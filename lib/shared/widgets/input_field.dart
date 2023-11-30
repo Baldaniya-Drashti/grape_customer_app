@@ -91,7 +91,7 @@ class InputTextField extends StatelessWidget {
           debugLabel: labelText,
           fontFamily: 'SfPro',
           letterSpacing: 0.5,
-          color: ColorConstants.black1,
+          color: ColorConstants.black,
           fontSize: getFontSize(12),
           fontWeight: FontWeight.w400,
         ),
@@ -116,7 +116,7 @@ class InputTextField extends StatelessWidget {
             fontWeight: FontWeight.normal, fontFamily: 'SfPro',
             letterSpacing: 0.5,
             //letterSpacing: Utils.getSize(0.5),
-            color: ColorConstants.redErrorColor,
+            color: ColorConstants.red,
           ),
           //    prefixIconConstraints: BoxConstraints(maxHeight: getSize(50)),
           labelStyle: TextStyle(
@@ -124,7 +124,7 @@ class InputTextField extends StatelessWidget {
             fontWeight: FontWeight.normal, fontFamily: 'SfPro',
             letterSpacing: 0.5,
             //letterSpacing: Utils.getSize(0.5),
-            color: textColor ?? ColorConstants.black1,
+            color: textColor ?? ColorConstants.black,
           ),
           hintStyle: TextStyle(
             //  height: maxLines == 2 ? 2 : 0,
@@ -132,7 +132,7 @@ class InputTextField extends StatelessWidget {
             fontSize: getFontSize(12), fontFamily: 'SfPro',
             fontWeight: FontWeight.w400,
             letterSpacing: 0.5,
-            color: ColorConstants.black1,
+            color: ColorConstants.black,
           ),
           suffixIcon: suffixIcon,
 

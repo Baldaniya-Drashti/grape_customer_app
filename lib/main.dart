@@ -54,8 +54,8 @@ class App extends StatelessWidget {
       ensureScreenSize: true,
       child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
-        initialRoute: Routes.MAIN,
-        defaultTransition: Transition.native,
+        initialRoute: Routes.SPLASH,
+        defaultTransition: Transition.fadeIn,
         getPages: AppPages.routes,
         initialBinding: AppBinding(),
         smartManagement: SmartManagement.keepFactory,
