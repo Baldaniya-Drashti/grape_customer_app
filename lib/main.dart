@@ -1,99 +1,59 @@
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:grape_customer_app/theme/theme.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:grape_customer_app/domain/core/environment/environment.dart';
+import 'package:grape_customer_app/infrastructure/core/network/injectable_module.dart';
+import 'package:grape_customer_app/presentation/core/restart_widget.dart';
+import 'package:grape_customer_app/setup_hive.dart';
+import 'package:injectable/injectable.dart';
+import 'package:grape_customer_app/injection.dart';
+import 'package:grape_customer_app/presentation/core/app_widget.dart';
 
-import 'app_binding.dart';
-import 'di.dart';
-import 'lang/lang.dart';
-import 'routes/routes.dart';
-import 'shared/constants/constants.dart';
+// Future<void> main() async {
+//   WidgetsFlutterBinding.ensureInitialized();
+//   configureInjection(Environment.prod);
+//   await setupHive();
+//   runApp(RestartWidget(child: AppWidget()));
+// }
+import 'dart:async';
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  //await Firebase.initializeApp();
-  await DenpendencyInjection.init();
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-  SystemChrome.setSystemUIOverlayStyle(
-    SystemUiOverlayStyle.dark.copyWith(
-      statusBarColor: Colors.transparent,
-      statusBarIconBrightness: Brightness.dark,
-      statusBarBrightness: Brightness.light,
-    ),
+Future<void> main() async {
+  runZonedGuarded<Future<void>>(
+    () async {
+      WidgetsFlutterBinding.ensureInitialized();
+      await Firebase.initializeApp(
+        options: const FirebaseOptions(
+            apiKey: 'AIzaSyAPJlbWDRvg3xciz6ecOd6czKlEChcDhlE',
+            appId: '1:937666633545:android:b0f6320fc990a81bc50498',
+            messagingSenderId: '937666633545',
+            projectId: 'flutter-ddd-7c470'),
+      ).catchError((e) {
+        print(e);
+        return e;
+      }).then((v) async {
+        await _initializeCrashlytics();
+        await dotenv.load(fileName: ".env");
+        configureInjection(Environment.dev);
+        String environment = String.fromEnvironment(
+          'ENVIRONMENT',
+          defaultValue: Environment.dev,
+        );
+        EnvironmentCongig().initConfig(environment);
+        await setupHive();
+        ApiService.initAPIService();
+        runApp(RestartWidget(child: AppWidget()));
+      });
+    },
+    (error, stack) => FirebaseCrashlytics.instance.recordError(error, stack),
   );
-  // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
-  //   statusBarColor: Colors.cyan,
-  // ));
-
-  await SystemChrome.setPreferredOrientations(
-    [
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-    ],
-  );
-
-  runApp(App());
-  configLoading();
 }
 
-//This is the root of out application
-class App extends StatelessWidget {
-  // final brightness = SchedulerBinding.instance.window.platformBrightness;
-
-  const App({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final prefs = Get.find<SharedPreferences>();
-
-    print("Token : ${prefs.getString(StorageConstants.token)}");
-    return ScreenUtilInit(
-      ensureScreenSize: true,
-      child: GetMaterialApp(
-        debugShowCheckedModeBanner: false,
-        initialRoute: Routes.SPLASH,
-        defaultTransition: Transition.fadeIn,
-        getPages: AppPages.routes,
-        initialBinding: AppBinding(),
-        smartManagement: SmartManagement.keepFactory,
-        title: 'Grape Customer App',
-        supportedLocales: const [
-          Locale('en', 'US'),
-        ],
-        theme: ThemeConfig.lightTheme,
-        locale: TranslationService.locale,
-        fallbackLocale: TranslationService.fallbackLocale,
-        translations: TranslationService(),
-        builder: EasyLoading.init(),
-      ),
-    );
+Future<void> _initializeCrashlytics() async {
+  if (!kIsWeb) {
+    await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
   }
-}
-
-void configLoading() {
-  EasyLoading.instance
-    ..indicatorType = EasyLoadingIndicatorType.threeBounce
-    ..loadingStyle = EasyLoadingStyle.custom
-    // ..indicatorSize = 45.0
-    ..radius = 10.0
-    ..indicatorSize = 20
-    // ..progressColor = Colors.yellow
-    ..backgroundColor = ColorConstants.black
-    ..indicatorColor = ColorConstants.white
-    ..textColor = ColorConstants.white
-    ..maskColor = ColorConstants.black.withOpacity(0.5)
-    ..maskType = EasyLoadingMaskType.custom
-    ..toastPosition = EasyLoadingToastPosition.bottom
-    // ..maskColor = Colors.red
-    ..userInteractions = false
-    ..dismissOnTap = false
-    ..animationStyle = EasyLoadingAnimationStyle.scale
-    ..successWidget = Container(
-      height: 100,
-      width: 100,
-      color: Colors.blue,
-    );
+  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
 }
