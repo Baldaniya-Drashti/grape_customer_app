@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grape_customer_app/application/auth/register_form/register_form_bloc.dart';
 import 'package:grape_customer_app/presentation/common/utils/flushbar_creator.dart';
 import 'package:grape_customer_app/presentation/common/widgets/form_wrapper.dart';
-import 'package:grape_customer_app/presentation/core/colors.dart';
+import 'package:grape_customer_app/domain/core/color_constant.dart';
 import 'package:grape_customer_app/presentation/core/restart_widget.dart';
 
 class RegisterForm extends StatelessWidget {
@@ -32,7 +32,7 @@ class RegisterForm extends StatelessWidget {
       },
       builder: (context, state) {
         return Container(
-          color: ThemeColors.appBackground,
+          color: ColorConstants.appBackground,
           height: double.infinity,
           child: Form(
             autovalidateMode: state.showErrorMessages
@@ -157,7 +157,7 @@ class RegisterForm extends StatelessWidget {
                     Expanded(
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: ThemeColors.themeBlue,
+                          backgroundColor: ColorConstants.themeBlue,
                         ),
                         onPressed: () {
                           FocusScope.of(context).unfocus();
@@ -182,7 +182,7 @@ class RegisterForm extends StatelessWidget {
                 if (state.isSubmitting) ...[
                   const SizedBox(height: 8),
                   const LinearProgressIndicator(
-                    color: ThemeColors.themeBlue,
+                    color: ColorConstants.themeBlue,
                   ),
                 ]
               ],

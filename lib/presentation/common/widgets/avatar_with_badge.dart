@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:grape_customer_app/presentation/core/colors.dart';
+import 'package:grape_customer_app/domain/core/color_constant.dart';
 
 Widget getAvatarWithBadge(
   String image, {
@@ -22,11 +22,11 @@ Widget getAvatarWithBadge(
         child: Container(
           padding: const EdgeInsets.all(1),
           decoration: BoxDecoration(
-            color: isOnline ? ThemeColors.brandGreen : Colors.grey,
+            color: isOnline ? ColorConstants.brandGreen : Colors.grey,
             borderRadius: BorderRadius.circular(50),
             border: Border.all(
               width: 2,
-              color: ThemeColors.dmBackground,
+              color: ColorConstants.dmBackground,
             ),
           ),
           constraints: BoxConstraints(

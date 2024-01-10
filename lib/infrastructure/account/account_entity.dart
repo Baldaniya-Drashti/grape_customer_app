@@ -1,7 +1,9 @@
 import 'package:hive/hive.dart';
 import 'package:grape_customer_app/domain/account/account.dart';
 import 'package:grape_customer_app/domain/auth/auth_value_objects.dart';
+
 part 'account_entity.g.dart';
+
 @HiveType(typeId: 0)
 class AccountEntity extends HiveObject {
   @HiveField(0)

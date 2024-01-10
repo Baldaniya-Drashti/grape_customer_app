@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:grape_customer_app/domain/core/color_constant.dart';
 import 'package:grape_customer_app/presentation/auth/login/login_screen.dart';
 import 'package:grape_customer_app/presentation/auth/register/register_screen.dart';
-import 'package:grape_customer_app/presentation/core/colors.dart';
 
 class StartUpScreen extends StatelessWidget {
   static const routeName = '/auth';
@@ -11,7 +11,7 @@ class StartUpScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ColoredBox(
-        color: ThemeColors.appBackground,
+        color: ColorConstants.appBackground,
         child: Container(
           margin: const EdgeInsets.all(20),
           child: Center(
@@ -56,7 +56,7 @@ class StartUpScreen extends StatelessWidget {
                         Expanded(
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: ThemeColors.themeBlue,
+                              backgroundColor: ColorConstants.themeBlue,
                             ),
                             onPressed: () {
                               Navigator.of(context)
@@ -83,7 +83,7 @@ class StartUpScreen extends StatelessWidget {
                         Expanded(
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: ThemeColors.buttonGray,
+                              backgroundColor: ColorConstants.buttonGray,
                             ),
                             onPressed: () {
                               Navigator.of(context)

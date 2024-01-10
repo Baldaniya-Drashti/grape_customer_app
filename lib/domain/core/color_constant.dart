@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-class ThemeColors {
+class ColorConstants {
   static const themeBlue = Color(0xff7289d9);
   static const errorRed = Color(0xfff04747);
   static const brandRed = Color(0xffF14645);
@@ -19,4 +19,12 @@ class ThemeColors {
   static const appBarBackground = Color(0xff2D3134);
   static const channelRippleColor = Color(0xff383C41);
   static const infoBackground = Color(0xff1D2223);
+
+  //app colors
+  static Color black = Color(0xFF000000);
+  static Color white = Color(0xFFFFFFFF);
+  static Color splashColor1 = Color(0xFFDAB0FF);
+  static Color splashColor2 = Color(0xFF57198E);
+  static Color primaryOrange = Color(0xFFFF770E);
+  static Color grey = Color(0xFFD9D9D9);
 }

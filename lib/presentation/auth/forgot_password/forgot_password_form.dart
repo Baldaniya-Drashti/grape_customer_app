@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grape_customer_app/application/auth/forgot_password/forgot_password_cubit.dart';
+import 'package:grape_customer_app/domain/core/color_constant.dart';
 import 'package:grape_customer_app/presentation/common/utils/flushbar_creator.dart';
 import 'package:grape_customer_app/presentation/common/widgets/form_wrapper.dart';
-import 'package:grape_customer_app/presentation/core/colors.dart';
 
 class ForgotPasswordForm extends StatelessWidget {
   const ForgotPasswordForm({super.key});
@@ -33,7 +33,7 @@ class ForgotPasswordForm extends StatelessWidget {
       },
       builder: (context, state) {
         return Container(
-          color: ThemeColors.appBackground,
+          color: ColorConstants.appBackground,
           height: double.infinity,
           child: Form(
             autovalidateMode: state.showErrorMessages
@@ -73,7 +73,7 @@ class ForgotPasswordForm extends StatelessWidget {
                     Expanded(
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: ThemeColors.themeBlue,
+                          backgroundColor: ColorConstants.themeBlue,
                         ),
                         onPressed: () {
                           context
@@ -96,7 +96,7 @@ class ForgotPasswordForm extends StatelessWidget {
                 if (state.isSubmitting) ...[
                   const SizedBox(height: 8),
                   const LinearProgressIndicator(
-                    color: ThemeColors.themeBlue,
+                    color: ColorConstants.themeBlue,
                   ),
                 ]
               ],

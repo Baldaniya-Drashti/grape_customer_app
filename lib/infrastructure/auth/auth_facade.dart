@@ -95,7 +95,7 @@ class AuthFacade implements IAuthFacade {
   @override
   Future<bool> checkAuthenticated() async {
     // getCookie returns null as a String, so it has to be checked like this.
-    return getCookie() != "null";
+    return getUserToken() != null;
   }
 
   @override
@@ -173,15 +173,14 @@ class AuthFacade implements IAuthFacade {
     }
   }
 
-  // Future<void> _setCookie(List<String> cookies) async {
-  //   // Hacky solution to allow testing
-  //   if (!Platform.environment.containsKey('FLUTTER_TEST')) {
-  //     if (cookies.isNotEmpty) {
-  //       final authToken = cookies[0].split(';')[0];
-  //       await Hive.box(BoxNames.settingsBox).put(BoxKeys.cookieKey, authToken);
-  //     }
-  //   }
-  // }
+  Future<void> _setCookie(String authToken) async {
+    // Hacky solution to allow testing
+    if (!Platform.environment.containsKey('FLUTTER_TEST')) {
+      if (authToken.isNotEmpty) {
+        await Hive.box(BoxNames.settingsBox).put(BoxKeys.cookieKey, authToken);
+      }
+    }
+  }
 
   void _setUserData(Account account) {
     // Hacky solution to allow testing

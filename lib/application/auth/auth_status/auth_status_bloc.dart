@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:grape_customer_app/presentation/common/utils/get_cookie.dart';
 import 'package:injectable/injectable.dart';
 import 'package:grape_customer_app/domain/auth/i_auth_facade.dart';
 
@@ -17,11 +18,16 @@ class AuthStatusBloc extends Bloc<AuthStatusEvent, AuthStatusState> {
       await event.map(
         authCheckRequested: (e) async {
           final authenticated = await _authFacade.checkAuthenticated();
-          emit(
-            authenticated
-                ? const AuthStatusState.authenticated()
-                : const AuthStatusState.unauthenticated(),
-          );
+          final isShowIntroScreen = isUserShowIntro();
+          if (isShowIntroScreen == null) {
+            emit(AuthStatusState.introScreenVisibilty());
+          } else {
+            emit(
+              authenticated
+                  ? const AuthStatusState.authenticated()
+                  : const AuthStatusState.unauthenticated(),
+            );
+          }
         },
         signedOut: (e) async {
           await _authFacade.logout();

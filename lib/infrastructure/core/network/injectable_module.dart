@@ -1,10 +1,11 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:grape_customer_app/domain/core/api_constants.dart';
-import 'package:grape_customer_app/domain/core/storage_constants.dart';
+
 import 'package:grape_customer_app/infrastructure/core/common_response.dart';
 import 'package:grape_customer_app/infrastructure/core/network/interceptor/api_error_interceptors.dart';
 import 'package:grape_customer_app/infrastructure/core/network/interceptor/dio_connectivity_request_retrier.dart';
+import 'package:grape_customer_app/presentation/common/utils/get_cookie.dart';
 import 'package:injectable/injectable.dart';
 
 @lazySingleton
@@ -15,10 +16,12 @@ class ApiService {
   static Dio initAPIService({bool isMultipart = false}) {
     final interceptor = InterceptorsWrapper(
       onRequest: (options, handler) {
-        const String userToken = StorageConstants.userToken;
-        options.headers.addAll({
-          "Authorization": "Bearer $userToken",
-        });
+        String? userToken = getUserToken();
+        if (userToken != null) {
+          options.headers.addAll({
+            "Authorization": "Bearer $userToken",
+          });
+        }
 
         return handler.next(options); //continue
       },

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart' as bloc;
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:grape_customer_app/application/auth/auth_status/auth_status_bloc.dart';
+import 'package:grape_customer_app/domain/core/l10n/app_localizations.dart';
 
 import 'package:grape_customer_app/injection.dart';
 import 'package:grape_customer_app/presentation/core/app_router.dart';
@@ -12,9 +14,9 @@ class AppWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
+    return bloc.MultiBlocProvider(
       providers: [
-        BlocProvider(
+        bloc.BlocProvider(
           create: (context) => getIt<AuthStatusBloc>()
             ..add(
               const AuthStatusEvent.authCheckRequested(),
@@ -34,13 +36,28 @@ class _App extends StatelessWidget {
     //   use(UserSocketHook(context));
     // }
     return LifecycleWatcher(
-      child: MaterialApp(
-        title: 'Grape App',
-        debugShowCheckedModeBanner: false,
-        theme: AppTheme.light,
-        darkTheme: AppTheme.dark,
-        initialRoute: '/',
-        onGenerateRoute: _appRouter.onGenerateRoute,
+      child: ScreenUtilInit(
+        ensureScreenSize: true,
+        child: MaterialApp.router(
+          routerDelegate: _appRouter.delegate(),
+          routeInformationParser: _appRouter.defaultRouteParser(),
+          title: 'Grape App',
+          debugShowCheckedModeBanner: false,
+          theme: AppTheme.light,
+          darkTheme: AppTheme.dark,
+          supportedLocales: AppLocalizations.supportedLocales,
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          localeResolutionCallback: (locale, supportedLocales) {
+            for (final supportedLocale in supportedLocales) {
+              if (supportedLocale.languageCode == locale!.languageCode &&
+                  supportedLocale.countryCode == locale.countryCode) {
+                return supportedLocale;
+              }
+            }
+
+            return supportedLocales.first;
+          },
+        ),
       ),
     );
   }

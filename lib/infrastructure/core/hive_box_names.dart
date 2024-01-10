@@ -6,4 +6,6 @@ class BoxNames {
 class BoxKeys {
   static const currentKey = "account";
   static const cookieKey = "cookie";
+  static const userToken = "userToken";
+  static const isUserShowIntro = "isUserShowIntro";
 }

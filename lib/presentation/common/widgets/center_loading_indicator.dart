@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:grape_customer_app/presentation/core/colors.dart';
+import 'package:grape_customer_app/domain/core/color_constant.dart';
 
 class CenterLoadingIndicator extends StatelessWidget {
   const CenterLoadingIndicator({super.key});
@@ -8,7 +8,7 @@ class CenterLoadingIndicator extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Center(
       child: ColoredBox(
-        color: ThemeColors.dmBackground,
+        color: ColorConstants.dmBackground,
         child: CircularProgressIndicator(
           valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
         ),

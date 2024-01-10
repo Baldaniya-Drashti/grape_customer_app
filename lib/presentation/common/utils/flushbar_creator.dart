@@ -1,6 +1,6 @@
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
-import 'package:grape_customer_app/presentation/core/colors.dart';
+import 'package:grape_customer_app/domain/core/color_constant.dart';
 
 Flushbar showError({
   required String message,
@@ -16,7 +16,7 @@ Flushbar showError({
       color: Colors.red[300],
     ),
     leftBarIndicatorColor: Colors.red[300],
-    backgroundColor: ThemeColors.inputBackground,
+    backgroundColor: ColorConstants.inputBackground,
     duration: duration,
   );
 }
@@ -34,7 +34,7 @@ Flushbar showSuccess({
       color: Colors.green[300],
     ),
     leftBarIndicatorColor: Colors.green[300],
-    backgroundColor: ThemeColors.inputBackground,
+    backgroundColor: ColorConstants.inputBackground,
     duration: duration,
   );
 }
