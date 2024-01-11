@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:grape_customer_app/presentation/core/styles/app_colors.dart';
 import 'package:grape_customer_app/presentation/core/styles/app_text_theme.dart';
@@ -10,6 +9,7 @@ class AppTheme {
   // ignore: long-method
   static ThemeData get light => ThemeData.light().copyWith(
         primaryColor: const Color(0xFF2A59C3),
+
         brightness: Brightness.dark,
         scaffoldBackgroundColor: Colors.white,
         primaryTextTheme: AppTextTheme.light,
@@ -17,16 +17,19 @@ class AppTheme {
         appBarTheme: const AppBarTheme(),
         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
         visualDensity: VisualDensity.adaptivePlatformDensity,
+
         inputDecorationTheme: InputDecorationTheme(
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10),
           ),
         ),
+        
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
             textStyle: const TextStyle(
               color: AppColors.white,
               fontSize: 20,
+
               fontWeight: FontWeight.w700,
             ),
             shape: RoundedRectangleBorder(

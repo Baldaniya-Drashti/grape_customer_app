@@ -22,6 +22,18 @@ Either<ValueFailure<String>, String> validateUsername(String input) {
   }
 }
 
+Either<ValueFailure<String>, String> validateMobileNumber(String input) {
+  if (validateStringNotEmpty(input).isRight()) {
+    if (input.length >= 6 && input.length <= 15) {
+      return right(input);
+    } else {
+      return left(ValueFailure.invalidMobileNumber(failedValue: input));
+    }
+  } else {
+    return left(ValueFailure.empty(failedValue: input));
+  }
+}
+
 Either<ValueFailure<String>, String> validatePassword(String input) {
   if (input.length >= 6) {
     return right(input);

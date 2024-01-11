@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:grape_customer_app/domain/core/color_constant.dart';
+import 'package:grape_customer_app/presentation/core/styles/app_colors.dart';
 
 class NotificationIcon extends StatelessWidget {
   final int count;
@@ -16,10 +16,10 @@ class NotificationIcon extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(2),
         decoration: BoxDecoration(
-          color: ColorConstants.brandRed,
+          color: AppColors.red,
           borderRadius: BorderRadius.circular(10),
           border: Border.all(
-            color: ColorConstants.inputBackground,
+            color: AppColors.white,
             width: 2,
           ),
         ),

@@ -3,8 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grape_customer_app/application/auth/register_form/register_form_bloc.dart';
 import 'package:grape_customer_app/presentation/common/utils/flushbar_creator.dart';
 import 'package:grape_customer_app/presentation/common/widgets/form_wrapper.dart';
-import 'package:grape_customer_app/domain/core/color_constant.dart';
+
 import 'package:grape_customer_app/presentation/core/restart_widget.dart';
+import 'package:grape_customer_app/presentation/core/styles/app_colors.dart';
 
 class RegisterForm extends StatelessWidget {
   const RegisterForm({super.key});
@@ -31,162 +32,150 @@ class RegisterForm extends StatelessWidget {
         );
       },
       builder: (context, state) {
-        return Container(
-          color: ColorConstants.appBackground,
-          height: double.infinity,
-          child: Form(
-            autovalidateMode: state.showErrorMessages
-                ? AutovalidateMode.always
-                : AutovalidateMode.disabled,
-            child: FormWrapper(
-              children: [
-                const Text(
-                  "Register",
-                  style: TextStyle(
-                    fontSize: 28,
+        return Form(
+          autovalidateMode: state.showErrorMessages
+              ? AutovalidateMode.always
+              : AutovalidateMode.disabled,
+          child: FormWrapper(
+            children: [
+              const Text(
+                "Register",
+                style: TextStyle(
+                  fontSize: 28,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 25),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  "What should everyone call you?".toUpperCase(),
+                  style: const TextStyle(
+                    color: Colors.white70,
+                    fontSize: 12,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                const SizedBox(height: 25),
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    "What should everyone call you?".toUpperCase(),
-                    style: const TextStyle(
-                      color: Colors.white70,
-                      fontSize: 12,
-                      fontWeight: FontWeight.bold,
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              TextFormField(
+                decoration: const InputDecoration(
+                  labelText: 'Username',
+                ),
+                autocorrect: false,
+                textInputAction: TextInputAction.next,
+                onChanged: (value) => context
+                    .read<RegisterFormBloc>()
+                    .add(RegisterFormEvent.usernameChanged(value)),
+                validator: (_) =>
+                    context.read<RegisterFormBloc>().state.username.value.fold(
+                          (f) => f.maybeMap(
+                            invalidUsername: (_) => 'Invalid Username',
+                            orElse: () => null,
+                          ),
+                          (_) => null,
+                        ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  "Account Information".toUpperCase(),
+                  style: const TextStyle(
+                    color: Colors.white70,
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              TextFormField(
+                decoration: const InputDecoration(
+                  labelText: 'Email',
+                ),
+                autocorrect: false,
+                textInputAction: TextInputAction.next,
+                onChanged: (value) => context
+                    .read<RegisterFormBloc>()
+                    .add(RegisterFormEvent.emailChanged(value)),
+                validator: (_) => context
+                    .read<RegisterFormBloc>()
+                    .state
+                    .emailAddress
+                    .value
+                    .fold(
+                      (f) => f.maybeMap(
+                        invalidEmail: (_) => 'Invalid Email',
+                        orElse: () => null,
+                      ),
+                      (_) => null,
                     ),
-                  ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              TextFormField(
+                decoration: const InputDecoration(
+                  labelText: 'Password',
                 ),
-                const SizedBox(
-                  height: 5,
-                ),
-                TextFormField(
-                  decoration: const InputDecoration(
-                    labelText: 'Username',
-                  ),
-                  autocorrect: false,
-                  textInputAction: TextInputAction.next,
-                  onChanged: (value) => context
-                      .read<RegisterFormBloc>()
-                      .add(RegisterFormEvent.usernameChanged(value)),
-                  validator: (_) => context
-                      .read<RegisterFormBloc>()
-                      .state
-                      .username
-                      .value
-                      .fold(
-                        (f) => f.maybeMap(
-                          invalidUsername: (_) => 'Invalid Username',
-                          orElse: () => null,
+                textInputAction: TextInputAction.done,
+                autocorrect: false,
+                obscureText: true,
+                onChanged: (value) => context
+                    .read<RegisterFormBloc>()
+                    .add(RegisterFormEvent.passwordChanged(value)),
+                validator: (_) =>
+                    context.read<RegisterFormBloc>().state.password.value.fold(
+                          (f) => f.maybeMap(
+                            shortPassword: (_) => 'Short Password',
+                            orElse: () => null,
+                          ),
+                          (_) => null,
                         ),
-                        (_) => null,
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.black,
                       ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    "Account Information".toUpperCase(),
-                    style: const TextStyle(
-                      color: Colors.white70,
-                      fontSize: 12,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 5,
-                ),
-                TextFormField(
-                  decoration: const InputDecoration(
-                    labelText: 'Email',
-                  ),
-                  autocorrect: false,
-                  textInputAction: TextInputAction.next,
-                  onChanged: (value) => context
-                      .read<RegisterFormBloc>()
-                      .add(RegisterFormEvent.emailChanged(value)),
-                  validator: (_) => context
-                      .read<RegisterFormBloc>()
-                      .state
-                      .emailAddress
-                      .value
-                      .fold(
-                        (f) => f.maybeMap(
-                          invalidEmail: (_) => 'Invalid Email',
-                          orElse: () => null,
-                        ),
-                        (_) => null,
-                      ),
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                TextFormField(
-                  decoration: const InputDecoration(
-                    labelText: 'Password',
-                  ),
-                  textInputAction: TextInputAction.done,
-                  autocorrect: false,
-                  obscureText: true,
-                  onChanged: (value) => context
-                      .read<RegisterFormBloc>()
-                      .add(RegisterFormEvent.passwordChanged(value)),
-                  validator: (_) => context
-                      .read<RegisterFormBloc>()
-                      .state
-                      .password
-                      .value
-                      .fold(
-                        (f) => f.maybeMap(
-                          shortPassword: (_) => 'Short Password',
-                          orElse: () => null,
-                        ),
-                        (_) => null,
-                      ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: ColorConstants.themeBlue,
-                        ),
-                        onPressed: () {
-                          FocusScope.of(context).unfocus();
-                          context
-                              .read<RegisterFormBloc>()
-                              .add(const RegisterFormEvent.registerPressed());
-                        },
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(vertical: 15),
-                          child: const Text(
-                            "Create Account",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
-                            ),
+                      onPressed: () {
+                        FocusScope.of(context).unfocus();
+                        context
+                            .read<RegisterFormBloc>()
+                            .add(const RegisterFormEvent.registerPressed());
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(vertical: 15),
+                        child: const Text(
+                          "Create Account",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
                           ),
                         ),
                       ),
                     ),
-                  ],
-                ),
-                if (state.isSubmitting) ...[
-                  const SizedBox(height: 8),
-                  const LinearProgressIndicator(
-                    color: ColorConstants.themeBlue,
                   ),
-                ]
-              ],
-            ),
+                ],
+              ),
+              if (state.isSubmitting) ...[
+                const SizedBox(height: 8),
+                const LinearProgressIndicator(
+                  color: AppColors.black,
+                ),
+              ]
+            ],
           ),
         );
       },

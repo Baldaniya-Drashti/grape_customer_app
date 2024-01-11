@@ -29,6 +29,19 @@ class Username extends ValueObject<String> {
   const Username._(this.value);
 }
 
+class MobileNumber extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory MobileNumber(String input) {
+    return MobileNumber._(
+      validateMobileNumber(input),
+    );
+  }
+
+  const MobileNumber._(this.value);
+}
+
 class Password extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;

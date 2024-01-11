@@ -3,18 +3,18 @@ part of 'login_form_bloc.dart';
 @freezed
 class LoginFormState with _$LoginFormState {
   const factory LoginFormState({
-    required EmailAddress emailAddress,
-    required Password password,
+    required MobileNumber mobileNumber,
     required bool showErrorMessages,
     required bool isSubmitting,
+    required String selectedCountrycode,
     required Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption,
   }) = _LoginFormState;
 
   factory LoginFormState.initial() => LoginFormState(
-        emailAddress: EmailAddress(''),
-        password: Password(''),
+        mobileNumber: MobileNumber(''),
         showErrorMessages: false,
         isSubmitting: false,
         authFailureOrSuccessOption: none(),
+        selectedCountrycode: '',
       );
 }

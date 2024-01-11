@@ -5,6 +5,6 @@ String? getUserToken() {
   return Hive.box(BoxNames.settingsBox).get(BoxKeys.userToken);
 }
 
-String? isUserShowIntro() {
+bool? isUserShowIntro() {
   return Hive.box(BoxNames.settingsBox).get(BoxKeys.isUserShowIntro);
 }

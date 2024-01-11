@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:grape_customer_app/domain/core/color_constant.dart';
-import 'package:grape_customer_app/domain/core/math_utils.dart';
+import 'package:grape_customer_app/presentation/core/styles/app_colors.dart';
 
+import 'package:grape_customer_app/domain/core/math_utils.dart';
 
 class BaseText extends StatelessWidget {
   final String text;
@@ -49,7 +49,7 @@ class BaseText extends StatelessWidget {
           TextStyle(
             height: lineHeight,
             shadows: shadows,
-            color: textColor ?? ColorConstants.black,
+            color: textColor ?? AppColors.black,
             decoration: textDecoration,
             fontFamily: fontFamily,
             fontSize: getFontSize(fontSize),

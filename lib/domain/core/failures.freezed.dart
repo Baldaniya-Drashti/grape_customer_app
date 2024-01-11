@@ -24,6 +24,7 @@ mixin _$ValueFailure<T> {
     required TResult Function(T failedValue, int max) tooManyGuilds,
     required TResult Function(T failedValue) invalidEmail,
     required TResult Function(T failedValue) invalidUsername,
+    required TResult Function(T failedValue) invalidMobileNumber,
     required TResult Function(T failedValue) invalidChannelName,
     required TResult Function(T failedValue) shortPassword,
     required TResult Function(T failedValue) passwordsDontMatch,
@@ -39,6 +40,7 @@ mixin _$ValueFailure<T> {
     TResult? Function(T failedValue, int max)? tooManyGuilds,
     TResult? Function(T failedValue)? invalidEmail,
     TResult? Function(T failedValue)? invalidUsername,
+    TResult? Function(T failedValue)? invalidMobileNumber,
     TResult? Function(T failedValue)? invalidChannelName,
     TResult? Function(T failedValue)? shortPassword,
     TResult? Function(T failedValue)? passwordsDontMatch,
@@ -54,6 +56,7 @@ mixin _$ValueFailure<T> {
     TResult Function(T failedValue, int max)? tooManyGuilds,
     TResult Function(T failedValue)? invalidEmail,
     TResult Function(T failedValue)? invalidUsername,
+    TResult Function(T failedValue)? invalidMobileNumber,
     TResult Function(T failedValue)? invalidChannelName,
     TResult Function(T failedValue)? shortPassword,
     TResult Function(T failedValue)? passwordsDontMatch,
@@ -70,6 +73,7 @@ mixin _$ValueFailure<T> {
     required TResult Function(TooManyGuilds<T> value) tooManyGuilds,
     required TResult Function(InvalidEmail<T> value) invalidEmail,
     required TResult Function(InvalidUsername<T> value) invalidUsername,
+    required TResult Function(InvalidMobileNumber<T> value) invalidMobileNumber,
     required TResult Function(InvalidChannelName<T> value) invalidChannelName,
     required TResult Function(ShortPassword<T> value) shortPassword,
     required TResult Function(PasswordsDontMatch<T> value) passwordsDontMatch,
@@ -85,6 +89,7 @@ mixin _$ValueFailure<T> {
     TResult? Function(TooManyGuilds<T> value)? tooManyGuilds,
     TResult? Function(InvalidEmail<T> value)? invalidEmail,
     TResult? Function(InvalidUsername<T> value)? invalidUsername,
+    TResult? Function(InvalidMobileNumber<T> value)? invalidMobileNumber,
     TResult? Function(InvalidChannelName<T> value)? invalidChannelName,
     TResult? Function(ShortPassword<T> value)? shortPassword,
     TResult? Function(PasswordsDontMatch<T> value)? passwordsDontMatch,
@@ -100,6 +105,7 @@ mixin _$ValueFailure<T> {
     TResult Function(TooManyGuilds<T> value)? tooManyGuilds,
     TResult Function(InvalidEmail<T> value)? invalidEmail,
     TResult Function(InvalidUsername<T> value)? invalidUsername,
+    TResult Function(InvalidMobileNumber<T> value)? invalidMobileNumber,
     TResult Function(InvalidChannelName<T> value)? invalidChannelName,
     TResult Function(ShortPassword<T> value)? shortPassword,
     TResult Function(PasswordsDontMatch<T> value)? passwordsDontMatch,
@@ -230,6 +236,7 @@ class _$ExceedingLengthImpl<T> implements ExceedingLength<T> {
     required TResult Function(T failedValue, int max) tooManyGuilds,
     required TResult Function(T failedValue) invalidEmail,
     required TResult Function(T failedValue) invalidUsername,
+    required TResult Function(T failedValue) invalidMobileNumber,
     required TResult Function(T failedValue) invalidChannelName,
     required TResult Function(T failedValue) shortPassword,
     required TResult Function(T failedValue) passwordsDontMatch,
@@ -248,6 +255,7 @@ class _$ExceedingLengthImpl<T> implements ExceedingLength<T> {
     TResult? Function(T failedValue, int max)? tooManyGuilds,
     TResult? Function(T failedValue)? invalidEmail,
     TResult? Function(T failedValue)? invalidUsername,
+    TResult? Function(T failedValue)? invalidMobileNumber,
     TResult? Function(T failedValue)? invalidChannelName,
     TResult? Function(T failedValue)? shortPassword,
     TResult? Function(T failedValue)? passwordsDontMatch,
@@ -266,6 +274,7 @@ class _$ExceedingLengthImpl<T> implements ExceedingLength<T> {
     TResult Function(T failedValue, int max)? tooManyGuilds,
     TResult Function(T failedValue)? invalidEmail,
     TResult Function(T failedValue)? invalidUsername,
+    TResult Function(T failedValue)? invalidMobileNumber,
     TResult Function(T failedValue)? invalidChannelName,
     TResult Function(T failedValue)? shortPassword,
     TResult Function(T failedValue)? passwordsDontMatch,
@@ -288,6 +297,7 @@ class _$ExceedingLengthImpl<T> implements ExceedingLength<T> {
     required TResult Function(TooManyGuilds<T> value) tooManyGuilds,
     required TResult Function(InvalidEmail<T> value) invalidEmail,
     required TResult Function(InvalidUsername<T> value) invalidUsername,
+    required TResult Function(InvalidMobileNumber<T> value) invalidMobileNumber,
     required TResult Function(InvalidChannelName<T> value) invalidChannelName,
     required TResult Function(ShortPassword<T> value) shortPassword,
     required TResult Function(PasswordsDontMatch<T> value) passwordsDontMatch,
@@ -306,6 +316,7 @@ class _$ExceedingLengthImpl<T> implements ExceedingLength<T> {
     TResult? Function(TooManyGuilds<T> value)? tooManyGuilds,
     TResult? Function(InvalidEmail<T> value)? invalidEmail,
     TResult? Function(InvalidUsername<T> value)? invalidUsername,
+    TResult? Function(InvalidMobileNumber<T> value)? invalidMobileNumber,
     TResult? Function(InvalidChannelName<T> value)? invalidChannelName,
     TResult? Function(ShortPassword<T> value)? shortPassword,
     TResult? Function(PasswordsDontMatch<T> value)? passwordsDontMatch,
@@ -324,6 +335,7 @@ class _$ExceedingLengthImpl<T> implements ExceedingLength<T> {
     TResult Function(TooManyGuilds<T> value)? tooManyGuilds,
     TResult Function(InvalidEmail<T> value)? invalidEmail,
     TResult Function(InvalidUsername<T> value)? invalidUsername,
+    TResult Function(InvalidMobileNumber<T> value)? invalidMobileNumber,
     TResult Function(InvalidChannelName<T> value)? invalidChannelName,
     TResult Function(ShortPassword<T> value)? shortPassword,
     TResult Function(PasswordsDontMatch<T> value)? passwordsDontMatch,
@@ -426,6 +438,7 @@ class _$EmptyImpl<T> implements Empty<T> {
     required TResult Function(T failedValue, int max) tooManyGuilds,
     required TResult Function(T failedValue) invalidEmail,
     required TResult Function(T failedValue) invalidUsername,
+    required TResult Function(T failedValue) invalidMobileNumber,
     required TResult Function(T failedValue) invalidChannelName,
     required TResult Function(T failedValue) shortPassword,
     required TResult Function(T failedValue) passwordsDontMatch,
@@ -444,6 +457,7 @@ class _$EmptyImpl<T> implements Empty<T> {
     TResult? Function(T failedValue, int max)? tooManyGuilds,
     TResult? Function(T failedValue)? invalidEmail,
     TResult? Function(T failedValue)? invalidUsername,
+    TResult? Function(T failedValue)? invalidMobileNumber,
     TResult? Function(T failedValue)? invalidChannelName,
     TResult? Function(T failedValue)? shortPassword,
     TResult? Function(T failedValue)? passwordsDontMatch,
@@ -462,6 +476,7 @@ class _$EmptyImpl<T> implements Empty<T> {
     TResult Function(T failedValue, int max)? tooManyGuilds,
     TResult Function(T failedValue)? invalidEmail,
     TResult Function(T failedValue)? invalidUsername,
+    TResult Function(T failedValue)? invalidMobileNumber,
     TResult Function(T failedValue)? invalidChannelName,
     TResult Function(T failedValue)? shortPassword,
     TResult Function(T failedValue)? passwordsDontMatch,
@@ -484,6 +499,7 @@ class _$EmptyImpl<T> implements Empty<T> {
     required TResult Function(TooManyGuilds<T> value) tooManyGuilds,
     required TResult Function(InvalidEmail<T> value) invalidEmail,
     required TResult Function(InvalidUsername<T> value) invalidUsername,
+    required TResult Function(InvalidMobileNumber<T> value) invalidMobileNumber,
     required TResult Function(InvalidChannelName<T> value) invalidChannelName,
     required TResult Function(ShortPassword<T> value) shortPassword,
     required TResult Function(PasswordsDontMatch<T> value) passwordsDontMatch,
@@ -502,6 +518,7 @@ class _$EmptyImpl<T> implements Empty<T> {
     TResult? Function(TooManyGuilds<T> value)? tooManyGuilds,
     TResult? Function(InvalidEmail<T> value)? invalidEmail,
     TResult? Function(InvalidUsername<T> value)? invalidUsername,
+    TResult? Function(InvalidMobileNumber<T> value)? invalidMobileNumber,
     TResult? Function(InvalidChannelName<T> value)? invalidChannelName,
     TResult? Function(ShortPassword<T> value)? shortPassword,
     TResult? Function(PasswordsDontMatch<T> value)? passwordsDontMatch,
@@ -520,6 +537,7 @@ class _$EmptyImpl<T> implements Empty<T> {
     TResult Function(TooManyGuilds<T> value)? tooManyGuilds,
     TResult Function(InvalidEmail<T> value)? invalidEmail,
     TResult Function(InvalidUsername<T> value)? invalidUsername,
+    TResult Function(InvalidMobileNumber<T> value)? invalidMobileNumber,
     TResult Function(InvalidChannelName<T> value)? invalidChannelName,
     TResult Function(ShortPassword<T> value)? shortPassword,
     TResult Function(PasswordsDontMatch<T> value)? passwordsDontMatch,
@@ -628,6 +646,7 @@ class _$TooManyGuildsImpl<T> implements TooManyGuilds<T> {
     required TResult Function(T failedValue, int max) tooManyGuilds,
     required TResult Function(T failedValue) invalidEmail,
     required TResult Function(T failedValue) invalidUsername,
+    required TResult Function(T failedValue) invalidMobileNumber,
     required TResult Function(T failedValue) invalidChannelName,
     required TResult Function(T failedValue) shortPassword,
     required TResult Function(T failedValue) passwordsDontMatch,
@@ -646,6 +665,7 @@ class _$TooManyGuildsImpl<T> implements TooManyGuilds<T> {
     TResult? Function(T failedValue, int max)? tooManyGuilds,
     TResult? Function(T failedValue)? invalidEmail,
     TResult? Function(T failedValue)? invalidUsername,
+    TResult? Function(T failedValue)? invalidMobileNumber,
     TResult? Function(T failedValue)? invalidChannelName,
     TResult? Function(T failedValue)? shortPassword,
     TResult? Function(T failedValue)? passwordsDontMatch,
@@ -664,6 +684,7 @@ class _$TooManyGuildsImpl<T> implements TooManyGuilds<T> {
     TResult Function(T failedValue, int max)? tooManyGuilds,
     TResult Function(T failedValue)? invalidEmail,
     TResult Function(T failedValue)? invalidUsername,
+    TResult Function(T failedValue)? invalidMobileNumber,
     TResult Function(T failedValue)? invalidChannelName,
     TResult Function(T failedValue)? shortPassword,
     TResult Function(T failedValue)? passwordsDontMatch,
@@ -686,6 +707,7 @@ class _$TooManyGuildsImpl<T> implements TooManyGuilds<T> {
     required TResult Function(TooManyGuilds<T> value) tooManyGuilds,
     required TResult Function(InvalidEmail<T> value) invalidEmail,
     required TResult Function(InvalidUsername<T> value) invalidUsername,
+    required TResult Function(InvalidMobileNumber<T> value) invalidMobileNumber,
     required TResult Function(InvalidChannelName<T> value) invalidChannelName,
     required TResult Function(ShortPassword<T> value) shortPassword,
     required TResult Function(PasswordsDontMatch<T> value) passwordsDontMatch,
@@ -704,6 +726,7 @@ class _$TooManyGuildsImpl<T> implements TooManyGuilds<T> {
     TResult? Function(TooManyGuilds<T> value)? tooManyGuilds,
     TResult? Function(InvalidEmail<T> value)? invalidEmail,
     TResult? Function(InvalidUsername<T> value)? invalidUsername,
+    TResult? Function(InvalidMobileNumber<T> value)? invalidMobileNumber,
     TResult? Function(InvalidChannelName<T> value)? invalidChannelName,
     TResult? Function(ShortPassword<T> value)? shortPassword,
     TResult? Function(PasswordsDontMatch<T> value)? passwordsDontMatch,
@@ -722,6 +745,7 @@ class _$TooManyGuildsImpl<T> implements TooManyGuilds<T> {
     TResult Function(TooManyGuilds<T> value)? tooManyGuilds,
     TResult Function(InvalidEmail<T> value)? invalidEmail,
     TResult Function(InvalidUsername<T> value)? invalidUsername,
+    TResult Function(InvalidMobileNumber<T> value)? invalidMobileNumber,
     TResult Function(InvalidChannelName<T> value)? invalidChannelName,
     TResult Function(ShortPassword<T> value)? shortPassword,
     TResult Function(PasswordsDontMatch<T> value)? passwordsDontMatch,
@@ -825,6 +849,7 @@ class _$InvalidEmailImpl<T> implements InvalidEmail<T> {
     required TResult Function(T failedValue, int max) tooManyGuilds,
     required TResult Function(T failedValue) invalidEmail,
     required TResult Function(T failedValue) invalidUsername,
+    required TResult Function(T failedValue) invalidMobileNumber,
     required TResult Function(T failedValue) invalidChannelName,
     required TResult Function(T failedValue) shortPassword,
     required TResult Function(T failedValue) passwordsDontMatch,
@@ -843,6 +868,7 @@ class _$InvalidEmailImpl<T> implements InvalidEmail<T> {
     TResult? Function(T failedValue, int max)? tooManyGuilds,
     TResult? Function(T failedValue)? invalidEmail,
     TResult? Function(T failedValue)? invalidUsername,
+    TResult? Function(T failedValue)? invalidMobileNumber,
     TResult? Function(T failedValue)? invalidChannelName,
     TResult? Function(T failedValue)? shortPassword,
     TResult? Function(T failedValue)? passwordsDontMatch,
@@ -861,6 +887,7 @@ class _$InvalidEmailImpl<T> implements InvalidEmail<T> {
     TResult Function(T failedValue, int max)? tooManyGuilds,
     TResult Function(T failedValue)? invalidEmail,
     TResult Function(T failedValue)? invalidUsername,
+    TResult Function(T failedValue)? invalidMobileNumber,
     TResult Function(T failedValue)? invalidChannelName,
     TResult Function(T failedValue)? shortPassword,
     TResult Function(T failedValue)? passwordsDontMatch,
@@ -883,6 +910,7 @@ class _$InvalidEmailImpl<T> implements InvalidEmail<T> {
     required TResult Function(TooManyGuilds<T> value) tooManyGuilds,
     required TResult Function(InvalidEmail<T> value) invalidEmail,
     required TResult Function(InvalidUsername<T> value) invalidUsername,
+    required TResult Function(InvalidMobileNumber<T> value) invalidMobileNumber,
     required TResult Function(InvalidChannelName<T> value) invalidChannelName,
     required TResult Function(ShortPassword<T> value) shortPassword,
     required TResult Function(PasswordsDontMatch<T> value) passwordsDontMatch,
@@ -901,6 +929,7 @@ class _$InvalidEmailImpl<T> implements InvalidEmail<T> {
     TResult? Function(TooManyGuilds<T> value)? tooManyGuilds,
     TResult? Function(InvalidEmail<T> value)? invalidEmail,
     TResult? Function(InvalidUsername<T> value)? invalidUsername,
+    TResult? Function(InvalidMobileNumber<T> value)? invalidMobileNumber,
     TResult? Function(InvalidChannelName<T> value)? invalidChannelName,
     TResult? Function(ShortPassword<T> value)? shortPassword,
     TResult? Function(PasswordsDontMatch<T> value)? passwordsDontMatch,
@@ -919,6 +948,7 @@ class _$InvalidEmailImpl<T> implements InvalidEmail<T> {
     TResult Function(TooManyGuilds<T> value)? tooManyGuilds,
     TResult Function(InvalidEmail<T> value)? invalidEmail,
     TResult Function(InvalidUsername<T> value)? invalidUsername,
+    TResult Function(InvalidMobileNumber<T> value)? invalidMobileNumber,
     TResult Function(InvalidChannelName<T> value)? invalidChannelName,
     TResult Function(ShortPassword<T> value)? shortPassword,
     TResult Function(PasswordsDontMatch<T> value)? passwordsDontMatch,
@@ -1020,6 +1050,7 @@ class _$InvalidUsernameImpl<T> implements InvalidUsername<T> {
     required TResult Function(T failedValue, int max) tooManyGuilds,
     required TResult Function(T failedValue) invalidEmail,
     required TResult Function(T failedValue) invalidUsername,
+    required TResult Function(T failedValue) invalidMobileNumber,
     required TResult Function(T failedValue) invalidChannelName,
     required TResult Function(T failedValue) shortPassword,
     required TResult Function(T failedValue) passwordsDontMatch,
@@ -1038,6 +1069,7 @@ class _$InvalidUsernameImpl<T> implements InvalidUsername<T> {
     TResult? Function(T failedValue, int max)? tooManyGuilds,
     TResult? Function(T failedValue)? invalidEmail,
     TResult? Function(T failedValue)? invalidUsername,
+    TResult? Function(T failedValue)? invalidMobileNumber,
     TResult? Function(T failedValue)? invalidChannelName,
     TResult? Function(T failedValue)? shortPassword,
     TResult? Function(T failedValue)? passwordsDontMatch,
@@ -1056,6 +1088,7 @@ class _$InvalidUsernameImpl<T> implements InvalidUsername<T> {
     TResult Function(T failedValue, int max)? tooManyGuilds,
     TResult Function(T failedValue)? invalidEmail,
     TResult Function(T failedValue)? invalidUsername,
+    TResult Function(T failedValue)? invalidMobileNumber,
     TResult Function(T failedValue)? invalidChannelName,
     TResult Function(T failedValue)? shortPassword,
     TResult Function(T failedValue)? passwordsDontMatch,
@@ -1078,6 +1111,7 @@ class _$InvalidUsernameImpl<T> implements InvalidUsername<T> {
     required TResult Function(TooManyGuilds<T> value) tooManyGuilds,
     required TResult Function(InvalidEmail<T> value) invalidEmail,
     required TResult Function(InvalidUsername<T> value) invalidUsername,
+    required TResult Function(InvalidMobileNumber<T> value) invalidMobileNumber,
     required TResult Function(InvalidChannelName<T> value) invalidChannelName,
     required TResult Function(ShortPassword<T> value) shortPassword,
     required TResult Function(PasswordsDontMatch<T> value) passwordsDontMatch,
@@ -1096,6 +1130,7 @@ class _$InvalidUsernameImpl<T> implements InvalidUsername<T> {
     TResult? Function(TooManyGuilds<T> value)? tooManyGuilds,
     TResult? Function(InvalidEmail<T> value)? invalidEmail,
     TResult? Function(InvalidUsername<T> value)? invalidUsername,
+    TResult? Function(InvalidMobileNumber<T> value)? invalidMobileNumber,
     TResult? Function(InvalidChannelName<T> value)? invalidChannelName,
     TResult? Function(ShortPassword<T> value)? shortPassword,
     TResult? Function(PasswordsDontMatch<T> value)? passwordsDontMatch,
@@ -1114,6 +1149,7 @@ class _$InvalidUsernameImpl<T> implements InvalidUsername<T> {
     TResult Function(TooManyGuilds<T> value)? tooManyGuilds,
     TResult Function(InvalidEmail<T> value)? invalidEmail,
     TResult Function(InvalidUsername<T> value)? invalidUsername,
+    TResult Function(InvalidMobileNumber<T> value)? invalidMobileNumber,
     TResult Function(InvalidChannelName<T> value)? invalidChannelName,
     TResult Function(ShortPassword<T> value)? shortPassword,
     TResult Function(PasswordsDontMatch<T> value)? passwordsDontMatch,
@@ -1139,6 +1175,207 @@ abstract class InvalidUsername<T> implements ValueFailure<T> {
   @JsonKey(ignore: true)
   _$$InvalidUsernameImplCopyWith<T, _$InvalidUsernameImpl<T>> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$InvalidMobileNumberImplCopyWith<T, $Res>
+    implements $ValueFailureCopyWith<T, $Res> {
+  factory _$$InvalidMobileNumberImplCopyWith(_$InvalidMobileNumberImpl<T> value,
+          $Res Function(_$InvalidMobileNumberImpl<T>) then) =
+      __$$InvalidMobileNumberImplCopyWithImpl<T, $Res>;
+  @override
+  @useResult
+  $Res call({T failedValue});
+}
+
+/// @nodoc
+class __$$InvalidMobileNumberImplCopyWithImpl<T, $Res>
+    extends _$ValueFailureCopyWithImpl<T, $Res, _$InvalidMobileNumberImpl<T>>
+    implements _$$InvalidMobileNumberImplCopyWith<T, $Res> {
+  __$$InvalidMobileNumberImplCopyWithImpl(_$InvalidMobileNumberImpl<T> _value,
+      $Res Function(_$InvalidMobileNumberImpl<T>) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? failedValue = freezed,
+  }) {
+    return _then(_$InvalidMobileNumberImpl<T>(
+      failedValue: freezed == failedValue
+          ? _value.failedValue
+          : failedValue // ignore: cast_nullable_to_non_nullable
+              as T,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$InvalidMobileNumberImpl<T> implements InvalidMobileNumber<T> {
+  const _$InvalidMobileNumberImpl({required this.failedValue});
+
+  @override
+  final T failedValue;
+
+  @override
+  String toString() {
+    return 'ValueFailure<$T>.invalidMobileNumber(failedValue: $failedValue)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$InvalidMobileNumberImpl<T> &&
+            const DeepCollectionEquality()
+                .equals(other.failedValue, failedValue));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(failedValue));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$InvalidMobileNumberImplCopyWith<T, _$InvalidMobileNumberImpl<T>>
+      get copyWith => __$$InvalidMobileNumberImplCopyWithImpl<T,
+          _$InvalidMobileNumberImpl<T>>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(T failedValue, int max) exceedingLength,
+    required TResult Function(T failedValue) empty,
+    required TResult Function(T failedValue, int max) tooManyGuilds,
+    required TResult Function(T failedValue) invalidEmail,
+    required TResult Function(T failedValue) invalidUsername,
+    required TResult Function(T failedValue) invalidMobileNumber,
+    required TResult Function(T failedValue) invalidChannelName,
+    required TResult Function(T failedValue) shortPassword,
+    required TResult Function(T failedValue) passwordsDontMatch,
+    required TResult Function(T failedValue, int max) exceedingSize,
+    required TResult Function(T failedValue) invalidColor,
+    required TResult Function(T failedValue) invalidUID,
+  }) {
+    return invalidMobileNumber(failedValue);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(T failedValue, int max)? exceedingLength,
+    TResult? Function(T failedValue)? empty,
+    TResult? Function(T failedValue, int max)? tooManyGuilds,
+    TResult? Function(T failedValue)? invalidEmail,
+    TResult? Function(T failedValue)? invalidUsername,
+    TResult? Function(T failedValue)? invalidMobileNumber,
+    TResult? Function(T failedValue)? invalidChannelName,
+    TResult? Function(T failedValue)? shortPassword,
+    TResult? Function(T failedValue)? passwordsDontMatch,
+    TResult? Function(T failedValue, int max)? exceedingSize,
+    TResult? Function(T failedValue)? invalidColor,
+    TResult? Function(T failedValue)? invalidUID,
+  }) {
+    return invalidMobileNumber?.call(failedValue);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(T failedValue, int max)? exceedingLength,
+    TResult Function(T failedValue)? empty,
+    TResult Function(T failedValue, int max)? tooManyGuilds,
+    TResult Function(T failedValue)? invalidEmail,
+    TResult Function(T failedValue)? invalidUsername,
+    TResult Function(T failedValue)? invalidMobileNumber,
+    TResult Function(T failedValue)? invalidChannelName,
+    TResult Function(T failedValue)? shortPassword,
+    TResult Function(T failedValue)? passwordsDontMatch,
+    TResult Function(T failedValue, int max)? exceedingSize,
+    TResult Function(T failedValue)? invalidColor,
+    TResult Function(T failedValue)? invalidUID,
+    required TResult orElse(),
+  }) {
+    if (invalidMobileNumber != null) {
+      return invalidMobileNumber(failedValue);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(ExceedingLength<T> value) exceedingLength,
+    required TResult Function(Empty<T> value) empty,
+    required TResult Function(TooManyGuilds<T> value) tooManyGuilds,
+    required TResult Function(InvalidEmail<T> value) invalidEmail,
+    required TResult Function(InvalidUsername<T> value) invalidUsername,
+    required TResult Function(InvalidMobileNumber<T> value) invalidMobileNumber,
+    required TResult Function(InvalidChannelName<T> value) invalidChannelName,
+    required TResult Function(ShortPassword<T> value) shortPassword,
+    required TResult Function(PasswordsDontMatch<T> value) passwordsDontMatch,
+    required TResult Function(ExceedingSize<T> value) exceedingSize,
+    required TResult Function(InvalidColor<T> value) invalidColor,
+    required TResult Function(InvalidUID<T> value) invalidUID,
+  }) {
+    return invalidMobileNumber(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(ExceedingLength<T> value)? exceedingLength,
+    TResult? Function(Empty<T> value)? empty,
+    TResult? Function(TooManyGuilds<T> value)? tooManyGuilds,
+    TResult? Function(InvalidEmail<T> value)? invalidEmail,
+    TResult? Function(InvalidUsername<T> value)? invalidUsername,
+    TResult? Function(InvalidMobileNumber<T> value)? invalidMobileNumber,
+    TResult? Function(InvalidChannelName<T> value)? invalidChannelName,
+    TResult? Function(ShortPassword<T> value)? shortPassword,
+    TResult? Function(PasswordsDontMatch<T> value)? passwordsDontMatch,
+    TResult? Function(ExceedingSize<T> value)? exceedingSize,
+    TResult? Function(InvalidColor<T> value)? invalidColor,
+    TResult? Function(InvalidUID<T> value)? invalidUID,
+  }) {
+    return invalidMobileNumber?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(ExceedingLength<T> value)? exceedingLength,
+    TResult Function(Empty<T> value)? empty,
+    TResult Function(TooManyGuilds<T> value)? tooManyGuilds,
+    TResult Function(InvalidEmail<T> value)? invalidEmail,
+    TResult Function(InvalidUsername<T> value)? invalidUsername,
+    TResult Function(InvalidMobileNumber<T> value)? invalidMobileNumber,
+    TResult Function(InvalidChannelName<T> value)? invalidChannelName,
+    TResult Function(ShortPassword<T> value)? shortPassword,
+    TResult Function(PasswordsDontMatch<T> value)? passwordsDontMatch,
+    TResult Function(ExceedingSize<T> value)? exceedingSize,
+    TResult Function(InvalidColor<T> value)? invalidColor,
+    TResult Function(InvalidUID<T> value)? invalidUID,
+    required TResult orElse(),
+  }) {
+    if (invalidMobileNumber != null) {
+      return invalidMobileNumber(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class InvalidMobileNumber<T> implements ValueFailure<T> {
+  const factory InvalidMobileNumber({required final T failedValue}) =
+      _$InvalidMobileNumberImpl<T>;
+
+  @override
+  T get failedValue;
+  @override
+  @JsonKey(ignore: true)
+  _$$InvalidMobileNumberImplCopyWith<T, _$InvalidMobileNumberImpl<T>>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -1215,6 +1452,7 @@ class _$InvalidChannelNameImpl<T> implements InvalidChannelName<T> {
     required TResult Function(T failedValue, int max) tooManyGuilds,
     required TResult Function(T failedValue) invalidEmail,
     required TResult Function(T failedValue) invalidUsername,
+    required TResult Function(T failedValue) invalidMobileNumber,
     required TResult Function(T failedValue) invalidChannelName,
     required TResult Function(T failedValue) shortPassword,
     required TResult Function(T failedValue) passwordsDontMatch,
@@ -1233,6 +1471,7 @@ class _$InvalidChannelNameImpl<T> implements InvalidChannelName<T> {
     TResult? Function(T failedValue, int max)? tooManyGuilds,
     TResult? Function(T failedValue)? invalidEmail,
     TResult? Function(T failedValue)? invalidUsername,
+    TResult? Function(T failedValue)? invalidMobileNumber,
     TResult? Function(T failedValue)? invalidChannelName,
     TResult? Function(T failedValue)? shortPassword,
     TResult? Function(T failedValue)? passwordsDontMatch,
@@ -1251,6 +1490,7 @@ class _$InvalidChannelNameImpl<T> implements InvalidChannelName<T> {
     TResult Function(T failedValue, int max)? tooManyGuilds,
     TResult Function(T failedValue)? invalidEmail,
     TResult Function(T failedValue)? invalidUsername,
+    TResult Function(T failedValue)? invalidMobileNumber,
     TResult Function(T failedValue)? invalidChannelName,
     TResult Function(T failedValue)? shortPassword,
     TResult Function(T failedValue)? passwordsDontMatch,
@@ -1273,6 +1513,7 @@ class _$InvalidChannelNameImpl<T> implements InvalidChannelName<T> {
     required TResult Function(TooManyGuilds<T> value) tooManyGuilds,
     required TResult Function(InvalidEmail<T> value) invalidEmail,
     required TResult Function(InvalidUsername<T> value) invalidUsername,
+    required TResult Function(InvalidMobileNumber<T> value) invalidMobileNumber,
     required TResult Function(InvalidChannelName<T> value) invalidChannelName,
     required TResult Function(ShortPassword<T> value) shortPassword,
     required TResult Function(PasswordsDontMatch<T> value) passwordsDontMatch,
@@ -1291,6 +1532,7 @@ class _$InvalidChannelNameImpl<T> implements InvalidChannelName<T> {
     TResult? Function(TooManyGuilds<T> value)? tooManyGuilds,
     TResult? Function(InvalidEmail<T> value)? invalidEmail,
     TResult? Function(InvalidUsername<T> value)? invalidUsername,
+    TResult? Function(InvalidMobileNumber<T> value)? invalidMobileNumber,
     TResult? Function(InvalidChannelName<T> value)? invalidChannelName,
     TResult? Function(ShortPassword<T> value)? shortPassword,
     TResult? Function(PasswordsDontMatch<T> value)? passwordsDontMatch,
@@ -1309,6 +1551,7 @@ class _$InvalidChannelNameImpl<T> implements InvalidChannelName<T> {
     TResult Function(TooManyGuilds<T> value)? tooManyGuilds,
     TResult Function(InvalidEmail<T> value)? invalidEmail,
     TResult Function(InvalidUsername<T> value)? invalidUsername,
+    TResult Function(InvalidMobileNumber<T> value)? invalidMobileNumber,
     TResult Function(InvalidChannelName<T> value)? invalidChannelName,
     TResult Function(ShortPassword<T> value)? shortPassword,
     TResult Function(PasswordsDontMatch<T> value)? passwordsDontMatch,
@@ -1410,6 +1653,7 @@ class _$ShortPasswordImpl<T> implements ShortPassword<T> {
     required TResult Function(T failedValue, int max) tooManyGuilds,
     required TResult Function(T failedValue) invalidEmail,
     required TResult Function(T failedValue) invalidUsername,
+    required TResult Function(T failedValue) invalidMobileNumber,
     required TResult Function(T failedValue) invalidChannelName,
     required TResult Function(T failedValue) shortPassword,
     required TResult Function(T failedValue) passwordsDontMatch,
@@ -1428,6 +1672,7 @@ class _$ShortPasswordImpl<T> implements ShortPassword<T> {
     TResult? Function(T failedValue, int max)? tooManyGuilds,
     TResult? Function(T failedValue)? invalidEmail,
     TResult? Function(T failedValue)? invalidUsername,
+    TResult? Function(T failedValue)? invalidMobileNumber,
     TResult? Function(T failedValue)? invalidChannelName,
     TResult? Function(T failedValue)? shortPassword,
     TResult? Function(T failedValue)? passwordsDontMatch,
@@ -1446,6 +1691,7 @@ class _$ShortPasswordImpl<T> implements ShortPassword<T> {
     TResult Function(T failedValue, int max)? tooManyGuilds,
     TResult Function(T failedValue)? invalidEmail,
     TResult Function(T failedValue)? invalidUsername,
+    TResult Function(T failedValue)? invalidMobileNumber,
     TResult Function(T failedValue)? invalidChannelName,
     TResult Function(T failedValue)? shortPassword,
     TResult Function(T failedValue)? passwordsDontMatch,
@@ -1468,6 +1714,7 @@ class _$ShortPasswordImpl<T> implements ShortPassword<T> {
     required TResult Function(TooManyGuilds<T> value) tooManyGuilds,
     required TResult Function(InvalidEmail<T> value) invalidEmail,
     required TResult Function(InvalidUsername<T> value) invalidUsername,
+    required TResult Function(InvalidMobileNumber<T> value) invalidMobileNumber,
     required TResult Function(InvalidChannelName<T> value) invalidChannelName,
     required TResult Function(ShortPassword<T> value) shortPassword,
     required TResult Function(PasswordsDontMatch<T> value) passwordsDontMatch,
@@ -1486,6 +1733,7 @@ class _$ShortPasswordImpl<T> implements ShortPassword<T> {
     TResult? Function(TooManyGuilds<T> value)? tooManyGuilds,
     TResult? Function(InvalidEmail<T> value)? invalidEmail,
     TResult? Function(InvalidUsername<T> value)? invalidUsername,
+    TResult? Function(InvalidMobileNumber<T> value)? invalidMobileNumber,
     TResult? Function(InvalidChannelName<T> value)? invalidChannelName,
     TResult? Function(ShortPassword<T> value)? shortPassword,
     TResult? Function(PasswordsDontMatch<T> value)? passwordsDontMatch,
@@ -1504,6 +1752,7 @@ class _$ShortPasswordImpl<T> implements ShortPassword<T> {
     TResult Function(TooManyGuilds<T> value)? tooManyGuilds,
     TResult Function(InvalidEmail<T> value)? invalidEmail,
     TResult Function(InvalidUsername<T> value)? invalidUsername,
+    TResult Function(InvalidMobileNumber<T> value)? invalidMobileNumber,
     TResult Function(InvalidChannelName<T> value)? invalidChannelName,
     TResult Function(ShortPassword<T> value)? shortPassword,
     TResult Function(PasswordsDontMatch<T> value)? passwordsDontMatch,
@@ -1605,6 +1854,7 @@ class _$PasswordsDontMatchImpl<T> implements PasswordsDontMatch<T> {
     required TResult Function(T failedValue, int max) tooManyGuilds,
     required TResult Function(T failedValue) invalidEmail,
     required TResult Function(T failedValue) invalidUsername,
+    required TResult Function(T failedValue) invalidMobileNumber,
     required TResult Function(T failedValue) invalidChannelName,
     required TResult Function(T failedValue) shortPassword,
     required TResult Function(T failedValue) passwordsDontMatch,
@@ -1623,6 +1873,7 @@ class _$PasswordsDontMatchImpl<T> implements PasswordsDontMatch<T> {
     TResult? Function(T failedValue, int max)? tooManyGuilds,
     TResult? Function(T failedValue)? invalidEmail,
     TResult? Function(T failedValue)? invalidUsername,
+    TResult? Function(T failedValue)? invalidMobileNumber,
     TResult? Function(T failedValue)? invalidChannelName,
     TResult? Function(T failedValue)? shortPassword,
     TResult? Function(T failedValue)? passwordsDontMatch,
@@ -1641,6 +1892,7 @@ class _$PasswordsDontMatchImpl<T> implements PasswordsDontMatch<T> {
     TResult Function(T failedValue, int max)? tooManyGuilds,
     TResult Function(T failedValue)? invalidEmail,
     TResult Function(T failedValue)? invalidUsername,
+    TResult Function(T failedValue)? invalidMobileNumber,
     TResult Function(T failedValue)? invalidChannelName,
     TResult Function(T failedValue)? shortPassword,
     TResult Function(T failedValue)? passwordsDontMatch,
@@ -1663,6 +1915,7 @@ class _$PasswordsDontMatchImpl<T> implements PasswordsDontMatch<T> {
     required TResult Function(TooManyGuilds<T> value) tooManyGuilds,
     required TResult Function(InvalidEmail<T> value) invalidEmail,
     required TResult Function(InvalidUsername<T> value) invalidUsername,
+    required TResult Function(InvalidMobileNumber<T> value) invalidMobileNumber,
     required TResult Function(InvalidChannelName<T> value) invalidChannelName,
     required TResult Function(ShortPassword<T> value) shortPassword,
     required TResult Function(PasswordsDontMatch<T> value) passwordsDontMatch,
@@ -1681,6 +1934,7 @@ class _$PasswordsDontMatchImpl<T> implements PasswordsDontMatch<T> {
     TResult? Function(TooManyGuilds<T> value)? tooManyGuilds,
     TResult? Function(InvalidEmail<T> value)? invalidEmail,
     TResult? Function(InvalidUsername<T> value)? invalidUsername,
+    TResult? Function(InvalidMobileNumber<T> value)? invalidMobileNumber,
     TResult? Function(InvalidChannelName<T> value)? invalidChannelName,
     TResult? Function(ShortPassword<T> value)? shortPassword,
     TResult? Function(PasswordsDontMatch<T> value)? passwordsDontMatch,
@@ -1699,6 +1953,7 @@ class _$PasswordsDontMatchImpl<T> implements PasswordsDontMatch<T> {
     TResult Function(TooManyGuilds<T> value)? tooManyGuilds,
     TResult Function(InvalidEmail<T> value)? invalidEmail,
     TResult Function(InvalidUsername<T> value)? invalidUsername,
+    TResult Function(InvalidMobileNumber<T> value)? invalidMobileNumber,
     TResult Function(InvalidChannelName<T> value)? invalidChannelName,
     TResult Function(ShortPassword<T> value)? shortPassword,
     TResult Function(PasswordsDontMatch<T> value)? passwordsDontMatch,
@@ -1808,6 +2063,7 @@ class _$ExceedingSizeImpl<T> implements ExceedingSize<T> {
     required TResult Function(T failedValue, int max) tooManyGuilds,
     required TResult Function(T failedValue) invalidEmail,
     required TResult Function(T failedValue) invalidUsername,
+    required TResult Function(T failedValue) invalidMobileNumber,
     required TResult Function(T failedValue) invalidChannelName,
     required TResult Function(T failedValue) shortPassword,
     required TResult Function(T failedValue) passwordsDontMatch,
@@ -1826,6 +2082,7 @@ class _$ExceedingSizeImpl<T> implements ExceedingSize<T> {
     TResult? Function(T failedValue, int max)? tooManyGuilds,
     TResult? Function(T failedValue)? invalidEmail,
     TResult? Function(T failedValue)? invalidUsername,
+    TResult? Function(T failedValue)? invalidMobileNumber,
     TResult? Function(T failedValue)? invalidChannelName,
     TResult? Function(T failedValue)? shortPassword,
     TResult? Function(T failedValue)? passwordsDontMatch,
@@ -1844,6 +2101,7 @@ class _$ExceedingSizeImpl<T> implements ExceedingSize<T> {
     TResult Function(T failedValue, int max)? tooManyGuilds,
     TResult Function(T failedValue)? invalidEmail,
     TResult Function(T failedValue)? invalidUsername,
+    TResult Function(T failedValue)? invalidMobileNumber,
     TResult Function(T failedValue)? invalidChannelName,
     TResult Function(T failedValue)? shortPassword,
     TResult Function(T failedValue)? passwordsDontMatch,
@@ -1866,6 +2124,7 @@ class _$ExceedingSizeImpl<T> implements ExceedingSize<T> {
     required TResult Function(TooManyGuilds<T> value) tooManyGuilds,
     required TResult Function(InvalidEmail<T> value) invalidEmail,
     required TResult Function(InvalidUsername<T> value) invalidUsername,
+    required TResult Function(InvalidMobileNumber<T> value) invalidMobileNumber,
     required TResult Function(InvalidChannelName<T> value) invalidChannelName,
     required TResult Function(ShortPassword<T> value) shortPassword,
     required TResult Function(PasswordsDontMatch<T> value) passwordsDontMatch,
@@ -1884,6 +2143,7 @@ class _$ExceedingSizeImpl<T> implements ExceedingSize<T> {
     TResult? Function(TooManyGuilds<T> value)? tooManyGuilds,
     TResult? Function(InvalidEmail<T> value)? invalidEmail,
     TResult? Function(InvalidUsername<T> value)? invalidUsername,
+    TResult? Function(InvalidMobileNumber<T> value)? invalidMobileNumber,
     TResult? Function(InvalidChannelName<T> value)? invalidChannelName,
     TResult? Function(ShortPassword<T> value)? shortPassword,
     TResult? Function(PasswordsDontMatch<T> value)? passwordsDontMatch,
@@ -1902,6 +2162,7 @@ class _$ExceedingSizeImpl<T> implements ExceedingSize<T> {
     TResult Function(TooManyGuilds<T> value)? tooManyGuilds,
     TResult Function(InvalidEmail<T> value)? invalidEmail,
     TResult Function(InvalidUsername<T> value)? invalidUsername,
+    TResult Function(InvalidMobileNumber<T> value)? invalidMobileNumber,
     TResult Function(InvalidChannelName<T> value)? invalidChannelName,
     TResult Function(ShortPassword<T> value)? shortPassword,
     TResult Function(PasswordsDontMatch<T> value)? passwordsDontMatch,
@@ -2005,6 +2266,7 @@ class _$InvalidColorImpl<T> implements InvalidColor<T> {
     required TResult Function(T failedValue, int max) tooManyGuilds,
     required TResult Function(T failedValue) invalidEmail,
     required TResult Function(T failedValue) invalidUsername,
+    required TResult Function(T failedValue) invalidMobileNumber,
     required TResult Function(T failedValue) invalidChannelName,
     required TResult Function(T failedValue) shortPassword,
     required TResult Function(T failedValue) passwordsDontMatch,
@@ -2023,6 +2285,7 @@ class _$InvalidColorImpl<T> implements InvalidColor<T> {
     TResult? Function(T failedValue, int max)? tooManyGuilds,
     TResult? Function(T failedValue)? invalidEmail,
     TResult? Function(T failedValue)? invalidUsername,
+    TResult? Function(T failedValue)? invalidMobileNumber,
     TResult? Function(T failedValue)? invalidChannelName,
     TResult? Function(T failedValue)? shortPassword,
     TResult? Function(T failedValue)? passwordsDontMatch,
@@ -2041,6 +2304,7 @@ class _$InvalidColorImpl<T> implements InvalidColor<T> {
     TResult Function(T failedValue, int max)? tooManyGuilds,
     TResult Function(T failedValue)? invalidEmail,
     TResult Function(T failedValue)? invalidUsername,
+    TResult Function(T failedValue)? invalidMobileNumber,
     TResult Function(T failedValue)? invalidChannelName,
     TResult Function(T failedValue)? shortPassword,
     TResult Function(T failedValue)? passwordsDontMatch,
@@ -2063,6 +2327,7 @@ class _$InvalidColorImpl<T> implements InvalidColor<T> {
     required TResult Function(TooManyGuilds<T> value) tooManyGuilds,
     required TResult Function(InvalidEmail<T> value) invalidEmail,
     required TResult Function(InvalidUsername<T> value) invalidUsername,
+    required TResult Function(InvalidMobileNumber<T> value) invalidMobileNumber,
     required TResult Function(InvalidChannelName<T> value) invalidChannelName,
     required TResult Function(ShortPassword<T> value) shortPassword,
     required TResult Function(PasswordsDontMatch<T> value) passwordsDontMatch,
@@ -2081,6 +2346,7 @@ class _$InvalidColorImpl<T> implements InvalidColor<T> {
     TResult? Function(TooManyGuilds<T> value)? tooManyGuilds,
     TResult? Function(InvalidEmail<T> value)? invalidEmail,
     TResult? Function(InvalidUsername<T> value)? invalidUsername,
+    TResult? Function(InvalidMobileNumber<T> value)? invalidMobileNumber,
     TResult? Function(InvalidChannelName<T> value)? invalidChannelName,
     TResult? Function(ShortPassword<T> value)? shortPassword,
     TResult? Function(PasswordsDontMatch<T> value)? passwordsDontMatch,
@@ -2099,6 +2365,7 @@ class _$InvalidColorImpl<T> implements InvalidColor<T> {
     TResult Function(TooManyGuilds<T> value)? tooManyGuilds,
     TResult Function(InvalidEmail<T> value)? invalidEmail,
     TResult Function(InvalidUsername<T> value)? invalidUsername,
+    TResult Function(InvalidMobileNumber<T> value)? invalidMobileNumber,
     TResult Function(InvalidChannelName<T> value)? invalidChannelName,
     TResult Function(ShortPassword<T> value)? shortPassword,
     TResult Function(PasswordsDontMatch<T> value)? passwordsDontMatch,
@@ -2199,6 +2466,7 @@ class _$InvalidUIDImpl<T> implements InvalidUID<T> {
     required TResult Function(T failedValue, int max) tooManyGuilds,
     required TResult Function(T failedValue) invalidEmail,
     required TResult Function(T failedValue) invalidUsername,
+    required TResult Function(T failedValue) invalidMobileNumber,
     required TResult Function(T failedValue) invalidChannelName,
     required TResult Function(T failedValue) shortPassword,
     required TResult Function(T failedValue) passwordsDontMatch,
@@ -2217,6 +2485,7 @@ class _$InvalidUIDImpl<T> implements InvalidUID<T> {
     TResult? Function(T failedValue, int max)? tooManyGuilds,
     TResult? Function(T failedValue)? invalidEmail,
     TResult? Function(T failedValue)? invalidUsername,
+    TResult? Function(T failedValue)? invalidMobileNumber,
     TResult? Function(T failedValue)? invalidChannelName,
     TResult? Function(T failedValue)? shortPassword,
     TResult? Function(T failedValue)? passwordsDontMatch,
@@ -2235,6 +2504,7 @@ class _$InvalidUIDImpl<T> implements InvalidUID<T> {
     TResult Function(T failedValue, int max)? tooManyGuilds,
     TResult Function(T failedValue)? invalidEmail,
     TResult Function(T failedValue)? invalidUsername,
+    TResult Function(T failedValue)? invalidMobileNumber,
     TResult Function(T failedValue)? invalidChannelName,
     TResult Function(T failedValue)? shortPassword,
     TResult Function(T failedValue)? passwordsDontMatch,
@@ -2257,6 +2527,7 @@ class _$InvalidUIDImpl<T> implements InvalidUID<T> {
     required TResult Function(TooManyGuilds<T> value) tooManyGuilds,
     required TResult Function(InvalidEmail<T> value) invalidEmail,
     required TResult Function(InvalidUsername<T> value) invalidUsername,
+    required TResult Function(InvalidMobileNumber<T> value) invalidMobileNumber,
     required TResult Function(InvalidChannelName<T> value) invalidChannelName,
     required TResult Function(ShortPassword<T> value) shortPassword,
     required TResult Function(PasswordsDontMatch<T> value) passwordsDontMatch,
@@ -2275,6 +2546,7 @@ class _$InvalidUIDImpl<T> implements InvalidUID<T> {
     TResult? Function(TooManyGuilds<T> value)? tooManyGuilds,
     TResult? Function(InvalidEmail<T> value)? invalidEmail,
     TResult? Function(InvalidUsername<T> value)? invalidUsername,
+    TResult? Function(InvalidMobileNumber<T> value)? invalidMobileNumber,
     TResult? Function(InvalidChannelName<T> value)? invalidChannelName,
     TResult? Function(ShortPassword<T> value)? shortPassword,
     TResult? Function(PasswordsDontMatch<T> value)? passwordsDontMatch,
@@ -2293,6 +2565,7 @@ class _$InvalidUIDImpl<T> implements InvalidUID<T> {
     TResult Function(TooManyGuilds<T> value)? tooManyGuilds,
     TResult Function(InvalidEmail<T> value)? invalidEmail,
     TResult Function(InvalidUsername<T> value)? invalidUsername,
+    TResult Function(InvalidMobileNumber<T> value)? invalidMobileNumber,
     TResult Function(InvalidChannelName<T> value)? invalidChannelName,
     TResult Function(ShortPassword<T> value)? shortPassword,
     TResult Function(PasswordsDontMatch<T> value)? passwordsDontMatch,

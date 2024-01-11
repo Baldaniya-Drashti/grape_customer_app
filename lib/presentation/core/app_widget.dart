@@ -1,3 +1,4 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' as bloc;
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -28,23 +29,35 @@ class AppWidget extends StatelessWidget {
   }
 }
 
-class _App extends StatelessWidget {
+class _App extends StatefulWidget {
+  @override
+  State<_App> createState() => _AppState();
+}
+
+class _AppState extends State<_App> {
   final AppRouter _appRouter = AppRouter();
+  FirebaseAnalytics analytics = FirebaseAnalytics.instance;
+
   @override
   Widget build(BuildContext context) {
     // if (doesCurrentUserExist()) {
     //   use(UserSocketHook(context));
     // }
+
     return LifecycleWatcher(
       child: ScreenUtilInit(
         ensureScreenSize: true,
         child: MaterialApp.router(
-          routerDelegate: _appRouter.delegate(),
-          routeInformationParser: _appRouter.defaultRouteParser(),
-          title: 'Grape App',
+          // routerDelegate: _appRouter.delegate(),
+          // routeInformationParser: _appRouter.defaultRouteParser(),
+          title: 'Grape Customer App',
           debugShowCheckedModeBanner: false,
           theme: AppTheme.light,
           darkTheme: AppTheme.dark,
+          routerConfig: _appRouter.config(
+            navigatorObservers: () =>
+                [FirebaseAnalyticsObserver(analytics: analytics)],
+          ),
           supportedLocales: AppLocalizations.supportedLocales,
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           localeResolutionCallback: (locale, supportedLocales) {

@@ -18,44 +18,44 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$LoginFormEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String email) emailChanged,
-    required TResult Function(String password) passwordChanged,
+    required TResult Function(String mobileNumber) mobileNumberChanged,
+    required TResult Function(String counryCode) selectCountryCode,
     required TResult Function() loginPressed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String email)? emailChanged,
-    TResult? Function(String password)? passwordChanged,
+    TResult? Function(String mobileNumber)? mobileNumberChanged,
+    TResult? Function(String counryCode)? selectCountryCode,
     TResult? Function()? loginPressed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String email)? emailChanged,
-    TResult Function(String password)? passwordChanged,
+    TResult Function(String mobileNumber)? mobileNumberChanged,
+    TResult Function(String counryCode)? selectCountryCode,
     TResult Function()? loginPressed,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(EmailChanged value) emailChanged,
-    required TResult Function(PasswordChanged value) passwordChanged,
+    required TResult Function(MobileNumberChanged value) mobileNumberChanged,
+    required TResult Function(SelectCountryCode value) selectCountryCode,
     required TResult Function(LoginPressed value) loginPressed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(EmailChanged value)? emailChanged,
-    TResult? Function(PasswordChanged value)? passwordChanged,
+    TResult? Function(MobileNumberChanged value)? mobileNumberChanged,
+    TResult? Function(SelectCountryCode value)? selectCountryCode,
     TResult? Function(LoginPressed value)? loginPressed,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(EmailChanged value)? emailChanged,
-    TResult Function(PasswordChanged value)? passwordChanged,
+    TResult Function(MobileNumberChanged value)? mobileNumberChanged,
+    TResult Function(SelectCountryCode value)? selectCountryCode,
     TResult Function(LoginPressed value)? loginPressed,
     required TResult orElse(),
   }) =>
@@ -81,31 +81,31 @@ class _$LoginFormEventCopyWithImpl<$Res, $Val extends LoginFormEvent>
 }
 
 /// @nodoc
-abstract class _$$EmailChangedImplCopyWith<$Res> {
-  factory _$$EmailChangedImplCopyWith(
-          _$EmailChangedImpl value, $Res Function(_$EmailChangedImpl) then) =
-      __$$EmailChangedImplCopyWithImpl<$Res>;
+abstract class _$$MobileNumberChangedImplCopyWith<$Res> {
+  factory _$$MobileNumberChangedImplCopyWith(_$MobileNumberChangedImpl value,
+          $Res Function(_$MobileNumberChangedImpl) then) =
+      __$$MobileNumberChangedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String email});
+  $Res call({String mobileNumber});
 }
 
 /// @nodoc
-class __$$EmailChangedImplCopyWithImpl<$Res>
-    extends _$LoginFormEventCopyWithImpl<$Res, _$EmailChangedImpl>
-    implements _$$EmailChangedImplCopyWith<$Res> {
-  __$$EmailChangedImplCopyWithImpl(
-      _$EmailChangedImpl _value, $Res Function(_$EmailChangedImpl) _then)
+class __$$MobileNumberChangedImplCopyWithImpl<$Res>
+    extends _$LoginFormEventCopyWithImpl<$Res, _$MobileNumberChangedImpl>
+    implements _$$MobileNumberChangedImplCopyWith<$Res> {
+  __$$MobileNumberChangedImplCopyWithImpl(_$MobileNumberChangedImpl _value,
+      $Res Function(_$MobileNumberChangedImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? email = null,
+    Object? mobileNumber = null,
   }) {
-    return _then(_$EmailChangedImpl(
-      null == email
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
+    return _then(_$MobileNumberChangedImpl(
+      null == mobileNumber
+          ? _value.mobileNumber
+          : mobileNumber // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -113,205 +113,66 @@ class __$$EmailChangedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$EmailChangedImpl implements EmailChanged {
-  const _$EmailChangedImpl(this.email);
+class _$MobileNumberChangedImpl implements MobileNumberChanged {
+  const _$MobileNumberChangedImpl(this.mobileNumber);
 
   @override
-  final String email;
+  final String mobileNumber;
 
   @override
   String toString() {
-    return 'LoginFormEvent.emailChanged(email: $email)';
+    return 'LoginFormEvent.mobileNumberChanged(mobileNumber: $mobileNumber)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$EmailChangedImpl &&
-            (identical(other.email, email) || other.email == email));
+            other is _$MobileNumberChangedImpl &&
+            (identical(other.mobileNumber, mobileNumber) ||
+                other.mobileNumber == mobileNumber));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, email);
+  int get hashCode => Object.hash(runtimeType, mobileNumber);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$EmailChangedImplCopyWith<_$EmailChangedImpl> get copyWith =>
-      __$$EmailChangedImplCopyWithImpl<_$EmailChangedImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(String email) emailChanged,
-    required TResult Function(String password) passwordChanged,
-    required TResult Function() loginPressed,
-  }) {
-    return emailChanged(email);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String email)? emailChanged,
-    TResult? Function(String password)? passwordChanged,
-    TResult? Function()? loginPressed,
-  }) {
-    return emailChanged?.call(email);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String email)? emailChanged,
-    TResult Function(String password)? passwordChanged,
-    TResult Function()? loginPressed,
-    required TResult orElse(),
-  }) {
-    if (emailChanged != null) {
-      return emailChanged(email);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(EmailChanged value) emailChanged,
-    required TResult Function(PasswordChanged value) passwordChanged,
-    required TResult Function(LoginPressed value) loginPressed,
-  }) {
-    return emailChanged(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(EmailChanged value)? emailChanged,
-    TResult? Function(PasswordChanged value)? passwordChanged,
-    TResult? Function(LoginPressed value)? loginPressed,
-  }) {
-    return emailChanged?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(EmailChanged value)? emailChanged,
-    TResult Function(PasswordChanged value)? passwordChanged,
-    TResult Function(LoginPressed value)? loginPressed,
-    required TResult orElse(),
-  }) {
-    if (emailChanged != null) {
-      return emailChanged(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class EmailChanged implements LoginFormEvent {
-  const factory EmailChanged(final String email) = _$EmailChangedImpl;
-
-  String get email;
-  @JsonKey(ignore: true)
-  _$$EmailChangedImplCopyWith<_$EmailChangedImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$PasswordChangedImplCopyWith<$Res> {
-  factory _$$PasswordChangedImplCopyWith(_$PasswordChangedImpl value,
-          $Res Function(_$PasswordChangedImpl) then) =
-      __$$PasswordChangedImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String password});
-}
-
-/// @nodoc
-class __$$PasswordChangedImplCopyWithImpl<$Res>
-    extends _$LoginFormEventCopyWithImpl<$Res, _$PasswordChangedImpl>
-    implements _$$PasswordChangedImplCopyWith<$Res> {
-  __$$PasswordChangedImplCopyWithImpl(
-      _$PasswordChangedImpl _value, $Res Function(_$PasswordChangedImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? password = null,
-  }) {
-    return _then(_$PasswordChangedImpl(
-      null == password
-          ? _value.password
-          : password // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$PasswordChangedImpl implements PasswordChanged {
-  const _$PasswordChangedImpl(this.password);
-
-  @override
-  final String password;
-
-  @override
-  String toString() {
-    return 'LoginFormEvent.passwordChanged(password: $password)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$PasswordChangedImpl &&
-            (identical(other.password, password) ||
-                other.password == password));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, password);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$PasswordChangedImplCopyWith<_$PasswordChangedImpl> get copyWith =>
-      __$$PasswordChangedImplCopyWithImpl<_$PasswordChangedImpl>(
+  _$$MobileNumberChangedImplCopyWith<_$MobileNumberChangedImpl> get copyWith =>
+      __$$MobileNumberChangedImplCopyWithImpl<_$MobileNumberChangedImpl>(
           this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String email) emailChanged,
-    required TResult Function(String password) passwordChanged,
+    required TResult Function(String mobileNumber) mobileNumberChanged,
+    required TResult Function(String counryCode) selectCountryCode,
     required TResult Function() loginPressed,
   }) {
-    return passwordChanged(password);
+    return mobileNumberChanged(mobileNumber);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String email)? emailChanged,
-    TResult? Function(String password)? passwordChanged,
+    TResult? Function(String mobileNumber)? mobileNumberChanged,
+    TResult? Function(String counryCode)? selectCountryCode,
     TResult? Function()? loginPressed,
   }) {
-    return passwordChanged?.call(password);
+    return mobileNumberChanged?.call(mobileNumber);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String email)? emailChanged,
-    TResult Function(String password)? passwordChanged,
+    TResult Function(String mobileNumber)? mobileNumberChanged,
+    TResult Function(String counryCode)? selectCountryCode,
     TResult Function()? loginPressed,
     required TResult orElse(),
   }) {
-    if (passwordChanged != null) {
-      return passwordChanged(password);
+    if (mobileNumberChanged != null) {
+      return mobileNumberChanged(mobileNumber);
     }
     return orElse();
   }
@@ -319,44 +180,187 @@ class _$PasswordChangedImpl implements PasswordChanged {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(EmailChanged value) emailChanged,
-    required TResult Function(PasswordChanged value) passwordChanged,
+    required TResult Function(MobileNumberChanged value) mobileNumberChanged,
+    required TResult Function(SelectCountryCode value) selectCountryCode,
     required TResult Function(LoginPressed value) loginPressed,
   }) {
-    return passwordChanged(this);
+    return mobileNumberChanged(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(EmailChanged value)? emailChanged,
-    TResult? Function(PasswordChanged value)? passwordChanged,
+    TResult? Function(MobileNumberChanged value)? mobileNumberChanged,
+    TResult? Function(SelectCountryCode value)? selectCountryCode,
     TResult? Function(LoginPressed value)? loginPressed,
   }) {
-    return passwordChanged?.call(this);
+    return mobileNumberChanged?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(EmailChanged value)? emailChanged,
-    TResult Function(PasswordChanged value)? passwordChanged,
+    TResult Function(MobileNumberChanged value)? mobileNumberChanged,
+    TResult Function(SelectCountryCode value)? selectCountryCode,
     TResult Function(LoginPressed value)? loginPressed,
     required TResult orElse(),
   }) {
-    if (passwordChanged != null) {
-      return passwordChanged(this);
+    if (mobileNumberChanged != null) {
+      return mobileNumberChanged(this);
     }
     return orElse();
   }
 }
 
-abstract class PasswordChanged implements LoginFormEvent {
-  const factory PasswordChanged(final String password) = _$PasswordChangedImpl;
+abstract class MobileNumberChanged implements LoginFormEvent {
+  const factory MobileNumberChanged(final String mobileNumber) =
+      _$MobileNumberChangedImpl;
 
-  String get password;
+  String get mobileNumber;
   @JsonKey(ignore: true)
-  _$$PasswordChangedImplCopyWith<_$PasswordChangedImpl> get copyWith =>
+  _$$MobileNumberChangedImplCopyWith<_$MobileNumberChangedImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$SelectCountryCodeImplCopyWith<$Res> {
+  factory _$$SelectCountryCodeImplCopyWith(_$SelectCountryCodeImpl value,
+          $Res Function(_$SelectCountryCodeImpl) then) =
+      __$$SelectCountryCodeImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String counryCode});
+}
+
+/// @nodoc
+class __$$SelectCountryCodeImplCopyWithImpl<$Res>
+    extends _$LoginFormEventCopyWithImpl<$Res, _$SelectCountryCodeImpl>
+    implements _$$SelectCountryCodeImplCopyWith<$Res> {
+  __$$SelectCountryCodeImplCopyWithImpl(_$SelectCountryCodeImpl _value,
+      $Res Function(_$SelectCountryCodeImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? counryCode = null,
+  }) {
+    return _then(_$SelectCountryCodeImpl(
+      null == counryCode
+          ? _value.counryCode
+          : counryCode // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SelectCountryCodeImpl implements SelectCountryCode {
+  const _$SelectCountryCodeImpl(this.counryCode);
+
+  @override
+  final String counryCode;
+
+  @override
+  String toString() {
+    return 'LoginFormEvent.selectCountryCode(counryCode: $counryCode)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SelectCountryCodeImpl &&
+            (identical(other.counryCode, counryCode) ||
+                other.counryCode == counryCode));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, counryCode);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SelectCountryCodeImplCopyWith<_$SelectCountryCodeImpl> get copyWith =>
+      __$$SelectCountryCodeImplCopyWithImpl<_$SelectCountryCodeImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String mobileNumber) mobileNumberChanged,
+    required TResult Function(String counryCode) selectCountryCode,
+    required TResult Function() loginPressed,
+  }) {
+    return selectCountryCode(counryCode);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String mobileNumber)? mobileNumberChanged,
+    TResult? Function(String counryCode)? selectCountryCode,
+    TResult? Function()? loginPressed,
+  }) {
+    return selectCountryCode?.call(counryCode);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String mobileNumber)? mobileNumberChanged,
+    TResult Function(String counryCode)? selectCountryCode,
+    TResult Function()? loginPressed,
+    required TResult orElse(),
+  }) {
+    if (selectCountryCode != null) {
+      return selectCountryCode(counryCode);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(MobileNumberChanged value) mobileNumberChanged,
+    required TResult Function(SelectCountryCode value) selectCountryCode,
+    required TResult Function(LoginPressed value) loginPressed,
+  }) {
+    return selectCountryCode(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(MobileNumberChanged value)? mobileNumberChanged,
+    TResult? Function(SelectCountryCode value)? selectCountryCode,
+    TResult? Function(LoginPressed value)? loginPressed,
+  }) {
+    return selectCountryCode?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(MobileNumberChanged value)? mobileNumberChanged,
+    TResult Function(SelectCountryCode value)? selectCountryCode,
+    TResult Function(LoginPressed value)? loginPressed,
+    required TResult orElse(),
+  }) {
+    if (selectCountryCode != null) {
+      return selectCountryCode(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SelectCountryCode implements LoginFormEvent {
+  const factory SelectCountryCode(final String counryCode) =
+      _$SelectCountryCodeImpl;
+
+  String get counryCode;
+  @JsonKey(ignore: true)
+  _$$SelectCountryCodeImplCopyWith<_$SelectCountryCodeImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -398,8 +402,8 @@ class _$LoginPressedImpl implements LoginPressed {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String email) emailChanged,
-    required TResult Function(String password) passwordChanged,
+    required TResult Function(String mobileNumber) mobileNumberChanged,
+    required TResult Function(String counryCode) selectCountryCode,
     required TResult Function() loginPressed,
   }) {
     return loginPressed();
@@ -408,8 +412,8 @@ class _$LoginPressedImpl implements LoginPressed {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String email)? emailChanged,
-    TResult? Function(String password)? passwordChanged,
+    TResult? Function(String mobileNumber)? mobileNumberChanged,
+    TResult? Function(String counryCode)? selectCountryCode,
     TResult? Function()? loginPressed,
   }) {
     return loginPressed?.call();
@@ -418,8 +422,8 @@ class _$LoginPressedImpl implements LoginPressed {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String email)? emailChanged,
-    TResult Function(String password)? passwordChanged,
+    TResult Function(String mobileNumber)? mobileNumberChanged,
+    TResult Function(String counryCode)? selectCountryCode,
     TResult Function()? loginPressed,
     required TResult orElse(),
   }) {
@@ -432,8 +436,8 @@ class _$LoginPressedImpl implements LoginPressed {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
-    required TResult Function(EmailChanged value) emailChanged,
-    required TResult Function(PasswordChanged value) passwordChanged,
+    required TResult Function(MobileNumberChanged value) mobileNumberChanged,
+    required TResult Function(SelectCountryCode value) selectCountryCode,
     required TResult Function(LoginPressed value) loginPressed,
   }) {
     return loginPressed(this);
@@ -442,8 +446,8 @@ class _$LoginPressedImpl implements LoginPressed {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(EmailChanged value)? emailChanged,
-    TResult? Function(PasswordChanged value)? passwordChanged,
+    TResult? Function(MobileNumberChanged value)? mobileNumberChanged,
+    TResult? Function(SelectCountryCode value)? selectCountryCode,
     TResult? Function(LoginPressed value)? loginPressed,
   }) {
     return loginPressed?.call(this);
@@ -452,8 +456,8 @@ class _$LoginPressedImpl implements LoginPressed {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
-    TResult Function(EmailChanged value)? emailChanged,
-    TResult Function(PasswordChanged value)? passwordChanged,
+    TResult Function(MobileNumberChanged value)? mobileNumberChanged,
+    TResult Function(SelectCountryCode value)? selectCountryCode,
     TResult Function(LoginPressed value)? loginPressed,
     required TResult orElse(),
   }) {
@@ -470,10 +474,10 @@ abstract class LoginPressed implements LoginFormEvent {
 
 /// @nodoc
 mixin _$LoginFormState {
-  EmailAddress get emailAddress => throw _privateConstructorUsedError;
-  Password get password => throw _privateConstructorUsedError;
+  MobileNumber get mobileNumber => throw _privateConstructorUsedError;
   bool get showErrorMessages => throw _privateConstructorUsedError;
   bool get isSubmitting => throw _privateConstructorUsedError;
+  String get selectedCountrycode => throw _privateConstructorUsedError;
   Option<Either<AuthFailure, Unit>> get authFailureOrSuccessOption =>
       throw _privateConstructorUsedError;
 
@@ -489,10 +493,10 @@ abstract class $LoginFormStateCopyWith<$Res> {
       _$LoginFormStateCopyWithImpl<$Res, LoginFormState>;
   @useResult
   $Res call(
-      {EmailAddress emailAddress,
-      Password password,
+      {MobileNumber mobileNumber,
       bool showErrorMessages,
       bool isSubmitting,
+      String selectedCountrycode,
       Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption});
 }
 
@@ -509,21 +513,17 @@ class _$LoginFormStateCopyWithImpl<$Res, $Val extends LoginFormState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? emailAddress = null,
-    Object? password = null,
+    Object? mobileNumber = null,
     Object? showErrorMessages = null,
     Object? isSubmitting = null,
+    Object? selectedCountrycode = null,
     Object? authFailureOrSuccessOption = null,
   }) {
     return _then(_value.copyWith(
-      emailAddress: null == emailAddress
-          ? _value.emailAddress
-          : emailAddress // ignore: cast_nullable_to_non_nullable
-              as EmailAddress,
-      password: null == password
-          ? _value.password
-          : password // ignore: cast_nullable_to_non_nullable
-              as Password,
+      mobileNumber: null == mobileNumber
+          ? _value.mobileNumber
+          : mobileNumber // ignore: cast_nullable_to_non_nullable
+              as MobileNumber,
       showErrorMessages: null == showErrorMessages
           ? _value.showErrorMessages
           : showErrorMessages // ignore: cast_nullable_to_non_nullable
@@ -532,6 +532,10 @@ class _$LoginFormStateCopyWithImpl<$Res, $Val extends LoginFormState>
           ? _value.isSubmitting
           : isSubmitting // ignore: cast_nullable_to_non_nullable
               as bool,
+      selectedCountrycode: null == selectedCountrycode
+          ? _value.selectedCountrycode
+          : selectedCountrycode // ignore: cast_nullable_to_non_nullable
+              as String,
       authFailureOrSuccessOption: null == authFailureOrSuccessOption
           ? _value.authFailureOrSuccessOption
           : authFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
@@ -549,10 +553,10 @@ abstract class _$$LoginFormStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {EmailAddress emailAddress,
-      Password password,
+      {MobileNumber mobileNumber,
       bool showErrorMessages,
       bool isSubmitting,
+      String selectedCountrycode,
       Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption});
 }
 
@@ -567,21 +571,17 @@ class __$$LoginFormStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? emailAddress = null,
-    Object? password = null,
+    Object? mobileNumber = null,
     Object? showErrorMessages = null,
     Object? isSubmitting = null,
+    Object? selectedCountrycode = null,
     Object? authFailureOrSuccessOption = null,
   }) {
     return _then(_$LoginFormStateImpl(
-      emailAddress: null == emailAddress
-          ? _value.emailAddress
-          : emailAddress // ignore: cast_nullable_to_non_nullable
-              as EmailAddress,
-      password: null == password
-          ? _value.password
-          : password // ignore: cast_nullable_to_non_nullable
-              as Password,
+      mobileNumber: null == mobileNumber
+          ? _value.mobileNumber
+          : mobileNumber // ignore: cast_nullable_to_non_nullable
+              as MobileNumber,
       showErrorMessages: null == showErrorMessages
           ? _value.showErrorMessages
           : showErrorMessages // ignore: cast_nullable_to_non_nullable
@@ -590,6 +590,10 @@ class __$$LoginFormStateImplCopyWithImpl<$Res>
           ? _value.isSubmitting
           : isSubmitting // ignore: cast_nullable_to_non_nullable
               as bool,
+      selectedCountrycode: null == selectedCountrycode
+          ? _value.selectedCountrycode
+          : selectedCountrycode // ignore: cast_nullable_to_non_nullable
+              as String,
       authFailureOrSuccessOption: null == authFailureOrSuccessOption
           ? _value.authFailureOrSuccessOption
           : authFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
@@ -602,26 +606,26 @@ class __$$LoginFormStateImplCopyWithImpl<$Res>
 
 class _$LoginFormStateImpl implements _LoginFormState {
   const _$LoginFormStateImpl(
-      {required this.emailAddress,
-      required this.password,
+      {required this.mobileNumber,
       required this.showErrorMessages,
       required this.isSubmitting,
+      required this.selectedCountrycode,
       required this.authFailureOrSuccessOption});
 
   @override
-  final EmailAddress emailAddress;
-  @override
-  final Password password;
+  final MobileNumber mobileNumber;
   @override
   final bool showErrorMessages;
   @override
   final bool isSubmitting;
   @override
+  final String selectedCountrycode;
+  @override
   final Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption;
 
   @override
   String toString() {
-    return 'LoginFormState(emailAddress: $emailAddress, password: $password, showErrorMessages: $showErrorMessages, isSubmitting: $isSubmitting, authFailureOrSuccessOption: $authFailureOrSuccessOption)';
+    return 'LoginFormState(mobileNumber: $mobileNumber, showErrorMessages: $showErrorMessages, isSubmitting: $isSubmitting, selectedCountrycode: $selectedCountrycode, authFailureOrSuccessOption: $authFailureOrSuccessOption)';
   }
 
   @override
@@ -629,14 +633,14 @@ class _$LoginFormStateImpl implements _LoginFormState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$LoginFormStateImpl &&
-            (identical(other.emailAddress, emailAddress) ||
-                other.emailAddress == emailAddress) &&
-            (identical(other.password, password) ||
-                other.password == password) &&
+            (identical(other.mobileNumber, mobileNumber) ||
+                other.mobileNumber == mobileNumber) &&
             (identical(other.showErrorMessages, showErrorMessages) ||
                 other.showErrorMessages == showErrorMessages) &&
             (identical(other.isSubmitting, isSubmitting) ||
                 other.isSubmitting == isSubmitting) &&
+            (identical(other.selectedCountrycode, selectedCountrycode) ||
+                other.selectedCountrycode == selectedCountrycode) &&
             (identical(other.authFailureOrSuccessOption,
                     authFailureOrSuccessOption) ||
                 other.authFailureOrSuccessOption ==
@@ -644,8 +648,8 @@ class _$LoginFormStateImpl implements _LoginFormState {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, emailAddress, password,
-      showErrorMessages, isSubmitting, authFailureOrSuccessOption);
+  int get hashCode => Object.hash(runtimeType, mobileNumber, showErrorMessages,
+      isSubmitting, selectedCountrycode, authFailureOrSuccessOption);
 
   @JsonKey(ignore: true)
   @override
@@ -657,21 +661,21 @@ class _$LoginFormStateImpl implements _LoginFormState {
 
 abstract class _LoginFormState implements LoginFormState {
   const factory _LoginFormState(
-      {required final EmailAddress emailAddress,
-      required final Password password,
+      {required final MobileNumber mobileNumber,
       required final bool showErrorMessages,
       required final bool isSubmitting,
+      required final String selectedCountrycode,
       required final Option<Either<AuthFailure, Unit>>
           authFailureOrSuccessOption}) = _$LoginFormStateImpl;
 
   @override
-  EmailAddress get emailAddress;
-  @override
-  Password get password;
+  MobileNumber get mobileNumber;
   @override
   bool get showErrorMessages;
   @override
   bool get isSubmitting;
+  @override
+  String get selectedCountrycode;
   @override
   Option<Either<AuthFailure, Unit>> get authFailureOrSuccessOption;
   @override

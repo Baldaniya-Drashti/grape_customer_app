@@ -18,29 +18,12 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
   LoginFormBloc(this._authFacade) : super(LoginFormState.initial()) {
     on<LoginFormEvent>((event, emit) async {
       await event.map(
-        emailChanged: (e) async {
-          emit(
-            state.copyWith(
-              emailAddress: EmailAddress(e.email),
-              authFailureOrSuccessOption: none(),
-            ),
-          );
-        },
-        passwordChanged: (e) async {
-          emit(
-            state.copyWith(
-              password: Password(e.password),
-              authFailureOrSuccessOption: none(),
-            ),
-          );
-        },
         loginPressed: (e) async {
           Either<AuthFailure, Unit>? failureOrSuccess;
 
-          final isEmailValid = state.emailAddress.isValid();
-          final isPasswordValid = state.password.isValid();
+          final isMobileNumberValid = state.mobileNumber.isValid();
 
-          if (isEmailValid && isPasswordValid) {
+          if (isMobileNumberValid) {
             emit(
               state.copyWith(
                 isSubmitting: true,
@@ -48,10 +31,10 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
               ),
             );
 
-            failureOrSuccess = await _authFacade.login(
-              emailAddress: state.emailAddress,
-              password: state.password,
-            );
+            // failureOrSuccess = await _authFacade.login(
+            //   emailAddress: EmailAddress('input'),
+            //   password: Password('input'),
+            // );
           }
 
           emit(
@@ -59,6 +42,17 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
               isSubmitting: false,
               showErrorMessages: true,
               authFailureOrSuccessOption: optionOf(failureOrSuccess),
+            ),
+          );
+        },
+        selectCountryCode: (e) {
+          emit(state.copyWith(selectedCountrycode: e.counryCode));
+        },
+        mobileNumberChanged: (e) {
+          emit(
+            state.copyWith(
+              mobileNumber: MobileNumber(e.mobileNumber),
+              authFailureOrSuccessOption: none(),
             ),
           );
         },

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "568471335476",
+    "project_id": "grape-market-place",
+    "storage_bucket": "grape-market-place.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:568471335476:android:870d2cdcbf08727af09061",
+        "android_client_info": {
+          "package_name": "com.mobile.grapecustomer.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAEPe7upukbefIVDSmvNL90bc-MYfObF4I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

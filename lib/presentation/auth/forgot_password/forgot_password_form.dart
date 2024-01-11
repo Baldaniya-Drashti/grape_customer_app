@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grape_customer_app/application/auth/forgot_password/forgot_password_cubit.dart';
-import 'package:grape_customer_app/domain/core/color_constant.dart';
+
 import 'package:grape_customer_app/presentation/common/utils/flushbar_creator.dart';
 import 'package:grape_customer_app/presentation/common/widgets/form_wrapper.dart';
+import 'package:grape_customer_app/presentation/core/styles/app_colors.dart';
 
 class ForgotPasswordForm extends StatelessWidget {
   const ForgotPasswordForm({super.key});
@@ -32,75 +33,71 @@ class ForgotPasswordForm extends StatelessWidget {
         );
       },
       builder: (context, state) {
-        return Container(
-          color: ColorConstants.appBackground,
-          height: double.infinity,
-          child: Form(
-            autovalidateMode: state.showErrorMessages
-                ? AutovalidateMode.always
-                : AutovalidateMode.disabled,
-            child: FormWrapper(
-              children: [
-                const SizedBox(
-                  height: 20,
+        return Form(
+          autovalidateMode: state.showErrorMessages
+              ? AutovalidateMode.always
+              : AutovalidateMode.disabled,
+          child: FormWrapper(
+            children: [
+              const SizedBox(
+                height: 20,
+              ),
+              TextFormField(
+                decoration: const InputDecoration(
+                  labelText: 'Email',
                 ),
-                TextFormField(
-                  decoration: const InputDecoration(
-                    labelText: 'Email',
-                  ),
-                  autocorrect: false,
-                  textInputAction: TextInputAction.done,
-                  onChanged: (value) =>
-                      context.read<ForgotPasswordCubit>().emailChanged(value),
-                  validator: (_) => context
-                      .read<ForgotPasswordCubit>()
-                      .state
-                      .emailAddress
-                      .value
-                      .fold(
-                        (f) => f.maybeMap(
-                          invalidEmail: (_) => 'Invalid Email',
-                          orElse: () => null,
-                        ),
-                        (_) => null,
+                autocorrect: false,
+                textInputAction: TextInputAction.done,
+                onChanged: (value) =>
+                    context.read<ForgotPasswordCubit>().emailChanged(value),
+                validator: (_) => context
+                    .read<ForgotPasswordCubit>()
+                    .state
+                    .emailAddress
+                    .value
+                    .fold(
+                      (f) => f.maybeMap(
+                        invalidEmail: (_) => 'Invalid Email',
+                        orElse: () => null,
                       ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: ColorConstants.themeBlue,
-                        ),
-                        onPressed: () {
-                          context
-                              .read<ForgotPasswordCubit>()
-                              .submitForgotPassword();
-                        },
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(vertical: 15),
-                          child: const Text(
-                            "Send Email",
-                            style: TextStyle(
-                              fontSize: 16,
-                            ),
+                      (_) => null,
+                    ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.black,
+                      ),
+                      onPressed: () {
+                        context
+                            .read<ForgotPasswordCubit>()
+                            .submitForgotPassword();
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(vertical: 15),
+                        child: const Text(
+                          "Send Email",
+                          style: TextStyle(
+                            fontSize: 16,
                           ),
                         ),
                       ),
                     ),
-                  ],
-                ),
-                if (state.isSubmitting) ...[
-                  const SizedBox(height: 8),
-                  const LinearProgressIndicator(
-                    color: ColorConstants.themeBlue,
                   ),
-                ]
-              ],
-            ),
+                ],
+              ),
+              if (state.isSubmitting) ...[
+                const SizedBox(height: 8),
+                const LinearProgressIndicator(
+                  color: AppColors.black,
+                ),
+              ]
+            ],
           ),
         );
       },

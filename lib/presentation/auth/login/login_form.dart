@@ -1,12 +1,22 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:country_code_picker/country_code_picker.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grape_customer_app/application/auth/login_form/login_form_bloc.dart';
-import 'package:grape_customer_app/domain/core/color_constant.dart';
-import 'package:grape_customer_app/presentation/auth/forgot_password/forgot_password_screen.dart';
+import 'package:grape_customer_app/presentation/common/utils/app_focus.dart';
+import 'package:grape_customer_app/presentation/core/app_router.gr.dart';
+import 'package:grape_customer_app/presentation/core/styles/app_colors.dart';
+
+import 'package:grape_customer_app/domain/core/math_utils.dart';
+import 'package:grape_customer_app/domain/core/png_image_constants.dart';
 import 'package:grape_customer_app/presentation/common/utils/flushbar_creator.dart';
-import 'package:grape_customer_app/presentation/common/widgets/form_wrapper.dart';
+import 'package:grape_customer_app/presentation/common/widgets/base_text.dart';
+import 'package:grape_customer_app/presentation/common/widgets/common_country_code_picker.dart';
 
 import 'package:grape_customer_app/presentation/core/restart_widget.dart';
+import 'package:grape_customer_app/presentation/core/widgets/buttons/common_button.dart';
+import 'package:grape_customer_app/presentation/core/widgets/inputs/custom_text_field.dart';
 
 class LoginForm extends StatelessWidget {
   const LoginForm({super.key});
@@ -33,134 +43,117 @@ class LoginForm extends StatelessWidget {
         );
       },
       builder: (context, state) {
-        return Container(
-          color: ColorConstants.appBackground,
-          height: double.infinity,
-          child: Form(
-            autovalidateMode: state.showErrorMessages
-                ? AutovalidateMode.always
-                : AutovalidateMode.disabled,
-            child: FormWrapper(
-              children: [
-                const Text(
-                  "Welcome back!",
-                  style: TextStyle(
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(height: 15),
-                const Text(
-                  "We're so exited to see you again!",
-                  style: TextStyle(
-                    color: Colors.white70,
-                    fontSize: 16,
-                  ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                TextFormField(
-                  decoration: const InputDecoration(
-                    labelText: 'Email',
-                  ),
-                  autocorrect: false,
-                  textInputAction: TextInputAction.next,
-                  onChanged: (value) => context
-                      .read<LoginFormBloc>()
-                      .add(LoginFormEvent.emailChanged(value)),
-                  validator: (_) => context
-                      .read<LoginFormBloc>()
-                      .state
-                      .emailAddress
-                      .value
-                      .fold(
-                        (f) => f.maybeMap(
-                          invalidEmail: (_) => 'Invalid Email',
-                          orElse: () => null,
-                        ),
-                        (_) => null,
+        return Scaffold(
+          body: GestureDetector(
+            onTap: () {
+              AppFocus.unfocus(context);
+            },
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: getSize(18)),
+              child: Form(
+                autovalidateMode: state.showErrorMessages
+                    ? AutovalidateMode.always
+                    : AutovalidateMode.disabled,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Spacer(),
+                    Center(
+                      child: Image.asset(
+                        PngImageConstants.grape_login_logo,
+                        height: getSize(156),
+                        width: getSize(128),
                       ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                TextFormField(
-                  decoration: const InputDecoration(
-                    labelText: 'Password',
-                  ),
-                  textInputAction: TextInputAction.done,
-                  autocorrect: false,
-                  obscureText: true,
-                  onChanged: (value) => context
-                      .read<LoginFormBloc>()
-                      .add(LoginFormEvent.passwordChanged(value)),
-                  validator: (_) =>
-                      context.read<LoginFormBloc>().state.password.value.fold(
+                    ),
+                    Spacer(),
+                    BaseText(
+                      text: 'Welcome to\nGrape Company',
+                      fontSize: 24,
+                      fontWeight: FontWeight.w800,
+                      textColor: AppColors.authBlack,
+                    ),
+                    Spacer(),
+                    BaseText(
+                      text:
+                          'Please confirm your country code and enter your mobile number',
+                      fontSize: 12,
+                      textColor: AppColors.black.withOpacity(0.5),
+                    ),
+                    Spacer(),
+                    CustomTextField(
+                      labelText: 'Mobile Number',
+                      hintText: 'Mobile Number',
+                      keyboardType: TextInputType.phone,
+                      onChanged: (value) => context
+                          .read<LoginFormBloc>()
+                          .add(LoginFormEvent.mobileNumberChanged(value)),
+                      validator: (_, context) => context
+                          .read<LoginFormBloc>()
+                          .state
+                          .mobileNumber
+                          .value
+                          .fold(
                             (f) => f.maybeMap(
-                              shortPassword: (_) => 'Short Password',
+                              empty: (value) => 'Please enter mobile number',
+                              invalidMobileNumber: (_) =>
+                                  'Please enter valid mobile number',
                               orElse: () => null,
                             ),
                             (_) => null,
                           ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: ColorConstants.appBackground,
-                    elevation: 0,
-                  ),
-                  onPressed: () {
-                    Navigator.of(context)
-                        .pushNamed(ForgotPasswordScreen.routeName);
-                  },
-                  child: const Text(
-                    "Forgot your password?",
-                    style: TextStyle(
-                      color: ColorConstants.themeBlue,
-                      fontSize: 15,
-                    ),
-                    textAlign: TextAlign.start,
-                  ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: ColorConstants.themeBlue,
-                        ),
-                        onPressed: () {
-                          FocusScope.of(context).unfocus();
-                          context
-                              .read<LoginFormBloc>()
-                              .add(const LoginFormEvent.loginPressed());
+                      prefixIcon: CommonCountryCodePicker(
+                        initialSelection: state.selectedCountrycode,
+                        onChanged: (CountryCode countryCode) {
+                          context.read<LoginFormBloc>().add(
+                                LoginFormEvent.selectCountryCode(
+                                    countryCode.dialCode ?? ""),
+                              );
                         },
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(vertical: 15),
-                          child: const Text(
-                            "Login",
-                            style: TextStyle(
-                              fontSize: 16,
-                            ),
+                      ),
+                    ),
+                    Spacer(),
+                    CommonButton(
+                      isSubmitting: state.isSubmitting,
+                      onPressed: () {
+                        context
+                            .read<LoginFormBloc>()
+                            .add(LoginFormEvent.loginPressed());
+                      },
+                      buttonText: 'Continue',
+                    ),
+                    Spacer(),
+                    Center(
+                      child: Text.rich(
+                        TextSpan(
+                          text: 'Don’t have an account? ',
+                          style: TextStyle(
+                            color: AppColors.black.withOpacity(0.5),
+                            fontSize: getFontSize(12),
+                            fontWeight: FontWeight.w400,
                           ),
+                          children: [
+                            TextSpan(
+                              text: "Create Account",
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () {
+                                  context.router.replace(
+                                      PageRouteInfo(RegisterScreen.name));
+                                },
+                              style: TextStyle(
+                                fontSize: getFontSize(12),
+                                fontWeight: FontWeight.w500,
+                                decoration: TextDecoration.underline,
+                                color: AppColors.black,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
+                    Spacer(),
                   ],
                 ),
-                if (state.isSubmitting) ...[
-                  const SizedBox(height: 8),
-                  const LinearProgressIndicator(
-                    color: ColorConstants.themeBlue,
-                  ),
-                ]
-              ],
+              ),
             ),
           ),
         );
