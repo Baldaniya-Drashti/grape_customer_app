@@ -48,20 +48,15 @@ dependencies:
   meta: ^1.10.0
   google_sign_in: ^6.2.1
   another_flushbar: ^1.12.30
-  reorderables: ^0.6.0
   rxdart: ^0.27.7
-  kt_dart: ^1.1.0
-  flutter_slidable: ^3.0.1
-  styled_widget: ^0.4.1
-  flutter_hooks: ^0.20.3
-  uuid: ^4.2.2
+  
   freezed_annotation: ^2.4.1
-  time: ^2.1.3
+ 
   country_code_picker: ^3.0.0
   firebase_auth: ^4.15.3
   cloud_firestore: ^4.13.6
   firebase_core: ^2.24.2
-  implicitly_animated_reorderable_list_2: ^0.5.1
+ 
   auto_route: ^7.8.4
   firebase_crashlytics: ^3.4.9
   firebase_analytics: ^10.8.0
@@ -77,6 +72,8 @@ dependencies:
   intl: ^0.18.0
   flutter_localizations: # Add this line
     sdk: flutter # Add this line
+  url_launcher: ^6.2.3
+  pin_code_fields: ^8.0.1
 
 
 

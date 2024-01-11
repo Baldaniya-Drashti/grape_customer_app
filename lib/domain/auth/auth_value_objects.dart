@@ -16,6 +16,19 @@ class EmailAddress extends ValueObject<String> {
   const EmailAddress._(this.value);
 }
 
+class OTPText extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory OTPText(String input) {
+    return OTPText._(
+      validateMaxStringLength(input, 4),
+    );
+  }
+
+  const OTPText._(this.value);
+}
+
 class Username extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;
@@ -40,6 +53,19 @@ class MobileNumber extends ValueObject<String> {
   }
 
   const MobileNumber._(this.value);
+}
+
+class InputEmptyOrNot extends ValueObject<String?> {
+  @override
+  final Either<ValueFailure<String?>, String?> value;
+
+  factory InputEmptyOrNot(String input) {
+    return InputEmptyOrNot._(
+      validateStringNotEmpty(input),
+    );
+  }
+
+  const InputEmptyOrNot._(this.value);
 }
 
 class Password extends ValueObject<String> {

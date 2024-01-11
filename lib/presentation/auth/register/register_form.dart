@@ -1,17 +1,26 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:country_code_picker/country_code_picker.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grape_customer_app/application/auth/register_form/register_form_bloc.dart';
+import 'package:grape_customer_app/domain/core/math_utils.dart';
 import 'package:grape_customer_app/presentation/common/utils/flushbar_creator.dart';
-import 'package:grape_customer_app/presentation/common/widgets/form_wrapper.dart';
+import 'package:grape_customer_app/presentation/common/widgets/base_text.dart';
+import 'package:grape_customer_app/presentation/common/widgets/common_country_code_picker.dart';
+import 'package:grape_customer_app/presentation/core/app_router.gr.dart';
 
 import 'package:grape_customer_app/presentation/core/restart_widget.dart';
 import 'package:grape_customer_app/presentation/core/styles/app_colors.dart';
+import 'package:grape_customer_app/presentation/core/widgets/buttons/common_button.dart';
+import 'package:grape_customer_app/presentation/core/widgets/inputs/custom_text_field.dart';
+import 'package:grape_customer_app/presentation/core/widgets/layout/common_url_launcher.dart';
 
 class RegisterForm extends StatelessWidget {
   const RegisterForm({super.key});
 
   @override
-  Widget build(BuildContext _) {
+  Widget build(BuildContext context) {
     return BlocConsumer<RegisterFormBloc, RegisterFormState>(
       listener: (context, state) {
         state.authFailureOrSuccessOption.fold(
@@ -36,149 +45,214 @@ class RegisterForm extends StatelessWidget {
           autovalidateMode: state.showErrorMessages
               ? AutovalidateMode.always
               : AutovalidateMode.disabled,
-          child: FormWrapper(
+          child: ListView(
+            shrinkWrap: true,
+            padding: EdgeInsets.symmetric(horizontal: getSize(18)),
+            physics: BouncingScrollPhysics(),
             children: [
-              const Text(
-                "Register",
-                style: TextStyle(
-                  fontSize: 28,
-                  fontWeight: FontWeight.bold,
-                ),
+              BaseText(
+                text: 'Create Account',
+                fontSize: 24,
+                fontWeight: FontWeight.w800,
+                textColor: AppColors.authBlack,
               ),
-              const SizedBox(height: 25),
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  "What should everyone call you?".toUpperCase(),
-                  style: const TextStyle(
-                    color: Colors.white70,
-                    fontSize: 12,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+              SizedBox(
+                height: getSize(30),
               ),
-              const SizedBox(
-                height: 5,
+              firstNameTextFieldView(context, state),
+              SizedBox(
+                height: getSize(20),
               ),
-              TextFormField(
-                decoration: const InputDecoration(
-                  labelText: 'Username',
-                ),
-                autocorrect: false,
-                textInputAction: TextInputAction.next,
-                onChanged: (value) => context
-                    .read<RegisterFormBloc>()
-                    .add(RegisterFormEvent.usernameChanged(value)),
-                validator: (_) =>
-                    context.read<RegisterFormBloc>().state.username.value.fold(
-                          (f) => f.maybeMap(
-                            invalidUsername: (_) => 'Invalid Username',
-                            orElse: () => null,
-                          ),
-                          (_) => null,
-                        ),
+              lasttNameTextFieldView(context, state),
+              SizedBox(
+                height: getSize(20),
               ),
-              const SizedBox(
-                height: 20,
+              emailTextFieldView(context, state),
+              SizedBox(
+                height: getSize(20),
               ),
-              Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  "Account Information".toUpperCase(),
-                  style: const TextStyle(
-                    color: Colors.white70,
-                    fontSize: 12,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+              mobileNumberTextFieldView(context, state),
+              SizedBox(
+                height: getSize(30),
               ),
-              const SizedBox(
-                height: 5,
-              ),
-              TextFormField(
-                decoration: const InputDecoration(
-                  labelText: 'Email',
-                ),
-                autocorrect: false,
-                textInputAction: TextInputAction.next,
-                onChanged: (value) => context
-                    .read<RegisterFormBloc>()
-                    .add(RegisterFormEvent.emailChanged(value)),
-                validator: (_) => context
-                    .read<RegisterFormBloc>()
-                    .state
-                    .emailAddress
-                    .value
-                    .fold(
-                      (f) => f.maybeMap(
-                        invalidEmail: (_) => 'Invalid Email',
-                        orElse: () => null,
-                      ),
-                      (_) => null,
-                    ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              TextFormField(
-                decoration: const InputDecoration(
-                  labelText: 'Password',
-                ),
-                textInputAction: TextInputAction.done,
-                autocorrect: false,
-                obscureText: true,
-                onChanged: (value) => context
-                    .read<RegisterFormBloc>()
-                    .add(RegisterFormEvent.passwordChanged(value)),
-                validator: (_) =>
-                    context.read<RegisterFormBloc>().state.password.value.fold(
-                          (f) => f.maybeMap(
-                            shortPassword: (_) => 'Short Password',
-                            orElse: () => null,
-                          ),
-                          (_) => null,
-                        ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Row(
-                children: [
-                  Expanded(
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.black,
-                      ),
-                      onPressed: () {
-                        FocusScope.of(context).unfocus();
-                        context
-                            .read<RegisterFormBloc>()
-                            .add(const RegisterFormEvent.registerPressed());
-                      },
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(vertical: 15),
-                        child: const Text(
-                          "Create Account",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 16,
-                          ),
-                        ),
+              CommonButton(
+                isSubmitting: state.isSubmitting,
+                onPressed: () {
+                  context.router.push(
+                    PageRouteInfo(
+                      OtpRegisterVerificationView.name,
+                      args: OtpRegisterVerificationViewArgs(
+                        countryCode: state.selectedCountrycode,
+                        phoneNumber: state.mobileNumber.getValue(),
                       ),
                     ),
-                  ),
-                ],
+                  );
+                  // context
+                  //     .read<RegisterFormBloc>()
+                  //     .add(RegisterFormEvent.registerPressed());
+                },
+                buttonText: 'Continue',
               ),
-              if (state.isSubmitting) ...[
-                const SizedBox(height: 8),
-                const LinearProgressIndicator(
-                  color: AppColors.black,
-                ),
-              ]
+              SizedBox(
+                height: getSize(30),
+              ),
+              getPrivacyPolicyText(),
+              SizedBox(
+                height: getSize(20),
+              ),
             ],
           ),
         );
       },
+    );
+  }
+
+  Center getPrivacyPolicyText() {
+    return Center(
+      child: Text.rich(
+        TextSpan(
+          style: TextStyle(
+            fontSize: getFontSize(12),
+            fontWeight: FontWeight.w400,
+            color: AppColors.black.withOpacity(0.6),
+            fontFamily: 'SFPro',
+          ),
+          children: [
+            TextSpan(
+              text: 'By clicking continue, I agree to ',
+            ),
+            TextSpan(
+              text: 'Terms and Conditions',
+              recognizer: TapGestureRecognizer()
+                ..onTap = () {
+                  CommonUrlLauncher.launchAppUrl(
+                      'https://www.termsfeed.com/blog/terms-conditions-url/');
+                },
+              style: TextStyle(
+                color: AppColors.primaryOrange,
+                fontWeight: FontWeight.w500,
+                decoration: TextDecoration.underline,
+                decorationColor: AppColors.primaryOrange,
+              ),
+            ),
+            TextSpan(
+              text: ' and ',
+            ),
+            TextSpan(
+              text: 'Privacy Policy.',
+              recognizer: TapGestureRecognizer()
+                ..onTap = () {
+                  CommonUrlLauncher.launchAppUrl(
+                      'https://www.termsfeed.com/blog/terms-conditions-url/');
+                },
+              style: TextStyle(
+                color: AppColors.primaryOrange,
+                fontWeight: FontWeight.w500,
+                decoration: TextDecoration.underline,
+                decorationColor: AppColors.primaryOrange,
+              ),
+            ),
+          ],
+        ),
+        textScaler: TextScaler.linear(1),
+        textAlign: TextAlign.center,
+      ),
+    );
+  }
+
+  CustomTextField firstNameTextFieldView(
+      BuildContext context, RegisterFormState state) {
+    return CustomTextField(
+      labelText: 'First Name',
+      hintText: 'First Name',
+      textCapitalization: TextCapitalization.words,
+      onChanged: (value) => context
+          .read<RegisterFormBloc>()
+          .add(RegisterFormEvent.firstNameChanged(value)),
+      validator: (_, context) =>
+          context.read<RegisterFormBloc>().state.firstName.value.fold(
+                (f) => f.maybeMap(
+                  empty: (value) => 'Please enter first name',
+                  invalidUsername: (_) => 'Please enter valid first name',
+                  orElse: () => null,
+                ),
+                (_) => null,
+              ),
+    );
+  }
+
+  CustomTextField lasttNameTextFieldView(
+      BuildContext context, RegisterFormState state) {
+    return CustomTextField(
+      labelText: 'Last Name',
+      hintText: 'Last Name',
+      textCapitalization: TextCapitalization.words,
+      onChanged: (value) => context
+          .read<RegisterFormBloc>()
+          .add(RegisterFormEvent.lastNameChanged(value)),
+      validator: (_, context) =>
+          context.read<RegisterFormBloc>().state.lastName.value.fold(
+                (f) => f.maybeMap(
+                  empty: (value) => 'Please enter last name',
+                  invalidUsername: (_) => 'Please enter valid last name',
+                  orElse: () => null,
+                ),
+                (_) => null,
+              ),
+    );
+  }
+
+  CustomTextField emailTextFieldView(
+      BuildContext context, RegisterFormState state) {
+    return CustomTextField(
+      labelText: 'Email Address',
+      hintText: 'Email Address',
+      keyboardType: TextInputType.emailAddress,
+      onChanged: (value) => context
+          .read<RegisterFormBloc>()
+          .add(RegisterFormEvent.emailChanged(value)),
+      validator: (_, context) =>
+          context.read<RegisterFormBloc>().state.emailAddress.value.fold(
+                (f) => f.maybeMap(
+                  empty: (value) => 'Please enter email',
+                  invalidEmail: (_) => 'Please enter valid email address',
+                  orElse: () => null,
+                ),
+                (_) => null,
+              ),
+    );
+  }
+
+  CustomTextField mobileNumberTextFieldView(
+      BuildContext context, RegisterFormState state) {
+    return CustomTextField(
+      labelText: 'Mobile Number',
+      hintText: 'Mobile Number',
+      keyboardType: TextInputType.phone,
+      onChanged: (value) => context
+          .read<RegisterFormBloc>()
+          .add(RegisterFormEvent.mobileNumberChanged(value)),
+      validator: (_, context) => context
+          .read<RegisterFormBloc>()
+          .state
+          .mobileNumber
+          .value
+          .fold(
+            (f) => f.maybeMap(
+              empty: (value) => 'Please enter mobile number',
+              invalidMobileNumber: (_) => 'Please enter valid mobile number',
+              orElse: () => null,
+            ),
+            (_) => null,
+          ),
+      prefixIcon: CommonCountryCodePicker(
+        initialSelection: state.selectedCountrycode,
+        onChanged: (CountryCode countryCode) {
+          context.read<RegisterFormBloc>().add(
+                RegisterFormEvent.selectCountryCode(countryCode.dialCode ?? ""),
+              );
+        },
+      ),
     );
   }
 }

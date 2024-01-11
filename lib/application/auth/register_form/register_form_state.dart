@@ -4,19 +4,27 @@ part of 'register_form_bloc.dart';
 class RegisterFormState with _$RegisterFormState {
   const factory RegisterFormState({
     required EmailAddress emailAddress,
-    required Username username,
-    required Password password,
+    required Username firstName,
+    required Username lastName,
+    required MobileNumber mobileNumber,
     required bool showErrorMessages,
     required bool isSubmitting,
+    required String selectedCountrycode,
+    required OTPText enteredOTP,
+    required int secondsRemaining,
     required Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption,
   }) = _RegisterFormState;
 
   factory RegisterFormState.initial() => RegisterFormState(
         emailAddress: EmailAddress(''),
-        username: Username(''),
-        password: Password(''),
         showErrorMessages: false,
         isSubmitting: false,
         authFailureOrSuccessOption: none(),
+        firstName: Username(''),
+        lastName: Username(''),
+        mobileNumber: MobileNumber(''),
+        selectedCountrycode: '',
+        enteredOTP: OTPText(''),
+        secondsRemaining: 30,
       );
 }

@@ -43,7 +43,6 @@ class CommonButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(isSubmitting);
     return ElevatedButton(
       onPressed: isSubmitting ? null : onPressed,
       style: ElevatedButton.styleFrom(

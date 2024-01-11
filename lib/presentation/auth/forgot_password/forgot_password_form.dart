@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grape_customer_app/application/auth/forgot_password/forgot_password_cubit.dart';
 
 import 'package:grape_customer_app/presentation/common/utils/flushbar_creator.dart';
-import 'package:grape_customer_app/presentation/common/widgets/form_wrapper.dart';
+
 import 'package:grape_customer_app/presentation/core/styles/app_colors.dart';
 
 class ForgotPasswordForm extends StatelessWidget {
@@ -37,7 +37,7 @@ class ForgotPasswordForm extends StatelessWidget {
           autovalidateMode: state.showErrorMessages
               ? AutovalidateMode.always
               : AutovalidateMode.disabled,
-          child: FormWrapper(
+          child: Column(
             children: [
               const SizedBox(
                 height: 20,

@@ -22,6 +22,8 @@ class CustomTextField extends StatelessWidget {
     this.maxLines = 1,
     this.prefixIcon,
     this.validator,
+    this.textInputAction,
+    this.textCapitalization = TextCapitalization.none,
   }) : super(key: key);
   final List<TextInputFormatter>? inputFormatters;
   final TextEditingController? controller;
@@ -37,7 +39,8 @@ class CustomTextField extends StatelessWidget {
   final int maxLines;
   final String? Function(String?, BuildContext)? validator;
   final Widget? prefixIcon;
-
+  final TextInputAction? textInputAction;
+  final TextCapitalization textCapitalization;
   @override
   Widget build(BuildContext context) {
     final border = OutlineInputBorder(
@@ -77,6 +80,8 @@ class CustomTextField extends StatelessWidget {
           controller: controller,
           cursorColor: AppColors.primaryOrange,
           keyboardType: keyboardType,
+          textInputAction: textInputAction,
+          textCapitalization: textCapitalization,
           maxLines: maxLines,
           decoration: decoration?.copyWith(
                 filled: true,

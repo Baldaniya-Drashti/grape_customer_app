@@ -4,7 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grape_customer_app/application/auth/register_form/register_form_bloc.dart';
 import 'package:grape_customer_app/injection.dart';
 import 'package:grape_customer_app/presentation/auth/register/register_form.dart';
-import 'package:grape_customer_app/presentation/core/styles/app_colors.dart';
+import 'package:grape_customer_app/presentation/common/utils/app_focus.dart';
+import 'package:grape_customer_app/presentation/core/widgets/inputs/custom_app_bar.dart';
 
 @RoutePage(name: 'RegisterScreen')
 class RegisterScreen extends StatelessWidget {
@@ -12,12 +13,15 @@ class RegisterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: AppColors.black,
-      ),
+      appBar: CustomAppBar(title: ''),
       body: BlocProvider(
         create: (context) => getIt<RegisterFormBloc>(),
-        child: RegisterForm(),
+        child: GestureDetector(
+          onTap: () {
+            AppFocus.unfocus(context);
+          },
+          child: RegisterForm(),
+        ),
       ),
     );
   }

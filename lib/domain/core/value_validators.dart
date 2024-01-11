@@ -5,20 +5,28 @@ import 'package:dartz/dartz.dart';
 import 'package:grape_customer_app/domain/core/failures.dart';
 
 Either<ValueFailure<String>, String> validateEmailAddress(String input) {
-  const emailRegex =
-      r"""^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+""";
-  if (RegExp(emailRegex).hasMatch(input)) {
-    return right(input);
+  if (validateStringNotEmpty(input).isRight()) {
+    const emailRegex =
+        r"""^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+""";
+    if (RegExp(emailRegex).hasMatch(input)) {
+      return right(input);
+    } else {
+      return left(ValueFailure.invalidEmail(failedValue: input));
+    }
   } else {
-    return left(ValueFailure.invalidEmail(failedValue: input));
+    return left(ValueFailure.empty(failedValue: input));
   }
 }
 
 Either<ValueFailure<String>, String> validateUsername(String input) {
-  if (input.length >= 3 && input.length <= 32) {
-    return right(input);
+  if (validateStringNotEmpty(input).isRight()) {
+    if (input.length >= 2 && input.length <= 32) {
+      return right(input);
+    } else {
+      return left(ValueFailure.invalidUsername(failedValue: input));
+    }
   } else {
-    return left(ValueFailure.invalidUsername(failedValue: input));
+    return left(ValueFailure.empty(failedValue: input));
   }
 }
 
@@ -70,11 +78,17 @@ Either<ValueFailure<String>, String> validateMaxStringLength(
   String input,
   int maxLength,
 ) {
-  if (input.length <= maxLength) {
-    return right(input);
+  if (validateStringNotEmpty(input).isRight()) {
+    if (input.length <= maxLength) {
+      return left(
+        ValueFailure.exceedingLength(failedValue: input, max: maxLength),
+      );
+    } else {
+      return right(input);
+    }
   } else {
     return left(
-      ValueFailure.exceedingLength(failedValue: input, max: maxLength),
+      ValueFailure.empty(failedValue: input),
     );
   }
 }
