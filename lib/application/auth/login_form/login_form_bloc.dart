@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -14,6 +16,7 @@ part 'login_form_state.dart';
 @injectable
 class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
   final IAuthFacade _authFacade;
+  late Timer timer;
 
   LoginFormBloc(this._authFacade) : super(LoginFormState.initial()) {
     on<LoginFormEvent>((event, emit) async {
@@ -52,6 +55,73 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
           emit(
             state.copyWith(
               mobileNumber: MobileNumber(e.mobileNumber),
+              authFailureOrSuccessOption: none(),
+            ),
+          );
+        },
+        startCountdown: (StartCountdown value) {
+          timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+            if (state.secondsRemaining > 0) {
+              add(const LoginFormEvent.decrementTimer());
+            } else {
+              timer.cancel();
+              add(const LoginFormEvent.resendOtp());
+            }
+          });
+          emit(state.copyWith(secondsRemaining: 30));
+        },
+        decrementTimer: (DecrementTimer value) {
+          emit(state.copyWith(secondsRemaining: state.secondsRemaining - 1));
+        },
+        resendOtp: (ResendOtp value) {
+          timer.cancel();
+          emit(
+            state.copyWith(
+              secondsRemaining: 30,
+            ),
+          );
+        },
+        verifyOtp: (VerifyOtp value) {
+          Either<AuthFailure, Unit>? failureOrSuccess;
+
+          final isOTPValid = state.enteredOTP.isValid();
+
+          if (isOTPValid) {
+            emit(
+              state.copyWith(
+                isSubmitting: true,
+                authFailureOrSuccessOption: none(),
+              ),
+            );
+
+            // failureOrSuccess = await _authFacade.register(
+            //   emailAddress: state.emailAddress,
+            //   username: state.username,
+            //   password: state.password,
+            // );
+          }
+
+          emit(
+            state.copyWith(
+              isSubmitting: false,
+              showErrorMessages: true,
+              authFailureOrSuccessOption: optionOf(failureOrSuccess),
+            ),
+          );
+        },
+        changeOTP: (ChangeOTP value) {
+          emit(
+            state.copyWith(
+              enteredOTP: OTPText(value.otp),
+              authFailureOrSuccessOption: none(),
+            ),
+          );
+        },
+        getPrefilledPhoneNumber: (GetPrefilledPhoneNumber value) {
+          emit(
+            state.copyWith(
+              mobileNumber: MobileNumber(value.phoneNumber),
+              selectedCountrycode: value.countryCode,
               authFailureOrSuccessOption: none(),
             ),
           );

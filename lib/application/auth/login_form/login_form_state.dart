@@ -7,6 +7,8 @@ class LoginFormState with _$LoginFormState {
     required bool showErrorMessages,
     required bool isSubmitting,
     required String selectedCountrycode,
+    required OTPText enteredOTP,
+    required int secondsRemaining,
     required Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption,
   }) = _LoginFormState;
 
@@ -16,5 +18,7 @@ class LoginFormState with _$LoginFormState {
         isSubmitting: false,
         authFailureOrSuccessOption: none(),
         selectedCountrycode: '',
+        enteredOTP: OTPText(''),
+        secondsRemaining: 0,
       );
 }

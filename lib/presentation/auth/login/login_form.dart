@@ -114,6 +114,15 @@ class LoginForm extends StatelessWidget {
                   CommonButton(
                     isSubmitting: state.isSubmitting,
                     onPressed: () {
+                      // context.router.push(
+                      //   PageRouteInfo(
+                      //     OtpLoginVerificationView.name,
+                      //     args: OtpLoginVerificationViewArgs(
+                      //       countryCode: state.selectedCountrycode,
+                      //       phoneNumber: state.mobileNumber.getValue(),
+                      //     ),
+                      //   ),
+                      // );
                       context
                           .read<LoginFormBloc>()
                           .add(LoginFormEvent.loginPressed());

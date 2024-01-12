@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +7,6 @@ import 'package:grape_customer_app/domain/core/math_utils.dart';
 import 'package:grape_customer_app/presentation/common/utils/flushbar_creator.dart';
 import 'package:grape_customer_app/presentation/common/widgets/base_text.dart';
 import 'package:grape_customer_app/presentation/common/widgets/common_country_code_picker.dart';
-import 'package:grape_customer_app/presentation/core/app_router.gr.dart';
 
 import 'package:grape_customer_app/presentation/core/restart_widget.dart';
 import 'package:grape_customer_app/presentation/core/styles/app_colors.dart';

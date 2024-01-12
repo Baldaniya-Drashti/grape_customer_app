@@ -21,6 +21,13 @@ mixin _$LoginFormEvent {
     required TResult Function(String mobileNumber) mobileNumberChanged,
     required TResult Function(String counryCode) selectCountryCode,
     required TResult Function() loginPressed,
+    required TResult Function() startCountdown,
+    required TResult Function() decrementTimer,
+    required TResult Function() resendOtp,
+    required TResult Function(String countryCode, String phoneNumber)
+        getPrefilledPhoneNumber,
+    required TResult Function() verifyOtp,
+    required TResult Function(String otp) changeOTP,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -28,6 +35,13 @@ mixin _$LoginFormEvent {
     TResult? Function(String mobileNumber)? mobileNumberChanged,
     TResult? Function(String counryCode)? selectCountryCode,
     TResult? Function()? loginPressed,
+    TResult? Function()? startCountdown,
+    TResult? Function()? decrementTimer,
+    TResult? Function()? resendOtp,
+    TResult? Function(String countryCode, String phoneNumber)?
+        getPrefilledPhoneNumber,
+    TResult? Function()? verifyOtp,
+    TResult? Function(String otp)? changeOTP,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -35,6 +49,13 @@ mixin _$LoginFormEvent {
     TResult Function(String mobileNumber)? mobileNumberChanged,
     TResult Function(String counryCode)? selectCountryCode,
     TResult Function()? loginPressed,
+    TResult Function()? startCountdown,
+    TResult Function()? decrementTimer,
+    TResult Function()? resendOtp,
+    TResult Function(String countryCode, String phoneNumber)?
+        getPrefilledPhoneNumber,
+    TResult Function()? verifyOtp,
+    TResult Function(String otp)? changeOTP,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -43,6 +64,13 @@ mixin _$LoginFormEvent {
     required TResult Function(MobileNumberChanged value) mobileNumberChanged,
     required TResult Function(SelectCountryCode value) selectCountryCode,
     required TResult Function(LoginPressed value) loginPressed,
+    required TResult Function(StartCountdown value) startCountdown,
+    required TResult Function(DecrementTimer value) decrementTimer,
+    required TResult Function(ResendOtp value) resendOtp,
+    required TResult Function(GetPrefilledPhoneNumber value)
+        getPrefilledPhoneNumber,
+    required TResult Function(VerifyOtp value) verifyOtp,
+    required TResult Function(ChangeOTP value) changeOTP,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -50,6 +78,12 @@ mixin _$LoginFormEvent {
     TResult? Function(MobileNumberChanged value)? mobileNumberChanged,
     TResult? Function(SelectCountryCode value)? selectCountryCode,
     TResult? Function(LoginPressed value)? loginPressed,
+    TResult? Function(StartCountdown value)? startCountdown,
+    TResult? Function(DecrementTimer value)? decrementTimer,
+    TResult? Function(ResendOtp value)? resendOtp,
+    TResult? Function(GetPrefilledPhoneNumber value)? getPrefilledPhoneNumber,
+    TResult? Function(VerifyOtp value)? verifyOtp,
+    TResult? Function(ChangeOTP value)? changeOTP,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -57,6 +91,12 @@ mixin _$LoginFormEvent {
     TResult Function(MobileNumberChanged value)? mobileNumberChanged,
     TResult Function(SelectCountryCode value)? selectCountryCode,
     TResult Function(LoginPressed value)? loginPressed,
+    TResult Function(StartCountdown value)? startCountdown,
+    TResult Function(DecrementTimer value)? decrementTimer,
+    TResult Function(ResendOtp value)? resendOtp,
+    TResult Function(GetPrefilledPhoneNumber value)? getPrefilledPhoneNumber,
+    TResult Function(VerifyOtp value)? verifyOtp,
+    TResult Function(ChangeOTP value)? changeOTP,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -149,6 +189,13 @@ class _$MobileNumberChangedImpl implements MobileNumberChanged {
     required TResult Function(String mobileNumber) mobileNumberChanged,
     required TResult Function(String counryCode) selectCountryCode,
     required TResult Function() loginPressed,
+    required TResult Function() startCountdown,
+    required TResult Function() decrementTimer,
+    required TResult Function() resendOtp,
+    required TResult Function(String countryCode, String phoneNumber)
+        getPrefilledPhoneNumber,
+    required TResult Function() verifyOtp,
+    required TResult Function(String otp) changeOTP,
   }) {
     return mobileNumberChanged(mobileNumber);
   }
@@ -159,6 +206,13 @@ class _$MobileNumberChangedImpl implements MobileNumberChanged {
     TResult? Function(String mobileNumber)? mobileNumberChanged,
     TResult? Function(String counryCode)? selectCountryCode,
     TResult? Function()? loginPressed,
+    TResult? Function()? startCountdown,
+    TResult? Function()? decrementTimer,
+    TResult? Function()? resendOtp,
+    TResult? Function(String countryCode, String phoneNumber)?
+        getPrefilledPhoneNumber,
+    TResult? Function()? verifyOtp,
+    TResult? Function(String otp)? changeOTP,
   }) {
     return mobileNumberChanged?.call(mobileNumber);
   }
@@ -169,6 +223,13 @@ class _$MobileNumberChangedImpl implements MobileNumberChanged {
     TResult Function(String mobileNumber)? mobileNumberChanged,
     TResult Function(String counryCode)? selectCountryCode,
     TResult Function()? loginPressed,
+    TResult Function()? startCountdown,
+    TResult Function()? decrementTimer,
+    TResult Function()? resendOtp,
+    TResult Function(String countryCode, String phoneNumber)?
+        getPrefilledPhoneNumber,
+    TResult Function()? verifyOtp,
+    TResult Function(String otp)? changeOTP,
     required TResult orElse(),
   }) {
     if (mobileNumberChanged != null) {
@@ -183,6 +244,13 @@ class _$MobileNumberChangedImpl implements MobileNumberChanged {
     required TResult Function(MobileNumberChanged value) mobileNumberChanged,
     required TResult Function(SelectCountryCode value) selectCountryCode,
     required TResult Function(LoginPressed value) loginPressed,
+    required TResult Function(StartCountdown value) startCountdown,
+    required TResult Function(DecrementTimer value) decrementTimer,
+    required TResult Function(ResendOtp value) resendOtp,
+    required TResult Function(GetPrefilledPhoneNumber value)
+        getPrefilledPhoneNumber,
+    required TResult Function(VerifyOtp value) verifyOtp,
+    required TResult Function(ChangeOTP value) changeOTP,
   }) {
     return mobileNumberChanged(this);
   }
@@ -193,6 +261,12 @@ class _$MobileNumberChangedImpl implements MobileNumberChanged {
     TResult? Function(MobileNumberChanged value)? mobileNumberChanged,
     TResult? Function(SelectCountryCode value)? selectCountryCode,
     TResult? Function(LoginPressed value)? loginPressed,
+    TResult? Function(StartCountdown value)? startCountdown,
+    TResult? Function(DecrementTimer value)? decrementTimer,
+    TResult? Function(ResendOtp value)? resendOtp,
+    TResult? Function(GetPrefilledPhoneNumber value)? getPrefilledPhoneNumber,
+    TResult? Function(VerifyOtp value)? verifyOtp,
+    TResult? Function(ChangeOTP value)? changeOTP,
   }) {
     return mobileNumberChanged?.call(this);
   }
@@ -203,6 +277,12 @@ class _$MobileNumberChangedImpl implements MobileNumberChanged {
     TResult Function(MobileNumberChanged value)? mobileNumberChanged,
     TResult Function(SelectCountryCode value)? selectCountryCode,
     TResult Function(LoginPressed value)? loginPressed,
+    TResult Function(StartCountdown value)? startCountdown,
+    TResult Function(DecrementTimer value)? decrementTimer,
+    TResult Function(ResendOtp value)? resendOtp,
+    TResult Function(GetPrefilledPhoneNumber value)? getPrefilledPhoneNumber,
+    TResult Function(VerifyOtp value)? verifyOtp,
+    TResult Function(ChangeOTP value)? changeOTP,
     required TResult orElse(),
   }) {
     if (mobileNumberChanged != null) {
@@ -291,6 +371,13 @@ class _$SelectCountryCodeImpl implements SelectCountryCode {
     required TResult Function(String mobileNumber) mobileNumberChanged,
     required TResult Function(String counryCode) selectCountryCode,
     required TResult Function() loginPressed,
+    required TResult Function() startCountdown,
+    required TResult Function() decrementTimer,
+    required TResult Function() resendOtp,
+    required TResult Function(String countryCode, String phoneNumber)
+        getPrefilledPhoneNumber,
+    required TResult Function() verifyOtp,
+    required TResult Function(String otp) changeOTP,
   }) {
     return selectCountryCode(counryCode);
   }
@@ -301,6 +388,13 @@ class _$SelectCountryCodeImpl implements SelectCountryCode {
     TResult? Function(String mobileNumber)? mobileNumberChanged,
     TResult? Function(String counryCode)? selectCountryCode,
     TResult? Function()? loginPressed,
+    TResult? Function()? startCountdown,
+    TResult? Function()? decrementTimer,
+    TResult? Function()? resendOtp,
+    TResult? Function(String countryCode, String phoneNumber)?
+        getPrefilledPhoneNumber,
+    TResult? Function()? verifyOtp,
+    TResult? Function(String otp)? changeOTP,
   }) {
     return selectCountryCode?.call(counryCode);
   }
@@ -311,6 +405,13 @@ class _$SelectCountryCodeImpl implements SelectCountryCode {
     TResult Function(String mobileNumber)? mobileNumberChanged,
     TResult Function(String counryCode)? selectCountryCode,
     TResult Function()? loginPressed,
+    TResult Function()? startCountdown,
+    TResult Function()? decrementTimer,
+    TResult Function()? resendOtp,
+    TResult Function(String countryCode, String phoneNumber)?
+        getPrefilledPhoneNumber,
+    TResult Function()? verifyOtp,
+    TResult Function(String otp)? changeOTP,
     required TResult orElse(),
   }) {
     if (selectCountryCode != null) {
@@ -325,6 +426,13 @@ class _$SelectCountryCodeImpl implements SelectCountryCode {
     required TResult Function(MobileNumberChanged value) mobileNumberChanged,
     required TResult Function(SelectCountryCode value) selectCountryCode,
     required TResult Function(LoginPressed value) loginPressed,
+    required TResult Function(StartCountdown value) startCountdown,
+    required TResult Function(DecrementTimer value) decrementTimer,
+    required TResult Function(ResendOtp value) resendOtp,
+    required TResult Function(GetPrefilledPhoneNumber value)
+        getPrefilledPhoneNumber,
+    required TResult Function(VerifyOtp value) verifyOtp,
+    required TResult Function(ChangeOTP value) changeOTP,
   }) {
     return selectCountryCode(this);
   }
@@ -335,6 +443,12 @@ class _$SelectCountryCodeImpl implements SelectCountryCode {
     TResult? Function(MobileNumberChanged value)? mobileNumberChanged,
     TResult? Function(SelectCountryCode value)? selectCountryCode,
     TResult? Function(LoginPressed value)? loginPressed,
+    TResult? Function(StartCountdown value)? startCountdown,
+    TResult? Function(DecrementTimer value)? decrementTimer,
+    TResult? Function(ResendOtp value)? resendOtp,
+    TResult? Function(GetPrefilledPhoneNumber value)? getPrefilledPhoneNumber,
+    TResult? Function(VerifyOtp value)? verifyOtp,
+    TResult? Function(ChangeOTP value)? changeOTP,
   }) {
     return selectCountryCode?.call(this);
   }
@@ -345,6 +459,12 @@ class _$SelectCountryCodeImpl implements SelectCountryCode {
     TResult Function(MobileNumberChanged value)? mobileNumberChanged,
     TResult Function(SelectCountryCode value)? selectCountryCode,
     TResult Function(LoginPressed value)? loginPressed,
+    TResult Function(StartCountdown value)? startCountdown,
+    TResult Function(DecrementTimer value)? decrementTimer,
+    TResult Function(ResendOtp value)? resendOtp,
+    TResult Function(GetPrefilledPhoneNumber value)? getPrefilledPhoneNumber,
+    TResult Function(VerifyOtp value)? verifyOtp,
+    TResult Function(ChangeOTP value)? changeOTP,
     required TResult orElse(),
   }) {
     if (selectCountryCode != null) {
@@ -405,6 +525,13 @@ class _$LoginPressedImpl implements LoginPressed {
     required TResult Function(String mobileNumber) mobileNumberChanged,
     required TResult Function(String counryCode) selectCountryCode,
     required TResult Function() loginPressed,
+    required TResult Function() startCountdown,
+    required TResult Function() decrementTimer,
+    required TResult Function() resendOtp,
+    required TResult Function(String countryCode, String phoneNumber)
+        getPrefilledPhoneNumber,
+    required TResult Function() verifyOtp,
+    required TResult Function(String otp) changeOTP,
   }) {
     return loginPressed();
   }
@@ -415,6 +542,13 @@ class _$LoginPressedImpl implements LoginPressed {
     TResult? Function(String mobileNumber)? mobileNumberChanged,
     TResult? Function(String counryCode)? selectCountryCode,
     TResult? Function()? loginPressed,
+    TResult? Function()? startCountdown,
+    TResult? Function()? decrementTimer,
+    TResult? Function()? resendOtp,
+    TResult? Function(String countryCode, String phoneNumber)?
+        getPrefilledPhoneNumber,
+    TResult? Function()? verifyOtp,
+    TResult? Function(String otp)? changeOTP,
   }) {
     return loginPressed?.call();
   }
@@ -425,6 +559,13 @@ class _$LoginPressedImpl implements LoginPressed {
     TResult Function(String mobileNumber)? mobileNumberChanged,
     TResult Function(String counryCode)? selectCountryCode,
     TResult Function()? loginPressed,
+    TResult Function()? startCountdown,
+    TResult Function()? decrementTimer,
+    TResult Function()? resendOtp,
+    TResult Function(String countryCode, String phoneNumber)?
+        getPrefilledPhoneNumber,
+    TResult Function()? verifyOtp,
+    TResult Function(String otp)? changeOTP,
     required TResult orElse(),
   }) {
     if (loginPressed != null) {
@@ -439,6 +580,13 @@ class _$LoginPressedImpl implements LoginPressed {
     required TResult Function(MobileNumberChanged value) mobileNumberChanged,
     required TResult Function(SelectCountryCode value) selectCountryCode,
     required TResult Function(LoginPressed value) loginPressed,
+    required TResult Function(StartCountdown value) startCountdown,
+    required TResult Function(DecrementTimer value) decrementTimer,
+    required TResult Function(ResendOtp value) resendOtp,
+    required TResult Function(GetPrefilledPhoneNumber value)
+        getPrefilledPhoneNumber,
+    required TResult Function(VerifyOtp value) verifyOtp,
+    required TResult Function(ChangeOTP value) changeOTP,
   }) {
     return loginPressed(this);
   }
@@ -449,6 +597,12 @@ class _$LoginPressedImpl implements LoginPressed {
     TResult? Function(MobileNumberChanged value)? mobileNumberChanged,
     TResult? Function(SelectCountryCode value)? selectCountryCode,
     TResult? Function(LoginPressed value)? loginPressed,
+    TResult? Function(StartCountdown value)? startCountdown,
+    TResult? Function(DecrementTimer value)? decrementTimer,
+    TResult? Function(ResendOtp value)? resendOtp,
+    TResult? Function(GetPrefilledPhoneNumber value)? getPrefilledPhoneNumber,
+    TResult? Function(VerifyOtp value)? verifyOtp,
+    TResult? Function(ChangeOTP value)? changeOTP,
   }) {
     return loginPressed?.call(this);
   }
@@ -459,6 +613,12 @@ class _$LoginPressedImpl implements LoginPressed {
     TResult Function(MobileNumberChanged value)? mobileNumberChanged,
     TResult Function(SelectCountryCode value)? selectCountryCode,
     TResult Function(LoginPressed value)? loginPressed,
+    TResult Function(StartCountdown value)? startCountdown,
+    TResult Function(DecrementTimer value)? decrementTimer,
+    TResult Function(ResendOtp value)? resendOtp,
+    TResult Function(GetPrefilledPhoneNumber value)? getPrefilledPhoneNumber,
+    TResult Function(VerifyOtp value)? verifyOtp,
+    TResult Function(ChangeOTP value)? changeOTP,
     required TResult orElse(),
   }) {
     if (loginPressed != null) {
@@ -473,11 +633,979 @@ abstract class LoginPressed implements LoginFormEvent {
 }
 
 /// @nodoc
+abstract class _$$StartCountdownImplCopyWith<$Res> {
+  factory _$$StartCountdownImplCopyWith(_$StartCountdownImpl value,
+          $Res Function(_$StartCountdownImpl) then) =
+      __$$StartCountdownImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$StartCountdownImplCopyWithImpl<$Res>
+    extends _$LoginFormEventCopyWithImpl<$Res, _$StartCountdownImpl>
+    implements _$$StartCountdownImplCopyWith<$Res> {
+  __$$StartCountdownImplCopyWithImpl(
+      _$StartCountdownImpl _value, $Res Function(_$StartCountdownImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$StartCountdownImpl implements StartCountdown {
+  const _$StartCountdownImpl();
+
+  @override
+  String toString() {
+    return 'LoginFormEvent.startCountdown()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$StartCountdownImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String mobileNumber) mobileNumberChanged,
+    required TResult Function(String counryCode) selectCountryCode,
+    required TResult Function() loginPressed,
+    required TResult Function() startCountdown,
+    required TResult Function() decrementTimer,
+    required TResult Function() resendOtp,
+    required TResult Function(String countryCode, String phoneNumber)
+        getPrefilledPhoneNumber,
+    required TResult Function() verifyOtp,
+    required TResult Function(String otp) changeOTP,
+  }) {
+    return startCountdown();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String mobileNumber)? mobileNumberChanged,
+    TResult? Function(String counryCode)? selectCountryCode,
+    TResult? Function()? loginPressed,
+    TResult? Function()? startCountdown,
+    TResult? Function()? decrementTimer,
+    TResult? Function()? resendOtp,
+    TResult? Function(String countryCode, String phoneNumber)?
+        getPrefilledPhoneNumber,
+    TResult? Function()? verifyOtp,
+    TResult? Function(String otp)? changeOTP,
+  }) {
+    return startCountdown?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String mobileNumber)? mobileNumberChanged,
+    TResult Function(String counryCode)? selectCountryCode,
+    TResult Function()? loginPressed,
+    TResult Function()? startCountdown,
+    TResult Function()? decrementTimer,
+    TResult Function()? resendOtp,
+    TResult Function(String countryCode, String phoneNumber)?
+        getPrefilledPhoneNumber,
+    TResult Function()? verifyOtp,
+    TResult Function(String otp)? changeOTP,
+    required TResult orElse(),
+  }) {
+    if (startCountdown != null) {
+      return startCountdown();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(MobileNumberChanged value) mobileNumberChanged,
+    required TResult Function(SelectCountryCode value) selectCountryCode,
+    required TResult Function(LoginPressed value) loginPressed,
+    required TResult Function(StartCountdown value) startCountdown,
+    required TResult Function(DecrementTimer value) decrementTimer,
+    required TResult Function(ResendOtp value) resendOtp,
+    required TResult Function(GetPrefilledPhoneNumber value)
+        getPrefilledPhoneNumber,
+    required TResult Function(VerifyOtp value) verifyOtp,
+    required TResult Function(ChangeOTP value) changeOTP,
+  }) {
+    return startCountdown(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(MobileNumberChanged value)? mobileNumberChanged,
+    TResult? Function(SelectCountryCode value)? selectCountryCode,
+    TResult? Function(LoginPressed value)? loginPressed,
+    TResult? Function(StartCountdown value)? startCountdown,
+    TResult? Function(DecrementTimer value)? decrementTimer,
+    TResult? Function(ResendOtp value)? resendOtp,
+    TResult? Function(GetPrefilledPhoneNumber value)? getPrefilledPhoneNumber,
+    TResult? Function(VerifyOtp value)? verifyOtp,
+    TResult? Function(ChangeOTP value)? changeOTP,
+  }) {
+    return startCountdown?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(MobileNumberChanged value)? mobileNumberChanged,
+    TResult Function(SelectCountryCode value)? selectCountryCode,
+    TResult Function(LoginPressed value)? loginPressed,
+    TResult Function(StartCountdown value)? startCountdown,
+    TResult Function(DecrementTimer value)? decrementTimer,
+    TResult Function(ResendOtp value)? resendOtp,
+    TResult Function(GetPrefilledPhoneNumber value)? getPrefilledPhoneNumber,
+    TResult Function(VerifyOtp value)? verifyOtp,
+    TResult Function(ChangeOTP value)? changeOTP,
+    required TResult orElse(),
+  }) {
+    if (startCountdown != null) {
+      return startCountdown(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class StartCountdown implements LoginFormEvent {
+  const factory StartCountdown() = _$StartCountdownImpl;
+}
+
+/// @nodoc
+abstract class _$$DecrementTimerImplCopyWith<$Res> {
+  factory _$$DecrementTimerImplCopyWith(_$DecrementTimerImpl value,
+          $Res Function(_$DecrementTimerImpl) then) =
+      __$$DecrementTimerImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$DecrementTimerImplCopyWithImpl<$Res>
+    extends _$LoginFormEventCopyWithImpl<$Res, _$DecrementTimerImpl>
+    implements _$$DecrementTimerImplCopyWith<$Res> {
+  __$$DecrementTimerImplCopyWithImpl(
+      _$DecrementTimerImpl _value, $Res Function(_$DecrementTimerImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$DecrementTimerImpl implements DecrementTimer {
+  const _$DecrementTimerImpl();
+
+  @override
+  String toString() {
+    return 'LoginFormEvent.decrementTimer()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$DecrementTimerImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String mobileNumber) mobileNumberChanged,
+    required TResult Function(String counryCode) selectCountryCode,
+    required TResult Function() loginPressed,
+    required TResult Function() startCountdown,
+    required TResult Function() decrementTimer,
+    required TResult Function() resendOtp,
+    required TResult Function(String countryCode, String phoneNumber)
+        getPrefilledPhoneNumber,
+    required TResult Function() verifyOtp,
+    required TResult Function(String otp) changeOTP,
+  }) {
+    return decrementTimer();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String mobileNumber)? mobileNumberChanged,
+    TResult? Function(String counryCode)? selectCountryCode,
+    TResult? Function()? loginPressed,
+    TResult? Function()? startCountdown,
+    TResult? Function()? decrementTimer,
+    TResult? Function()? resendOtp,
+    TResult? Function(String countryCode, String phoneNumber)?
+        getPrefilledPhoneNumber,
+    TResult? Function()? verifyOtp,
+    TResult? Function(String otp)? changeOTP,
+  }) {
+    return decrementTimer?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String mobileNumber)? mobileNumberChanged,
+    TResult Function(String counryCode)? selectCountryCode,
+    TResult Function()? loginPressed,
+    TResult Function()? startCountdown,
+    TResult Function()? decrementTimer,
+    TResult Function()? resendOtp,
+    TResult Function(String countryCode, String phoneNumber)?
+        getPrefilledPhoneNumber,
+    TResult Function()? verifyOtp,
+    TResult Function(String otp)? changeOTP,
+    required TResult orElse(),
+  }) {
+    if (decrementTimer != null) {
+      return decrementTimer();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(MobileNumberChanged value) mobileNumberChanged,
+    required TResult Function(SelectCountryCode value) selectCountryCode,
+    required TResult Function(LoginPressed value) loginPressed,
+    required TResult Function(StartCountdown value) startCountdown,
+    required TResult Function(DecrementTimer value) decrementTimer,
+    required TResult Function(ResendOtp value) resendOtp,
+    required TResult Function(GetPrefilledPhoneNumber value)
+        getPrefilledPhoneNumber,
+    required TResult Function(VerifyOtp value) verifyOtp,
+    required TResult Function(ChangeOTP value) changeOTP,
+  }) {
+    return decrementTimer(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(MobileNumberChanged value)? mobileNumberChanged,
+    TResult? Function(SelectCountryCode value)? selectCountryCode,
+    TResult? Function(LoginPressed value)? loginPressed,
+    TResult? Function(StartCountdown value)? startCountdown,
+    TResult? Function(DecrementTimer value)? decrementTimer,
+    TResult? Function(ResendOtp value)? resendOtp,
+    TResult? Function(GetPrefilledPhoneNumber value)? getPrefilledPhoneNumber,
+    TResult? Function(VerifyOtp value)? verifyOtp,
+    TResult? Function(ChangeOTP value)? changeOTP,
+  }) {
+    return decrementTimer?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(MobileNumberChanged value)? mobileNumberChanged,
+    TResult Function(SelectCountryCode value)? selectCountryCode,
+    TResult Function(LoginPressed value)? loginPressed,
+    TResult Function(StartCountdown value)? startCountdown,
+    TResult Function(DecrementTimer value)? decrementTimer,
+    TResult Function(ResendOtp value)? resendOtp,
+    TResult Function(GetPrefilledPhoneNumber value)? getPrefilledPhoneNumber,
+    TResult Function(VerifyOtp value)? verifyOtp,
+    TResult Function(ChangeOTP value)? changeOTP,
+    required TResult orElse(),
+  }) {
+    if (decrementTimer != null) {
+      return decrementTimer(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class DecrementTimer implements LoginFormEvent {
+  const factory DecrementTimer() = _$DecrementTimerImpl;
+}
+
+/// @nodoc
+abstract class _$$ResendOtpImplCopyWith<$Res> {
+  factory _$$ResendOtpImplCopyWith(
+          _$ResendOtpImpl value, $Res Function(_$ResendOtpImpl) then) =
+      __$$ResendOtpImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$ResendOtpImplCopyWithImpl<$Res>
+    extends _$LoginFormEventCopyWithImpl<$Res, _$ResendOtpImpl>
+    implements _$$ResendOtpImplCopyWith<$Res> {
+  __$$ResendOtpImplCopyWithImpl(
+      _$ResendOtpImpl _value, $Res Function(_$ResendOtpImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$ResendOtpImpl implements ResendOtp {
+  const _$ResendOtpImpl();
+
+  @override
+  String toString() {
+    return 'LoginFormEvent.resendOtp()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$ResendOtpImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String mobileNumber) mobileNumberChanged,
+    required TResult Function(String counryCode) selectCountryCode,
+    required TResult Function() loginPressed,
+    required TResult Function() startCountdown,
+    required TResult Function() decrementTimer,
+    required TResult Function() resendOtp,
+    required TResult Function(String countryCode, String phoneNumber)
+        getPrefilledPhoneNumber,
+    required TResult Function() verifyOtp,
+    required TResult Function(String otp) changeOTP,
+  }) {
+    return resendOtp();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String mobileNumber)? mobileNumberChanged,
+    TResult? Function(String counryCode)? selectCountryCode,
+    TResult? Function()? loginPressed,
+    TResult? Function()? startCountdown,
+    TResult? Function()? decrementTimer,
+    TResult? Function()? resendOtp,
+    TResult? Function(String countryCode, String phoneNumber)?
+        getPrefilledPhoneNumber,
+    TResult? Function()? verifyOtp,
+    TResult? Function(String otp)? changeOTP,
+  }) {
+    return resendOtp?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String mobileNumber)? mobileNumberChanged,
+    TResult Function(String counryCode)? selectCountryCode,
+    TResult Function()? loginPressed,
+    TResult Function()? startCountdown,
+    TResult Function()? decrementTimer,
+    TResult Function()? resendOtp,
+    TResult Function(String countryCode, String phoneNumber)?
+        getPrefilledPhoneNumber,
+    TResult Function()? verifyOtp,
+    TResult Function(String otp)? changeOTP,
+    required TResult orElse(),
+  }) {
+    if (resendOtp != null) {
+      return resendOtp();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(MobileNumberChanged value) mobileNumberChanged,
+    required TResult Function(SelectCountryCode value) selectCountryCode,
+    required TResult Function(LoginPressed value) loginPressed,
+    required TResult Function(StartCountdown value) startCountdown,
+    required TResult Function(DecrementTimer value) decrementTimer,
+    required TResult Function(ResendOtp value) resendOtp,
+    required TResult Function(GetPrefilledPhoneNumber value)
+        getPrefilledPhoneNumber,
+    required TResult Function(VerifyOtp value) verifyOtp,
+    required TResult Function(ChangeOTP value) changeOTP,
+  }) {
+    return resendOtp(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(MobileNumberChanged value)? mobileNumberChanged,
+    TResult? Function(SelectCountryCode value)? selectCountryCode,
+    TResult? Function(LoginPressed value)? loginPressed,
+    TResult? Function(StartCountdown value)? startCountdown,
+    TResult? Function(DecrementTimer value)? decrementTimer,
+    TResult? Function(ResendOtp value)? resendOtp,
+    TResult? Function(GetPrefilledPhoneNumber value)? getPrefilledPhoneNumber,
+    TResult? Function(VerifyOtp value)? verifyOtp,
+    TResult? Function(ChangeOTP value)? changeOTP,
+  }) {
+    return resendOtp?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(MobileNumberChanged value)? mobileNumberChanged,
+    TResult Function(SelectCountryCode value)? selectCountryCode,
+    TResult Function(LoginPressed value)? loginPressed,
+    TResult Function(StartCountdown value)? startCountdown,
+    TResult Function(DecrementTimer value)? decrementTimer,
+    TResult Function(ResendOtp value)? resendOtp,
+    TResult Function(GetPrefilledPhoneNumber value)? getPrefilledPhoneNumber,
+    TResult Function(VerifyOtp value)? verifyOtp,
+    TResult Function(ChangeOTP value)? changeOTP,
+    required TResult orElse(),
+  }) {
+    if (resendOtp != null) {
+      return resendOtp(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ResendOtp implements LoginFormEvent {
+  const factory ResendOtp() = _$ResendOtpImpl;
+}
+
+/// @nodoc
+abstract class _$$GetPrefilledPhoneNumberImplCopyWith<$Res> {
+  factory _$$GetPrefilledPhoneNumberImplCopyWith(
+          _$GetPrefilledPhoneNumberImpl value,
+          $Res Function(_$GetPrefilledPhoneNumberImpl) then) =
+      __$$GetPrefilledPhoneNumberImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String countryCode, String phoneNumber});
+}
+
+/// @nodoc
+class __$$GetPrefilledPhoneNumberImplCopyWithImpl<$Res>
+    extends _$LoginFormEventCopyWithImpl<$Res, _$GetPrefilledPhoneNumberImpl>
+    implements _$$GetPrefilledPhoneNumberImplCopyWith<$Res> {
+  __$$GetPrefilledPhoneNumberImplCopyWithImpl(
+      _$GetPrefilledPhoneNumberImpl _value,
+      $Res Function(_$GetPrefilledPhoneNumberImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? countryCode = null,
+    Object? phoneNumber = null,
+  }) {
+    return _then(_$GetPrefilledPhoneNumberImpl(
+      null == countryCode
+          ? _value.countryCode
+          : countryCode // ignore: cast_nullable_to_non_nullable
+              as String,
+      null == phoneNumber
+          ? _value.phoneNumber
+          : phoneNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$GetPrefilledPhoneNumberImpl implements GetPrefilledPhoneNumber {
+  const _$GetPrefilledPhoneNumberImpl(this.countryCode, this.phoneNumber);
+
+  @override
+  final String countryCode;
+  @override
+  final String phoneNumber;
+
+  @override
+  String toString() {
+    return 'LoginFormEvent.getPrefilledPhoneNumber(countryCode: $countryCode, phoneNumber: $phoneNumber)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$GetPrefilledPhoneNumberImpl &&
+            (identical(other.countryCode, countryCode) ||
+                other.countryCode == countryCode) &&
+            (identical(other.phoneNumber, phoneNumber) ||
+                other.phoneNumber == phoneNumber));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, countryCode, phoneNumber);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$GetPrefilledPhoneNumberImplCopyWith<_$GetPrefilledPhoneNumberImpl>
+      get copyWith => __$$GetPrefilledPhoneNumberImplCopyWithImpl<
+          _$GetPrefilledPhoneNumberImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String mobileNumber) mobileNumberChanged,
+    required TResult Function(String counryCode) selectCountryCode,
+    required TResult Function() loginPressed,
+    required TResult Function() startCountdown,
+    required TResult Function() decrementTimer,
+    required TResult Function() resendOtp,
+    required TResult Function(String countryCode, String phoneNumber)
+        getPrefilledPhoneNumber,
+    required TResult Function() verifyOtp,
+    required TResult Function(String otp) changeOTP,
+  }) {
+    return getPrefilledPhoneNumber(countryCode, phoneNumber);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String mobileNumber)? mobileNumberChanged,
+    TResult? Function(String counryCode)? selectCountryCode,
+    TResult? Function()? loginPressed,
+    TResult? Function()? startCountdown,
+    TResult? Function()? decrementTimer,
+    TResult? Function()? resendOtp,
+    TResult? Function(String countryCode, String phoneNumber)?
+        getPrefilledPhoneNumber,
+    TResult? Function()? verifyOtp,
+    TResult? Function(String otp)? changeOTP,
+  }) {
+    return getPrefilledPhoneNumber?.call(countryCode, phoneNumber);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String mobileNumber)? mobileNumberChanged,
+    TResult Function(String counryCode)? selectCountryCode,
+    TResult Function()? loginPressed,
+    TResult Function()? startCountdown,
+    TResult Function()? decrementTimer,
+    TResult Function()? resendOtp,
+    TResult Function(String countryCode, String phoneNumber)?
+        getPrefilledPhoneNumber,
+    TResult Function()? verifyOtp,
+    TResult Function(String otp)? changeOTP,
+    required TResult orElse(),
+  }) {
+    if (getPrefilledPhoneNumber != null) {
+      return getPrefilledPhoneNumber(countryCode, phoneNumber);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(MobileNumberChanged value) mobileNumberChanged,
+    required TResult Function(SelectCountryCode value) selectCountryCode,
+    required TResult Function(LoginPressed value) loginPressed,
+    required TResult Function(StartCountdown value) startCountdown,
+    required TResult Function(DecrementTimer value) decrementTimer,
+    required TResult Function(ResendOtp value) resendOtp,
+    required TResult Function(GetPrefilledPhoneNumber value)
+        getPrefilledPhoneNumber,
+    required TResult Function(VerifyOtp value) verifyOtp,
+    required TResult Function(ChangeOTP value) changeOTP,
+  }) {
+    return getPrefilledPhoneNumber(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(MobileNumberChanged value)? mobileNumberChanged,
+    TResult? Function(SelectCountryCode value)? selectCountryCode,
+    TResult? Function(LoginPressed value)? loginPressed,
+    TResult? Function(StartCountdown value)? startCountdown,
+    TResult? Function(DecrementTimer value)? decrementTimer,
+    TResult? Function(ResendOtp value)? resendOtp,
+    TResult? Function(GetPrefilledPhoneNumber value)? getPrefilledPhoneNumber,
+    TResult? Function(VerifyOtp value)? verifyOtp,
+    TResult? Function(ChangeOTP value)? changeOTP,
+  }) {
+    return getPrefilledPhoneNumber?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(MobileNumberChanged value)? mobileNumberChanged,
+    TResult Function(SelectCountryCode value)? selectCountryCode,
+    TResult Function(LoginPressed value)? loginPressed,
+    TResult Function(StartCountdown value)? startCountdown,
+    TResult Function(DecrementTimer value)? decrementTimer,
+    TResult Function(ResendOtp value)? resendOtp,
+    TResult Function(GetPrefilledPhoneNumber value)? getPrefilledPhoneNumber,
+    TResult Function(VerifyOtp value)? verifyOtp,
+    TResult Function(ChangeOTP value)? changeOTP,
+    required TResult orElse(),
+  }) {
+    if (getPrefilledPhoneNumber != null) {
+      return getPrefilledPhoneNumber(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class GetPrefilledPhoneNumber implements LoginFormEvent {
+  const factory GetPrefilledPhoneNumber(
+          final String countryCode, final String phoneNumber) =
+      _$GetPrefilledPhoneNumberImpl;
+
+  String get countryCode;
+  String get phoneNumber;
+  @JsonKey(ignore: true)
+  _$$GetPrefilledPhoneNumberImplCopyWith<_$GetPrefilledPhoneNumberImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$VerifyOtpImplCopyWith<$Res> {
+  factory _$$VerifyOtpImplCopyWith(
+          _$VerifyOtpImpl value, $Res Function(_$VerifyOtpImpl) then) =
+      __$$VerifyOtpImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$VerifyOtpImplCopyWithImpl<$Res>
+    extends _$LoginFormEventCopyWithImpl<$Res, _$VerifyOtpImpl>
+    implements _$$VerifyOtpImplCopyWith<$Res> {
+  __$$VerifyOtpImplCopyWithImpl(
+      _$VerifyOtpImpl _value, $Res Function(_$VerifyOtpImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$VerifyOtpImpl implements VerifyOtp {
+  const _$VerifyOtpImpl();
+
+  @override
+  String toString() {
+    return 'LoginFormEvent.verifyOtp()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$VerifyOtpImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String mobileNumber) mobileNumberChanged,
+    required TResult Function(String counryCode) selectCountryCode,
+    required TResult Function() loginPressed,
+    required TResult Function() startCountdown,
+    required TResult Function() decrementTimer,
+    required TResult Function() resendOtp,
+    required TResult Function(String countryCode, String phoneNumber)
+        getPrefilledPhoneNumber,
+    required TResult Function() verifyOtp,
+    required TResult Function(String otp) changeOTP,
+  }) {
+    return verifyOtp();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String mobileNumber)? mobileNumberChanged,
+    TResult? Function(String counryCode)? selectCountryCode,
+    TResult? Function()? loginPressed,
+    TResult? Function()? startCountdown,
+    TResult? Function()? decrementTimer,
+    TResult? Function()? resendOtp,
+    TResult? Function(String countryCode, String phoneNumber)?
+        getPrefilledPhoneNumber,
+    TResult? Function()? verifyOtp,
+    TResult? Function(String otp)? changeOTP,
+  }) {
+    return verifyOtp?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String mobileNumber)? mobileNumberChanged,
+    TResult Function(String counryCode)? selectCountryCode,
+    TResult Function()? loginPressed,
+    TResult Function()? startCountdown,
+    TResult Function()? decrementTimer,
+    TResult Function()? resendOtp,
+    TResult Function(String countryCode, String phoneNumber)?
+        getPrefilledPhoneNumber,
+    TResult Function()? verifyOtp,
+    TResult Function(String otp)? changeOTP,
+    required TResult orElse(),
+  }) {
+    if (verifyOtp != null) {
+      return verifyOtp();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(MobileNumberChanged value) mobileNumberChanged,
+    required TResult Function(SelectCountryCode value) selectCountryCode,
+    required TResult Function(LoginPressed value) loginPressed,
+    required TResult Function(StartCountdown value) startCountdown,
+    required TResult Function(DecrementTimer value) decrementTimer,
+    required TResult Function(ResendOtp value) resendOtp,
+    required TResult Function(GetPrefilledPhoneNumber value)
+        getPrefilledPhoneNumber,
+    required TResult Function(VerifyOtp value) verifyOtp,
+    required TResult Function(ChangeOTP value) changeOTP,
+  }) {
+    return verifyOtp(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(MobileNumberChanged value)? mobileNumberChanged,
+    TResult? Function(SelectCountryCode value)? selectCountryCode,
+    TResult? Function(LoginPressed value)? loginPressed,
+    TResult? Function(StartCountdown value)? startCountdown,
+    TResult? Function(DecrementTimer value)? decrementTimer,
+    TResult? Function(ResendOtp value)? resendOtp,
+    TResult? Function(GetPrefilledPhoneNumber value)? getPrefilledPhoneNumber,
+    TResult? Function(VerifyOtp value)? verifyOtp,
+    TResult? Function(ChangeOTP value)? changeOTP,
+  }) {
+    return verifyOtp?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(MobileNumberChanged value)? mobileNumberChanged,
+    TResult Function(SelectCountryCode value)? selectCountryCode,
+    TResult Function(LoginPressed value)? loginPressed,
+    TResult Function(StartCountdown value)? startCountdown,
+    TResult Function(DecrementTimer value)? decrementTimer,
+    TResult Function(ResendOtp value)? resendOtp,
+    TResult Function(GetPrefilledPhoneNumber value)? getPrefilledPhoneNumber,
+    TResult Function(VerifyOtp value)? verifyOtp,
+    TResult Function(ChangeOTP value)? changeOTP,
+    required TResult orElse(),
+  }) {
+    if (verifyOtp != null) {
+      return verifyOtp(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class VerifyOtp implements LoginFormEvent {
+  const factory VerifyOtp() = _$VerifyOtpImpl;
+}
+
+/// @nodoc
+abstract class _$$ChangeOTPImplCopyWith<$Res> {
+  factory _$$ChangeOTPImplCopyWith(
+          _$ChangeOTPImpl value, $Res Function(_$ChangeOTPImpl) then) =
+      __$$ChangeOTPImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String otp});
+}
+
+/// @nodoc
+class __$$ChangeOTPImplCopyWithImpl<$Res>
+    extends _$LoginFormEventCopyWithImpl<$Res, _$ChangeOTPImpl>
+    implements _$$ChangeOTPImplCopyWith<$Res> {
+  __$$ChangeOTPImplCopyWithImpl(
+      _$ChangeOTPImpl _value, $Res Function(_$ChangeOTPImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? otp = null,
+  }) {
+    return _then(_$ChangeOTPImpl(
+      null == otp
+          ? _value.otp
+          : otp // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$ChangeOTPImpl implements ChangeOTP {
+  const _$ChangeOTPImpl(this.otp);
+
+  @override
+  final String otp;
+
+  @override
+  String toString() {
+    return 'LoginFormEvent.changeOTP(otp: $otp)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ChangeOTPImpl &&
+            (identical(other.otp, otp) || other.otp == otp));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, otp);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ChangeOTPImplCopyWith<_$ChangeOTPImpl> get copyWith =>
+      __$$ChangeOTPImplCopyWithImpl<_$ChangeOTPImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String mobileNumber) mobileNumberChanged,
+    required TResult Function(String counryCode) selectCountryCode,
+    required TResult Function() loginPressed,
+    required TResult Function() startCountdown,
+    required TResult Function() decrementTimer,
+    required TResult Function() resendOtp,
+    required TResult Function(String countryCode, String phoneNumber)
+        getPrefilledPhoneNumber,
+    required TResult Function() verifyOtp,
+    required TResult Function(String otp) changeOTP,
+  }) {
+    return changeOTP(otp);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String mobileNumber)? mobileNumberChanged,
+    TResult? Function(String counryCode)? selectCountryCode,
+    TResult? Function()? loginPressed,
+    TResult? Function()? startCountdown,
+    TResult? Function()? decrementTimer,
+    TResult? Function()? resendOtp,
+    TResult? Function(String countryCode, String phoneNumber)?
+        getPrefilledPhoneNumber,
+    TResult? Function()? verifyOtp,
+    TResult? Function(String otp)? changeOTP,
+  }) {
+    return changeOTP?.call(otp);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String mobileNumber)? mobileNumberChanged,
+    TResult Function(String counryCode)? selectCountryCode,
+    TResult Function()? loginPressed,
+    TResult Function()? startCountdown,
+    TResult Function()? decrementTimer,
+    TResult Function()? resendOtp,
+    TResult Function(String countryCode, String phoneNumber)?
+        getPrefilledPhoneNumber,
+    TResult Function()? verifyOtp,
+    TResult Function(String otp)? changeOTP,
+    required TResult orElse(),
+  }) {
+    if (changeOTP != null) {
+      return changeOTP(otp);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(MobileNumberChanged value) mobileNumberChanged,
+    required TResult Function(SelectCountryCode value) selectCountryCode,
+    required TResult Function(LoginPressed value) loginPressed,
+    required TResult Function(StartCountdown value) startCountdown,
+    required TResult Function(DecrementTimer value) decrementTimer,
+    required TResult Function(ResendOtp value) resendOtp,
+    required TResult Function(GetPrefilledPhoneNumber value)
+        getPrefilledPhoneNumber,
+    required TResult Function(VerifyOtp value) verifyOtp,
+    required TResult Function(ChangeOTP value) changeOTP,
+  }) {
+    return changeOTP(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(MobileNumberChanged value)? mobileNumberChanged,
+    TResult? Function(SelectCountryCode value)? selectCountryCode,
+    TResult? Function(LoginPressed value)? loginPressed,
+    TResult? Function(StartCountdown value)? startCountdown,
+    TResult? Function(DecrementTimer value)? decrementTimer,
+    TResult? Function(ResendOtp value)? resendOtp,
+    TResult? Function(GetPrefilledPhoneNumber value)? getPrefilledPhoneNumber,
+    TResult? Function(VerifyOtp value)? verifyOtp,
+    TResult? Function(ChangeOTP value)? changeOTP,
+  }) {
+    return changeOTP?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(MobileNumberChanged value)? mobileNumberChanged,
+    TResult Function(SelectCountryCode value)? selectCountryCode,
+    TResult Function(LoginPressed value)? loginPressed,
+    TResult Function(StartCountdown value)? startCountdown,
+    TResult Function(DecrementTimer value)? decrementTimer,
+    TResult Function(ResendOtp value)? resendOtp,
+    TResult Function(GetPrefilledPhoneNumber value)? getPrefilledPhoneNumber,
+    TResult Function(VerifyOtp value)? verifyOtp,
+    TResult Function(ChangeOTP value)? changeOTP,
+    required TResult orElse(),
+  }) {
+    if (changeOTP != null) {
+      return changeOTP(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ChangeOTP implements LoginFormEvent {
+  const factory ChangeOTP(final String otp) = _$ChangeOTPImpl;
+
+  String get otp;
+  @JsonKey(ignore: true)
+  _$$ChangeOTPImplCopyWith<_$ChangeOTPImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$LoginFormState {
   MobileNumber get mobileNumber => throw _privateConstructorUsedError;
   bool get showErrorMessages => throw _privateConstructorUsedError;
   bool get isSubmitting => throw _privateConstructorUsedError;
   String get selectedCountrycode => throw _privateConstructorUsedError;
+  OTPText get enteredOTP => throw _privateConstructorUsedError;
+  int get secondsRemaining => throw _privateConstructorUsedError;
   Option<Either<AuthFailure, Unit>> get authFailureOrSuccessOption =>
       throw _privateConstructorUsedError;
 
@@ -497,6 +1625,8 @@ abstract class $LoginFormStateCopyWith<$Res> {
       bool showErrorMessages,
       bool isSubmitting,
       String selectedCountrycode,
+      OTPText enteredOTP,
+      int secondsRemaining,
       Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption});
 }
 
@@ -517,6 +1647,8 @@ class _$LoginFormStateCopyWithImpl<$Res, $Val extends LoginFormState>
     Object? showErrorMessages = null,
     Object? isSubmitting = null,
     Object? selectedCountrycode = null,
+    Object? enteredOTP = null,
+    Object? secondsRemaining = null,
     Object? authFailureOrSuccessOption = null,
   }) {
     return _then(_value.copyWith(
@@ -536,6 +1668,14 @@ class _$LoginFormStateCopyWithImpl<$Res, $Val extends LoginFormState>
           ? _value.selectedCountrycode
           : selectedCountrycode // ignore: cast_nullable_to_non_nullable
               as String,
+      enteredOTP: null == enteredOTP
+          ? _value.enteredOTP
+          : enteredOTP // ignore: cast_nullable_to_non_nullable
+              as OTPText,
+      secondsRemaining: null == secondsRemaining
+          ? _value.secondsRemaining
+          : secondsRemaining // ignore: cast_nullable_to_non_nullable
+              as int,
       authFailureOrSuccessOption: null == authFailureOrSuccessOption
           ? _value.authFailureOrSuccessOption
           : authFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
@@ -557,6 +1697,8 @@ abstract class _$$LoginFormStateImplCopyWith<$Res>
       bool showErrorMessages,
       bool isSubmitting,
       String selectedCountrycode,
+      OTPText enteredOTP,
+      int secondsRemaining,
       Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption});
 }
 
@@ -575,6 +1717,8 @@ class __$$LoginFormStateImplCopyWithImpl<$Res>
     Object? showErrorMessages = null,
     Object? isSubmitting = null,
     Object? selectedCountrycode = null,
+    Object? enteredOTP = null,
+    Object? secondsRemaining = null,
     Object? authFailureOrSuccessOption = null,
   }) {
     return _then(_$LoginFormStateImpl(
@@ -594,6 +1738,14 @@ class __$$LoginFormStateImplCopyWithImpl<$Res>
           ? _value.selectedCountrycode
           : selectedCountrycode // ignore: cast_nullable_to_non_nullable
               as String,
+      enteredOTP: null == enteredOTP
+          ? _value.enteredOTP
+          : enteredOTP // ignore: cast_nullable_to_non_nullable
+              as OTPText,
+      secondsRemaining: null == secondsRemaining
+          ? _value.secondsRemaining
+          : secondsRemaining // ignore: cast_nullable_to_non_nullable
+              as int,
       authFailureOrSuccessOption: null == authFailureOrSuccessOption
           ? _value.authFailureOrSuccessOption
           : authFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
@@ -610,6 +1762,8 @@ class _$LoginFormStateImpl implements _LoginFormState {
       required this.showErrorMessages,
       required this.isSubmitting,
       required this.selectedCountrycode,
+      required this.enteredOTP,
+      required this.secondsRemaining,
       required this.authFailureOrSuccessOption});
 
   @override
@@ -621,11 +1775,15 @@ class _$LoginFormStateImpl implements _LoginFormState {
   @override
   final String selectedCountrycode;
   @override
+  final OTPText enteredOTP;
+  @override
+  final int secondsRemaining;
+  @override
   final Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption;
 
   @override
   String toString() {
-    return 'LoginFormState(mobileNumber: $mobileNumber, showErrorMessages: $showErrorMessages, isSubmitting: $isSubmitting, selectedCountrycode: $selectedCountrycode, authFailureOrSuccessOption: $authFailureOrSuccessOption)';
+    return 'LoginFormState(mobileNumber: $mobileNumber, showErrorMessages: $showErrorMessages, isSubmitting: $isSubmitting, selectedCountrycode: $selectedCountrycode, enteredOTP: $enteredOTP, secondsRemaining: $secondsRemaining, authFailureOrSuccessOption: $authFailureOrSuccessOption)';
   }
 
   @override
@@ -641,6 +1799,10 @@ class _$LoginFormStateImpl implements _LoginFormState {
                 other.isSubmitting == isSubmitting) &&
             (identical(other.selectedCountrycode, selectedCountrycode) ||
                 other.selectedCountrycode == selectedCountrycode) &&
+            (identical(other.enteredOTP, enteredOTP) ||
+                other.enteredOTP == enteredOTP) &&
+            (identical(other.secondsRemaining, secondsRemaining) ||
+                other.secondsRemaining == secondsRemaining) &&
             (identical(other.authFailureOrSuccessOption,
                     authFailureOrSuccessOption) ||
                 other.authFailureOrSuccessOption ==
@@ -648,8 +1810,15 @@ class _$LoginFormStateImpl implements _LoginFormState {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, mobileNumber, showErrorMessages,
-      isSubmitting, selectedCountrycode, authFailureOrSuccessOption);
+  int get hashCode => Object.hash(
+      runtimeType,
+      mobileNumber,
+      showErrorMessages,
+      isSubmitting,
+      selectedCountrycode,
+      enteredOTP,
+      secondsRemaining,
+      authFailureOrSuccessOption);
 
   @JsonKey(ignore: true)
   @override
@@ -665,6 +1834,8 @@ abstract class _LoginFormState implements LoginFormState {
       required final bool showErrorMessages,
       required final bool isSubmitting,
       required final String selectedCountrycode,
+      required final OTPText enteredOTP,
+      required final int secondsRemaining,
       required final Option<Either<AuthFailure, Unit>>
           authFailureOrSuccessOption}) = _$LoginFormStateImpl;
 
@@ -676,6 +1847,10 @@ abstract class _LoginFormState implements LoginFormState {
   bool get isSubmitting;
   @override
   String get selectedCountrycode;
+  @override
+  OTPText get enteredOTP;
+  @override
+  int get secondsRemaining;
   @override
   Option<Either<AuthFailure, Unit>> get authFailureOrSuccessOption;
   @override
