@@ -25,6 +25,6 @@ class RegisterFormState with _$RegisterFormState {
         mobileNumber: MobileNumber(''),
         selectedCountrycode: '',
         enteredOTP: OTPText(''),
-        secondsRemaining: 30,
+        secondsRemaining: 0,
       );
 }

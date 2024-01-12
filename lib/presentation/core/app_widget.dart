@@ -51,9 +51,9 @@ class _AppState extends State<_App> {
           // routerDelegate: _appRouter.delegate(),
           // routeInformationParser: _appRouter.defaultRouteParser(),
           title: 'Grape Customer App',
-          debugShowCheckedModeBanner: false,
-          theme: AppTheme.light,
-          darkTheme: AppTheme.dark,
+          debugShowCheckedModeBanner: false, theme: ThemeConfig.lightTheme,
+          // theme: AppTheme.light,
+          // darkTheme: AppTheme.dark,
           routerConfig: _appRouter.config(
             navigatorObservers: () =>
                 [FirebaseAnalyticsObserver(analytics: analytics)],

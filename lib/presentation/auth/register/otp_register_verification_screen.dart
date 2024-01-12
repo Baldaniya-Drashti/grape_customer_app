@@ -12,11 +12,24 @@ import 'package:grape_customer_app/presentation/core/widgets/inputs/custom_app_b
 import 'package:grape_customer_app/presentation/core/widgets/inputs/inputs.dart';
 
 @RoutePage(name: 'OtpRegisterVerificationView')
-class OtpRegisterVerificationView extends StatelessWidget {
+class OtpRegisterVerificationView extends StatefulWidget {
   final String countryCode;
   final String phoneNumber;
   const OtpRegisterVerificationView(
       {super.key, required this.countryCode, required this.phoneNumber});
+
+  @override
+  State<OtpRegisterVerificationView> createState() =>
+      _OtpRegisterVerificationViewState();
+}
+
+class _OtpRegisterVerificationViewState
+    extends State<OtpRegisterVerificationView> {
+  @override
+  void dispose() {
+    context.read<RegisterFormBloc>().timer.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,9 +37,9 @@ class OtpRegisterVerificationView extends StatelessWidget {
       appBar: CustomAppBar(title: ''),
       body: BlocProvider(
         create: (context) => getIt<RegisterFormBloc>()
-          //  ..add(RegisterFormEvent.startCountdown())
+          ..add(RegisterFormEvent.startCountdown())
           ..add(RegisterFormEvent.getPrefilledPhoneNumber(
-              countryCode, phoneNumber)),
+              widget.countryCode, widget.phoneNumber)),
         child: BlocConsumer<RegisterFormBloc, RegisterFormState>(
           listener: (context, state) {},
           builder: (context, state) {
@@ -116,14 +129,23 @@ class OtpRegisterVerificationView extends StatelessWidget {
                             (_) => null,
                           ),
                     ),
-                    GestureDetector(
-                      onTap: () {},
-                      child: BaseText(
-                        text: 'Resend',
-                        fontSize: 12,
-                        fontWeight: FontWeight.w500,
-                        textColor: AppColors.primaryOrange,
-                        textAlign: TextAlign.right,
+                    Opacity(
+                      opacity: state.secondsRemaining == 0 ? 1 : 0.5,
+                      child: GestureDetector(
+                        onTap: state.secondsRemaining == 0
+                            ? () {
+                                context
+                                    .read<RegisterFormBloc>()
+                                    .add(RegisterFormEvent.resendOtp());
+                              }
+                            : null,
+                        child: BaseText(
+                          text: 'Resend',
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                          textColor: AppColors.primaryOrange,
+                          textAlign: TextAlign.right,
+                        ),
                       ),
                     ),
                     Spacer(),

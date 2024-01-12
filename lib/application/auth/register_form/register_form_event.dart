@@ -18,7 +18,8 @@ class RegisterFormEvent with _$RegisterFormEvent {
   const factory RegisterFormEvent.changeOTP(String otp) = ChangeOTP;
   const factory RegisterFormEvent.registerPressed() = RegisterPressed;
   const factory RegisterFormEvent.startCountdown() = StartCountdown;
-  const factory RegisterFormEvent.stopCountdown() = StopCountdown;
+  const factory RegisterFormEvent.decrementTimer() = DecrementTimer;
+  const factory RegisterFormEvent.resendOtp() = ResendOtp;
 
   const factory RegisterFormEvent.verifyOtp() = VerifyOtp;
 }
