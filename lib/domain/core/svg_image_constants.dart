@@ -13,4 +13,5 @@ class SvgImageConstant {
   static const notificationSelected = "assets/images/png/arrow_left.png";
   static const timeCircle = "assets/images/svg/time_circle.svg";
   static const call = "assets/images/svg/call.svg";
+  static const successImage = "assets/svg/success.svg";
 }

@@ -20,14 +20,36 @@ class SplashPage extends StatelessWidget {
       listener: (context, state) {
         state.map(
           initial: (_) {},
-          authenticated: (_) {
-            context.router.replace(const PageRouteInfo(LoginPage.name));
+          authenticated: (_) async {
+            await Future.delayed(
+              Duration(seconds: 3),
+              () => context.router.replace(const PageRouteInfo(LoginPage.name)),
+            );
           },
-          unauthenticated: (_) {
-            context.router.replace(const PageRouteInfo(LoginPage.name));
+          unauthenticated: (_) async {
+            await Future.delayed(
+              Duration(seconds: 3),
+              () => context.router.replace(const PageRouteInfo(LoginPage.name)),
+            );
+            // await Future.delayed(
+            //   Duration(seconds: 3),
+            //   () => context.router.replace(
+            //     const PageRouteInfo(
+            //       SuccessScreen.name,
+            //       args: SuccessScreenArgs(
+            //         title: 'SUCCESS',
+            //         subTitle: 'Your account has been successfully created.',
+            //       ),
+            //     ),
+            //   ),
+            // );
           },
-          introScreenVisibilty: (IntroScreenVisibilty value) {
-            context.router.replace(const PageRouteInfo(Onboarding.name));
+          introScreenVisibilty: (IntroScreenVisibilty value) async {
+            await Future.delayed(
+              Duration(seconds: 3),
+              () =>
+                  context.router.replace(const PageRouteInfo(Onboarding.name)),
+            );
           },
         );
       },
