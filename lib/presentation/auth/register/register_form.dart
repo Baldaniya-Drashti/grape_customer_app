@@ -78,18 +78,18 @@ class RegisterForm extends StatelessWidget {
               CommonButton(
                 isSubmitting: state.isSubmitting,
                 onPressed: () {
-                  context.router.push(
-                    PageRouteInfo(
-                      OtpRegisterVerificationView.name,
-                      args: OtpRegisterVerificationViewArgs(
-                        countryCode: state.selectedCountrycode,
-                        phoneNumber: state.mobileNumber.getValue(),
-                      ),
-                    ),
-                  );
-                  // context
-                  //     .read<RegisterFormBloc>()
-                  //     .add(RegisterFormEvent.registerPressed());
+                  // context.router.push(
+                  //   PageRouteInfo(
+                  //     OtpRegisterVerificationView.name,
+                  //     args: OtpRegisterVerificationViewArgs(
+                  //       countryCode: state.selectedCountrycode,
+                  //       phoneNumber: state.mobileNumber.getValue(),
+                  //     ),
+                  //   ),
+                  // );
+                  context
+                      .read<RegisterFormBloc>()
+                      .add(RegisterFormEvent.registerPressed());
                 },
                 buttonText: 'Continue',
               ),

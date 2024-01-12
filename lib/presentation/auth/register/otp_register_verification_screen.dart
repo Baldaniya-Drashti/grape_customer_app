@@ -5,6 +5,7 @@ import 'package:grape_customer_app/application/auth/register_form/register_form_
 import 'package:grape_customer_app/domain/core/math_utils.dart';
 import 'package:grape_customer_app/domain/core/png_image_constants.dart';
 import 'package:grape_customer_app/injection.dart';
+import 'package:grape_customer_app/presentation/common/utils/app_focus.dart';
 import 'package:grape_customer_app/presentation/common/widgets/base_text.dart';
 import 'package:grape_customer_app/presentation/core/styles/app_colors.dart';
 import 'package:grape_customer_app/presentation/core/widgets/buttons/common_button.dart';
@@ -32,6 +33,11 @@ class _OtpRegisterVerificationViewState
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(title: ''),
@@ -43,14 +49,19 @@ class _OtpRegisterVerificationViewState
         child: BlocConsumer<RegisterFormBloc, RegisterFormState>(
           listener: (context, state) {},
           builder: (context, state) {
-            return Padding(
-              padding: EdgeInsets.symmetric(horizontal: getSize(18)),
+            return GestureDetector(
+              onTap: () {
+                AppFocus.unfocus(context);
+              },
               child: Form(
                 autovalidateMode: state.showErrorMessages
                     ? AutovalidateMode.always
                     : AutovalidateMode.disabled,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                child: ListView(
+                  shrinkWrap: true,
+                  physics: BouncingScrollPhysics(),
+                  padding: EdgeInsets.symmetric(horizontal: getSize(18)),
+                  //  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Center(
                       child: Image.asset(
@@ -59,7 +70,9 @@ class _OtpRegisterVerificationViewState
                         width: getSize(128),
                       ),
                     ),
-                    Spacer(),
+                    SizedBox(
+                      height: getSize(68),
+                    ),
                     BaseText(
                       text: 'OTP Verification',
                       fontSize: 24,
@@ -93,7 +106,9 @@ class _OtpRegisterVerificationViewState
                         ],
                       ),
                     ),
-                    Spacer(),
+                    SizedBox(
+                      height: getSize(77),
+                    ),
                     CustomPinField(
                       labelWidget: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -148,7 +163,9 @@ class _OtpRegisterVerificationViewState
                         ),
                       ),
                     ),
-                    Spacer(),
+                    SizedBox(
+                      height: getSize(40),
+                    ),
                     CommonButton(
                       onPressed: () {
                         context
@@ -157,7 +174,6 @@ class _OtpRegisterVerificationViewState
                       },
                       buttonText: 'Verify',
                     ),
-                    Spacer(),
                   ],
                 ),
               ),

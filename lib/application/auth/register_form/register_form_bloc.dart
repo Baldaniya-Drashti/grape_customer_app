@@ -159,7 +159,7 @@ class RegisterFormBloc extends Bloc<RegisterFormEvent, RegisterFormState> {
             timer.cancel();
             emit(
               state.copyWith(
-                secondsRemaining: 0,
+                secondsRemaining: 30,
               ),
             );
           },
