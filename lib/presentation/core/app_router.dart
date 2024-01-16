@@ -13,6 +13,15 @@ class AppRouter extends $AppRouter {
         AutoRoute(page: OtpRegisterVerificationView.page),
         AutoRoute(page: OtpLoginVerificationView.page),
         AutoRoute(page: SuccessScreen.page),
-        AutoRoute(page: MainTabView.page),
+        AutoRoute(
+          page: MainTabView.page,
+          children: [
+            AutoRoute(page: HomeView.page),
+            AutoRoute(page: FavouriteView.page),
+            AutoRoute(page: CartView.page),
+            AutoRoute(page: NotificationView.page),
+            AutoRoute(page: ProfileView.page),
+          ],
+        ),
       ];
 }

@@ -1,15 +1,15 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:grape_customer_app/presentation/common/widgets/base_text.dart';
 
-@RoutePage(name: 'HomeView')
-class HomeView extends StatelessWidget {
-  const HomeView({super.key});
+@RoutePage(name: 'ProfileView')
+class ProfileView extends StatelessWidget {
+  const ProfileView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: BaseText(text: 'Home View'),
+      child: BaseText(text: 'Profile View'),
     );
   }
 }

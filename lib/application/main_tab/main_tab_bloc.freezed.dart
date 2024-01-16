@@ -17,6 +17,15 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$MainTabState {
   int get selectedTab => throw _privateConstructorUsedError;
+  String get currentLocation => throw _privateConstructorUsedError;
+  double? get currentLatitude => throw _privateConstructorUsedError;
+  double? get currentLongitude => throw _privateConstructorUsedError;
+  int get pageIndex => throw _privateConstructorUsedError;
+  String get homePage => throw _privateConstructorUsedError;
+  String get myCartPage => throw _privateConstructorUsedError;
+  String get notificationPage => throw _privateConstructorUsedError;
+  String get favouritesPage => throw _privateConstructorUsedError;
+  String get profilePage => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MainTabStateCopyWith<MainTabState> get copyWith =>
@@ -29,7 +38,17 @@ abstract class $MainTabStateCopyWith<$Res> {
           MainTabState value, $Res Function(MainTabState) then) =
       _$MainTabStateCopyWithImpl<$Res, MainTabState>;
   @useResult
-  $Res call({int selectedTab});
+  $Res call(
+      {int selectedTab,
+      String currentLocation,
+      double? currentLatitude,
+      double? currentLongitude,
+      int pageIndex,
+      String homePage,
+      String myCartPage,
+      String notificationPage,
+      String favouritesPage,
+      String profilePage});
 }
 
 /// @nodoc
@@ -46,12 +65,57 @@ class _$MainTabStateCopyWithImpl<$Res, $Val extends MainTabState>
   @override
   $Res call({
     Object? selectedTab = null,
+    Object? currentLocation = null,
+    Object? currentLatitude = freezed,
+    Object? currentLongitude = freezed,
+    Object? pageIndex = null,
+    Object? homePage = null,
+    Object? myCartPage = null,
+    Object? notificationPage = null,
+    Object? favouritesPage = null,
+    Object? profilePage = null,
   }) {
     return _then(_value.copyWith(
       selectedTab: null == selectedTab
           ? _value.selectedTab
           : selectedTab // ignore: cast_nullable_to_non_nullable
               as int,
+      currentLocation: null == currentLocation
+          ? _value.currentLocation
+          : currentLocation // ignore: cast_nullable_to_non_nullable
+              as String,
+      currentLatitude: freezed == currentLatitude
+          ? _value.currentLatitude
+          : currentLatitude // ignore: cast_nullable_to_non_nullable
+              as double?,
+      currentLongitude: freezed == currentLongitude
+          ? _value.currentLongitude
+          : currentLongitude // ignore: cast_nullable_to_non_nullable
+              as double?,
+      pageIndex: null == pageIndex
+          ? _value.pageIndex
+          : pageIndex // ignore: cast_nullable_to_non_nullable
+              as int,
+      homePage: null == homePage
+          ? _value.homePage
+          : homePage // ignore: cast_nullable_to_non_nullable
+              as String,
+      myCartPage: null == myCartPage
+          ? _value.myCartPage
+          : myCartPage // ignore: cast_nullable_to_non_nullable
+              as String,
+      notificationPage: null == notificationPage
+          ? _value.notificationPage
+          : notificationPage // ignore: cast_nullable_to_non_nullable
+              as String,
+      favouritesPage: null == favouritesPage
+          ? _value.favouritesPage
+          : favouritesPage // ignore: cast_nullable_to_non_nullable
+              as String,
+      profilePage: null == profilePage
+          ? _value.profilePage
+          : profilePage // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -64,7 +128,17 @@ abstract class _$$MainTabStateImplCopyWith<$Res>
       __$$MainTabStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int selectedTab});
+  $Res call(
+      {int selectedTab,
+      String currentLocation,
+      double? currentLatitude,
+      double? currentLongitude,
+      int pageIndex,
+      String homePage,
+      String myCartPage,
+      String notificationPage,
+      String favouritesPage,
+      String profilePage});
 }
 
 /// @nodoc
@@ -79,12 +153,57 @@ class __$$MainTabStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? selectedTab = null,
+    Object? currentLocation = null,
+    Object? currentLatitude = freezed,
+    Object? currentLongitude = freezed,
+    Object? pageIndex = null,
+    Object? homePage = null,
+    Object? myCartPage = null,
+    Object? notificationPage = null,
+    Object? favouritesPage = null,
+    Object? profilePage = null,
   }) {
     return _then(_$MainTabStateImpl(
       selectedTab: null == selectedTab
           ? _value.selectedTab
           : selectedTab // ignore: cast_nullable_to_non_nullable
               as int,
+      currentLocation: null == currentLocation
+          ? _value.currentLocation
+          : currentLocation // ignore: cast_nullable_to_non_nullable
+              as String,
+      currentLatitude: freezed == currentLatitude
+          ? _value.currentLatitude
+          : currentLatitude // ignore: cast_nullable_to_non_nullable
+              as double?,
+      currentLongitude: freezed == currentLongitude
+          ? _value.currentLongitude
+          : currentLongitude // ignore: cast_nullable_to_non_nullable
+              as double?,
+      pageIndex: null == pageIndex
+          ? _value.pageIndex
+          : pageIndex // ignore: cast_nullable_to_non_nullable
+              as int,
+      homePage: null == homePage
+          ? _value.homePage
+          : homePage // ignore: cast_nullable_to_non_nullable
+              as String,
+      myCartPage: null == myCartPage
+          ? _value.myCartPage
+          : myCartPage // ignore: cast_nullable_to_non_nullable
+              as String,
+      notificationPage: null == notificationPage
+          ? _value.notificationPage
+          : notificationPage // ignore: cast_nullable_to_non_nullable
+              as String,
+      favouritesPage: null == favouritesPage
+          ? _value.favouritesPage
+          : favouritesPage // ignore: cast_nullable_to_non_nullable
+              as String,
+      profilePage: null == profilePage
+          ? _value.profilePage
+          : profilePage // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -92,14 +211,42 @@ class __$$MainTabStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$MainTabStateImpl implements _MainTabState {
-  const _$MainTabStateImpl({required this.selectedTab});
+  _$MainTabStateImpl(
+      {required this.selectedTab,
+      required this.currentLocation,
+      this.currentLatitude,
+      this.currentLongitude,
+      required this.pageIndex,
+      required this.homePage,
+      required this.myCartPage,
+      required this.notificationPage,
+      required this.favouritesPage,
+      required this.profilePage});
 
   @override
   final int selectedTab;
+  @override
+  final String currentLocation;
+  @override
+  final double? currentLatitude;
+  @override
+  final double? currentLongitude;
+  @override
+  final int pageIndex;
+  @override
+  final String homePage;
+  @override
+  final String myCartPage;
+  @override
+  final String notificationPage;
+  @override
+  final String favouritesPage;
+  @override
+  final String profilePage;
 
   @override
   String toString() {
-    return 'MainTabState(selectedTab: $selectedTab)';
+    return 'MainTabState(selectedTab: $selectedTab, currentLocation: $currentLocation, currentLatitude: $currentLatitude, currentLongitude: $currentLongitude, pageIndex: $pageIndex, homePage: $homePage, myCartPage: $myCartPage, notificationPage: $notificationPage, favouritesPage: $favouritesPage, profilePage: $profilePage)';
   }
 
   @override
@@ -108,11 +255,40 @@ class _$MainTabStateImpl implements _MainTabState {
         (other.runtimeType == runtimeType &&
             other is _$MainTabStateImpl &&
             (identical(other.selectedTab, selectedTab) ||
-                other.selectedTab == selectedTab));
+                other.selectedTab == selectedTab) &&
+            (identical(other.currentLocation, currentLocation) ||
+                other.currentLocation == currentLocation) &&
+            (identical(other.currentLatitude, currentLatitude) ||
+                other.currentLatitude == currentLatitude) &&
+            (identical(other.currentLongitude, currentLongitude) ||
+                other.currentLongitude == currentLongitude) &&
+            (identical(other.pageIndex, pageIndex) ||
+                other.pageIndex == pageIndex) &&
+            (identical(other.homePage, homePage) ||
+                other.homePage == homePage) &&
+            (identical(other.myCartPage, myCartPage) ||
+                other.myCartPage == myCartPage) &&
+            (identical(other.notificationPage, notificationPage) ||
+                other.notificationPage == notificationPage) &&
+            (identical(other.favouritesPage, favouritesPage) ||
+                other.favouritesPage == favouritesPage) &&
+            (identical(other.profilePage, profilePage) ||
+                other.profilePage == profilePage));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, selectedTab);
+  int get hashCode => Object.hash(
+      runtimeType,
+      selectedTab,
+      currentLocation,
+      currentLatitude,
+      currentLongitude,
+      pageIndex,
+      homePage,
+      myCartPage,
+      notificationPage,
+      favouritesPage,
+      profilePage);
 
   @JsonKey(ignore: true)
   @override
@@ -122,11 +298,38 @@ class _$MainTabStateImpl implements _MainTabState {
 }
 
 abstract class _MainTabState implements MainTabState {
-  const factory _MainTabState({required final int selectedTab}) =
-      _$MainTabStateImpl;
+  factory _MainTabState(
+      {required final int selectedTab,
+      required final String currentLocation,
+      final double? currentLatitude,
+      final double? currentLongitude,
+      required final int pageIndex,
+      required final String homePage,
+      required final String myCartPage,
+      required final String notificationPage,
+      required final String favouritesPage,
+      required final String profilePage}) = _$MainTabStateImpl;
 
   @override
   int get selectedTab;
+  @override
+  String get currentLocation;
+  @override
+  double? get currentLatitude;
+  @override
+  double? get currentLongitude;
+  @override
+  int get pageIndex;
+  @override
+  String get homePage;
+  @override
+  String get myCartPage;
+  @override
+  String get notificationPage;
+  @override
+  String get favouritesPage;
+  @override
+  String get profilePage;
   @override
   @JsonKey(ignore: true)
   _$$MainTabStateImplCopyWith<_$MainTabStateImpl> get copyWith =>
@@ -135,42 +338,43 @@ abstract class _MainTabState implements MainTabState {
 
 /// @nodoc
 mixin _$MainTabEvent {
-  int get tabIndex => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(int tabIndex) tabChange,
+    required TResult Function() getCurrentLocation,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int tabIndex)? tabChange,
+    TResult? Function()? getCurrentLocation,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int tabIndex)? tabChange,
+    TResult Function()? getCurrentLocation,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(TabChange value) tabChange,
+    required TResult Function(GetCurrentLocation value) getCurrentLocation,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(TabChange value)? tabChange,
+    TResult? Function(GetCurrentLocation value)? getCurrentLocation,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(TabChange value)? tabChange,
+    TResult Function(GetCurrentLocation value)? getCurrentLocation,
     required TResult orElse(),
   }) =>
-      throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $MainTabEventCopyWith<MainTabEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -179,8 +383,6 @@ abstract class $MainTabEventCopyWith<$Res> {
   factory $MainTabEventCopyWith(
           MainTabEvent value, $Res Function(MainTabEvent) then) =
       _$MainTabEventCopyWithImpl<$Res, MainTabEvent>;
-  @useResult
-  $Res call({int tabIndex});
 }
 
 /// @nodoc
@@ -192,28 +394,13 @@ class _$MainTabEventCopyWithImpl<$Res, $Val extends MainTabEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? tabIndex = null,
-  }) {
-    return _then(_value.copyWith(
-      tabIndex: null == tabIndex
-          ? _value.tabIndex
-          : tabIndex // ignore: cast_nullable_to_non_nullable
-              as int,
-    ) as $Val);
-  }
 }
 
 /// @nodoc
-abstract class _$$TabChangeImplCopyWith<$Res>
-    implements $MainTabEventCopyWith<$Res> {
+abstract class _$$TabChangeImplCopyWith<$Res> {
   factory _$$TabChangeImplCopyWith(
           _$TabChangeImpl value, $Res Function(_$TabChangeImpl) then) =
       __$$TabChangeImplCopyWithImpl<$Res>;
-  @override
   @useResult
   $Res call({int tabIndex});
 }
@@ -243,7 +430,7 @@ class __$$TabChangeImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$TabChangeImpl implements TabChange {
-  const _$TabChangeImpl(this.tabIndex);
+  _$TabChangeImpl(this.tabIndex);
 
   @override
   final int tabIndex;
@@ -275,6 +462,7 @@ class _$TabChangeImpl implements TabChange {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(int tabIndex) tabChange,
+    required TResult Function() getCurrentLocation,
   }) {
     return tabChange(tabIndex);
   }
@@ -283,6 +471,7 @@ class _$TabChangeImpl implements TabChange {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int tabIndex)? tabChange,
+    TResult? Function()? getCurrentLocation,
   }) {
     return tabChange?.call(tabIndex);
   }
@@ -291,6 +480,7 @@ class _$TabChangeImpl implements TabChange {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int tabIndex)? tabChange,
+    TResult Function()? getCurrentLocation,
     required TResult orElse(),
   }) {
     if (tabChange != null) {
@@ -303,6 +493,7 @@ class _$TabChangeImpl implements TabChange {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(TabChange value) tabChange,
+    required TResult Function(GetCurrentLocation value) getCurrentLocation,
   }) {
     return tabChange(this);
   }
@@ -311,6 +502,7 @@ class _$TabChangeImpl implements TabChange {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(TabChange value)? tabChange,
+    TResult? Function(GetCurrentLocation value)? getCurrentLocation,
   }) {
     return tabChange?.call(this);
   }
@@ -319,6 +511,7 @@ class _$TabChangeImpl implements TabChange {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(TabChange value)? tabChange,
+    TResult Function(GetCurrentLocation value)? getCurrentLocation,
     required TResult orElse(),
   }) {
     if (tabChange != null) {
@@ -329,12 +522,112 @@ class _$TabChangeImpl implements TabChange {
 }
 
 abstract class TabChange implements MainTabEvent {
-  const factory TabChange(final int tabIndex) = _$TabChangeImpl;
+  factory TabChange(final int tabIndex) = _$TabChangeImpl;
 
-  @override
   int get tabIndex;
-  @override
   @JsonKey(ignore: true)
   _$$TabChangeImplCopyWith<_$TabChangeImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$GetCurrentLocationImplCopyWith<$Res> {
+  factory _$$GetCurrentLocationImplCopyWith(_$GetCurrentLocationImpl value,
+          $Res Function(_$GetCurrentLocationImpl) then) =
+      __$$GetCurrentLocationImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$GetCurrentLocationImplCopyWithImpl<$Res>
+    extends _$MainTabEventCopyWithImpl<$Res, _$GetCurrentLocationImpl>
+    implements _$$GetCurrentLocationImplCopyWith<$Res> {
+  __$$GetCurrentLocationImplCopyWithImpl(_$GetCurrentLocationImpl _value,
+      $Res Function(_$GetCurrentLocationImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$GetCurrentLocationImpl implements GetCurrentLocation {
+  _$GetCurrentLocationImpl();
+
+  @override
+  String toString() {
+    return 'MainTabEvent.getCurrentLocation()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$GetCurrentLocationImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(int tabIndex) tabChange,
+    required TResult Function() getCurrentLocation,
+  }) {
+    return getCurrentLocation();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(int tabIndex)? tabChange,
+    TResult? Function()? getCurrentLocation,
+  }) {
+    return getCurrentLocation?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(int tabIndex)? tabChange,
+    TResult Function()? getCurrentLocation,
+    required TResult orElse(),
+  }) {
+    if (getCurrentLocation != null) {
+      return getCurrentLocation();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(TabChange value) tabChange,
+    required TResult Function(GetCurrentLocation value) getCurrentLocation,
+  }) {
+    return getCurrentLocation(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(TabChange value)? tabChange,
+    TResult? Function(GetCurrentLocation value)? getCurrentLocation,
+  }) {
+    return getCurrentLocation?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(TabChange value)? tabChange,
+    TResult Function(GetCurrentLocation value)? getCurrentLocation,
+    required TResult orElse(),
+  }) {
+    if (getCurrentLocation != null) {
+      return getCurrentLocation(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class GetCurrentLocation implements MainTabEvent {
+  factory GetCurrentLocation() = _$GetCurrentLocationImpl;
 }
