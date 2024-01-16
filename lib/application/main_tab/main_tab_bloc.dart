@@ -6,7 +6,11 @@ part 'main_tab_event.dart';
 part 'main_tab_bloc.freezed.dart';
 
 class MainTabBloc extends Bloc<MainTabEvent, MainTabState> {
-  MainTabBloc() : super(const MainTabState.initial()) {
-    on<MainTabEvent>((event, emit) async {});
+  MainTabBloc() : super(MainTabState.initial()) {
+    on<MainTabEvent>((event, emit) async {
+      event.map(
+        tabChange: (value) => emit(state.copyWith(selectedTab: value.tabIndex)),
+      );
+    });
   }
 }

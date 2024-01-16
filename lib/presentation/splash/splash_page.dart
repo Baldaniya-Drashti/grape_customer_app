@@ -23,13 +23,15 @@ class SplashPage extends StatelessWidget {
           authenticated: (_) async {
             await Future.delayed(
               Duration(seconds: 3),
-              () => context.router.replace(const PageRouteInfo(LoginPage.name)),
+              () =>
+                  context.router.replace(const PageRouteInfo(MainTabView.name)),
             );
           },
           unauthenticated: (_) async {
             await Future.delayed(
               Duration(seconds: 3),
-              () => context.router.replace(const PageRouteInfo(LoginPage.name)),
+              () =>
+                  context.router.replace(const PageRouteInfo(MainTabView.name)),
             );
             // await Future.delayed(
             //   Duration(seconds: 3),

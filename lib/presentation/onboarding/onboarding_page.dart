@@ -6,7 +6,6 @@ import 'package:grape_customer_app/application/auth/auth_status/auth_status_bloc
 import 'package:grape_customer_app/application/onboarding/onboarding_bloc.dart';
 import 'package:grape_customer_app/presentation/core/styles/app_colors.dart';
 
-import 'package:grape_customer_app/domain/core/l10n/app_localizations.dart';
 
 import 'package:grape_customer_app/domain/core/math_utils.dart';
 import 'package:grape_customer_app/domain/core/png_image_constants.dart';
@@ -174,7 +173,7 @@ class OnBoardingPage extends StatelessWidget {
                   .put(BoxKeys.isUserShowIntro, true);
             },
             child: BaseText(
-              text: AppLocalizations.of(context).skip,
+              text: 'Skip',
               textColor: AppColors.black.withOpacity(0.5),
               textAlign: TextAlign.end,
             ),

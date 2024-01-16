@@ -93,11 +93,35 @@ abstract class AppLocalizations {
     Locale('so')
   ];
 
-  /// No description provided for @skip.
+  /// No description provided for @home.
   ///
   /// In en, this message translates to:
-  /// **'Skip'**
-  String get skip;
+  /// **'Home'**
+  String get home;
+
+  /// No description provided for @favorites.
+  ///
+  /// In en, this message translates to:
+  /// **'Favorites'**
+  String get favorites;
+
+  /// No description provided for @myCart.
+  ///
+  /// In en, this message translates to:
+  /// **'My Cart'**
+  String get myCart;
+
+  /// No description provided for @notifications.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get notifications;
+
+  /// No description provided for @profile.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile'**
+  String get profile;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

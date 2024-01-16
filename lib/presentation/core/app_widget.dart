@@ -10,6 +10,7 @@ import 'package:grape_customer_app/injection.dart';
 import 'package:grape_customer_app/presentation/core/app_router.dart';
 import 'package:grape_customer_app/presentation/core/app_theme.dart';
 import 'package:grape_customer_app/presentation/core/widgets/utility/life_cycle_watcher.dart';
+import 'package:intl/intl.dart';
 
 class AppWidget extends StatelessWidget {
   const AppWidget({super.key});
@@ -41,6 +42,7 @@ class _AppState extends State<_App> {
 
   @override
   Widget build(BuildContext context) {
+    print('Locale : ${Intl.getCurrentLocale()}');
     // if (doesCurrentUserExist()) {
     //   use(UserSocketHook(context));
     // }
@@ -53,6 +55,7 @@ class _AppState extends State<_App> {
           // routeInformationParser: _appRouter.defaultRouteParser(),
           title: 'Grape Customer App',
           debugShowCheckedModeBanner: false, theme: ThemeConfig.lightTheme,
+          locale: Locale(Intl.defaultLocale ?? Intl.systemLocale),
           // theme: AppTheme.light,
           // darkTheme: AppTheme.dark,
           routerConfig: _appRouter.config(

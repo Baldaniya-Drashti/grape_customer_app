@@ -5,5 +5,17 @@ class AppLocalizationsSo extends AppLocalizations {
   AppLocalizationsSo([String locale = 'so']) : super(locale);
 
   @override
-  String get skip => 'Ka bax';
+  String get home => 'Guriga';
+
+  @override
+  String get favorites => 'Faa\'iidooyinka';
+
+  @override
+  String get myCart => 'Goobtaayada';
+
+  @override
+  String get notifications => 'Ku xusan';
+
+  @override
+  String get profile => 'Profiil';
 }

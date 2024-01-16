@@ -1,6 +1,10 @@
 {
-    "skip": "Skip"
+    "home": "Home",
    
+    "favorites": "Favorites",
+    "myCart": "My Cart",
+    "notifications": "Notifications",
+    "profile": "Profile"
 
 
 }
