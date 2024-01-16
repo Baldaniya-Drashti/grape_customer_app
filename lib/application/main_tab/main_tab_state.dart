@@ -2,10 +2,26 @@ part of 'main_tab_bloc.dart';
 
 @freezed
 class MainTabState with _$MainTabState {
-  const factory MainTabState({
+  factory MainTabState({
     required int selectedTab,
+    required String currentLocation,
+    double? currentLatitude,
+    double? currentLongitude,
+    required int pageIndex,
+    required String homePage,
+    required String myCartPage,
+    required String notificationPage,
+    required String favouritesPage,
+    required String profilePage,
   }) = _MainTabState;
   factory MainTabState.initial() => MainTabState(
         selectedTab: 0,
+        currentLocation: '',
+        pageIndex: 0,
+        homePage: HomeView.name,
+        myCartPage: CartView.name,
+        notificationPage: NotificationView.name,
+        favouritesPage: FavouriteView.name,
+        profilePage: ProfileView.name,
       );
 }
