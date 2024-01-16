@@ -7,6 +7,6 @@ part 'main_tab_bloc.freezed.dart';
 
 class MainTabBloc extends Bloc<MainTabEvent, MainTabState> {
   MainTabBloc() : super(const MainTabState.initial()) {
-    on((event, emit) => null);
+    on<MainTabEvent>((event, emit) async {});
   }
 }

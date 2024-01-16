@@ -110,7 +110,7 @@ class CustomTextField extends StatelessWidget {
                 focusedErrorBorder: errorBorder,
                 errorBorder: errorBorder,
                 prefixIconConstraints:
-                    BoxConstraints(maxWidth: getSize(88), minHeight: 0),
+                    BoxConstraints(maxWidth: getSize(79), minHeight: 0),
                 hintStyle: TextStyle(
                   color: AppColors.black.withOpacity(0.3),
                   fontSize: getFontSize(14),

@@ -33,9 +33,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      leading: leading ?? _buildLeadingView(context),
+      //leading: leading ?? _buildLeadingView(context),
       systemOverlayStyle: SystemUiOverlayStyle.dark,
-      automaticallyImplyLeading: false,
+      automaticallyImplyLeading: true,
       shadowColor: Color(0xFFE1E1E1),
       surfaceTintColor: Colors.transparent,
       scrolledUnderElevation: elevation,

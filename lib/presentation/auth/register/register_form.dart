@@ -230,19 +230,16 @@ class RegisterForm extends StatelessWidget {
       onChanged: (value) => context
           .read<RegisterFormBloc>()
           .add(RegisterFormEvent.mobileNumberChanged(value)),
-      validator: (_, context) => context
-          .read<RegisterFormBloc>()
-          .state
-          .mobileNumber
-          .value
-          .fold(
-            (f) => f.maybeMap(
-              empty: (value) => 'Please enter mobile number',
-              invalidMobileNumber: (_) => 'Please enter valid mobile number',
-              orElse: () => null,
-            ),
-            (_) => null,
-          ),
+      validator: (_, context) =>
+          context.read<RegisterFormBloc>().state.mobileNumber.value.fold(
+                (f) => f.maybeMap(
+                  empty: (value) => 'Please enter mobile number',
+                  invalidMobileNumber: (_) =>
+                      'Pnone number should be between 6 and 15 digits',
+                  orElse: () => null,
+                ),
+                (_) => null,
+              ),
       prefixIcon: CommonCountryCodePicker(
         initialSelection: state.selectedCountrycode,
         onChanged: (CountryCode countryCode) {

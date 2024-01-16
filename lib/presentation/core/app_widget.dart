@@ -1,3 +1,4 @@
+import 'package:country_code_picker/country_code_picker.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' as bloc;
@@ -59,7 +60,10 @@ class _AppState extends State<_App> {
                 [FirebaseAnalyticsObserver(analytics: analytics)],
           ),
           supportedLocales: AppLocalizations.supportedLocales,
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          localizationsDelegates: [
+            CountryLocalizations.delegate,
+            ...AppLocalizations.localizationsDelegates,
+          ],
           localeResolutionCallback: (locale, supportedLocales) {
             for (final supportedLocale in supportedLocales) {
               if (supportedLocale.languageCode == locale!.languageCode &&

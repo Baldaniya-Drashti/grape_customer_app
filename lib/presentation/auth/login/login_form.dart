@@ -51,116 +51,129 @@ class LoginForm extends StatelessWidget {
             autovalidateMode: state.showErrorMessages
                 ? AutovalidateMode.always
                 : AutovalidateMode.disabled,
-            child: Padding(
+            child: ListView(
+              shrinkWrap: true,
+              physics: BouncingScrollPhysics(),
               padding: EdgeInsets.symmetric(horizontal: getSize(18)),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Spacer(),
-                  Center(
-                    child: Image.asset(
-                      PngImageConstants.grape_login_logo,
-                      height: getSize(156),
-                      width: getSize(128),
-                    ),
+              children: [
+                SizedBox(
+                  height: getSize(100),
+                ),
+                Center(
+                  child: Image.asset(
+                    PngImageConstants.grape_login_logo,
+                    height: getSize(156),
+                    width: getSize(128),
                   ),
-                  Spacer(),
-                  BaseText(
-                    text: 'Welcome to\nGrape Company',
-                    fontSize: 24,
-                    fontWeight: FontWeight.w800,
-                    textColor: AppColors.authBlack,
-                  ),
-                  Spacer(),
-                  BaseText(
-                    text:
-                        'Please confirm your country code and enter your mobile number',
-                    fontSize: 12,
-                    textColor: AppColors.black.withOpacity(0.5),
-                  ),
-                  Spacer(),
-                  CustomTextField(
-                    labelText: 'Mobile Number',
-                    hintText: 'Mobile Number',
-                    keyboardType: TextInputType.phone,
-                    onChanged: (value) => context
-                        .read<LoginFormBloc>()
-                        .add(LoginFormEvent.mobileNumberChanged(value)),
-                    validator: (_, context) => context
-                        .read<LoginFormBloc>()
-                        .state
-                        .mobileNumber
-                        .value
-                        .fold(
-                          (f) => f.maybeMap(
-                            empty: (value) => 'Please enter mobile number',
-                            invalidMobileNumber: (_) =>
-                                'Please enter valid mobile number',
-                            orElse: () => null,
-                          ),
-                          (_) => null,
+                ),
+                SizedBox(
+                  height: getSize(45),
+                ),
+                BaseText(
+                  text: 'Welcome to\nGrape Company',
+                  fontSize: 24,
+                  fontWeight: FontWeight.w800,
+                  textColor: AppColors.authBlack,
+                ),
+                SizedBox(
+                  height: getSize(20),
+                ),
+                BaseText(
+                  text:
+                      'Please confirm your country code and enter your mobile number',
+                  fontSize: 12,
+                  textColor: AppColors.black.withOpacity(0.5),
+                ),
+                SizedBox(
+                  height: getSize(64),
+                ),
+                CustomTextField(
+                  labelText: 'Mobile Number',
+                  hintText: 'Mobile Number',
+                  keyboardType: TextInputType.phone,
+                  onChanged: (value) => context
+                      .read<LoginFormBloc>()
+                      .add(LoginFormEvent.mobileNumberChanged(value)),
+                  validator: (_, context) => context
+                      .read<LoginFormBloc>()
+                      .state
+                      .mobileNumber
+                      .value
+                      .fold(
+                        (f) => f.maybeMap(
+                          empty: (value) => 'Please enter mobile number',
+                          invalidMobileNumber: (_) =>
+                              'Pnone number should be between 6 and 15 digits',
+                          orElse: () => null,
                         ),
-                    prefixIcon: CommonCountryCodePicker(
-                      initialSelection: state.selectedCountrycode,
-                      onChanged: (CountryCode countryCode) {
-                        context.read<LoginFormBloc>().add(
-                              LoginFormEvent.selectCountryCode(
-                                  countryCode.dialCode ?? ""),
-                            );
-                      },
-                    ),
-                  ),
-                  Spacer(),
-                  CommonButton(
-                    isSubmitting: state.isSubmitting,
-                    onPressed: () {
-                      // context.router.push(
-                      //   PageRouteInfo(
-                      //     OtpLoginVerificationView.name,
-                      //     args: OtpLoginVerificationViewArgs(
-                      //       countryCode: state.selectedCountrycode,
-                      //       phoneNumber: state.mobileNumber.getValue(),
-                      //     ),
-                      //   ),
-                      // );
-                      context
-                          .read<LoginFormBloc>()
-                          .add(LoginFormEvent.loginPressed());
-                    },
-                    buttonText: 'Continue',
-                  ),
-                  Spacer(),
-                  Center(
-                    child: Text.rich(
-                      TextSpan(
-                        text: 'Don’t have an account? ',
-                        style: TextStyle(
-                          color: AppColors.black.withOpacity(0.5),
-                          fontSize: getFontSize(12),
-                          fontWeight: FontWeight.w400,
-                        ),
-                        children: [
-                          TextSpan(
-                            text: "Create Account",
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () {
-                                context.router
-                                    .push(PageRouteInfo(RegisterScreen.name));
-                              },
-                            style: TextStyle(
-                              fontSize: getFontSize(12),
-                              fontWeight: FontWeight.w500,
-                              decoration: TextDecoration.underline,
-                              color: AppColors.black,
-                            ),
-                          ),
-                        ],
+                        (_) => null,
                       ),
+                  prefixIcon: CommonCountryCodePicker(
+                    initialSelection: state.selectedCountrycode,
+                    onChanged: (CountryCode countryCode) {
+                      context.read<LoginFormBloc>().add(
+                            LoginFormEvent.selectCountryCode(
+                                countryCode.dialCode ?? ""),
+                          );
+                    },
+                  ),
+                ),
+                SizedBox(
+                  height: getSize(45),
+                ),
+                CommonButton(
+                  isSubmitting: state.isSubmitting,
+                  onPressed: () {
+                    // context.router.push(
+                    //   PageRouteInfo(
+                    //     OtpLoginVerificationView.name,
+                    //     args: OtpLoginVerificationViewArgs(
+                    //       countryCode: state.selectedCountrycode,
+                    //       phoneNumber: state.mobileNumber.getValue(),
+                    //     ),
+                    //   ),
+                    // );
+                    context
+                        .read<LoginFormBloc>()
+                        .add(LoginFormEvent.loginPressed());
+                  },
+                  buttonText: 'Continue',
+                ),
+                SizedBox(
+                  height: getSize(20),
+                ),
+                Center(
+                  child: Text.rich(
+                    TextSpan(
+                      text: 'Don’t have an account? ',
+                      style: TextStyle(
+                        color: AppColors.black.withOpacity(0.5),
+                        fontSize: getFontSize(12),
+                        fontWeight: FontWeight.w400,
+                      ),
+                      children: [
+                        TextSpan(
+                          text: "Create Account",
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              context.router
+                                  .push(PageRouteInfo(RegisterScreen.name));
+                            },
+                          style: TextStyle(
+                            fontSize: getFontSize(12),
+                            fontWeight: FontWeight.w500,
+                            decoration: TextDecoration.underline,
+                            color: AppColors.black,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  Spacer(),
-                ],
-              ),
+                ),
+                SizedBox(
+                  height: getSize(20),
+                ),
+              ],
             ),
           ),
         );
