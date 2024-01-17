@@ -266,6 +266,23 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Save'**
   String get save;
+  /// No description provided for @searchProduct.
+  ///
+  /// In en, this message translates to:
+  /// **'Search Product'**
+  String get searchProduct;
+
+  /// No description provided for @recommendedForYou.
+  ///
+  /// In en, this message translates to:
+  /// **'Recommended for you'**
+  String get recommendedForYou;
+
+  /// No description provided for @seeMore.
+  ///
+  /// In en, this message translates to:
+  /// **'See More'**
+  String get seeMore;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

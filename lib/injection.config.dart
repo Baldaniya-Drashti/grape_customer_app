@@ -69,6 +69,28 @@ extension GetItInjectableX on _i1.GetIt {
         () => _i15.ChangePasswordCubit(gh<_i7.IAuthFacade>()));
     gh.factory<_i16.ForgotPasswordCubit>(
         () => _i16.ForgotPasswordCubit(gh<_i7.IAuthFacade>()));
+    gh.factory<_i4.FavouriteBloc>(() => _i4.FavouriteBloc());
+    gh.factory<_i5.HomeBloc>(() => _i5.HomeBloc());
+    gh.lazySingleton<_i6.IAccountRepository>(
+        () => _i7.AccountRepository(gh<_i3.ApiService>()));
+    gh.lazySingleton<_i8.IAuthFacade>(
+        () => _i9.AuthFacade(gh<_i3.ApiService>()));
+    gh.factory<_i10.LoginFormBloc>(
+        () => _i10.LoginFormBloc(gh<_i8.IAuthFacade>()));
+    gh.factory<_i11.MainTabBloc>(() => _i11.MainTabBloc());
+    gh.factory<_i12.OnboardingBloc>(() => _i12.OnboardingBloc());
+    gh.factory<_i13.RegisterFormBloc>(
+        () => _i13.RegisterFormBloc(gh<_i8.IAuthFacade>()));
+    gh.factory<_i14.UpdateAccountBloc>(
+        () => _i14.UpdateAccountBloc(gh<_i6.IAccountRepository>()));
+    gh.factory<_i15.AccountCubit>(
+        () => _i15.AccountCubit(gh<_i6.IAccountRepository>()));
+    gh.factory<_i16.AuthStatusBloc>(
+        () => _i16.AuthStatusBloc(gh<_i8.IAuthFacade>()));
+    gh.factory<_i17.ChangePasswordCubit>(
+        () => _i17.ChangePasswordCubit(gh<_i8.IAuthFacade>()));
+    gh.factory<_i18.ForgotPasswordCubit>(
+        () => _i18.ForgotPasswordCubit(gh<_i8.IAuthFacade>()));
     return this;
   }
 }

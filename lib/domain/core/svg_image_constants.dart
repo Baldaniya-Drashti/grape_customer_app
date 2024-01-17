@@ -9,7 +9,9 @@ class SvgImageConstant {
   static const notificationUnselected =
       "assets/svg/notification_unselected.svg";
   static const notificationSelected = "assets/svg/notification_selected.svg";
-
+  static const emptyStar = 'assets/svg/empty_star.svg';
+  static const fullStar = 'assets/svg/full_star.svg';
+  static const halfStart = 'assets/svg/half_star.svg';
   static const successImage = "assets/svg/success.svg";
   //Profile
   static const email = "assets/svg/email.svg";
@@ -27,4 +29,7 @@ class SvgImageConstant {
 
   //Edit Profile
   static const editProfileIcon = 'assets/svg/edit_profile.svg';
+
+  static const search = "assets/svg/search.svg";
+  static const filter = "assets/svg/filter.svg";
 }

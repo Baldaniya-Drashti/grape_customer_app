@@ -1,12 +1,12 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:grape_customer_app/presentation/core/app_router.gr.dart';
-import 'package:grape_customer_app/presentation/core/helper/location_helper.dart';
+import 'package:injectable/injectable.dart';
 
 part 'main_tab_state.dart';
 part 'main_tab_event.dart';
 part 'main_tab_bloc.freezed.dart';
-
+@injectable
 class MainTabBloc extends Bloc<MainTabEvent, MainTabState> {
   final List<String> pageList = [HomeView.name];
   MainTabBloc() : super(MainTabState.initial()) {
@@ -54,19 +54,6 @@ class MainTabBloc extends Bloc<MainTabEvent, MainTabState> {
                 break;
               default:
             }
-          },
-          getCurrentLocation: (GetCurrentLocation value) async {
-            await LocationHelper().getCurrentLocation().then(
-              (value) {
-                emit(
-                  state.copyWith(
-                    currentLocation: value.$1 ?? "",
-                    currentLatitude: value.$2,
-                    currentLongitude: value.$3,
-                  ),
-                );
-              },
-            );
           },
         );
       },

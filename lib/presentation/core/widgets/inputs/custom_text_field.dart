@@ -24,6 +24,7 @@ class CustomTextField extends StatelessWidget {
     this.validator,
     this.textInputAction,
     this.textCapitalization = TextCapitalization.none,
+    this.suffixIcon,
   }) : super(key: key);
   final List<TextInputFormatter>? inputFormatters;
   final TextEditingController? controller;
@@ -39,6 +40,8 @@ class CustomTextField extends StatelessWidget {
   final int maxLines;
   final String? Function(String?, BuildContext)? validator;
   final Widget? prefixIcon;
+  final Widget? suffixIcon;
+
   final TextInputAction? textInputAction;
   final TextCapitalization textCapitalization;
   @override
@@ -100,12 +103,15 @@ class CustomTextField extends StatelessWidget {
                 hintText: hintText,
                 contentPadding: EdgeInsets.symmetric(
                   vertical: getSize(12),
-                  horizontal: getSize(20),
+                  horizontal: getSize(18),
                 ),
                 isDense: true,
                 border: border,
                 enabledBorder: border,
                 prefixIcon: prefixIcon,
+                suffixIcon: suffixIcon,
+                suffixIconConstraints:
+                    BoxConstraints(maxWidth: getSize(80), minHeight: 0),
                 focusedBorder: focusedBorder,
                 focusedErrorBorder: errorBorder,
                 errorBorder: errorBorder,
@@ -113,7 +119,7 @@ class CustomTextField extends StatelessWidget {
                     BoxConstraints(maxWidth: getSize(79), minHeight: 0),
                 hintStyle: TextStyle(
                   color: AppColors.black.withOpacity(0.3),
-                  fontSize: getFontSize(14),
+                  fontSize: getFontSize(12),
                   fontFamily: 'SfPro',
                   fontWeight: FontWeight.w500,
                 ),

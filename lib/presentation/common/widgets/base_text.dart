@@ -51,6 +51,7 @@ class BaseText extends StatelessWidget {
             shadows: shadows,
             color: textColor ?? AppColors.black,
             decoration: textDecoration,
+            decorationColor: textColor,
             fontFamily: fontFamily,
             fontSize: getFontSize(fontSize),
             letterSpacing: letterSpacing ?? 0.5,
