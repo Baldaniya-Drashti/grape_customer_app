@@ -127,7 +127,28 @@ class RecommandedProductWidget extends StatelessWidget {
                   ],
                 ),
               ],
-            )
+            ),
+            Positioned(
+              left: getSize(6),
+              top: getSize(6),
+              child: Container(
+                height: getSize(16),
+                width: getSize(36),
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  color: Color(0xFFFFF094),
+                  borderRadius: BorderRadius.circular(
+                    getSize(4),
+                  ),
+                ),
+                child: BaseText(
+                  text: '-20%',
+                  fontSize: 10,
+                  fontWeight: FontWeight.w500,
+                  textColor: Color(0xFFFF770E),
+                ),
+              ),
+            ),
           ],
         );
       },
