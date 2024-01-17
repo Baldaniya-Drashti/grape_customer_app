@@ -122,6 +122,78 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Profile'**
   String get profile;
+
+  /// No description provided for @editProfile.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Profile'**
+  String get editProfile;
+
+  /// No description provided for @myOrders.
+  ///
+  /// In en, this message translates to:
+  /// **'My Orders'**
+  String get myOrders;
+
+  /// No description provided for @shippingAddresses.
+  ///
+  /// In en, this message translates to:
+  /// **'Shipping Addresses'**
+  String get shippingAddresses;
+
+  /// No description provided for @paymentMethods.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment Methods'**
+  String get paymentMethods;
+
+  /// No description provided for @languages.
+  ///
+  /// In en, this message translates to:
+  /// **'Languages'**
+  String get languages;
+
+  /// No description provided for @customerSupport.
+  ///
+  /// In en, this message translates to:
+  /// **'Customer Support'**
+  String get customerSupport;
+
+  /// No description provided for @privacyPolicy.
+  ///
+  /// In en, this message translates to:
+  /// **'Privacy Policy'**
+  String get privacyPolicy;
+
+  /// No description provided for @termsConditions.
+  ///
+  /// In en, this message translates to:
+  /// **'Terms & Conditions'**
+  String get termsConditions;
+
+  /// No description provided for @logout.
+  ///
+  /// In en, this message translates to:
+  /// **'Logout'**
+  String get logout;
+
+  /// No description provided for @liveChatSupport.
+  ///
+  /// In en, this message translates to:
+  /// **'Live Chat Support'**
+  String get liveChatSupport;
+
+  /// No description provided for @developedby.
+  ///
+  /// In en, this message translates to:
+  /// **'Developed by '**
+  String get developedby;
+
+  /// No description provided for @iRoidSolutions.
+  ///
+  /// In en, this message translates to:
+  /// **'iRoid Solutions'**
+  String get iRoidSolutions;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

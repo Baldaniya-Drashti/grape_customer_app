@@ -1,10 +1,19 @@
 {
     "home": "Home",
-   
     "favorites": "Favorites",
     "myCart": "My Cart",
     "notifications": "Notifications",
-    "profile": "Profile"
-
-
+    "profile": "Profile",
+    "editProfile":"Edit Profile",
+    "myOrders":"My Orders",
+    "shippingAddresses":"Shipping Addresses",
+    "paymentMethods":"Payment Methods",
+    "languages":"Languages",
+    "customerSupport":"Customer Support",
+    "privacyPolicy":"Privacy Policy",
+    "termsConditions":"Terms & Conditions",
+    "logout":"Logout",
+    "liveChatSupport":"Live Chat Support",
+    "developedby":"Developed by ",
+    "iRoidSolutions":"iRoid Solutions"
 }

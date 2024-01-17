@@ -20,8 +20,11 @@ class MainTabView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          MainTabBloc()..add(MainTabEvent.getCurrentLocation()),
+      create: (context) => MainTabBloc()
+      // ..add(
+      //   MainTabEvent.getCurrentLocation(),
+      // ),
+      ,
       child: BlocBuilder<MainTabBloc, MainTabState>(
         builder: (context, state) {
           print('${context.read<MainTabBloc>().pageList}');

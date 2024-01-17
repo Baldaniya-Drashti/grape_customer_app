@@ -18,4 +18,40 @@ class AppLocalizationsSo extends AppLocalizations {
 
   @override
   String get profile => 'Profiil';
+
+  @override
+  String get editProfile => 'Edit Profile';
+
+  @override
+  String get myOrders => 'My Orders';
+
+  @override
+  String get shippingAddresses => 'Shipping Addresses';
+
+  @override
+  String get paymentMethods => 'Payment Methods';
+
+  @override
+  String get languages => 'Languages';
+
+  @override
+  String get customerSupport => 'Customer Support';
+
+  @override
+  String get privacyPolicy => 'Privacy Policy';
+
+  @override
+  String get termsConditions => 'Terms & Conditions';
+
+  @override
+  String get logout => 'Logout';
+
+  @override
+  String get liveChatSupport => 'Live Chat Support';
+
+  @override
+  String get developedby => 'Developed by ';
+
+  @override
+  String get iRoidSolutions => 'iRoid Solutions';
 }

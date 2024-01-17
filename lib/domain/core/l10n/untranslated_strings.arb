@@ -1,1 +1,16 @@
-{}
+{
+  "so": [
+    "editProfile",
+    "myOrders",
+    "shippingAddresses",
+    "paymentMethods",
+    "languages",
+    "customerSupport",
+    "privacyPolicy",
+    "termsConditions",
+    "logout",
+    "liveChatSupport",
+    "developedby",
+    "iRoidSolutions"
+  ]
+}
