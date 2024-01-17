@@ -1,1 +1,7 @@
-{}
+{
+  "so": [
+    "searchProduct",
+    "recommendedForYou",
+    "seeMore"
+  ]
+}

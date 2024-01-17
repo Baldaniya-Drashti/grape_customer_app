@@ -4,9 +4,7 @@ part of 'main_tab_bloc.dart';
 class MainTabState with _$MainTabState {
   factory MainTabState({
     required int selectedTab,
-    required String currentLocation,
-    double? currentLatitude,
-    double? currentLongitude,
+   
     required int pageIndex,
     required String homePage,
     required String myCartPage,
@@ -16,7 +14,7 @@ class MainTabState with _$MainTabState {
   }) = _MainTabState;
   factory MainTabState.initial() => MainTabState(
         selectedTab: 0,
-        currentLocation: '',
+   
         pageIndex: 0,
         homePage: HomeView.name,
         myCartPage: CartView.name,

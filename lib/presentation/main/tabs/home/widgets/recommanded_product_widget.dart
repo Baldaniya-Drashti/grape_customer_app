@@ -1,0 +1,136 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:grape_customer_app/domain/core/math_utils.dart';
+import 'package:grape_customer_app/domain/core/svg_image_constants.dart';
+import 'package:grape_customer_app/presentation/common/widgets/base_text.dart';
+import 'package:grape_customer_app/presentation/core/styles/styles.dart';
+import 'package:grape_customer_app/presentation/core/widgets/utility/common_rating_bar.dart';
+
+class RecommandedProductWidget extends StatelessWidget {
+  const RecommandedProductWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return GridView.builder(
+      itemCount: 10,
+      shrinkWrap: true,
+      padding: EdgeInsets.symmetric(
+        horizontal: getSize(18),
+      ),
+      physics: BouncingScrollPhysics(),
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        childAspectRatio: 0.6,
+        crossAxisSpacing: getSize(21),
+        mainAxisSpacing: getSize(20),
+      ),
+      itemBuilder: (context, index) {
+        return Stack(
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Center(
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(getSize(10)),
+                    child: CachedNetworkImage(
+                      imageUrl:
+                          "https://www.tpci.in/indiabusinesstrade/wp-content/uploads/2023/09/Untitled-design-6-3.png",
+                      placeholder: (context, url) => Container(
+                        height: getSize(160),
+                        decoration: BoxDecoration(
+                          color: Colors.grey.shade100,
+                          borderRadius: BorderRadius.circular(getSize(10)),
+                        ),
+                      ),
+                      height: getSize(160),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: getSize(8),
+                ),
+                BaseText(
+                  text: 'Google Pixel 7a',
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                  maxLines: 1,
+                ),
+                SizedBox(
+                  height: getSize(5),
+                ),
+                Row(
+                  children: [
+                    BaseText(
+                      text: '\$350',
+                      textDecoration: TextDecoration.lineThrough,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w500,
+                      textColor: AppColors.black.withOpacity(0.4),
+                    ),
+                    SizedBox(
+                      width: getSize(6),
+                    ),
+                    BaseText(
+                      text: '\$350',
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: getSize(5),
+                ),
+                Row(
+                  children: [
+                    CommonRatingBar(
+                      onRatingUpdate: (p0) {},
+                      iconnSize: getSize(9),
+                      initialRating: 4.5,
+                      horizontalPadding: getSize(2),
+                      absorbing: true,
+                    ),
+                    SizedBox(
+                      width: getSize(4),
+                    ),
+                    BaseText(
+                      text: '200 Sold',
+                      fontSize: 8,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: getSize(3),
+                ),
+                Row(
+                  children: [
+                    SvgPicture.asset(
+                      SvgImageConstant.location,
+                      height: getSize(12),
+                      width: getSize(12),
+                      colorFilter: ColorFilter.mode(
+                        AppColors.black.withOpacity(0.4),
+                        BlendMode.srcIn,
+                      ),
+                    ),
+                    SizedBox(
+                      width: getSize(2),
+                    ),
+                    BaseText(
+                      text: 'Hyderabad',
+                      fontSize: 8,
+                      fontWeight: FontWeight.w500,
+                      textColor: AppColors.black.withOpacity(0.4),
+                    ),
+                  ],
+                ),
+              ],
+            )
+          ],
+        );
+      },
+    );
+  }
+}

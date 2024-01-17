@@ -4,7 +4,10 @@
     "favorites": "Favorites",
     "myCart": "My Cart",
     "notifications": "Notifications",
-    "profile": "Profile"
+    "profile": "Profile",
+    "searchProduct": "Search Product",
+        "recommendedForYou": "Recommended for you",
+    "seeMore": "See More"
 
 
 }

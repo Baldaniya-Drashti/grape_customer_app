@@ -18,4 +18,13 @@ class AppLocalizationsSo extends AppLocalizations {
 
   @override
   String get profile => 'Profiil';
+
+  @override
+  String get searchProduct => 'Search Product';
+
+  @override
+  String get recommendedForYou => 'Recommended for you';
+
+  @override
+  String get seeMore => 'See More';
 }

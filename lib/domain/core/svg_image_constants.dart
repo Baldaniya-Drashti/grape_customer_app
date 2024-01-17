@@ -9,6 +9,11 @@ class SvgImageConstant {
   static const notificationUnselected =
       "assets/svg/notification_unselected.svg";
   static const notificationSelected = "assets/svg/notification_selected.svg";
-
+  static const emptyStar = 'assets/svg/empty_star.svg';
+  static const fullStar = 'assets/svg/full_star.svg';
+  static const halfStart = 'assets/svg/half_star.svg';
   static const successImage = "assets/svg/success.svg";
+  static const location = "assets/svg/location.svg";
+  static const search = "assets/svg/search.svg";
+  static const filter = "assets/svg/filter.svg";
 }

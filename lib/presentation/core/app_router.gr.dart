@@ -21,15 +21,15 @@ import 'package:grape_customer_app/presentation/auth/register/register_screen.da
 import 'package:grape_customer_app/presentation/core/widgets/layout/success_view.dart'
     as _i13;
 import 'package:grape_customer_app/presentation/main/main_tab_view.dart' as _i5;
-import 'package:grape_customer_app/presentation/main/tabs/cart_view.dart'
+import 'package:grape_customer_app/presentation/main/tabs/cart/cart_view.dart'
     as _i1;
-import 'package:grape_customer_app/presentation/main/tabs/favourite_view.dart'
+import 'package:grape_customer_app/presentation/main/tabs/favourite/favourite_view.dart'
     as _i2;
-import 'package:grape_customer_app/presentation/main/tabs/home_view.dart'
+import 'package:grape_customer_app/presentation/main/tabs/home/home_view.dart'
     as _i3;
-import 'package:grape_customer_app/presentation/main/tabs/notification_view.dart'
+import 'package:grape_customer_app/presentation/main/tabs/notification/notification_view.dart'
     as _i6;
-import 'package:grape_customer_app/presentation/main/tabs/profile_view.dart'
+import 'package:grape_customer_app/presentation/main/tabs/profile/profile_view.dart'
     as _i10;
 import 'package:grape_customer_app/presentation/onboarding/onboarding_page.dart'
     as _i7;
