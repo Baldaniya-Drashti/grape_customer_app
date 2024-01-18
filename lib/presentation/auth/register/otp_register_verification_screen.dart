@@ -6,7 +6,9 @@ import 'package:grape_customer_app/domain/core/math_utils.dart';
 import 'package:grape_customer_app/domain/core/png_image_constants.dart';
 import 'package:grape_customer_app/injection.dart';
 import 'package:grape_customer_app/presentation/common/utils/app_focus.dart';
+import 'package:grape_customer_app/presentation/common/utils/flushbar_creator.dart';
 import 'package:grape_customer_app/presentation/common/widgets/base_text.dart';
+import 'package:grape_customer_app/presentation/core/app_router.gr.dart';
 import 'package:grape_customer_app/presentation/core/styles/app_colors.dart';
 import 'package:grape_customer_app/presentation/core/widgets/buttons/common_button.dart';
 import 'package:grape_customer_app/presentation/core/widgets/inputs/custom_app_bar.dart';
@@ -47,7 +49,31 @@ class _OtpRegisterVerificationViewState
           ..add(RegisterFormEvent.getPrefilledPhoneNumber(
               widget.countryCode, widget.phoneNumber)),
         child: BlocConsumer<RegisterFormBloc, RegisterFormState>(
-          listener: (context, state) {},
+          listener: (context, state) {
+            state.authFailureOrSuccessOption.fold(
+              () {},
+              (either) => either.fold(
+                (failure) {
+                  showError(
+                    message: failure.maybeMap(
+                      showAPIResponseMessage: (value) => value.message,
+                      networkError: (value) =>
+                          'Please check your internet connectivity',
+                      orElse: () => "Server Error. Try again later.",
+                    ),
+                  ).show(context);
+                },
+                (_) {
+                  context.router.replace(
+                    PageRouteInfo(
+                      MainTabView.name,
+                    ),
+                  );
+                  // RestartWidget.restartApp(context);
+                },
+              ),
+            );
+          },
           builder: (context, state) {
             return GestureDetector(
               onTap: () {

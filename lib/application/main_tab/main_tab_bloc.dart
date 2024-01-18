@@ -1,15 +1,20 @@
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:grape_customer_app/domain/auth/i_auth_facade.dart';
 import 'package:grape_customer_app/presentation/core/app_router.gr.dart';
+import 'package:grape_customer_app/presentation/core/helper/push_notification_helper.dart';
 import 'package:injectable/injectable.dart';
 
 part 'main_tab_state.dart';
 part 'main_tab_event.dart';
 part 'main_tab_bloc.freezed.dart';
+
 @injectable
 class MainTabBloc extends Bloc<MainTabEvent, MainTabState> {
   final List<String> pageList = [HomeView.name];
-  MainTabBloc() : super(MainTabState.initial()) {
+  final IAuthFacade authFacade;
+  MainTabBloc(this.authFacade) : super(MainTabState.initial()) {
     on<MainTabEvent>(
       (event, emit) async {
         await event.map(
@@ -54,6 +59,12 @@ class MainTabBloc extends Bloc<MainTabEvent, MainTabState> {
                 break;
               default:
             }
+          },
+          registerForPush: (RegisterForPush value) async {
+            await authFacade.registerForPush(fcmToken: value.fcmToken);
+          },
+          pushNotificationInitialize: (PushNotificationInitialize value) {
+            PushNotificationService().setupInteractedMessage(value.context);
           },
         );
       },

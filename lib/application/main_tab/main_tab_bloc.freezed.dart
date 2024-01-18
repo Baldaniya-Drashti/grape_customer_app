@@ -265,42 +265,52 @@ abstract class _MainTabState implements MainTabState {
 
 /// @nodoc
 mixin _$MainTabEvent {
-  int get tabIndex => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(int tabIndex) tabChange,
+    required TResult Function(String fcmToken) registerForPush,
+    required TResult Function(BuildContext context) pushNotificationInitialize,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int tabIndex)? tabChange,
+    TResult? Function(String fcmToken)? registerForPush,
+    TResult? Function(BuildContext context)? pushNotificationInitialize,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int tabIndex)? tabChange,
+    TResult Function(String fcmToken)? registerForPush,
+    TResult Function(BuildContext context)? pushNotificationInitialize,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(TabChange value) tabChange,
+    required TResult Function(RegisterForPush value) registerForPush,
+    required TResult Function(PushNotificationInitialize value)
+        pushNotificationInitialize,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(TabChange value)? tabChange,
+    TResult? Function(RegisterForPush value)? registerForPush,
+    TResult? Function(PushNotificationInitialize value)?
+        pushNotificationInitialize,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(TabChange value)? tabChange,
+    TResult Function(RegisterForPush value)? registerForPush,
+    TResult Function(PushNotificationInitialize value)?
+        pushNotificationInitialize,
     required TResult orElse(),
   }) =>
-      throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $MainTabEventCopyWith<MainTabEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -309,8 +319,6 @@ abstract class $MainTabEventCopyWith<$Res> {
   factory $MainTabEventCopyWith(
           MainTabEvent value, $Res Function(MainTabEvent) then) =
       _$MainTabEventCopyWithImpl<$Res, MainTabEvent>;
-  @useResult
-  $Res call({int tabIndex});
 }
 
 /// @nodoc
@@ -322,28 +330,13 @@ class _$MainTabEventCopyWithImpl<$Res, $Val extends MainTabEvent>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? tabIndex = null,
-  }) {
-    return _then(_value.copyWith(
-      tabIndex: null == tabIndex
-          ? _value.tabIndex
-          : tabIndex // ignore: cast_nullable_to_non_nullable
-              as int,
-    ) as $Val);
-  }
 }
 
 /// @nodoc
-abstract class _$$TabChangeImplCopyWith<$Res>
-    implements $MainTabEventCopyWith<$Res> {
+abstract class _$$TabChangeImplCopyWith<$Res> {
   factory _$$TabChangeImplCopyWith(
           _$TabChangeImpl value, $Res Function(_$TabChangeImpl) then) =
       __$$TabChangeImplCopyWithImpl<$Res>;
-  @override
   @useResult
   $Res call({int tabIndex});
 }
@@ -405,6 +398,8 @@ class _$TabChangeImpl implements TabChange {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(int tabIndex) tabChange,
+    required TResult Function(String fcmToken) registerForPush,
+    required TResult Function(BuildContext context) pushNotificationInitialize,
   }) {
     return tabChange(tabIndex);
   }
@@ -413,6 +408,8 @@ class _$TabChangeImpl implements TabChange {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int tabIndex)? tabChange,
+    TResult? Function(String fcmToken)? registerForPush,
+    TResult? Function(BuildContext context)? pushNotificationInitialize,
   }) {
     return tabChange?.call(tabIndex);
   }
@@ -421,6 +418,8 @@ class _$TabChangeImpl implements TabChange {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int tabIndex)? tabChange,
+    TResult Function(String fcmToken)? registerForPush,
+    TResult Function(BuildContext context)? pushNotificationInitialize,
     required TResult orElse(),
   }) {
     if (tabChange != null) {
@@ -433,6 +432,9 @@ class _$TabChangeImpl implements TabChange {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(TabChange value) tabChange,
+    required TResult Function(RegisterForPush value) registerForPush,
+    required TResult Function(PushNotificationInitialize value)
+        pushNotificationInitialize,
   }) {
     return tabChange(this);
   }
@@ -441,6 +443,9 @@ class _$TabChangeImpl implements TabChange {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(TabChange value)? tabChange,
+    TResult? Function(RegisterForPush value)? registerForPush,
+    TResult? Function(PushNotificationInitialize value)?
+        pushNotificationInitialize,
   }) {
     return tabChange?.call(this);
   }
@@ -449,6 +454,9 @@ class _$TabChangeImpl implements TabChange {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(TabChange value)? tabChange,
+    TResult Function(RegisterForPush value)? registerForPush,
+    TResult Function(PushNotificationInitialize value)?
+        pushNotificationInitialize,
     required TResult orElse(),
   }) {
     if (tabChange != null) {
@@ -461,10 +469,298 @@ class _$TabChangeImpl implements TabChange {
 abstract class TabChange implements MainTabEvent {
   factory TabChange(final int tabIndex) = _$TabChangeImpl;
 
-  @override
   int get tabIndex;
-  @override
   @JsonKey(ignore: true)
   _$$TabChangeImplCopyWith<_$TabChangeImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$RegisterForPushImplCopyWith<$Res> {
+  factory _$$RegisterForPushImplCopyWith(_$RegisterForPushImpl value,
+          $Res Function(_$RegisterForPushImpl) then) =
+      __$$RegisterForPushImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String fcmToken});
+}
+
+/// @nodoc
+class __$$RegisterForPushImplCopyWithImpl<$Res>
+    extends _$MainTabEventCopyWithImpl<$Res, _$RegisterForPushImpl>
+    implements _$$RegisterForPushImplCopyWith<$Res> {
+  __$$RegisterForPushImplCopyWithImpl(
+      _$RegisterForPushImpl _value, $Res Function(_$RegisterForPushImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? fcmToken = null,
+  }) {
+    return _then(_$RegisterForPushImpl(
+      null == fcmToken
+          ? _value.fcmToken
+          : fcmToken // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$RegisterForPushImpl implements RegisterForPush {
+  _$RegisterForPushImpl(this.fcmToken);
+
+  @override
+  final String fcmToken;
+
+  @override
+  String toString() {
+    return 'MainTabEvent.registerForPush(fcmToken: $fcmToken)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$RegisterForPushImpl &&
+            (identical(other.fcmToken, fcmToken) ||
+                other.fcmToken == fcmToken));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, fcmToken);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$RegisterForPushImplCopyWith<_$RegisterForPushImpl> get copyWith =>
+      __$$RegisterForPushImplCopyWithImpl<_$RegisterForPushImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(int tabIndex) tabChange,
+    required TResult Function(String fcmToken) registerForPush,
+    required TResult Function(BuildContext context) pushNotificationInitialize,
+  }) {
+    return registerForPush(fcmToken);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(int tabIndex)? tabChange,
+    TResult? Function(String fcmToken)? registerForPush,
+    TResult? Function(BuildContext context)? pushNotificationInitialize,
+  }) {
+    return registerForPush?.call(fcmToken);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(int tabIndex)? tabChange,
+    TResult Function(String fcmToken)? registerForPush,
+    TResult Function(BuildContext context)? pushNotificationInitialize,
+    required TResult orElse(),
+  }) {
+    if (registerForPush != null) {
+      return registerForPush(fcmToken);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(TabChange value) tabChange,
+    required TResult Function(RegisterForPush value) registerForPush,
+    required TResult Function(PushNotificationInitialize value)
+        pushNotificationInitialize,
+  }) {
+    return registerForPush(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(TabChange value)? tabChange,
+    TResult? Function(RegisterForPush value)? registerForPush,
+    TResult? Function(PushNotificationInitialize value)?
+        pushNotificationInitialize,
+  }) {
+    return registerForPush?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(TabChange value)? tabChange,
+    TResult Function(RegisterForPush value)? registerForPush,
+    TResult Function(PushNotificationInitialize value)?
+        pushNotificationInitialize,
+    required TResult orElse(),
+  }) {
+    if (registerForPush != null) {
+      return registerForPush(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class RegisterForPush implements MainTabEvent {
+  factory RegisterForPush(final String fcmToken) = _$RegisterForPushImpl;
+
+  String get fcmToken;
+  @JsonKey(ignore: true)
+  _$$RegisterForPushImplCopyWith<_$RegisterForPushImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$PushNotificationInitializeImplCopyWith<$Res> {
+  factory _$$PushNotificationInitializeImplCopyWith(
+          _$PushNotificationInitializeImpl value,
+          $Res Function(_$PushNotificationInitializeImpl) then) =
+      __$$PushNotificationInitializeImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({BuildContext context});
+}
+
+/// @nodoc
+class __$$PushNotificationInitializeImplCopyWithImpl<$Res>
+    extends _$MainTabEventCopyWithImpl<$Res, _$PushNotificationInitializeImpl>
+    implements _$$PushNotificationInitializeImplCopyWith<$Res> {
+  __$$PushNotificationInitializeImplCopyWithImpl(
+      _$PushNotificationInitializeImpl _value,
+      $Res Function(_$PushNotificationInitializeImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? context = null,
+  }) {
+    return _then(_$PushNotificationInitializeImpl(
+      null == context
+          ? _value.context
+          : context // ignore: cast_nullable_to_non_nullable
+              as BuildContext,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$PushNotificationInitializeImpl implements PushNotificationInitialize {
+  _$PushNotificationInitializeImpl(this.context);
+
+  @override
+  final BuildContext context;
+
+  @override
+  String toString() {
+    return 'MainTabEvent.pushNotificationInitialize(context: $context)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$PushNotificationInitializeImpl &&
+            (identical(other.context, context) || other.context == context));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, context);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$PushNotificationInitializeImplCopyWith<_$PushNotificationInitializeImpl>
+      get copyWith => __$$PushNotificationInitializeImplCopyWithImpl<
+          _$PushNotificationInitializeImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(int tabIndex) tabChange,
+    required TResult Function(String fcmToken) registerForPush,
+    required TResult Function(BuildContext context) pushNotificationInitialize,
+  }) {
+    return pushNotificationInitialize(context);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(int tabIndex)? tabChange,
+    TResult? Function(String fcmToken)? registerForPush,
+    TResult? Function(BuildContext context)? pushNotificationInitialize,
+  }) {
+    return pushNotificationInitialize?.call(context);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(int tabIndex)? tabChange,
+    TResult Function(String fcmToken)? registerForPush,
+    TResult Function(BuildContext context)? pushNotificationInitialize,
+    required TResult orElse(),
+  }) {
+    if (pushNotificationInitialize != null) {
+      return pushNotificationInitialize(context);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(TabChange value) tabChange,
+    required TResult Function(RegisterForPush value) registerForPush,
+    required TResult Function(PushNotificationInitialize value)
+        pushNotificationInitialize,
+  }) {
+    return pushNotificationInitialize(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(TabChange value)? tabChange,
+    TResult? Function(RegisterForPush value)? registerForPush,
+    TResult? Function(PushNotificationInitialize value)?
+        pushNotificationInitialize,
+  }) {
+    return pushNotificationInitialize?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(TabChange value)? tabChange,
+    TResult Function(RegisterForPush value)? registerForPush,
+    TResult Function(PushNotificationInitialize value)?
+        pushNotificationInitialize,
+    required TResult orElse(),
+  }) {
+    if (pushNotificationInitialize != null) {
+      return pushNotificationInitialize(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class PushNotificationInitialize implements MainTabEvent {
+  factory PushNotificationInitialize(final BuildContext context) =
+      _$PushNotificationInitializeImpl;
+
+  BuildContext get context;
+  @JsonKey(ignore: true)
+  _$$PushNotificationInitializeImplCopyWith<_$PushNotificationInitializeImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

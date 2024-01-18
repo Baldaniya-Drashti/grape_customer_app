@@ -81,7 +81,7 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
             ),
           );
         },
-        verifyOtp: (VerifyOtp value) {
+        verifyOtp: (VerifyOtp value) async {
           Either<AuthFailure, Unit>? failureOrSuccess;
 
           final isOTPValid = state.enteredOTP.isValid();
@@ -94,11 +94,11 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
               ),
             );
 
-            // failureOrSuccess = await _authFacade.register(
-            //   emailAddress: state.emailAddress,
-            //   username: state.username,
-            //   password: state.password,
-            // );
+            failureOrSuccess = await _authFacade.verifyOtp(
+              countryCode: state.selectedCountrycode,
+              mobileNumber: state.mobileNumber,
+              otp: state.enteredOTP,
+            );
           }
 
           emit(

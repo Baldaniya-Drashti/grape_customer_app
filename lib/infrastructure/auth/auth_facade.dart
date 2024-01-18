@@ -159,29 +159,52 @@ class AuthFacade implements IAuthFacade {
   }
 
   @override
-  Future<Either<AuthFailure, Unit>> forgotPassword({
-    required EmailAddress emailAddress,
+  Future<Either<AuthFailure, Unit>> verifyOtp({
+    required String countryCode,
+    required MobileNumber mobileNumber,
+    required OTPText otp,
   }) async {
-    final email = emailAddress.getOrCrash();
-
     try {
-      await apiService.postMethod(
-        '/account/forgot-password',
+      final response = await apiService.postMethod(
+        ApiConstants.verifyOtp,
         {
-          "email": email,
+          "remember_token": getRememberToken(),
+          "type": 2,
+          "country_code": countryCode,
+          "mobile": mobileNumber.getOrCrash(),
+          "otp": otp.getOrCrash(),
         },
       );
 
+      final account = CurrentUserDto.fromJson(response.data).toDomain();
+      setUserToken(account.auth?.accessToken ?? "");
+      _setUserData(account);
       return right(unit);
     } on DioException catch (err) {
-      print(err);
-      return left(const AuthFailure.serverError());
-    } on SocketException catch (_) {
+      if (err.response != null) {
+        var commonRespose = CommonResponse.fromJson(err.response?.data);
+
+        if (commonRespose.dioMessage != null) {
+          return left(
+              AuthFailure.showAPIResponseMessage(commonRespose.dioMessage!));
+        }
+      }
+
       return left(const AuthFailure.serverError());
     }
   }
 
   Future<void> setRememberToken(String authToken) async {
+    // Hacky solution to allow testing
+    if (!Platform.environment.containsKey('FLUTTER_TEST')) {
+      if (authToken.isNotEmpty) {
+        await Hive.box(BoxNames.settingsBox)
+            .put(BoxKeys.rememberToken, authToken);
+      }
+    }
+  }
+
+  Future<void> setUserToken(String authToken) async {
     // Hacky solution to allow testing
     if (!Platform.environment.containsKey('FLUTTER_TEST')) {
       if (authToken.isNotEmpty) {
@@ -195,6 +218,34 @@ class AuthFacade implements IAuthFacade {
     if (!Platform.environment.containsKey('FLUTTER_TEST')) {
       final box = Hive.box<AccountEntity>(BoxNames.currentUser);
       box.put(BoxKeys.currentKey, AccountEntity.fromDomain(account));
+    }
+  }
+
+  @override
+  Future<Either<AuthFailure, Unit>> registerForPush(
+      {required String fcmToken}) async {
+    try {
+      await apiService.postMethod(
+        ApiConstants.registerForPush,
+        {
+          "device_id": await getDeviceId(),
+          "device_type": Platform.isAndroid ? "1" : "2",
+          "token": fcmToken,
+        },
+      );
+
+      return right(unit);
+    } on DioException catch (err) {
+      if (err.response != null) {
+        var commonRespose = CommonResponse.fromJson(err.response?.data);
+
+        if (commonRespose.dioMessage != null) {
+          return left(
+              AuthFailure.showAPIResponseMessage(commonRespose.dioMessage!));
+        }
+      }
+
+      return left(const AuthFailure.serverError());
     }
   }
 }
