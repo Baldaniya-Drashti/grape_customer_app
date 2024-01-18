@@ -134,4 +134,40 @@ class AppLocalizationsSo extends AppLocalizations {
 
   @override
   String get iRoidSolutions => 'iRoid Solutions';
+
+  @override
+  String get takePhoto => 'TakePhoto';
+
+  @override
+  String get galleryPhoto => 'GalleryPhoto';
+
+  @override
+  String get cancle => 'Cancle';
+
+  @override
+  String get firstName => 'First Name';
+
+  @override
+  String get enterFirstName => 'Please enter first name';
+
+  @override
+  String get lastName => 'Last Name';
+
+  @override
+  String get enterLastName => 'Please enter last name';
+
+  @override
+  String get emailAddress => 'Email Address';
+
+  @override
+  String get enterEmail => 'Please enter valid email address';
+
+  @override
+  String get enterMobile => 'Phone number should be between 6 and 15 digits';
+
+  @override
+  String get mobileNumber => 'Mobile Number';
+
+  @override
+  String get save => 'Save';
 }

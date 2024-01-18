@@ -44,4 +44,7 @@ class SvgImageConstant {
   static const privacyPolicy = 'assets/svg/privacy_policy.svg';
   static const tc = 'assets/svg/tc.svg';
   static const logOut = 'assets/svg/logout.svg';
+
+  //Edit Profile
+  static const editProfileIcon = 'assets/svg/edit_profile.svg';
 }
