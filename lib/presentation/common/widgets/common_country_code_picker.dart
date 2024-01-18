@@ -59,6 +59,8 @@ class CommonCountryCodePicker extends StatelessWidget {
           fontWeight: FontWeight.w500,
         ),
       ),
+      // showDropDownButton: true,
+      showFlag: true,
     );
   }
 }

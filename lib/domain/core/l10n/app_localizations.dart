@@ -194,6 +194,78 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'iRoid Solutions'**
   String get iRoidSolutions;
+
+  /// No description provided for @takePhoto.
+  ///
+  /// In en, this message translates to:
+  /// **'TakePhoto'**
+  String get takePhoto;
+
+  /// No description provided for @galleryPhoto.
+  ///
+  /// In en, this message translates to:
+  /// **'GalleryPhoto'**
+  String get galleryPhoto;
+
+  /// No description provided for @cancle.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancle'**
+  String get cancle;
+
+  /// No description provided for @firstName.
+  ///
+  /// In en, this message translates to:
+  /// **'First Name'**
+  String get firstName;
+
+  /// No description provided for @enterFirstName.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter first name'**
+  String get enterFirstName;
+
+  /// No description provided for @lastName.
+  ///
+  /// In en, this message translates to:
+  /// **'Last Name'**
+  String get lastName;
+
+  /// No description provided for @enterLastName.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter last name'**
+  String get enterLastName;
+
+  /// No description provided for @emailAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'Email Address'**
+  String get emailAddress;
+
+  /// No description provided for @enterEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter valid email address'**
+  String get enterEmail;
+
+  /// No description provided for @enterMobile.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone number should be between 6 and 15 digits'**
+  String get enterMobile;
+
+  /// No description provided for @mobileNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Mobile Number'**
+  String get mobileNumber;
+
+  /// No description provided for @save.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get save;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

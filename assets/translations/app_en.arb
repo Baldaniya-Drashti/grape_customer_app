@@ -15,5 +15,17 @@
     "logout":"Logout",
     "liveChatSupport":"Live Chat Support",
     "developedby":"Developed by ",
-    "iRoidSolutions":"iRoid Solutions"
+    "iRoidSolutions":"iRoid Solutions",
+    "takePhoto":"TakePhoto",
+    "galleryPhoto":"GalleryPhoto",
+    "cancle":"Cancle",
+    "firstName":"First Name",
+    "enterFirstName":"Please enter first name",
+    "lastName":"Last Name",
+    "enterLastName":"Please enter last name",
+    "emailAddress":"Email Address",
+    "enterEmail":"Please enter valid email address",
+    "enterMobile":"Phone number should be between 6 and 15 digits",
+    "mobileNumber":"Mobile Number",
+    "save":"Save"
 }

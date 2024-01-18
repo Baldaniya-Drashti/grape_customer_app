@@ -23,5 +23,6 @@ class AppRouter extends $AppRouter {
             AutoRoute(page: ProfileView.page),
           ],
         ),
+        AutoRoute(page: EditProfileScreen.page),
       ];
 }

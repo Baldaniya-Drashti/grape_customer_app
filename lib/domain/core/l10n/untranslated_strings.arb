@@ -11,6 +11,18 @@
     "logout",
     "liveChatSupport",
     "developedby",
-    "iRoidSolutions"
+    "iRoidSolutions",
+    "takePhoto",
+    "galleryPhoto",
+    "cancle",
+    "firstName",
+    "enterFirstName",
+    "lastName",
+    "enterLastName",
+    "emailAddress",
+    "enterEmail",
+    "enterMobile",
+    "mobileNumber",
+    "save"
   ]
 }

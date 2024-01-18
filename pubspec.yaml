@@ -77,7 +77,9 @@ dependencies:
   flutter_svg: ^2.0.9
   geocoding: ^2.1.1
   geolocator: ^10.1.0
-
+  permission_handler: ^11.1.0
+  device_info_plus: ^9.1.1
+  figma_squircle: ^0.5.3
 
 
   

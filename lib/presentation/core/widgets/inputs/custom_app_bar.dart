@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:grape_customer_app/domain/core/math_utils.dart';
@@ -33,7 +32,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      //leading: leading ?? _buildLeadingView(context),
+      // leading: leading,
       systemOverlayStyle: SystemUiOverlayStyle.dark,
       automaticallyImplyLeading: true,
       shadowColor: Color(0xFFE1E1E1),
@@ -69,16 +68,16 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Size get preferredSize => Size.fromHeight(60);
 
-  _buildLeadingView(BuildContext context) {
-    return IconButton(
-      padding: EdgeInsets.zero,
-      onPressed: onPressed ??
-          () {
-            context.router.back();
-          },
-      icon: Icon(
-        Icons.arrow_back_ios_rounded,
-      ),
-    );
-  }
+  // _buildLeadingView(BuildContext context) {
+  //   return IconButton(
+  //     padding: EdgeInsets.zero,
+  //     onPressed: onPressed ??
+  //         () {
+  //           context.router.back();
+  //         },
+  //     icon: Icon(
+  //       Icons.arrow_back_ios_rounded,
+  //     ),
+  //   );
+  // }
 }
