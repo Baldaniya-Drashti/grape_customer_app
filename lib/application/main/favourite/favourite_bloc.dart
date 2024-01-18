@@ -8,7 +8,5 @@ part 'favourite_bloc.freezed.dart';
 
 @injectable
 class FavouriteBloc extends Bloc<FavouriteEvent,FavouriteState>{
-  FavouriteBloc() : super(const FavouriteState.initial()){
-    
-  }
+  FavouriteBloc() : super(const FavouriteState.initial());
 }

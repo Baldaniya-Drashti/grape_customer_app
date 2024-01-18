@@ -21,7 +21,7 @@ class RecommandedProductWidget extends StatelessWidget {
       physics: BouncingScrollPhysics(),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
-        childAspectRatio: 0.6,
+        childAspectRatio: 0.62,
         crossAxisSpacing: getSize(21),
         mainAxisSpacing: getSize(20),
       ),

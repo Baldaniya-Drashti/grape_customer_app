@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -35,11 +37,13 @@ Future<void> main() async {
         ],
       );
       await Firebase.initializeApp(
-        options: const FirebaseOptions(
-            apiKey: 'AIzaSyAEPe7upukbefIVDSmvNL90bc-MYfObF4I',
-            appId: '1:568471335476:android:870d2cdcbf08727af09061',
-            messagingSenderId: '568471335476',
-            projectId: 'grape-market-place'),
+        options: Platform.isIOS
+            ? null
+            : const FirebaseOptions(
+                apiKey: 'AIzaSyAEPe7upukbefIVDSmvNL90bc-MYfObF4I',
+                appId: '1:568471335476:android:870d2cdcbf08727af09061',
+                messagingSenderId: '568471335476',
+                projectId: 'grape-market-place'),
       ).catchError((e) {
         print(e);
         return e;
