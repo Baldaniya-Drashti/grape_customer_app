@@ -37,6 +37,8 @@ mixin _$CurrentUserDto {
   int? get role => throw _privateConstructorUsedError;
   @JsonKey(name: 'remember_token')
   String? get rememberToken => throw _privateConstructorUsedError;
+  @JsonKey(name: 'auth')
+  AuthDto? get authDto => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -60,7 +62,10 @@ abstract class $CurrentUserDtoCopyWith<$Res> {
       @JsonKey(name: 'is_email_verified') bool? isEmailVerified,
       @JsonKey(name: 'is_mobile_verified') bool? isMobileVerified,
       int? role,
-      @JsonKey(name: 'remember_token') String? rememberToken});
+      @JsonKey(name: 'remember_token') String? rememberToken,
+      @JsonKey(name: 'auth') AuthDto? authDto});
+
+  $AuthDtoCopyWith<$Res>? get authDto;
 }
 
 /// @nodoc
@@ -86,6 +91,7 @@ class _$CurrentUserDtoCopyWithImpl<$Res, $Val extends CurrentUserDto>
     Object? isMobileVerified = freezed,
     Object? role = freezed,
     Object? rememberToken = freezed,
+    Object? authDto = freezed,
   }) {
     return _then(_value.copyWith(
       userId: freezed == userId
@@ -128,7 +134,23 @@ class _$CurrentUserDtoCopyWithImpl<$Res, $Val extends CurrentUserDto>
           ? _value.rememberToken
           : rememberToken // ignore: cast_nullable_to_non_nullable
               as String?,
+      authDto: freezed == authDto
+          ? _value.authDto
+          : authDto // ignore: cast_nullable_to_non_nullable
+              as AuthDto?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $AuthDtoCopyWith<$Res>? get authDto {
+    if (_value.authDto == null) {
+      return null;
+    }
+
+    return $AuthDtoCopyWith<$Res>(_value.authDto!, (value) {
+      return _then(_value.copyWith(authDto: value) as $Val);
+    });
   }
 }
 
@@ -150,7 +172,11 @@ abstract class _$$CurrentUserDtoImplCopyWith<$Res>
       @JsonKey(name: 'is_email_verified') bool? isEmailVerified,
       @JsonKey(name: 'is_mobile_verified') bool? isMobileVerified,
       int? role,
-      @JsonKey(name: 'remember_token') String? rememberToken});
+      @JsonKey(name: 'remember_token') String? rememberToken,
+      @JsonKey(name: 'auth') AuthDto? authDto});
+
+  @override
+  $AuthDtoCopyWith<$Res>? get authDto;
 }
 
 /// @nodoc
@@ -174,6 +200,7 @@ class __$$CurrentUserDtoImplCopyWithImpl<$Res>
     Object? isMobileVerified = freezed,
     Object? role = freezed,
     Object? rememberToken = freezed,
+    Object? authDto = freezed,
   }) {
     return _then(_$CurrentUserDtoImpl(
       userId: freezed == userId
@@ -216,6 +243,10 @@ class __$$CurrentUserDtoImplCopyWithImpl<$Res>
           ? _value.rememberToken
           : rememberToken // ignore: cast_nullable_to_non_nullable
               as String?,
+      authDto: freezed == authDto
+          ? _value.authDto
+          : authDto // ignore: cast_nullable_to_non_nullable
+              as AuthDto?,
     ));
   }
 }
@@ -233,7 +264,8 @@ class _$CurrentUserDtoImpl extends _CurrentUserDto {
       @JsonKey(name: 'is_email_verified') this.isEmailVerified,
       @JsonKey(name: 'is_mobile_verified') this.isMobileVerified,
       this.role,
-      @JsonKey(name: 'remember_token') this.rememberToken})
+      @JsonKey(name: 'remember_token') this.rememberToken,
+      @JsonKey(name: 'auth') this.authDto})
       : super._();
 
   factory _$CurrentUserDtoImpl.fromJson(Map<String, dynamic> json) =>
@@ -266,10 +298,13 @@ class _$CurrentUserDtoImpl extends _CurrentUserDto {
   @override
   @JsonKey(name: 'remember_token')
   final String? rememberToken;
+  @override
+  @JsonKey(name: 'auth')
+  final AuthDto? authDto;
 
   @override
   String toString() {
-    return 'CurrentUserDto(userId: $userId, firstName: $firstName, lastName: $lastName, email: $email, countryCode: $countryCode, phone: $phone, isEmailVerified: $isEmailVerified, isMobileVerified: $isMobileVerified, role: $role, rememberToken: $rememberToken)';
+    return 'CurrentUserDto(userId: $userId, firstName: $firstName, lastName: $lastName, email: $email, countryCode: $countryCode, phone: $phone, isEmailVerified: $isEmailVerified, isMobileVerified: $isMobileVerified, role: $role, rememberToken: $rememberToken, authDto: $authDto)';
   }
 
   @override
@@ -292,7 +327,8 @@ class _$CurrentUserDtoImpl extends _CurrentUserDto {
                 other.isMobileVerified == isMobileVerified) &&
             (identical(other.role, role) || other.role == role) &&
             (identical(other.rememberToken, rememberToken) ||
-                other.rememberToken == rememberToken));
+                other.rememberToken == rememberToken) &&
+            (identical(other.authDto, authDto) || other.authDto == authDto));
   }
 
   @JsonKey(ignore: true)
@@ -308,7 +344,8 @@ class _$CurrentUserDtoImpl extends _CurrentUserDto {
       isEmailVerified,
       isMobileVerified,
       role,
-      rememberToken);
+      rememberToken,
+      authDto);
 
   @JsonKey(ignore: true)
   @override
@@ -327,17 +364,17 @@ class _$CurrentUserDtoImpl extends _CurrentUserDto {
 
 abstract class _CurrentUserDto extends CurrentUserDto {
   const factory _CurrentUserDto(
-          {@JsonKey(name: 'user_id') final int? userId,
-          @JsonKey(name: 'first_name') final String? firstName,
-          @JsonKey(name: 'last_name') final String? lastName,
-          final String? email,
-          @JsonKey(name: 'country_code') final String? countryCode,
-          final int? phone,
-          @JsonKey(name: 'is_email_verified') final bool? isEmailVerified,
-          @JsonKey(name: 'is_mobile_verified') final bool? isMobileVerified,
-          final int? role,
-          @JsonKey(name: 'remember_token') final String? rememberToken}) =
-      _$CurrentUserDtoImpl;
+      {@JsonKey(name: 'user_id') final int? userId,
+      @JsonKey(name: 'first_name') final String? firstName,
+      @JsonKey(name: 'last_name') final String? lastName,
+      final String? email,
+      @JsonKey(name: 'country_code') final String? countryCode,
+      final int? phone,
+      @JsonKey(name: 'is_email_verified') final bool? isEmailVerified,
+      @JsonKey(name: 'is_mobile_verified') final bool? isMobileVerified,
+      final int? role,
+      @JsonKey(name: 'remember_token') final String? rememberToken,
+      @JsonKey(name: 'auth') final AuthDto? authDto}) = _$CurrentUserDtoImpl;
   const _CurrentUserDto._() : super._();
 
   factory _CurrentUserDto.fromJson(Map<String, dynamic> json) =
@@ -371,7 +408,226 @@ abstract class _CurrentUserDto extends CurrentUserDto {
   @JsonKey(name: 'remember_token')
   String? get rememberToken;
   @override
+  @JsonKey(name: 'auth')
+  AuthDto? get authDto;
+  @override
   @JsonKey(ignore: true)
   _$$CurrentUserDtoImplCopyWith<_$CurrentUserDtoImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+AuthDto _$AuthDtoFromJson(Map<String, dynamic> json) {
+  return _AuthDto.fromJson(json);
+}
+
+/// @nodoc
+mixin _$AuthDto {
+  @JsonKey(name: 'token_type')
+  String? get tokenType => throw _privateConstructorUsedError;
+  @JsonKey(name: 'expires_in')
+  int? get expiresIn => throw _privateConstructorUsedError;
+  @JsonKey(name: 'access_token')
+  String? get accessToken => throw _privateConstructorUsedError;
+  @JsonKey(name: 'refresh_token')
+  String? get refreshToken => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $AuthDtoCopyWith<AuthDto> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $AuthDtoCopyWith<$Res> {
+  factory $AuthDtoCopyWith(AuthDto value, $Res Function(AuthDto) then) =
+      _$AuthDtoCopyWithImpl<$Res, AuthDto>;
+  @useResult
+  $Res call(
+      {@JsonKey(name: 'token_type') String? tokenType,
+      @JsonKey(name: 'expires_in') int? expiresIn,
+      @JsonKey(name: 'access_token') String? accessToken,
+      @JsonKey(name: 'refresh_token') String? refreshToken});
+}
+
+/// @nodoc
+class _$AuthDtoCopyWithImpl<$Res, $Val extends AuthDto>
+    implements $AuthDtoCopyWith<$Res> {
+  _$AuthDtoCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? tokenType = freezed,
+    Object? expiresIn = freezed,
+    Object? accessToken = freezed,
+    Object? refreshToken = freezed,
+  }) {
+    return _then(_value.copyWith(
+      tokenType: freezed == tokenType
+          ? _value.tokenType
+          : tokenType // ignore: cast_nullable_to_non_nullable
+              as String?,
+      expiresIn: freezed == expiresIn
+          ? _value.expiresIn
+          : expiresIn // ignore: cast_nullable_to_non_nullable
+              as int?,
+      accessToken: freezed == accessToken
+          ? _value.accessToken
+          : accessToken // ignore: cast_nullable_to_non_nullable
+              as String?,
+      refreshToken: freezed == refreshToken
+          ? _value.refreshToken
+          : refreshToken // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$AuthDtoImplCopyWith<$Res> implements $AuthDtoCopyWith<$Res> {
+  factory _$$AuthDtoImplCopyWith(
+          _$AuthDtoImpl value, $Res Function(_$AuthDtoImpl) then) =
+      __$$AuthDtoImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {@JsonKey(name: 'token_type') String? tokenType,
+      @JsonKey(name: 'expires_in') int? expiresIn,
+      @JsonKey(name: 'access_token') String? accessToken,
+      @JsonKey(name: 'refresh_token') String? refreshToken});
+}
+
+/// @nodoc
+class __$$AuthDtoImplCopyWithImpl<$Res>
+    extends _$AuthDtoCopyWithImpl<$Res, _$AuthDtoImpl>
+    implements _$$AuthDtoImplCopyWith<$Res> {
+  __$$AuthDtoImplCopyWithImpl(
+      _$AuthDtoImpl _value, $Res Function(_$AuthDtoImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? tokenType = freezed,
+    Object? expiresIn = freezed,
+    Object? accessToken = freezed,
+    Object? refreshToken = freezed,
+  }) {
+    return _then(_$AuthDtoImpl(
+      tokenType: freezed == tokenType
+          ? _value.tokenType
+          : tokenType // ignore: cast_nullable_to_non_nullable
+              as String?,
+      expiresIn: freezed == expiresIn
+          ? _value.expiresIn
+          : expiresIn // ignore: cast_nullable_to_non_nullable
+              as int?,
+      accessToken: freezed == accessToken
+          ? _value.accessToken
+          : accessToken // ignore: cast_nullable_to_non_nullable
+              as String?,
+      refreshToken: freezed == refreshToken
+          ? _value.refreshToken
+          : refreshToken // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$AuthDtoImpl extends _AuthDto {
+  const _$AuthDtoImpl(
+      {@JsonKey(name: 'token_type') this.tokenType,
+      @JsonKey(name: 'expires_in') this.expiresIn,
+      @JsonKey(name: 'access_token') this.accessToken,
+      @JsonKey(name: 'refresh_token') this.refreshToken})
+      : super._();
+
+  factory _$AuthDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$AuthDtoImplFromJson(json);
+
+  @override
+  @JsonKey(name: 'token_type')
+  final String? tokenType;
+  @override
+  @JsonKey(name: 'expires_in')
+  final int? expiresIn;
+  @override
+  @JsonKey(name: 'access_token')
+  final String? accessToken;
+  @override
+  @JsonKey(name: 'refresh_token')
+  final String? refreshToken;
+
+  @override
+  String toString() {
+    return 'AuthDto(tokenType: $tokenType, expiresIn: $expiresIn, accessToken: $accessToken, refreshToken: $refreshToken)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$AuthDtoImpl &&
+            (identical(other.tokenType, tokenType) ||
+                other.tokenType == tokenType) &&
+            (identical(other.expiresIn, expiresIn) ||
+                other.expiresIn == expiresIn) &&
+            (identical(other.accessToken, accessToken) ||
+                other.accessToken == accessToken) &&
+            (identical(other.refreshToken, refreshToken) ||
+                other.refreshToken == refreshToken));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, tokenType, expiresIn, accessToken, refreshToken);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$AuthDtoImplCopyWith<_$AuthDtoImpl> get copyWith =>
+      __$$AuthDtoImplCopyWithImpl<_$AuthDtoImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$AuthDtoImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _AuthDto extends AuthDto {
+  const factory _AuthDto(
+          {@JsonKey(name: 'token_type') final String? tokenType,
+          @JsonKey(name: 'expires_in') final int? expiresIn,
+          @JsonKey(name: 'access_token') final String? accessToken,
+          @JsonKey(name: 'refresh_token') final String? refreshToken}) =
+      _$AuthDtoImpl;
+  const _AuthDto._() : super._();
+
+  factory _AuthDto.fromJson(Map<String, dynamic> json) = _$AuthDtoImpl.fromJson;
+
+  @override
+  @JsonKey(name: 'token_type')
+  String? get tokenType;
+  @override
+  @JsonKey(name: 'expires_in')
+  int? get expiresIn;
+  @override
+  @JsonKey(name: 'access_token')
+  String? get accessToken;
+  @override
+  @JsonKey(name: 'refresh_token')
+  String? get refreshToken;
+  @override
+  @JsonKey(ignore: true)
+  _$$AuthDtoImplCopyWith<_$AuthDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

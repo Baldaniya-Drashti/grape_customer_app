@@ -20,6 +20,7 @@ class CurrentUserDto with _$CurrentUserDto {
     @JsonKey(name: 'is_mobile_verified') bool? isMobileVerified,
     int? role,
     @JsonKey(name: 'remember_token') String? rememberToken,
+    @JsonKey(name: 'auth') AuthDto? authDto,
   }) = _CurrentUserDto;
   Account toDomain() {
     return Account(
@@ -33,6 +34,7 @@ class CurrentUserDto with _$CurrentUserDto {
       isMobileVerified: isMobileVerified,
       role: role,
       rememberToken: rememberToken,
+      auth: authDto?.toDomain(),
     );
   }
 
@@ -48,8 +50,39 @@ class CurrentUserDto with _$CurrentUserDto {
       isMobileVerified: account.isMobileVerified,
       role: account.role,
       rememberToken: account.rememberToken,
+      authDto: account.auth != null ? AuthDto.fromDomain(account.auth!) : null,
     );
   }
   factory CurrentUserDto.fromJson(Map<String, dynamic> json) =>
       _$CurrentUserDtoFromJson(json);
+}
+
+@freezed
+class AuthDto with _$AuthDto {
+  const AuthDto._();
+  const factory AuthDto({
+    @JsonKey(name: 'token_type') String? tokenType,
+    @JsonKey(name: 'expires_in') int? expiresIn,
+    @JsonKey(name: 'access_token') String? accessToken,
+    @JsonKey(name: 'refresh_token') String? refreshToken,
+  }) = _AuthDto;
+  Auth toDomain() {
+    return Auth(
+      accessToken: accessToken,
+      expiresIn: expiresIn,
+      refreshToken: refreshToken,
+      tokenType: tokenType,
+    );
+  }
+
+  factory AuthDto.fromDomain(Auth auth) {
+    return AuthDto(
+      tokenType: auth.tokenType,
+      accessToken: auth.accessToken,
+      expiresIn: auth.expiresIn,
+      refreshToken: auth.refreshToken,
+    );
+  }
+  factory AuthDto.fromJson(Map<String, dynamic> json) =>
+      _$AuthDtoFromJson(json);
 }

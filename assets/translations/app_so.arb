@@ -1,7 +1,10 @@
 {
     "home": "Guriga",
-    "favorites": "Faa'iidooyinka",
-    "myCart": "Goobtaayada",
-    "notifications": "Ku xusan",
-    "profile": "Profiil"
+    "favorites": "Raadinta",
+    "myCart": "Soo'gaarkaaga",
+    "notifications": "Dhameystirka",
+    "profile": "Profiilka",
+    "searchProduct": "Raadi Cinwaan",
+    "recommendedForYou": "Tavayadahaada",
+    "seeMore": "Eeg Dhaqso"
 }

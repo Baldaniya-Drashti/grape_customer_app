@@ -59,17 +59,24 @@ class HomeAppbar extends StatelessWidget implements PreferredSizeWidget {
                   SizedBox(
                     width: getSize(8),
                   ),
-                  Container(
-                    height: getSize(43),
-                    width: getSize(43),
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      color: AppColors.primaryOrange,
-                      borderRadius: BorderRadius.circular(
-                        getSize(10),
+                  GestureDetector(
+                    onTap: () {
+                      // context
+                      //     .read<LanguageBloc>()
+                      //     .add(LanguageEvent.changeLanguage());
+                    },
+                    child: Container(
+                      height: getSize(43),
+                      width: getSize(43),
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: AppColors.primaryOrange,
+                        borderRadius: BorderRadius.circular(
+                          getSize(10),
+                        ),
                       ),
+                      child: SvgPicture.asset(SvgImageConstant.filter),
                     ),
-                    child: SvgPicture.asset(SvgImageConstant.filter),
                   ),
                 ],
               ),

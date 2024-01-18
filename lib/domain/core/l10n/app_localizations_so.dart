@@ -8,23 +8,23 @@ class AppLocalizationsSo extends AppLocalizations {
   String get home => 'Guriga';
 
   @override
-  String get favorites => 'Faa\'iidooyinka';
+  String get favorites => 'Raadinta';
 
   @override
-  String get myCart => 'Goobtaayada';
+  String get myCart => 'Soo\'gaarkaaga';
 
   @override
-  String get notifications => 'Ku xusan';
+  String get notifications => 'Dhameystirka';
 
   @override
-  String get profile => 'Profiil';
+  String get profile => 'Profiilka';
 
   @override
-  String get searchProduct => 'Search Product';
+  String get searchProduct => 'Raadi Cinwaan';
 
   @override
-  String get recommendedForYou => 'Recommended for you';
+  String get recommendedForYou => 'Tavayadahaada';
 
   @override
-  String get seeMore => 'See More';
+  String get seeMore => 'Eeg Dhaqso';
 }

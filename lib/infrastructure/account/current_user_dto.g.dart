@@ -18,6 +18,9 @@ _$CurrentUserDtoImpl _$$CurrentUserDtoImplFromJson(Map<String, dynamic> json) =>
       isMobileVerified: json['is_mobile_verified'] as bool?,
       role: json['role'] as int?,
       rememberToken: json['remember_token'] as String?,
+      authDto: json['auth'] == null
+          ? null
+          : AuthDto.fromJson(json['auth'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$CurrentUserDtoImplToJson(
@@ -33,4 +36,21 @@ Map<String, dynamic> _$$CurrentUserDtoImplToJson(
       'is_mobile_verified': instance.isMobileVerified,
       'role': instance.role,
       'remember_token': instance.rememberToken,
+      'auth': instance.authDto,
+    };
+
+_$AuthDtoImpl _$$AuthDtoImplFromJson(Map<String, dynamic> json) =>
+    _$AuthDtoImpl(
+      tokenType: json['token_type'] as String?,
+      expiresIn: json['expires_in'] as int?,
+      accessToken: json['access_token'] as String?,
+      refreshToken: json['refresh_token'] as String?,
+    );
+
+Map<String, dynamic> _$$AuthDtoImplToJson(_$AuthDtoImpl instance) =>
+    <String, dynamic>{
+      'token_type': instance.tokenType,
+      'expires_in': instance.expiresIn,
+      'access_token': instance.accessToken,
+      'refresh_token': instance.refreshToken,
     };

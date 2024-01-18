@@ -17,13 +17,17 @@ class Account with _$Account {
     bool? isMobileVerified,
     int? role,
     String? rememberToken,
+    Auth? auth,
   }) = _Account;
+}
 
-  factory Account.empty() => Account();
-
-  // Option<ValueFailure<dynamic>> get failureOption {
-  //   return username.failureOrUnit
-  //       .andThen(email.failureOrUnit)
-  //       .fold((f) => some(f), (_) => none());
-  // }
+@freezed
+class Auth with _$Auth {
+  const Auth._();
+  const factory Auth({
+    String? tokenType,
+    int? expiresIn,
+    String? accessToken,
+    String? refreshToken,
+  }) = _Auth;
 }

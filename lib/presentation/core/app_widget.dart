@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' as bloc;
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:grape_customer_app/application/auth/auth_status/auth_status_bloc.dart';
+import 'package:grape_customer_app/application/main/profile/language/language_bloc.dart';
 import 'package:grape_customer_app/domain/core/l10n/app_localizations.dart';
 
 import 'package:grape_customer_app/injection.dart';
@@ -25,6 +26,9 @@ class AppWidget extends StatelessWidget {
               const AuthStatusEvent.authCheckRequested(),
             ),
         ),
+        bloc.BlocProvider(
+          create: (context) => getIt<LanguageBloc>(),
+        )
       ],
       child: _App(),
     );
@@ -47,38 +51,40 @@ class _AppState extends State<_App> {
     //   use(UserSocketHook(context));
     // }
 
-    return LifecycleWatcher(
-      child: ScreenUtilInit(
-        ensureScreenSize: true,
-        child: MaterialApp.router(
-          // routerDelegate: _appRouter.delegate(),
-          // routeInformationParser: _appRouter.defaultRouteParser(),
-          title: 'Grape Customer App',
-          debugShowCheckedModeBanner: false, theme: ThemeConfig.lightTheme,
-          locale: Locale(Intl.defaultLocale ?? Intl.systemLocale),
-          // theme: AppTheme.light,
-          // darkTheme: AppTheme.dark,
-          routerConfig: _appRouter.config(
-            navigatorObservers: () =>
-                [FirebaseAnalyticsObserver(analytics: analytics)],
-          ),
-          supportedLocales: AppLocalizations.supportedLocales,
-          localizationsDelegates: [
-            CountryLocalizations.delegate,
-            ...AppLocalizations.localizationsDelegates,
-          ],
-          localeResolutionCallback: (locale, supportedLocales) {
-            for (final supportedLocale in supportedLocales) {
-              if (supportedLocale.languageCode == locale!.languageCode &&
-                  supportedLocale.countryCode == locale.countryCode) {
-                return supportedLocale;
-              }
-            }
+    return bloc.BlocBuilder<LanguageBloc, LanguageState>(
+      builder: (context, state) {
+        print('Locale : ${state.locale}');
+        return LifecycleWatcher(
+          child: ScreenUtilInit(
+            ensureScreenSize: true,
+            child: MaterialApp.router(
+              title: 'Grape Customer App',
+              debugShowCheckedModeBanner: false,
+              theme: ThemeConfig.lightTheme,
+              locale: state.locale,
+              routerConfig: _appRouter.config(
+                navigatorObservers: () =>
+                    [FirebaseAnalyticsObserver(analytics: analytics)],
+              ),
+              supportedLocales: AppLocalizations.supportedLocales,
+              localizationsDelegates: [
+                CountryLocalizations.delegate,
+                ...AppLocalizations.localizationsDelegates,
+              ],
+              localeResolutionCallback: (locale, supportedLocales) {
+                for (final supportedLocale in supportedLocales) {
+                  if (supportedLocale.languageCode == locale!.languageCode &&
+                      supportedLocale.countryCode == locale.countryCode) {
+                    return supportedLocale;
+                  }
+                }
 
-            return supportedLocales.first;
-          },
-        ),
-      ),
+                return supportedLocales.first;
+              },
+            ),
+          ),
+        );
+      },
     );
   }
 }
