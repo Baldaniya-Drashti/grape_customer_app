@@ -34,10 +34,10 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
               ),
             );
 
-            // failureOrSuccess = await _authFacade.login(
-            //   emailAddress: EmailAddress('input'),
-            //   password: Password('input'),
-            // );
+            failureOrSuccess = await _authFacade.login(
+              mobileNumber: state.mobileNumber,
+              countryCode: state.selectedCountrycode,
+            );
           }
 
           emit(

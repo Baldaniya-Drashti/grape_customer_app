@@ -14,7 +14,7 @@ class CurrentUserDto with _$CurrentUserDto {
     @JsonKey(name: 'first_name') String? firstName,
     @JsonKey(name: 'last_name') String? lastName,
     String? email,
-    @JsonKey(name: 'country_code') DateTime? countryCode,
+    @JsonKey(name: 'country_code') String? countryCode,
     int? phone,
     @JsonKey(name: 'is_email_verified') bool? isEmailVerified,
     @JsonKey(name: 'is_mobile_verified') bool? isMobileVerified,

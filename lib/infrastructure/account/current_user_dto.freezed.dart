@@ -28,7 +28,7 @@ mixin _$CurrentUserDto {
   String? get lastName => throw _privateConstructorUsedError;
   String? get email => throw _privateConstructorUsedError;
   @JsonKey(name: 'country_code')
-  DateTime? get countryCode => throw _privateConstructorUsedError;
+  String? get countryCode => throw _privateConstructorUsedError;
   int? get phone => throw _privateConstructorUsedError;
   @JsonKey(name: 'is_email_verified')
   bool? get isEmailVerified => throw _privateConstructorUsedError;
@@ -55,7 +55,7 @@ abstract class $CurrentUserDtoCopyWith<$Res> {
       @JsonKey(name: 'first_name') String? firstName,
       @JsonKey(name: 'last_name') String? lastName,
       String? email,
-      @JsonKey(name: 'country_code') DateTime? countryCode,
+      @JsonKey(name: 'country_code') String? countryCode,
       int? phone,
       @JsonKey(name: 'is_email_verified') bool? isEmailVerified,
       @JsonKey(name: 'is_mobile_verified') bool? isMobileVerified,
@@ -107,7 +107,7 @@ class _$CurrentUserDtoCopyWithImpl<$Res, $Val extends CurrentUserDto>
       countryCode: freezed == countryCode
           ? _value.countryCode
           : countryCode // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as String?,
       phone: freezed == phone
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
@@ -145,7 +145,7 @@ abstract class _$$CurrentUserDtoImplCopyWith<$Res>
       @JsonKey(name: 'first_name') String? firstName,
       @JsonKey(name: 'last_name') String? lastName,
       String? email,
-      @JsonKey(name: 'country_code') DateTime? countryCode,
+      @JsonKey(name: 'country_code') String? countryCode,
       int? phone,
       @JsonKey(name: 'is_email_verified') bool? isEmailVerified,
       @JsonKey(name: 'is_mobile_verified') bool? isMobileVerified,
@@ -195,7 +195,7 @@ class __$$CurrentUserDtoImplCopyWithImpl<$Res>
       countryCode: freezed == countryCode
           ? _value.countryCode
           : countryCode // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as String?,
       phone: freezed == phone
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
@@ -252,7 +252,7 @@ class _$CurrentUserDtoImpl extends _CurrentUserDto {
   final String? email;
   @override
   @JsonKey(name: 'country_code')
-  final DateTime? countryCode;
+  final String? countryCode;
   @override
   final int? phone;
   @override
@@ -331,7 +331,7 @@ abstract class _CurrentUserDto extends CurrentUserDto {
           @JsonKey(name: 'first_name') final String? firstName,
           @JsonKey(name: 'last_name') final String? lastName,
           final String? email,
-          @JsonKey(name: 'country_code') final DateTime? countryCode,
+          @JsonKey(name: 'country_code') final String? countryCode,
           final int? phone,
           @JsonKey(name: 'is_email_verified') final bool? isEmailVerified,
           @JsonKey(name: 'is_mobile_verified') final bool? isMobileVerified,
@@ -356,7 +356,7 @@ abstract class _CurrentUserDto extends CurrentUserDto {
   String? get email;
   @override
   @JsonKey(name: 'country_code')
-  DateTime? get countryCode;
+  String? get countryCode;
   @override
   int? get phone;
   @override

@@ -14,7 +14,7 @@ class AccountEntity extends HiveObject {
   @HiveField(3)
   final String? email;
   @HiveField(4)
-  final DateTime? countryCode;
+  final String? countryCode;
   @HiveField(5)
   final int? phone;
   @HiveField(6)

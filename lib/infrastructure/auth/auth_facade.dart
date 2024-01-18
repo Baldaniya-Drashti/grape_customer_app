@@ -26,23 +26,37 @@ class AuthFacade implements IAuthFacade {
 
   @override
   Future<Either<AuthFailure, Unit>> login({
-    required EmailAddress emailAddress,
-    required Password password,
+    required String countryCode,
+    required MobileNumber mobileNumber,
   }) async {
-    final emailString = emailAddress.getOrCrash();
-    final passwordStr = password.getOrCrash();
+    try {
+      final response = await apiService.postMethod(
+        ApiConstants.login,
+        {
+          "role": 2,
+          "country_code": countryCode,
+          "mobile": mobileNumber.getOrCrash(),
+        },
+      );
 
-    final response = await apiService.postMethod(
-      '/account/login',
-      {"email": emailString, "password": passwordStr},
-    );
+      final account = CurrentUserDto.fromJson(response.data).toDomain();
+      _setCookie(account.rememberToken ?? "");
+      _setUserData(account);
+      return right(unit);
+    } on DioException catch (err) {
+      if (err.response != null) {
+        var commonRespose = CommonResponse.fromJson(err.response?.data);
 
-    // final cookies = response.headers['set-cookie'];
-    // _setCookie(cookies!);
-    //final results = jsonDecode(response.data);
-    final account = CurrentUserDto.fromJson(response.data).toDomain();
-    _setUserData(account);
-    return right(unit);
+        if (commonRespose.dioMessage != null) {
+          return left(
+              AuthFailure.showAPIResponseMessage(commonRespose.dioMessage!));
+        }
+      } else if (err.type == DioExceptionType.connectionError) {
+        return left(const AuthFailure.networkError());
+      }
+
+      return left(const AuthFailure.serverError());
+    }
   }
 
   @override
@@ -58,20 +72,14 @@ class AuthFacade implements IAuthFacade {
         ApiConstants.register,
         {
           "role": 2,
-          "first_name": "Grap",
-          "last_name": "Market",
-          "email": "grap-market@mailinator.com",
-          "country_code": "+91",
-          "mobile": 1234564564
-          // "role": 2,
-          // "first_name": firstName.getOrCrash(),
-          // "last_name": lastName.getOrCrash(),
-          // "email": emailAddress.getOrCrash(),
-          // "country_code": countryCode,
-          // "mobile": mobileNumber.getOrCrash()
+          "first_name": firstName.getOrCrash(),
+          "last_name": lastName.getOrCrash(),
+          "email": emailAddress.getOrCrash(),
+          "country_code": countryCode,
+          "mobile": mobileNumber.getOrCrash()
         },
       );
-      print('response : ${response.data}');
+
       final account = CurrentUserDto.fromJson(response.data).toDomain();
       _setCookie(account.rememberToken ?? "");
       _setUserData(account);
@@ -92,6 +100,7 @@ class AuthFacade implements IAuthFacade {
 
   @override
   Future<bool> checkAuthenticated() async {
+    print('getUserToken() : ${getUserToken()}');
     // getCookie returns null as a String, so it has to be checked like this.
     return getUserToken() != null;
   }
@@ -175,7 +184,7 @@ class AuthFacade implements IAuthFacade {
     // Hacky solution to allow testing
     if (!Platform.environment.containsKey('FLUTTER_TEST')) {
       if (authToken.isNotEmpty) {
-        await Hive.box(BoxNames.settingsBox).put(BoxKeys.cookieKey, authToken);
+        await Hive.box(BoxNames.settingsBox).put(BoxKeys.userToken, authToken);
       }
     }
   }

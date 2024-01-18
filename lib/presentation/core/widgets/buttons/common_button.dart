@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:grape_customer_app/presentation/common/utils/app_focus.dart';
 import 'package:grape_customer_app/presentation/core/styles/app_colors.dart';
 
 import 'package:grape_customer_app/domain/core/math_utils.dart';
@@ -44,7 +45,12 @@ class CommonButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: isSubmitting ? null : onPressed,
+      onPressed: isSubmitting
+          ? null
+          : () {
+              AppFocus.unfocus(context);
+              onPressed();
+            },
       style: ElevatedButton.styleFrom(
         side: BorderSide(color: borderColor ?? Colors.transparent),
         elevation: 0,
@@ -69,8 +75,12 @@ class CommonButton extends StatelessWidget {
         ),
       ),
       child: isSubmitting
-          ? CircularProgressIndicator(
-              color: AppColors.white,
+          ? SizedBox(
+              height: getSize(20),
+              width: getSize(20),
+              child: CircularProgressIndicator(
+                color: AppColors.white,
+              ),
             )
           : BaseText(
               text: buttonText,

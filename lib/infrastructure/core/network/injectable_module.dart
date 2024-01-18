@@ -28,7 +28,7 @@ class ApiService {
         return handler.next(options); //continue
       },
       onResponse: (response, handler) {
-        return handler.next(response); // continue
+        return handler.resolve(response); // continue
       },
       onError: (DioException e, handler) {
         return handler.next(e); //continue

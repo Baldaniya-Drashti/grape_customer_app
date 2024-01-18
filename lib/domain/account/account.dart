@@ -11,7 +11,7 @@ class Account with _$Account {
     String? firstName,
     String? lastName,
     String? email,
-    DateTime? countryCode,
+    String? countryCode,
     int? phone,
     bool? isEmailVerified,
     bool? isMobileVerified,

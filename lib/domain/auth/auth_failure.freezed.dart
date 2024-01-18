@@ -22,6 +22,7 @@ mixin _$AuthFailure {
     required TResult Function() invalidCredentials,
     required TResult Function(String message) showAPIResponseMessage,
     required TResult Function() serverError,
+    required TResult Function() networkError,
     required TResult Function(String error) badRequest,
   }) =>
       throw _privateConstructorUsedError;
@@ -31,6 +32,7 @@ mixin _$AuthFailure {
     TResult? Function()? invalidCredentials,
     TResult? Function(String message)? showAPIResponseMessage,
     TResult? Function()? serverError,
+    TResult? Function()? networkError,
     TResult? Function(String error)? badRequest,
   }) =>
       throw _privateConstructorUsedError;
@@ -40,6 +42,7 @@ mixin _$AuthFailure {
     TResult Function()? invalidCredentials,
     TResult Function(String message)? showAPIResponseMessage,
     TResult Function()? serverError,
+    TResult Function()? networkError,
     TResult Function(String error)? badRequest,
     required TResult orElse(),
   }) =>
@@ -51,6 +54,7 @@ mixin _$AuthFailure {
     required TResult Function(_ShowAPIResponseMessage value)
         showAPIResponseMessage,
     required TResult Function(_ServerError value) serverError,
+    required TResult Function(_NetworkError value) networkError,
     required TResult Function(_BadRequest value) badRequest,
   }) =>
       throw _privateConstructorUsedError;
@@ -60,6 +64,7 @@ mixin _$AuthFailure {
     TResult? Function(_InvalidCredentials value)? invalidCredentials,
     TResult? Function(_ShowAPIResponseMessage value)? showAPIResponseMessage,
     TResult? Function(_ServerError value)? serverError,
+    TResult? Function(_NetworkError value)? networkError,
     TResult? Function(_BadRequest value)? badRequest,
   }) =>
       throw _privateConstructorUsedError;
@@ -69,6 +74,7 @@ mixin _$AuthFailure {
     TResult Function(_InvalidCredentials value)? invalidCredentials,
     TResult Function(_ShowAPIResponseMessage value)? showAPIResponseMessage,
     TResult Function(_ServerError value)? serverError,
+    TResult Function(_NetworkError value)? networkError,
     TResult Function(_BadRequest value)? badRequest,
     required TResult orElse(),
   }) =>
@@ -135,6 +141,7 @@ class _$PasswordsDontMatchImpl implements _PasswordsDontMatch {
     required TResult Function() invalidCredentials,
     required TResult Function(String message) showAPIResponseMessage,
     required TResult Function() serverError,
+    required TResult Function() networkError,
     required TResult Function(String error) badRequest,
   }) {
     return passwordsDontMatch();
@@ -147,6 +154,7 @@ class _$PasswordsDontMatchImpl implements _PasswordsDontMatch {
     TResult? Function()? invalidCredentials,
     TResult? Function(String message)? showAPIResponseMessage,
     TResult? Function()? serverError,
+    TResult? Function()? networkError,
     TResult? Function(String error)? badRequest,
   }) {
     return passwordsDontMatch?.call();
@@ -159,6 +167,7 @@ class _$PasswordsDontMatchImpl implements _PasswordsDontMatch {
     TResult Function()? invalidCredentials,
     TResult Function(String message)? showAPIResponseMessage,
     TResult Function()? serverError,
+    TResult Function()? networkError,
     TResult Function(String error)? badRequest,
     required TResult orElse(),
   }) {
@@ -176,6 +185,7 @@ class _$PasswordsDontMatchImpl implements _PasswordsDontMatch {
     required TResult Function(_ShowAPIResponseMessage value)
         showAPIResponseMessage,
     required TResult Function(_ServerError value) serverError,
+    required TResult Function(_NetworkError value) networkError,
     required TResult Function(_BadRequest value) badRequest,
   }) {
     return passwordsDontMatch(this);
@@ -188,6 +198,7 @@ class _$PasswordsDontMatchImpl implements _PasswordsDontMatch {
     TResult? Function(_InvalidCredentials value)? invalidCredentials,
     TResult? Function(_ShowAPIResponseMessage value)? showAPIResponseMessage,
     TResult? Function(_ServerError value)? serverError,
+    TResult? Function(_NetworkError value)? networkError,
     TResult? Function(_BadRequest value)? badRequest,
   }) {
     return passwordsDontMatch?.call(this);
@@ -200,6 +211,7 @@ class _$PasswordsDontMatchImpl implements _PasswordsDontMatch {
     TResult Function(_InvalidCredentials value)? invalidCredentials,
     TResult Function(_ShowAPIResponseMessage value)? showAPIResponseMessage,
     TResult Function(_ServerError value)? serverError,
+    TResult Function(_NetworkError value)? networkError,
     TResult Function(_BadRequest value)? badRequest,
     required TResult orElse(),
   }) {
@@ -256,6 +268,7 @@ class _$InvalidCredentialsImpl implements _InvalidCredentials {
     required TResult Function() invalidCredentials,
     required TResult Function(String message) showAPIResponseMessage,
     required TResult Function() serverError,
+    required TResult Function() networkError,
     required TResult Function(String error) badRequest,
   }) {
     return invalidCredentials();
@@ -268,6 +281,7 @@ class _$InvalidCredentialsImpl implements _InvalidCredentials {
     TResult? Function()? invalidCredentials,
     TResult? Function(String message)? showAPIResponseMessage,
     TResult? Function()? serverError,
+    TResult? Function()? networkError,
     TResult? Function(String error)? badRequest,
   }) {
     return invalidCredentials?.call();
@@ -280,6 +294,7 @@ class _$InvalidCredentialsImpl implements _InvalidCredentials {
     TResult Function()? invalidCredentials,
     TResult Function(String message)? showAPIResponseMessage,
     TResult Function()? serverError,
+    TResult Function()? networkError,
     TResult Function(String error)? badRequest,
     required TResult orElse(),
   }) {
@@ -297,6 +312,7 @@ class _$InvalidCredentialsImpl implements _InvalidCredentials {
     required TResult Function(_ShowAPIResponseMessage value)
         showAPIResponseMessage,
     required TResult Function(_ServerError value) serverError,
+    required TResult Function(_NetworkError value) networkError,
     required TResult Function(_BadRequest value) badRequest,
   }) {
     return invalidCredentials(this);
@@ -309,6 +325,7 @@ class _$InvalidCredentialsImpl implements _InvalidCredentials {
     TResult? Function(_InvalidCredentials value)? invalidCredentials,
     TResult? Function(_ShowAPIResponseMessage value)? showAPIResponseMessage,
     TResult? Function(_ServerError value)? serverError,
+    TResult? Function(_NetworkError value)? networkError,
     TResult? Function(_BadRequest value)? badRequest,
   }) {
     return invalidCredentials?.call(this);
@@ -321,6 +338,7 @@ class _$InvalidCredentialsImpl implements _InvalidCredentials {
     TResult Function(_InvalidCredentials value)? invalidCredentials,
     TResult Function(_ShowAPIResponseMessage value)? showAPIResponseMessage,
     TResult Function(_ServerError value)? serverError,
+    TResult Function(_NetworkError value)? networkError,
     TResult Function(_BadRequest value)? badRequest,
     required TResult orElse(),
   }) {
@@ -406,6 +424,7 @@ class _$ShowAPIResponseMessageImpl implements _ShowAPIResponseMessage {
     required TResult Function() invalidCredentials,
     required TResult Function(String message) showAPIResponseMessage,
     required TResult Function() serverError,
+    required TResult Function() networkError,
     required TResult Function(String error) badRequest,
   }) {
     return showAPIResponseMessage(message);
@@ -418,6 +437,7 @@ class _$ShowAPIResponseMessageImpl implements _ShowAPIResponseMessage {
     TResult? Function()? invalidCredentials,
     TResult? Function(String message)? showAPIResponseMessage,
     TResult? Function()? serverError,
+    TResult? Function()? networkError,
     TResult? Function(String error)? badRequest,
   }) {
     return showAPIResponseMessage?.call(message);
@@ -430,6 +450,7 @@ class _$ShowAPIResponseMessageImpl implements _ShowAPIResponseMessage {
     TResult Function()? invalidCredentials,
     TResult Function(String message)? showAPIResponseMessage,
     TResult Function()? serverError,
+    TResult Function()? networkError,
     TResult Function(String error)? badRequest,
     required TResult orElse(),
   }) {
@@ -447,6 +468,7 @@ class _$ShowAPIResponseMessageImpl implements _ShowAPIResponseMessage {
     required TResult Function(_ShowAPIResponseMessage value)
         showAPIResponseMessage,
     required TResult Function(_ServerError value) serverError,
+    required TResult Function(_NetworkError value) networkError,
     required TResult Function(_BadRequest value) badRequest,
   }) {
     return showAPIResponseMessage(this);
@@ -459,6 +481,7 @@ class _$ShowAPIResponseMessageImpl implements _ShowAPIResponseMessage {
     TResult? Function(_InvalidCredentials value)? invalidCredentials,
     TResult? Function(_ShowAPIResponseMessage value)? showAPIResponseMessage,
     TResult? Function(_ServerError value)? serverError,
+    TResult? Function(_NetworkError value)? networkError,
     TResult? Function(_BadRequest value)? badRequest,
   }) {
     return showAPIResponseMessage?.call(this);
@@ -471,6 +494,7 @@ class _$ShowAPIResponseMessageImpl implements _ShowAPIResponseMessage {
     TResult Function(_InvalidCredentials value)? invalidCredentials,
     TResult Function(_ShowAPIResponseMessage value)? showAPIResponseMessage,
     TResult Function(_ServerError value)? serverError,
+    TResult Function(_NetworkError value)? networkError,
     TResult Function(_BadRequest value)? badRequest,
     required TResult orElse(),
   }) {
@@ -533,6 +557,7 @@ class _$ServerErrorImpl implements _ServerError {
     required TResult Function() invalidCredentials,
     required TResult Function(String message) showAPIResponseMessage,
     required TResult Function() serverError,
+    required TResult Function() networkError,
     required TResult Function(String error) badRequest,
   }) {
     return serverError();
@@ -545,6 +570,7 @@ class _$ServerErrorImpl implements _ServerError {
     TResult? Function()? invalidCredentials,
     TResult? Function(String message)? showAPIResponseMessage,
     TResult? Function()? serverError,
+    TResult? Function()? networkError,
     TResult? Function(String error)? badRequest,
   }) {
     return serverError?.call();
@@ -557,6 +583,7 @@ class _$ServerErrorImpl implements _ServerError {
     TResult Function()? invalidCredentials,
     TResult Function(String message)? showAPIResponseMessage,
     TResult Function()? serverError,
+    TResult Function()? networkError,
     TResult Function(String error)? badRequest,
     required TResult orElse(),
   }) {
@@ -574,6 +601,7 @@ class _$ServerErrorImpl implements _ServerError {
     required TResult Function(_ShowAPIResponseMessage value)
         showAPIResponseMessage,
     required TResult Function(_ServerError value) serverError,
+    required TResult Function(_NetworkError value) networkError,
     required TResult Function(_BadRequest value) badRequest,
   }) {
     return serverError(this);
@@ -586,6 +614,7 @@ class _$ServerErrorImpl implements _ServerError {
     TResult? Function(_InvalidCredentials value)? invalidCredentials,
     TResult? Function(_ShowAPIResponseMessage value)? showAPIResponseMessage,
     TResult? Function(_ServerError value)? serverError,
+    TResult? Function(_NetworkError value)? networkError,
     TResult? Function(_BadRequest value)? badRequest,
   }) {
     return serverError?.call(this);
@@ -598,6 +627,7 @@ class _$ServerErrorImpl implements _ServerError {
     TResult Function(_InvalidCredentials value)? invalidCredentials,
     TResult Function(_ShowAPIResponseMessage value)? showAPIResponseMessage,
     TResult Function(_ServerError value)? serverError,
+    TResult Function(_NetworkError value)? networkError,
     TResult Function(_BadRequest value)? badRequest,
     required TResult orElse(),
   }) {
@@ -610,6 +640,133 @@ class _$ServerErrorImpl implements _ServerError {
 
 abstract class _ServerError implements AuthFailure {
   const factory _ServerError() = _$ServerErrorImpl;
+}
+
+/// @nodoc
+abstract class _$$NetworkErrorImplCopyWith<$Res> {
+  factory _$$NetworkErrorImplCopyWith(
+          _$NetworkErrorImpl value, $Res Function(_$NetworkErrorImpl) then) =
+      __$$NetworkErrorImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$NetworkErrorImplCopyWithImpl<$Res>
+    extends _$AuthFailureCopyWithImpl<$Res, _$NetworkErrorImpl>
+    implements _$$NetworkErrorImplCopyWith<$Res> {
+  __$$NetworkErrorImplCopyWithImpl(
+      _$NetworkErrorImpl _value, $Res Function(_$NetworkErrorImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$NetworkErrorImpl implements _NetworkError {
+  const _$NetworkErrorImpl();
+
+  @override
+  String toString() {
+    return 'AuthFailure.networkError()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$NetworkErrorImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() passwordsDontMatch,
+    required TResult Function() invalidCredentials,
+    required TResult Function(String message) showAPIResponseMessage,
+    required TResult Function() serverError,
+    required TResult Function() networkError,
+    required TResult Function(String error) badRequest,
+  }) {
+    return networkError();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? passwordsDontMatch,
+    TResult? Function()? invalidCredentials,
+    TResult? Function(String message)? showAPIResponseMessage,
+    TResult? Function()? serverError,
+    TResult? Function()? networkError,
+    TResult? Function(String error)? badRequest,
+  }) {
+    return networkError?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? passwordsDontMatch,
+    TResult Function()? invalidCredentials,
+    TResult Function(String message)? showAPIResponseMessage,
+    TResult Function()? serverError,
+    TResult Function()? networkError,
+    TResult Function(String error)? badRequest,
+    required TResult orElse(),
+  }) {
+    if (networkError != null) {
+      return networkError();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_PasswordsDontMatch value) passwordsDontMatch,
+    required TResult Function(_InvalidCredentials value) invalidCredentials,
+    required TResult Function(_ShowAPIResponseMessage value)
+        showAPIResponseMessage,
+    required TResult Function(_ServerError value) serverError,
+    required TResult Function(_NetworkError value) networkError,
+    required TResult Function(_BadRequest value) badRequest,
+  }) {
+    return networkError(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_PasswordsDontMatch value)? passwordsDontMatch,
+    TResult? Function(_InvalidCredentials value)? invalidCredentials,
+    TResult? Function(_ShowAPIResponseMessage value)? showAPIResponseMessage,
+    TResult? Function(_ServerError value)? serverError,
+    TResult? Function(_NetworkError value)? networkError,
+    TResult? Function(_BadRequest value)? badRequest,
+  }) {
+    return networkError?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_PasswordsDontMatch value)? passwordsDontMatch,
+    TResult Function(_InvalidCredentials value)? invalidCredentials,
+    TResult Function(_ShowAPIResponseMessage value)? showAPIResponseMessage,
+    TResult Function(_ServerError value)? serverError,
+    TResult Function(_NetworkError value)? networkError,
+    TResult Function(_BadRequest value)? badRequest,
+    required TResult orElse(),
+  }) {
+    if (networkError != null) {
+      return networkError(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _NetworkError implements AuthFailure {
+  const factory _NetworkError() = _$NetworkErrorImpl;
 }
 
 /// @nodoc
@@ -680,6 +837,7 @@ class _$BadRequestImpl implements _BadRequest {
     required TResult Function() invalidCredentials,
     required TResult Function(String message) showAPIResponseMessage,
     required TResult Function() serverError,
+    required TResult Function() networkError,
     required TResult Function(String error) badRequest,
   }) {
     return badRequest(error);
@@ -692,6 +850,7 @@ class _$BadRequestImpl implements _BadRequest {
     TResult? Function()? invalidCredentials,
     TResult? Function(String message)? showAPIResponseMessage,
     TResult? Function()? serverError,
+    TResult? Function()? networkError,
     TResult? Function(String error)? badRequest,
   }) {
     return badRequest?.call(error);
@@ -704,6 +863,7 @@ class _$BadRequestImpl implements _BadRequest {
     TResult Function()? invalidCredentials,
     TResult Function(String message)? showAPIResponseMessage,
     TResult Function()? serverError,
+    TResult Function()? networkError,
     TResult Function(String error)? badRequest,
     required TResult orElse(),
   }) {
@@ -721,6 +881,7 @@ class _$BadRequestImpl implements _BadRequest {
     required TResult Function(_ShowAPIResponseMessage value)
         showAPIResponseMessage,
     required TResult Function(_ServerError value) serverError,
+    required TResult Function(_NetworkError value) networkError,
     required TResult Function(_BadRequest value) badRequest,
   }) {
     return badRequest(this);
@@ -733,6 +894,7 @@ class _$BadRequestImpl implements _BadRequest {
     TResult? Function(_InvalidCredentials value)? invalidCredentials,
     TResult? Function(_ShowAPIResponseMessage value)? showAPIResponseMessage,
     TResult? Function(_ServerError value)? serverError,
+    TResult? Function(_NetworkError value)? networkError,
     TResult? Function(_BadRequest value)? badRequest,
   }) {
     return badRequest?.call(this);
@@ -745,6 +907,7 @@ class _$BadRequestImpl implements _BadRequest {
     TResult Function(_InvalidCredentials value)? invalidCredentials,
     TResult Function(_ShowAPIResponseMessage value)? showAPIResponseMessage,
     TResult Function(_ServerError value)? serverError,
+    TResult Function(_NetworkError value)? networkError,
     TResult Function(_BadRequest value)? badRequest,
     required TResult orElse(),
   }) {

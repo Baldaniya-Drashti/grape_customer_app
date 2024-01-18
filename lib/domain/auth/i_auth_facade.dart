@@ -13,8 +13,8 @@ abstract class IAuthFacade {
   });
 
   Future<Either<AuthFailure, Unit>> login({
-    required EmailAddress emailAddress,
-    required Password password,
+    required String countryCode,
+    required MobileNumber mobileNumber,
   });
 
   Future<bool> checkAuthenticated();

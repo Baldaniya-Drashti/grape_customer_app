@@ -14,7 +14,6 @@ import 'package:grape_customer_app/presentation/common/utils/flushbar_creator.da
 import 'package:grape_customer_app/presentation/common/widgets/base_text.dart';
 import 'package:grape_customer_app/presentation/common/widgets/common_country_code_picker.dart';
 
-import 'package:grape_customer_app/presentation/core/restart_widget.dart';
 import 'package:grape_customer_app/presentation/core/widgets/buttons/common_button.dart';
 import 'package:grape_customer_app/presentation/core/widgets/inputs/custom_text_field.dart';
 
@@ -31,13 +30,24 @@ class LoginForm extends StatelessWidget {
             (failure) {
               showError(
                 message: failure.maybeMap(
-                  invalidCredentials: (_) => "Invalid Credentials",
+                  showAPIResponseMessage: (value) => value.message,
+                  networkError: (value) =>
+                      'Please check your internet connectivity',
                   orElse: () => "Server Error. Try again later.",
                 ),
               ).show(context);
             },
             (_) {
-              RestartWidget.restartApp(context);
+              context.router.push(
+                PageRouteInfo(
+                  OtpLoginVerificationView.name,
+                  args: OtpLoginVerificationViewArgs(
+                    countryCode: state.selectedCountrycode,
+                    phoneNumber: state.mobileNumber.getValue(),
+                  ),
+                ),
+              );
+              // RestartWidget.restartApp(context);
             },
           ),
         );
@@ -124,15 +134,6 @@ class LoginForm extends StatelessWidget {
                 CommonButton(
                   isSubmitting: state.isSubmitting,
                   onPressed: () {
-                    // context.router.push(
-                    //   PageRouteInfo(
-                    //     OtpLoginVerificationView.name,
-                    //     args: OtpLoginVerificationViewArgs(
-                    //       countryCode: state.selectedCountrycode,
-                    //       phoneNumber: state.mobileNumber.getValue(),
-                    //     ),
-                    //   ),
-                    // );
                     context
                         .read<LoginFormBloc>()
                         .add(LoginFormEvent.loginPressed());

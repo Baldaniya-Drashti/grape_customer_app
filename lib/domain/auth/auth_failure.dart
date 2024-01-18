@@ -10,5 +10,7 @@ class AuthFailure with _$AuthFailure {
       _ShowAPIResponseMessage;
 
   const factory AuthFailure.serverError() = _ServerError;
+  const factory AuthFailure.networkError() = _NetworkError;
+
   const factory AuthFailure.badRequest(String error) = _BadRequest;
 }
