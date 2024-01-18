@@ -5,6 +5,10 @@ String? getUserToken() {
   return Hive.box(BoxNames.settingsBox).get(BoxKeys.userToken);
 }
 
+String? getRememberToken() {
+  return Hive.box(BoxNames.settingsBox).get(BoxKeys.rememberToken);
+}
+
 bool? isUserShowIntro() {
   return Hive.box(BoxNames.settingsBox).get(BoxKeys.isUserShowIntro);
 }

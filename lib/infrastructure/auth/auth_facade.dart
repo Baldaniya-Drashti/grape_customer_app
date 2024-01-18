@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
@@ -40,7 +41,7 @@ class AuthFacade implements IAuthFacade {
       );
 
       final account = CurrentUserDto.fromJson(response.data).toDomain();
-      _setCookie(account.rememberToken ?? "");
+      setRememberToken(account.rememberToken ?? "");
       _setUserData(account);
       return right(unit);
     } on DioException catch (err) {
@@ -81,7 +82,7 @@ class AuthFacade implements IAuthFacade {
       );
 
       final account = CurrentUserDto.fromJson(response.data).toDomain();
-      _setCookie(account.rememberToken ?? "");
+      setRememberToken(account.rememberToken ?? "");
       _setUserData(account);
       return right(unit);
     } on DioException catch (err) {
@@ -100,7 +101,7 @@ class AuthFacade implements IAuthFacade {
 
   @override
   Future<bool> checkAuthenticated() async {
-    print('getUserToken() : ${getUserToken()}');
+    log('getUserToken() : ${getUserToken()}');
     // getCookie returns null as a String, so it has to be checked like this.
     return getUserToken() != null;
   }
@@ -180,7 +181,7 @@ class AuthFacade implements IAuthFacade {
     }
   }
 
-  Future<void> _setCookie(String authToken) async {
+  Future<void> setRememberToken(String authToken) async {
     // Hacky solution to allow testing
     if (!Platform.environment.containsKey('FLUTTER_TEST')) {
       if (authToken.isNotEmpty) {

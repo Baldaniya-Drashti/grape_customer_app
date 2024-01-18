@@ -26,6 +26,7 @@ mixin _$Account {
   bool? get isMobileVerified => throw _privateConstructorUsedError;
   int? get role => throw _privateConstructorUsedError;
   String? get rememberToken => throw _privateConstructorUsedError;
+  Auth? get auth => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AccountCopyWith<Account> get copyWith => throw _privateConstructorUsedError;
@@ -46,7 +47,10 @@ abstract class $AccountCopyWith<$Res> {
       bool? isEmailVerified,
       bool? isMobileVerified,
       int? role,
-      String? rememberToken});
+      String? rememberToken,
+      Auth? auth});
+
+  $AuthCopyWith<$Res>? get auth;
 }
 
 /// @nodoc
@@ -72,6 +76,7 @@ class _$AccountCopyWithImpl<$Res, $Val extends Account>
     Object? isMobileVerified = freezed,
     Object? role = freezed,
     Object? rememberToken = freezed,
+    Object? auth = freezed,
   }) {
     return _then(_value.copyWith(
       userId: freezed == userId
@@ -114,7 +119,23 @@ class _$AccountCopyWithImpl<$Res, $Val extends Account>
           ? _value.rememberToken
           : rememberToken // ignore: cast_nullable_to_non_nullable
               as String?,
+      auth: freezed == auth
+          ? _value.auth
+          : auth // ignore: cast_nullable_to_non_nullable
+              as Auth?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $AuthCopyWith<$Res>? get auth {
+    if (_value.auth == null) {
+      return null;
+    }
+
+    return $AuthCopyWith<$Res>(_value.auth!, (value) {
+      return _then(_value.copyWith(auth: value) as $Val);
+    });
   }
 }
 
@@ -135,7 +156,11 @@ abstract class _$$AccountImplCopyWith<$Res> implements $AccountCopyWith<$Res> {
       bool? isEmailVerified,
       bool? isMobileVerified,
       int? role,
-      String? rememberToken});
+      String? rememberToken,
+      Auth? auth});
+
+  @override
+  $AuthCopyWith<$Res>? get auth;
 }
 
 /// @nodoc
@@ -159,6 +184,7 @@ class __$$AccountImplCopyWithImpl<$Res>
     Object? isMobileVerified = freezed,
     Object? role = freezed,
     Object? rememberToken = freezed,
+    Object? auth = freezed,
   }) {
     return _then(_$AccountImpl(
       userId: freezed == userId
@@ -201,6 +227,10 @@ class __$$AccountImplCopyWithImpl<$Res>
           ? _value.rememberToken
           : rememberToken // ignore: cast_nullable_to_non_nullable
               as String?,
+      auth: freezed == auth
+          ? _value.auth
+          : auth // ignore: cast_nullable_to_non_nullable
+              as Auth?,
     ));
   }
 }
@@ -218,7 +248,8 @@ class _$AccountImpl extends _Account {
       this.isEmailVerified,
       this.isMobileVerified,
       this.role,
-      this.rememberToken})
+      this.rememberToken,
+      this.auth})
       : super._();
 
   @override
@@ -241,10 +272,12 @@ class _$AccountImpl extends _Account {
   final int? role;
   @override
   final String? rememberToken;
+  @override
+  final Auth? auth;
 
   @override
   String toString() {
-    return 'Account(userId: $userId, firstName: $firstName, lastName: $lastName, email: $email, countryCode: $countryCode, phone: $phone, isEmailVerified: $isEmailVerified, isMobileVerified: $isMobileVerified, role: $role, rememberToken: $rememberToken)';
+    return 'Account(userId: $userId, firstName: $firstName, lastName: $lastName, email: $email, countryCode: $countryCode, phone: $phone, isEmailVerified: $isEmailVerified, isMobileVerified: $isMobileVerified, role: $role, rememberToken: $rememberToken, auth: $auth)';
   }
 
   @override
@@ -267,7 +300,8 @@ class _$AccountImpl extends _Account {
                 other.isMobileVerified == isMobileVerified) &&
             (identical(other.role, role) || other.role == role) &&
             (identical(other.rememberToken, rememberToken) ||
-                other.rememberToken == rememberToken));
+                other.rememberToken == rememberToken) &&
+            (identical(other.auth, auth) || other.auth == auth));
   }
 
   @override
@@ -282,7 +316,8 @@ class _$AccountImpl extends _Account {
       isEmailVerified,
       isMobileVerified,
       role,
-      rememberToken);
+      rememberToken,
+      auth);
 
   @JsonKey(ignore: true)
   @override
@@ -302,7 +337,8 @@ abstract class _Account extends Account {
       final bool? isEmailVerified,
       final bool? isMobileVerified,
       final int? role,
-      final String? rememberToken}) = _$AccountImpl;
+      final String? rememberToken,
+      final Auth? auth}) = _$AccountImpl;
   const _Account._() : super._();
 
   @override
@@ -326,7 +362,190 @@ abstract class _Account extends Account {
   @override
   String? get rememberToken;
   @override
+  Auth? get auth;
+  @override
   @JsonKey(ignore: true)
   _$$AccountImplCopyWith<_$AccountImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+mixin _$Auth {
+  String? get tokenType => throw _privateConstructorUsedError;
+  int? get expiresIn => throw _privateConstructorUsedError;
+  String? get accessToken => throw _privateConstructorUsedError;
+  String? get refreshToken => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $AuthCopyWith<Auth> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $AuthCopyWith<$Res> {
+  factory $AuthCopyWith(Auth value, $Res Function(Auth) then) =
+      _$AuthCopyWithImpl<$Res, Auth>;
+  @useResult
+  $Res call(
+      {String? tokenType,
+      int? expiresIn,
+      String? accessToken,
+      String? refreshToken});
+}
+
+/// @nodoc
+class _$AuthCopyWithImpl<$Res, $Val extends Auth>
+    implements $AuthCopyWith<$Res> {
+  _$AuthCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? tokenType = freezed,
+    Object? expiresIn = freezed,
+    Object? accessToken = freezed,
+    Object? refreshToken = freezed,
+  }) {
+    return _then(_value.copyWith(
+      tokenType: freezed == tokenType
+          ? _value.tokenType
+          : tokenType // ignore: cast_nullable_to_non_nullable
+              as String?,
+      expiresIn: freezed == expiresIn
+          ? _value.expiresIn
+          : expiresIn // ignore: cast_nullable_to_non_nullable
+              as int?,
+      accessToken: freezed == accessToken
+          ? _value.accessToken
+          : accessToken // ignore: cast_nullable_to_non_nullable
+              as String?,
+      refreshToken: freezed == refreshToken
+          ? _value.refreshToken
+          : refreshToken // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$AuthImplCopyWith<$Res> implements $AuthCopyWith<$Res> {
+  factory _$$AuthImplCopyWith(
+          _$AuthImpl value, $Res Function(_$AuthImpl) then) =
+      __$$AuthImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {String? tokenType,
+      int? expiresIn,
+      String? accessToken,
+      String? refreshToken});
+}
+
+/// @nodoc
+class __$$AuthImplCopyWithImpl<$Res>
+    extends _$AuthCopyWithImpl<$Res, _$AuthImpl>
+    implements _$$AuthImplCopyWith<$Res> {
+  __$$AuthImplCopyWithImpl(_$AuthImpl _value, $Res Function(_$AuthImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? tokenType = freezed,
+    Object? expiresIn = freezed,
+    Object? accessToken = freezed,
+    Object? refreshToken = freezed,
+  }) {
+    return _then(_$AuthImpl(
+      tokenType: freezed == tokenType
+          ? _value.tokenType
+          : tokenType // ignore: cast_nullable_to_non_nullable
+              as String?,
+      expiresIn: freezed == expiresIn
+          ? _value.expiresIn
+          : expiresIn // ignore: cast_nullable_to_non_nullable
+              as int?,
+      accessToken: freezed == accessToken
+          ? _value.accessToken
+          : accessToken // ignore: cast_nullable_to_non_nullable
+              as String?,
+      refreshToken: freezed == refreshToken
+          ? _value.refreshToken
+          : refreshToken // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$AuthImpl extends _Auth {
+  const _$AuthImpl(
+      {this.tokenType, this.expiresIn, this.accessToken, this.refreshToken})
+      : super._();
+
+  @override
+  final String? tokenType;
+  @override
+  final int? expiresIn;
+  @override
+  final String? accessToken;
+  @override
+  final String? refreshToken;
+
+  @override
+  String toString() {
+    return 'Auth(tokenType: $tokenType, expiresIn: $expiresIn, accessToken: $accessToken, refreshToken: $refreshToken)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$AuthImpl &&
+            (identical(other.tokenType, tokenType) ||
+                other.tokenType == tokenType) &&
+            (identical(other.expiresIn, expiresIn) ||
+                other.expiresIn == expiresIn) &&
+            (identical(other.accessToken, accessToken) ||
+                other.accessToken == accessToken) &&
+            (identical(other.refreshToken, refreshToken) ||
+                other.refreshToken == refreshToken));
+  }
+
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, tokenType, expiresIn, accessToken, refreshToken);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$AuthImplCopyWith<_$AuthImpl> get copyWith =>
+      __$$AuthImplCopyWithImpl<_$AuthImpl>(this, _$identity);
+}
+
+abstract class _Auth extends Auth {
+  const factory _Auth(
+      {final String? tokenType,
+      final int? expiresIn,
+      final String? accessToken,
+      final String? refreshToken}) = _$AuthImpl;
+  const _Auth._() : super._();
+
+  @override
+  String? get tokenType;
+  @override
+  int? get expiresIn;
+  @override
+  String? get accessToken;
+  @override
+  String? get refreshToken;
+  @override
+  @JsonKey(ignore: true)
+  _$$AuthImplCopyWith<_$AuthImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
