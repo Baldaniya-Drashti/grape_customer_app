@@ -34,8 +34,6 @@ import 'package:grape_customer_app/application/account/update_account/update_acc
     as _i15;
 import 'package:grape_customer_app/application/auth/auth_status/auth_status_bloc.dart'
     as _i17;
-import 'package:grape_customer_app/application/auth/forgot_password/forgot_password_cubit.dart'
-    as _i19;
 import 'package:grape_customer_app/application/auth/login_form/login_form_bloc.dart'
     as _i11;
 import 'package:grape_customer_app/application/auth/register_form/register_form_bloc.dart'
@@ -100,7 +98,7 @@ extension GetItInjectableX on _i1.GetIt {
     gh.factory<_i10.LanguageBloc>(() => _i10.LanguageBloc());
     gh.factory<_i11.LoginFormBloc>(
         () => _i11.LoginFormBloc(gh<_i8.IAuthFacade>()));
-    gh.factory<_i12.MainTabBloc>(() => _i12.MainTabBloc());
+    gh.factory<_i12.MainTabBloc>(() => _i12.MainTabBloc(gh<_i8.IAuthFacade>()));
     gh.factory<_i13.OnboardingBloc>(() => _i13.OnboardingBloc());
     gh.factory<_i14.RegisterFormBloc>(
         () => _i14.RegisterFormBloc(gh<_i8.IAuthFacade>()));
@@ -112,8 +110,6 @@ extension GetItInjectableX on _i1.GetIt {
         () => _i17.AuthStatusBloc(gh<_i8.IAuthFacade>()));
     gh.factory<_i18.ChangePasswordCubit>(
         () => _i18.ChangePasswordCubit(gh<_i8.IAuthFacade>()));
-    gh.factory<_i19.ForgotPasswordCubit>(
-        () => _i19.ForgotPasswordCubit(gh<_i8.IAuthFacade>()));
     return this;
   }
 }

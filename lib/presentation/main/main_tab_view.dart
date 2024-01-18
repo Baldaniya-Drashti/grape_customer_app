@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grape_customer_app/application/main/home/home_bloc.dart';
 import 'package:grape_customer_app/application/main_tab/main_tab_bloc.dart';
 import 'package:grape_customer_app/domain/core/l10n/app_localizations.dart';
+import 'package:grape_customer_app/injection.dart';
 import 'package:grape_customer_app/presentation/common/utils/app_focus.dart';
 import 'package:grape_customer_app/presentation/core/app_router.gr.dart'
     as autoroute;
@@ -27,7 +28,7 @@ class MainTabView extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => MainTabBloc(),
+          create: (_) => getIt<MainTabBloc>(),
         ),
         BlocProvider(
           create: (context) => HomeBloc()..add(HomeEvent.getCurrentLocation()),
@@ -35,6 +36,9 @@ class MainTabView extends StatelessWidget {
       ],
       child: BlocBuilder<MainTabBloc, MainTabState>(
         builder: (context, state) {
+          context
+              .read<MainTabBloc>()
+              .add(MainTabEvent.pushNotificationInitialize(context));
           return Scaffold(
             appBar: getAppbar(state, context),
             body: GestureDetector(

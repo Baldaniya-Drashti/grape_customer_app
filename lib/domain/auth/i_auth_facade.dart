@@ -26,8 +26,12 @@ abstract class IAuthFacade {
     required Password newPassword,
     required Password confirmNewPassword,
   });
-
-  Future<Either<AuthFailure, Unit>> forgotPassword({
-    required EmailAddress emailAddress,
+  Future<Either<AuthFailure, Unit>> registerForPush({
+    required String fcmToken,
+  });
+  Future<Either<AuthFailure, Unit>> verifyOtp({
+    required String countryCode,
+    required MobileNumber mobileNumber,
+    required OTPText otp,
   });
 }
