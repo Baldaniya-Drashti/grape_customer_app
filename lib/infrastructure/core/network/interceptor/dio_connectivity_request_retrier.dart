@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
+import 'package:grape_customer_app/presentation/common/utils/flushbar_creator.dart';
 
 class DioConnectivityRequestRetrier {
   final Dio dio;
@@ -34,10 +35,13 @@ class DioConnectivityRequestRetrier {
                 extra: requestOptions.extra,
                 contentType: requestOptions.contentType,
                 headers: requestOptions.headers,
+                validateStatus: requestOptions.validateStatus,
                 responseType: requestOptions.responseType,
               ),
             ),
           );
+        } else {
+          showError(message: 'Please check your internet connectivity.');
         }
       },
     );

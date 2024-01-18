@@ -21,6 +21,8 @@ class CommonResponse<T> {
     status = json['success'];
     dioMessage = json['message'];
 
+    data = json['data'];
+
     errors = json['errors'] != null ? Errors.fromJson(json['errors']) : null;
     if (json.containsKey("meta") && json["meta"] != null) {
       meta = Meta.fromJson(json['meta']);

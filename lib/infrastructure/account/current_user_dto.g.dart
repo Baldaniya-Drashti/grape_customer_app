@@ -12,9 +12,7 @@ _$CurrentUserDtoImpl _$$CurrentUserDtoImplFromJson(Map<String, dynamic> json) =>
       firstName: json['first_name'] as String?,
       lastName: json['last_name'] as String?,
       email: json['email'] as String?,
-      countryCode: json['country_code'] == null
-          ? null
-          : DateTime.parse(json['country_code'] as String),
+      countryCode: json['country_code'] as String?,
       phone: json['phone'] as int?,
       isEmailVerified: json['is_email_verified'] as bool?,
       isMobileVerified: json['is_mobile_verified'] as bool?,
@@ -29,7 +27,7 @@ Map<String, dynamic> _$$CurrentUserDtoImplToJson(
       'first_name': instance.firstName,
       'last_name': instance.lastName,
       'email': instance.email,
-      'country_code': instance.countryCode?.toIso8601String(),
+      'country_code': instance.countryCode,
       'phone': instance.phone,
       'is_email_verified': instance.isEmailVerified,
       'is_mobile_verified': instance.isMobileVerified,

@@ -20,7 +20,7 @@ mixin _$Account {
   String? get firstName => throw _privateConstructorUsedError;
   String? get lastName => throw _privateConstructorUsedError;
   String? get email => throw _privateConstructorUsedError;
-  DateTime? get countryCode => throw _privateConstructorUsedError;
+  String? get countryCode => throw _privateConstructorUsedError;
   int? get phone => throw _privateConstructorUsedError;
   bool? get isEmailVerified => throw _privateConstructorUsedError;
   bool? get isMobileVerified => throw _privateConstructorUsedError;
@@ -41,7 +41,7 @@ abstract class $AccountCopyWith<$Res> {
       String? firstName,
       String? lastName,
       String? email,
-      DateTime? countryCode,
+      String? countryCode,
       int? phone,
       bool? isEmailVerified,
       bool? isMobileVerified,
@@ -93,7 +93,7 @@ class _$AccountCopyWithImpl<$Res, $Val extends Account>
       countryCode: freezed == countryCode
           ? _value.countryCode
           : countryCode // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as String?,
       phone: freezed == phone
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
@@ -130,7 +130,7 @@ abstract class _$$AccountImplCopyWith<$Res> implements $AccountCopyWith<$Res> {
       String? firstName,
       String? lastName,
       String? email,
-      DateTime? countryCode,
+      String? countryCode,
       int? phone,
       bool? isEmailVerified,
       bool? isMobileVerified,
@@ -180,7 +180,7 @@ class __$$AccountImplCopyWithImpl<$Res>
       countryCode: freezed == countryCode
           ? _value.countryCode
           : countryCode // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as String?,
       phone: freezed == phone
           ? _value.phone
           : phone // ignore: cast_nullable_to_non_nullable
@@ -230,7 +230,7 @@ class _$AccountImpl extends _Account {
   @override
   final String? email;
   @override
-  final DateTime? countryCode;
+  final String? countryCode;
   @override
   final int? phone;
   @override
@@ -297,7 +297,7 @@ abstract class _Account extends Account {
       final String? firstName,
       final String? lastName,
       final String? email,
-      final DateTime? countryCode,
+      final String? countryCode,
       final int? phone,
       final bool? isEmailVerified,
       final bool? isMobileVerified,
@@ -314,7 +314,7 @@ abstract class _Account extends Account {
   @override
   String? get email;
   @override
-  DateTime? get countryCode;
+  String? get countryCode;
   @override
   int? get phone;
   @override

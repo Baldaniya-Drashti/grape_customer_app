@@ -5,7 +5,7 @@ import 'package:grape_customer_app/presentation/core/styles/app_colors.dart';
 Flushbar showError({
   required String message,
   String? title,
-  Duration duration = const Duration(seconds: 3),
+  Duration duration = const Duration(seconds: 5),
 }) {
   return Flushbar(
     title: title,
@@ -13,18 +13,19 @@ Flushbar showError({
     icon: Icon(
       Icons.warning,
       size: 28.0,
-      color: Colors.red[300],
+      color: Colors.white,
     ),
     leftBarIndicatorColor: Colors.red[300],
     backgroundColor: AppColors.red,
     duration: duration,
+    flushbarPosition: FlushbarPosition.TOP,
   );
 }
 
 Flushbar showSuccess({
   required String message,
   String? title,
-  Duration duration = const Duration(seconds: 3),
+  Duration duration = const Duration(seconds: 5),
 }) {
   return Flushbar(
     title: title,
@@ -35,6 +36,7 @@ Flushbar showSuccess({
     ),
     leftBarIndicatorColor: Colors.green[300],
     backgroundColor: AppColors.red,
+    flushbarPosition: FlushbarPosition.TOP,
     duration: duration,
   );
 }

@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -7,8 +8,8 @@ import 'package:grape_customer_app/domain/core/math_utils.dart';
 import 'package:grape_customer_app/presentation/common/utils/flushbar_creator.dart';
 import 'package:grape_customer_app/presentation/common/widgets/base_text.dart';
 import 'package:grape_customer_app/presentation/common/widgets/common_country_code_picker.dart';
+import 'package:grape_customer_app/presentation/core/app_router.gr.dart';
 
-import 'package:grape_customer_app/presentation/core/restart_widget.dart';
 import 'package:grape_customer_app/presentation/core/styles/app_colors.dart';
 import 'package:grape_customer_app/presentation/core/widgets/buttons/common_button.dart';
 import 'package:grape_customer_app/presentation/core/widgets/inputs/custom_text_field.dart';
@@ -29,12 +30,23 @@ class RegisterForm extends StatelessWidget {
                 message: failure.maybeMap(
                   badRequest: (value) => value.error,
                   showAPIResponseMessage: (value) => value.message,
+                  networkError: (value) =>
+                      'Please check your internet connectivity',
                   orElse: () => "Server Error. Try again later.",
                 ),
               ).show(context);
             },
             (_) {
-              RestartWidget.restartApp(context);
+              context.router.push(
+                PageRouteInfo(
+                  OtpRegisterVerificationView.name,
+                  args: OtpRegisterVerificationViewArgs(
+                    countryCode: state.selectedCountrycode,
+                    phoneNumber: state.mobileNumber.getValue(),
+                  ),
+                ),
+              );
+              // RestartWidget.restartApp(context);
             },
           ),
         );
@@ -77,15 +89,6 @@ class RegisterForm extends StatelessWidget {
               CommonButton(
                 isSubmitting: state.isSubmitting,
                 onPressed: () {
-                  // context.router.push(
-                  //   PageRouteInfo(
-                  //     OtpRegisterVerificationView.name,
-                  //     args: OtpRegisterVerificationViewArgs(
-                  //       countryCode: state.selectedCountrycode,
-                  //       phoneNumber: state.mobileNumber.getValue(),
-                  //     ),
-                  //   ),
-                  // );
                   context
                       .read<RegisterFormBloc>()
                       .add(RegisterFormEvent.registerPressed());

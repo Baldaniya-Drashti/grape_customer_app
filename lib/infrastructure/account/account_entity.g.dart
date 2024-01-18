@@ -21,7 +21,7 @@ class AccountEntityAdapter extends TypeAdapter<AccountEntity> {
       fields[1] as String?,
       fields[2] as String?,
       fields[3] as String?,
-      fields[4] as DateTime?,
+      fields[4] as String?,
       fields[5] as int?,
       fields[6] as bool?,
       fields[7] as bool?,

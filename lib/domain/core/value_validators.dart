@@ -79,7 +79,7 @@ Either<ValueFailure<String>, String> validateMaxStringLength(
   int maxLength,
 ) {
   if (validateStringNotEmpty(input).isRight()) {
-    if (input.length <= maxLength) {
+    if (input.length < maxLength) {
       return left(
         ValueFailure.exceedingLength(failedValue: input, max: maxLength),
       );
