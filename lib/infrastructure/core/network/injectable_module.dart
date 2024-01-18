@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:grape_customer_app/domain/core/api_constants.dart';
@@ -32,10 +34,19 @@ class ApiService {
         return handler.next(e); //continue
       },
     );
+    var acceptHeader = Headers.jsonContentType;
+    var contentTypeHeader = isMultipart
+        ? Headers.multipartFormDataContentType
+        : Headers.jsonContentType;
+    var headers = {
+      HttpHeaders.acceptHeader: acceptHeader,
+      HttpHeaders.contentTypeHeader: contentTypeHeader,
+    };
     final BaseOptions options = BaseOptions(
       baseUrl: ApiConstants.baseUrl,
       connectTimeout: const Duration(milliseconds: 5000), //5s
       receiveTimeout: const Duration(milliseconds: 15000), //15s
+      headers: headers,
       contentType: isMultipart
           ? Headers.multipartFormDataContentType
           : Headers.jsonContentType,
@@ -58,61 +69,31 @@ class ApiService {
     return dio;
   }
 
-  Future<CommonResponse?> postMethod(String path, dynamic data,
+  Future<CommonResponse> postMethod(String path, dynamic data,
       {bool isMultipart = false,
       FormData? formData,
       Map<String, dynamic>? queryParameters}) async {
     dio = initAPIService(isMultipart: isMultipart);
-    return await dio
-        .post(
+
+    var response = await dio.post(
       path,
       data: isMultipart ? formData : data,
       queryParameters: queryParameters,
-    )
-        .then((value) {
-      if (value.statusCode == 200) {
-        return CommonResponse.fromJson(value.data);
-      }
-      return null;
-    }).catchError((error) {
-      return error;
-    });
+    );
+
+    return CommonResponse.fromJson(response.data);
   }
 
   Future<CommonResponse?> getMethod(String path,
       {Map<String, dynamic>? queryParameters}) async {
     dio = initAPIService();
-    return await dio
-        .get(
+
+    var response = await dio.get(
       path,
       queryParameters: queryParameters,
-    )
-        .then((value) {
-      if (value.statusCode == 200) {
-        return CommonResponse.fromJson(value.data);
-      }
-      return null;
-    }).catchError((error) {
-      return error;
-    });
-  }
+    );
 
-  Future defaultGetMethod(String path,
-      {Map<String, dynamic>? queryParameters}) async {
-    dio = initAPIService();
-
-    return await dio
-        .get(
-      path,
-      queryParameters: queryParameters,
-    )
-        .then((value) {
-      if (value.statusCode == 200) {
-        return value;
-      }
-    }).catchError((error) {
-      return error;
-    });
+    return CommonResponse.fromJson(response.data);
   }
 
   Future<CommonResponse?> putMethod(String path,
@@ -121,20 +102,14 @@ class ApiService {
       bool isMultipart = false,
       FormData? formData}) async {
     dio = initAPIService(isMultipart: isMultipart);
-    return await dio
-        .put(
+
+    var response = await dio.put(
       path,
       data: isMultipart ? formData : data,
       queryParameters: queryParameters,
-    )
-        .then((value) {
-      if (value.statusCode == 200) {
-        return CommonResponse.fromJson(value.data);
-      }
-      return null;
-    }).catchError((error) {
-      return error;
-    });
+    );
+
+    return CommonResponse.fromJson(response.data);
   }
 
   Future<CommonResponse?> deleteMethod(
@@ -143,20 +118,13 @@ class ApiService {
     Map<String, dynamic>? queryParameters,
   }) async {
     dio = initAPIService();
-    await dio
-        .delete(
+
+    var response = await dio.delete(
       path,
       data: data,
       queryParameters: queryParameters,
-    )
-        .then((value) {
-      if (value.statusCode == 200) {
-        return CommonResponse.fromJson(value.data);
-      }
-      return null;
-    }).catchError((error) {
-      return error;
-    });
-    return null;
+    );
+
+    return CommonResponse.fromJson(response.data);
   }
 }

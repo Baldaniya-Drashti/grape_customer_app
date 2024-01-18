@@ -28,6 +28,7 @@ class RegisterForm extends StatelessWidget {
               showError(
                 message: failure.maybeMap(
                   badRequest: (value) => value.error,
+                  showAPIResponseMessage: (value) => value.message,
                   orElse: () => "Server Error. Try again later.",
                 ),
               ).show(context);

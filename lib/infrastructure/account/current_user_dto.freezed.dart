@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'account.dart';
+part of 'current_user_dto.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,45 +14,59 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
+CurrentUserDto _$CurrentUserDtoFromJson(Map<String, dynamic> json) {
+  return _CurrentUserDto.fromJson(json);
+}
+
 /// @nodoc
-mixin _$Account {
+mixin _$CurrentUserDto {
+  @JsonKey(name: 'user_id')
   int? get userId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'first_name')
   String? get firstName => throw _privateConstructorUsedError;
+  @JsonKey(name: 'last_name')
   String? get lastName => throw _privateConstructorUsedError;
   String? get email => throw _privateConstructorUsedError;
+  @JsonKey(name: 'country_code')
   DateTime? get countryCode => throw _privateConstructorUsedError;
   int? get phone => throw _privateConstructorUsedError;
+  @JsonKey(name: 'is_email_verified')
   bool? get isEmailVerified => throw _privateConstructorUsedError;
+  @JsonKey(name: 'is_mobile_verified')
   bool? get isMobileVerified => throw _privateConstructorUsedError;
   int? get role => throw _privateConstructorUsedError;
+  @JsonKey(name: 'remember_token')
   String? get rememberToken => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $AccountCopyWith<Account> get copyWith => throw _privateConstructorUsedError;
+  $CurrentUserDtoCopyWith<CurrentUserDto> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $AccountCopyWith<$Res> {
-  factory $AccountCopyWith(Account value, $Res Function(Account) then) =
-      _$AccountCopyWithImpl<$Res, Account>;
+abstract class $CurrentUserDtoCopyWith<$Res> {
+  factory $CurrentUserDtoCopyWith(
+          CurrentUserDto value, $Res Function(CurrentUserDto) then) =
+      _$CurrentUserDtoCopyWithImpl<$Res, CurrentUserDto>;
   @useResult
   $Res call(
-      {int? userId,
-      String? firstName,
-      String? lastName,
+      {@JsonKey(name: 'user_id') int? userId,
+      @JsonKey(name: 'first_name') String? firstName,
+      @JsonKey(name: 'last_name') String? lastName,
       String? email,
-      DateTime? countryCode,
+      @JsonKey(name: 'country_code') DateTime? countryCode,
       int? phone,
-      bool? isEmailVerified,
-      bool? isMobileVerified,
+      @JsonKey(name: 'is_email_verified') bool? isEmailVerified,
+      @JsonKey(name: 'is_mobile_verified') bool? isMobileVerified,
       int? role,
-      String? rememberToken});
+      @JsonKey(name: 'remember_token') String? rememberToken});
 }
 
 /// @nodoc
-class _$AccountCopyWithImpl<$Res, $Val extends Account>
-    implements $AccountCopyWith<$Res> {
-  _$AccountCopyWithImpl(this._value, this._then);
+class _$CurrentUserDtoCopyWithImpl<$Res, $Val extends CurrentUserDto>
+    implements $CurrentUserDtoCopyWith<$Res> {
+  _$CurrentUserDtoCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -119,31 +133,32 @@ class _$AccountCopyWithImpl<$Res, $Val extends Account>
 }
 
 /// @nodoc
-abstract class _$$AccountImplCopyWith<$Res> implements $AccountCopyWith<$Res> {
-  factory _$$AccountImplCopyWith(
-          _$AccountImpl value, $Res Function(_$AccountImpl) then) =
-      __$$AccountImplCopyWithImpl<$Res>;
+abstract class _$$CurrentUserDtoImplCopyWith<$Res>
+    implements $CurrentUserDtoCopyWith<$Res> {
+  factory _$$CurrentUserDtoImplCopyWith(_$CurrentUserDtoImpl value,
+          $Res Function(_$CurrentUserDtoImpl) then) =
+      __$$CurrentUserDtoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
-      {int? userId,
-      String? firstName,
-      String? lastName,
+      {@JsonKey(name: 'user_id') int? userId,
+      @JsonKey(name: 'first_name') String? firstName,
+      @JsonKey(name: 'last_name') String? lastName,
       String? email,
-      DateTime? countryCode,
+      @JsonKey(name: 'country_code') DateTime? countryCode,
       int? phone,
-      bool? isEmailVerified,
-      bool? isMobileVerified,
+      @JsonKey(name: 'is_email_verified') bool? isEmailVerified,
+      @JsonKey(name: 'is_mobile_verified') bool? isMobileVerified,
       int? role,
-      String? rememberToken});
+      @JsonKey(name: 'remember_token') String? rememberToken});
 }
 
 /// @nodoc
-class __$$AccountImplCopyWithImpl<$Res>
-    extends _$AccountCopyWithImpl<$Res, _$AccountImpl>
-    implements _$$AccountImplCopyWith<$Res> {
-  __$$AccountImplCopyWithImpl(
-      _$AccountImpl _value, $Res Function(_$AccountImpl) _then)
+class __$$CurrentUserDtoImplCopyWithImpl<$Res>
+    extends _$CurrentUserDtoCopyWithImpl<$Res, _$CurrentUserDtoImpl>
+    implements _$$CurrentUserDtoImplCopyWith<$Res> {
+  __$$CurrentUserDtoImplCopyWithImpl(
+      _$CurrentUserDtoImpl _value, $Res Function(_$CurrentUserDtoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -160,7 +175,7 @@ class __$$AccountImplCopyWithImpl<$Res>
     Object? role = freezed,
     Object? rememberToken = freezed,
   }) {
-    return _then(_$AccountImpl(
+    return _then(_$CurrentUserDtoImpl(
       userId: freezed == userId
           ? _value.userId
           : userId // ignore: cast_nullable_to_non_nullable
@@ -206,52 +221,62 @@ class __$$AccountImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
-class _$AccountImpl extends _Account {
-  const _$AccountImpl(
-      {this.userId,
-      this.firstName,
-      this.lastName,
+@JsonSerializable()
+class _$CurrentUserDtoImpl extends _CurrentUserDto {
+  const _$CurrentUserDtoImpl(
+      {@JsonKey(name: 'user_id') this.userId,
+      @JsonKey(name: 'first_name') this.firstName,
+      @JsonKey(name: 'last_name') this.lastName,
       this.email,
-      this.countryCode,
+      @JsonKey(name: 'country_code') this.countryCode,
       this.phone,
-      this.isEmailVerified,
-      this.isMobileVerified,
+      @JsonKey(name: 'is_email_verified') this.isEmailVerified,
+      @JsonKey(name: 'is_mobile_verified') this.isMobileVerified,
       this.role,
-      this.rememberToken})
+      @JsonKey(name: 'remember_token') this.rememberToken})
       : super._();
 
+  factory _$CurrentUserDtoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$CurrentUserDtoImplFromJson(json);
+
   @override
+  @JsonKey(name: 'user_id')
   final int? userId;
   @override
+  @JsonKey(name: 'first_name')
   final String? firstName;
   @override
+  @JsonKey(name: 'last_name')
   final String? lastName;
   @override
   final String? email;
   @override
+  @JsonKey(name: 'country_code')
   final DateTime? countryCode;
   @override
   final int? phone;
   @override
+  @JsonKey(name: 'is_email_verified')
   final bool? isEmailVerified;
   @override
+  @JsonKey(name: 'is_mobile_verified')
   final bool? isMobileVerified;
   @override
   final int? role;
   @override
+  @JsonKey(name: 'remember_token')
   final String? rememberToken;
 
   @override
   String toString() {
-    return 'Account(userId: $userId, firstName: $firstName, lastName: $lastName, email: $email, countryCode: $countryCode, phone: $phone, isEmailVerified: $isEmailVerified, isMobileVerified: $isMobileVerified, role: $role, rememberToken: $rememberToken)';
+    return 'CurrentUserDto(userId: $userId, firstName: $firstName, lastName: $lastName, email: $email, countryCode: $countryCode, phone: $phone, isEmailVerified: $isEmailVerified, isMobileVerified: $isMobileVerified, role: $role, rememberToken: $rememberToken)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$AccountImpl &&
+            other is _$CurrentUserDtoImpl &&
             (identical(other.userId, userId) || other.userId == userId) &&
             (identical(other.firstName, firstName) ||
                 other.firstName == firstName) &&
@@ -270,6 +295,7 @@ class _$AccountImpl extends _Account {
                 other.rememberToken == rememberToken));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -287,46 +313,65 @@ class _$AccountImpl extends _Account {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$AccountImplCopyWith<_$AccountImpl> get copyWith =>
-      __$$AccountImplCopyWithImpl<_$AccountImpl>(this, _$identity);
+  _$$CurrentUserDtoImplCopyWith<_$CurrentUserDtoImpl> get copyWith =>
+      __$$CurrentUserDtoImplCopyWithImpl<_$CurrentUserDtoImpl>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$CurrentUserDtoImplToJson(
+      this,
+    );
+  }
 }
 
-abstract class _Account extends Account {
-  const factory _Account(
-      {final int? userId,
-      final String? firstName,
-      final String? lastName,
-      final String? email,
-      final DateTime? countryCode,
-      final int? phone,
-      final bool? isEmailVerified,
-      final bool? isMobileVerified,
-      final int? role,
-      final String? rememberToken}) = _$AccountImpl;
-  const _Account._() : super._();
+abstract class _CurrentUserDto extends CurrentUserDto {
+  const factory _CurrentUserDto(
+          {@JsonKey(name: 'user_id') final int? userId,
+          @JsonKey(name: 'first_name') final String? firstName,
+          @JsonKey(name: 'last_name') final String? lastName,
+          final String? email,
+          @JsonKey(name: 'country_code') final DateTime? countryCode,
+          final int? phone,
+          @JsonKey(name: 'is_email_verified') final bool? isEmailVerified,
+          @JsonKey(name: 'is_mobile_verified') final bool? isMobileVerified,
+          final int? role,
+          @JsonKey(name: 'remember_token') final String? rememberToken}) =
+      _$CurrentUserDtoImpl;
+  const _CurrentUserDto._() : super._();
+
+  factory _CurrentUserDto.fromJson(Map<String, dynamic> json) =
+      _$CurrentUserDtoImpl.fromJson;
 
   @override
+  @JsonKey(name: 'user_id')
   int? get userId;
   @override
+  @JsonKey(name: 'first_name')
   String? get firstName;
   @override
+  @JsonKey(name: 'last_name')
   String? get lastName;
   @override
   String? get email;
   @override
+  @JsonKey(name: 'country_code')
   DateTime? get countryCode;
   @override
   int? get phone;
   @override
+  @JsonKey(name: 'is_email_verified')
   bool? get isEmailVerified;
   @override
+  @JsonKey(name: 'is_mobile_verified')
   bool? get isMobileVerified;
   @override
   int? get role;
   @override
+  @JsonKey(name: 'remember_token')
   String? get rememberToken;
   @override
   @JsonKey(ignore: true)
-  _$$AccountImplCopyWith<_$AccountImpl> get copyWith =>
+  _$$CurrentUserDtoImplCopyWith<_$CurrentUserDtoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

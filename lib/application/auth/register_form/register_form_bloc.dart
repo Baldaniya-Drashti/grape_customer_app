@@ -49,11 +49,13 @@ class RegisterFormBloc extends Bloc<RegisterFormEvent, RegisterFormState> {
                 ),
               );
 
-              // failureOrSuccess = await _authFacade.register(
-              //   emailAddress: state.emailAddress,
-              //   username: state.username,
-              //   password: state.password,
-              // );
+              failureOrSuccess = await _authFacade.register(
+                emailAddress: state.emailAddress,
+                firstName: state.firstName,
+                lastName: state.lastName,
+                countryCode: state.selectedCountrycode,
+                mobileNumber: state.mobileNumber,
+              );
             }
 
             emit(

@@ -8,27 +8,6 @@ class AppInterceptors extends Interceptor {
   @override
   Future onError(DioException err, ErrorInterceptorHandler handler) async {
     switch (err.type) {
-      case DioExceptionType.connectionTimeout:
-        break;
-      case DioExceptionType.sendTimeout:
-      case DioExceptionType.receiveTimeout:
-        throw DeadlineExceededException(err.requestOptions);
-      case DioExceptionType.badResponse:
-        switch (err.response?.statusCode) {
-          case 400:
-            throw BadRequestException(err.requestOptions);
-          case 401:
-            throw UnauthorizedException(err.requestOptions);
-          case 404:
-            throw NotFoundException(err.requestOptions);
-          case 409:
-            throw ConflictException(err.requestOptions);
-          case 500:
-            throw InternalServerErrorException(err.requestOptions);
-        }
-        break;
-      case DioExceptionType.cancel:
-        break;
       case DioExceptionType.connectionError:
         var res = await requestRetrier.scheduleRequestRetry(err.requestOptions);
 
@@ -37,7 +16,6 @@ class AppInterceptors extends Interceptor {
 
       default:
     }
-
     return handler.next(err);
   }
 }

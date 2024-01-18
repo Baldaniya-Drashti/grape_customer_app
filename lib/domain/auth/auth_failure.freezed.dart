@@ -20,6 +20,7 @@ mixin _$AuthFailure {
   TResult when<TResult extends Object?>({
     required TResult Function() passwordsDontMatch,
     required TResult Function() invalidCredentials,
+    required TResult Function(String message) showAPIResponseMessage,
     required TResult Function() serverError,
     required TResult Function(String error) badRequest,
   }) =>
@@ -28,6 +29,7 @@ mixin _$AuthFailure {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? passwordsDontMatch,
     TResult? Function()? invalidCredentials,
+    TResult? Function(String message)? showAPIResponseMessage,
     TResult? Function()? serverError,
     TResult? Function(String error)? badRequest,
   }) =>
@@ -36,6 +38,7 @@ mixin _$AuthFailure {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? passwordsDontMatch,
     TResult Function()? invalidCredentials,
+    TResult Function(String message)? showAPIResponseMessage,
     TResult Function()? serverError,
     TResult Function(String error)? badRequest,
     required TResult orElse(),
@@ -45,6 +48,8 @@ mixin _$AuthFailure {
   TResult map<TResult extends Object?>({
     required TResult Function(_PasswordsDontMatch value) passwordsDontMatch,
     required TResult Function(_InvalidCredentials value) invalidCredentials,
+    required TResult Function(_ShowAPIResponseMessage value)
+        showAPIResponseMessage,
     required TResult Function(_ServerError value) serverError,
     required TResult Function(_BadRequest value) badRequest,
   }) =>
@@ -53,6 +58,7 @@ mixin _$AuthFailure {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_PasswordsDontMatch value)? passwordsDontMatch,
     TResult? Function(_InvalidCredentials value)? invalidCredentials,
+    TResult? Function(_ShowAPIResponseMessage value)? showAPIResponseMessage,
     TResult? Function(_ServerError value)? serverError,
     TResult? Function(_BadRequest value)? badRequest,
   }) =>
@@ -61,6 +67,7 @@ mixin _$AuthFailure {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_PasswordsDontMatch value)? passwordsDontMatch,
     TResult Function(_InvalidCredentials value)? invalidCredentials,
+    TResult Function(_ShowAPIResponseMessage value)? showAPIResponseMessage,
     TResult Function(_ServerError value)? serverError,
     TResult Function(_BadRequest value)? badRequest,
     required TResult orElse(),
@@ -126,6 +133,7 @@ class _$PasswordsDontMatchImpl implements _PasswordsDontMatch {
   TResult when<TResult extends Object?>({
     required TResult Function() passwordsDontMatch,
     required TResult Function() invalidCredentials,
+    required TResult Function(String message) showAPIResponseMessage,
     required TResult Function() serverError,
     required TResult Function(String error) badRequest,
   }) {
@@ -137,6 +145,7 @@ class _$PasswordsDontMatchImpl implements _PasswordsDontMatch {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? passwordsDontMatch,
     TResult? Function()? invalidCredentials,
+    TResult? Function(String message)? showAPIResponseMessage,
     TResult? Function()? serverError,
     TResult? Function(String error)? badRequest,
   }) {
@@ -148,6 +157,7 @@ class _$PasswordsDontMatchImpl implements _PasswordsDontMatch {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? passwordsDontMatch,
     TResult Function()? invalidCredentials,
+    TResult Function(String message)? showAPIResponseMessage,
     TResult Function()? serverError,
     TResult Function(String error)? badRequest,
     required TResult orElse(),
@@ -163,6 +173,8 @@ class _$PasswordsDontMatchImpl implements _PasswordsDontMatch {
   TResult map<TResult extends Object?>({
     required TResult Function(_PasswordsDontMatch value) passwordsDontMatch,
     required TResult Function(_InvalidCredentials value) invalidCredentials,
+    required TResult Function(_ShowAPIResponseMessage value)
+        showAPIResponseMessage,
     required TResult Function(_ServerError value) serverError,
     required TResult Function(_BadRequest value) badRequest,
   }) {
@@ -174,6 +186,7 @@ class _$PasswordsDontMatchImpl implements _PasswordsDontMatch {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_PasswordsDontMatch value)? passwordsDontMatch,
     TResult? Function(_InvalidCredentials value)? invalidCredentials,
+    TResult? Function(_ShowAPIResponseMessage value)? showAPIResponseMessage,
     TResult? Function(_ServerError value)? serverError,
     TResult? Function(_BadRequest value)? badRequest,
   }) {
@@ -185,6 +198,7 @@ class _$PasswordsDontMatchImpl implements _PasswordsDontMatch {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_PasswordsDontMatch value)? passwordsDontMatch,
     TResult Function(_InvalidCredentials value)? invalidCredentials,
+    TResult Function(_ShowAPIResponseMessage value)? showAPIResponseMessage,
     TResult Function(_ServerError value)? serverError,
     TResult Function(_BadRequest value)? badRequest,
     required TResult orElse(),
@@ -240,6 +254,7 @@ class _$InvalidCredentialsImpl implements _InvalidCredentials {
   TResult when<TResult extends Object?>({
     required TResult Function() passwordsDontMatch,
     required TResult Function() invalidCredentials,
+    required TResult Function(String message) showAPIResponseMessage,
     required TResult Function() serverError,
     required TResult Function(String error) badRequest,
   }) {
@@ -251,6 +266,7 @@ class _$InvalidCredentialsImpl implements _InvalidCredentials {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? passwordsDontMatch,
     TResult? Function()? invalidCredentials,
+    TResult? Function(String message)? showAPIResponseMessage,
     TResult? Function()? serverError,
     TResult? Function(String error)? badRequest,
   }) {
@@ -262,6 +278,7 @@ class _$InvalidCredentialsImpl implements _InvalidCredentials {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? passwordsDontMatch,
     TResult Function()? invalidCredentials,
+    TResult Function(String message)? showAPIResponseMessage,
     TResult Function()? serverError,
     TResult Function(String error)? badRequest,
     required TResult orElse(),
@@ -277,6 +294,8 @@ class _$InvalidCredentialsImpl implements _InvalidCredentials {
   TResult map<TResult extends Object?>({
     required TResult Function(_PasswordsDontMatch value) passwordsDontMatch,
     required TResult Function(_InvalidCredentials value) invalidCredentials,
+    required TResult Function(_ShowAPIResponseMessage value)
+        showAPIResponseMessage,
     required TResult Function(_ServerError value) serverError,
     required TResult Function(_BadRequest value) badRequest,
   }) {
@@ -288,6 +307,7 @@ class _$InvalidCredentialsImpl implements _InvalidCredentials {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_PasswordsDontMatch value)? passwordsDontMatch,
     TResult? Function(_InvalidCredentials value)? invalidCredentials,
+    TResult? Function(_ShowAPIResponseMessage value)? showAPIResponseMessage,
     TResult? Function(_ServerError value)? serverError,
     TResult? Function(_BadRequest value)? badRequest,
   }) {
@@ -299,6 +319,7 @@ class _$InvalidCredentialsImpl implements _InvalidCredentials {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_PasswordsDontMatch value)? passwordsDontMatch,
     TResult Function(_InvalidCredentials value)? invalidCredentials,
+    TResult Function(_ShowAPIResponseMessage value)? showAPIResponseMessage,
     TResult Function(_ServerError value)? serverError,
     TResult Function(_BadRequest value)? badRequest,
     required TResult orElse(),
@@ -312,6 +333,162 @@ class _$InvalidCredentialsImpl implements _InvalidCredentials {
 
 abstract class _InvalidCredentials implements AuthFailure {
   const factory _InvalidCredentials() = _$InvalidCredentialsImpl;
+}
+
+/// @nodoc
+abstract class _$$ShowAPIResponseMessageImplCopyWith<$Res> {
+  factory _$$ShowAPIResponseMessageImplCopyWith(
+          _$ShowAPIResponseMessageImpl value,
+          $Res Function(_$ShowAPIResponseMessageImpl) then) =
+      __$$ShowAPIResponseMessageImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String message});
+}
+
+/// @nodoc
+class __$$ShowAPIResponseMessageImplCopyWithImpl<$Res>
+    extends _$AuthFailureCopyWithImpl<$Res, _$ShowAPIResponseMessageImpl>
+    implements _$$ShowAPIResponseMessageImplCopyWith<$Res> {
+  __$$ShowAPIResponseMessageImplCopyWithImpl(
+      _$ShowAPIResponseMessageImpl _value,
+      $Res Function(_$ShowAPIResponseMessageImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? message = null,
+  }) {
+    return _then(_$ShowAPIResponseMessageImpl(
+      null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$ShowAPIResponseMessageImpl implements _ShowAPIResponseMessage {
+  const _$ShowAPIResponseMessageImpl(this.message);
+
+  @override
+  final String message;
+
+  @override
+  String toString() {
+    return 'AuthFailure.showAPIResponseMessage(message: $message)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ShowAPIResponseMessageImpl &&
+            (identical(other.message, message) || other.message == message));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, message);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ShowAPIResponseMessageImplCopyWith<_$ShowAPIResponseMessageImpl>
+      get copyWith => __$$ShowAPIResponseMessageImplCopyWithImpl<
+          _$ShowAPIResponseMessageImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() passwordsDontMatch,
+    required TResult Function() invalidCredentials,
+    required TResult Function(String message) showAPIResponseMessage,
+    required TResult Function() serverError,
+    required TResult Function(String error) badRequest,
+  }) {
+    return showAPIResponseMessage(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? passwordsDontMatch,
+    TResult? Function()? invalidCredentials,
+    TResult? Function(String message)? showAPIResponseMessage,
+    TResult? Function()? serverError,
+    TResult? Function(String error)? badRequest,
+  }) {
+    return showAPIResponseMessage?.call(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? passwordsDontMatch,
+    TResult Function()? invalidCredentials,
+    TResult Function(String message)? showAPIResponseMessage,
+    TResult Function()? serverError,
+    TResult Function(String error)? badRequest,
+    required TResult orElse(),
+  }) {
+    if (showAPIResponseMessage != null) {
+      return showAPIResponseMessage(message);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_PasswordsDontMatch value) passwordsDontMatch,
+    required TResult Function(_InvalidCredentials value) invalidCredentials,
+    required TResult Function(_ShowAPIResponseMessage value)
+        showAPIResponseMessage,
+    required TResult Function(_ServerError value) serverError,
+    required TResult Function(_BadRequest value) badRequest,
+  }) {
+    return showAPIResponseMessage(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_PasswordsDontMatch value)? passwordsDontMatch,
+    TResult? Function(_InvalidCredentials value)? invalidCredentials,
+    TResult? Function(_ShowAPIResponseMessage value)? showAPIResponseMessage,
+    TResult? Function(_ServerError value)? serverError,
+    TResult? Function(_BadRequest value)? badRequest,
+  }) {
+    return showAPIResponseMessage?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_PasswordsDontMatch value)? passwordsDontMatch,
+    TResult Function(_InvalidCredentials value)? invalidCredentials,
+    TResult Function(_ShowAPIResponseMessage value)? showAPIResponseMessage,
+    TResult Function(_ServerError value)? serverError,
+    TResult Function(_BadRequest value)? badRequest,
+    required TResult orElse(),
+  }) {
+    if (showAPIResponseMessage != null) {
+      return showAPIResponseMessage(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ShowAPIResponseMessage implements AuthFailure {
+  const factory _ShowAPIResponseMessage(final String message) =
+      _$ShowAPIResponseMessageImpl;
+
+  String get message;
+  @JsonKey(ignore: true)
+  _$$ShowAPIResponseMessageImplCopyWith<_$ShowAPIResponseMessageImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -354,6 +531,7 @@ class _$ServerErrorImpl implements _ServerError {
   TResult when<TResult extends Object?>({
     required TResult Function() passwordsDontMatch,
     required TResult Function() invalidCredentials,
+    required TResult Function(String message) showAPIResponseMessage,
     required TResult Function() serverError,
     required TResult Function(String error) badRequest,
   }) {
@@ -365,6 +543,7 @@ class _$ServerErrorImpl implements _ServerError {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? passwordsDontMatch,
     TResult? Function()? invalidCredentials,
+    TResult? Function(String message)? showAPIResponseMessage,
     TResult? Function()? serverError,
     TResult? Function(String error)? badRequest,
   }) {
@@ -376,6 +555,7 @@ class _$ServerErrorImpl implements _ServerError {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? passwordsDontMatch,
     TResult Function()? invalidCredentials,
+    TResult Function(String message)? showAPIResponseMessage,
     TResult Function()? serverError,
     TResult Function(String error)? badRequest,
     required TResult orElse(),
@@ -391,6 +571,8 @@ class _$ServerErrorImpl implements _ServerError {
   TResult map<TResult extends Object?>({
     required TResult Function(_PasswordsDontMatch value) passwordsDontMatch,
     required TResult Function(_InvalidCredentials value) invalidCredentials,
+    required TResult Function(_ShowAPIResponseMessage value)
+        showAPIResponseMessage,
     required TResult Function(_ServerError value) serverError,
     required TResult Function(_BadRequest value) badRequest,
   }) {
@@ -402,6 +584,7 @@ class _$ServerErrorImpl implements _ServerError {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_PasswordsDontMatch value)? passwordsDontMatch,
     TResult? Function(_InvalidCredentials value)? invalidCredentials,
+    TResult? Function(_ShowAPIResponseMessage value)? showAPIResponseMessage,
     TResult? Function(_ServerError value)? serverError,
     TResult? Function(_BadRequest value)? badRequest,
   }) {
@@ -413,6 +596,7 @@ class _$ServerErrorImpl implements _ServerError {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_PasswordsDontMatch value)? passwordsDontMatch,
     TResult Function(_InvalidCredentials value)? invalidCredentials,
+    TResult Function(_ShowAPIResponseMessage value)? showAPIResponseMessage,
     TResult Function(_ServerError value)? serverError,
     TResult Function(_BadRequest value)? badRequest,
     required TResult orElse(),
@@ -494,6 +678,7 @@ class _$BadRequestImpl implements _BadRequest {
   TResult when<TResult extends Object?>({
     required TResult Function() passwordsDontMatch,
     required TResult Function() invalidCredentials,
+    required TResult Function(String message) showAPIResponseMessage,
     required TResult Function() serverError,
     required TResult Function(String error) badRequest,
   }) {
@@ -505,6 +690,7 @@ class _$BadRequestImpl implements _BadRequest {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? passwordsDontMatch,
     TResult? Function()? invalidCredentials,
+    TResult? Function(String message)? showAPIResponseMessage,
     TResult? Function()? serverError,
     TResult? Function(String error)? badRequest,
   }) {
@@ -516,6 +702,7 @@ class _$BadRequestImpl implements _BadRequest {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? passwordsDontMatch,
     TResult Function()? invalidCredentials,
+    TResult Function(String message)? showAPIResponseMessage,
     TResult Function()? serverError,
     TResult Function(String error)? badRequest,
     required TResult orElse(),
@@ -531,6 +718,8 @@ class _$BadRequestImpl implements _BadRequest {
   TResult map<TResult extends Object?>({
     required TResult Function(_PasswordsDontMatch value) passwordsDontMatch,
     required TResult Function(_InvalidCredentials value) invalidCredentials,
+    required TResult Function(_ShowAPIResponseMessage value)
+        showAPIResponseMessage,
     required TResult Function(_ServerError value) serverError,
     required TResult Function(_BadRequest value) badRequest,
   }) {
@@ -542,6 +731,7 @@ class _$BadRequestImpl implements _BadRequest {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_PasswordsDontMatch value)? passwordsDontMatch,
     TResult? Function(_InvalidCredentials value)? invalidCredentials,
+    TResult? Function(_ShowAPIResponseMessage value)? showAPIResponseMessage,
     TResult? Function(_ServerError value)? serverError,
     TResult? Function(_BadRequest value)? badRequest,
   }) {
@@ -553,6 +743,7 @@ class _$BadRequestImpl implements _BadRequest {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_PasswordsDontMatch value)? passwordsDontMatch,
     TResult Function(_InvalidCredentials value)? invalidCredentials,
+    TResult Function(_ShowAPIResponseMessage value)? showAPIResponseMessage,
     TResult Function(_ServerError value)? serverError,
     TResult Function(_BadRequest value)? badRequest,
     required TResult orElse(),

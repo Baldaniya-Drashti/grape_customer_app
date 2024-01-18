@@ -17,25 +17,43 @@ class AccountEntityAdapter extends TypeAdapter<AccountEntity> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return AccountEntity(
-      fields[0] as String,
-      fields[1] as String,
-      fields[2] as String,
-      fields[3] as String,
+      fields[0] as int?,
+      fields[1] as String?,
+      fields[2] as String?,
+      fields[3] as String?,
+      fields[4] as DateTime?,
+      fields[5] as int?,
+      fields[6] as bool?,
+      fields[7] as bool?,
+      fields[8] as int?,
+      fields[9] as String?,
     );
   }
 
   @override
   void write(BinaryWriter writer, AccountEntity obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(10)
       ..writeByte(0)
-      ..write(obj.id)
+      ..write(obj.userId)
       ..writeByte(1)
-      ..write(obj.email)
+      ..write(obj.firstName)
       ..writeByte(2)
-      ..write(obj.username)
+      ..write(obj.lastName)
       ..writeByte(3)
-      ..write(obj.image);
+      ..write(obj.email)
+      ..writeByte(4)
+      ..write(obj.countryCode)
+      ..writeByte(5)
+      ..write(obj.phone)
+      ..writeByte(6)
+      ..write(obj.isEmailVerified)
+      ..writeByte(7)
+      ..write(obj.isMobileVerified)
+      ..writeByte(8)
+      ..write(obj.role)
+      ..writeByte(9)
+      ..write(obj.rememberToken);
   }
 
   @override

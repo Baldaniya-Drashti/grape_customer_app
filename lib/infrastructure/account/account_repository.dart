@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:grape_customer_app/infrastructure/account/current_user_dto.dart';
 import 'package:grape_customer_app/infrastructure/core/network/injectable_module.dart';
 import 'package:hive/hive.dart';
 import 'package:http_parser/http_parser.dart';
@@ -10,7 +11,7 @@ import 'package:grape_customer_app/domain/account/account.dart';
 import 'package:grape_customer_app/domain/account/account_failure.dart';
 import 'package:grape_customer_app/domain/account/i_account_repository.dart';
 import 'package:grape_customer_app/domain/auth/auth_value_objects.dart';
-import 'package:grape_customer_app/infrastructure/account/account_dto.dart';
+
 import 'package:grape_customer_app/infrastructure/account/account_entity.dart';
 import 'package:grape_customer_app/infrastructure/core/field_error.dart';
 import 'package:grape_customer_app/infrastructure/core/hive_box_names.dart';
@@ -26,7 +27,7 @@ class AccountRepository extends IAccountRepository {
     try {
       final response = await apiService.getMethod('/account');
       //final results = jsonDecode(response.data);
-      final account = AccountDto.fromJson(response?.data).toDomain();
+      final account = CurrentUserDto.fromJson(response?.data).toDomain();
       _setUserData(account);
       return right(account);
     } on DioException catch (err) {
@@ -67,7 +68,7 @@ class AccountRepository extends IAccountRepository {
       final response = await apiService.putMethod('/account', data: formData);
 
       //  final results = jsonDecode(response.data);
-      final account = AccountDto.fromJson(response?.data).toDomain();
+      final account = CurrentUserDto.fromJson(response?.data).toDomain();
       _setUserData(account);
       return right(account);
     } on DioException catch (err) {

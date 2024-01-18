@@ -2,6 +2,9 @@ import 'dart:io';
 
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:grape_customer_app/domain/core/api_constants.dart';
+import 'package:grape_customer_app/infrastructure/account/current_user_dto.dart';
+import 'package:grape_customer_app/infrastructure/core/common_response.dart';
 import 'package:grape_customer_app/infrastructure/core/network/injectable_module.dart';
 import 'package:hive/hive.dart';
 import 'package:injectable/injectable.dart';
@@ -9,7 +12,7 @@ import 'package:grape_customer_app/domain/account/account.dart';
 import 'package:grape_customer_app/domain/auth/auth_failure.dart';
 import 'package:grape_customer_app/domain/auth/auth_value_objects.dart';
 import 'package:grape_customer_app/domain/auth/i_auth_facade.dart';
-import 'package:grape_customer_app/infrastructure/account/account_dto.dart';
+
 import 'package:grape_customer_app/infrastructure/account/account_entity.dart';
 import 'package:grape_customer_app/infrastructure/core/field_error.dart';
 import 'package:grape_customer_app/infrastructure/core/hive_box_names.dart';
@@ -29,65 +32,60 @@ class AuthFacade implements IAuthFacade {
     final emailString = emailAddress.getOrCrash();
     final passwordStr = password.getOrCrash();
 
-    try {
-      final response = await apiService.postMethod(
-        '/account/login',
-        {"email": emailString, "password": passwordStr},
-      );
+    final response = await apiService.postMethod(
+      '/account/login',
+      {"email": emailString, "password": passwordStr},
+    );
 
-      // final cookies = response.headers['set-cookie'];
-      // _setCookie(cookies!);
-      //final results = jsonDecode(response.data);
-      final account = AccountDto.fromJson(response?.data).toDomain();
-      _setUserData(account);
-      return right(unit);
-    } on DioException catch (err) {
-      if (err.response?.statusCode == 401) {
-        return left(const AuthFailure.invalidCredentials());
-      }
-      return left(const AuthFailure.serverError());
-    } on SocketException catch (_) {
-      return left(const AuthFailure.serverError());
-    }
+    // final cookies = response.headers['set-cookie'];
+    // _setCookie(cookies!);
+    //final results = jsonDecode(response.data);
+    final account = CurrentUserDto.fromJson(response.data).toDomain();
+    _setUserData(account);
+    return right(unit);
   }
 
   @override
   Future<Either<AuthFailure, Unit>> register({
+    required Username firstName,
+    required Username lastName,
     required EmailAddress emailAddress,
-    required Username username,
-    required Password password,
+    required String countryCode,
+    required MobileNumber mobileNumber,
   }) async {
-    final emailString = emailAddress.getOrCrash();
-    final passwordStr = password.getOrCrash();
-    final usernameStr = username.getOrCrash();
-
     try {
       final response = await apiService.postMethod(
-        '/account/register',
+        ApiConstants.register,
         {
-          "email": emailString,
-          "password": passwordStr,
-          "username": usernameStr
+          "role": 2,
+          "first_name": "Grap",
+          "last_name": "Market",
+          "email": "grap-market@mailinator.com",
+          "country_code": "+91",
+          "mobile": 1234564564
+          // "role": 2,
+          // "first_name": firstName.getOrCrash(),
+          // "last_name": lastName.getOrCrash(),
+          // "email": emailAddress.getOrCrash(),
+          // "country_code": countryCode,
+          // "mobile": mobileNumber.getOrCrash()
         },
       );
-
-      // final cookies = response.headers['set-cookie'];
-      // _setCookie(cookies!);
-      // final results = jsonDecode(response.data);
-      final account = AccountDto.fromJson(response?.data).toDomain();
+      print('response : ${response.data}');
+      final account = CurrentUserDto.fromJson(response.data).toDomain();
+      _setCookie(account.rememberToken ?? "");
       _setUserData(account);
       return right(unit);
     } on DioException catch (err) {
-      if (err.response?.statusCode == 400 && err.response != null) {
-        final errors = FieldError.getErrors(err.response!);
-        if (errors.isNotEmpty) {
-          return left(AuthFailure.badRequest(errors[0].message));
+      if (err.response != null) {
+        var commonRespose = CommonResponse.fromJson(err.response?.data);
+
+        if (commonRespose.dioMessage != null) {
+          return left(
+              AuthFailure.showAPIResponseMessage(commonRespose.dioMessage!));
         }
       }
 
-      return left(const AuthFailure.serverError());
-    } on SocketException catch (err) {
-      print(err);
       return left(const AuthFailure.serverError());
     }
   }

@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grape_customer_app/application/main/home/home_bloc.dart';
 import 'package:grape_customer_app/application/main_tab/main_tab_bloc.dart';
 import 'package:grape_customer_app/domain/core/l10n/app_localizations.dart';
+import 'package:grape_customer_app/presentation/common/utils/app_focus.dart';
 import 'package:grape_customer_app/presentation/core/app_router.gr.dart'
     as autoroute;
 import 'package:grape_customer_app/presentation/core/widgets/inputs/custom_app_bar.dart';
@@ -36,20 +37,25 @@ class MainTabView extends StatelessWidget {
         builder: (context, state) {
           return Scaffold(
             appBar: getAppbar(state, context),
-            body: IndexedStack(
-              index: state.pageIndex,
-              children: List<Widget>.generate(
-                context.read<MainTabBloc>().pageList.length,
-                (int index) {
-                  return Navigator(
-                    onGenerateRoute: (RouteSettings settings) {
-                      return onGenerateRoute(
-                        settings,
-                        context.read<MainTabBloc>().pageList[index],
-                      );
-                    },
-                  );
-                },
+            body: GestureDetector(
+              onTap: () {
+                AppFocus.unfocus(context);
+              },
+              child: IndexedStack(
+                index: state.pageIndex,
+                children: List<Widget>.generate(
+                  context.read<MainTabBloc>().pageList.length,
+                  (int index) {
+                    return Navigator(
+                      onGenerateRoute: (RouteSettings settings) {
+                        return onGenerateRoute(
+                          settings,
+                          context.read<MainTabBloc>().pageList[index],
+                        );
+                      },
+                    );
+                  },
+                ),
               ),
             ),
             bottomNavigationBar: CustomBottomNavigationWidget(),
