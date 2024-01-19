@@ -18,4 +18,5 @@ class EditProfileEvent with _$EditProfileEvent {
       CountryCodeChanged;
 
   const factory EditProfileEvent.saveButtonPressed() = SaveButtonPressed;
+  
 }

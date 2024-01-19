@@ -16,6 +16,7 @@ class Account with _$Account {
     bool? isEmailVerified,
     bool? isMobileVerified,
     int? role,
+    String? profile,
     String? rememberToken,
     Auth? auth,
   }) = _Account;

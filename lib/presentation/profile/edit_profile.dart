@@ -27,10 +27,12 @@ class EditProfileScreen extends StatelessWidget {
             (either) => either.fold((l) {
               showError(
                   message: l.maybeMap(
-                badRequest: (value) => value.error,
-                orElse: () => 'Server Error. Try again later.',
+                showAPIResponseMessage: (value) => value.message,
+                networkError: (value) =>
+                    'Please check your internet connectivity',
+                orElse: () => "Server Error. Try again later.",
               ));
-            }, (r) => null),
+            }, (r) => context.router.back()),
           );
         },
         builder: (context, state) {
@@ -43,7 +45,7 @@ class EditProfileScreen extends StatelessWidget {
             ),
             bottomNavigationBar: Padding(
               padding: EdgeInsets.only(
-                bottom: getSize(46),
+                bottom: getSize(18),
                 left: getSize(18),
                 right: getSize(18),
               ),

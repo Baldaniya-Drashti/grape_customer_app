@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:auto_route/auto_route.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -18,7 +20,6 @@ import 'package:image_picker/image_picker.dart';
 class EditProfileForm extends StatelessWidget {
   const EditProfileForm({
     super.key,
-
   });
 
   @override
@@ -42,11 +43,11 @@ class EditProfileForm extends StatelessWidget {
               SizedBox(
                 height: getSize(20),
               ),
-              lastNameTextFiled(context),
+              lastNameTextFiled(context, state),
               SizedBox(
                 height: getSize(20),
               ),
-              emailAddressTextFiled(context),
+              emailAddressTextFiled(context, state),
               SizedBox(
                 height: getSize(20),
               ),
@@ -64,6 +65,7 @@ class EditProfileForm extends StatelessWidget {
       hintText: AppLocalizations.of(context).mobileNumber,
       labelText: AppLocalizations.of(context).mobileNumber,
       keyboardType: TextInputType.number,
+      initialValue: state.currentUser.phone?.toString() ?? "",
       onChanged: (mobileNumber) => context
           .read<EditProfileBloc>()
           .add(EditProfileEvent.mobileNumberChanged(mobileNumber)),
@@ -88,35 +90,37 @@ class EditProfileForm extends StatelessWidget {
     );
   }
 
-  CustomTextField emailAddressTextFiled(BuildContext context) {
-    return CustomTextField(
-      hintText: AppLocalizations.of(context).emailAddress,
-      labelText: AppLocalizations.of(context).emailAddress,
-      keyboardType: TextInputType.emailAddress,
-      onChanged: (email) => context
-          .read<EditProfileBloc>()
-          .add(EditProfileEvent.emailAddressChanged(email)),
-      validator: (_, context) => context
-          .read<EditProfileBloc>()
-          .state
-          .emailAddress
-          .value
-          .fold(
-            (l) => l.maybeMap(
-              empty: (value) => AppLocalizations.of(context).enterEmail,
-              invalidEmail: (value) => AppLocalizations.of(context).enterEmail,
-              orElse: () => null,
-            ),
-            (r) => null,
-          ),
+  emailAddressTextFiled(BuildContext context, EditProfileState state) {
+    return AbsorbPointer(
+      child: CustomTextField(
+        hintText: AppLocalizations.of(context).emailAddress,
+        labelText: AppLocalizations.of(context).emailAddress,
+        keyboardType: TextInputType.emailAddress,
+        initialValue: state.currentUser.email,
+        onChanged: (email) => context
+            .read<EditProfileBloc>()
+            .add(EditProfileEvent.emailAddressChanged(email)),
+        validator: (_, context) =>
+            context.read<EditProfileBloc>().state.emailAddress.value.fold(
+                  (l) => l.maybeMap(
+                    empty: (value) => AppLocalizations.of(context).enterEmail,
+                    invalidEmail: (value) =>
+                        AppLocalizations.of(context).enterEmail,
+                    orElse: () => null,
+                  ),
+                  (r) => null,
+                ),
+      ),
     );
   }
 
-  CustomTextField lastNameTextFiled(BuildContext context) {
+  CustomTextField lastNameTextFiled(
+      BuildContext context, EditProfileState state) {
     return CustomTextField(
       labelText: AppLocalizations.of(context).lastName,
       hintText: AppLocalizations.of(context).lastName,
       textCapitalization: TextCapitalization.words,
+      initialValue: state.currentUser.lastName,
       onChanged: (p0) => context
           .read<EditProfileBloc>()
           .add(EditProfileEvent.lastNameChanged(p0)),
@@ -137,6 +141,7 @@ class EditProfileForm extends StatelessWidget {
     return CustomTextField(
       labelText: AppLocalizations.of(context).firstName,
       hintText: AppLocalizations.of(context).firstName,
+      initialValue: state.currentUser.firstName,
       textCapitalization: TextCapitalization.words,
       onChanged: (value) => context
           .read<EditProfileBloc>()
@@ -172,11 +177,10 @@ class EditProfileForm extends StatelessWidget {
               ),
               shape: BoxShape.rectangle,
               image: DecorationImage(
-                image: state.selectImage.isNotEmpty
+                image: state.selectImage.isNotEmpty &&
+                        !state.selectImage.contains('https')
                     ? FileImage(File(state.selectImage)) as ImageProvider
-                    : NetworkImage(
-                        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHDRlp-KGr_M94k_oor4Odjn2UzbAS7n1YoA&usqp=CAU',
-                      ),
+                    : CachedNetworkImageProvider(state.selectImage),
                 fit: BoxFit.cover,
               ),
             ),
@@ -191,31 +195,32 @@ class EditProfileForm extends StatelessWidget {
                   String path = await ImagePickerUtils().pickImage(
                           imageSource: ImageSource.camera, context: context) ??
                       '';
-                  path.isNotEmpty
-                      ? context.read<EditProfileBloc>().add(
-                            EditProfileEvent.changeProfilePicture(path),
-                          )
-                      : Navigator.of(context).pop();
-                  Navigator.of(context).pop();
+
+                  if (path.isNotEmpty) {
+                    context.read<EditProfileBloc>().add(
+                          EditProfileEvent.changeProfilePicture(path),
+                        );
+                  }
+                  context.router.pop();
                 },
                 selectPhotoCallback: () async {
                   String path = await ImagePickerUtils().pickImage(
                           imageSource: ImageSource.gallery, context: context) ??
                       '';
-                  path.isNotEmpty
-                      ? context.read<EditProfileBloc>().add(
-                            EditProfileEvent.changeProfilePicture(path),
-                          )
-                      : Navigator.of(context).pop();
-                  Navigator.of(context).pop();
+                  if (path.isNotEmpty) {
+                    context.read<EditProfileBloc>().add(
+                          EditProfileEvent.changeProfilePicture(path),
+                        );
+                  }
+                  context.router.pop();
                 },
                 context: context,
               );
             },
             child: Container(
-              padding: EdgeInsets.all(
-                getSize(5),
-              ),
+              height: getSize(28),
+              width: getSize(28),
+              alignment: Alignment.center,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: AppColors.white,

@@ -19,6 +19,7 @@ class CurrentUserDto with _$CurrentUserDto {
     @JsonKey(name: 'is_email_verified') bool? isEmailVerified,
     @JsonKey(name: 'is_mobile_verified') bool? isMobileVerified,
     int? role,
+    String? profile,
     @JsonKey(name: 'remember_token') String? rememberToken,
     @JsonKey(name: 'auth') AuthDto? authDto,
   }) = _CurrentUserDto;
@@ -34,6 +35,7 @@ class CurrentUserDto with _$CurrentUserDto {
       isMobileVerified: isMobileVerified,
       role: role,
       rememberToken: rememberToken,
+      profile: profile,
       auth: authDto?.toDomain(),
     );
   }
@@ -49,6 +51,7 @@ class CurrentUserDto with _$CurrentUserDto {
       isEmailVerified: account.isEmailVerified,
       isMobileVerified: account.isMobileVerified,
       role: account.role,
+      profile: account.profile,
       rememberToken: account.rememberToken,
       authDto: account.auth != null ? AuthDto.fromDomain(account.auth!) : null,
     );

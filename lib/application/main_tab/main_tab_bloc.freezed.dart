@@ -269,6 +269,7 @@ mixin _$MainTabEvent {
   TResult when<TResult extends Object?>({
     required TResult Function(int tabIndex) tabChange,
     required TResult Function(String fcmToken) registerForPush,
+    required TResult Function() getCurrentUser,
     required TResult Function(BuildContext context) pushNotificationInitialize,
   }) =>
       throw _privateConstructorUsedError;
@@ -276,6 +277,7 @@ mixin _$MainTabEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int tabIndex)? tabChange,
     TResult? Function(String fcmToken)? registerForPush,
+    TResult? Function()? getCurrentUser,
     TResult? Function(BuildContext context)? pushNotificationInitialize,
   }) =>
       throw _privateConstructorUsedError;
@@ -283,6 +285,7 @@ mixin _$MainTabEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int tabIndex)? tabChange,
     TResult Function(String fcmToken)? registerForPush,
+    TResult Function()? getCurrentUser,
     TResult Function(BuildContext context)? pushNotificationInitialize,
     required TResult orElse(),
   }) =>
@@ -291,6 +294,7 @@ mixin _$MainTabEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(TabChange value) tabChange,
     required TResult Function(RegisterForPush value) registerForPush,
+    required TResult Function(GetCurrentUser value) getCurrentUser,
     required TResult Function(PushNotificationInitialize value)
         pushNotificationInitialize,
   }) =>
@@ -299,6 +303,7 @@ mixin _$MainTabEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(TabChange value)? tabChange,
     TResult? Function(RegisterForPush value)? registerForPush,
+    TResult? Function(GetCurrentUser value)? getCurrentUser,
     TResult? Function(PushNotificationInitialize value)?
         pushNotificationInitialize,
   }) =>
@@ -307,6 +312,7 @@ mixin _$MainTabEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(TabChange value)? tabChange,
     TResult Function(RegisterForPush value)? registerForPush,
+    TResult Function(GetCurrentUser value)? getCurrentUser,
     TResult Function(PushNotificationInitialize value)?
         pushNotificationInitialize,
     required TResult orElse(),
@@ -399,6 +405,7 @@ class _$TabChangeImpl implements TabChange {
   TResult when<TResult extends Object?>({
     required TResult Function(int tabIndex) tabChange,
     required TResult Function(String fcmToken) registerForPush,
+    required TResult Function() getCurrentUser,
     required TResult Function(BuildContext context) pushNotificationInitialize,
   }) {
     return tabChange(tabIndex);
@@ -409,6 +416,7 @@ class _$TabChangeImpl implements TabChange {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int tabIndex)? tabChange,
     TResult? Function(String fcmToken)? registerForPush,
+    TResult? Function()? getCurrentUser,
     TResult? Function(BuildContext context)? pushNotificationInitialize,
   }) {
     return tabChange?.call(tabIndex);
@@ -419,6 +427,7 @@ class _$TabChangeImpl implements TabChange {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int tabIndex)? tabChange,
     TResult Function(String fcmToken)? registerForPush,
+    TResult Function()? getCurrentUser,
     TResult Function(BuildContext context)? pushNotificationInitialize,
     required TResult orElse(),
   }) {
@@ -433,6 +442,7 @@ class _$TabChangeImpl implements TabChange {
   TResult map<TResult extends Object?>({
     required TResult Function(TabChange value) tabChange,
     required TResult Function(RegisterForPush value) registerForPush,
+    required TResult Function(GetCurrentUser value) getCurrentUser,
     required TResult Function(PushNotificationInitialize value)
         pushNotificationInitialize,
   }) {
@@ -444,6 +454,7 @@ class _$TabChangeImpl implements TabChange {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(TabChange value)? tabChange,
     TResult? Function(RegisterForPush value)? registerForPush,
+    TResult? Function(GetCurrentUser value)? getCurrentUser,
     TResult? Function(PushNotificationInitialize value)?
         pushNotificationInitialize,
   }) {
@@ -455,6 +466,7 @@ class _$TabChangeImpl implements TabChange {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(TabChange value)? tabChange,
     TResult Function(RegisterForPush value)? registerForPush,
+    TResult Function(GetCurrentUser value)? getCurrentUser,
     TResult Function(PushNotificationInitialize value)?
         pushNotificationInitialize,
     required TResult orElse(),
@@ -543,6 +555,7 @@ class _$RegisterForPushImpl implements RegisterForPush {
   TResult when<TResult extends Object?>({
     required TResult Function(int tabIndex) tabChange,
     required TResult Function(String fcmToken) registerForPush,
+    required TResult Function() getCurrentUser,
     required TResult Function(BuildContext context) pushNotificationInitialize,
   }) {
     return registerForPush(fcmToken);
@@ -553,6 +566,7 @@ class _$RegisterForPushImpl implements RegisterForPush {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int tabIndex)? tabChange,
     TResult? Function(String fcmToken)? registerForPush,
+    TResult? Function()? getCurrentUser,
     TResult? Function(BuildContext context)? pushNotificationInitialize,
   }) {
     return registerForPush?.call(fcmToken);
@@ -563,6 +577,7 @@ class _$RegisterForPushImpl implements RegisterForPush {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int tabIndex)? tabChange,
     TResult Function(String fcmToken)? registerForPush,
+    TResult Function()? getCurrentUser,
     TResult Function(BuildContext context)? pushNotificationInitialize,
     required TResult orElse(),
   }) {
@@ -577,6 +592,7 @@ class _$RegisterForPushImpl implements RegisterForPush {
   TResult map<TResult extends Object?>({
     required TResult Function(TabChange value) tabChange,
     required TResult Function(RegisterForPush value) registerForPush,
+    required TResult Function(GetCurrentUser value) getCurrentUser,
     required TResult Function(PushNotificationInitialize value)
         pushNotificationInitialize,
   }) {
@@ -588,6 +604,7 @@ class _$RegisterForPushImpl implements RegisterForPush {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(TabChange value)? tabChange,
     TResult? Function(RegisterForPush value)? registerForPush,
+    TResult? Function(GetCurrentUser value)? getCurrentUser,
     TResult? Function(PushNotificationInitialize value)?
         pushNotificationInitialize,
   }) {
@@ -599,6 +616,7 @@ class _$RegisterForPushImpl implements RegisterForPush {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(TabChange value)? tabChange,
     TResult Function(RegisterForPush value)? registerForPush,
+    TResult Function(GetCurrentUser value)? getCurrentUser,
     TResult Function(PushNotificationInitialize value)?
         pushNotificationInitialize,
     required TResult orElse(),
@@ -617,6 +635,123 @@ abstract class RegisterForPush implements MainTabEvent {
   @JsonKey(ignore: true)
   _$$RegisterForPushImplCopyWith<_$RegisterForPushImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$GetCurrentUserImplCopyWith<$Res> {
+  factory _$$GetCurrentUserImplCopyWith(_$GetCurrentUserImpl value,
+          $Res Function(_$GetCurrentUserImpl) then) =
+      __$$GetCurrentUserImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$GetCurrentUserImplCopyWithImpl<$Res>
+    extends _$MainTabEventCopyWithImpl<$Res, _$GetCurrentUserImpl>
+    implements _$$GetCurrentUserImplCopyWith<$Res> {
+  __$$GetCurrentUserImplCopyWithImpl(
+      _$GetCurrentUserImpl _value, $Res Function(_$GetCurrentUserImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$GetCurrentUserImpl implements GetCurrentUser {
+  _$GetCurrentUserImpl();
+
+  @override
+  String toString() {
+    return 'MainTabEvent.getCurrentUser()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$GetCurrentUserImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(int tabIndex) tabChange,
+    required TResult Function(String fcmToken) registerForPush,
+    required TResult Function() getCurrentUser,
+    required TResult Function(BuildContext context) pushNotificationInitialize,
+  }) {
+    return getCurrentUser();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(int tabIndex)? tabChange,
+    TResult? Function(String fcmToken)? registerForPush,
+    TResult? Function()? getCurrentUser,
+    TResult? Function(BuildContext context)? pushNotificationInitialize,
+  }) {
+    return getCurrentUser?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(int tabIndex)? tabChange,
+    TResult Function(String fcmToken)? registerForPush,
+    TResult Function()? getCurrentUser,
+    TResult Function(BuildContext context)? pushNotificationInitialize,
+    required TResult orElse(),
+  }) {
+    if (getCurrentUser != null) {
+      return getCurrentUser();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(TabChange value) tabChange,
+    required TResult Function(RegisterForPush value) registerForPush,
+    required TResult Function(GetCurrentUser value) getCurrentUser,
+    required TResult Function(PushNotificationInitialize value)
+        pushNotificationInitialize,
+  }) {
+    return getCurrentUser(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(TabChange value)? tabChange,
+    TResult? Function(RegisterForPush value)? registerForPush,
+    TResult? Function(GetCurrentUser value)? getCurrentUser,
+    TResult? Function(PushNotificationInitialize value)?
+        pushNotificationInitialize,
+  }) {
+    return getCurrentUser?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(TabChange value)? tabChange,
+    TResult Function(RegisterForPush value)? registerForPush,
+    TResult Function(GetCurrentUser value)? getCurrentUser,
+    TResult Function(PushNotificationInitialize value)?
+        pushNotificationInitialize,
+    required TResult orElse(),
+  }) {
+    if (getCurrentUser != null) {
+      return getCurrentUser(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class GetCurrentUser implements MainTabEvent {
+  factory GetCurrentUser() = _$GetCurrentUserImpl;
 }
 
 /// @nodoc
@@ -688,6 +823,7 @@ class _$PushNotificationInitializeImpl implements PushNotificationInitialize {
   TResult when<TResult extends Object?>({
     required TResult Function(int tabIndex) tabChange,
     required TResult Function(String fcmToken) registerForPush,
+    required TResult Function() getCurrentUser,
     required TResult Function(BuildContext context) pushNotificationInitialize,
   }) {
     return pushNotificationInitialize(context);
@@ -698,6 +834,7 @@ class _$PushNotificationInitializeImpl implements PushNotificationInitialize {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(int tabIndex)? tabChange,
     TResult? Function(String fcmToken)? registerForPush,
+    TResult? Function()? getCurrentUser,
     TResult? Function(BuildContext context)? pushNotificationInitialize,
   }) {
     return pushNotificationInitialize?.call(context);
@@ -708,6 +845,7 @@ class _$PushNotificationInitializeImpl implements PushNotificationInitialize {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(int tabIndex)? tabChange,
     TResult Function(String fcmToken)? registerForPush,
+    TResult Function()? getCurrentUser,
     TResult Function(BuildContext context)? pushNotificationInitialize,
     required TResult orElse(),
   }) {
@@ -722,6 +860,7 @@ class _$PushNotificationInitializeImpl implements PushNotificationInitialize {
   TResult map<TResult extends Object?>({
     required TResult Function(TabChange value) tabChange,
     required TResult Function(RegisterForPush value) registerForPush,
+    required TResult Function(GetCurrentUser value) getCurrentUser,
     required TResult Function(PushNotificationInitialize value)
         pushNotificationInitialize,
   }) {
@@ -733,6 +872,7 @@ class _$PushNotificationInitializeImpl implements PushNotificationInitialize {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(TabChange value)? tabChange,
     TResult? Function(RegisterForPush value)? registerForPush,
+    TResult? Function(GetCurrentUser value)? getCurrentUser,
     TResult? Function(PushNotificationInitialize value)?
         pushNotificationInitialize,
   }) {
@@ -744,6 +884,7 @@ class _$PushNotificationInitializeImpl implements PushNotificationInitialize {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(TabChange value)? tabChange,
     TResult Function(RegisterForPush value)? registerForPush,
+    TResult Function(GetCurrentUser value)? getCurrentUser,
     TResult Function(PushNotificationInitialize value)?
         pushNotificationInitialize,
     required TResult orElse(),

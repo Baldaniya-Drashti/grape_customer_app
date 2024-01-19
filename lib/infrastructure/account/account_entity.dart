@@ -25,7 +25,8 @@ class AccountEntity extends HiveObject {
   final int? role;
   @HiveField(9)
   final String? rememberToken;
-
+  @HiveField(10)
+  final String? profile;
   AccountEntity(
     this.userId,
     this.firstName,
@@ -37,6 +38,7 @@ class AccountEntity extends HiveObject {
     this.isMobileVerified,
     this.role,
     this.rememberToken,
+    this.profile,
   );
 
   Account toDomain() {
@@ -50,6 +52,7 @@ class AccountEntity extends HiveObject {
       isEmailVerified: isEmailVerified,
       isMobileVerified: isMobileVerified,
       role: role,
+      profile: profile,
       rememberToken: rememberToken,
     );
   }
@@ -66,6 +69,7 @@ class AccountEntity extends HiveObject {
       account.isMobileVerified,
       account.role,
       account.rememberToken,
+      account.profile,
     );
   }
 }

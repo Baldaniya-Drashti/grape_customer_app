@@ -22,6 +22,8 @@ mixin _$AccountFailure {
     required TResult Function(String message) badRequest,
     required TResult Function() serverError,
     required TResult Function() unauthenticated,
+    required TResult Function() networkError,
+    required TResult Function(String message) showAPIResponseMessage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -30,6 +32,8 @@ mixin _$AccountFailure {
     TResult? Function(String message)? badRequest,
     TResult? Function()? serverError,
     TResult? Function()? unauthenticated,
+    TResult? Function()? networkError,
+    TResult? Function(String message)? showAPIResponseMessage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -38,6 +42,8 @@ mixin _$AccountFailure {
     TResult Function(String message)? badRequest,
     TResult Function()? serverError,
     TResult Function()? unauthenticated,
+    TResult Function()? networkError,
+    TResult Function(String message)? showAPIResponseMessage,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -47,6 +53,9 @@ mixin _$AccountFailure {
     required TResult Function(_BadRequest value) badRequest,
     required TResult Function(_ServerError value) serverError,
     required TResult Function(_Unauthenticated value) unauthenticated,
+    required TResult Function(_NetworkError value) networkError,
+    required TResult Function(_ShowAPIResponseMessage value)
+        showAPIResponseMessage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -55,6 +64,8 @@ mixin _$AccountFailure {
     TResult? Function(_BadRequest value)? badRequest,
     TResult? Function(_ServerError value)? serverError,
     TResult? Function(_Unauthenticated value)? unauthenticated,
+    TResult? Function(_NetworkError value)? networkError,
+    TResult? Function(_ShowAPIResponseMessage value)? showAPIResponseMessage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -63,6 +74,8 @@ mixin _$AccountFailure {
     TResult Function(_BadRequest value)? badRequest,
     TResult Function(_ServerError value)? serverError,
     TResult Function(_Unauthenticated value)? unauthenticated,
+    TResult Function(_NetworkError value)? networkError,
+    TResult Function(_ShowAPIResponseMessage value)? showAPIResponseMessage,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -128,6 +141,8 @@ class _$UnexpectedImpl implements _Unexpected {
     required TResult Function(String message) badRequest,
     required TResult Function() serverError,
     required TResult Function() unauthenticated,
+    required TResult Function() networkError,
+    required TResult Function(String message) showAPIResponseMessage,
   }) {
     return unexpected();
   }
@@ -139,6 +154,8 @@ class _$UnexpectedImpl implements _Unexpected {
     TResult? Function(String message)? badRequest,
     TResult? Function()? serverError,
     TResult? Function()? unauthenticated,
+    TResult? Function()? networkError,
+    TResult? Function(String message)? showAPIResponseMessage,
   }) {
     return unexpected?.call();
   }
@@ -150,6 +167,8 @@ class _$UnexpectedImpl implements _Unexpected {
     TResult Function(String message)? badRequest,
     TResult Function()? serverError,
     TResult Function()? unauthenticated,
+    TResult Function()? networkError,
+    TResult Function(String message)? showAPIResponseMessage,
     required TResult orElse(),
   }) {
     if (unexpected != null) {
@@ -165,6 +184,9 @@ class _$UnexpectedImpl implements _Unexpected {
     required TResult Function(_BadRequest value) badRequest,
     required TResult Function(_ServerError value) serverError,
     required TResult Function(_Unauthenticated value) unauthenticated,
+    required TResult Function(_NetworkError value) networkError,
+    required TResult Function(_ShowAPIResponseMessage value)
+        showAPIResponseMessage,
   }) {
     return unexpected(this);
   }
@@ -176,6 +198,8 @@ class _$UnexpectedImpl implements _Unexpected {
     TResult? Function(_BadRequest value)? badRequest,
     TResult? Function(_ServerError value)? serverError,
     TResult? Function(_Unauthenticated value)? unauthenticated,
+    TResult? Function(_NetworkError value)? networkError,
+    TResult? Function(_ShowAPIResponseMessage value)? showAPIResponseMessage,
   }) {
     return unexpected?.call(this);
   }
@@ -187,6 +211,8 @@ class _$UnexpectedImpl implements _Unexpected {
     TResult Function(_BadRequest value)? badRequest,
     TResult Function(_ServerError value)? serverError,
     TResult Function(_Unauthenticated value)? unauthenticated,
+    TResult Function(_NetworkError value)? networkError,
+    TResult Function(_ShowAPIResponseMessage value)? showAPIResponseMessage,
     required TResult orElse(),
   }) {
     if (unexpected != null) {
@@ -268,6 +294,8 @@ class _$BadRequestImpl implements _BadRequest {
     required TResult Function(String message) badRequest,
     required TResult Function() serverError,
     required TResult Function() unauthenticated,
+    required TResult Function() networkError,
+    required TResult Function(String message) showAPIResponseMessage,
   }) {
     return badRequest(message);
   }
@@ -279,6 +307,8 @@ class _$BadRequestImpl implements _BadRequest {
     TResult? Function(String message)? badRequest,
     TResult? Function()? serverError,
     TResult? Function()? unauthenticated,
+    TResult? Function()? networkError,
+    TResult? Function(String message)? showAPIResponseMessage,
   }) {
     return badRequest?.call(message);
   }
@@ -290,6 +320,8 @@ class _$BadRequestImpl implements _BadRequest {
     TResult Function(String message)? badRequest,
     TResult Function()? serverError,
     TResult Function()? unauthenticated,
+    TResult Function()? networkError,
+    TResult Function(String message)? showAPIResponseMessage,
     required TResult orElse(),
   }) {
     if (badRequest != null) {
@@ -305,6 +337,9 @@ class _$BadRequestImpl implements _BadRequest {
     required TResult Function(_BadRequest value) badRequest,
     required TResult Function(_ServerError value) serverError,
     required TResult Function(_Unauthenticated value) unauthenticated,
+    required TResult Function(_NetworkError value) networkError,
+    required TResult Function(_ShowAPIResponseMessage value)
+        showAPIResponseMessage,
   }) {
     return badRequest(this);
   }
@@ -316,6 +351,8 @@ class _$BadRequestImpl implements _BadRequest {
     TResult? Function(_BadRequest value)? badRequest,
     TResult? Function(_ServerError value)? serverError,
     TResult? Function(_Unauthenticated value)? unauthenticated,
+    TResult? Function(_NetworkError value)? networkError,
+    TResult? Function(_ShowAPIResponseMessage value)? showAPIResponseMessage,
   }) {
     return badRequest?.call(this);
   }
@@ -327,6 +364,8 @@ class _$BadRequestImpl implements _BadRequest {
     TResult Function(_BadRequest value)? badRequest,
     TResult Function(_ServerError value)? serverError,
     TResult Function(_Unauthenticated value)? unauthenticated,
+    TResult Function(_NetworkError value)? networkError,
+    TResult Function(_ShowAPIResponseMessage value)? showAPIResponseMessage,
     required TResult orElse(),
   }) {
     if (badRequest != null) {
@@ -387,6 +426,8 @@ class _$ServerErrorImpl implements _ServerError {
     required TResult Function(String message) badRequest,
     required TResult Function() serverError,
     required TResult Function() unauthenticated,
+    required TResult Function() networkError,
+    required TResult Function(String message) showAPIResponseMessage,
   }) {
     return serverError();
   }
@@ -398,6 +439,8 @@ class _$ServerErrorImpl implements _ServerError {
     TResult? Function(String message)? badRequest,
     TResult? Function()? serverError,
     TResult? Function()? unauthenticated,
+    TResult? Function()? networkError,
+    TResult? Function(String message)? showAPIResponseMessage,
   }) {
     return serverError?.call();
   }
@@ -409,6 +452,8 @@ class _$ServerErrorImpl implements _ServerError {
     TResult Function(String message)? badRequest,
     TResult Function()? serverError,
     TResult Function()? unauthenticated,
+    TResult Function()? networkError,
+    TResult Function(String message)? showAPIResponseMessage,
     required TResult orElse(),
   }) {
     if (serverError != null) {
@@ -424,6 +469,9 @@ class _$ServerErrorImpl implements _ServerError {
     required TResult Function(_BadRequest value) badRequest,
     required TResult Function(_ServerError value) serverError,
     required TResult Function(_Unauthenticated value) unauthenticated,
+    required TResult Function(_NetworkError value) networkError,
+    required TResult Function(_ShowAPIResponseMessage value)
+        showAPIResponseMessage,
   }) {
     return serverError(this);
   }
@@ -435,6 +483,8 @@ class _$ServerErrorImpl implements _ServerError {
     TResult? Function(_BadRequest value)? badRequest,
     TResult? Function(_ServerError value)? serverError,
     TResult? Function(_Unauthenticated value)? unauthenticated,
+    TResult? Function(_NetworkError value)? networkError,
+    TResult? Function(_ShowAPIResponseMessage value)? showAPIResponseMessage,
   }) {
     return serverError?.call(this);
   }
@@ -446,6 +496,8 @@ class _$ServerErrorImpl implements _ServerError {
     TResult Function(_BadRequest value)? badRequest,
     TResult Function(_ServerError value)? serverError,
     TResult Function(_Unauthenticated value)? unauthenticated,
+    TResult Function(_NetworkError value)? networkError,
+    TResult Function(_ShowAPIResponseMessage value)? showAPIResponseMessage,
     required TResult orElse(),
   }) {
     if (serverError != null) {
@@ -501,6 +553,8 @@ class _$UnauthenticatedImpl implements _Unauthenticated {
     required TResult Function(String message) badRequest,
     required TResult Function() serverError,
     required TResult Function() unauthenticated,
+    required TResult Function() networkError,
+    required TResult Function(String message) showAPIResponseMessage,
   }) {
     return unauthenticated();
   }
@@ -512,6 +566,8 @@ class _$UnauthenticatedImpl implements _Unauthenticated {
     TResult? Function(String message)? badRequest,
     TResult? Function()? serverError,
     TResult? Function()? unauthenticated,
+    TResult? Function()? networkError,
+    TResult? Function(String message)? showAPIResponseMessage,
   }) {
     return unauthenticated?.call();
   }
@@ -523,6 +579,8 @@ class _$UnauthenticatedImpl implements _Unauthenticated {
     TResult Function(String message)? badRequest,
     TResult Function()? serverError,
     TResult Function()? unauthenticated,
+    TResult Function()? networkError,
+    TResult Function(String message)? showAPIResponseMessage,
     required TResult orElse(),
   }) {
     if (unauthenticated != null) {
@@ -538,6 +596,9 @@ class _$UnauthenticatedImpl implements _Unauthenticated {
     required TResult Function(_BadRequest value) badRequest,
     required TResult Function(_ServerError value) serverError,
     required TResult Function(_Unauthenticated value) unauthenticated,
+    required TResult Function(_NetworkError value) networkError,
+    required TResult Function(_ShowAPIResponseMessage value)
+        showAPIResponseMessage,
   }) {
     return unauthenticated(this);
   }
@@ -549,6 +610,8 @@ class _$UnauthenticatedImpl implements _Unauthenticated {
     TResult? Function(_BadRequest value)? badRequest,
     TResult? Function(_ServerError value)? serverError,
     TResult? Function(_Unauthenticated value)? unauthenticated,
+    TResult? Function(_NetworkError value)? networkError,
+    TResult? Function(_ShowAPIResponseMessage value)? showAPIResponseMessage,
   }) {
     return unauthenticated?.call(this);
   }
@@ -560,6 +623,8 @@ class _$UnauthenticatedImpl implements _Unauthenticated {
     TResult Function(_BadRequest value)? badRequest,
     TResult Function(_ServerError value)? serverError,
     TResult Function(_Unauthenticated value)? unauthenticated,
+    TResult Function(_NetworkError value)? networkError,
+    TResult Function(_ShowAPIResponseMessage value)? showAPIResponseMessage,
     required TResult orElse(),
   }) {
     if (unauthenticated != null) {
@@ -571,4 +636,293 @@ class _$UnauthenticatedImpl implements _Unauthenticated {
 
 abstract class _Unauthenticated implements AccountFailure {
   const factory _Unauthenticated() = _$UnauthenticatedImpl;
+}
+
+/// @nodoc
+abstract class _$$NetworkErrorImplCopyWith<$Res> {
+  factory _$$NetworkErrorImplCopyWith(
+          _$NetworkErrorImpl value, $Res Function(_$NetworkErrorImpl) then) =
+      __$$NetworkErrorImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$NetworkErrorImplCopyWithImpl<$Res>
+    extends _$AccountFailureCopyWithImpl<$Res, _$NetworkErrorImpl>
+    implements _$$NetworkErrorImplCopyWith<$Res> {
+  __$$NetworkErrorImplCopyWithImpl(
+      _$NetworkErrorImpl _value, $Res Function(_$NetworkErrorImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$NetworkErrorImpl implements _NetworkError {
+  const _$NetworkErrorImpl();
+
+  @override
+  String toString() {
+    return 'AccountFailure.networkError()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$NetworkErrorImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() unexpected,
+    required TResult Function(String message) badRequest,
+    required TResult Function() serverError,
+    required TResult Function() unauthenticated,
+    required TResult Function() networkError,
+    required TResult Function(String message) showAPIResponseMessage,
+  }) {
+    return networkError();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? unexpected,
+    TResult? Function(String message)? badRequest,
+    TResult? Function()? serverError,
+    TResult? Function()? unauthenticated,
+    TResult? Function()? networkError,
+    TResult? Function(String message)? showAPIResponseMessage,
+  }) {
+    return networkError?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? unexpected,
+    TResult Function(String message)? badRequest,
+    TResult Function()? serverError,
+    TResult Function()? unauthenticated,
+    TResult Function()? networkError,
+    TResult Function(String message)? showAPIResponseMessage,
+    required TResult orElse(),
+  }) {
+    if (networkError != null) {
+      return networkError();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Unexpected value) unexpected,
+    required TResult Function(_BadRequest value) badRequest,
+    required TResult Function(_ServerError value) serverError,
+    required TResult Function(_Unauthenticated value) unauthenticated,
+    required TResult Function(_NetworkError value) networkError,
+    required TResult Function(_ShowAPIResponseMessage value)
+        showAPIResponseMessage,
+  }) {
+    return networkError(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Unexpected value)? unexpected,
+    TResult? Function(_BadRequest value)? badRequest,
+    TResult? Function(_ServerError value)? serverError,
+    TResult? Function(_Unauthenticated value)? unauthenticated,
+    TResult? Function(_NetworkError value)? networkError,
+    TResult? Function(_ShowAPIResponseMessage value)? showAPIResponseMessage,
+  }) {
+    return networkError?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Unexpected value)? unexpected,
+    TResult Function(_BadRequest value)? badRequest,
+    TResult Function(_ServerError value)? serverError,
+    TResult Function(_Unauthenticated value)? unauthenticated,
+    TResult Function(_NetworkError value)? networkError,
+    TResult Function(_ShowAPIResponseMessage value)? showAPIResponseMessage,
+    required TResult orElse(),
+  }) {
+    if (networkError != null) {
+      return networkError(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _NetworkError implements AccountFailure {
+  const factory _NetworkError() = _$NetworkErrorImpl;
+}
+
+/// @nodoc
+abstract class _$$ShowAPIResponseMessageImplCopyWith<$Res> {
+  factory _$$ShowAPIResponseMessageImplCopyWith(
+          _$ShowAPIResponseMessageImpl value,
+          $Res Function(_$ShowAPIResponseMessageImpl) then) =
+      __$$ShowAPIResponseMessageImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String message});
+}
+
+/// @nodoc
+class __$$ShowAPIResponseMessageImplCopyWithImpl<$Res>
+    extends _$AccountFailureCopyWithImpl<$Res, _$ShowAPIResponseMessageImpl>
+    implements _$$ShowAPIResponseMessageImplCopyWith<$Res> {
+  __$$ShowAPIResponseMessageImplCopyWithImpl(
+      _$ShowAPIResponseMessageImpl _value,
+      $Res Function(_$ShowAPIResponseMessageImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? message = null,
+  }) {
+    return _then(_$ShowAPIResponseMessageImpl(
+      null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$ShowAPIResponseMessageImpl implements _ShowAPIResponseMessage {
+  const _$ShowAPIResponseMessageImpl(this.message);
+
+  @override
+  final String message;
+
+  @override
+  String toString() {
+    return 'AccountFailure.showAPIResponseMessage(message: $message)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ShowAPIResponseMessageImpl &&
+            (identical(other.message, message) || other.message == message));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, message);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ShowAPIResponseMessageImplCopyWith<_$ShowAPIResponseMessageImpl>
+      get copyWith => __$$ShowAPIResponseMessageImplCopyWithImpl<
+          _$ShowAPIResponseMessageImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() unexpected,
+    required TResult Function(String message) badRequest,
+    required TResult Function() serverError,
+    required TResult Function() unauthenticated,
+    required TResult Function() networkError,
+    required TResult Function(String message) showAPIResponseMessage,
+  }) {
+    return showAPIResponseMessage(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? unexpected,
+    TResult? Function(String message)? badRequest,
+    TResult? Function()? serverError,
+    TResult? Function()? unauthenticated,
+    TResult? Function()? networkError,
+    TResult? Function(String message)? showAPIResponseMessage,
+  }) {
+    return showAPIResponseMessage?.call(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? unexpected,
+    TResult Function(String message)? badRequest,
+    TResult Function()? serverError,
+    TResult Function()? unauthenticated,
+    TResult Function()? networkError,
+    TResult Function(String message)? showAPIResponseMessage,
+    required TResult orElse(),
+  }) {
+    if (showAPIResponseMessage != null) {
+      return showAPIResponseMessage(message);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Unexpected value) unexpected,
+    required TResult Function(_BadRequest value) badRequest,
+    required TResult Function(_ServerError value) serverError,
+    required TResult Function(_Unauthenticated value) unauthenticated,
+    required TResult Function(_NetworkError value) networkError,
+    required TResult Function(_ShowAPIResponseMessage value)
+        showAPIResponseMessage,
+  }) {
+    return showAPIResponseMessage(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Unexpected value)? unexpected,
+    TResult? Function(_BadRequest value)? badRequest,
+    TResult? Function(_ServerError value)? serverError,
+    TResult? Function(_Unauthenticated value)? unauthenticated,
+    TResult? Function(_NetworkError value)? networkError,
+    TResult? Function(_ShowAPIResponseMessage value)? showAPIResponseMessage,
+  }) {
+    return showAPIResponseMessage?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Unexpected value)? unexpected,
+    TResult Function(_BadRequest value)? badRequest,
+    TResult Function(_ServerError value)? serverError,
+    TResult Function(_Unauthenticated value)? unauthenticated,
+    TResult Function(_NetworkError value)? networkError,
+    TResult Function(_ShowAPIResponseMessage value)? showAPIResponseMessage,
+    required TResult orElse(),
+  }) {
+    if (showAPIResponseMessage != null) {
+      return showAPIResponseMessage(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ShowAPIResponseMessage implements AccountFailure {
+  const factory _ShowAPIResponseMessage(final String message) =
+      _$ShowAPIResponseMessageImpl;
+
+  String get message;
+  @JsonKey(ignore: true)
+  _$$ShowAPIResponseMessageImplCopyWith<_$ShowAPIResponseMessageImpl>
+      get copyWith => throw _privateConstructorUsedError;
 }

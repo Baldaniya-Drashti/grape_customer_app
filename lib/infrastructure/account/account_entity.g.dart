@@ -27,13 +27,14 @@ class AccountEntityAdapter extends TypeAdapter<AccountEntity> {
       fields[7] as bool?,
       fields[8] as int?,
       fields[9] as String?,
+      fields[10] as String?,
     );
   }
 
   @override
   void write(BinaryWriter writer, AccountEntity obj) {
     writer
-      ..writeByte(10)
+      ..writeByte(11)
       ..writeByte(0)
       ..write(obj.userId)
       ..writeByte(1)
@@ -53,7 +54,9 @@ class AccountEntityAdapter extends TypeAdapter<AccountEntity> {
       ..writeByte(8)
       ..write(obj.role)
       ..writeByte(9)
-      ..write(obj.rememberToken);
+      ..write(obj.rememberToken)
+      ..writeByte(10)
+      ..write(obj.profile);
   }
 
   @override

@@ -25,6 +25,7 @@ mixin _$Account {
   bool? get isEmailVerified => throw _privateConstructorUsedError;
   bool? get isMobileVerified => throw _privateConstructorUsedError;
   int? get role => throw _privateConstructorUsedError;
+  String? get profile => throw _privateConstructorUsedError;
   String? get rememberToken => throw _privateConstructorUsedError;
   Auth? get auth => throw _privateConstructorUsedError;
 
@@ -47,6 +48,7 @@ abstract class $AccountCopyWith<$Res> {
       bool? isEmailVerified,
       bool? isMobileVerified,
       int? role,
+      String? profile,
       String? rememberToken,
       Auth? auth});
 
@@ -75,6 +77,7 @@ class _$AccountCopyWithImpl<$Res, $Val extends Account>
     Object? isEmailVerified = freezed,
     Object? isMobileVerified = freezed,
     Object? role = freezed,
+    Object? profile = freezed,
     Object? rememberToken = freezed,
     Object? auth = freezed,
   }) {
@@ -115,6 +118,10 @@ class _$AccountCopyWithImpl<$Res, $Val extends Account>
           ? _value.role
           : role // ignore: cast_nullable_to_non_nullable
               as int?,
+      profile: freezed == profile
+          ? _value.profile
+          : profile // ignore: cast_nullable_to_non_nullable
+              as String?,
       rememberToken: freezed == rememberToken
           ? _value.rememberToken
           : rememberToken // ignore: cast_nullable_to_non_nullable
@@ -156,6 +163,7 @@ abstract class _$$AccountImplCopyWith<$Res> implements $AccountCopyWith<$Res> {
       bool? isEmailVerified,
       bool? isMobileVerified,
       int? role,
+      String? profile,
       String? rememberToken,
       Auth? auth});
 
@@ -183,6 +191,7 @@ class __$$AccountImplCopyWithImpl<$Res>
     Object? isEmailVerified = freezed,
     Object? isMobileVerified = freezed,
     Object? role = freezed,
+    Object? profile = freezed,
     Object? rememberToken = freezed,
     Object? auth = freezed,
   }) {
@@ -223,6 +232,10 @@ class __$$AccountImplCopyWithImpl<$Res>
           ? _value.role
           : role // ignore: cast_nullable_to_non_nullable
               as int?,
+      profile: freezed == profile
+          ? _value.profile
+          : profile // ignore: cast_nullable_to_non_nullable
+              as String?,
       rememberToken: freezed == rememberToken
           ? _value.rememberToken
           : rememberToken // ignore: cast_nullable_to_non_nullable
@@ -248,6 +261,7 @@ class _$AccountImpl extends _Account {
       this.isEmailVerified,
       this.isMobileVerified,
       this.role,
+      this.profile,
       this.rememberToken,
       this.auth})
       : super._();
@@ -271,13 +285,15 @@ class _$AccountImpl extends _Account {
   @override
   final int? role;
   @override
+  final String? profile;
+  @override
   final String? rememberToken;
   @override
   final Auth? auth;
 
   @override
   String toString() {
-    return 'Account(userId: $userId, firstName: $firstName, lastName: $lastName, email: $email, countryCode: $countryCode, phone: $phone, isEmailVerified: $isEmailVerified, isMobileVerified: $isMobileVerified, role: $role, rememberToken: $rememberToken, auth: $auth)';
+    return 'Account(userId: $userId, firstName: $firstName, lastName: $lastName, email: $email, countryCode: $countryCode, phone: $phone, isEmailVerified: $isEmailVerified, isMobileVerified: $isMobileVerified, role: $role, profile: $profile, rememberToken: $rememberToken, auth: $auth)';
   }
 
   @override
@@ -299,6 +315,7 @@ class _$AccountImpl extends _Account {
             (identical(other.isMobileVerified, isMobileVerified) ||
                 other.isMobileVerified == isMobileVerified) &&
             (identical(other.role, role) || other.role == role) &&
+            (identical(other.profile, profile) || other.profile == profile) &&
             (identical(other.rememberToken, rememberToken) ||
                 other.rememberToken == rememberToken) &&
             (identical(other.auth, auth) || other.auth == auth));
@@ -316,6 +333,7 @@ class _$AccountImpl extends _Account {
       isEmailVerified,
       isMobileVerified,
       role,
+      profile,
       rememberToken,
       auth);
 
@@ -337,6 +355,7 @@ abstract class _Account extends Account {
       final bool? isEmailVerified,
       final bool? isMobileVerified,
       final int? role,
+      final String? profile,
       final String? rememberToken,
       final Auth? auth}) = _$AccountImpl;
   const _Account._() : super._();
@@ -359,6 +378,8 @@ abstract class _Account extends Account {
   bool? get isMobileVerified;
   @override
   int? get role;
+  @override
+  String? get profile;
   @override
   String? get rememberToken;
   @override

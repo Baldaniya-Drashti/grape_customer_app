@@ -28,7 +28,8 @@ class MainTabView extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (_) => getIt<MainTabBloc>(),
+          create: (_) =>
+              getIt<MainTabBloc>()..add(MainTabEvent.getCurrentUser()),
         ),
         BlocProvider(
           create: (context) => HomeBloc()..add(HomeEvent.getCurrentLocation()),

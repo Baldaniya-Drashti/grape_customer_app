@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:grape_customer_app/domain/account/account.dart';
 
 import 'package:grape_customer_app/domain/auth/auth_failure.dart';
 import 'package:grape_customer_app/domain/auth/auth_value_objects.dart';
@@ -26,6 +27,7 @@ abstract class IAuthFacade {
     required Password newPassword,
     required Password confirmNewPassword,
   });
+
   Future<Either<AuthFailure, Unit>> registerForPush({
     required String fcmToken,
   });

@@ -3,7 +3,7 @@ part of 'edit_profile_bloc.dart';
 @freezed
 class EditProfileState with _$EditProfileState {
   const factory EditProfileState({
-    required Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption,
+    required Option<Either<AccountFailure, Unit>> authFailureOrSuccessOption,
     required bool showErrorMessages,
     required bool isSubmitting,
     required String selectImage,
@@ -12,16 +12,18 @@ class EditProfileState with _$EditProfileState {
     required EmailAddress emailAddress,
     required MobileNumber mobileNumber,
     required String countryCode,
+    required Account currentUser,
   }) = _EditProfileState;
   factory EditProfileState.initial() => EditProfileState(
         isSubmitting: false,
         authFailureOrSuccessOption: none(),
         showErrorMessages: false,
-        selectImage: '',
-        firstName: Username(''),
-        lastName: Username(''),
-        emailAddress: EmailAddress(''),
-        mobileNumber: MobileNumber(''),
-        countryCode: '+91',
+        selectImage: getCurrentUser().profile ?? "",
+        firstName: Username(getCurrentUser().firstName ?? ""),
+        lastName: Username(getCurrentUser().lastName ?? ""),
+        emailAddress: EmailAddress(getCurrentUser().email ?? ""),
+        mobileNumber: MobileNumber(getCurrentUser().phone?.toString() ?? ""),
+        countryCode: getCurrentUser().countryCode ?? "",
+        currentUser: getCurrentUser(),
       );
 }

@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$EditProfileState {
-  Option<Either<AuthFailure, Unit>> get authFailureOrSuccessOption =>
+  Option<Either<AccountFailure, Unit>> get authFailureOrSuccessOption =>
       throw _privateConstructorUsedError;
   bool get showErrorMessages => throw _privateConstructorUsedError;
   bool get isSubmitting => throw _privateConstructorUsedError;
@@ -26,6 +26,7 @@ mixin _$EditProfileState {
   EmailAddress get emailAddress => throw _privateConstructorUsedError;
   MobileNumber get mobileNumber => throw _privateConstructorUsedError;
   String get countryCode => throw _privateConstructorUsedError;
+  Account get currentUser => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $EditProfileStateCopyWith<EditProfileState> get copyWith =>
@@ -39,7 +40,7 @@ abstract class $EditProfileStateCopyWith<$Res> {
       _$EditProfileStateCopyWithImpl<$Res, EditProfileState>;
   @useResult
   $Res call(
-      {Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption,
+      {Option<Either<AccountFailure, Unit>> authFailureOrSuccessOption,
       bool showErrorMessages,
       bool isSubmitting,
       String selectImage,
@@ -47,7 +48,10 @@ abstract class $EditProfileStateCopyWith<$Res> {
       Username lastName,
       EmailAddress emailAddress,
       MobileNumber mobileNumber,
-      String countryCode});
+      String countryCode,
+      Account currentUser});
+
+  $AccountCopyWith<$Res> get currentUser;
 }
 
 /// @nodoc
@@ -72,12 +76,13 @@ class _$EditProfileStateCopyWithImpl<$Res, $Val extends EditProfileState>
     Object? emailAddress = null,
     Object? mobileNumber = null,
     Object? countryCode = null,
+    Object? currentUser = null,
   }) {
     return _then(_value.copyWith(
       authFailureOrSuccessOption: null == authFailureOrSuccessOption
           ? _value.authFailureOrSuccessOption
           : authFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
-              as Option<Either<AuthFailure, Unit>>,
+              as Option<Either<AccountFailure, Unit>>,
       showErrorMessages: null == showErrorMessages
           ? _value.showErrorMessages
           : showErrorMessages // ignore: cast_nullable_to_non_nullable
@@ -110,7 +115,19 @@ class _$EditProfileStateCopyWithImpl<$Res, $Val extends EditProfileState>
           ? _value.countryCode
           : countryCode // ignore: cast_nullable_to_non_nullable
               as String,
+      currentUser: null == currentUser
+          ? _value.currentUser
+          : currentUser // ignore: cast_nullable_to_non_nullable
+              as Account,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $AccountCopyWith<$Res> get currentUser {
+    return $AccountCopyWith<$Res>(_value.currentUser, (value) {
+      return _then(_value.copyWith(currentUser: value) as $Val);
+    });
   }
 }
 
@@ -123,7 +140,7 @@ abstract class _$$EditProfileStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption,
+      {Option<Either<AccountFailure, Unit>> authFailureOrSuccessOption,
       bool showErrorMessages,
       bool isSubmitting,
       String selectImage,
@@ -131,7 +148,11 @@ abstract class _$$EditProfileStateImplCopyWith<$Res>
       Username lastName,
       EmailAddress emailAddress,
       MobileNumber mobileNumber,
-      String countryCode});
+      String countryCode,
+      Account currentUser});
+
+  @override
+  $AccountCopyWith<$Res> get currentUser;
 }
 
 /// @nodoc
@@ -154,12 +175,13 @@ class __$$EditProfileStateImplCopyWithImpl<$Res>
     Object? emailAddress = null,
     Object? mobileNumber = null,
     Object? countryCode = null,
+    Object? currentUser = null,
   }) {
     return _then(_$EditProfileStateImpl(
       authFailureOrSuccessOption: null == authFailureOrSuccessOption
           ? _value.authFailureOrSuccessOption
           : authFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
-              as Option<Either<AuthFailure, Unit>>,
+              as Option<Either<AccountFailure, Unit>>,
       showErrorMessages: null == showErrorMessages
           ? _value.showErrorMessages
           : showErrorMessages // ignore: cast_nullable_to_non_nullable
@@ -192,6 +214,10 @@ class __$$EditProfileStateImplCopyWithImpl<$Res>
           ? _value.countryCode
           : countryCode // ignore: cast_nullable_to_non_nullable
               as String,
+      currentUser: null == currentUser
+          ? _value.currentUser
+          : currentUser // ignore: cast_nullable_to_non_nullable
+              as Account,
     ));
   }
 }
@@ -208,10 +234,11 @@ class _$EditProfileStateImpl implements _EditProfileState {
       required this.lastName,
       required this.emailAddress,
       required this.mobileNumber,
-      required this.countryCode});
+      required this.countryCode,
+      required this.currentUser});
 
   @override
-  final Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption;
+  final Option<Either<AccountFailure, Unit>> authFailureOrSuccessOption;
   @override
   final bool showErrorMessages;
   @override
@@ -228,10 +255,12 @@ class _$EditProfileStateImpl implements _EditProfileState {
   final MobileNumber mobileNumber;
   @override
   final String countryCode;
+  @override
+  final Account currentUser;
 
   @override
   String toString() {
-    return 'EditProfileState(authFailureOrSuccessOption: $authFailureOrSuccessOption, showErrorMessages: $showErrorMessages, isSubmitting: $isSubmitting, selectImage: $selectImage, firstName: $firstName, lastName: $lastName, emailAddress: $emailAddress, mobileNumber: $mobileNumber, countryCode: $countryCode)';
+    return 'EditProfileState(authFailureOrSuccessOption: $authFailureOrSuccessOption, showErrorMessages: $showErrorMessages, isSubmitting: $isSubmitting, selectImage: $selectImage, firstName: $firstName, lastName: $lastName, emailAddress: $emailAddress, mobileNumber: $mobileNumber, countryCode: $countryCode, currentUser: $currentUser)';
   }
 
   @override
@@ -258,7 +287,9 @@ class _$EditProfileStateImpl implements _EditProfileState {
             (identical(other.mobileNumber, mobileNumber) ||
                 other.mobileNumber == mobileNumber) &&
             (identical(other.countryCode, countryCode) ||
-                other.countryCode == countryCode));
+                other.countryCode == countryCode) &&
+            (identical(other.currentUser, currentUser) ||
+                other.currentUser == currentUser));
   }
 
   @override
@@ -272,7 +303,8 @@ class _$EditProfileStateImpl implements _EditProfileState {
       lastName,
       emailAddress,
       mobileNumber,
-      countryCode);
+      countryCode,
+      currentUser);
 
   @JsonKey(ignore: true)
   @override
@@ -284,7 +316,7 @@ class _$EditProfileStateImpl implements _EditProfileState {
 
 abstract class _EditProfileState implements EditProfileState {
   const factory _EditProfileState(
-      {required final Option<Either<AuthFailure, Unit>>
+      {required final Option<Either<AccountFailure, Unit>>
           authFailureOrSuccessOption,
       required final bool showErrorMessages,
       required final bool isSubmitting,
@@ -293,10 +325,11 @@ abstract class _EditProfileState implements EditProfileState {
       required final Username lastName,
       required final EmailAddress emailAddress,
       required final MobileNumber mobileNumber,
-      required final String countryCode}) = _$EditProfileStateImpl;
+      required final String countryCode,
+      required final Account currentUser}) = _$EditProfileStateImpl;
 
   @override
-  Option<Either<AuthFailure, Unit>> get authFailureOrSuccessOption;
+  Option<Either<AccountFailure, Unit>> get authFailureOrSuccessOption;
   @override
   bool get showErrorMessages;
   @override
@@ -313,6 +346,8 @@ abstract class _EditProfileState implements EditProfileState {
   MobileNumber get mobileNumber;
   @override
   String get countryCode;
+  @override
+  Account get currentUser;
   @override
   @JsonKey(ignore: true)
   _$$EditProfileStateImplCopyWith<_$EditProfileStateImpl> get copyWith =>

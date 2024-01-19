@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:grape_customer_app/domain/account/i_account_repository.dart';
 import 'package:grape_customer_app/domain/auth/i_auth_facade.dart';
 import 'package:grape_customer_app/presentation/core/app_router.gr.dart';
 import 'package:grape_customer_app/presentation/core/helper/push_notification_helper.dart';
@@ -14,7 +15,10 @@ part 'main_tab_bloc.freezed.dart';
 class MainTabBloc extends Bloc<MainTabEvent, MainTabState> {
   final List<String> pageList = [HomeView.name];
   final IAuthFacade authFacade;
-  MainTabBloc(this.authFacade) : super(MainTabState.initial()) {
+  final IAccountRepository accountRepository;
+
+  MainTabBloc(this.authFacade, this.accountRepository)
+      : super(MainTabState.initial()) {
     on<MainTabEvent>(
       (event, emit) async {
         await event.map(
@@ -65,6 +69,9 @@ class MainTabBloc extends Bloc<MainTabEvent, MainTabState> {
           },
           pushNotificationInitialize: (PushNotificationInitialize value) {
             PushNotificationService().setupInteractedMessage(value.context);
+          },
+          getCurrentUser: (GetCurrentUser value) async {
+            await accountRepository.getCurrentUserApi();
           },
         );
       },

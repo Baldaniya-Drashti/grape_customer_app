@@ -35,6 +35,7 @@ mixin _$CurrentUserDto {
   @JsonKey(name: 'is_mobile_verified')
   bool? get isMobileVerified => throw _privateConstructorUsedError;
   int? get role => throw _privateConstructorUsedError;
+  String? get profile => throw _privateConstructorUsedError;
   @JsonKey(name: 'remember_token')
   String? get rememberToken => throw _privateConstructorUsedError;
   @JsonKey(name: 'auth')
@@ -62,6 +63,7 @@ abstract class $CurrentUserDtoCopyWith<$Res> {
       @JsonKey(name: 'is_email_verified') bool? isEmailVerified,
       @JsonKey(name: 'is_mobile_verified') bool? isMobileVerified,
       int? role,
+      String? profile,
       @JsonKey(name: 'remember_token') String? rememberToken,
       @JsonKey(name: 'auth') AuthDto? authDto});
 
@@ -90,6 +92,7 @@ class _$CurrentUserDtoCopyWithImpl<$Res, $Val extends CurrentUserDto>
     Object? isEmailVerified = freezed,
     Object? isMobileVerified = freezed,
     Object? role = freezed,
+    Object? profile = freezed,
     Object? rememberToken = freezed,
     Object? authDto = freezed,
   }) {
@@ -130,6 +133,10 @@ class _$CurrentUserDtoCopyWithImpl<$Res, $Val extends CurrentUserDto>
           ? _value.role
           : role // ignore: cast_nullable_to_non_nullable
               as int?,
+      profile: freezed == profile
+          ? _value.profile
+          : profile // ignore: cast_nullable_to_non_nullable
+              as String?,
       rememberToken: freezed == rememberToken
           ? _value.rememberToken
           : rememberToken // ignore: cast_nullable_to_non_nullable
@@ -172,6 +179,7 @@ abstract class _$$CurrentUserDtoImplCopyWith<$Res>
       @JsonKey(name: 'is_email_verified') bool? isEmailVerified,
       @JsonKey(name: 'is_mobile_verified') bool? isMobileVerified,
       int? role,
+      String? profile,
       @JsonKey(name: 'remember_token') String? rememberToken,
       @JsonKey(name: 'auth') AuthDto? authDto});
 
@@ -199,6 +207,7 @@ class __$$CurrentUserDtoImplCopyWithImpl<$Res>
     Object? isEmailVerified = freezed,
     Object? isMobileVerified = freezed,
     Object? role = freezed,
+    Object? profile = freezed,
     Object? rememberToken = freezed,
     Object? authDto = freezed,
   }) {
@@ -239,6 +248,10 @@ class __$$CurrentUserDtoImplCopyWithImpl<$Res>
           ? _value.role
           : role // ignore: cast_nullable_to_non_nullable
               as int?,
+      profile: freezed == profile
+          ? _value.profile
+          : profile // ignore: cast_nullable_to_non_nullable
+              as String?,
       rememberToken: freezed == rememberToken
           ? _value.rememberToken
           : rememberToken // ignore: cast_nullable_to_non_nullable
@@ -264,6 +277,7 @@ class _$CurrentUserDtoImpl extends _CurrentUserDto {
       @JsonKey(name: 'is_email_verified') this.isEmailVerified,
       @JsonKey(name: 'is_mobile_verified') this.isMobileVerified,
       this.role,
+      this.profile,
       @JsonKey(name: 'remember_token') this.rememberToken,
       @JsonKey(name: 'auth') this.authDto})
       : super._();
@@ -296,6 +310,8 @@ class _$CurrentUserDtoImpl extends _CurrentUserDto {
   @override
   final int? role;
   @override
+  final String? profile;
+  @override
   @JsonKey(name: 'remember_token')
   final String? rememberToken;
   @override
@@ -304,7 +320,7 @@ class _$CurrentUserDtoImpl extends _CurrentUserDto {
 
   @override
   String toString() {
-    return 'CurrentUserDto(userId: $userId, firstName: $firstName, lastName: $lastName, email: $email, countryCode: $countryCode, phone: $phone, isEmailVerified: $isEmailVerified, isMobileVerified: $isMobileVerified, role: $role, rememberToken: $rememberToken, authDto: $authDto)';
+    return 'CurrentUserDto(userId: $userId, firstName: $firstName, lastName: $lastName, email: $email, countryCode: $countryCode, phone: $phone, isEmailVerified: $isEmailVerified, isMobileVerified: $isMobileVerified, role: $role, profile: $profile, rememberToken: $rememberToken, authDto: $authDto)';
   }
 
   @override
@@ -326,6 +342,7 @@ class _$CurrentUserDtoImpl extends _CurrentUserDto {
             (identical(other.isMobileVerified, isMobileVerified) ||
                 other.isMobileVerified == isMobileVerified) &&
             (identical(other.role, role) || other.role == role) &&
+            (identical(other.profile, profile) || other.profile == profile) &&
             (identical(other.rememberToken, rememberToken) ||
                 other.rememberToken == rememberToken) &&
             (identical(other.authDto, authDto) || other.authDto == authDto));
@@ -344,6 +361,7 @@ class _$CurrentUserDtoImpl extends _CurrentUserDto {
       isEmailVerified,
       isMobileVerified,
       role,
+      profile,
       rememberToken,
       authDto);
 
@@ -373,6 +391,7 @@ abstract class _CurrentUserDto extends CurrentUserDto {
       @JsonKey(name: 'is_email_verified') final bool? isEmailVerified,
       @JsonKey(name: 'is_mobile_verified') final bool? isMobileVerified,
       final int? role,
+      final String? profile,
       @JsonKey(name: 'remember_token') final String? rememberToken,
       @JsonKey(name: 'auth') final AuthDto? authDto}) = _$CurrentUserDtoImpl;
   const _CurrentUserDto._() : super._();
@@ -404,6 +423,8 @@ abstract class _CurrentUserDto extends CurrentUserDto {
   bool? get isMobileVerified;
   @override
   int? get role;
+  @override
+  String? get profile;
   @override
   @JsonKey(name: 'remember_token')
   String? get rememberToken;

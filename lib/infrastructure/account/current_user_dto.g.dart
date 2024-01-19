@@ -17,6 +17,7 @@ _$CurrentUserDtoImpl _$$CurrentUserDtoImplFromJson(Map<String, dynamic> json) =>
       isEmailVerified: json['is_email_verified'] as bool?,
       isMobileVerified: json['is_mobile_verified'] as bool?,
       role: json['role'] as int?,
+      profile: json['profile'] as String?,
       rememberToken: json['remember_token'] as String?,
       authDto: json['auth'] == null
           ? null
@@ -35,6 +36,7 @@ Map<String, dynamic> _$$CurrentUserDtoImplToJson(
       'is_email_verified': instance.isEmailVerified,
       'is_mobile_verified': instance.isMobileVerified,
       'role': instance.role,
+      'profile': instance.profile,
       'remember_token': instance.rememberToken,
       'auth': instance.authDto,
     };

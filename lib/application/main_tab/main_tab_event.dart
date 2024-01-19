@@ -4,6 +4,8 @@ part of 'main_tab_bloc.dart';
 class MainTabEvent with _$MainTabEvent {
   factory MainTabEvent.tabChange(int tabIndex) = TabChange;
   factory MainTabEvent.registerForPush(String fcmToken) = RegisterForPush;
+  factory MainTabEvent.getCurrentUser() = GetCurrentUser;
+
   factory MainTabEvent.pushNotificationInitialize(BuildContext context) =
       PushNotificationInitialize;
 }

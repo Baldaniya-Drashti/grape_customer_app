@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:grape_customer_app/domain/core/math_utils.dart';
@@ -27,14 +28,26 @@ class UserProfileWidget extends StatelessWidget {
             alignment: Alignment.center,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(6),
+              color: getCurrentUser().profile == null
+                  ? Color(0xFFAEFFFF)
+                  : AppColors.white,
               shape: BoxShape.rectangle,
-              image: DecorationImage(
-                image: NetworkImage(
-                  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHDRlp-KGr_M94k_oor4Odjn2UzbAS7n1YoA&usqp=CAU',
-                ),
-                fit: BoxFit.cover,
-              ),
+              image: getCurrentUser().profile != null
+                  ? DecorationImage(
+                      image: CachedNetworkImageProvider(
+                          getCurrentUser().profile ?? ""),
+                      fit: BoxFit.cover,
+                    )
+                  : null,
             ),
+            child: getCurrentUser().profile == null
+                ? BaseText(
+                    text: getInitials(),
+                    fontSize: 24,
+                    fontWeight: FontWeight.w600,
+                    textColor: AppColors.authBlack,
+                  )
+                : null,
           ),
           SizedBox(
             width: getSize(12),
@@ -93,4 +106,13 @@ class UserProfileWidget extends StatelessWidget {
       ),
     );
   }
+
+  String getInitials() =>
+      '${getCurrentUser().firstName!} ${getCurrentUser().lastName!}'
+          .trim()
+          .split(' ')
+          .map((l) => l[0])
+          .take(2)
+          .join()
+          .toUpperCase();
 }
