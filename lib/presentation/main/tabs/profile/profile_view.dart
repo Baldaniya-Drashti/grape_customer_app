@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -18,62 +16,57 @@ class ProfileView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CustomAppBar(
-        title: StringConstant.profile,
+    return Padding(
+      padding: EdgeInsets.symmetric(
+        horizontal: getSize(20),
       ),
-      body: Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: getSize(20),
-        ),
-        child: Column(
-          children: [
-            profileInfoView(),
-            SizedBox(
-              height: getSize(20),
+      child: Column(
+        children: [
+          profileInfoView(),
+          SizedBox(
+            height: getSize(20),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: getSize(20)),
+            child: Divider(
+              thickness: 1,
+              color: AppColors.black.withOpacity(0.1),
             ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: getSize(20)),
-              child: Divider(
-                thickness: 1,
-                color: AppColors.black.withOpacity(0.1),
-              ),
-            ),
-            selectionMenu(context),
-            SizedBox(
-              height: getSize(5),
-            ),
-            liveChatSupport(context),
-            SizedBox(
-              height: getSize(12),
-            ),
-            Text.rich(
-              TextSpan(
-                children: [
-                  TextSpan(
-                    text: AppLocalizations.of(context).developedby,
-                  ),
-                  TextSpan(
-                    text: AppLocalizations.of(context).iRoidSolutions,
-                    style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      color: AppColors.black,
-                    ),
-                  )
-                ],
-                style: TextStyle(
-                  fontFamily: 'SfPro',
-                  fontSize: getFontSize(10),
-                  color: AppColors.black.withOpacity(0.6),
-                  fontWeight: FontWeight.w500,
+          ),
+          selectionMenu(context),
+          SizedBox(
+            height: getSize(5),
+          ),
+          liveChatSupport(context),
+          SizedBox(
+            height: getSize(12),
+          ),
+          Text.rich(
+            TextSpan(
+              children: [
+                TextSpan(
+                  text: AppLocalizations.of(context).developedby,
                 ),
+                TextSpan(
+                  text: AppLocalizations.of(context).iRoidSolutions,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.black,
+                  ),
+                )
+              ],
+              style: TextStyle(
+                fontFamily: 'SfPro',
+                fontSize: getFontSize(10),
+                color: AppColors.black.withOpacity(0.6),
+                fontWeight: FontWeight.w500,
               ),
             ),
-            SizedBox(
-              height: getSize(6),
-            ),
-          ],
-        ),
+          ),
+          SizedBox(
+            height: getSize(6),
+          ),
+        ],
       ),
     );
   }
