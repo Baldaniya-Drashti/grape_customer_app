@@ -32,7 +32,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      //leading: leading ?? _buildLeadingView(context),
+      // leading: leading,
       systemOverlayStyle: SystemUiOverlayStyle.dark,
       automaticallyImplyLeading: true,
       shadowColor: Color(0xFFE1E1E1),

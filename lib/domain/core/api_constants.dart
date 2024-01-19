@@ -10,4 +10,5 @@ class ApiConstants {
   static String login = 'auth/login';
   static String sendOtp = 'auth/send-otp';
   static String verifyOtp = 'auth/verify-otp';
+  static String logout = 'auth/logout';
 }

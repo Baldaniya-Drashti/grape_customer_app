@@ -12,4 +12,5 @@ class PngImageConstants {
 
   static const cartUnselected = "assets/png/cart_unselected.png";
   static const cartSelected = "assets/png/cart_selected.png";
+  static const liveChat = 'assets/png/liveChat.png';
 }

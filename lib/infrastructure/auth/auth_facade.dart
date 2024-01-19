@@ -107,15 +107,29 @@ class AuthFacade implements IAuthFacade {
   }
 
   @override
-  Future<void> logout() async {
+  Future<Either<AuthFailure, Unit>> logout() async {
     try {
-      Future.wait([
-        Hive.box(BoxNames.settingsBox).clear(),
-        Hive.box<AccountEntity>(BoxNames.currentUser).clear(),
-        apiService.postMethod("/account/logout", {}),
+      await Future.wait([
+        apiService.postMethod(ApiConstants.logout,
+            {"device_id": await getDeviceId()}).then((value) async {
+          Hive.box(BoxNames.settingsBox).clear();
+          Hive.box<AccountEntity>(BoxNames.currentUser).clear();
+          await Hive.box(BoxNames.settingsBox)
+              .put(BoxKeys.isUserShowIntro, true);
+        }),
       ]);
-    } on DioException catch (e) {
-      print(e);
+      return right(unit);
+    } on DioException catch (err) {
+      if (err.response != null) {
+        var commonRespose = CommonResponse.fromJson(err.response?.data);
+
+        if (commonRespose.dioMessage != null) {
+          return left(
+              AuthFailure.showAPIResponseMessage(commonRespose.dioMessage!));
+        }
+      }
+
+      return left(const AuthFailure.serverError());
     }
   }
 

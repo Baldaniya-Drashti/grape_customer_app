@@ -19,7 +19,7 @@ abstract class IAuthFacade {
 
   Future<bool> checkAuthenticated();
 
-  Future<void> logout();
+  Future<Either<AuthFailure, Unit>> logout();
 
   Future<Either<AuthFailure, Unit>> changePassword({
     required Password oldPassword,

@@ -29,12 +29,6 @@ class OtpLoginVerificationView extends StatefulWidget {
 class _OtpRegisterVerificationViewState
     extends State<OtpLoginVerificationView> {
   @override
-  void dispose() {
-    context.read<LoginFormBloc>().timer.cancel();
-    super.dispose();
-  }
-
-  @override
   void didChangeDependencies() {
     super.didChangeDependencies();
   }
@@ -64,12 +58,8 @@ class _OtpRegisterVerificationViewState
                   ).show(context);
                 },
                 (_) {
-                  context.router.replaceAll(
-                    [
-                      PageRouteInfo(MainTabView.name),
-                    ],
-                  );
-                  // RestartWidget.restartApp(context);
+                  context.router
+                      .replaceAll([const PageRouteInfo(MainTabView.name)]);
                 },
               ),
             );

@@ -1,1 +1,28 @@
-{}
+{
+  "so": [
+    "editProfile",
+    "myOrders",
+    "shippingAddresses",
+    "paymentMethods",
+    "languages",
+    "customerSupport",
+    "privacyPolicy",
+    "termsConditions",
+    "logout",
+    "liveChatSupport",
+    "developedby",
+    "iRoidSolutions",
+    "takePhoto",
+    "galleryPhoto",
+    "cancle",
+    "firstName",
+    "enterFirstName",
+    "lastName",
+    "enterLastName",
+    "emailAddress",
+    "enterEmail",
+    "enterMobile",
+    "mobileNumber",
+    "save"
+  ]
+}

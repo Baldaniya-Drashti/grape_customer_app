@@ -4,4 +4,9 @@ class StringConstant {
 
   //onboarding
   static const String skip = 'skip';
+
+  //Profile
+  static const String profile = 'Profile';
+  static const String editProfile = 'Edit Profile';
+  
 }
