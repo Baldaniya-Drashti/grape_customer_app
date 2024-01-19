@@ -77,16 +77,13 @@ dependencies:
   flutter_svg: ^2.0.9
   geocoding: ^2.1.1
   geolocator: ^10.1.0
-  permission_handler: ^11.1.0
   device_info_plus: ^9.1.1
   figma_squircle: ^0.5.3
   carousel_slider: ^4.2.1
   flutter_rating_bar: ^4.0.1
   flutter_local_notifications: ^16.3.0
   firebase_messaging: ^14.7.10
-  device_info_plus: ^9.1.1
   permission_handler: ^11.1.0
-  figma_squircle: ^0.5.3
 
 
   

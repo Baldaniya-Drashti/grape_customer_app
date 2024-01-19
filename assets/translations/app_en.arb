@@ -27,9 +27,9 @@
     "enterEmail":"Please enter valid email address",
     "enterMobile":"Phone number should be between 6 and 15 digits",
     "mobileNumber":"Mobile Number",
-    "save":"Save"
+    "save":"Save",
     "searchProduct": "Search Product",
-        "recommendedForYou": "Recommended for you",
+    "recommendedForYou": "Recommended for you",
     "seeMore": "See More",
     "editProfile":"Edit Profile",
     "myOrders":"My Orders",
