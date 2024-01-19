@@ -65,7 +65,7 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
               add(const LoginFormEvent.decrementTimer());
             } else {
               timer.cancel();
-              add(const LoginFormEvent.resendOtp());
+              // add(const LoginFormEvent.resendOtp());
             }
           });
           emit(state.copyWith(secondsRemaining: 30));
@@ -73,13 +73,32 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
         decrementTimer: (DecrementTimer value) {
           emit(state.copyWith(secondsRemaining: state.secondsRemaining - 1));
         },
-        resendOtp: (ResendOtp value) {
+        resendOtp: (ResendOtp value) async {
           timer.cancel();
+
+          Either<AuthFailure, Unit>? failureOrSuccess;
+
           emit(
             state.copyWith(
-              secondsRemaining: 30,
+              isSubmitting: true,
+              authFailureOrSuccessOption: none(),
             ),
           );
+
+          failureOrSuccess = await _authFacade.resendOtp(
+            countryCode: state.selectedCountrycode,
+            mobileNumber: state.mobileNumber,
+          );
+
+          emit(
+            state.copyWith(
+              isSubmitting: false,
+              //showErrorMessages: true,
+              secondsRemaining: 30,
+              authFailureOrSuccessOption: optionOf(failureOrSuccess),
+            ),
+          );
+          add(LoginFormEvent.startCountdown());
         },
         verifyOtp: (VerifyOtp value) async {
           Either<AuthFailure, Unit>? failureOrSuccess;

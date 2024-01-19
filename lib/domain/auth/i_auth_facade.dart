@@ -34,4 +34,8 @@ abstract class IAuthFacade {
     required MobileNumber mobileNumber,
     required OTPText otp,
   });
+  Future<Either<AuthFailure, Unit>> resendOtp({
+    required String countryCode,
+    required MobileNumber mobileNumber,
+  });
 }

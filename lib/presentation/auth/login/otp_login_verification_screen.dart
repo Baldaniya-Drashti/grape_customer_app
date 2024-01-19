@@ -64,10 +64,10 @@ class _OtpRegisterVerificationViewState
                   ).show(context);
                 },
                 (_) {
-                  context.router.replace(
-                    PageRouteInfo(
-                      MainTabView.name,
-                    ),
+                  context.router.replaceAll(
+                    [
+                      PageRouteInfo(MainTabView.name),
+                    ],
                   );
                   // RestartWidget.restartApp(context);
                 },

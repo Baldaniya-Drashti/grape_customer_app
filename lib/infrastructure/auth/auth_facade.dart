@@ -248,4 +248,39 @@ class AuthFacade implements IAuthFacade {
       return left(const AuthFailure.serverError());
     }
   }
+
+  @override
+  Future<Either<AuthFailure, Unit>> resendOtp({
+    required String countryCode,
+    required MobileNumber mobileNumber,
+  }) async {
+    try {
+      final response = await apiService.postMethod(
+        ApiConstants.sendOtp,
+        {
+          "is_forgot_password": false,
+          "remember_token": getRememberToken(),
+          "type": 2,
+          "country_code": countryCode,
+          "mobile": mobileNumber.getOrCrash(),
+        },
+      );
+
+      final account = CurrentUserDto.fromJson(response.data).toDomain();
+      setUserToken(account.auth?.accessToken ?? "");
+      _setUserData(account);
+      return right(unit);
+    } on DioException catch (err) {
+      if (err.response != null) {
+        var commonRespose = CommonResponse.fromJson(err.response?.data);
+
+        if (commonRespose.dioMessage != null) {
+          return left(
+              AuthFailure.showAPIResponseMessage(commonRespose.dioMessage!));
+        }
+      }
+
+      return left(const AuthFailure.serverError());
+    }
+  }
 }

@@ -66,7 +66,20 @@ class _OtpRegisterVerificationViewState
                 (_) {
                   context.router.replace(
                     PageRouteInfo(
-                      MainTabView.name,
+                      SuccessScreen.name,
+                      args: SuccessScreenArgs(
+                        title: 'Congratulations',
+                        subTitle: 'SUCCESS',
+                      ),
+                    ),
+                  );
+
+                  Future.delayed(
+                    Duration(seconds: 2),
+                    () => context.router.replaceAll(
+                      [
+                        PageRouteInfo(MainTabView.name),
+                      ],
                     ),
                   );
                   // RestartWidget.restartApp(context);

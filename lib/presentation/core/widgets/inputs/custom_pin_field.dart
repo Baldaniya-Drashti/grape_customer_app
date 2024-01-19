@@ -38,6 +38,7 @@ class CustomPinField extends StatelessWidget {
           hintCharacter: '-',
           errorTextMargin: EdgeInsets.only(top: getSize(10)),
           cursorHeight: getSize(20),
+
           textStyle: TextStyle(
             fontFamily: 'SFPro',
             letterSpacing: 0.5,
