@@ -24,15 +24,22 @@ class EditProfileScreen extends StatelessWidget {
         listener: (context, state) {
           state.authFailureOrSuccessOption.fold(
             () {},
-            (either) => either.fold((l) {
-              showError(
-                  message: l.maybeMap(
-                showAPIResponseMessage: (value) => value.message,
-                networkError: (value) =>
-                    'Please check your internet connectivity',
-                orElse: () => "Server Error. Try again later.",
-              ));
-            }, (r) => context.router.back()),
+            (either) => either.fold(
+              (l) {
+                showError(
+                    message: l.maybeMap(
+                  showAPIResponseMessage: (value) => value.message,
+                  networkError: (value) =>
+                      'Please check your internet connectivity',
+                  orElse: () => "Server Error. Try again later.",
+                )).show(context);
+              },
+              (r) {
+                showSuccess(message: r[1])
+                    .show(context)
+                    .then((value) => context.router.pop(r[0]));
+              },
+            ),
           );
         },
         builder: (context, state) {

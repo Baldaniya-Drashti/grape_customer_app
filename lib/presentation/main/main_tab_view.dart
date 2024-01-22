@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grape_customer_app/application/main/home/home_bloc.dart';
+import 'package:grape_customer_app/application/main/profile/get_account/account_cubit.dart';
 import 'package:grape_customer_app/application/main_tab/main_tab_bloc.dart';
 import 'package:grape_customer_app/domain/core/l10n/app_localizations.dart';
 import 'package:grape_customer_app/injection.dart';
@@ -28,8 +29,10 @@ class MainTabView extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (_) =>
-              getIt<MainTabBloc>()..add(MainTabEvent.getCurrentUser()),
+          create: (_) => getIt<MainTabBloc>(),
+        ),
+        BlocProvider<AccountCubit>(
+          create: (context) => getIt<AccountCubit>()..getAccount(),
         ),
         BlocProvider(
           create: (context) => HomeBloc()..add(HomeEvent.getCurrentLocation()),

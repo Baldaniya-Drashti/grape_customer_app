@@ -5,9 +5,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:grape_customer_app/domain/account/account.dart';
 import 'package:grape_customer_app/domain/account/account_failure.dart';
 import 'package:grape_customer_app/domain/account/i_account_repository.dart';
-import 'package:grape_customer_app/domain/auth/auth_failure.dart';
 import 'package:grape_customer_app/domain/auth/auth_value_objects.dart';
-import 'package:grape_customer_app/domain/auth/i_auth_facade.dart';
 import 'package:grape_customer_app/presentation/common/utils/get_current_user.dart';
 import 'package:injectable/injectable.dart';
 part 'edit_profile_state.dart';
@@ -16,10 +14,8 @@ part 'edit_profile_bloc.freezed.dart';
 
 @injectable
 class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
-  final IAuthFacade _authFacade;
   final IAccountRepository accountRepository;
-  EditProfileBloc(this._authFacade, this.accountRepository)
-      : super(EditProfileState.initial()) {
+  EditProfileBloc(this.accountRepository) : super(EditProfileState.initial()) {
     on<EditProfileEvent>((event, emit) async {
       await event.map(
         changeProfilePicture: (value) async {
@@ -67,7 +63,7 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
           );
         },
         saveButtonPressed: (e) async {
-          Either<AccountFailure, Unit>? failureOrSuccess;
+          Either<AccountFailure, List>? failureOrSuccess;
           final isFirstNameValid = state.firstName.isValid();
           final isLastNameValid = state.lastName.isValid();
           final isEmailAddressValid = state.emailAddress.isValid();

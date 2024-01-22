@@ -10,7 +10,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:grape_customer_app/application/auth/auth_status/auth_status_bloc.dart'
-    as _i15;
+    as _i16;
 import 'package:grape_customer_app/application/auth/login_form/login_form_bloc.dart'
     as _i11;
 import 'package:grape_customer_app/application/auth/register_form/register_form_bloc.dart'
@@ -19,7 +19,9 @@ import 'package:grape_customer_app/application/main/favourite/favourite_bloc.dar
     as _i4;
 import 'package:grape_customer_app/application/main/home/home_bloc.dart' as _i5;
 import 'package:grape_customer_app/application/main/profile/edit_profile/edit_profile_bloc.dart'
-    as _i16;
+    as _i17;
+import 'package:grape_customer_app/application/main/profile/get_account/account_cubit.dart'
+    as _i15;
 import 'package:grape_customer_app/application/main/profile/language/language_bloc.dart'
     as _i10;
 import 'package:grape_customer_app/application/main_tab/main_tab_bloc.dart'
@@ -64,12 +66,12 @@ extension GetItInjectableX on _i1.GetIt {
     gh.factory<_i13.OnboardingBloc>(() => _i13.OnboardingBloc());
     gh.factory<_i14.RegisterFormBloc>(
         () => _i14.RegisterFormBloc(gh<_i8.IAuthFacade>()));
-    gh.factory<_i15.AuthStatusBloc>(
-        () => _i15.AuthStatusBloc(gh<_i8.IAuthFacade>()));
-    gh.factory<_i16.EditProfileBloc>(() => _i16.EditProfileBloc(
-          gh<_i8.IAuthFacade>(),
-          gh<_i6.IAccountRepository>(),
-        ));
+    gh.factory<_i15.AccountCubit>(
+        () => _i15.AccountCubit(gh<_i6.IAccountRepository>()));
+    gh.factory<_i16.AuthStatusBloc>(
+        () => _i16.AuthStatusBloc(gh<_i8.IAuthFacade>()));
+    gh.factory<_i17.EditProfileBloc>(
+        () => _i17.EditProfileBloc(gh<_i6.IAccountRepository>()));
     return this;
   }
 }

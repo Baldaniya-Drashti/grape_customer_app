@@ -7,7 +7,6 @@ import 'package:grape_customer_app/infrastructure/account/current_user_dto.dart'
 import 'package:grape_customer_app/infrastructure/core/common_response.dart';
 import 'package:grape_customer_app/infrastructure/core/network/injectable_module.dart';
 import 'package:hive/hive.dart';
-import 'package:http_parser/http_parser.dart';
 import 'package:injectable/injectable.dart';
 import 'package:grape_customer_app/domain/account/account.dart';
 import 'package:grape_customer_app/domain/account/account_failure.dart';
@@ -15,7 +14,6 @@ import 'package:grape_customer_app/domain/account/i_account_repository.dart';
 import 'package:grape_customer_app/domain/auth/auth_value_objects.dart';
 
 import 'package:grape_customer_app/infrastructure/account/account_entity.dart';
-import 'package:grape_customer_app/infrastructure/core/field_error.dart';
 import 'package:grape_customer_app/infrastructure/core/hive_box_names.dart';
 
 @LazySingleton(as: IAccountRepository)
@@ -25,7 +23,7 @@ class AccountRepository extends IAccountRepository {
   AccountRepository(this.apiService);
 
   @override
-  Future<Either<AccountFailure, Unit>> updateUser({
+  Future<Either<AccountFailure, List>> updateUser({
     required Username firstName,
     required Username lastName,
     required EmailAddress emailAddress,
@@ -41,7 +39,9 @@ class AccountRepository extends IAccountRepository {
         "country_code": countryCode,
         "mobile": mobileNumber.getOrCrash(),
       });
-      if (profileImage != null && profileImage.isNotEmpty) {
+      if (profileImage != null &&
+          profileImage.isNotEmpty &&
+          !profileImage.contains('https')) {
         var multipartFile = await MultipartFile.fromFile(
           profileImage,
           filename: 'profile.png',
@@ -54,11 +54,11 @@ class AccountRepository extends IAccountRepository {
       final response = await apiService.postMethod(ApiConstants.updateUser, {},
           formData: formData, isMultipart: true);
 
-      //final account = CurrentUserDto.fromJson(response.data).toDomain();
-
       if (response.data != null) {
-        getCurrentUserApi();
-        return right(unit);
+        final account = CurrentUserDto.fromJson(response.data).toDomain();
+
+        _setUserData(account);
+        return right([account, response.dioMessage]);
       } else {
         return left(const AccountFailure.serverError());
       }
@@ -77,7 +77,7 @@ class AccountRepository extends IAccountRepository {
   }
 
   @override
-  Future<Either<AccountFailure, Unit>> getCurrentUserApi() async {
+  Future<Either<AccountFailure, Account>> getCurrentUserApi() async {
     try {
       final response = await apiService.getMethod(
         ApiConstants.getUser,
@@ -85,7 +85,7 @@ class AccountRepository extends IAccountRepository {
       if (response != null && response.data != null) {
         final account = CurrentUserDto.fromJson(response.data).toDomain();
         _setUserData(account);
-        return right(unit);
+        return right(account);
       } else {
         return left(const AccountFailure.serverError());
       }

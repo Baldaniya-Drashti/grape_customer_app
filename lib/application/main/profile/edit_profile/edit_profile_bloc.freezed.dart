@@ -16,7 +16,7 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$EditProfileState {
-  Option<Either<AccountFailure, Unit>> get authFailureOrSuccessOption =>
+  Option<Either<AccountFailure, List>> get authFailureOrSuccessOption =>
       throw _privateConstructorUsedError;
   bool get showErrorMessages => throw _privateConstructorUsedError;
   bool get isSubmitting => throw _privateConstructorUsedError;
@@ -40,7 +40,7 @@ abstract class $EditProfileStateCopyWith<$Res> {
       _$EditProfileStateCopyWithImpl<$Res, EditProfileState>;
   @useResult
   $Res call(
-      {Option<Either<AccountFailure, Unit>> authFailureOrSuccessOption,
+      {Option<Either<AccountFailure, List>> authFailureOrSuccessOption,
       bool showErrorMessages,
       bool isSubmitting,
       String selectImage,
@@ -82,7 +82,7 @@ class _$EditProfileStateCopyWithImpl<$Res, $Val extends EditProfileState>
       authFailureOrSuccessOption: null == authFailureOrSuccessOption
           ? _value.authFailureOrSuccessOption
           : authFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
-              as Option<Either<AccountFailure, Unit>>,
+              as Option<Either<AccountFailure, List>>,
       showErrorMessages: null == showErrorMessages
           ? _value.showErrorMessages
           : showErrorMessages // ignore: cast_nullable_to_non_nullable
@@ -140,7 +140,7 @@ abstract class _$$EditProfileStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {Option<Either<AccountFailure, Unit>> authFailureOrSuccessOption,
+      {Option<Either<AccountFailure, List>> authFailureOrSuccessOption,
       bool showErrorMessages,
       bool isSubmitting,
       String selectImage,
@@ -181,7 +181,7 @@ class __$$EditProfileStateImplCopyWithImpl<$Res>
       authFailureOrSuccessOption: null == authFailureOrSuccessOption
           ? _value.authFailureOrSuccessOption
           : authFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
-              as Option<Either<AccountFailure, Unit>>,
+              as Option<Either<AccountFailure, List>>,
       showErrorMessages: null == showErrorMessages
           ? _value.showErrorMessages
           : showErrorMessages // ignore: cast_nullable_to_non_nullable
@@ -238,7 +238,7 @@ class _$EditProfileStateImpl implements _EditProfileState {
       required this.currentUser});
 
   @override
-  final Option<Either<AccountFailure, Unit>> authFailureOrSuccessOption;
+  final Option<Either<AccountFailure, List>> authFailureOrSuccessOption;
   @override
   final bool showErrorMessages;
   @override
@@ -316,7 +316,7 @@ class _$EditProfileStateImpl implements _EditProfileState {
 
 abstract class _EditProfileState implements EditProfileState {
   const factory _EditProfileState(
-      {required final Option<Either<AccountFailure, Unit>>
+      {required final Option<Either<AccountFailure, List>>
           authFailureOrSuccessOption,
       required final bool showErrorMessages,
       required final bool isSubmitting,
@@ -329,7 +329,7 @@ abstract class _EditProfileState implements EditProfileState {
       required final Account currentUser}) = _$EditProfileStateImpl;
 
   @override
-  Option<Either<AccountFailure, Unit>> get authFailureOrSuccessOption;
+  Option<Either<AccountFailure, List>> get authFailureOrSuccessOption;
   @override
   bool get showErrorMessages;
   @override

@@ -3,7 +3,7 @@ part of 'edit_profile_bloc.dart';
 @freezed
 class EditProfileState with _$EditProfileState {
   const factory EditProfileState({
-    required Option<Either<AccountFailure, Unit>> authFailureOrSuccessOption,
+    required Option<Either<AccountFailure, List>> authFailureOrSuccessOption,
     required bool showErrorMessages,
     required bool isSubmitting,
     required String selectImage,

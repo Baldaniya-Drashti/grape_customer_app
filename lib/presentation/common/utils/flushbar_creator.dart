@@ -32,10 +32,10 @@ Flushbar showSuccess({
     message: message,
     icon: Icon(
       Icons.check_circle,
-      color: Colors.green[300],
+      color: AppColors.green,
     ),
-    leftBarIndicatorColor: Colors.green[300],
-    backgroundColor: AppColors.red,
+    leftBarIndicatorColor: AppColors.white,
+    backgroundColor: AppColors.green,
     flushbarPosition: FlushbarPosition.TOP,
     duration: duration,
   );

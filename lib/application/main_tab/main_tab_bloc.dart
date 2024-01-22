@@ -70,9 +70,6 @@ class MainTabBloc extends Bloc<MainTabEvent, MainTabState> {
           pushNotificationInitialize: (PushNotificationInitialize value) {
             PushNotificationService().setupInteractedMessage(value.context);
           },
-          getCurrentUser: (GetCurrentUser value) async {
-            await accountRepository.getCurrentUserApi();
-          },
         );
       },
     );
