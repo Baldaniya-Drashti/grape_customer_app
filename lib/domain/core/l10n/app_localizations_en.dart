@@ -65,10 +65,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get iRoidSolutions => 'iRoid Solutions';
 
   @override
-  String get takePhoto => 'TakePhoto';
+  String get takePhoto => 'Take Photo';
 
   @override
-  String get galleryPhoto => 'GalleryPhoto';
+  String get galleryPhoto => 'Gallery Photo';
 
   @override
   String get cancle => 'Cancle';

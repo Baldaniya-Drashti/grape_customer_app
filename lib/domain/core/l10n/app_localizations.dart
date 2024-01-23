@@ -216,13 +216,13 @@ abstract class AppLocalizations {
   /// No description provided for @takePhoto.
   ///
   /// In en, this message translates to:
-  /// **'TakePhoto'**
+  /// **'Take Photo'**
   String get takePhoto;
 
   /// No description provided for @galleryPhoto.
   ///
   /// In en, this message translates to:
-  /// **'GalleryPhoto'**
+  /// **'Gallery Photo'**
   String get galleryPhoto;
 
   /// No description provided for @cancle.

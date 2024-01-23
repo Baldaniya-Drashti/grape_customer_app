@@ -4,6 +4,7 @@ part of 'edit_profile_bloc.dart';
 class EditProfileState with _$EditProfileState {
   const factory EditProfileState({
     required Option<Either<AccountFailure, List>> authFailureOrSuccessOption,
+    required Option<Either<AuthFailure, String>> otpFailureOrSuccessOption,
     required bool showErrorMessages,
     required bool isSubmitting,
     required String selectImage,
@@ -13,6 +14,8 @@ class EditProfileState with _$EditProfileState {
     required MobileNumber mobileNumber,
     required String countryCode,
     required Account currentUser,
+    required OTPText enteredOTP,
+    required int secondsRemaining,
   }) = _EditProfileState;
   factory EditProfileState.initial() => EditProfileState(
         isSubmitting: false,
@@ -25,5 +28,8 @@ class EditProfileState with _$EditProfileState {
         mobileNumber: MobileNumber(getCurrentUser().phone?.toString() ?? ""),
         countryCode: getCurrentUser().countryCode ?? "",
         currentUser: getCurrentUser(),
+        enteredOTP: OTPText(''),
+        secondsRemaining: 0,
+        otpFailureOrSuccessOption: none(),
       );
 }

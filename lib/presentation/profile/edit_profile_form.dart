@@ -6,12 +6,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:grape_customer_app/application/main/profile/edit_profile/edit_profile_bloc.dart';
+import 'package:grape_customer_app/application/main/profile/get_account/account_cubit.dart';
 
 import 'package:grape_customer_app/domain/core/l10n/app_localizations.dart';
 import 'package:grape_customer_app/domain/core/math_utils.dart';
 import 'package:grape_customer_app/domain/core/svg_image_constants.dart';
 import 'package:grape_customer_app/presentation/common/utils/image_picker_utils.dart';
+import 'package:grape_customer_app/presentation/common/widgets/base_text.dart';
 import 'package:grape_customer_app/presentation/common/widgets/common_country_code_picker.dart';
+import 'package:grape_customer_app/presentation/core/app_router.gr.dart';
 import 'package:grape_customer_app/presentation/core/styles/app_colors.dart';
 import 'package:grape_customer_app/presentation/common/widgets/image_chosser.dialog.dart';
 import 'package:grape_customer_app/presentation/core/widgets/inputs/inputs.dart';
@@ -27,9 +30,10 @@ class EditProfileForm extends StatelessWidget {
     return BlocBuilder<EditProfileBloc, EditProfileState>(
       builder: (context, state) {
         return Form(
-          autovalidateMode: state.showErrorMessages
-              ? AutovalidateMode.always
-              : AutovalidateMode.disabled,
+          autovalidateMode:
+              state.showErrorMessages || getIsMobileNumberChange(state)
+                  ? AutovalidateMode.always
+                  : AutovalidateMode.disabled,
           child: ListView(
             shrinkWrap: true,
             physics: BouncingScrollPhysics(),
@@ -87,6 +91,41 @@ class EditProfileForm extends StatelessWidget {
               ),
             ),
       ),
+      suffixIcon: getIsMobileNumberChange(state)
+          ? IconButton(
+              padding: EdgeInsets.only(right: getSize(20)),
+              onPressed: () async {
+                if (state.mobileNumber.isValid()) {
+                  var res = await context.router.push(
+                    PageRouteInfo(
+                      OtpLoginVerificationView.name,
+                      args: OtpLoginVerificationViewArgs(
+                        countryCode: state.countryCode,
+                        phoneNumber: state.mobileNumber.getValue(),
+                      ),
+                    ),
+                  );
+                  if (res != null && res == true) {
+                    context.read<AccountCubit>().getAccount();
+                  }
+                }
+              },
+              icon: BaseText(
+                text: 'Verify',
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+                textColor: Color(0xFF048ED6),
+              ),
+            )
+          : IconButton(
+              padding: EdgeInsets.zero,
+              onPressed: null,
+              icon: Icon(
+                Icons.check_circle_outline_outlined,
+                color: AppColors.green,
+                size: getSize(20),
+              ),
+            ),
     );
   }
 
@@ -112,6 +151,15 @@ class EditProfileForm extends StatelessWidget {
                 ),
       ),
     );
+  }
+
+  bool getIsMobileNumberChange(EditProfileState state) {
+    if (state.currentUser.phone.toString() != state.mobileNumber.getValue() ||
+        state.currentUser.countryCode != state.countryCode) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   CustomTextField lastNameTextFiled(

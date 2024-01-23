@@ -18,5 +18,11 @@ class EditProfileEvent with _$EditProfileEvent {
       CountryCodeChanged;
 
   const factory EditProfileEvent.saveButtonPressed() = SaveButtonPressed;
-  
+  const factory EditProfileEvent.getPrefilledPhoneNumber(
+      String countryCode, String phoneNumber) = GetPrefilledPhoneNumber;
+  const factory EditProfileEvent.verifyOtp() = VerifyOtp;
+  const factory EditProfileEvent.changeOTP(String otp) = ChangeOTP;
+  const factory EditProfileEvent.startCountdown() = StartCountdown;
+  const factory EditProfileEvent.decrementTimer() = DecrementTimer;
+  const factory EditProfileEvent.resendOtp() = ResendOtp;
 }

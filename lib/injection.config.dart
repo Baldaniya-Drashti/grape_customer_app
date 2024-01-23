@@ -70,8 +70,10 @@ extension GetItInjectableX on _i1.GetIt {
         () => _i15.AccountCubit(gh<_i6.IAccountRepository>()));
     gh.factory<_i16.AuthStatusBloc>(
         () => _i16.AuthStatusBloc(gh<_i8.IAuthFacade>()));
-    gh.factory<_i17.EditProfileBloc>(
-        () => _i17.EditProfileBloc(gh<_i6.IAccountRepository>()));
+    gh.factory<_i17.EditProfileBloc>(() => _i17.EditProfileBloc(
+          gh<_i6.IAccountRepository>(),
+          gh<_i8.IAuthFacade>(),
+        ));
     return this;
   }
 }
