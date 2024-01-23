@@ -14,26 +14,29 @@ class AuthStatusBloc extends Bloc<AuthStatusEvent, AuthStatusState> {
   final IAuthFacade _authFacade;
 
   AuthStatusBloc(this._authFacade) : super(const AuthStatusState.initial()) {
-    on<AuthStatusEvent>((event, emit) async {
-      await event.map(
-        authCheckRequested: (e) async {
-          final authenticated = await _authFacade.checkAuthenticated();
-          final isShowIntroScreen = isUserShowIntro();
-          if (isShowIntroScreen == null) {
-            emit(AuthStatusState.introScreenVisibilty());
-          } else {
-            emit(
-              authenticated
-                  ? const AuthStatusState.authenticated()
-                  : const AuthStatusState.unauthenticated(),
-            );
-          }
-        },
-        signedOut: (e) async {
-          await _authFacade.logout();
-          emit(const AuthStatusState.unauthenticated());
-        },
-      );
-    });
+    on<AuthStatusEvent>(
+      (event, emit) async {
+        await event.map(
+          authCheckRequested: (e) async {
+            final authenticated = await _authFacade.checkAuthenticated();
+            final isShowIntroScreen = isUserShowIntro();
+            if (isShowIntroScreen == null) {
+              emit(AuthStatusState.introScreenVisibilty());
+            } else {
+              emit(
+                authenticated
+                    ? const AuthStatusState.authenticated()
+                    : const AuthStatusState.unauthenticated(''),
+              );
+            }
+          },
+          signedOut: (e) async {
+            var res = await _authFacade.logout();
+            res.fold(
+                (l) => null, (r) => emit(AuthStatusState.unauthenticated(r)));
+          },
+        );
+      },
+    );
   }
 }

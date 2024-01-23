@@ -1,4 +1,3 @@
-
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,6 +9,7 @@ import 'package:grape_customer_app/domain/core/l10n/app_localizations.dart';
 import 'package:grape_customer_app/domain/core/math_utils.dart';
 import 'package:grape_customer_app/domain/core/png_image_constants.dart';
 import 'package:grape_customer_app/domain/core/svg_image_constants.dart';
+import 'package:grape_customer_app/presentation/common/utils/flushbar_creator.dart';
 import 'package:grape_customer_app/presentation/common/widgets/base_text.dart';
 import 'package:grape_customer_app/presentation/core/app_router.gr.dart';
 import 'package:grape_customer_app/presentation/core/styles/styles.dart';
@@ -90,8 +90,11 @@ class ProfileView extends StatelessWidget {
                     .replace(const PageRouteInfo(MainTabView.name)),
               );
             },
-            unauthenticated: (_) async {
-              context.router.replaceAll([const PageRouteInfo(LoginPage.name)]);
+            unauthenticated: (r) async {
+              showSuccess(message: r.successMessage).show(context).then(
+                    (value) => context.router
+                        .replaceAll([const PageRouteInfo(LoginPage.name)]),
+                  );
             },
             introScreenVisibilty: (IntroScreenVisibilty value) async {
               await Future.delayed(

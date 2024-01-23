@@ -31,7 +31,7 @@ class RegisterFormBloc extends Bloc<RegisterFormEvent, RegisterFormState> {
             );
           },
           registerPressed: (e) async {
-            Either<AuthFailure, Unit>? failureOrSuccess;
+            Either<AuthFailure, String>? failureOrSuccess;
 
             final isEmailValid = state.emailAddress.isValid();
             final isFirstNameValid = state.firstName.isValid();
@@ -99,7 +99,7 @@ class RegisterFormBloc extends Bloc<RegisterFormEvent, RegisterFormState> {
             );
           },
           verifyOtp: (VerifyOtp value) async {
-            Either<AuthFailure, Unit>? failureOrSuccess;
+            Either<AuthFailure, String>? failureOrSuccess;
 
             final isOTPValid = state.enteredOTP.isValid();
 
@@ -160,7 +160,7 @@ class RegisterFormBloc extends Bloc<RegisterFormEvent, RegisterFormState> {
           resendOtp: (ResendOtp value) async {
             timer.cancel();
 
-            Either<AuthFailure, Unit>? failureOrSuccess;
+            Either<AuthFailure, String>? failureOrSuccess;
 
             emit(
               state.copyWith(

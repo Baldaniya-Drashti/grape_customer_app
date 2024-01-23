@@ -50,20 +50,22 @@ class EditProfileScreen extends StatelessWidget {
               onTap: () => AppFocus.unfocus(context),
               child: EditProfileForm(),
             ),
-            bottomNavigationBar: Padding(
-              padding: EdgeInsets.only(
-                bottom: getSize(18),
-                left: getSize(18),
-                right: getSize(18),
-              ),
-              child: CommonButton(
-                isSubmitting: state.isSubmitting,
-                buttonText: AppLocalizations.of(context).save,
-                onPressed: () {
-                  context
-                      .read<EditProfileBloc>()
-                      .add(EditProfileEvent.saveButtonPressed());
-                },
+            bottomNavigationBar: SafeArea(
+              child: Padding(
+                padding: EdgeInsets.only(
+                  bottom: getSize(isFullScreenDevice(context) ? 0 : 18),
+                  left: getSize(18),
+                  right: getSize(18),
+                ),
+                child: CommonButton(
+                  isSubmitting: state.isSubmitting,
+                  buttonText: AppLocalizations.of(context).save,
+                  onPressed: () {
+                    context
+                        .read<EditProfileBloc>()
+                        .add(EditProfileEvent.saveButtonPressed());
+                  },
+                ),
               ),
             ),
           );

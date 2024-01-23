@@ -36,16 +36,19 @@ class RegisterForm extends StatelessWidget {
                 ),
               ).show(context);
             },
-            (_) {
-              context.router.push(
-                PageRouteInfo(
-                  OtpRegisterVerificationView.name,
-                  args: OtpRegisterVerificationViewArgs(
-                    countryCode: state.selectedCountrycode,
-                    phoneNumber: state.mobileNumber.getValue(),
-                  ),
-                ),
-              );
+            (r) {
+              showSuccess(message: r).show(context).then(
+                    (value) => context.router.push(
+                      PageRouteInfo(
+                        OtpRegisterVerificationView.name,
+                        args: OtpRegisterVerificationViewArgs(
+                          countryCode: state.selectedCountrycode,
+                          phoneNumber: state.mobileNumber.getValue(),
+                        ),
+                      ),
+                    ),
+                  );
+
               // RestartWidget.restartApp(context);
             },
           ),

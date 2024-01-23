@@ -284,7 +284,7 @@ mixin _$AuthStatusState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() authenticated,
-    required TResult Function() unauthenticated,
+    required TResult Function(String successMessage) unauthenticated,
     required TResult Function() introScreenVisibilty,
   }) =>
       throw _privateConstructorUsedError;
@@ -292,7 +292,7 @@ mixin _$AuthStatusState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? authenticated,
-    TResult? Function()? unauthenticated,
+    TResult? Function(String successMessage)? unauthenticated,
     TResult? Function()? introScreenVisibilty,
   }) =>
       throw _privateConstructorUsedError;
@@ -300,7 +300,7 @@ mixin _$AuthStatusState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? authenticated,
-    TResult Function()? unauthenticated,
+    TResult Function(String successMessage)? unauthenticated,
     TResult Function()? introScreenVisibilty,
     required TResult orElse(),
   }) =>
@@ -390,7 +390,7 @@ class _$InitialImpl implements Initial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() authenticated,
-    required TResult Function() unauthenticated,
+    required TResult Function(String successMessage) unauthenticated,
     required TResult Function() introScreenVisibilty,
   }) {
     return initial();
@@ -401,7 +401,7 @@ class _$InitialImpl implements Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? authenticated,
-    TResult? Function()? unauthenticated,
+    TResult? Function(String successMessage)? unauthenticated,
     TResult? Function()? introScreenVisibilty,
   }) {
     return initial?.call();
@@ -412,7 +412,7 @@ class _$InitialImpl implements Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? authenticated,
-    TResult Function()? unauthenticated,
+    TResult Function(String successMessage)? unauthenticated,
     TResult Function()? introScreenVisibilty,
     required TResult orElse(),
   }) {
@@ -504,7 +504,7 @@ class _$AuthenticatedImpl implements Authenticated {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() authenticated,
-    required TResult Function() unauthenticated,
+    required TResult Function(String successMessage) unauthenticated,
     required TResult Function() introScreenVisibilty,
   }) {
     return authenticated();
@@ -515,7 +515,7 @@ class _$AuthenticatedImpl implements Authenticated {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? authenticated,
-    TResult? Function()? unauthenticated,
+    TResult? Function(String successMessage)? unauthenticated,
     TResult? Function()? introScreenVisibilty,
   }) {
     return authenticated?.call();
@@ -526,7 +526,7 @@ class _$AuthenticatedImpl implements Authenticated {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? authenticated,
-    TResult Function()? unauthenticated,
+    TResult Function(String successMessage)? unauthenticated,
     TResult Function()? introScreenVisibilty,
     required TResult orElse(),
   }) {
@@ -583,6 +583,8 @@ abstract class _$$UnauthenticatedImplCopyWith<$Res> {
   factory _$$UnauthenticatedImplCopyWith(_$UnauthenticatedImpl value,
           $Res Function(_$UnauthenticatedImpl) then) =
       __$$UnauthenticatedImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String successMessage});
 }
 
 /// @nodoc
@@ -592,36 +594,62 @@ class __$$UnauthenticatedImplCopyWithImpl<$Res>
   __$$UnauthenticatedImplCopyWithImpl(
       _$UnauthenticatedImpl _value, $Res Function(_$UnauthenticatedImpl) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? successMessage = null,
+  }) {
+    return _then(_$UnauthenticatedImpl(
+      null == successMessage
+          ? _value.successMessage
+          : successMessage // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$UnauthenticatedImpl implements Unauthenticated {
-  const _$UnauthenticatedImpl();
+  const _$UnauthenticatedImpl(this.successMessage);
+
+  @override
+  final String successMessage;
 
   @override
   String toString() {
-    return 'AuthStatusState.unauthenticated()';
+    return 'AuthStatusState.unauthenticated(successMessage: $successMessage)';
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$UnauthenticatedImpl);
+        (other.runtimeType == runtimeType &&
+            other is _$UnauthenticatedImpl &&
+            (identical(other.successMessage, successMessage) ||
+                other.successMessage == successMessage));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(runtimeType, successMessage);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$UnauthenticatedImplCopyWith<_$UnauthenticatedImpl> get copyWith =>
+      __$$UnauthenticatedImplCopyWithImpl<_$UnauthenticatedImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() authenticated,
-    required TResult Function() unauthenticated,
+    required TResult Function(String successMessage) unauthenticated,
     required TResult Function() introScreenVisibilty,
   }) {
-    return unauthenticated();
+    return unauthenticated(successMessage);
   }
 
   @override
@@ -629,10 +657,10 @@ class _$UnauthenticatedImpl implements Unauthenticated {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? authenticated,
-    TResult? Function()? unauthenticated,
+    TResult? Function(String successMessage)? unauthenticated,
     TResult? Function()? introScreenVisibilty,
   }) {
-    return unauthenticated?.call();
+    return unauthenticated?.call(successMessage);
   }
 
   @override
@@ -640,12 +668,12 @@ class _$UnauthenticatedImpl implements Unauthenticated {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? authenticated,
-    TResult Function()? unauthenticated,
+    TResult Function(String successMessage)? unauthenticated,
     TResult Function()? introScreenVisibilty,
     required TResult orElse(),
   }) {
     if (unauthenticated != null) {
-      return unauthenticated();
+      return unauthenticated(successMessage);
     }
     return orElse();
   }
@@ -689,7 +717,13 @@ class _$UnauthenticatedImpl implements Unauthenticated {
 }
 
 abstract class Unauthenticated implements AuthStatusState {
-  const factory Unauthenticated() = _$UnauthenticatedImpl;
+  const factory Unauthenticated(final String successMessage) =
+      _$UnauthenticatedImpl;
+
+  String get successMessage;
+  @JsonKey(ignore: true)
+  _$$UnauthenticatedImplCopyWith<_$UnauthenticatedImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -733,7 +767,7 @@ class _$IntroScreenVisibiltyImpl implements IntroScreenVisibilty {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() authenticated,
-    required TResult Function() unauthenticated,
+    required TResult Function(String successMessage) unauthenticated,
     required TResult Function() introScreenVisibilty,
   }) {
     return introScreenVisibilty();
@@ -744,7 +778,7 @@ class _$IntroScreenVisibiltyImpl implements IntroScreenVisibilty {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? authenticated,
-    TResult? Function()? unauthenticated,
+    TResult? Function(String successMessage)? unauthenticated,
     TResult? Function()? introScreenVisibilty,
   }) {
     return introScreenVisibilty?.call();
@@ -755,7 +789,7 @@ class _$IntroScreenVisibiltyImpl implements IntroScreenVisibilty {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? authenticated,
-    TResult Function()? unauthenticated,
+    TResult Function(String successMessage)? unauthenticated,
     TResult Function()? introScreenVisibilty,
     required TResult orElse(),
   }) {

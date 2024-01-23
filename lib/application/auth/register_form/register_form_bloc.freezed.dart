@@ -2385,7 +2385,7 @@ mixin _$RegisterFormState {
   String get selectedCountrycode => throw _privateConstructorUsedError;
   OTPText get enteredOTP => throw _privateConstructorUsedError;
   int get secondsRemaining => throw _privateConstructorUsedError;
-  Option<Either<AuthFailure, Unit>> get authFailureOrSuccessOption =>
+  Option<Either<AuthFailure, String>> get authFailureOrSuccessOption =>
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -2409,7 +2409,7 @@ abstract class $RegisterFormStateCopyWith<$Res> {
       String selectedCountrycode,
       OTPText enteredOTP,
       int secondsRemaining,
-      Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption});
+      Option<Either<AuthFailure, String>> authFailureOrSuccessOption});
 }
 
 /// @nodoc
@@ -2476,7 +2476,7 @@ class _$RegisterFormStateCopyWithImpl<$Res, $Val extends RegisterFormState>
       authFailureOrSuccessOption: null == authFailureOrSuccessOption
           ? _value.authFailureOrSuccessOption
           : authFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
-              as Option<Either<AuthFailure, Unit>>,
+              as Option<Either<AuthFailure, String>>,
     ) as $Val);
   }
 }
@@ -2499,7 +2499,7 @@ abstract class _$$RegisterFormStateImplCopyWith<$Res>
       String selectedCountrycode,
       OTPText enteredOTP,
       int secondsRemaining,
-      Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption});
+      Option<Either<AuthFailure, String>> authFailureOrSuccessOption});
 }
 
 /// @nodoc
@@ -2564,7 +2564,7 @@ class __$$RegisterFormStateImplCopyWithImpl<$Res>
       authFailureOrSuccessOption: null == authFailureOrSuccessOption
           ? _value.authFailureOrSuccessOption
           : authFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
-              as Option<Either<AuthFailure, Unit>>,
+              as Option<Either<AuthFailure, String>>,
     ));
   }
 }
@@ -2603,7 +2603,7 @@ class _$RegisterFormStateImpl implements _RegisterFormState {
   @override
   final int secondsRemaining;
   @override
-  final Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption;
+  final Option<Either<AuthFailure, String>> authFailureOrSuccessOption;
 
   @override
   String toString() {
@@ -2672,7 +2672,7 @@ abstract class _RegisterFormState implements RegisterFormState {
       required final String selectedCountrycode,
       required final OTPText enteredOTP,
       required final int secondsRemaining,
-      required final Option<Either<AuthFailure, Unit>>
+      required final Option<Either<AuthFailure, String>>
           authFailureOrSuccessOption}) = _$RegisterFormStateImpl;
 
   @override
@@ -2694,7 +2694,7 @@ abstract class _RegisterFormState implements RegisterFormState {
   @override
   int get secondsRemaining;
   @override
-  Option<Either<AuthFailure, Unit>> get authFailureOrSuccessOption;
+  Option<Either<AuthFailure, String>> get authFailureOrSuccessOption;
   @override
   @JsonKey(ignore: true)
   _$$RegisterFormStateImplCopyWith<_$RegisterFormStateImpl> get copyWith =>

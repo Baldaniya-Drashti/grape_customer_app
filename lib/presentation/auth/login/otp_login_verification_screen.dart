@@ -15,23 +15,11 @@ import 'package:grape_customer_app/presentation/core/widgets/inputs/custom_app_b
 import 'package:grape_customer_app/presentation/core/widgets/inputs/inputs.dart';
 
 @RoutePage(name: 'OtpLoginVerificationView')
-class OtpLoginVerificationView extends StatefulWidget {
+class OtpLoginVerificationView extends StatelessWidget {
   final String countryCode;
   final String phoneNumber;
   const OtpLoginVerificationView(
       {super.key, required this.countryCode, required this.phoneNumber});
-
-  @override
-  State<OtpLoginVerificationView> createState() =>
-      _OtpRegisterVerificationViewState();
-}
-
-class _OtpRegisterVerificationViewState
-    extends State<OtpLoginVerificationView> {
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,14 +28,15 @@ class _OtpRegisterVerificationViewState
       body: BlocProvider(
         create: (context) => getIt<LoginFormBloc>()
           ..add(LoginFormEvent.startCountdown())
-          ..add(LoginFormEvent.getPrefilledPhoneNumber(
-              widget.countryCode, widget.phoneNumber)),
+          ..add(
+              LoginFormEvent.getPrefilledPhoneNumber(countryCode, phoneNumber)),
         child: BlocConsumer<LoginFormBloc, LoginFormState>(
           listener: (context, state) {
             state.authFailureOrSuccessOption.fold(
               () {},
               (either) => either.fold(
                 (failure) {
+                  context.read<LoginFormBloc>().timer.cancel();
                   showError(
                     message: failure.maybeMap(
                       showAPIResponseMessage: (value) => value.message,
@@ -57,9 +46,17 @@ class _OtpRegisterVerificationViewState
                     ),
                   ).show(context);
                 },
-                (_) {
-                  context.router
-                      .replaceAll([const PageRouteInfo(MainTabView.name)]);
+                (r) {
+                  context.read<LoginFormBloc>().timer.cancel();
+                  showSuccess(message: r).show(context).then(
+                    (value) {
+                      context.router.replaceAll(
+                        [
+                          const PageRouteInfo(MainTabView.name),
+                        ],
+                      );
+                    },
+                  );
                 },
               ),
             );
@@ -185,6 +182,7 @@ class _OtpRegisterVerificationViewState
                     CommonButton(
                       isSubmitting: state.isSubmitting,
                       onPressed: () {
+                        //  context.read<LoginFormBloc>().timer.cancel();
                         context
                             .read<LoginFormBloc>()
                             .add(LoginFormEvent.verifyOtp());

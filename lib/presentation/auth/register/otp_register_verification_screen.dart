@@ -54,6 +54,7 @@ class _OtpRegisterVerificationViewState
               () {},
               (either) => either.fold(
                 (failure) {
+                  context.read<RegisterFormBloc>().timer.cancel();
                   showError(
                     message: failure.maybeMap(
                       showAPIResponseMessage: (value) => value.message,
@@ -64,6 +65,7 @@ class _OtpRegisterVerificationViewState
                   ).show(context);
                 },
                 (_) {
+                  context.read<RegisterFormBloc>().timer.cancel();
                   context.router.replace(
                     PageRouteInfo(
                       SuccessScreen.name,

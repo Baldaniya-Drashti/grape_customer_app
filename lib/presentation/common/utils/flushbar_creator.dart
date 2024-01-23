@@ -25,16 +25,16 @@ Flushbar showError({
 Flushbar showSuccess({
   required String message,
   String? title,
-  Duration duration = const Duration(seconds: 5),
+  Duration duration = const Duration(seconds: 2),
 }) {
   return Flushbar(
     title: title,
     message: message,
     icon: Icon(
       Icons.check_circle,
-      color: AppColors.green,
+      color: AppColors.white,
     ),
-    leftBarIndicatorColor: AppColors.white,
+    leftBarIndicatorColor: AppColors.green,
     backgroundColor: AppColors.green,
     flushbarPosition: FlushbarPosition.TOP,
     duration: duration,

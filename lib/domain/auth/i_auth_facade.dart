@@ -4,7 +4,7 @@ import 'package:grape_customer_app/domain/auth/auth_failure.dart';
 import 'package:grape_customer_app/domain/auth/auth_value_objects.dart';
 
 abstract class IAuthFacade {
-  Future<Either<AuthFailure, Unit>> register({
+  Future<Either<AuthFailure, String>> register({
     required Username firstName,
     required Username lastName,
     required EmailAddress emailAddress,
@@ -12,14 +12,14 @@ abstract class IAuthFacade {
     required MobileNumber mobileNumber,
   });
 
-  Future<Either<AuthFailure, Unit>> login({
+  Future<Either<AuthFailure, String>> login({
     required String countryCode,
     required MobileNumber mobileNumber,
   });
 
   Future<bool> checkAuthenticated();
 
-  Future<Either<AuthFailure, Unit>> logout();
+  Future<Either<AuthFailure, String>> logout();
 
   Future<Either<AuthFailure, Unit>> changePassword({
     required Password oldPassword,
@@ -30,12 +30,12 @@ abstract class IAuthFacade {
   Future<Either<AuthFailure, Unit>> registerForPush({
     required String fcmToken,
   });
-  Future<Either<AuthFailure, Unit>> verifyOtp({
+  Future<Either<AuthFailure, String>> verifyOtp({
     required String countryCode,
     required MobileNumber mobileNumber,
     required OTPText otp,
   });
-  Future<Either<AuthFailure, Unit>> resendOtp({
+  Future<Either<AuthFailure, String>> resendOtp({
     required String countryCode,
     required MobileNumber mobileNumber,
   });

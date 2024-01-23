@@ -37,7 +37,7 @@ class LoginForm extends StatelessWidget {
                 ),
               ).show(context);
             },
-            (_) {
+            (r) {
               context.router.push(
                 PageRouteInfo(
                   OtpLoginVerificationView.name,

@@ -19,93 +19,66 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
   late Timer timer;
 
   LoginFormBloc(this._authFacade) : super(LoginFormState.initial()) {
-    on<LoginFormEvent>((event, emit) async {
-      await event.map(
-        loginPressed: (e) async {
-          Either<AuthFailure, Unit>? failureOrSuccess;
+    on<LoginFormEvent>(
+      (event, emit) async {
+        await event.map(
+          loginPressed: (e) async {
+            Either<AuthFailure, String>? failureOrSuccess;
 
-          final isMobileNumberValid = state.mobileNumber.isValid();
+            final isMobileNumberValid = state.mobileNumber.isValid();
 
-          if (isMobileNumberValid) {
-            emit(
-              state.copyWith(
-                isSubmitting: true,
-                authFailureOrSuccessOption: none(),
-              ),
-            );
+            if (isMobileNumberValid) {
+              emit(
+                state.copyWith(
+                  isSubmitting: true,
+                  authFailureOrSuccessOption: none(),
+                ),
+              );
 
-            failureOrSuccess = await _authFacade.login(
-              mobileNumber: state.mobileNumber,
-              countryCode: state.selectedCountrycode,
-            );
-          }
-
-          emit(
-            state.copyWith(
-              isSubmitting: false,
-              showErrorMessages: true,
-              authFailureOrSuccessOption: optionOf(failureOrSuccess),
-            ),
-          );
-        },
-        selectCountryCode: (e) {
-          emit(state.copyWith(selectedCountrycode: e.counryCode));
-        },
-        mobileNumberChanged: (e) {
-          emit(
-            state.copyWith(
-              mobileNumber: MobileNumber(e.mobileNumber),
-              authFailureOrSuccessOption: none(),
-            ),
-          );
-        },
-        startCountdown: (StartCountdown value) {
-          timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-            if (state.secondsRemaining > 0) {
-              add(const LoginFormEvent.decrementTimer());
-            } else {
-              timer.cancel();
-              // add(const LoginFormEvent.resendOtp());
+              failureOrSuccess = await _authFacade.login(
+                mobileNumber: state.mobileNumber,
+                countryCode: state.selectedCountrycode,
+              );
             }
-          });
-          emit(state.copyWith(secondsRemaining: 30));
-        },
-        decrementTimer: (DecrementTimer value) {
-          emit(state.copyWith(secondsRemaining: state.secondsRemaining - 1));
-        },
-        resendOtp: (ResendOtp value) async {
-          timer.cancel();
 
-          Either<AuthFailure, Unit>? failureOrSuccess;
+            emit(
+              state.copyWith(
+                isSubmitting: false,
+                showErrorMessages: true,
+                authFailureOrSuccessOption: optionOf(failureOrSuccess),
+              ),
+            );
+          },
+          selectCountryCode: (e) {
+            emit(state.copyWith(selectedCountrycode: e.counryCode));
+          },
+          mobileNumberChanged: (e) {
+            emit(
+              state.copyWith(
+                mobileNumber: MobileNumber(e.mobileNumber),
+                authFailureOrSuccessOption: none(),
+              ),
+            );
+          },
+          startCountdown: (StartCountdown value) {
+            timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+              if (state.secondsRemaining > 0) {
+                add(const LoginFormEvent.decrementTimer());
+              } else {
+                timer.cancel();
+                // add(const LoginFormEvent.resendOtp());
+              }
+            });
+            emit(state.copyWith(secondsRemaining: 30));
+          },
+          decrementTimer: (DecrementTimer value) {
+            emit(state.copyWith(secondsRemaining: state.secondsRemaining - 1));
+          },
+          resendOtp: (ResendOtp value) async {
+            timer.cancel();
 
-          emit(
-            state.copyWith(
-              isSubmitting: true,
-              authFailureOrSuccessOption: none(),
-            ),
-          );
+            Either<AuthFailure, String>? failureOrSuccess;
 
-          failureOrSuccess = await _authFacade.resendOtp(
-            countryCode: state.selectedCountrycode,
-            mobileNumber: state.mobileNumber,
-          );
-
-          emit(
-            state.copyWith(
-              isSubmitting: false,
-              //showErrorMessages: true,
-              secondsRemaining: 30,
-              authFailureOrSuccessOption: optionOf(failureOrSuccess),
-            ),
-          );
-          add(LoginFormEvent.startCountdown());
-        },
-        verifyOtp: (VerifyOtp value) async {
-          Either<AuthFailure, Unit>? failureOrSuccess;
-
-          final isOTPValid = state.enteredOTP.isValid();
-
-          if (isOTPValid) {
             emit(
               state.copyWith(
                 isSubmitting: true,
@@ -113,39 +86,68 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
               ),
             );
 
-            failureOrSuccess = await _authFacade.verifyOtp(
+            failureOrSuccess = await _authFacade.resendOtp(
               countryCode: state.selectedCountrycode,
               mobileNumber: state.mobileNumber,
-              otp: state.enteredOTP,
             );
-          }
 
-          emit(
-            state.copyWith(
-              isSubmitting: false,
-              showErrorMessages: true,
-              authFailureOrSuccessOption: optionOf(failureOrSuccess),
-            ),
-          );
-        },
-        changeOTP: (ChangeOTP value) {
-          emit(
-            state.copyWith(
-              enteredOTP: OTPText(value.otp),
-              authFailureOrSuccessOption: none(),
-            ),
-          );
-        },
-        getPrefilledPhoneNumber: (GetPrefilledPhoneNumber value) {
-          emit(
-            state.copyWith(
-              mobileNumber: MobileNumber(value.phoneNumber),
-              selectedCountrycode: value.countryCode,
-              authFailureOrSuccessOption: none(),
-            ),
-          );
-        },
-      );
-    });
+            emit(
+              state.copyWith(
+                isSubmitting: false,
+                //showErrorMessages: true,
+                secondsRemaining: 30,
+                authFailureOrSuccessOption: optionOf(failureOrSuccess),
+              ),
+            );
+            add(LoginFormEvent.startCountdown());
+          },
+          verifyOtp: (VerifyOtp value) async {
+            Either<AuthFailure, String>? failureOrSuccess;
+
+            final isOTPValid = state.enteredOTP.isValid();
+
+            if (isOTPValid) {
+              emit(
+                state.copyWith(
+                  isSubmitting: true,
+                  authFailureOrSuccessOption: none(),
+                ),
+              );
+
+              failureOrSuccess = await _authFacade.verifyOtp(
+                countryCode: state.selectedCountrycode,
+                mobileNumber: state.mobileNumber,
+                otp: state.enteredOTP,
+              );
+            }
+
+            emit(
+              state.copyWith(
+                isSubmitting: false,
+                showErrorMessages: true,
+                authFailureOrSuccessOption: optionOf(failureOrSuccess),
+              ),
+            );
+          },
+          changeOTP: (ChangeOTP value) {
+            emit(
+              state.copyWith(
+                enteredOTP: OTPText(value.otp),
+                authFailureOrSuccessOption: none(),
+              ),
+            );
+          },
+          getPrefilledPhoneNumber: (GetPrefilledPhoneNumber value) {
+            emit(
+              state.copyWith(
+                mobileNumber: MobileNumber(value.phoneNumber),
+                selectedCountrycode: value.countryCode,
+                authFailureOrSuccessOption: none(),
+              ),
+            );
+          },
+        );
+      },
+    );
   }
 }

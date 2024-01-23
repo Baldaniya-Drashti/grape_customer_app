@@ -9,7 +9,7 @@ class LoginFormState with _$LoginFormState {
     required String selectedCountrycode,
     required OTPText enteredOTP,
     required int secondsRemaining,
-    required Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption,
+    required Option<Either<AuthFailure, String>> authFailureOrSuccessOption,
   }) = _LoginFormState;
 
   factory LoginFormState.initial() => LoginFormState(

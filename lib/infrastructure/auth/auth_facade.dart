@@ -26,7 +26,7 @@ class AuthFacade implements IAuthFacade {
   AuthFacade(this.apiService);
 
   @override
-  Future<Either<AuthFailure, Unit>> login({
+  Future<Either<AuthFailure, String>> login({
     required String countryCode,
     required MobileNumber mobileNumber,
   }) async {
@@ -43,7 +43,7 @@ class AuthFacade implements IAuthFacade {
       final account = CurrentUserDto.fromJson(response.data).toDomain();
       setRememberToken(account.rememberToken ?? "");
       _setUserData(account);
-      return right(unit);
+      return right(response.dioMessage ?? "");
     } on DioException catch (err) {
       if (err.response != null) {
         var commonRespose = CommonResponse.fromJson(err.response?.data);
@@ -61,7 +61,7 @@ class AuthFacade implements IAuthFacade {
   }
 
   @override
-  Future<Either<AuthFailure, Unit>> register({
+  Future<Either<AuthFailure, String>> register({
     required Username firstName,
     required Username lastName,
     required EmailAddress emailAddress,
@@ -84,7 +84,7 @@ class AuthFacade implements IAuthFacade {
       final account = CurrentUserDto.fromJson(response.data).toDomain();
       setRememberToken(account.rememberToken ?? "");
       _setUserData(account);
-      return right(unit);
+      return right(response.dioMessage ?? "");
     } on DioException catch (err) {
       if (err.response != null) {
         var commonRespose = CommonResponse.fromJson(err.response?.data);
@@ -107,18 +107,19 @@ class AuthFacade implements IAuthFacade {
   }
 
   @override
-  Future<Either<AuthFailure, Unit>> logout() async {
+  Future<Either<AuthFailure, String>> logout() async {
     try {
-      await Future.wait([
-        apiService.postMethod(ApiConstants.logout,
-            {"device_id": await getDeviceId()}).then((value) async {
-          Hive.box(BoxNames.settingsBox).clear();
-          Hive.box<AccountEntity>(BoxNames.currentUser).clear();
-          await Hive.box(BoxNames.settingsBox)
-              .put(BoxKeys.isUserShowIntro, true);
-        }),
-      ]);
-      return right(unit);
+      return apiService.postMethod(ApiConstants.logout,
+          {"device_id": await getDeviceId()}).then((value) async {
+        Hive.box(BoxNames.settingsBox).clear();
+        Hive.box<AccountEntity>(BoxNames.currentUser).clear();
+        await Hive.box(BoxNames.settingsBox).put(BoxKeys.isUserShowIntro, true);
+        return right(value.dioMessage ?? "");
+      });
+      // await Future.wait([
+
+      // ]);
+      //  return right('');
     } on DioException catch (err) {
       if (err.response != null) {
         var commonRespose = CommonResponse.fromJson(err.response?.data);
@@ -173,7 +174,7 @@ class AuthFacade implements IAuthFacade {
   }
 
   @override
-  Future<Either<AuthFailure, Unit>> verifyOtp({
+  Future<Either<AuthFailure, String>> verifyOtp({
     required String countryCode,
     required MobileNumber mobileNumber,
     required OTPText otp,
@@ -193,7 +194,7 @@ class AuthFacade implements IAuthFacade {
       final account = CurrentUserDto.fromJson(response.data).toDomain();
       setUserToken(account.auth?.accessToken ?? "");
       _setUserData(account);
-      return right(unit);
+      return right(response.dioMessage ?? "");
     } on DioException catch (err) {
       if (err.response != null) {
         var commonRespose = CommonResponse.fromJson(err.response?.data);
@@ -264,7 +265,7 @@ class AuthFacade implements IAuthFacade {
   }
 
   @override
-  Future<Either<AuthFailure, Unit>> resendOtp({
+  Future<Either<AuthFailure, String>> resendOtp({
     required String countryCode,
     required MobileNumber mobileNumber,
   }) async {
@@ -283,7 +284,7 @@ class AuthFacade implements IAuthFacade {
       final account = CurrentUserDto.fromJson(response.data).toDomain();
       setUserToken(account.auth?.accessToken ?? "");
       _setUserData(account);
-      return right(unit);
+      return right(response.dioMessage ?? "");
     } on DioException catch (err) {
       if (err.response != null) {
         var commonRespose = CommonResponse.fromJson(err.response?.data);

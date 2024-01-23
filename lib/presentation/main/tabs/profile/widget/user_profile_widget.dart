@@ -7,6 +7,7 @@ import 'package:grape_customer_app/domain/account/account.dart';
 import 'package:grape_customer_app/domain/core/math_utils.dart';
 import 'package:grape_customer_app/domain/core/svg_image_constants.dart';
 import 'package:grape_customer_app/presentation/common/widgets/base_text.dart';
+import 'package:grape_customer_app/presentation/core/shimmer/profile_shimmer.dart';
 import 'package:grape_customer_app/presentation/core/styles/app_colors.dart';
 
 class UserProfileWidget extends StatelessWidget {
@@ -112,7 +113,7 @@ class UserProfileWidget extends StatelessWidget {
             ),
           ),
           orElse: () => Center(
-            child: CircularProgressIndicator(),
+            child: ProfileShimmer(),
           ),
         );
       },

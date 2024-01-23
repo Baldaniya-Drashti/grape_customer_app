@@ -1606,7 +1606,7 @@ mixin _$LoginFormState {
   String get selectedCountrycode => throw _privateConstructorUsedError;
   OTPText get enteredOTP => throw _privateConstructorUsedError;
   int get secondsRemaining => throw _privateConstructorUsedError;
-  Option<Either<AuthFailure, Unit>> get authFailureOrSuccessOption =>
+  Option<Either<AuthFailure, String>> get authFailureOrSuccessOption =>
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -1627,7 +1627,7 @@ abstract class $LoginFormStateCopyWith<$Res> {
       String selectedCountrycode,
       OTPText enteredOTP,
       int secondsRemaining,
-      Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption});
+      Option<Either<AuthFailure, String>> authFailureOrSuccessOption});
 }
 
 /// @nodoc
@@ -1679,7 +1679,7 @@ class _$LoginFormStateCopyWithImpl<$Res, $Val extends LoginFormState>
       authFailureOrSuccessOption: null == authFailureOrSuccessOption
           ? _value.authFailureOrSuccessOption
           : authFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
-              as Option<Either<AuthFailure, Unit>>,
+              as Option<Either<AuthFailure, String>>,
     ) as $Val);
   }
 }
@@ -1699,7 +1699,7 @@ abstract class _$$LoginFormStateImplCopyWith<$Res>
       String selectedCountrycode,
       OTPText enteredOTP,
       int secondsRemaining,
-      Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption});
+      Option<Either<AuthFailure, String>> authFailureOrSuccessOption});
 }
 
 /// @nodoc
@@ -1749,7 +1749,7 @@ class __$$LoginFormStateImplCopyWithImpl<$Res>
       authFailureOrSuccessOption: null == authFailureOrSuccessOption
           ? _value.authFailureOrSuccessOption
           : authFailureOrSuccessOption // ignore: cast_nullable_to_non_nullable
-              as Option<Either<AuthFailure, Unit>>,
+              as Option<Either<AuthFailure, String>>,
     ));
   }
 }
@@ -1779,7 +1779,7 @@ class _$LoginFormStateImpl implements _LoginFormState {
   @override
   final int secondsRemaining;
   @override
-  final Option<Either<AuthFailure, Unit>> authFailureOrSuccessOption;
+  final Option<Either<AuthFailure, String>> authFailureOrSuccessOption;
 
   @override
   String toString() {
@@ -1836,7 +1836,7 @@ abstract class _LoginFormState implements LoginFormState {
       required final String selectedCountrycode,
       required final OTPText enteredOTP,
       required final int secondsRemaining,
-      required final Option<Either<AuthFailure, Unit>>
+      required final Option<Either<AuthFailure, String>>
           authFailureOrSuccessOption}) = _$LoginFormStateImpl;
 
   @override
@@ -1852,7 +1852,7 @@ abstract class _LoginFormState implements LoginFormState {
   @override
   int get secondsRemaining;
   @override
-  Option<Either<AuthFailure, Unit>> get authFailureOrSuccessOption;
+  Option<Either<AuthFailure, String>> get authFailureOrSuccessOption;
   @override
   @JsonKey(ignore: true)
   _$$LoginFormStateImplCopyWith<_$LoginFormStateImpl> get copyWith =>
