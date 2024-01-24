@@ -9,6 +9,7 @@ import 'package:grape_customer_app/domain/core/svg_image_constants.dart';
 import 'package:grape_customer_app/presentation/common/widgets/base_text.dart';
 import 'package:grape_customer_app/presentation/core/styles/app_colors.dart';
 import 'package:grape_customer_app/presentation/core/widgets/inputs/custom_text_field.dart';
+import 'package:grape_customer_app/presentation/main/tabs/home/widgets/filter_bottom_sheet.dart';
 
 class HomeAppbar extends StatelessWidget implements PreferredSizeWidget {
   const HomeAppbar({super.key});
@@ -61,9 +62,7 @@ class HomeAppbar extends StatelessWidget implements PreferredSizeWidget {
                   ),
                   GestureDetector(
                     onTap: () {
-                      // context
-                      //     .read<LanguageBloc>()
-                      //     .add(LanguageEvent.changeLanguage());
+                      FilterBottomSheet().getFilterBottomSheet(context);
                     },
                     child: Container(
                       height: getSize(43),

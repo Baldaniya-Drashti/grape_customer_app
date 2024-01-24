@@ -15,29 +15,11 @@ import 'package:grape_customer_app/presentation/core/widgets/inputs/custom_app_b
 import 'package:grape_customer_app/presentation/core/widgets/inputs/inputs.dart';
 
 @RoutePage(name: 'OtpRegisterVerificationView')
-class OtpRegisterVerificationView extends StatefulWidget {
+class OtpRegisterVerificationView extends StatelessWidget {
   final String countryCode;
   final String phoneNumber;
   const OtpRegisterVerificationView(
       {super.key, required this.countryCode, required this.phoneNumber});
-
-  @override
-  State<OtpRegisterVerificationView> createState() =>
-      _OtpRegisterVerificationViewState();
-}
-
-class _OtpRegisterVerificationViewState
-    extends State<OtpRegisterVerificationView> {
-  @override
-  void dispose() {
-    context.read<RegisterFormBloc>().timer.cancel();
-    super.dispose();
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +29,7 @@ class _OtpRegisterVerificationViewState
         create: (context) => getIt<RegisterFormBloc>()
           ..add(RegisterFormEvent.startCountdown())
           ..add(RegisterFormEvent.getPrefilledPhoneNumber(
-              widget.countryCode, widget.phoneNumber)),
+              countryCode, phoneNumber)),
         child: BlocConsumer<RegisterFormBloc, RegisterFormState>(
           listener: (context, state) {
             state.authFailureOrSuccessOption.fold(
@@ -64,9 +46,9 @@ class _OtpRegisterVerificationViewState
                     ),
                   ).show(context);
                 },
-                (_) {
+                (_) async {
                   context.read<RegisterFormBloc>().timer.cancel();
-                  context.router.replace(
+                  context.router.push(
                     PageRouteInfo(
                       SuccessScreen.name,
                       args: SuccessScreenArgs(
@@ -76,7 +58,7 @@ class _OtpRegisterVerificationViewState
                     ),
                   );
 
-                  Future.delayed(
+                  await Future.delayed(
                     Duration(seconds: 2),
                     () => context.router.replaceAll(
                       [
@@ -208,6 +190,7 @@ class _OtpRegisterVerificationViewState
                       height: getSize(40),
                     ),
                     CommonButton(
+                      isSubmitting: state.isSubmitting,
                       onPressed: () {
                         context
                             .read<RegisterFormBloc>()

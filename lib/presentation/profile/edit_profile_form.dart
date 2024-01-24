@@ -6,15 +6,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:grape_customer_app/application/main/profile/edit_profile/edit_profile_bloc.dart';
-import 'package:grape_customer_app/application/main/profile/get_account/account_cubit.dart';
+import 'package:grape_customer_app/domain/account/account.dart';
 
 import 'package:grape_customer_app/domain/core/l10n/app_localizations.dart';
 import 'package:grape_customer_app/domain/core/math_utils.dart';
 import 'package:grape_customer_app/domain/core/svg_image_constants.dart';
+import 'package:grape_customer_app/presentation/common/utils/flushbar_creator.dart';
 import 'package:grape_customer_app/presentation/common/utils/image_picker_utils.dart';
 import 'package:grape_customer_app/presentation/common/widgets/base_text.dart';
 import 'package:grape_customer_app/presentation/common/widgets/common_country_code_picker.dart';
-import 'package:grape_customer_app/presentation/core/app_router.gr.dart';
 import 'package:grape_customer_app/presentation/core/styles/app_colors.dart';
 import 'package:grape_customer_app/presentation/common/widgets/image_chosser.dialog.dart';
 import 'package:grape_customer_app/presentation/core/widgets/inputs/inputs.dart';
@@ -30,10 +30,10 @@ class EditProfileForm extends StatelessWidget {
     return BlocBuilder<EditProfileBloc, EditProfileState>(
       builder: (context, state) {
         return Form(
-          autovalidateMode:
-              state.showErrorMessages || getIsMobileNumberChange(state)
-                  ? AutovalidateMode.always
-                  : AutovalidateMode.disabled,
+          autovalidateMode: state.showErrorMessages
+              //|| getIsMobileNumberChange(state)
+              ? AutovalidateMode.always
+              : AutovalidateMode.disabled,
           child: ListView(
             shrinkWrap: true,
             physics: BouncingScrollPhysics(),
@@ -95,20 +95,21 @@ class EditProfileForm extends StatelessWidget {
           ? IconButton(
               padding: EdgeInsets.only(right: getSize(20)),
               onPressed: () async {
-                if (state.mobileNumber.isValid()) {
-                  var res = await context.router.push(
-                    PageRouteInfo(
-                      OtpLoginVerificationView.name,
-                      args: OtpLoginVerificationViewArgs(
-                        countryCode: state.countryCode,
-                        phoneNumber: state.mobileNumber.getValue(),
-                      ),
-                    ),
-                  );
-                  if (res != null && res == true) {
-                    context.read<AccountCubit>().getAccount();
-                  }
-                }
+                showError(message: 'Under Developemnt').show(context);
+                // if (state.mobileNumber.isValid()) {
+                //   var res = await context.router.push(
+                //     PageRouteInfo(
+                //       OtpLoginVerificationView.name,
+                //       args: OtpLoginVerificationViewArgs(
+                //         countryCode: state.countryCode,
+                //         phoneNumber: state.mobileNumber.getValue(),
+                //       ),
+                //     ),
+                //   );
+                //   if (res != null && res == true) {
+                //     context.read<AccountCubit>().getAccount();
+                //   }
+                // }
               },
               icon: BaseText(
                 text: 'Verify',
@@ -219,19 +220,30 @@ class EditProfileForm extends StatelessWidget {
             alignment: Alignment.center,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
-              border: Border.all(
-                color: AppColors.primaryOrange,
-                width: getSize(1),
-              ),
+              color: state.selectImage.isEmpty
+                  ? Color(0xFFAEFFFF)
+                  : AppColors.white,
               shape: BoxShape.rectangle,
-              image: DecorationImage(
-                image: state.selectImage.isNotEmpty &&
-                        !state.selectImage.contains('https')
-                    ? FileImage(File(state.selectImage)) as ImageProvider
-                    : CachedNetworkImageProvider(state.selectImage),
-                fit: BoxFit.cover,
-              ),
+              image: state.selectImage.isNotEmpty
+                  ? state.selectImage.contains('https')
+                      ? DecorationImage(
+                          image: CachedNetworkImageProvider(state.selectImage),
+                          fit: BoxFit.cover,
+                        )
+                      : DecorationImage(
+                          image: FileImage(File(state.selectImage)),
+                          fit: BoxFit.cover,
+                        )
+                  : null,
             ),
+            child: state.selectImage.isEmpty
+                ? BaseText(
+                    text: getInitials(state.currentUser),
+                    fontSize: 24,
+                    fontWeight: FontWeight.w600,
+                    textColor: AppColors.authBlack,
+                  )
+                : null,
           ),
         ),
         Positioned(
@@ -284,4 +296,13 @@ class EditProfileForm extends StatelessWidget {
       ],
     );
   }
+
+  String getInitials(Account account) =>
+      '${account.firstName!} ${account.lastName!}'
+          .trim()
+          .split(' ')
+          .map((l) => l[0])
+          .take(2)
+          .join()
+          .toUpperCase();
 }

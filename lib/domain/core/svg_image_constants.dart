@@ -20,7 +20,7 @@ class SvgImageConstant {
   static const profile = "assets/svg/profile.svg";
   static const backArrow = "assets/svg/back_arrow.svg";
   static const order = 'assets/svg/order.svg';
-  
+
   static const payment = 'assets/svg/payment.svg';
   static const languages = 'assets/svg/languages.svg';
   static const customerSupport = 'assets/svg/customer_support.svg';
@@ -33,4 +33,6 @@ class SvgImageConstant {
 
   static const search = "assets/svg/search.svg";
   static const filter = "assets/svg/filter.svg";
+  static const emptyCheckbox = "assets/svg/empty_checkbox.svg";
+  static const selectedCheckbox = "assets/svg/selected_checkbox.svg";
 }

@@ -125,37 +125,51 @@ class ProfileView extends StatelessWidget {
             selectionListTile(
               iconUrl: SvgImageConstant.order,
               title: AppLocalizations.of(context).myOrders,
-              onTap: () {},
+              onTap: () {
+                showError(message: 'Under Developemnt').show(context);
+              },
             ),
             selectionListTile(
               iconUrl: SvgImageConstant.location,
               title: AppLocalizations.of(context).shippingAddresses,
-              onTap: () {},
+              onTap: () {
+                showError(message: 'Under Developemnt').show(context);
+              },
             ),
             selectionListTile(
               iconUrl: SvgImageConstant.payment,
               title: AppLocalizations.of(context).paymentMethods,
-              onTap: () {},
+              onTap: () {
+                showError(message: 'Under Developemnt').show(context);
+              },
             ),
             selectionListTile(
               iconUrl: SvgImageConstant.languages,
               title: AppLocalizations.of(context).languages,
-              onTap: () {},
+              onTap: () {
+                showError(message: 'Under Developemnt').show(context);
+              },
             ),
             selectionListTile(
               iconUrl: SvgImageConstant.customerSupport,
               title: AppLocalizations.of(context).customerSupport,
-              onTap: () {},
+              onTap: () {
+                showError(message: 'Under Developemnt').show(context);
+              },
             ),
             selectionListTile(
               iconUrl: SvgImageConstant.privacyPolicy,
               title: AppLocalizations.of(context).privacyPolicy,
-              onTap: () {},
+              onTap: () {
+                showError(message: 'Under Developemnt').show(context);
+              },
             ),
             selectionListTile(
               iconUrl: SvgImageConstant.tc,
               title: AppLocalizations.of(context).termsConditions,
-              onTap: () {},
+              onTap: () {
+                showError(message: 'Under Developemnt').show(context);
+              },
             ),
             selectionListTile(
               iconUrl: SvgImageConstant.logOut,
