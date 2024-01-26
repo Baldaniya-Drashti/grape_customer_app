@@ -51,6 +51,7 @@ class SplashPage extends StatelessWidget {
                 AppColors.splashColor1,
                 AppColors.splashColor2,
               ],
+              radius: 1,
             ),
           ),
           child: Column(

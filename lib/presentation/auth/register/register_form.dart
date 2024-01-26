@@ -1,5 +1,5 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:country_code_picker/country_code_picker.dart';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -247,9 +247,9 @@ class RegisterForm extends StatelessWidget {
               ),
       prefixIcon: CommonCountryCodePicker(
         initialSelection: state.selectedCountrycode,
-        onChanged: (CountryCode countryCode) {
+        onChanged: (countryCode) {
           context.read<RegisterFormBloc>().add(
-                RegisterFormEvent.selectCountryCode(countryCode.dialCode ?? ""),
+                RegisterFormEvent.selectCountryCode(countryCode.phoneCode),
               );
         },
       ),

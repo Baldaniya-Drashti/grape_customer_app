@@ -87,7 +87,7 @@ class EditProfileForm extends StatelessWidget {
         initialSelection: state.countryCode,
         onChanged: (code) => context.read<EditProfileBloc>().add(
               EditProfileEvent.countryCodeChanged(
-                code.dialCode ?? '',
+                code.phoneCode,
               ),
             ),
       ),

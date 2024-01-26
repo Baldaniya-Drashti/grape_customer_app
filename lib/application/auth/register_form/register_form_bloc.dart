@@ -53,7 +53,7 @@ class RegisterFormBloc extends Bloc<RegisterFormEvent, RegisterFormState> {
                 emailAddress: state.emailAddress,
                 firstName: state.firstName,
                 lastName: state.lastName,
-                countryCode: state.selectedCountrycode,
+                countryCode: '+${state.selectedCountrycode}',
                 mobileNumber: state.mobileNumber,
               );
             }
@@ -112,7 +112,7 @@ class RegisterFormBloc extends Bloc<RegisterFormEvent, RegisterFormState> {
               );
 
               failureOrSuccess = await _authFacade.verifyOtp(
-                countryCode: state.selectedCountrycode,
+                countryCode: '+${state.selectedCountrycode}',
                 mobileNumber: state.mobileNumber,
                 otp: state.enteredOTP,
               );
@@ -149,7 +149,6 @@ class RegisterFormBloc extends Bloc<RegisterFormEvent, RegisterFormState> {
                 add(const RegisterFormEvent.decrementTimer());
               } else {
                 timer.cancel();
-                add(const RegisterFormEvent.resendOtp());
               }
             });
             emit(state.copyWith(secondsRemaining: 30));
@@ -161,7 +160,6 @@ class RegisterFormBloc extends Bloc<RegisterFormEvent, RegisterFormState> {
             timer.cancel();
 
             Either<AuthFailure, String>? failureOrSuccess;
-
             emit(
               state.copyWith(
                 isSubmitting: true,

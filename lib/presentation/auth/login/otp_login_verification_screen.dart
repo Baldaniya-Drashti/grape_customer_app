@@ -110,7 +110,7 @@ class OtpLoginVerificationView extends StatelessWidget {
                           ),
                           TextSpan(
                             text:
-                                '(${state.selectedCountrycode}) ${state.mobileNumber.getValue()}',
+                                '(+${state.selectedCountrycode}) ${state.mobileNumber.getValue()}',
                             style: TextStyle(
                               fontWeight: FontWeight.w500,
                               color: AppColors.black,

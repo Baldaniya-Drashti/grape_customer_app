@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -101,6 +100,7 @@ class LoginForm extends StatelessWidget {
                   labelText: 'Mobile Number',
                   hintText: 'Mobile Number',
                   keyboardType: TextInputType.phone,
+                  errorMaxLines: 2,
                   onChanged: (value) => context
                       .read<LoginFormBloc>()
                       .add(LoginFormEvent.mobileNumberChanged(value)),
@@ -120,10 +120,10 @@ class LoginForm extends StatelessWidget {
                       ),
                   prefixIcon: CommonCountryCodePicker(
                     initialSelection: state.selectedCountrycode,
-                    onChanged: (CountryCode countryCode) {
+                    onChanged: (countryCode) {
                       context.read<LoginFormBloc>().add(
                             LoginFormEvent.selectCountryCode(
-                                countryCode.dialCode ?? ""),
+                                countryCode.phoneCode),
                           );
                     },
                   ),

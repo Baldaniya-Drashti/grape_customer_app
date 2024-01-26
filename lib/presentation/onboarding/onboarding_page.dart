@@ -6,7 +6,6 @@ import 'package:grape_customer_app/application/auth/auth_status/auth_status_bloc
 import 'package:grape_customer_app/application/onboarding/onboarding_bloc.dart';
 import 'package:grape_customer_app/presentation/core/styles/app_colors.dart';
 
-
 import 'package:grape_customer_app/domain/core/math_utils.dart';
 import 'package:grape_customer_app/domain/core/png_image_constants.dart';
 import 'package:grape_customer_app/infrastructure/core/hive_box_names.dart';
@@ -67,32 +66,37 @@ class OnBoardingPage extends StatelessWidget {
                     height: getSize(50),
                   ),
                   getSkipText(context, state),
-                  getImageView(state, context),
-                  Spacer(),
-                  Center(
-                    child: BaseText(
-                      text: onboardingList[state.currentPage].title,
-                      fontSize: 22,
-                      textAlign: TextAlign.center,
-                      fontWeight: FontWeight.w800,
-                      textColor: Color(0xFF32353A),
-                    ),
-                  ),
                   SizedBox(
-                    height: getSize(15),
+                    height: getSize(20),
                   ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: getSize(28)),
-                    child: BaseText(
-                      text: onboardingList[state.currentPage].description,
-                      textColor: AppColors.black.withOpacity(0.5),
-                      textAlign: TextAlign.center,
-                      fontSize: 12,
-                    ),
-                  ),
+                  getPageView(state, context),
+                  // Spacer(),
+                  // Center(
+                  //   child: BaseText(
+                  //     text: onboardingList[state.currentPage].title,
+                  //     fontSize: 22,
+                  //     textAlign: TextAlign.center,
+                  //     fontWeight: FontWeight.w800,
+                  //     textColor: Color(0xFF32353A),
+                  //   ),
+                  // ),
+                  // SizedBox(
+                  //   height: getSize(15),
+                  // ),
+                  // Padding(
+                  //   padding: EdgeInsets.symmetric(horizontal: getSize(28)),
+                  //   child: BaseText(
+                  //     text: onboardingList[state.currentPage].description,
+                  //     textColor: AppColors.black.withOpacity(0.5),
+                  //     textAlign: TextAlign.center,
+                  //     fontSize: 12,
+                  //   ),
+                  // ),
                   Spacer(),
                   getButtonView(state, context),
-                  Spacer(),
+                  SizedBox(
+                    height: getSize(40),
+                  ),
                   getNextButtonAndDotIndicatorView(state),
                   SizedBox(
                     height: getSize(12),
@@ -210,7 +214,7 @@ class OnBoardingPage extends StatelessWidget {
     );
   }
 
-  getImageView(OnboardingState state, BuildContext context) {
+  getPageView(OnboardingState state, BuildContext context) {
     return Expanded(
       flex: 10,
       child: PageView.builder(
@@ -221,10 +225,64 @@ class OnBoardingPage extends StatelessWidget {
           padding: EdgeInsets.symmetric(
             horizontal: getSize(
               index == 0
-                  ? getSize(57)
+                  ? getSize(0)
                   : index == 1
-                      ? getSize(39)
-                      : getSize(24),
+                      ? getSize(0)
+                      : getSize(0),
+            ),
+          ),
+          child: Column(
+            children: [
+              Image.asset(
+                onboardingList[index].image,
+              ),
+              Spacer(),
+              Center(
+                child: BaseText(
+                  text: onboardingList[state.currentPage].title,
+                  fontSize: 22,
+                  textAlign: TextAlign.center,
+                  fontWeight: FontWeight.w800,
+                  textColor: Color(0xFF32353A),
+                ),
+              ),
+              SizedBox(
+                height: getSize(15),
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: getSize(28)),
+                child: BaseText(
+                  text: onboardingList[state.currentPage].description,
+                  textColor: AppColors.black.withOpacity(0.5),
+                  textAlign: TextAlign.center,
+                  fontSize: 12,
+                ),
+              ),
+            ],
+          ),
+        ),
+        onPageChanged: (value) {
+          context.read<OnboardingBloc>().add(OnboardingEvent.nextPage(value));
+        },
+      ),
+    );
+  }
+
+  getTitleAndDescription(OnboardingState state, BuildContext context) {
+    return Expanded(
+      flex: 10,
+      child: PageView.builder(
+        controller: pageController,
+        itemCount: onboardingList.length,
+        physics: BouncingScrollPhysics(),
+        itemBuilder: (context, index) => Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: getSize(
+              index == 0
+                  ? getSize(0)
+                  : index == 1
+                      ? getSize(0)
+                      : getSize(0),
             ),
           ),
           child: Image.asset(

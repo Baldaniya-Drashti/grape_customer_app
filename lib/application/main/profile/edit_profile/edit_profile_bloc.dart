@@ -90,7 +90,7 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
               firstName: state.firstName,
               lastName: state.lastName,
               emailAddress: state.emailAddress,
-              countryCode: state.countryCode,
+              countryCode: '+${state.countryCode}',
               mobileNumber: state.mobileNumber,
               profileImage: state.selectImage,
             );
@@ -117,7 +117,7 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
             );
 
             failureOrSuccess = await _authFacade.verifyOtp(
-              countryCode: state.countryCode,
+              countryCode: '+${state.countryCode}',
               mobileNumber: state.mobileNumber,
               otp: state.enteredOTP,
             );

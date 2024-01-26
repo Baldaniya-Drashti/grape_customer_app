@@ -52,8 +52,8 @@ class OtpRegisterVerificationView extends StatelessWidget {
                     PageRouteInfo(
                       SuccessScreen.name,
                       args: SuccessScreenArgs(
-                        title: 'Congratulations',
-                        subTitle: 'SUCCESS',
+                        title: 'SUCCESS',
+                        subTitle: 'Your account has been successfully created.',
                       ),
                     ),
                   );
@@ -120,7 +120,7 @@ class OtpRegisterVerificationView extends StatelessWidget {
                           ),
                           TextSpan(
                             text:
-                                '(${state.selectedCountrycode}) ${state.mobileNumber.getValue()}',
+                                '(+${state.selectedCountrycode}) ${state.mobileNumber.getValue()}',
                             style: TextStyle(
                               fontWeight: FontWeight.w500,
                               color: AppColors.black,

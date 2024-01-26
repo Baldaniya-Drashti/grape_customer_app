@@ -17,7 +17,7 @@ class LoginFormState with _$LoginFormState {
         showErrorMessages: false,
         isSubmitting: false,
         authFailureOrSuccessOption: none(),
-        selectedCountrycode: '+91',
+        selectedCountrycode: '91',
         enteredOTP: OTPText(''),
         secondsRemaining: 0,
       );

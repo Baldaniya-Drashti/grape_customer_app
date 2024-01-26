@@ -23,7 +23,7 @@ class RegisterFormState with _$RegisterFormState {
         firstName: Username(''),
         lastName: Username(''),
         mobileNumber: MobileNumber(''),
-        selectedCountrycode: '+91',
+        selectedCountrycode: '91',
         enteredOTP: OTPText(''),
         secondsRemaining: 0,
       );

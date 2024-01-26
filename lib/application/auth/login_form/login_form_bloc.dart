@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,7 +27,6 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
             Either<AuthFailure, String>? failureOrSuccess;
 
             final isMobileNumberValid = state.mobileNumber.isValid();
-
             if (isMobileNumberValid) {
               emit(
                 state.copyWith(
@@ -37,7 +37,7 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
 
               failureOrSuccess = await _authFacade.login(
                 mobileNumber: state.mobileNumber,
-                countryCode: state.selectedCountrycode,
+                countryCode: '+${state.selectedCountrycode}',
               );
             }
 
@@ -115,7 +115,7 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
               );
 
               failureOrSuccess = await _authFacade.verifyOtp(
-                countryCode: state.selectedCountrycode,
+                countryCode: '+${state.selectedCountrycode}',
                 mobileNumber: state.mobileNumber,
                 otp: state.enteredOTP,
               );

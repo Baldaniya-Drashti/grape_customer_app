@@ -26,7 +26,7 @@ class EditProfileState with _$EditProfileState {
         lastName: Username(getCurrentUser().lastName ?? ""),
         emailAddress: EmailAddress(getCurrentUser().email ?? ""),
         mobileNumber: MobileNumber(getCurrentUser().phone?.toString() ?? ""),
-        countryCode: getCurrentUser().countryCode ?? "",
+        countryCode: getCurrentUser().countryCode?.replaceFirst('+', '') ?? "",
         currentUser: getCurrentUser(),
         enteredOTP: OTPText(''),
         secondsRemaining: 0,
