@@ -27,6 +27,7 @@ class AccountEntity extends HiveObject {
   final String? rememberToken;
   @HiveField(10)
   final String? profile;
+  
   AccountEntity(
     this.userId,
     this.firstName,

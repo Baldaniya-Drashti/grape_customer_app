@@ -284,6 +284,84 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Save'**
   String get save;
+
+  /// No description provided for @fullName.
+  ///
+  /// In en, this message translates to:
+  /// **'Full Name'**
+  String get fullName;
+
+  /// No description provided for @enterFullName.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter full Name'**
+  String get enterFullName;
+
+  /// No description provided for @address.
+  ///
+  /// In en, this message translates to:
+  /// **'Address'**
+  String get address;
+
+  /// No description provided for @enterAddress.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter Address'**
+  String get enterAddress;
+
+  /// No description provided for @landMark.
+  ///
+  /// In en, this message translates to:
+  /// **'LandMark'**
+  String get landMark;
+
+  /// No description provided for @enterLandMark.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter LandMark'**
+  String get enterLandMark;
+
+  /// No description provided for @state.
+  ///
+  /// In en, this message translates to:
+  /// **'State'**
+  String get state;
+
+  /// No description provided for @enterState.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter State'**
+  String get enterState;
+
+  /// No description provided for @city.
+  ///
+  /// In en, this message translates to:
+  /// **'City'**
+  String get city;
+
+  /// No description provided for @enterCity.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter City'**
+  String get enterCity;
+
+  /// No description provided for @pinCode.
+  ///
+  /// In en, this message translates to:
+  /// **'PinCode'**
+  String get pinCode;
+
+  /// No description provided for @enterPinCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter PinCode'**
+  String get enterPinCode;
+
+  /// No description provided for @edit.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit'**
+  String get edit;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

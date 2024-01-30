@@ -32,5 +32,20 @@
     "enterEmail":"Please enter valid email address",
     "enterMobile":"Phone number should be between 6 and 15 digits",
     "mobileNumber":"Mobile Number",
-    "save":"Save"
+    "save":"Save",
+    "fullName":"Full Name",
+    "enterFullName":"Enter full Name",
+    "address":"Address",
+    "enterAddress":"Enter Address",
+    "landMark":"LandMark",
+    "enterLandMark":"Enter LandMark",
+    "state":"State",
+    "enterState":"Enter State",
+    "city":"City",
+    "enterCity":"Enter City",
+    "pinCode":"PinCode",
+    "enterPinCode":"Enter PinCode",
+    "edit":"Edit"
+
+
 }

@@ -36,4 +36,8 @@ class SvgImageConstant {
   static const emptyCheckbox = "assets/svg/empty_checkbox.svg";
   static const selectedCheckbox = "assets/svg/selected_checkbox.svg";
   static const downArrow = 'assets/svg/down_arrow.svg';
+
+  //ShippingAddress
+  static const addIcon = "assets/svg/add_icon.svg";
+  static const deleteIcon = 'assets/svg/delete_icon.svg';
 }

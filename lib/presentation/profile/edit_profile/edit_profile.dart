@@ -10,7 +10,7 @@ import 'package:grape_customer_app/presentation/common/utils/app_focus.dart';
 import 'package:grape_customer_app/presentation/common/utils/flushbar_creator.dart';
 import 'package:grape_customer_app/presentation/core/widgets/buttons/common_button.dart';
 import 'package:grape_customer_app/presentation/core/widgets/inputs/custom_app_bar.dart';
-import 'package:grape_customer_app/presentation/profile/edit_profile_form.dart';
+import 'package:grape_customer_app/presentation/profile/edit_profile/edit_profile_form.dart';
 
 @RoutePage(name: 'EditProfileScreen')
 class EditProfileScreen extends StatelessWidget {

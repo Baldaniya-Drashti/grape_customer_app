@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -48,6 +50,7 @@ class CustomTextField extends StatelessWidget {
   final TextCapitalization textCapitalization;
   @override
   Widget build(BuildContext context) {
+    log(initialValue ?? "initial");
     final border = OutlineInputBorder(
       borderSide: BorderSide(color: AppColors.black.withOpacity(0.2)),
       borderRadius: BorderRadius.circular(getSize(10)),

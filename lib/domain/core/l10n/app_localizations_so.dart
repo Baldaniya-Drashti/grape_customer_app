@@ -99,4 +99,43 @@ class AppLocalizationsSo extends AppLocalizations {
 
   @override
   String get save => 'Save';
+
+  @override
+  String get fullName => 'Full Name';
+
+  @override
+  String get enterFullName => 'Enter full Name';
+
+  @override
+  String get address => 'Address';
+
+  @override
+  String get enterAddress => 'Enter Address';
+
+  @override
+  String get landMark => 'LandMark';
+
+  @override
+  String get enterLandMark => 'Enter LandMark';
+
+  @override
+  String get state => 'State';
+
+  @override
+  String get enterState => 'Enter State';
+
+  @override
+  String get city => 'City';
+
+  @override
+  String get enterCity => 'Enter City';
+
+  @override
+  String get pinCode => 'PinCode';
+
+  @override
+  String get enterPinCode => 'Enter PinCode';
+
+  @override
+  String get edit => 'Edit';
 }

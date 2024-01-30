@@ -25,5 +25,7 @@ class AppRouter extends $AppRouter {
           ],
         ),
         AutoRoute(page: EditProfileScreen.page),
+        AutoRoute(page: ShippingAddresses.page),
+        AutoRoute(page: AddNewAddress.page),
       ];
 }

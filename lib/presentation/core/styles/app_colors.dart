@@ -23,4 +23,5 @@ class AppColors {
   static Color splashColor2 = Color(0xFF57198E);
   static Color primaryOrange = Color(0xFFFF770E);
   static Color grey = Color(0xFFD9D9D9);
+  static Color grey1 = Color(0x33D9D9D9);
 }

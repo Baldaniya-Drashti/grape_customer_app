@@ -23,6 +23,19 @@
     "enterEmail",
     "enterMobile",
     "mobileNumber",
-    "save"
+    "save",
+    "fullName",
+    "enterFullName",
+    "address",
+    "enterAddress",
+    "landMark",
+    "enterLandMark",
+    "state",
+    "enterState",
+    "city",
+    "enterCity",
+    "pinCode",
+    "enterPinCode",
+    "edit"
   ]
 }
