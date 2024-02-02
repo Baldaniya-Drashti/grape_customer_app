@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -29,6 +27,7 @@ class CustomTextField extends StatelessWidget {
     this.errorMaxLines,
     this.suffixIcon,
   }) : super(key: key);
+
   final List<TextInputFormatter>? inputFormatters;
   final TextEditingController? controller;
   final String? hintText;
@@ -45,12 +44,10 @@ class CustomTextField extends StatelessWidget {
   final Widget? prefixIcon;
   final Widget? suffixIcon;
   final int? errorMaxLines;
-
   final TextInputAction? textInputAction;
   final TextCapitalization textCapitalization;
   @override
   Widget build(BuildContext context) {
-    log(initialValue ?? "initial");
     final border = OutlineInputBorder(
       borderSide: BorderSide(color: AppColors.black.withOpacity(0.2)),
       borderRadius: BorderRadius.circular(getSize(10)),

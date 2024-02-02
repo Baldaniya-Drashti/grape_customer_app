@@ -1,4 +1,4 @@
-class ShippingAddressResponce {
+class ShippingAddressResponse {
   String? fullName;
   String? countryCode;
   String? mobileNumber;
@@ -7,7 +7,7 @@ class ShippingAddressResponce {
   String? state;
   String? city;
   String? pinCode;
-  ShippingAddressResponce({
+  ShippingAddressResponse({
     this.fullName,
     this.countryCode,
     this.mobileNumber,

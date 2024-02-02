@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:grape_customer_app/application/main/profile/shipping_addresses/shipping_addresses_responce.dart';
+import 'package:grape_customer_app/application/main/profile/shipping_addresses/shipping_addresses_response.dart';
 import 'package:grape_customer_app/domain/core/l10n/app_localizations.dart';
 import 'package:grape_customer_app/domain/core/math_utils.dart';
 import 'package:grape_customer_app/domain/core/svg_image_constants.dart';
@@ -9,7 +9,7 @@ import 'package:grape_customer_app/presentation/core/styles/styles.dart';
 import 'package:grape_customer_app/presentation/core/widgets/buttons/common_button.dart';
 
 class ShippingAddressCard extends StatelessWidget {
-  final ShippingAddressResponce shippingAddress;
+  final ShippingAddressResponse shippingAddress;
   final void Function()? onTapSelectCard;
   final void Function()? onTapDelete;
   final void Function()? onTapEdit;

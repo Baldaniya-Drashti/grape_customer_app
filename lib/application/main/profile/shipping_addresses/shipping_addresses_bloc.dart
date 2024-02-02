@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:grape_customer_app/application/main/profile/shipping_addresses/shipping_addresses_responce.dart';
+import 'package:grape_customer_app/application/main/profile/shipping_addresses/shipping_addresses_response.dart';
 import 'package:grape_customer_app/domain/auth/auth_failure.dart';
 import 'package:grape_customer_app/domain/auth/auth_value_objects.dart';
 import 'package:injectable/injectable.dart';
@@ -36,7 +36,7 @@ class ShippingAddressesBloc
               isCityValid &&
               isPinCodeValid) {
             value.context.router.pop(
-              ShippingAddressResponce(
+              ShippingAddressResponse(
                 fullName: state.fullName.getValue(),
                 countryCode: state.countryCode,
                 mobileNumber: state.mobileNumber.getValue(),
@@ -113,7 +113,7 @@ class ShippingAddressesBloc
             addressList: List.of(state.addressList)..removeAt(value.index),
           ));
         },
-        prefillEditAddressData: (PrefillEditAddressData value) {
+        prefillEditAddressData: (PrefillEditAddressData value) async {
           emit(
             state.copyWith(
               isEdit: value.isEdit,

@@ -25,9 +25,9 @@ class ShippingAddressesEvent with _$ShippingAddressesEvent {
   const factory ShippingAddressesEvent.saveButtonPressed(BuildContext context) =
       SaveButtonPressed;
   const factory ShippingAddressesEvent.addAddresses(
-      ShippingAddressResponce shippingAddressResponce) = AddAddresses;
+      ShippingAddressResponse shippingAddressResponce) = AddAddresses;
   const factory ShippingAddressesEvent.prefillEditAddressData(
-          ShippingAddressResponce shippingAddressResponce, bool isEdit) =
+          ShippingAddressResponse shippingAddressResponce, bool isEdit) =
       PrefillEditAddressData;
   const factory ShippingAddressesEvent.selectedIndex(int index) = SeletedIndex;
   const factory ShippingAddressesEvent.deleteAddress(int index) = DeleteAddress;

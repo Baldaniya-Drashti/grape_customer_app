@@ -4,8 +4,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grape_customer_app/application/main/profile/shipping_addresses/shipping_addresses_bloc.dart';
-import 'package:grape_customer_app/application/main/profile/shipping_addresses/shipping_addresses_responce.dart';
-import 'package:grape_customer_app/domain/auth/auth_value_objects.dart';
+import 'package:grape_customer_app/application/main/profile/shipping_addresses/shipping_addresses_response.dart';
 import 'package:grape_customer_app/domain/core/l10n/app_localizations.dart';
 import 'package:grape_customer_app/domain/core/math_utils.dart';
 import 'package:grape_customer_app/injection.dart';
@@ -17,7 +16,7 @@ import 'package:grape_customer_app/presentation/core/widgets/inputs/inputs.dart'
 
 @RoutePage(name: 'AddNewAddress')
 class AddNewAddress extends StatelessWidget {
-  final ShippingAddressResponce shippingAddressResponce;
+  final ShippingAddressResponse shippingAddressResponce;
   const AddNewAddress({super.key, required this.shippingAddressResponce});
 
   @override
@@ -32,14 +31,12 @@ class AddNewAddress extends StatelessWidget {
               shippingAddressResponce.fullName == null ? false : true,
             ),
           ),
-        child: BlocBuilder<ShippingAddressesBloc, ShippingAddressesState>(
-          // listener: (context, state) {
-          //   // TODO: implement listener
-          // },
+        child: BlocConsumer<ShippingAddressesBloc, ShippingAddressesState>(
+          listener: (context, state) {},
           builder: (context, state) {
-            log('Name :${state.selectedAddressItems.fullName}');
             return Scaffold(
-              appBar: CustomAppBar(title: 'Add New Address'),
+              appBar: CustomAppBar(
+                  title: state.isEdit ? 'Edit Address' : 'Add New Address'),
               body: BlocBuilder<ShippingAddressesBloc, ShippingAddressesState>(
                 builder: (context, state) {
                   return Form(
@@ -179,6 +176,7 @@ class AddNewAddress extends StatelessWidget {
     return CustomTextField(
       hintText: AppLocalizations.of(context).address,
       labelText: AppLocalizations.of(context).address,
+      maxLines: 3,
       onChanged: (address) => context
           .read<ShippingAddressesBloc>()
           .add(ShippingAddressesEvent.addressChanged(address)),
@@ -197,6 +195,7 @@ class AddNewAddress extends StatelessWidget {
     return CustomTextField(
       labelText: AppLocalizations.of(context).mobileNumber,
       hintText: AppLocalizations.of(context).mobileNumber,
+      initialValue: state.selectedAddressItems.mobileNumber ?? "",
       keyboardType: TextInputType.phone,
       onChanged: (mobileNumber) => context
           .read<ShippingAddressesBloc>()
@@ -221,11 +220,10 @@ class AddNewAddress extends StatelessWidget {
 
   CustomTextField fullNameTextFiled(
       BuildContext context, ShippingAddressesState state) {
-    log('Full Name :${state.selectedAddressItems.fullName}');
     return CustomTextField(
       labelText: AppLocalizations.of(context).fullName,
       hintText: AppLocalizations.of(context).fullName,
-      initialValue: state.selectedAddressItems.fullName ?? "",
+      // initialValue: state.isEdit ? state.selectedAddressItems.fullName : null,
       onChanged: (fullName) => context
           .read<ShippingAddressesBloc>()
           .add(ShippingAddressesEvent.fullNameChanged(fullName)),

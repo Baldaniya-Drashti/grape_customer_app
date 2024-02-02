@@ -13,8 +13,8 @@ class ShippingAddressesState with _$ShippingAddressesState {
     required InputEmptyOrNot pinCode,
     required bool showErrorMessages,
     required Option<Either<AuthFailure, String>> failureOrSuccessOption,
-    required List<ShippingAddressResponce> addressList,
-    required ShippingAddressResponce selectedAddressItems,
+    required List<ShippingAddressResponse> addressList,
+    required ShippingAddressResponse selectedAddressItems,
     required int selectedIndex,
     required bool isEdit,
   }) = _EditProfileState;
@@ -32,6 +32,6 @@ class ShippingAddressesState with _$ShippingAddressesState {
         addressList: [],
         selectedIndex: 0,
         isEdit: false,
-        selectedAddressItems: ShippingAddressResponce(),
+        selectedAddressItems: ShippingAddressResponse(),
       );
 }

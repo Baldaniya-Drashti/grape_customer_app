@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:grape_customer_app/application/main/profile/shipping_addresses/shipping_addresses_bloc.dart';
-import 'package:grape_customer_app/application/main/profile/shipping_addresses/shipping_addresses_responce.dart';
+import 'package:grape_customer_app/application/main/profile/shipping_addresses/shipping_addresses_response.dart';
 import 'package:grape_customer_app/domain/core/math_utils.dart';
 import 'package:grape_customer_app/domain/core/svg_image_constants.dart';
 import 'package:grape_customer_app/presentation/core/app_router.gr.dart';
@@ -32,8 +32,8 @@ class ShippingAddress extends StatelessWidget {
                         .push(PageRouteInfo(AddNewAddress.name,
                             args: AddNewAddressArgs(
                               shippingAddressResponce:
-                                  ShippingAddressResponce(),
-                            ))) as ShippingAddressResponce;
+                                  ShippingAddressResponse(),
+                            ))) as ShippingAddressResponse;
                     context
                         .read<ShippingAddressesBloc>()
                         .add(ShippingAddressesEvent.addAddresses(res));
