@@ -9,6 +9,7 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 <<<<<<< HEAD
+<<<<<<< HEAD
 import 'package:auto_route/auto_route.dart' as _i25;
 import 'package:flutter/material.dart' as _i26;
 import 'package:grape_customer_app/application/main/profile/shipping_addresses/shipping_addresses_response.dart'
@@ -19,8 +20,12 @@ import 'package:flutter/material.dart' as _i19;
 import 'package:auto_route/auto_route.dart' as _i19;
 import 'package:flutter/material.dart' as _i20;
 >>>>>>> 4a267b3 (maitry : search view completed)
+=======
+import 'package:auto_route/auto_route.dart' as _i20;
+import 'package:flutter/material.dart' as _i21;
+>>>>>>> ca68361 (maitry : product details in progress)
 import 'package:grape_customer_app/application/main/profile/shipping_addresses/shipping_addresses_response.dart'
-    as _i21;
+    as _i22;
 import 'package:grape_customer_app/presentation/auth/login/login_screen.dart'
     as _i8;
 import 'package:grape_customer_app/presentation/auth/login/otp_login_verification_screen.dart'
@@ -28,6 +33,7 @@ import 'package:grape_customer_app/presentation/auth/login/otp_login_verificatio
 import 'package:grape_customer_app/presentation/auth/register/otp_register_verification_screen.dart'
     as _i16;
 import 'package:grape_customer_app/presentation/auth/register/register_screen.dart'
+<<<<<<< HEAD
     as _i20;
 import 'package:grape_customer_app/presentation/core/widgets/layout/success_view.dart'
 <<<<<<< HEAD
@@ -35,6 +41,11 @@ import 'package:grape_customer_app/presentation/core/widgets/layout/success_view
 import 'package:grape_customer_app/presentation/main/main_tab_view.dart' as _i9;
 =======
     as _i18;
+=======
+    as _i15;
+import 'package:grape_customer_app/presentation/core/widgets/layout/success_view.dart'
+    as _i19;
+>>>>>>> ca68361 (maitry : product details in progress)
 import 'package:grape_customer_app/presentation/main/main_tab_view.dart' as _i7;
 >>>>>>> 4a267b3 (maitry : search view completed)
 import 'package:grape_customer_app/presentation/main/tabs/cart/cart_view.dart'
@@ -52,13 +63,23 @@ import 'package:grape_customer_app/presentation/main/tabs/home/search/search_vie
     as _i21;
 =======
     as _i5;
+import 'package:grape_customer_app/presentation/main/tabs/home/product_details/product_details_view.dart'
+    as _i13;
 import 'package:grape_customer_app/presentation/main/tabs/home/search/search_view.dart'
+<<<<<<< HEAD
     as _i15;
 >>>>>>> 4a267b3 (maitry : search view completed)
+=======
+    as _i16;
+>>>>>>> ca68361 (maitry : product details in progress)
 import 'package:grape_customer_app/presentation/main/tabs/notification/notification_view.dart'
     as _i11;
 import 'package:grape_customer_app/presentation/main/tabs/profile/profile_view.dart'
+<<<<<<< HEAD
     as _i19;
+=======
+    as _i14;
+>>>>>>> ca68361 (maitry : product details in progress)
 import 'package:grape_customer_app/presentation/onboarding/onboarding_page.dart'
     as _i12;
 import 'package:grape_customer_app/presentation/profile/edit_profile/edit_profile.dart'
@@ -77,6 +98,7 @@ import 'package:grape_customer_app/presentation/profile/shipping_addresses/add_n
     as _i1;
 import 'package:grape_customer_app/presentation/profile/shipping_addresses/shipping_addresses.dart'
 <<<<<<< HEAD
+<<<<<<< HEAD
     as _i22;
 import 'package:grape_customer_app/presentation/splash/splash_page.dart'
     as _i23;
@@ -92,17 +114,25 @@ abstract class $AppRouter extends _i25.RootStackRouter {
 =======
     as _i16;
 import 'package:grape_customer_app/presentation/splash/splash_page.dart'
+=======
+>>>>>>> ca68361 (maitry : product details in progress)
     as _i17;
+import 'package:grape_customer_app/presentation/splash/splash_page.dart'
+    as _i18;
 
-abstract class $AppRouter extends _i19.RootStackRouter {
+abstract class $AppRouter extends _i20.RootStackRouter {
   $AppRouter({super.navigatorKey});
 
   @override
-  final Map<String, _i19.PageFactory> pagesMap = {
+  final Map<String, _i20.PageFactory> pagesMap = {
     AddNewAddress.name: (routeData) {
       final args = routeData.argsAs<AddNewAddressArgs>();
+<<<<<<< HEAD
       return _i19.AutoRoutePage<dynamic>(
 >>>>>>> 4a267b3 (maitry : search view completed)
+=======
+      return _i20.AutoRoutePage<dynamic>(
+>>>>>>> ca68361 (maitry : product details in progress)
         routeData: routeData,
         child: _i1.AddNewAddress(
           key: args.key,
@@ -115,8 +145,12 @@ abstract class $AppRouter extends _i19.RootStackRouter {
       return _i25.AutoRoutePage<dynamic>(
 =======
     CartView.name: (routeData) {
+<<<<<<< HEAD
       return _i19.AutoRoutePage<dynamic>(
 >>>>>>> 4a267b3 (maitry : search view completed)
+=======
+      return _i20.AutoRoutePage<dynamic>(
+>>>>>>> ca68361 (maitry : product details in progress)
         routeData: routeData,
         child: const _i2.AddNewCard(),
       );
@@ -135,50 +169,70 @@ abstract class $AppRouter extends _i19.RootStackRouter {
     },
     EditProfileScreen.name: (routeData) {
 <<<<<<< HEAD
+<<<<<<< HEAD
       return _i25.AutoRoutePage<dynamic>(
 =======
       return _i19.AutoRoutePage<dynamic>(
 >>>>>>> 4a267b3 (maitry : search view completed)
+=======
+      return _i20.AutoRoutePage<dynamic>(
+>>>>>>> ca68361 (maitry : product details in progress)
         routeData: routeData,
         child: const _i5.EditProfileScreen(),
       );
     },
     FavouriteView.name: (routeData) {
 <<<<<<< HEAD
+<<<<<<< HEAD
       return _i25.AutoRoutePage<dynamic>(
 =======
       return _i19.AutoRoutePage<dynamic>(
 >>>>>>> 4a267b3 (maitry : search view completed)
+=======
+      return _i20.AutoRoutePage<dynamic>(
+>>>>>>> ca68361 (maitry : product details in progress)
         routeData: routeData,
         child: const _i6.FavouriteView(),
       );
     },
     HomeView.name: (routeData) {
 <<<<<<< HEAD
+<<<<<<< HEAD
       return _i25.AutoRoutePage<dynamic>(
 =======
       return _i19.AutoRoutePage<dynamic>(
 >>>>>>> 4a267b3 (maitry : search view completed)
+=======
+      return _i20.AutoRoutePage<dynamic>(
+>>>>>>> ca68361 (maitry : product details in progress)
         routeData: routeData,
         child: const _i7.HomeView(),
       );
     },
     LoginPage.name: (routeData) {
 <<<<<<< HEAD
+<<<<<<< HEAD
       return _i25.AutoRoutePage<dynamic>(
 =======
       return _i19.AutoRoutePage<dynamic>(
 >>>>>>> 4a267b3 (maitry : search view completed)
+=======
+      return _i20.AutoRoutePage<dynamic>(
+>>>>>>> ca68361 (maitry : product details in progress)
         routeData: routeData,
         child: const _i8.LoginScreen(),
       );
     },
     MainTabView.name: (routeData) {
 <<<<<<< HEAD
+<<<<<<< HEAD
       return _i25.AutoRoutePage<dynamic>(
 =======
       return _i19.AutoRoutePage<dynamic>(
 >>>>>>> 4a267b3 (maitry : search view completed)
+=======
+      return _i20.AutoRoutePage<dynamic>(
+>>>>>>> ca68361 (maitry : product details in progress)
         routeData: routeData,
         child: const _i9.MainTabView(),
       );
@@ -191,10 +245,14 @@ abstract class $AppRouter extends _i19.RootStackRouter {
     },
     NotificationView.name: (routeData) {
 <<<<<<< HEAD
+<<<<<<< HEAD
       return _i25.AutoRoutePage<dynamic>(
 =======
       return _i19.AutoRoutePage<dynamic>(
 >>>>>>> 4a267b3 (maitry : search view completed)
+=======
+      return _i20.AutoRoutePage<dynamic>(
+>>>>>>> ca68361 (maitry : product details in progress)
         routeData: routeData,
         child: const _i11.NotificationView(),
       );
@@ -203,10 +261,14 @@ abstract class $AppRouter extends _i19.RootStackRouter {
       final args = routeData.argsAs<OnboardingArgs>(
           orElse: () => const OnboardingArgs());
 <<<<<<< HEAD
+<<<<<<< HEAD
       return _i25.AutoRoutePage<dynamic>(
 =======
       return _i19.AutoRoutePage<dynamic>(
 >>>>>>> 4a267b3 (maitry : search view completed)
+=======
+      return _i20.AutoRoutePage<dynamic>(
+>>>>>>> ca68361 (maitry : product details in progress)
         routeData: routeData,
         child: _i12.OnBoardingPage(key: args.key),
       );
@@ -220,10 +282,14 @@ abstract class $AppRouter extends _i19.RootStackRouter {
     OtpEditProfileVerificationView.name: (routeData) {
       final args = routeData.argsAs<OtpEditProfileVerificationViewArgs>();
 <<<<<<< HEAD
+<<<<<<< HEAD
       return _i25.AutoRoutePage<dynamic>(
 =======
       return _i19.AutoRoutePage<dynamic>(
 >>>>>>> 4a267b3 (maitry : search view completed)
+=======
+      return _i20.AutoRoutePage<dynamic>(
+>>>>>>> ca68361 (maitry : product details in progress)
         routeData: routeData,
         child: _i14.OtpEditProfileVerificationView(
           key: args.key,
@@ -235,10 +301,14 @@ abstract class $AppRouter extends _i19.RootStackRouter {
     OtpLoginVerificationView.name: (routeData) {
       final args = routeData.argsAs<OtpLoginVerificationViewArgs>();
 <<<<<<< HEAD
+<<<<<<< HEAD
       return _i25.AutoRoutePage<dynamic>(
 =======
       return _i19.AutoRoutePage<dynamic>(
 >>>>>>> 4a267b3 (maitry : search view completed)
+=======
+      return _i20.AutoRoutePage<dynamic>(
+>>>>>>> ca68361 (maitry : product details in progress)
         routeData: routeData,
         child: _i15.OtpLoginVerificationView(
           key: args.key,
@@ -250,10 +320,14 @@ abstract class $AppRouter extends _i19.RootStackRouter {
     OtpRegisterVerificationView.name: (routeData) {
       final args = routeData.argsAs<OtpRegisterVerificationViewArgs>();
 <<<<<<< HEAD
+<<<<<<< HEAD
       return _i25.AutoRoutePage<dynamic>(
 =======
       return _i19.AutoRoutePage<dynamic>(
 >>>>>>> 4a267b3 (maitry : search view completed)
+=======
+      return _i20.AutoRoutePage<dynamic>(
+>>>>>>> ca68361 (maitry : product details in progress)
         routeData: routeData,
         child: _i16.OtpRegisterVerificationView(
           key: args.key,
@@ -262,9 +336,10 @@ abstract class $AppRouter extends _i19.RootStackRouter {
         ),
       );
     },
-    ProfileView.name: (routeData) {
-      return _i19.AutoRoutePage<dynamic>(
+    ProductDetailsView.name: (routeData) {
+      return _i20.AutoRoutePage<dynamic>(
         routeData: routeData,
+<<<<<<< HEAD
         child: const _i17.PaymentMethod(),
       );
     },
@@ -278,11 +353,21 @@ abstract class $AppRouter extends _i19.RootStackRouter {
       return _i25.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const _i19.ProfileView(),
+=======
+        child: const _i13.ProductDetailsView(),
+      );
+    },
+    ProfileView.name: (routeData) {
+      return _i20.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const _i14.ProfileView(),
+>>>>>>> ca68361 (maitry : product details in progress)
       );
     },
     RegisterScreen.name: (routeData) {
-      return _i19.AutoRoutePage<dynamic>(
+      return _i20.AutoRoutePage<dynamic>(
         routeData: routeData,
+<<<<<<< HEAD
         child: const _i20.RegisterScreen(),
       );
     },
@@ -290,31 +375,34 @@ abstract class $AppRouter extends _i19.RootStackRouter {
       return _i25.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const _i21.SearchView(),
+=======
+        child: const _i15.RegisterScreen(),
+>>>>>>> ca68361 (maitry : product details in progress)
       );
     },
     SearchView.name: (routeData) {
-      return _i19.AutoRoutePage<dynamic>(
+      return _i20.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i15.SearchView(),
+        child: const _i16.SearchView(),
       );
     },
     ShippingAddresses.name: (routeData) {
-      return _i19.AutoRoutePage<dynamic>(
+      return _i20.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i16.ShippingAddress(),
+        child: const _i17.ShippingAddress(),
       );
     },
     SplashPage.name: (routeData) {
-      return _i19.AutoRoutePage<dynamic>(
+      return _i20.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i17.SplashPage(),
+        child: const _i18.SplashPage(),
       );
     },
     SuccessScreen.name: (routeData) {
       final args = routeData.argsAs<SuccessScreenArgs>();
-      return _i19.AutoRoutePage<dynamic>(
+      return _i20.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i18.SuccessScreen(
+        child: _i19.SuccessScreen(
           key: args.key,
           title: args.title,
           subTitle: args.subTitle,
@@ -327,11 +415,11 @@ abstract class $AppRouter extends _i19.RootStackRouter {
 
 /// generated route for
 /// [_i1.AddNewAddress]
-class AddNewAddress extends _i19.PageRouteInfo<AddNewAddressArgs> {
+class AddNewAddress extends _i20.PageRouteInfo<AddNewAddressArgs> {
   AddNewAddress({
-    _i20.Key? key,
-    required _i21.ShippingAddressResponse shippingAddressResponce,
-    List<_i19.PageRouteInfo>? children,
+    _i21.Key? key,
+    required _i22.ShippingAddressResponse shippingAddressResponce,
+    List<_i20.PageRouteInfo>? children,
   }) : super(
           AddNewAddress.name,
           args: AddNewAddressArgs(
@@ -343,8 +431,8 @@ class AddNewAddress extends _i19.PageRouteInfo<AddNewAddressArgs> {
 
   static const String name = 'AddNewAddress';
 
-  static const _i19.PageInfo<AddNewAddressArgs> page =
-      _i19.PageInfo<AddNewAddressArgs>(name);
+  static const _i20.PageInfo<AddNewAddressArgs> page =
+      _i20.PageInfo<AddNewAddressArgs>(name);
 }
 
 class AddNewAddressArgs {
@@ -353,9 +441,9 @@ class AddNewAddressArgs {
     required this.shippingAddressResponce,
   });
 
-  final _i20.Key? key;
+  final _i21.Key? key;
 
-  final _i21.ShippingAddressResponse shippingAddressResponce;
+  final _i22.ShippingAddressResponse shippingAddressResponce;
 
   @override
   String toString() {
@@ -365,8 +453,8 @@ class AddNewAddressArgs {
 
 /// generated route for
 /// [_i2.CartView]
-class CartView extends _i19.PageRouteInfo<void> {
-  const CartView({List<_i19.PageRouteInfo>? children})
+class CartView extends _i20.PageRouteInfo<void> {
+  const CartView({List<_i20.PageRouteInfo>? children})
       : super(
           CartView.name,
           initialChildren: children,
@@ -374,13 +462,13 @@ class CartView extends _i19.PageRouteInfo<void> {
 
   static const String name = 'CartView';
 
-  static const _i19.PageInfo<void> page = _i19.PageInfo<void>(name);
+  static const _i20.PageInfo<void> page = _i20.PageInfo<void>(name);
 }
 
 /// generated route for
 /// [_i3.EditProfileScreen]
-class EditProfileScreen extends _i19.PageRouteInfo<void> {
-  const EditProfileScreen({List<_i19.PageRouteInfo>? children})
+class EditProfileScreen extends _i20.PageRouteInfo<void> {
+  const EditProfileScreen({List<_i20.PageRouteInfo>? children})
       : super(
           EditProfileScreen.name,
           initialChildren: children,
@@ -388,13 +476,13 @@ class EditProfileScreen extends _i19.PageRouteInfo<void> {
 
   static const String name = 'EditProfileScreen';
 
-  static const _i19.PageInfo<void> page = _i19.PageInfo<void>(name);
+  static const _i20.PageInfo<void> page = _i20.PageInfo<void>(name);
 }
 
 /// generated route for
 /// [_i4.FavouriteView]
-class FavouriteView extends _i19.PageRouteInfo<void> {
-  const FavouriteView({List<_i19.PageRouteInfo>? children})
+class FavouriteView extends _i20.PageRouteInfo<void> {
+  const FavouriteView({List<_i20.PageRouteInfo>? children})
       : super(
           FavouriteView.name,
           initialChildren: children,
@@ -402,13 +490,13 @@ class FavouriteView extends _i19.PageRouteInfo<void> {
 
   static const String name = 'FavouriteView';
 
-  static const _i19.PageInfo<void> page = _i19.PageInfo<void>(name);
+  static const _i20.PageInfo<void> page = _i20.PageInfo<void>(name);
 }
 
 /// generated route for
 /// [_i5.HomeView]
-class HomeView extends _i19.PageRouteInfo<void> {
-  const HomeView({List<_i19.PageRouteInfo>? children})
+class HomeView extends _i20.PageRouteInfo<void> {
+  const HomeView({List<_i20.PageRouteInfo>? children})
       : super(
           HomeView.name,
           initialChildren: children,
@@ -416,13 +504,13 @@ class HomeView extends _i19.PageRouteInfo<void> {
 
   static const String name = 'HomeView';
 
-  static const _i19.PageInfo<void> page = _i19.PageInfo<void>(name);
+  static const _i20.PageInfo<void> page = _i20.PageInfo<void>(name);
 }
 
 /// generated route for
 /// [_i6.LoginScreen]
-class LoginPage extends _i19.PageRouteInfo<void> {
-  const LoginPage({List<_i19.PageRouteInfo>? children})
+class LoginPage extends _i20.PageRouteInfo<void> {
+  const LoginPage({List<_i20.PageRouteInfo>? children})
       : super(
           LoginPage.name,
           initialChildren: children,
@@ -430,13 +518,13 @@ class LoginPage extends _i19.PageRouteInfo<void> {
 
   static const String name = 'LoginPage';
 
-  static const _i19.PageInfo<void> page = _i19.PageInfo<void>(name);
+  static const _i20.PageInfo<void> page = _i20.PageInfo<void>(name);
 }
 
 /// generated route for
 /// [_i7.MainTabView]
-class MainTabView extends _i19.PageRouteInfo<void> {
-  const MainTabView({List<_i19.PageRouteInfo>? children})
+class MainTabView extends _i20.PageRouteInfo<void> {
+  const MainTabView({List<_i20.PageRouteInfo>? children})
       : super(
           MainTabView.name,
           initialChildren: children,
@@ -444,13 +532,13 @@ class MainTabView extends _i19.PageRouteInfo<void> {
 
   static const String name = 'MainTabView';
 
-  static const _i19.PageInfo<void> page = _i19.PageInfo<void>(name);
+  static const _i20.PageInfo<void> page = _i20.PageInfo<void>(name);
 }
 
 /// generated route for
 /// [_i8.NotificationView]
-class NotificationView extends _i19.PageRouteInfo<void> {
-  const NotificationView({List<_i19.PageRouteInfo>? children})
+class NotificationView extends _i20.PageRouteInfo<void> {
+  const NotificationView({List<_i20.PageRouteInfo>? children})
       : super(
           NotificationView.name,
           initialChildren: children,
@@ -458,15 +546,15 @@ class NotificationView extends _i19.PageRouteInfo<void> {
 
   static const String name = 'NotificationView';
 
-  static const _i19.PageInfo<void> page = _i19.PageInfo<void>(name);
+  static const _i20.PageInfo<void> page = _i20.PageInfo<void>(name);
 }
 
 /// generated route for
 /// [_i9.OnBoardingPage]
-class Onboarding extends _i19.PageRouteInfo<OnboardingArgs> {
+class Onboarding extends _i20.PageRouteInfo<OnboardingArgs> {
   Onboarding({
-    _i20.Key? key,
-    List<_i19.PageRouteInfo>? children,
+    _i21.Key? key,
+    List<_i20.PageRouteInfo>? children,
   }) : super(
           Onboarding.name,
           args: OnboardingArgs(key: key),
@@ -475,14 +563,14 @@ class Onboarding extends _i19.PageRouteInfo<OnboardingArgs> {
 
   static const String name = 'Onboarding';
 
-  static const _i19.PageInfo<OnboardingArgs> page =
-      _i19.PageInfo<OnboardingArgs>(name);
+  static const _i20.PageInfo<OnboardingArgs> page =
+      _i20.PageInfo<OnboardingArgs>(name);
 }
 
 class OnboardingArgs {
   const OnboardingArgs({this.key});
 
-  final _i20.Key? key;
+  final _i21.Key? key;
 
   @override
   String toString() {
@@ -507,12 +595,12 @@ class OrderDetails extends _i25.PageRouteInfo<void> {
 /// generated route for
 /// [_i14.OtpEditProfileVerificationView]
 class OtpEditProfileVerificationView
-    extends _i19.PageRouteInfo<OtpEditProfileVerificationViewArgs> {
+    extends _i20.PageRouteInfo<OtpEditProfileVerificationViewArgs> {
   OtpEditProfileVerificationView({
-    _i20.Key? key,
+    _i21.Key? key,
     required String countryCode,
     required String phoneNumber,
-    List<_i19.PageRouteInfo>? children,
+    List<_i20.PageRouteInfo>? children,
   }) : super(
           OtpEditProfileVerificationView.name,
           args: OtpEditProfileVerificationViewArgs(
@@ -525,8 +613,8 @@ class OtpEditProfileVerificationView
 
   static const String name = 'OtpEditProfileVerificationView';
 
-  static const _i19.PageInfo<OtpEditProfileVerificationViewArgs> page =
-      _i19.PageInfo<OtpEditProfileVerificationViewArgs>(name);
+  static const _i20.PageInfo<OtpEditProfileVerificationViewArgs> page =
+      _i20.PageInfo<OtpEditProfileVerificationViewArgs>(name);
 }
 
 class OtpEditProfileVerificationViewArgs {
@@ -536,7 +624,7 @@ class OtpEditProfileVerificationViewArgs {
     required this.phoneNumber,
   });
 
-  final _i20.Key? key;
+  final _i21.Key? key;
 
   final String countryCode;
 
@@ -551,12 +639,12 @@ class OtpEditProfileVerificationViewArgs {
 /// generated route for
 /// [_i15.OtpLoginVerificationView]
 class OtpLoginVerificationView
-    extends _i19.PageRouteInfo<OtpLoginVerificationViewArgs> {
+    extends _i20.PageRouteInfo<OtpLoginVerificationViewArgs> {
   OtpLoginVerificationView({
-    _i20.Key? key,
+    _i21.Key? key,
     required String countryCode,
     required String phoneNumber,
-    List<_i19.PageRouteInfo>? children,
+    List<_i20.PageRouteInfo>? children,
   }) : super(
           OtpLoginVerificationView.name,
           args: OtpLoginVerificationViewArgs(
@@ -570,12 +658,17 @@ class OtpLoginVerificationView
   static const String name = 'OtpLoginVerificationView';
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   static const _i25.PageInfo<OtpLoginVerificationViewArgs> page =
       _i25.PageInfo<OtpLoginVerificationViewArgs>(name);
 =======
   static const _i19.PageInfo<OtpLoginVerificationViewArgs> page =
       _i19.PageInfo<OtpLoginVerificationViewArgs>(name);
 >>>>>>> 4a267b3 (maitry : search view completed)
+=======
+  static const _i20.PageInfo<OtpLoginVerificationViewArgs> page =
+      _i20.PageInfo<OtpLoginVerificationViewArgs>(name);
+>>>>>>> ca68361 (maitry : product details in progress)
 }
 
 class OtpLoginVerificationViewArgs {
@@ -585,7 +678,7 @@ class OtpLoginVerificationViewArgs {
     required this.phoneNumber,
   });
 
-  final _i20.Key? key;
+  final _i21.Key? key;
 
   final String countryCode;
 
@@ -600,6 +693,7 @@ class OtpLoginVerificationViewArgs {
 /// generated route for
 /// [_i16.OtpRegisterVerificationView]
 class OtpRegisterVerificationView
+<<<<<<< HEAD
     extends _i25.PageRouteInfo<OtpRegisterVerificationViewArgs> {
   OtpRegisterVerificationView({
     _i26.Key? key,
@@ -607,11 +701,14 @@ class OtpRegisterVerificationView
     required String phoneNumber,
     List<_i25.PageRouteInfo>? children,
     extends _i19.PageRouteInfo<OtpRegisterVerificationViewArgs> {
+=======
+    extends _i20.PageRouteInfo<OtpRegisterVerificationViewArgs> {
+>>>>>>> ca68361 (maitry : product details in progress)
   OtpRegisterVerificationView({
-    _i20.Key? key,
+    _i21.Key? key,
     required String countryCode,
     required String phoneNumber,
-    List<_i19.PageRouteInfo>? children,
+    List<_i20.PageRouteInfo>? children,
   }) : super(
           OtpRegisterVerificationView.name,
           args: OtpRegisterVerificationViewArgs(
@@ -624,10 +721,15 @@ class OtpRegisterVerificationView
 
   static const String name = 'OtpRegisterVerificationView';
 
+<<<<<<< HEAD
   static const _i25.PageInfo<OtpRegisterVerificationViewArgs> page =
       _i25.PageInfo<OtpRegisterVerificationViewArgs>(name);
   static const _i19.PageInfo<OtpRegisterVerificationViewArgs> page =
       _i19.PageInfo<OtpRegisterVerificationViewArgs>(name);
+=======
+  static const _i20.PageInfo<OtpRegisterVerificationViewArgs> page =
+      _i20.PageInfo<OtpRegisterVerificationViewArgs>(name);
+>>>>>>> ca68361 (maitry : product details in progress)
 }
 
 class OtpRegisterVerificationViewArgs {
@@ -637,8 +739,12 @@ class OtpRegisterVerificationViewArgs {
     required this.phoneNumber,
   });
 
+<<<<<<< HEAD
   final _i26.Key? key;
   final _i20.Key? key;
+=======
+  final _i21.Key? key;
+>>>>>>> ca68361 (maitry : product details in progress)
 
   final String countryCode;
 
@@ -651,6 +757,7 @@ class OtpRegisterVerificationViewArgs {
 }
 
 /// generated route for
+<<<<<<< HEAD
 /// [_i17.PaymentMethod]
 class PaymentMethod extends _i25.PageRouteInfo<void> {
   const PaymentMethod({List<_i25.PageRouteInfo>? children})
@@ -668,6 +775,11 @@ class PaymentMethod extends _i25.PageRouteInfo<void> {
 /// [_i18.ProductDetailsView]
 class ProductDetailsView extends _i25.PageRouteInfo<void> {
   const ProductDetailsView({List<_i25.PageRouteInfo>? children})
+=======
+/// [_i13.ProductDetailsView]
+class ProductDetailsView extends _i20.PageRouteInfo<void> {
+  const ProductDetailsView({List<_i20.PageRouteInfo>? children})
+>>>>>>> ca68361 (maitry : product details in progress)
       : super(
           ProductDetailsView.name,
           initialChildren: children,
@@ -675,6 +787,7 @@ class ProductDetailsView extends _i25.PageRouteInfo<void> {
 
   static const String name = 'ProductDetailsView';
 
+<<<<<<< HEAD
   static const _i25.PageInfo<void> page = _i25.PageInfo<void>(name);
 }
 
@@ -685,6 +798,15 @@ class ProfileView extends _i25.PageRouteInfo<void> {
 /// [_i13.ProfileView]
 class ProfileView extends _i19.PageRouteInfo<void> {
   const ProfileView({List<_i19.PageRouteInfo>? children})
+=======
+  static const _i20.PageInfo<void> page = _i20.PageInfo<void>(name);
+}
+
+/// generated route for
+/// [_i14.ProfileView]
+class ProfileView extends _i20.PageRouteInfo<void> {
+  const ProfileView({List<_i20.PageRouteInfo>? children})
+>>>>>>> ca68361 (maitry : product details in progress)
       : super(
           ProfileView.name,
           initialChildren: children,
@@ -692,6 +814,7 @@ class ProfileView extends _i19.PageRouteInfo<void> {
 
   static const String name = 'ProfileView';
 
+<<<<<<< HEAD
   static const _i25.PageInfo<void> page = _i25.PageInfo<void>(name);
 }
 
@@ -700,12 +823,15 @@ class ProfileView extends _i19.PageRouteInfo<void> {
 class RegisterScreen extends _i25.PageRouteInfo<void> {
   const RegisterScreen({List<_i25.PageRouteInfo>? children})
   static const _i19.PageInfo<void> page = _i19.PageInfo<void>(name);
+=======
+  static const _i20.PageInfo<void> page = _i20.PageInfo<void>(name);
+>>>>>>> ca68361 (maitry : product details in progress)
 }
 
 /// generated route for
-/// [_i14.RegisterScreen]
-class RegisterScreen extends _i19.PageRouteInfo<void> {
-  const RegisterScreen({List<_i19.PageRouteInfo>? children})
+/// [_i15.RegisterScreen]
+class RegisterScreen extends _i20.PageRouteInfo<void> {
+  const RegisterScreen({List<_i20.PageRouteInfo>? children})
       : super(
           RegisterScreen.name,
           initialChildren: children,
@@ -713,6 +839,7 @@ class RegisterScreen extends _i19.PageRouteInfo<void> {
 
   static const String name = 'RegisterScreen';
 
+<<<<<<< HEAD
   static const _i25.PageInfo<void> page = _i25.PageInfo<void>(name);
 }
 
@@ -721,12 +848,15 @@ class RegisterScreen extends _i19.PageRouteInfo<void> {
 class SearchView extends _i25.PageRouteInfo<void> {
   const SearchView({List<_i25.PageRouteInfo>? children})
   static const _i19.PageInfo<void> page = _i19.PageInfo<void>(name);
+=======
+  static const _i20.PageInfo<void> page = _i20.PageInfo<void>(name);
+>>>>>>> ca68361 (maitry : product details in progress)
 }
 
 /// generated route for
-/// [_i15.SearchView]
-class SearchView extends _i19.PageRouteInfo<void> {
-  const SearchView({List<_i19.PageRouteInfo>? children})
+/// [_i16.SearchView]
+class SearchView extends _i20.PageRouteInfo<void> {
+  const SearchView({List<_i20.PageRouteInfo>? children})
       : super(
           SearchView.name,
           initialChildren: children,
@@ -734,6 +864,7 @@ class SearchView extends _i19.PageRouteInfo<void> {
 
   static const String name = 'SearchView';
 
+<<<<<<< HEAD
   static const _i25.PageInfo<void> page = _i25.PageInfo<void>(name);
 }
 
@@ -742,12 +873,15 @@ class SearchView extends _i19.PageRouteInfo<void> {
 class ShippingAddresses extends _i25.PageRouteInfo<void> {
   const ShippingAddresses({List<_i25.PageRouteInfo>? children})
   static const _i19.PageInfo<void> page = _i19.PageInfo<void>(name);
+=======
+  static const _i20.PageInfo<void> page = _i20.PageInfo<void>(name);
+>>>>>>> ca68361 (maitry : product details in progress)
 }
 
 /// generated route for
-/// [_i16.ShippingAddress]
-class ShippingAddresses extends _i19.PageRouteInfo<void> {
-  const ShippingAddresses({List<_i19.PageRouteInfo>? children})
+/// [_i17.ShippingAddress]
+class ShippingAddresses extends _i20.PageRouteInfo<void> {
+  const ShippingAddresses({List<_i20.PageRouteInfo>? children})
       : super(
           ShippingAddresses.name,
           initialChildren: children,
@@ -755,6 +889,7 @@ class ShippingAddresses extends _i19.PageRouteInfo<void> {
 
   static const String name = 'ShippingAddresses';
 
+<<<<<<< HEAD
   static const _i25.PageInfo<void> page = _i25.PageInfo<void>(name);
 }
 
@@ -763,12 +898,15 @@ class ShippingAddresses extends _i19.PageRouteInfo<void> {
 class SplashPage extends _i25.PageRouteInfo<void> {
   const SplashPage({List<_i25.PageRouteInfo>? children})
   static const _i19.PageInfo<void> page = _i19.PageInfo<void>(name);
+=======
+  static const _i20.PageInfo<void> page = _i20.PageInfo<void>(name);
+>>>>>>> ca68361 (maitry : product details in progress)
 }
 
 /// generated route for
-/// [_i17.SplashPage]
-class SplashPage extends _i19.PageRouteInfo<void> {
-  const SplashPage({List<_i19.PageRouteInfo>? children})
+/// [_i18.SplashPage]
+class SplashPage extends _i20.PageRouteInfo<void> {
+  const SplashPage({List<_i20.PageRouteInfo>? children})
       : super(
           SplashPage.name,
           initialChildren: children,
@@ -776,6 +914,7 @@ class SplashPage extends _i19.PageRouteInfo<void> {
 
   static const String name = 'SplashPage';
 
+<<<<<<< HEAD
   static const _i25.PageInfo<void> page = _i25.PageInfo<void>(name);
 }
 
@@ -789,17 +928,20 @@ class SuccessScreen extends _i25.PageRouteInfo<SuccessScreenArgs> {
     String? image,
     List<_i25.PageRouteInfo>? children,
   static const _i19.PageInfo<void> page = _i19.PageInfo<void>(name);
+=======
+  static const _i20.PageInfo<void> page = _i20.PageInfo<void>(name);
+>>>>>>> ca68361 (maitry : product details in progress)
 }
 
 /// generated route for
-/// [_i18.SuccessScreen]
-class SuccessScreen extends _i19.PageRouteInfo<SuccessScreenArgs> {
+/// [_i19.SuccessScreen]
+class SuccessScreen extends _i20.PageRouteInfo<SuccessScreenArgs> {
   SuccessScreen({
-    _i20.Key? key,
+    _i21.Key? key,
     required String title,
     required String subTitle,
     String? image,
-    List<_i19.PageRouteInfo>? children,
+    List<_i20.PageRouteInfo>? children,
   }) : super(
           SuccessScreen.name,
           args: SuccessScreenArgs(
@@ -813,10 +955,15 @@ class SuccessScreen extends _i19.PageRouteInfo<SuccessScreenArgs> {
 
   static const String name = 'SuccessScreen';
 
+<<<<<<< HEAD
   static const _i25.PageInfo<SuccessScreenArgs> page =
       _i25.PageInfo<SuccessScreenArgs>(name);
   static const _i19.PageInfo<SuccessScreenArgs> page =
       _i19.PageInfo<SuccessScreenArgs>(name);
+=======
+  static const _i20.PageInfo<SuccessScreenArgs> page =
+      _i20.PageInfo<SuccessScreenArgs>(name);
+>>>>>>> ca68361 (maitry : product details in progress)
 }
 
 class SuccessScreenArgs {
@@ -827,8 +974,12 @@ class SuccessScreenArgs {
     this.image,
   });
 
+<<<<<<< HEAD
   final _i26.Key? key;
   final _i20.Key? key;
+=======
+  final _i21.Key? key;
+>>>>>>> ca68361 (maitry : product details in progress)
 
   final String title;
 
