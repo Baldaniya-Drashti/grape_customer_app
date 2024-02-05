@@ -38,6 +38,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       shadowColor: Color(0xFFE1E1E1),
       surfaceTintColor: Colors.transparent,
       scrolledUnderElevation: elevation,
+
       leadingWidth: leadingWidth,
       shape: isRoundedCorner
           ? RoundedRectangleBorder(
