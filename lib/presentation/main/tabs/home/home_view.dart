@@ -22,11 +22,10 @@ class HomeView extends StatelessWidget {
           onTap: () {
             AppFocus.unfocus(context);
           },
-          child: Column(
+          child: ListView(
+            shrinkWrap: true,
+            physics: BouncingScrollPhysics(),
             children: [
-              SizedBox(
-                height: getSize(10),
-              ),
               HomeDiscountCarousalWidget(),
               SizedBox(
                 height: getSize(6),
@@ -86,9 +85,7 @@ class HomeView extends StatelessWidget {
               SizedBox(
                 height: getSize(18),
               ),
-              Flexible(
-                child: RecommandedProductWidget(),
-              ),
+              RecommandedProductWidget(),
             ],
           ),
         );

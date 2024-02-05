@@ -6,7 +6,5 @@ part 'edit_shipping_addresses_event.dart';
 part 'edit_shipping_addresses_bloc.freezed.dart';
 
 class EditShippingAddressesBloc extends Bloc<EditShippingAddressesEvent,EditShippingAddressesState>{
-  EditShippingAddressesBloc() : super(const EditShippingAddressesState.initial()){
-    
-  }
+  EditShippingAddressesBloc() : super(const EditShippingAddressesState.initial());
 }

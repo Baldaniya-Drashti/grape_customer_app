@@ -116,8 +116,18 @@ class ShippingAddressesBloc
         prefillEditAddressData: (PrefillEditAddressData value) async {
           emit(
             state.copyWith(
+              fullName: Username(value.shippingAddressResponce.fullName ?? ""),
+              mobileNumber: MobileNumber(
+                  value.shippingAddressResponce.mobileNumber ?? ""),
+              address:
+                  InputEmptyOrNot(value.shippingAddressResponce.address ?? ""),
+              landMark:
+                  InputEmptyOrNot(value.shippingAddressResponce.landMark ?? ""),
+              state: InputEmptyOrNot(value.shippingAddressResponce.state ?? ""),
+              city: InputEmptyOrNot(value.shippingAddressResponce.city ?? ""),
+              pinCode:
+                  InputEmptyOrNot(value.shippingAddressResponce.pinCode ?? ""),
               isEdit: value.isEdit,
-              selectedAddressItems: value.shippingAddressResponce,
               failureOrSuccessOption: none(),
             ),
           );

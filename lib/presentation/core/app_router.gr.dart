@@ -10,7 +10,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i18;
 import 'package:flutter/material.dart' as _i19;
-import 'package:grape_customer_app/application/main/profile/shipping_addresses/shipping_addresses_responce.dart'
+import 'package:grape_customer_app/application/main/profile/shipping_addresses/shipping_addresses_response.dart'
     as _i20;
 import 'package:grape_customer_app/presentation/auth/login/login_screen.dart'
     as _i6;
@@ -188,7 +188,7 @@ abstract class $AppRouter extends _i18.RootStackRouter {
 class AddNewAddress extends _i18.PageRouteInfo<AddNewAddressArgs> {
   AddNewAddress({
     _i19.Key? key,
-    required _i20.ShippingAddressResponce shippingAddressResponce,
+    required _i20.ShippingAddressResponse shippingAddressResponce,
     List<_i18.PageRouteInfo>? children,
   }) : super(
           AddNewAddress.name,
@@ -213,7 +213,7 @@ class AddNewAddressArgs {
 
   final _i19.Key? key;
 
-  final _i20.ShippingAddressResponce shippingAddressResponce;
+  final _i20.ShippingAddressResponse shippingAddressResponce;
 
   @override
   String toString() {

@@ -62,6 +62,7 @@ class CustomTextField extends StatelessWidget {
     );
 
     return Column(
+      key: Key(initialValue ?? ""),
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (labelText != null) ...[

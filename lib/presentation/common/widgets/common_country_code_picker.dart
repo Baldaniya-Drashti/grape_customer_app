@@ -8,8 +8,8 @@ import 'package:grape_customer_app/presentation/common/widgets/base_text.dart';
 
 class CommonCountryCodePicker extends StatelessWidget {
   final Function(Country) onChanged;
-  String? initialSelection;
-  CommonCountryCodePicker({
+  final String? initialSelection;
+  const CommonCountryCodePicker({
     super.key,
     required this.onChanged,
     this.initialSelection,

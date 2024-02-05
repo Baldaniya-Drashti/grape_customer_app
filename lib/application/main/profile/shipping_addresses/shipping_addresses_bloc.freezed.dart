@@ -27,9 +27,7 @@ mixin _$ShippingAddressesState {
   bool get showErrorMessages => throw _privateConstructorUsedError;
   Option<Either<AuthFailure, String>> get failureOrSuccessOption =>
       throw _privateConstructorUsedError;
-  List<ShippingAddressResponce> get addressList =>
-      throw _privateConstructorUsedError;
-  ShippingAddressResponce get selectedAddressItems =>
+  List<ShippingAddressResponse> get addressList =>
       throw _privateConstructorUsedError;
   int get selectedIndex => throw _privateConstructorUsedError;
   bool get isEdit => throw _privateConstructorUsedError;
@@ -56,8 +54,7 @@ abstract class $ShippingAddressesStateCopyWith<$Res> {
       InputEmptyOrNot pinCode,
       bool showErrorMessages,
       Option<Either<AuthFailure, String>> failureOrSuccessOption,
-      List<ShippingAddressResponce> addressList,
-      ShippingAddressResponce selectedAddressItems,
+      List<ShippingAddressResponse> addressList,
       int selectedIndex,
       bool isEdit});
 }
@@ -87,7 +84,6 @@ class _$ShippingAddressesStateCopyWithImpl<$Res,
     Object? showErrorMessages = null,
     Object? failureOrSuccessOption = null,
     Object? addressList = null,
-    Object? selectedAddressItems = null,
     Object? selectedIndex = null,
     Object? isEdit = null,
   }) {
@@ -135,11 +131,7 @@ class _$ShippingAddressesStateCopyWithImpl<$Res,
       addressList: null == addressList
           ? _value.addressList
           : addressList // ignore: cast_nullable_to_non_nullable
-              as List<ShippingAddressResponce>,
-      selectedAddressItems: null == selectedAddressItems
-          ? _value.selectedAddressItems
-          : selectedAddressItems // ignore: cast_nullable_to_non_nullable
-              as ShippingAddressResponce,
+              as List<ShippingAddressResponse>,
       selectedIndex: null == selectedIndex
           ? _value.selectedIndex
           : selectedIndex // ignore: cast_nullable_to_non_nullable
@@ -171,8 +163,7 @@ abstract class _$$EditProfileStateImplCopyWith<$Res>
       InputEmptyOrNot pinCode,
       bool showErrorMessages,
       Option<Either<AuthFailure, String>> failureOrSuccessOption,
-      List<ShippingAddressResponce> addressList,
-      ShippingAddressResponce selectedAddressItems,
+      List<ShippingAddressResponse> addressList,
       int selectedIndex,
       bool isEdit});
 }
@@ -199,7 +190,6 @@ class __$$EditProfileStateImplCopyWithImpl<$Res>
     Object? showErrorMessages = null,
     Object? failureOrSuccessOption = null,
     Object? addressList = null,
-    Object? selectedAddressItems = null,
     Object? selectedIndex = null,
     Object? isEdit = null,
   }) {
@@ -247,11 +237,7 @@ class __$$EditProfileStateImplCopyWithImpl<$Res>
       addressList: null == addressList
           ? _value._addressList
           : addressList // ignore: cast_nullable_to_non_nullable
-              as List<ShippingAddressResponce>,
-      selectedAddressItems: null == selectedAddressItems
-          ? _value.selectedAddressItems
-          : selectedAddressItems // ignore: cast_nullable_to_non_nullable
-              as ShippingAddressResponce,
+              as List<ShippingAddressResponse>,
       selectedIndex: null == selectedIndex
           ? _value.selectedIndex
           : selectedIndex // ignore: cast_nullable_to_non_nullable
@@ -280,8 +266,7 @@ class _$EditProfileStateImpl
       required this.pinCode,
       required this.showErrorMessages,
       required this.failureOrSuccessOption,
-      required final List<ShippingAddressResponce> addressList,
-      required this.selectedAddressItems,
+      required final List<ShippingAddressResponse> addressList,
       required this.selectedIndex,
       required this.isEdit})
       : _addressList = addressList;
@@ -306,16 +291,14 @@ class _$EditProfileStateImpl
   final bool showErrorMessages;
   @override
   final Option<Either<AuthFailure, String>> failureOrSuccessOption;
-  final List<ShippingAddressResponce> _addressList;
+  final List<ShippingAddressResponse> _addressList;
   @override
-  List<ShippingAddressResponce> get addressList {
+  List<ShippingAddressResponse> get addressList {
     if (_addressList is EqualUnmodifiableListView) return _addressList;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_addressList);
   }
 
-  @override
-  final ShippingAddressResponce selectedAddressItems;
   @override
   final int selectedIndex;
   @override
@@ -323,7 +306,7 @@ class _$EditProfileStateImpl
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ShippingAddressesState(fullName: $fullName, mobileNumber: $mobileNumber, countryCode: $countryCode, address: $address, landMark: $landMark, state: $state, city: $city, pinCode: $pinCode, showErrorMessages: $showErrorMessages, failureOrSuccessOption: $failureOrSuccessOption, addressList: $addressList, selectedAddressItems: $selectedAddressItems, selectedIndex: $selectedIndex, isEdit: $isEdit)';
+    return 'ShippingAddressesState(fullName: $fullName, mobileNumber: $mobileNumber, countryCode: $countryCode, address: $address, landMark: $landMark, state: $state, city: $city, pinCode: $pinCode, showErrorMessages: $showErrorMessages, failureOrSuccessOption: $failureOrSuccessOption, addressList: $addressList, selectedIndex: $selectedIndex, isEdit: $isEdit)';
   }
 
   @override
@@ -343,7 +326,6 @@ class _$EditProfileStateImpl
       ..add(
           DiagnosticsProperty('failureOrSuccessOption', failureOrSuccessOption))
       ..add(DiagnosticsProperty('addressList', addressList))
-      ..add(DiagnosticsProperty('selectedAddressItems', selectedAddressItems))
       ..add(DiagnosticsProperty('selectedIndex', selectedIndex))
       ..add(DiagnosticsProperty('isEdit', isEdit));
   }
@@ -371,8 +353,6 @@ class _$EditProfileStateImpl
                 other.failureOrSuccessOption == failureOrSuccessOption) &&
             const DeepCollectionEquality()
                 .equals(other._addressList, _addressList) &&
-            (identical(other.selectedAddressItems, selectedAddressItems) ||
-                other.selectedAddressItems == selectedAddressItems) &&
             (identical(other.selectedIndex, selectedIndex) ||
                 other.selectedIndex == selectedIndex) &&
             (identical(other.isEdit, isEdit) || other.isEdit == isEdit));
@@ -392,7 +372,6 @@ class _$EditProfileStateImpl
       showErrorMessages,
       failureOrSuccessOption,
       const DeepCollectionEquality().hash(_addressList),
-      selectedAddressItems,
       selectedIndex,
       isEdit);
 
@@ -416,8 +395,7 @@ abstract class _EditProfileState implements ShippingAddressesState {
       required final InputEmptyOrNot pinCode,
       required final bool showErrorMessages,
       required final Option<Either<AuthFailure, String>> failureOrSuccessOption,
-      required final List<ShippingAddressResponce> addressList,
-      required final ShippingAddressResponce selectedAddressItems,
+      required final List<ShippingAddressResponse> addressList,
       required final int selectedIndex,
       required final bool isEdit}) = _$EditProfileStateImpl;
 
@@ -442,9 +420,7 @@ abstract class _EditProfileState implements ShippingAddressesState {
   @override
   Option<Either<AuthFailure, String>> get failureOrSuccessOption;
   @override
-  List<ShippingAddressResponce> get addressList;
-  @override
-  ShippingAddressResponce get selectedAddressItems;
+  List<ShippingAddressResponse> get addressList;
   @override
   int get selectedIndex;
   @override
@@ -468,10 +444,10 @@ mixin _$ShippingAddressesEvent {
     required TResult Function(String city) cityChanged,
     required TResult Function(String pinCode) pinCodeChanged,
     required TResult Function(BuildContext context) saveButtonPressed,
-    required TResult Function(ShippingAddressResponce shippingAddressResponce)
+    required TResult Function(ShippingAddressResponse shippingAddressResponce)
         addAddresses,
     required TResult Function(
-            ShippingAddressResponce shippingAddressResponce, bool isEdit)
+            ShippingAddressResponse shippingAddressResponce, bool isEdit)
         prefillEditAddressData,
     required TResult Function(int index) selectedIndex,
     required TResult Function(int index) deleteAddress,
@@ -488,10 +464,10 @@ mixin _$ShippingAddressesEvent {
     TResult? Function(String city)? cityChanged,
     TResult? Function(String pinCode)? pinCodeChanged,
     TResult? Function(BuildContext context)? saveButtonPressed,
-    TResult? Function(ShippingAddressResponce shippingAddressResponce)?
+    TResult? Function(ShippingAddressResponse shippingAddressResponce)?
         addAddresses,
     TResult? Function(
-            ShippingAddressResponce shippingAddressResponce, bool isEdit)?
+            ShippingAddressResponse shippingAddressResponce, bool isEdit)?
         prefillEditAddressData,
     TResult? Function(int index)? selectedIndex,
     TResult? Function(int index)? deleteAddress,
@@ -508,10 +484,10 @@ mixin _$ShippingAddressesEvent {
     TResult Function(String city)? cityChanged,
     TResult Function(String pinCode)? pinCodeChanged,
     TResult Function(BuildContext context)? saveButtonPressed,
-    TResult Function(ShippingAddressResponce shippingAddressResponce)?
+    TResult Function(ShippingAddressResponse shippingAddressResponce)?
         addAddresses,
     TResult Function(
-            ShippingAddressResponce shippingAddressResponce, bool isEdit)?
+            ShippingAddressResponse shippingAddressResponce, bool isEdit)?
         prefillEditAddressData,
     TResult Function(int index)? selectedIndex,
     TResult Function(int index)? deleteAddress,
@@ -678,10 +654,10 @@ class _$FullNameChangedImpl
     required TResult Function(String city) cityChanged,
     required TResult Function(String pinCode) pinCodeChanged,
     required TResult Function(BuildContext context) saveButtonPressed,
-    required TResult Function(ShippingAddressResponce shippingAddressResponce)
+    required TResult Function(ShippingAddressResponse shippingAddressResponce)
         addAddresses,
     required TResult Function(
-            ShippingAddressResponce shippingAddressResponce, bool isEdit)
+            ShippingAddressResponse shippingAddressResponce, bool isEdit)
         prefillEditAddressData,
     required TResult Function(int index) selectedIndex,
     required TResult Function(int index) deleteAddress,
@@ -701,10 +677,10 @@ class _$FullNameChangedImpl
     TResult? Function(String city)? cityChanged,
     TResult? Function(String pinCode)? pinCodeChanged,
     TResult? Function(BuildContext context)? saveButtonPressed,
-    TResult? Function(ShippingAddressResponce shippingAddressResponce)?
+    TResult? Function(ShippingAddressResponse shippingAddressResponce)?
         addAddresses,
     TResult? Function(
-            ShippingAddressResponce shippingAddressResponce, bool isEdit)?
+            ShippingAddressResponse shippingAddressResponce, bool isEdit)?
         prefillEditAddressData,
     TResult? Function(int index)? selectedIndex,
     TResult? Function(int index)? deleteAddress,
@@ -724,10 +700,10 @@ class _$FullNameChangedImpl
     TResult Function(String city)? cityChanged,
     TResult Function(String pinCode)? pinCodeChanged,
     TResult Function(BuildContext context)? saveButtonPressed,
-    TResult Function(ShippingAddressResponce shippingAddressResponce)?
+    TResult Function(ShippingAddressResponse shippingAddressResponce)?
         addAddresses,
     TResult Function(
-            ShippingAddressResponce shippingAddressResponce, bool isEdit)?
+            ShippingAddressResponse shippingAddressResponce, bool isEdit)?
         prefillEditAddressData,
     TResult Function(int index)? selectedIndex,
     TResult Function(int index)? deleteAddress,
@@ -901,10 +877,10 @@ class _$MobileNumberChangedImpl
     required TResult Function(String city) cityChanged,
     required TResult Function(String pinCode) pinCodeChanged,
     required TResult Function(BuildContext context) saveButtonPressed,
-    required TResult Function(ShippingAddressResponce shippingAddressResponce)
+    required TResult Function(ShippingAddressResponse shippingAddressResponce)
         addAddresses,
     required TResult Function(
-            ShippingAddressResponce shippingAddressResponce, bool isEdit)
+            ShippingAddressResponse shippingAddressResponce, bool isEdit)
         prefillEditAddressData,
     required TResult Function(int index) selectedIndex,
     required TResult Function(int index) deleteAddress,
@@ -924,10 +900,10 @@ class _$MobileNumberChangedImpl
     TResult? Function(String city)? cityChanged,
     TResult? Function(String pinCode)? pinCodeChanged,
     TResult? Function(BuildContext context)? saveButtonPressed,
-    TResult? Function(ShippingAddressResponce shippingAddressResponce)?
+    TResult? Function(ShippingAddressResponse shippingAddressResponce)?
         addAddresses,
     TResult? Function(
-            ShippingAddressResponce shippingAddressResponce, bool isEdit)?
+            ShippingAddressResponse shippingAddressResponce, bool isEdit)?
         prefillEditAddressData,
     TResult? Function(int index)? selectedIndex,
     TResult? Function(int index)? deleteAddress,
@@ -947,10 +923,10 @@ class _$MobileNumberChangedImpl
     TResult Function(String city)? cityChanged,
     TResult Function(String pinCode)? pinCodeChanged,
     TResult Function(BuildContext context)? saveButtonPressed,
-    TResult Function(ShippingAddressResponce shippingAddressResponce)?
+    TResult Function(ShippingAddressResponse shippingAddressResponce)?
         addAddresses,
     TResult Function(
-            ShippingAddressResponce shippingAddressResponce, bool isEdit)?
+            ShippingAddressResponse shippingAddressResponce, bool isEdit)?
         prefillEditAddressData,
     TResult Function(int index)? selectedIndex,
     TResult Function(int index)? deleteAddress,
@@ -1124,10 +1100,10 @@ class _$CountryCodeChangedImpl
     required TResult Function(String city) cityChanged,
     required TResult Function(String pinCode) pinCodeChanged,
     required TResult Function(BuildContext context) saveButtonPressed,
-    required TResult Function(ShippingAddressResponce shippingAddressResponce)
+    required TResult Function(ShippingAddressResponse shippingAddressResponce)
         addAddresses,
     required TResult Function(
-            ShippingAddressResponce shippingAddressResponce, bool isEdit)
+            ShippingAddressResponse shippingAddressResponce, bool isEdit)
         prefillEditAddressData,
     required TResult Function(int index) selectedIndex,
     required TResult Function(int index) deleteAddress,
@@ -1147,10 +1123,10 @@ class _$CountryCodeChangedImpl
     TResult? Function(String city)? cityChanged,
     TResult? Function(String pinCode)? pinCodeChanged,
     TResult? Function(BuildContext context)? saveButtonPressed,
-    TResult? Function(ShippingAddressResponce shippingAddressResponce)?
+    TResult? Function(ShippingAddressResponse shippingAddressResponce)?
         addAddresses,
     TResult? Function(
-            ShippingAddressResponce shippingAddressResponce, bool isEdit)?
+            ShippingAddressResponse shippingAddressResponce, bool isEdit)?
         prefillEditAddressData,
     TResult? Function(int index)? selectedIndex,
     TResult? Function(int index)? deleteAddress,
@@ -1170,10 +1146,10 @@ class _$CountryCodeChangedImpl
     TResult Function(String city)? cityChanged,
     TResult Function(String pinCode)? pinCodeChanged,
     TResult Function(BuildContext context)? saveButtonPressed,
-    TResult Function(ShippingAddressResponce shippingAddressResponce)?
+    TResult Function(ShippingAddressResponse shippingAddressResponce)?
         addAddresses,
     TResult Function(
-            ShippingAddressResponce shippingAddressResponce, bool isEdit)?
+            ShippingAddressResponse shippingAddressResponce, bool isEdit)?
         prefillEditAddressData,
     TResult Function(int index)? selectedIndex,
     TResult Function(int index)? deleteAddress,
@@ -1346,10 +1322,10 @@ class _$AddressChangedImpl
     required TResult Function(String city) cityChanged,
     required TResult Function(String pinCode) pinCodeChanged,
     required TResult Function(BuildContext context) saveButtonPressed,
-    required TResult Function(ShippingAddressResponce shippingAddressResponce)
+    required TResult Function(ShippingAddressResponse shippingAddressResponce)
         addAddresses,
     required TResult Function(
-            ShippingAddressResponce shippingAddressResponce, bool isEdit)
+            ShippingAddressResponse shippingAddressResponce, bool isEdit)
         prefillEditAddressData,
     required TResult Function(int index) selectedIndex,
     required TResult Function(int index) deleteAddress,
@@ -1369,10 +1345,10 @@ class _$AddressChangedImpl
     TResult? Function(String city)? cityChanged,
     TResult? Function(String pinCode)? pinCodeChanged,
     TResult? Function(BuildContext context)? saveButtonPressed,
-    TResult? Function(ShippingAddressResponce shippingAddressResponce)?
+    TResult? Function(ShippingAddressResponse shippingAddressResponce)?
         addAddresses,
     TResult? Function(
-            ShippingAddressResponce shippingAddressResponce, bool isEdit)?
+            ShippingAddressResponse shippingAddressResponce, bool isEdit)?
         prefillEditAddressData,
     TResult? Function(int index)? selectedIndex,
     TResult? Function(int index)? deleteAddress,
@@ -1392,10 +1368,10 @@ class _$AddressChangedImpl
     TResult Function(String city)? cityChanged,
     TResult Function(String pinCode)? pinCodeChanged,
     TResult Function(BuildContext context)? saveButtonPressed,
-    TResult Function(ShippingAddressResponce shippingAddressResponce)?
+    TResult Function(ShippingAddressResponse shippingAddressResponce)?
         addAddresses,
     TResult Function(
-            ShippingAddressResponce shippingAddressResponce, bool isEdit)?
+            ShippingAddressResponse shippingAddressResponce, bool isEdit)?
         prefillEditAddressData,
     TResult Function(int index)? selectedIndex,
     TResult Function(int index)? deleteAddress,
@@ -1568,10 +1544,10 @@ class _$LandMarkChangedImpl
     required TResult Function(String city) cityChanged,
     required TResult Function(String pinCode) pinCodeChanged,
     required TResult Function(BuildContext context) saveButtonPressed,
-    required TResult Function(ShippingAddressResponce shippingAddressResponce)
+    required TResult Function(ShippingAddressResponse shippingAddressResponce)
         addAddresses,
     required TResult Function(
-            ShippingAddressResponce shippingAddressResponce, bool isEdit)
+            ShippingAddressResponse shippingAddressResponce, bool isEdit)
         prefillEditAddressData,
     required TResult Function(int index) selectedIndex,
     required TResult Function(int index) deleteAddress,
@@ -1591,10 +1567,10 @@ class _$LandMarkChangedImpl
     TResult? Function(String city)? cityChanged,
     TResult? Function(String pinCode)? pinCodeChanged,
     TResult? Function(BuildContext context)? saveButtonPressed,
-    TResult? Function(ShippingAddressResponce shippingAddressResponce)?
+    TResult? Function(ShippingAddressResponse shippingAddressResponce)?
         addAddresses,
     TResult? Function(
-            ShippingAddressResponce shippingAddressResponce, bool isEdit)?
+            ShippingAddressResponse shippingAddressResponce, bool isEdit)?
         prefillEditAddressData,
     TResult? Function(int index)? selectedIndex,
     TResult? Function(int index)? deleteAddress,
@@ -1614,10 +1590,10 @@ class _$LandMarkChangedImpl
     TResult Function(String city)? cityChanged,
     TResult Function(String pinCode)? pinCodeChanged,
     TResult Function(BuildContext context)? saveButtonPressed,
-    TResult Function(ShippingAddressResponce shippingAddressResponce)?
+    TResult Function(ShippingAddressResponse shippingAddressResponce)?
         addAddresses,
     TResult Function(
-            ShippingAddressResponce shippingAddressResponce, bool isEdit)?
+            ShippingAddressResponse shippingAddressResponce, bool isEdit)?
         prefillEditAddressData,
     TResult Function(int index)? selectedIndex,
     TResult Function(int index)? deleteAddress,
@@ -1785,10 +1761,10 @@ class _$StateChangedImpl with DiagnosticableTreeMixin implements StateChanged {
     required TResult Function(String city) cityChanged,
     required TResult Function(String pinCode) pinCodeChanged,
     required TResult Function(BuildContext context) saveButtonPressed,
-    required TResult Function(ShippingAddressResponce shippingAddressResponce)
+    required TResult Function(ShippingAddressResponse shippingAddressResponce)
         addAddresses,
     required TResult Function(
-            ShippingAddressResponce shippingAddressResponce, bool isEdit)
+            ShippingAddressResponse shippingAddressResponce, bool isEdit)
         prefillEditAddressData,
     required TResult Function(int index) selectedIndex,
     required TResult Function(int index) deleteAddress,
@@ -1808,10 +1784,10 @@ class _$StateChangedImpl with DiagnosticableTreeMixin implements StateChanged {
     TResult? Function(String city)? cityChanged,
     TResult? Function(String pinCode)? pinCodeChanged,
     TResult? Function(BuildContext context)? saveButtonPressed,
-    TResult? Function(ShippingAddressResponce shippingAddressResponce)?
+    TResult? Function(ShippingAddressResponse shippingAddressResponce)?
         addAddresses,
     TResult? Function(
-            ShippingAddressResponce shippingAddressResponce, bool isEdit)?
+            ShippingAddressResponse shippingAddressResponce, bool isEdit)?
         prefillEditAddressData,
     TResult? Function(int index)? selectedIndex,
     TResult? Function(int index)? deleteAddress,
@@ -1831,10 +1807,10 @@ class _$StateChangedImpl with DiagnosticableTreeMixin implements StateChanged {
     TResult Function(String city)? cityChanged,
     TResult Function(String pinCode)? pinCodeChanged,
     TResult Function(BuildContext context)? saveButtonPressed,
-    TResult Function(ShippingAddressResponce shippingAddressResponce)?
+    TResult Function(ShippingAddressResponse shippingAddressResponce)?
         addAddresses,
     TResult Function(
-            ShippingAddressResponce shippingAddressResponce, bool isEdit)?
+            ShippingAddressResponse shippingAddressResponce, bool isEdit)?
         prefillEditAddressData,
     TResult Function(int index)? selectedIndex,
     TResult Function(int index)? deleteAddress,
@@ -2002,10 +1978,10 @@ class _$CityChangedImpl with DiagnosticableTreeMixin implements CityChanged {
     required TResult Function(String city) cityChanged,
     required TResult Function(String pinCode) pinCodeChanged,
     required TResult Function(BuildContext context) saveButtonPressed,
-    required TResult Function(ShippingAddressResponce shippingAddressResponce)
+    required TResult Function(ShippingAddressResponse shippingAddressResponce)
         addAddresses,
     required TResult Function(
-            ShippingAddressResponce shippingAddressResponce, bool isEdit)
+            ShippingAddressResponse shippingAddressResponce, bool isEdit)
         prefillEditAddressData,
     required TResult Function(int index) selectedIndex,
     required TResult Function(int index) deleteAddress,
@@ -2025,10 +2001,10 @@ class _$CityChangedImpl with DiagnosticableTreeMixin implements CityChanged {
     TResult? Function(String city)? cityChanged,
     TResult? Function(String pinCode)? pinCodeChanged,
     TResult? Function(BuildContext context)? saveButtonPressed,
-    TResult? Function(ShippingAddressResponce shippingAddressResponce)?
+    TResult? Function(ShippingAddressResponse shippingAddressResponce)?
         addAddresses,
     TResult? Function(
-            ShippingAddressResponce shippingAddressResponce, bool isEdit)?
+            ShippingAddressResponse shippingAddressResponce, bool isEdit)?
         prefillEditAddressData,
     TResult? Function(int index)? selectedIndex,
     TResult? Function(int index)? deleteAddress,
@@ -2048,10 +2024,10 @@ class _$CityChangedImpl with DiagnosticableTreeMixin implements CityChanged {
     TResult Function(String city)? cityChanged,
     TResult Function(String pinCode)? pinCodeChanged,
     TResult Function(BuildContext context)? saveButtonPressed,
-    TResult Function(ShippingAddressResponce shippingAddressResponce)?
+    TResult Function(ShippingAddressResponse shippingAddressResponce)?
         addAddresses,
     TResult Function(
-            ShippingAddressResponce shippingAddressResponce, bool isEdit)?
+            ShippingAddressResponse shippingAddressResponce, bool isEdit)?
         prefillEditAddressData,
     TResult Function(int index)? selectedIndex,
     TResult Function(int index)? deleteAddress,
@@ -2223,10 +2199,10 @@ class _$PinCodeChangedImpl
     required TResult Function(String city) cityChanged,
     required TResult Function(String pinCode) pinCodeChanged,
     required TResult Function(BuildContext context) saveButtonPressed,
-    required TResult Function(ShippingAddressResponce shippingAddressResponce)
+    required TResult Function(ShippingAddressResponse shippingAddressResponce)
         addAddresses,
     required TResult Function(
-            ShippingAddressResponce shippingAddressResponce, bool isEdit)
+            ShippingAddressResponse shippingAddressResponce, bool isEdit)
         prefillEditAddressData,
     required TResult Function(int index) selectedIndex,
     required TResult Function(int index) deleteAddress,
@@ -2246,10 +2222,10 @@ class _$PinCodeChangedImpl
     TResult? Function(String city)? cityChanged,
     TResult? Function(String pinCode)? pinCodeChanged,
     TResult? Function(BuildContext context)? saveButtonPressed,
-    TResult? Function(ShippingAddressResponce shippingAddressResponce)?
+    TResult? Function(ShippingAddressResponse shippingAddressResponce)?
         addAddresses,
     TResult? Function(
-            ShippingAddressResponce shippingAddressResponce, bool isEdit)?
+            ShippingAddressResponse shippingAddressResponce, bool isEdit)?
         prefillEditAddressData,
     TResult? Function(int index)? selectedIndex,
     TResult? Function(int index)? deleteAddress,
@@ -2269,10 +2245,10 @@ class _$PinCodeChangedImpl
     TResult Function(String city)? cityChanged,
     TResult Function(String pinCode)? pinCodeChanged,
     TResult Function(BuildContext context)? saveButtonPressed,
-    TResult Function(ShippingAddressResponce shippingAddressResponce)?
+    TResult Function(ShippingAddressResponse shippingAddressResponce)?
         addAddresses,
     TResult Function(
-            ShippingAddressResponce shippingAddressResponce, bool isEdit)?
+            ShippingAddressResponse shippingAddressResponce, bool isEdit)?
         prefillEditAddressData,
     TResult Function(int index)? selectedIndex,
     TResult Function(int index)? deleteAddress,
@@ -2444,10 +2420,10 @@ class _$SaveButtonPressedImpl
     required TResult Function(String city) cityChanged,
     required TResult Function(String pinCode) pinCodeChanged,
     required TResult Function(BuildContext context) saveButtonPressed,
-    required TResult Function(ShippingAddressResponce shippingAddressResponce)
+    required TResult Function(ShippingAddressResponse shippingAddressResponce)
         addAddresses,
     required TResult Function(
-            ShippingAddressResponce shippingAddressResponce, bool isEdit)
+            ShippingAddressResponse shippingAddressResponce, bool isEdit)
         prefillEditAddressData,
     required TResult Function(int index) selectedIndex,
     required TResult Function(int index) deleteAddress,
@@ -2467,10 +2443,10 @@ class _$SaveButtonPressedImpl
     TResult? Function(String city)? cityChanged,
     TResult? Function(String pinCode)? pinCodeChanged,
     TResult? Function(BuildContext context)? saveButtonPressed,
-    TResult? Function(ShippingAddressResponce shippingAddressResponce)?
+    TResult? Function(ShippingAddressResponse shippingAddressResponce)?
         addAddresses,
     TResult? Function(
-            ShippingAddressResponce shippingAddressResponce, bool isEdit)?
+            ShippingAddressResponse shippingAddressResponce, bool isEdit)?
         prefillEditAddressData,
     TResult? Function(int index)? selectedIndex,
     TResult? Function(int index)? deleteAddress,
@@ -2490,10 +2466,10 @@ class _$SaveButtonPressedImpl
     TResult Function(String city)? cityChanged,
     TResult Function(String pinCode)? pinCodeChanged,
     TResult Function(BuildContext context)? saveButtonPressed,
-    TResult Function(ShippingAddressResponce shippingAddressResponce)?
+    TResult Function(ShippingAddressResponse shippingAddressResponce)?
         addAddresses,
     TResult Function(
-            ShippingAddressResponce shippingAddressResponce, bool isEdit)?
+            ShippingAddressResponse shippingAddressResponce, bool isEdit)?
         prefillEditAddressData,
     TResult Function(int index)? selectedIndex,
     TResult Function(int index)? deleteAddress,
@@ -2587,7 +2563,7 @@ abstract class _$$AddAddressesImplCopyWith<$Res> {
           _$AddAddressesImpl value, $Res Function(_$AddAddressesImpl) then) =
       __$$AddAddressesImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({ShippingAddressResponce shippingAddressResponce});
+  $Res call({ShippingAddressResponse shippingAddressResponce});
 }
 
 /// @nodoc
@@ -2607,7 +2583,7 @@ class __$$AddAddressesImplCopyWithImpl<$Res>
       null == shippingAddressResponce
           ? _value.shippingAddressResponce
           : shippingAddressResponce // ignore: cast_nullable_to_non_nullable
-              as ShippingAddressResponce,
+              as ShippingAddressResponse,
     ));
   }
 }
@@ -2618,7 +2594,7 @@ class _$AddAddressesImpl with DiagnosticableTreeMixin implements AddAddresses {
   const _$AddAddressesImpl(this.shippingAddressResponce);
 
   @override
-  final ShippingAddressResponce shippingAddressResponce;
+  final ShippingAddressResponse shippingAddressResponce;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -2665,10 +2641,10 @@ class _$AddAddressesImpl with DiagnosticableTreeMixin implements AddAddresses {
     required TResult Function(String city) cityChanged,
     required TResult Function(String pinCode) pinCodeChanged,
     required TResult Function(BuildContext context) saveButtonPressed,
-    required TResult Function(ShippingAddressResponce shippingAddressResponce)
+    required TResult Function(ShippingAddressResponse shippingAddressResponce)
         addAddresses,
     required TResult Function(
-            ShippingAddressResponce shippingAddressResponce, bool isEdit)
+            ShippingAddressResponse shippingAddressResponce, bool isEdit)
         prefillEditAddressData,
     required TResult Function(int index) selectedIndex,
     required TResult Function(int index) deleteAddress,
@@ -2688,10 +2664,10 @@ class _$AddAddressesImpl with DiagnosticableTreeMixin implements AddAddresses {
     TResult? Function(String city)? cityChanged,
     TResult? Function(String pinCode)? pinCodeChanged,
     TResult? Function(BuildContext context)? saveButtonPressed,
-    TResult? Function(ShippingAddressResponce shippingAddressResponce)?
+    TResult? Function(ShippingAddressResponse shippingAddressResponce)?
         addAddresses,
     TResult? Function(
-            ShippingAddressResponce shippingAddressResponce, bool isEdit)?
+            ShippingAddressResponse shippingAddressResponce, bool isEdit)?
         prefillEditAddressData,
     TResult? Function(int index)? selectedIndex,
     TResult? Function(int index)? deleteAddress,
@@ -2711,10 +2687,10 @@ class _$AddAddressesImpl with DiagnosticableTreeMixin implements AddAddresses {
     TResult Function(String city)? cityChanged,
     TResult Function(String pinCode)? pinCodeChanged,
     TResult Function(BuildContext context)? saveButtonPressed,
-    TResult Function(ShippingAddressResponce shippingAddressResponce)?
+    TResult Function(ShippingAddressResponse shippingAddressResponce)?
         addAddresses,
     TResult Function(
-            ShippingAddressResponce shippingAddressResponce, bool isEdit)?
+            ShippingAddressResponse shippingAddressResponce, bool isEdit)?
         prefillEditAddressData,
     TResult Function(int index)? selectedIndex,
     TResult Function(int index)? deleteAddress,
@@ -2794,10 +2770,10 @@ class _$AddAddressesImpl with DiagnosticableTreeMixin implements AddAddresses {
 
 abstract class AddAddresses implements ShippingAddressesEvent {
   const factory AddAddresses(
-          final ShippingAddressResponce shippingAddressResponce) =
+          final ShippingAddressResponse shippingAddressResponce) =
       _$AddAddressesImpl;
 
-  ShippingAddressResponce get shippingAddressResponce;
+  ShippingAddressResponse get shippingAddressResponce;
   @JsonKey(ignore: true)
   _$$AddAddressesImplCopyWith<_$AddAddressesImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -2810,7 +2786,7 @@ abstract class _$$PrefillEditAddressDataImplCopyWith<$Res> {
           $Res Function(_$PrefillEditAddressDataImpl) then) =
       __$$PrefillEditAddressDataImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({ShippingAddressResponce shippingAddressResponce, bool isEdit});
+  $Res call({ShippingAddressResponse shippingAddressResponce, bool isEdit});
 }
 
 /// @nodoc
@@ -2833,7 +2809,7 @@ class __$$PrefillEditAddressDataImplCopyWithImpl<$Res>
       null == shippingAddressResponce
           ? _value.shippingAddressResponce
           : shippingAddressResponce // ignore: cast_nullable_to_non_nullable
-              as ShippingAddressResponce,
+              as ShippingAddressResponse,
       null == isEdit
           ? _value.isEdit
           : isEdit // ignore: cast_nullable_to_non_nullable
@@ -2850,7 +2826,7 @@ class _$PrefillEditAddressDataImpl
   const _$PrefillEditAddressDataImpl(this.shippingAddressResponce, this.isEdit);
 
   @override
-  final ShippingAddressResponce shippingAddressResponce;
+  final ShippingAddressResponse shippingAddressResponce;
   @override
   final bool isEdit;
 
@@ -2903,10 +2879,10 @@ class _$PrefillEditAddressDataImpl
     required TResult Function(String city) cityChanged,
     required TResult Function(String pinCode) pinCodeChanged,
     required TResult Function(BuildContext context) saveButtonPressed,
-    required TResult Function(ShippingAddressResponce shippingAddressResponce)
+    required TResult Function(ShippingAddressResponse shippingAddressResponce)
         addAddresses,
     required TResult Function(
-            ShippingAddressResponce shippingAddressResponce, bool isEdit)
+            ShippingAddressResponse shippingAddressResponce, bool isEdit)
         prefillEditAddressData,
     required TResult Function(int index) selectedIndex,
     required TResult Function(int index) deleteAddress,
@@ -2926,10 +2902,10 @@ class _$PrefillEditAddressDataImpl
     TResult? Function(String city)? cityChanged,
     TResult? Function(String pinCode)? pinCodeChanged,
     TResult? Function(BuildContext context)? saveButtonPressed,
-    TResult? Function(ShippingAddressResponce shippingAddressResponce)?
+    TResult? Function(ShippingAddressResponse shippingAddressResponce)?
         addAddresses,
     TResult? Function(
-            ShippingAddressResponce shippingAddressResponce, bool isEdit)?
+            ShippingAddressResponse shippingAddressResponce, bool isEdit)?
         prefillEditAddressData,
     TResult? Function(int index)? selectedIndex,
     TResult? Function(int index)? deleteAddress,
@@ -2949,10 +2925,10 @@ class _$PrefillEditAddressDataImpl
     TResult Function(String city)? cityChanged,
     TResult Function(String pinCode)? pinCodeChanged,
     TResult Function(BuildContext context)? saveButtonPressed,
-    TResult Function(ShippingAddressResponce shippingAddressResponce)?
+    TResult Function(ShippingAddressResponse shippingAddressResponce)?
         addAddresses,
     TResult Function(
-            ShippingAddressResponce shippingAddressResponce, bool isEdit)?
+            ShippingAddressResponse shippingAddressResponce, bool isEdit)?
         prefillEditAddressData,
     TResult Function(int index)? selectedIndex,
     TResult Function(int index)? deleteAddress,
@@ -3032,10 +3008,10 @@ class _$PrefillEditAddressDataImpl
 
 abstract class PrefillEditAddressData implements ShippingAddressesEvent {
   const factory PrefillEditAddressData(
-      final ShippingAddressResponce shippingAddressResponce,
+      final ShippingAddressResponse shippingAddressResponce,
       final bool isEdit) = _$PrefillEditAddressDataImpl;
 
-  ShippingAddressResponce get shippingAddressResponce;
+  ShippingAddressResponse get shippingAddressResponce;
   bool get isEdit;
   @JsonKey(ignore: true)
   _$$PrefillEditAddressDataImplCopyWith<_$PrefillEditAddressDataImpl>
@@ -3123,10 +3099,10 @@ class _$SeletedIndexImpl with DiagnosticableTreeMixin implements SeletedIndex {
     required TResult Function(String city) cityChanged,
     required TResult Function(String pinCode) pinCodeChanged,
     required TResult Function(BuildContext context) saveButtonPressed,
-    required TResult Function(ShippingAddressResponce shippingAddressResponce)
+    required TResult Function(ShippingAddressResponse shippingAddressResponce)
         addAddresses,
     required TResult Function(
-            ShippingAddressResponce shippingAddressResponce, bool isEdit)
+            ShippingAddressResponse shippingAddressResponce, bool isEdit)
         prefillEditAddressData,
     required TResult Function(int index) selectedIndex,
     required TResult Function(int index) deleteAddress,
@@ -3146,10 +3122,10 @@ class _$SeletedIndexImpl with DiagnosticableTreeMixin implements SeletedIndex {
     TResult? Function(String city)? cityChanged,
     TResult? Function(String pinCode)? pinCodeChanged,
     TResult? Function(BuildContext context)? saveButtonPressed,
-    TResult? Function(ShippingAddressResponce shippingAddressResponce)?
+    TResult? Function(ShippingAddressResponse shippingAddressResponce)?
         addAddresses,
     TResult? Function(
-            ShippingAddressResponce shippingAddressResponce, bool isEdit)?
+            ShippingAddressResponse shippingAddressResponce, bool isEdit)?
         prefillEditAddressData,
     TResult? Function(int index)? selectedIndex,
     TResult? Function(int index)? deleteAddress,
@@ -3169,10 +3145,10 @@ class _$SeletedIndexImpl with DiagnosticableTreeMixin implements SeletedIndex {
     TResult Function(String city)? cityChanged,
     TResult Function(String pinCode)? pinCodeChanged,
     TResult Function(BuildContext context)? saveButtonPressed,
-    TResult Function(ShippingAddressResponce shippingAddressResponce)?
+    TResult Function(ShippingAddressResponse shippingAddressResponce)?
         addAddresses,
     TResult Function(
-            ShippingAddressResponce shippingAddressResponce, bool isEdit)?
+            ShippingAddressResponse shippingAddressResponce, bool isEdit)?
         prefillEditAddressData,
     TResult Function(int index)? selectedIndex,
     TResult Function(int index)? deleteAddress,
@@ -3342,10 +3318,10 @@ class _$DeleteAddressImpl
     required TResult Function(String city) cityChanged,
     required TResult Function(String pinCode) pinCodeChanged,
     required TResult Function(BuildContext context) saveButtonPressed,
-    required TResult Function(ShippingAddressResponce shippingAddressResponce)
+    required TResult Function(ShippingAddressResponse shippingAddressResponce)
         addAddresses,
     required TResult Function(
-            ShippingAddressResponce shippingAddressResponce, bool isEdit)
+            ShippingAddressResponse shippingAddressResponce, bool isEdit)
         prefillEditAddressData,
     required TResult Function(int index) selectedIndex,
     required TResult Function(int index) deleteAddress,
@@ -3365,10 +3341,10 @@ class _$DeleteAddressImpl
     TResult? Function(String city)? cityChanged,
     TResult? Function(String pinCode)? pinCodeChanged,
     TResult? Function(BuildContext context)? saveButtonPressed,
-    TResult? Function(ShippingAddressResponce shippingAddressResponce)?
+    TResult? Function(ShippingAddressResponse shippingAddressResponce)?
         addAddresses,
     TResult? Function(
-            ShippingAddressResponce shippingAddressResponce, bool isEdit)?
+            ShippingAddressResponse shippingAddressResponce, bool isEdit)?
         prefillEditAddressData,
     TResult? Function(int index)? selectedIndex,
     TResult? Function(int index)? deleteAddress,
@@ -3388,10 +3364,10 @@ class _$DeleteAddressImpl
     TResult Function(String city)? cityChanged,
     TResult Function(String pinCode)? pinCodeChanged,
     TResult Function(BuildContext context)? saveButtonPressed,
-    TResult Function(ShippingAddressResponce shippingAddressResponce)?
+    TResult Function(ShippingAddressResponse shippingAddressResponce)?
         addAddresses,
     TResult Function(
-            ShippingAddressResponce shippingAddressResponce, bool isEdit)?
+            ShippingAddressResponse shippingAddressResponce, bool isEdit)?
         prefillEditAddressData,
     TResult Function(int index)? selectedIndex,
     TResult Function(int index)? deleteAddress,
