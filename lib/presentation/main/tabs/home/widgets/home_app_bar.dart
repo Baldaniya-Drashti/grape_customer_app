@@ -44,7 +44,8 @@ class HomeAppbar extends StatelessWidget implements PreferredSizeWidget {
           bottom: PreferredSize(
             preferredSize: preferredSize,
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: getSize(18)),
+              padding: EdgeInsets.symmetric(
+                  horizontal: getSize(18), vertical: getSize(10)),
               child: Row(
                 children: [
                   Expanded(

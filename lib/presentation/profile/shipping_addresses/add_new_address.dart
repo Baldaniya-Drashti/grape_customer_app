@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -108,6 +106,7 @@ class AddNewAddress extends StatelessWidget {
     return CustomTextField(
       hintText: AppLocalizations.of(context).pinCode,
       labelText: AppLocalizations.of(context).pinCode,
+      initialValue: state.pinCode.getValue() ?? "",
       keyboardType: TextInputType.number,
       initialValue: state.pinCode.getValue(),
       onChanged: (pinCode) => context.read<ShippingAddressesBloc>().add(
@@ -147,7 +146,7 @@ class AddNewAddress extends StatelessWidget {
     return CustomTextField(
       hintText: AppLocalizations.of(context).state,
       labelText: AppLocalizations.of(context).state,
-      initialValue: state.state.getValue(),
+      initialValue: state.state.getValue() ?? "",
       onChanged: (state) => context.read<ShippingAddressesBloc>().add(
             ShippingAddressesEvent.stateChanged(state),
           ),
@@ -166,7 +165,7 @@ class AddNewAddress extends StatelessWidget {
     return CustomTextField(
       hintText: AppLocalizations.of(context).landMark,
       labelText: AppLocalizations.of(context).landMark,
-      initialValue: state.landMark.getValue(),
+      initialValue: state.landMark.getValue() ?? "",
       onChanged: (landMark) => context.read<ShippingAddressesBloc>().add(
             ShippingAddressesEvent.landMarkChanged(landMark),
           ),
@@ -186,6 +185,7 @@ class AddNewAddress extends StatelessWidget {
     return CustomTextField(
       hintText: AppLocalizations.of(context).address,
       labelText: AppLocalizations.of(context).address,
+      maxLines: 3,
       initialValue: state.address.getValue(),
       onChanged: (address) => context
           .read<ShippingAddressesBloc>()
@@ -206,6 +206,7 @@ class AddNewAddress extends StatelessWidget {
       initialValue: state.mobileNumber.getValue(),
       labelText: AppLocalizations.of(context).mobileNumber,
       hintText: AppLocalizations.of(context).mobileNumber,
+      initialValue: state.mobileNumber.getValue(),
       keyboardType: TextInputType.phone,
       onChanged: (mobileNumber) => context
           .read<ShippingAddressesBloc>()
@@ -234,7 +235,6 @@ class AddNewAddress extends StatelessWidget {
       labelText: AppLocalizations.of(context).fullName,
       hintText: AppLocalizations.of(context).fullName,
       initialValue: state.fullName.getValue(),
-      textCapitalization: TextCapitalization.words,
       onChanged: (fullName) => context
           .read<ShippingAddressesBloc>()
           .add(ShippingAddressesEvent.fullNameChanged(fullName)),
