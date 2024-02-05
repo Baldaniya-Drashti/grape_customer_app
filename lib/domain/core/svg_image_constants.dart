@@ -40,4 +40,8 @@ class SvgImageConstant {
   //ShippingAddress
   static const addIcon = "assets/svg/add_icon.svg";
   static const deleteIcon = 'assets/svg/delete_icon.svg';
+
+  //product detail
+  static const share = "assets/svg/share.svg";
+  static const more = 'assets/svg/more.svg';
 }

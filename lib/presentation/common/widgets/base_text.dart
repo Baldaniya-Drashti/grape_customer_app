@@ -7,6 +7,8 @@ class BaseText extends StatelessWidget {
   final String text;
   final double fontSize;
   final bool isUpperCase;
+  final bool showFullDescription;
+
   final TextAlign textAlign;
   final FontWeight? fontWeight;
   final TextStyle? style;
@@ -34,6 +36,7 @@ class BaseText extends StatelessWidget {
     this.fontFamily = 'SfPro',
     this.lineHeight,
     this.shadows,
+    this.showFullDescription = false,
   }) : super(key: key);
 
   @override
@@ -42,9 +45,8 @@ class BaseText extends StatelessWidget {
       isUpperCase ? text.toUpperCase() : text,
       textAlign: textAlign,
       textScaler: TextScaler.linear(1),
-      //textScaleFactor: 1.0,
-      overflow: overflow,
-      maxLines: maxLines,
+      overflow: showFullDescription ? null : overflow,
+      maxLines: showFullDescription ? null : maxLines,
       style: style ??
           TextStyle(
             height: lineHeight,
