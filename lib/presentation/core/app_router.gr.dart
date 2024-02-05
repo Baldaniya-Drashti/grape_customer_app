@@ -12,6 +12,10 @@ import 'package:auto_route/auto_route.dart' as _i25;
 import 'package:flutter/material.dart' as _i26;
 import 'package:grape_customer_app/application/main/profile/shipping_addresses/shipping_addresses_response.dart'
     as _i27;
+import 'package:auto_route/auto_route.dart' as _i18;
+import 'package:flutter/material.dart' as _i19;
+import 'package:grape_customer_app/application/main/profile/shipping_addresses/shipping_addresses_response.dart'
+    as _i20;
 import 'package:grape_customer_app/presentation/auth/login/login_screen.dart'
     as _i8;
 import 'package:grape_customer_app/presentation/auth/login/otp_login_verification_screen.dart'
@@ -246,6 +250,9 @@ class AddNewAddress extends _i25.PageRouteInfo<AddNewAddressArgs> {
     _i26.Key? key,
     required _i27.ShippingAddressResponse shippingAddressResponce,
     List<_i25.PageRouteInfo>? children,
+    _i19.Key? key,
+    required _i20.ShippingAddressResponse shippingAddressResponce,
+    List<_i18.PageRouteInfo>? children,
   }) : super(
           AddNewAddress.name,
           args: AddNewAddressArgs(
@@ -270,6 +277,7 @@ class AddNewAddressArgs {
   final _i26.Key? key;
 
   final _i27.ShippingAddressResponse shippingAddressResponce;
+  final _i20.ShippingAddressResponse shippingAddressResponce;
 
   @override
   String toString() {
