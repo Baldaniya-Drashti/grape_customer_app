@@ -40,9 +40,9 @@ class MainTabView extends StatelessWidget {
       ],
       child: BlocBuilder<MainTabBloc, MainTabState>(
         builder: (context, state) {
-          context
-              .read<MainTabBloc>()
-              .add(MainTabEvent.pushNotificationInitialize(context));
+          // context
+          //     .read<MainTabBloc>()
+          //     .add(MainTabEvent.pushNotificationInitialize(context));
           return Scaffold(
             appBar: getAppbar(state, context),
             body: GestureDetector(

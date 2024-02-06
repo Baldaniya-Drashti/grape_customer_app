@@ -61,7 +61,7 @@ class CommonButton extends StatelessWidget {
         fixedSize: Size(
           getSize(width ?? MediaQuery.of(context).size.width),
           getSize(
-            height ?? getSize(42),
+            height ?? 42,
           ),
         ),
         visualDensity: VisualDensity(

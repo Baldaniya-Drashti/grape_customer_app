@@ -10,6 +10,7 @@ class ThemeConfig {
       scaffoldBackgroundColor: AppColors.white,
       primaryColor: Colors.black87,
       primaryColorDark: Colors.black87,
+      dividerTheme: DividerThemeData(color: AppColors.black.withOpacity(0.20)),
       // primarySwatch: Colors.black,
       colorScheme: ColorScheme(
         brightness: brightness,
