@@ -105,6 +105,10 @@ class CustomBottomNavigationWidget extends StatelessWidget {
               iconName,
               height: getSize(24),
               width: getSize(24),
+              colorFilter: ColorFilter.mode(
+                AppColors.black.withOpacity(0.4),
+                BlendMode.srcIn,
+              ),
             ),
     );
   }

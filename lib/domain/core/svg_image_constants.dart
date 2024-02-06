@@ -44,4 +44,9 @@ class SvgImageConstant {
   //product detail
   static const share = "assets/svg/share.svg";
   static const more = 'assets/svg/more.svg';
+  static const message = 'assets/svg/chat.svg';
+  static const favourite = 'assets/svg/heart.svg';
+  static const help = 'assets/svg/help.svg';
+  static const report = 'assets/svg/report.svg';
+  static const feedback = 'assets/svg/feedback.svg';
 }
