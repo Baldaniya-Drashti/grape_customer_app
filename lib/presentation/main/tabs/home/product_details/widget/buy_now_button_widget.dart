@@ -5,6 +5,7 @@ import 'package:grape_customer_app/domain/core/png_image_constants.dart';
 import 'package:grape_customer_app/domain/core/svg_image_constants.dart';
 import 'package:grape_customer_app/presentation/core/styles/app_colors.dart';
 import 'package:grape_customer_app/presentation/core/widgets/buttons/common_button.dart';
+import 'package:grape_customer_app/presentation/main/tabs/home/product_details/widget/buy_now_dialog.dart';
 
 class BuyNowButtonWidget extends StatelessWidget {
   const BuyNowButtonWidget({super.key});
@@ -50,7 +51,9 @@ class BuyNowButtonWidget extends StatelessWidget {
         ),
         Expanded(
           child: CommonButton(
-            onPressed: () {},
+            onPressed: () {
+              BuyNowDialog().buyNowDialog(context);
+            },
             height: 42,
             buttonText: 'Buy Now',
           ),
