@@ -7,9 +7,12 @@ import 'package:grape_customer_app/domain/core/svg_image_constants.dart';
 import 'package:grape_customer_app/presentation/common/widgets/base_text.dart';
 import 'package:grape_customer_app/presentation/core/styles/app_colors.dart';
 import 'package:grape_customer_app/presentation/core/widgets/inputs/custom_app_bar.dart';
-import 'package:grape_customer_app/presentation/core/widgets/utility/common_rating_bar.dart';
+import 'package:grape_customer_app/presentation/main/tabs/home/product_details/widget/buy_now_button_widget.dart';
+import 'package:grape_customer_app/presentation/main/tabs/home/product_details/widget/pop_up_menu_widget.dart';
+import 'package:grape_customer_app/presentation/main/tabs/home/product_details/widget/product_configuration_widget.dart';
+import 'package:grape_customer_app/presentation/main/tabs/home/product_details/widget/product_main_info.dart';
+import 'package:grape_customer_app/presentation/main/tabs/home/product_details/widget/product_review_list.dart';
 import 'package:grape_customer_app/presentation/main/tabs/home/product_details/widget/select_model_widget.dart';
-import 'package:intl/intl.dart';
 
 @RoutePage(name: 'ProductDetailsView')
 class ProductDetailsView extends StatelessWidget {
@@ -30,12 +33,7 @@ class ProductDetailsView extends StatelessWidget {
           SizedBox(
             width: getSize(8),
           ),
-          GestureDetector(
-            onTap: () {},
-            child: SvgPicture.asset(
-              SvgImageConstant.more,
-            ),
-          ),
+          PopMenuWidget(),
           SizedBox(
             width: getSize(8),
           ),
@@ -44,7 +42,6 @@ class ProductDetailsView extends StatelessWidget {
       body: SafeArea(
         child: ListView(
           shrinkWrap: true,
-          // padding: EdgeInsets.symmetric(horizontal: getSize(18)),
           physics: BouncingScrollPhysics(),
           children: [
             Center(
@@ -68,159 +65,11 @@ class ProductDetailsView extends StatelessWidget {
             SizedBox(
               height: getSize(20),
             ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: getSize(18)),
-              child: Row(
-                children: [
-                  BaseText(
-                    text: 'Nothing Phone 1',
-                    fontWeight: FontWeight.w600,
-                  ),
-                  SizedBox(
-                    width: getSize(4),
-                  ),
-                  Container(
-                    height: getSize(16),
-                    width: getSize(36),
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      color: Color(0xFFFFF094),
-                      borderRadius: BorderRadius.circular(
-                        getSize(4),
-                      ),
-                    ),
-                    child: BaseText(
-                      text: '-20%',
-                      fontSize: 10,
-                      fontWeight: FontWeight.w500,
-                      textColor: Color(0xFFFF770E),
-                    ),
-                  ),
-                  Spacer(),
-                  Container(
-                    alignment: Alignment.center,
-                    padding: EdgeInsets.symmetric(
-                      horizontal: getSize(14),
-                      vertical: getSize(4),
-                    ),
-                    decoration: BoxDecoration(
-                      color: Color(0xFF666666),
-                      borderRadius: BorderRadius.circular(getSize(6)),
-                    ),
-                    child: BaseText(
-                      text: 'Out of Stock',
-                      fontSize: 12,
-                      fontWeight: FontWeight.w500,
-                      textColor: AppColors.white,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: getSize(18)),
-              child: Row(
-                children: [
-                  CommonRatingBar(
-                    onRatingUpdate: (p0) {},
-                    iconnSize: getSize(12),
-                    initialRating: 4.5,
-                    horizontalPadding: getSize(4),
-                    absorbing: true,
-                  ),
-                  SizedBox(
-                    width: getSize(4),
-                  ),
-                  BaseText(
-                    text: '200 Sold',
-                    fontSize: 12,
-                    fontWeight: FontWeight.w500,
-                  ),
-                  Spacer(),
-                  BaseText(
-                    text: '\$350',
-                    textDecoration: TextDecoration.lineThrough,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                    textColor: AppColors.black.withOpacity(0.4),
-                  ),
-                  SizedBox(
-                    width: getSize(6),
-                  ),
-                  BaseText(
-                    text: '\$350',
-                    fontSize: 20,
-                    fontWeight: FontWeight.w600,
-                    textColor: Color(0xFF527FF2),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: getSize(18)),
-              child: Row(
-                children: [
-                  SvgPicture.asset(
-                    SvgImageConstant.location,
-                    height: getSize(14),
-                    width: getSize(14),
-                    colorFilter: ColorFilter.mode(
-                      AppColors.black.withOpacity(0.7),
-                      BlendMode.srcIn,
-                    ),
-                  ),
-                  SizedBox(
-                    width: getSize(2),
-                  ),
-                  BaseText(
-                    text: 'Hyderabad',
-                    fontSize: 12,
-                    fontWeight: FontWeight.w500,
-                    textColor: AppColors.black.withOpacity(0.7),
-                  ),
-                ],
-              ),
-            ),
+            ProductMainInfo(),
             SizedBox(
               height: getSize(20),
             ),
-            getProductDetails(title: 'Brand', description: 'Nothing'),
-            SizedBox(
-              height: getSize(6),
-            ),
-            getProductDetails(title: 'Model Name', description: 'A063'),
-            SizedBox(
-              height: getSize(6),
-            ),
-            getProductDetails(title: 'Wireless Carrier', description: 'MVNO'),
-            SizedBox(
-              height: getSize(6),
-            ),
-            getProductDetails(
-                title: 'Operating System', description: 'Android 12.0'),
-            SizedBox(
-              height: getSize(6),
-            ),
-            getProductDetails(title: 'Cellular Technology', description: '5G'),
-            SizedBox(
-              height: getSize(6),
-            ),
-            getProductDetails(
-                title: 'Storage Capacity', description: '128GB/ 256GB'),
-            SizedBox(
-              height: getSize(6),
-            ),
-            getProductDetails(
-                title: 'Connectivity Technology', description: 'Wi-Fi'),
-            SizedBox(
-              height: getSize(6),
-            ),
-            getProductDetails(title: 'Screen Size', description: '3.1 Inches'),
-            SizedBox(
-              height: getSize(6),
-            ),
-            getProductDetails(
-                title: 'Wireless network technology', description: ' GSM'),
+            ProductConfigurationWidget(),
             SizedBox(
               height: getSize(20),
             ),
@@ -274,111 +123,23 @@ class ProductDetailsView extends StatelessWidget {
             SizedBox(
               height: getSize(5),
             ),
-            ListView.builder(
-              shrinkWrap: true,
-              itemCount: 5,
-              padding: EdgeInsets.symmetric(horizontal: getSize(18)),
-              physics: BouncingScrollPhysics(),
-              itemBuilder: (context, index) => Container(
-                alignment: Alignment.center,
-                padding: EdgeInsets.all(getSize(12)),
-                margin: EdgeInsets.symmetric(vertical: getSize(5)),
-                decoration: BoxDecoration(
-                  color: Color(0xFFD9D9D9).withOpacity(0.20),
-                  borderRadius: BorderRadius.circular(getSize(10)),
-                  border: Border.all(
-                    color: AppColors.black.withOpacity(0.2),
-                    width: getSize(1),
-                  ),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        CircleAvatar(
-                          radius: getSize(20),
-                          backgroundColor: Colors.grey.shade400,
-                          backgroundImage: CachedNetworkImageProvider(
-                            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS56ldGyKRHaDGinQ1tg9qMxKiw5-ZW_CyCXZ6p3R0Yg0bZNbd9KErKJhyywksv4DDhQcU&usqp=CAU',
-                          ),
-                        ),
-                        SizedBox(width: getSize(8)),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            BaseText(
-                              text: 'James Lawson',
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
-                            ),
-                            SizedBox(
-                              height: getSize(3),
-                            ),
-                            BaseText(
-                              text: DateFormat('dd MMM , yyyy').format(
-                                  DateTime.fromMillisecondsSinceEpoch(
-                                      DateTime.now().millisecondsSinceEpoch)),
-                              fontWeight: FontWeight.w500,
-                              fontSize: 10,
-                            )
-                          ],
-                        ),
-                        Spacer(),
-                        CommonRatingBar(
-                          horizontalPadding: getSize(1.2),
-                          iconnSize: getSize(12),
-                          initialRating: 4.0,
-                          absorbing: true,
-                          onRatingUpdate: (value) {},
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: getSize(12)),
-                    BaseText(
-                      text:
-                          'Nothing 1 are always very comfortable fit, clean and just perfect in every way. just the box was too small and scrunched the sneakers up a little bit, not sure if the box was always this small but the 90s are and will always be one of my favorites.',
-                      textColor: AppColors.black.withOpacity(0.6),
-                      fontSize: 12,
-                      lineHeight: 1.5,
-                      showFullDescription: true,
-                      fontWeight: FontWeight.w400,
-                    )
-                  ],
-                ),
-              ),
-            )
+            ProductReviewListWidget()
           ],
         ),
       ),
-    );
-  }
-
-  getProductDetails({required String title, required String description}) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: getSize(18)),
-      child: RichText(
-        text: TextSpan(
-          style: TextStyle(
-            fontSize: getFontSize(12),
-            color: AppColors.black.withOpacity(0.80),
-            fontFamily: 'SfPro',
-            fontWeight: FontWeight.w500,
+      bottomNavigationBar: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.only(
+            left: getSize(12),
+            right: getSize(18),
+            top: getSize(8),
+            bottom: isFullScreenDevice(context) ? 0 : getSize(18),
           ),
-          children: [
-            TextSpan(text: '$title: '),
-            TextSpan(
-              text: description,
-              style: TextStyle(
-                color: AppColors.black.withOpacity(0.60),
-                fontFamily: 'SfPro',
-                fontWeight: FontWeight.w400,
-              ),
-            )
-          ],
+          child: BuyNowButtonWidget(),
+          //
+          //
+          // OutOfStockBottomWidget(),
         ),
-        textScaler: TextScaler.linear(1),
       ),
     );
   }
