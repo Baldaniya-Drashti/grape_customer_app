@@ -84,7 +84,7 @@ class AddNewAddress extends StatelessWidget {
               ),
               bottomNavigationBar: SafeArea(
                 child: Padding(
-                  padding: EdgeInsets.all(getSize(18)),
+                  padding: EdgeInsets.symmetric(horizontal: getSize(18)),
                   child: CommonButton(
                     onPressed: () {
                       context.read<ShippingAddressesBloc>().add(
@@ -109,7 +109,6 @@ class AddNewAddress extends StatelessWidget {
       labelText: AppLocalizations.of(context).pinCode,
       initialValue: state.pinCode.getValue() ?? "",
       keyboardType: TextInputType.number,
-      initialValue: state.pinCode.getValue(),
       onChanged: (pinCode) => context.read<ShippingAddressesBloc>().add(
             ShippingAddressesEvent.pinCodeChanged(pinCode),
           ),
@@ -191,6 +190,8 @@ class AddNewAddress extends StatelessWidget {
       hintText: AppLocalizations.of(context).address,
       labelText: AppLocalizations.of(context).address,
       initialValue: state.address.getValue(),
+      maxLines: 5,
+      minLines: 1,
       onChanged: (address) => context
           .read<ShippingAddressesBloc>()
           .add(ShippingAddressesEvent.addressChanged(address)),
@@ -240,6 +241,7 @@ class AddNewAddress extends StatelessWidget {
       labelText: AppLocalizations.of(context).fullName,
       hintText: AppLocalizations.of(context).fullName,
       initialValue: state.isEdit ? state.fullName.getValue() : null,
+      textCapitalization: TextCapitalization.words,
       onChanged: (fullName) => context
           .read<ShippingAddressesBloc>()
           .add(ShippingAddressesEvent.fullNameChanged(fullName)),

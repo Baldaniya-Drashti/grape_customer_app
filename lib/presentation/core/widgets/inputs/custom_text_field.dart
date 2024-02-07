@@ -20,6 +20,7 @@ class CustomTextField extends StatelessWidget {
     this.readOnly = false,
     this.autofocus = false,
     this.maxLines = 1,
+    this.minLines,
     this.prefixIcon,
     this.validator,
     this.textInputAction,
@@ -50,6 +51,7 @@ class CustomTextField extends StatelessWidget {
   final TextCapitalization textCapitalization;
   final int? maxLength;
   final bool obscureText;
+  final int? minLines;
   @override
   Widget build(BuildContext context) {
     final border = OutlineInputBorder(
@@ -85,6 +87,7 @@ class CustomTextField extends StatelessWidget {
           autofocus: autofocus,
           readOnly: readOnly,
           inputFormatters: inputFormatters,
+          minLines: minLines,
           onTap: onTap,
           onChanged: onChanged,
           initialValue: initialValue,
