@@ -1,16 +1,17 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:grape_customer_app/domain/core/math_utils.dart';
 import 'package:grape_customer_app/domain/core/svg_image_constants.dart';
 import 'package:grape_customer_app/presentation/common/widgets/base_text.dart';
 import 'package:grape_customer_app/presentation/core/app_router.gr.dart';
-import 'package:grape_customer_app/presentation/core/styles/styles.dart';
+import 'package:grape_customer_app/presentation/core/styles/app_colors.dart';
 import 'package:grape_customer_app/presentation/core/widgets/utility/common_rating_bar.dart';
 
-class RecommandedProductWidget extends StatelessWidget {
-  const RecommandedProductWidget({super.key});
+class FavouriteGridView extends StatelessWidget {
+  const FavouriteGridView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +20,7 @@ class RecommandedProductWidget extends StatelessWidget {
       shrinkWrap: true,
       padding: EdgeInsets.symmetric(
         horizontal: getSize(18),
+        vertical: getSize(14),
       ),
       physics: BouncingScrollPhysics(),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -160,6 +162,5 @@ class RecommandedProductWidget extends StatelessWidget {
         );
       },
     );
-  
   }
 }
