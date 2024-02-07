@@ -1,6 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:grape_customer_app/domain/core/math_utils.dart';
 import 'package:grape_customer_app/presentation/common/widgets/base_text.dart';
+import 'package:grape_customer_app/presentation/core/app_router.gr.dart';
 import 'package:grape_customer_app/presentation/core/styles/app_colors.dart';
 
 class ShippingAddressWidget extends StatelessWidget {
@@ -22,11 +24,16 @@ class ShippingAddressWidget extends StatelessWidget {
               fontSize: 14,
               fontWeight: FontWeight.w600,
             ),
-            BaseText(
-              text: 'Change',
-              fontSize: 12,
-              fontWeight: FontWeight.w500,
-              textColor: AppColors.primaryOrange,
+            GestureDetector(
+              onTap: () {
+                context.router.push(PageRouteInfo(ShippingAddresses.name));
+              },
+              child: BaseText(
+                text: 'Change',
+                fontSize: 12,
+                fontWeight: FontWeight.w500,
+                textColor: AppColors.primaryOrange,
+              ),
             ),
           ],
         ),
