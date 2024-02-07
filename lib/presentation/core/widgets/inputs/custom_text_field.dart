@@ -62,9 +62,7 @@ class CustomTextField extends StatelessWidget {
     );
 
     return Column(
-      key: initialValue != null && initialValue!.isNotEmpty
-          ? Key(initialValue ?? "")
-          : Key(labelText ?? ""),
+      key: key,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (labelText != null) ...[
@@ -85,7 +83,7 @@ class CustomTextField extends StatelessWidget {
           onTap: onTap,
           onChanged: onChanged,
           initialValue: initialValue,
-          controller: controller,
+          //   controller: controller,
           cursorColor: AppColors.primaryOrange,
           keyboardType: keyboardType,
           textInputAction: textInputAction,

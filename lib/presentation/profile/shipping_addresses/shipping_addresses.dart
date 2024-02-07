@@ -28,15 +28,19 @@ class ShippingAddress extends StatelessWidget {
               actions: [
                 GestureDetector(
                   onTap: () async {
-                    var res = await context.router
-                        .push(PageRouteInfo(AddNewAddress.name,
-                            args: AddNewAddressArgs(
-                              shippingAddressResponce:
-                                  ShippingAddressResponse(),
-                            ))) as ShippingAddressResponse;
-                    context
-                        .read<ShippingAddressesBloc>()
-                        .add(ShippingAddressesEvent.addAddresses(res));
+                    var res = await context.router.push(
+                      PageRouteInfo(
+                        AddNewAddress.name,
+                        args: AddNewAddressArgs(
+                          shippingAddressResponce: ShippingAddressResponse(),
+                        ),
+                      ),
+                    );
+                    if (res != null) {
+                      context.read<ShippingAddressesBloc>().add(
+                          ShippingAddressesEvent.addAddresses(
+                              res as ShippingAddressResponse));
+                    }
                   },
                   child: Padding(
                     padding: EdgeInsets.only(right: getSize(16)),

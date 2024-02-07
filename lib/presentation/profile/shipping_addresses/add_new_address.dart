@@ -103,6 +103,7 @@ class AddNewAddress extends StatelessWidget {
   CustomTextField pinCodeTextFiled(
       BuildContext context, ShippingAddressesState state) {
     return CustomTextField(
+      key: state.isEdit ? Key('pinCode') : null,
       hintText: AppLocalizations.of(context).pinCode,
       labelText: AppLocalizations.of(context).pinCode,
       initialValue: state.pinCode.getValue() ?? "",
@@ -123,6 +124,7 @@ class AddNewAddress extends StatelessWidget {
   CustomTextField cityTextFiled(
       BuildContext context, ShippingAddressesState state) {
     return CustomTextField(
+      key: state.isEdit ? Key('city') : null,
       hintText: AppLocalizations.of(context).city,
       labelText: AppLocalizations.of(context).city,
       initialValue: state.city.getValue() ?? "",
@@ -142,6 +144,7 @@ class AddNewAddress extends StatelessWidget {
   CustomTextField stateTextFiled(
       BuildContext context, ShippingAddressesState state) {
     return CustomTextField(
+      key: state.isEdit ? Key('state') : null,
       hintText: AppLocalizations.of(context).state,
       labelText: AppLocalizations.of(context).state,
       initialValue: state.state.getValue() ?? "",
@@ -161,6 +164,7 @@ class AddNewAddress extends StatelessWidget {
   CustomTextField landMarkTextFiled(
       BuildContext context, ShippingAddressesState state) {
     return CustomTextField(
+      key: state.isEdit ? Key('landMark') : null,
       hintText: AppLocalizations.of(context).landMark,
       labelText: AppLocalizations.of(context).landMark,
       initialValue: state.landMark.getValue() ?? "",
@@ -181,6 +185,7 @@ class AddNewAddress extends StatelessWidget {
   CustomTextField addressTextFiled(
       BuildContext context, ShippingAddressesState state) {
     return CustomTextField(
+      key: state.isEdit ? Key('address') : null,
       hintText: AppLocalizations.of(context).address,
       labelText: AppLocalizations.of(context).address,
       maxLines: 3,
@@ -201,9 +206,10 @@ class AddNewAddress extends StatelessWidget {
   CustomTextField mobileNumberTextFiled(
       BuildContext context, ShippingAddressesState state) {
     return CustomTextField(
+      key: state.isEdit ? Key('mobileNumber') : null,
       labelText: AppLocalizations.of(context).mobileNumber,
       hintText: AppLocalizations.of(context).mobileNumber,
-      initialValue: state.mobileNumber.getValue(),
+      initialValue: state.isEdit ? state.mobileNumber.getValue() : null,
       keyboardType: TextInputType.phone,
       onChanged: (mobileNumber) => context
           .read<ShippingAddressesBloc>()
@@ -229,9 +235,10 @@ class AddNewAddress extends StatelessWidget {
   CustomTextField fullNameTextFiled(
       BuildContext context, ShippingAddressesState state) {
     return CustomTextField(
+      key: state.isEdit ? Key('fullName') : null,
       labelText: AppLocalizations.of(context).fullName,
       hintText: AppLocalizations.of(context).fullName,
-      initialValue: state.fullName.getValue(),
+      initialValue: state.isEdit ? state.fullName.getValue() : null,
       onChanged: (fullName) => context
           .read<ShippingAddressesBloc>()
           .add(ShippingAddressesEvent.fullNameChanged(fullName)),
