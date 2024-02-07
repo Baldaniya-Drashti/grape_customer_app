@@ -82,15 +82,16 @@ class AddNewAddress extends StatelessWidget {
                   );
                 },
               ),
-              bottomNavigationBar: Padding(
-                padding: EdgeInsets.all(getSize(18)),
-                child: CommonButton(
-                  onPressed: () {
-                    context
-                        .read<ShippingAddressesBloc>()
-                        .add(ShippingAddressesEvent.saveButtonPressed(context));
-                  },
-                  buttonText: AppLocalizations.of(context).save,
+              bottomNavigationBar: SafeArea(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: getSize(18)),
+                  child: CommonButton(
+                    onPressed: () {
+                      context.read<ShippingAddressesBloc>().add(
+                          ShippingAddressesEvent.saveButtonPressed(context));
+                    },
+                    buttonText: AppLocalizations.of(context).save,
+                  ),
                 ),
               ),
             );
@@ -127,7 +128,7 @@ class AddNewAddress extends StatelessWidget {
       key: state.isEdit ? Key('city') : null,
       hintText: AppLocalizations.of(context).city,
       labelText: AppLocalizations.of(context).city,
-      initialValue: state.city.getValue() ?? "",
+      initialValue: state.city.getValue(),
       onChanged: (city) => context.read<ShippingAddressesBloc>().add(
             ShippingAddressesEvent.cityChanged(city),
           ),
@@ -188,8 +189,9 @@ class AddNewAddress extends StatelessWidget {
       key: state.isEdit ? Key('address') : null,
       hintText: AppLocalizations.of(context).address,
       labelText: AppLocalizations.of(context).address,
-      maxLines: 3,
       initialValue: state.address.getValue(),
+      maxLines: 5,
+      minLines: 1,
       onChanged: (address) => context
           .read<ShippingAddressesBloc>()
           .add(ShippingAddressesEvent.addressChanged(address)),
@@ -239,6 +241,7 @@ class AddNewAddress extends StatelessWidget {
       labelText: AppLocalizations.of(context).fullName,
       hintText: AppLocalizations.of(context).fullName,
       initialValue: state.isEdit ? state.fullName.getValue() : null,
+      textCapitalization: TextCapitalization.words,
       onChanged: (fullName) => context
           .read<ShippingAddressesBloc>()
           .add(ShippingAddressesEvent.fullNameChanged(fullName)),

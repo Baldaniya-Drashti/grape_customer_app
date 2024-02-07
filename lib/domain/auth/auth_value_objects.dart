@@ -68,6 +68,43 @@ class InputEmptyOrNot extends ValueObject<String?> {
   const InputEmptyOrNot._(this.value);
 }
 
+class CardNumber extends ValueObject<String?> {
+  @override
+  final Either<ValueFailure<String?>, String?> value;
+
+  factory CardNumber(String input) {
+    return CardNumber._(
+      validateCardNumber(input),
+    );
+  }
+
+  const CardNumber._(this.value);
+}
+
+class CardDate extends ValueObject<String?> {
+  @override
+  final Either<ValueFailure<String?>, String?> value;
+
+  factory CardDate(String value) {
+    return CardDate._(
+      validateCardDate(value),
+    );
+  }
+
+  const CardDate._(this.value);
+}
+
+class CVV extends ValueObject<String?> {
+  @override
+  final Either<ValueFailure<String?>, String?> value;
+
+  factory CVV(String value) {
+    return CVV._(
+      validateCvv(value),
+    );
+  }  const CVV._(this.value);
+}
+
 class Password extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;
@@ -77,6 +114,5 @@ class Password extends ValueObject<String> {
       validatePassword(input),
     );
   }
-
   const Password._(this.value);
 }

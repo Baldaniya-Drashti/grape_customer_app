@@ -27,8 +27,12 @@ class AppRouter extends $AppRouter {
         AutoRoute(page: EditProfileScreen.page),
         AutoRoute(page: ShippingAddresses.page),
         AutoRoute(page: AddNewAddress.page),
+        AutoRoute(page: PaymentMethod.page),
+        AutoRoute(page: AddNewCard.page),
         AutoRoute(page: SearchView.page),
         AutoRoute(page: ProductDetailsView.page),
         AutoRoute(page: CheckoutView.page),
+        AutoRoute(page: PaymentMethod.page),
+        AutoRoute(page: AddNewCard.page),
       ];
 }
