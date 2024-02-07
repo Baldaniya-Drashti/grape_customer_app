@@ -43,6 +43,54 @@ Either<ValueFailure<String>, String> validateMobileNumber(String input) {
   }
 }
 
+Either<ValueFailure<String>, String> validateCardNumber(String input) {
+  if (validateStringNotEmpty(input).isRight()) {
+    if (input.length > 12) {
+      return right(input);
+    } else {
+      return left(ValueFailure.invalidCardNumber(failedValue: input));
+    }
+  } else {
+    return left(ValueFailure.empty(failedValue: input));
+  }
+}
+
+Either<ValueFailure<String>, String> validateCvv(String input) {
+  if (input.length < 3 || input.length > 4) {
+    return left(ValueFailure.invalidCvv(failedValue: input));
+  } else {
+    return right(input);
+  }
+}
+
+Either<ValueFailure<String>, String> validateCardDate(String input) {
+  if (validateStringNotEmpty(input).isRight()) {
+    int year;
+    int month;
+    if (input.contains(RegExp(r'(/)'))) {
+      var split = input.split(RegExp(r'(/)'));
+
+      month = int.parse(split[0]);
+      year = int.parse(split[1]);
+    } else {
+      month = int.parse(input.substring(0, (input.length)));
+      year = -1;
+    }
+    var fourDigitsYear = convertYearTo4Digits(year);
+    if ((month < 1) || (month > 12)) {
+      return left(ValueFailure.invalidaCardMonth(failedValue: input));
+    } else if ((fourDigitsYear < 1) || (fourDigitsYear > 2099)) {
+      return left(ValueFailure.invalidaCardYear(failedValue: input));
+    } else if (!hasDateExpired(month, year)) {
+      return left(ValueFailure.cardExpired(failedValue: input));
+    } else {
+      return right(input);
+    }
+  } else {
+    return left(ValueFailure.empty(failedValue: input));
+  }
+}
+
 Either<ValueFailure<String>, String> validatePassword(String input) {
   if (input.length >= 6) {
     return right(input);
@@ -135,4 +183,35 @@ Either<ValueFailure<String>, String> validateUID(String input) {
   } else {
     return left(ValueFailure.invalidUID(failedValue: input));
   }
+}
+
+bool hasDateExpired(int month, int year) {
+  return isNotExpired(year, month);
+}
+
+bool isNotExpired(int year, int month) {
+  return !hasYearPassed(year) && !hasMonthPassed(year, month);
+}
+
+bool hasYearPassed(int year) {
+  int fourDigitsYear = convertYearTo4Digits(year);
+  var now = DateTime.now();
+
+  return fourDigitsYear < now.year;
+}
+
+int convertYearTo4Digits(int year) {
+  if (year < 100 && year >= 0) {
+    var now = DateTime.now();
+    String currentYear = now.year.toString();
+    String prefix = currentYear.substring(0, currentYear.length - 2);
+    year = int.parse('$prefix${year.toString().padLeft(2, '0')}');
+  }
+  return year;
+}
+
+bool hasMonthPassed(int year, int month) {
+  var now = DateTime.now();
+  return hasYearPassed(year) ||
+      convertYearTo4Digits(year) == now.year && (month < now.month + 1);
 }

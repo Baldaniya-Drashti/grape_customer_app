@@ -36,6 +36,20 @@
     "enterCity",
     "pinCode",
     "enterPinCode",
-    "edit"
+    "edit",
+    "addNewCard",
+    "cardHoldersName",
+    "cardNumber",
+    "validUpTo",
+    "cvv",
+    "cardHolderHintText",
+    "cardNumberHintText",
+    "validUpToHintText",
+    "enterCardHolderName",
+    "enterCardNumber",
+    "enterCardDate",
+    "enterCvv",
+    "noData",
+    "creditDebitCard"
   ]
 }

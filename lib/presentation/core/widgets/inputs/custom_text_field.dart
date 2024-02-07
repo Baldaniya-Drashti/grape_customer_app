@@ -26,6 +26,8 @@ class CustomTextField extends StatelessWidget {
     this.textCapitalization = TextCapitalization.none,
     this.errorMaxLines,
     this.suffixIcon,
+    this.maxLength,
+    this.obscureText = false,
   }) : super(key: key);
 
   final List<TextInputFormatter>? inputFormatters;
@@ -46,6 +48,8 @@ class CustomTextField extends StatelessWidget {
   final int? errorMaxLines;
   final TextInputAction? textInputAction;
   final TextCapitalization textCapitalization;
+  final int? maxLength;
+  final bool obscureText;
   @override
   Widget build(BuildContext context) {
     final border = OutlineInputBorder(
@@ -62,6 +66,7 @@ class CustomTextField extends StatelessWidget {
     );
 
     return Column(
+      key: key,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (labelText != null) ...[
@@ -76,12 +81,14 @@ class CustomTextField extends StatelessWidget {
           validator: (inputString) {
             return validator?.call(inputString, context);
           },
+          maxLength: maxLength,
           autofocus: autofocus,
           readOnly: readOnly,
           inputFormatters: inputFormatters,
           onTap: onTap,
           onChanged: onChanged,
           initialValue: initialValue,
+          obscureText: obscureText,
           controller: controller,
           cursorColor: AppColors.primaryOrange,
           keyboardType: keyboardType,
@@ -89,6 +96,9 @@ class CustomTextField extends StatelessWidget {
           textCapitalization: textCapitalization,
           maxLines: maxLines,
           decoration: decoration?.copyWith(
+                counterStyle: TextStyle(
+                  height: double.minPositive,
+                ),
                 filled: true,
                 fillColor: AppColors.extraLightGrey,
                 isDense: true,
@@ -100,6 +110,7 @@ class CustomTextField extends StatelessWidget {
                 hintStyle: const TextStyle(color: AppColors.lightGrey),
               ) ??
               InputDecoration(
+                counterText: '',
                 filled: true,
                 fillColor: AppColors.white.withOpacity(0.2),
                 hintText: hintText,

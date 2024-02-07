@@ -362,6 +362,90 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Edit'**
   String get edit;
+
+  /// No description provided for @addNewCard.
+  ///
+  /// In en, this message translates to:
+  /// **'Add New Card'**
+  String get addNewCard;
+
+  /// No description provided for @cardHoldersName.
+  ///
+  /// In en, this message translates to:
+  /// **'Card Holder’s Name'**
+  String get cardHoldersName;
+
+  /// No description provided for @cardNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Card Number'**
+  String get cardNumber;
+
+  /// No description provided for @validUpTo.
+  ///
+  /// In en, this message translates to:
+  /// **'Valid Up To'**
+  String get validUpTo;
+
+  /// No description provided for @cvv.
+  ///
+  /// In en, this message translates to:
+  /// **'CVV'**
+  String get cvv;
+
+  /// No description provided for @cardHolderHintText.
+  ///
+  /// In en, this message translates to:
+  /// **'Name on Card'**
+  String get cardHolderHintText;
+
+  /// No description provided for @cardNumberHintText.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter 12 Digit Card Number'**
+  String get cardNumberHintText;
+
+  /// No description provided for @validUpToHintText.
+  ///
+  /// In en, this message translates to:
+  /// **'MM/YY'**
+  String get validUpToHintText;
+
+  /// No description provided for @enterCardHolderName.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter the card holder Name'**
+  String get enterCardHolderName;
+
+  /// No description provided for @enterCardNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter the valid card number'**
+  String get enterCardNumber;
+
+  /// No description provided for @enterCardDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter the valid card date'**
+  String get enterCardDate;
+
+  /// No description provided for @enterCvv.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter the valid CVV'**
+  String get enterCvv;
+
+  /// No description provided for @noData.
+  ///
+  /// In en, this message translates to:
+  /// **'No data!'**
+  String get noData;
+
+  /// No description provided for @creditDebitCard.
+  ///
+  /// In en, this message translates to:
+  /// **'Credit/Debit Card'**
+  String get creditDebitCard;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

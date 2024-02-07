@@ -52,4 +52,22 @@ class ValueFailure<T> with _$ValueFailure<T> {
   const factory ValueFailure.invalidUID({
     required T failedValue,
   }) = InvalidUID<T>;
+
+  const factory ValueFailure.invalidCardNumber({
+    required T failedValue,
+  }) = InvalidCardNumber<T>;
+
+  const factory ValueFailure.invalidaCardMonth({
+    required T failedValue,
+  }) = InvalidCardMonth<T>;
+  const factory ValueFailure.invalidaCardYear({
+    required T failedValue,
+  }) = InvalidCardYear<T>;
+  const factory ValueFailure.cardExpired({
+    required T failedValue,
+  }) = CardExpired<T>;
+
+  const factory ValueFailure.invalidCvv({
+    required T failedValue,
+  }) = InvalidCvv<T>;
 }

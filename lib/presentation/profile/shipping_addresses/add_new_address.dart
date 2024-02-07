@@ -59,23 +59,23 @@ class AddNewAddress extends StatelessWidget {
                         SizedBox(
                           height: getSize(20),
                         ),
-                        addressTextFiled(context),
+                        addressTextFiled(context, state),
                         SizedBox(
                           height: getSize(20),
                         ),
-                        landMarkTextFiled(context),
+                        landMarkTextFiled(context, state),
                         SizedBox(
                           height: getSize(20),
                         ),
-                        stateTextFiled(context),
+                        stateTextFiled(context, state),
                         SizedBox(
                           height: getSize(20),
                         ),
-                        cityTextFiled(context),
+                        cityTextFiled(context, state),
                         SizedBox(
                           height: getSize(20),
                         ),
-                        pinCodeTextFiled(context),
+                        pinCodeTextFiled(context, state),
                         SizedBox(
                           height: getSize(20),
                         ),
@@ -84,15 +84,16 @@ class AddNewAddress extends StatelessWidget {
                   );
                 },
               ),
-              bottomNavigationBar: Padding(
-                padding: EdgeInsets.all(getSize(18)),
-                child: CommonButton(
-                  onPressed: () {
-                    context
-                        .read<ShippingAddressesBloc>()
-                        .add(ShippingAddressesEvent.saveButtonPressed(context));
-                  },
-                  buttonText: AppLocalizations.of(context).save,
+              bottomNavigationBar: SafeArea(
+                child: Padding(
+                  padding: EdgeInsets.all(getSize(18)),
+                  child: CommonButton(
+                    onPressed: () {
+                      context.read<ShippingAddressesBloc>().add(
+                          ShippingAddressesEvent.saveButtonPressed(context));
+                    },
+                    buttonText: AppLocalizations.of(context).save,
+                  ),
                 ),
               ),
             );
@@ -102,11 +103,13 @@ class AddNewAddress extends StatelessWidget {
     );
   }
 
-  CustomTextField pinCodeTextFiled(BuildContext context) {
+  CustomTextField pinCodeTextFiled(
+      BuildContext context, ShippingAddressesState state) {
     return CustomTextField(
       hintText: AppLocalizations.of(context).pinCode,
       labelText: AppLocalizations.of(context).pinCode,
       keyboardType: TextInputType.number,
+      initialValue: state.pinCode.getValue(),
       onChanged: (pinCode) => context.read<ShippingAddressesBloc>().add(
             ShippingAddressesEvent.pinCodeChanged(pinCode),
           ),
@@ -120,10 +123,12 @@ class AddNewAddress extends StatelessWidget {
     );
   }
 
-  CustomTextField cityTextFiled(BuildContext context) {
+  CustomTextField cityTextFiled(
+      BuildContext context, ShippingAddressesState state) {
     return CustomTextField(
       hintText: AppLocalizations.of(context).city,
       labelText: AppLocalizations.of(context).city,
+      initialValue: state.city.getValue(),
       onChanged: (city) => context.read<ShippingAddressesBloc>().add(
             ShippingAddressesEvent.cityChanged(city),
           ),
@@ -137,10 +142,12 @@ class AddNewAddress extends StatelessWidget {
     );
   }
 
-  CustomTextField stateTextFiled(BuildContext context) {
+  CustomTextField stateTextFiled(
+      BuildContext context, ShippingAddressesState state) {
     return CustomTextField(
       hintText: AppLocalizations.of(context).state,
       labelText: AppLocalizations.of(context).state,
+      initialValue: state.state.getValue(),
       onChanged: (state) => context.read<ShippingAddressesBloc>().add(
             ShippingAddressesEvent.stateChanged(state),
           ),
@@ -154,10 +161,12 @@ class AddNewAddress extends StatelessWidget {
     );
   }
 
-  CustomTextField landMarkTextFiled(BuildContext context) {
+  CustomTextField landMarkTextFiled(
+      BuildContext context, ShippingAddressesState state) {
     return CustomTextField(
       hintText: AppLocalizations.of(context).landMark,
       labelText: AppLocalizations.of(context).landMark,
+      initialValue: state.landMark.getValue(),
       onChanged: (landMark) => context.read<ShippingAddressesBloc>().add(
             ShippingAddressesEvent.landMarkChanged(landMark),
           ),
@@ -172,11 +181,12 @@ class AddNewAddress extends StatelessWidget {
     );
   }
 
-  CustomTextField addressTextFiled(BuildContext context) {
+  CustomTextField addressTextFiled(
+      BuildContext context, ShippingAddressesState state) {
     return CustomTextField(
       hintText: AppLocalizations.of(context).address,
       labelText: AppLocalizations.of(context).address,
-      maxLines: 3,
+      initialValue: state.address.getValue(),
       onChanged: (address) => context
           .read<ShippingAddressesBloc>()
           .add(ShippingAddressesEvent.addressChanged(address)),
@@ -193,9 +203,9 @@ class AddNewAddress extends StatelessWidget {
   CustomTextField mobileNumberTextFiled(
       BuildContext context, ShippingAddressesState state) {
     return CustomTextField(
+      initialValue: state.mobileNumber.getValue(),
       labelText: AppLocalizations.of(context).mobileNumber,
       hintText: AppLocalizations.of(context).mobileNumber,
-      initialValue: state.selectedAddressItems.mobileNumber ?? "",
       keyboardType: TextInputType.phone,
       onChanged: (mobileNumber) => context
           .read<ShippingAddressesBloc>()
@@ -223,7 +233,8 @@ class AddNewAddress extends StatelessWidget {
     return CustomTextField(
       labelText: AppLocalizations.of(context).fullName,
       hintText: AppLocalizations.of(context).fullName,
-      // initialValue: state.isEdit ? state.selectedAddressItems.fullName : null,
+      initialValue: state.fullName.getValue(),
+      textCapitalization: TextCapitalization.words,
       onChanged: (fullName) => context
           .read<ShippingAddressesBloc>()
           .add(ShippingAddressesEvent.fullNameChanged(fullName)),

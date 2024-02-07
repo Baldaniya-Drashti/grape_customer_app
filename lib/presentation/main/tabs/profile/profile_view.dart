@@ -140,8 +140,8 @@ class ProfileView extends StatelessWidget {
             selectionListTile(
               iconUrl: SvgImageConstant.payment,
               title: AppLocalizations.of(context).paymentMethods,
-              onTap: () {
-                showError(message: 'Under Developemnt').show(context);
+              onTap: () async {
+                await context.router.push(PageRouteInfo(PaymentMethod.name));
               },
             ),
             selectionListTile(
