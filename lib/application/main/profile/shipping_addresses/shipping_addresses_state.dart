@@ -14,7 +14,6 @@ class ShippingAddressesState with _$ShippingAddressesState {
     required bool showErrorMessages,
     required Option<Either<AuthFailure, String>> failureOrSuccessOption,
     required List<ShippingAddressResponse> addressList,
-    
     required int selectedIndex,
     required bool isEdit,
   }) = _ShippingAddressesState;
@@ -32,6 +31,5 @@ class ShippingAddressesState with _$ShippingAddressesState {
         addressList: [],
         selectedIndex: 0,
         isEdit: false,
-     
       );
 }

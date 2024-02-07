@@ -190,7 +190,6 @@ class AddNewAddress extends StatelessWidget {
       key: state.isEdit ? Key('address') : null,
       hintText: AppLocalizations.of(context).address,
       labelText: AppLocalizations.of(context).address,
-      maxLines: 3,
       initialValue: state.address.getValue(),
       onChanged: (address) => context
           .read<ShippingAddressesBloc>()
