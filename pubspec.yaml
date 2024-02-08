@@ -87,6 +87,8 @@ dependencies:
   permission_handler: ^11.1.0
   shimmer: ^3.0.0
   country_picker: ^2.0.23
+  socket_io_client: ^2.0.3+1
+  sticky_headers: ^0.3.0+2
 
 
   

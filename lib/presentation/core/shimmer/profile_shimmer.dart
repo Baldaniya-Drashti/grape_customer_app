@@ -12,12 +12,12 @@ class ProfileShimmer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Shimmer.fromColors(
       baseColor: Colors.grey.shade300,
-      highlightColor: Colors.grey.shade100,
+      highlightColor: Colors.grey.shade200,
       child: Container(
         padding: EdgeInsets.all(getSize(10)),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: AppColors.grey,
+          color: Colors.grey.shade50,
         ),
         child: Row(
           mainAxisSize: MainAxisSize.min,
@@ -28,7 +28,7 @@ class ProfileShimmer extends StatelessWidget {
               alignment: Alignment.center,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(6),
-                color: AppColors.grey,
+                color: Colors.grey.shade50,
                 shape: BoxShape.rectangle,
               ),
             ),
@@ -45,7 +45,7 @@ class ProfileShimmer extends StatelessWidget {
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(6),
-                      color: AppColors.grey,
+                      color: Colors.grey.shade50,
                       shape: BoxShape.rectangle,
                     ),
                   ),
@@ -68,7 +68,7 @@ class ProfileShimmer extends StatelessWidget {
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(6),
-                          color: AppColors.grey,
+                          color: Colors.grey.shade50,
                           shape: BoxShape.rectangle,
                         ),
                       ),
