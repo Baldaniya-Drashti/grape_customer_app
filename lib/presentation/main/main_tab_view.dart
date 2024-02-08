@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grape_customer_app/application/main/home/home_bloc.dart';
 import 'package:grape_customer_app/application/main/profile/get_account/account_cubit.dart';
 import 'package:grape_customer_app/application/main_tab/main_tab_bloc.dart';
+import 'package:grape_customer_app/application/main_tab/notifications/notifications_bloc.dart';
 import 'package:grape_customer_app/domain/core/l10n/app_localizations.dart';
 import 'package:grape_customer_app/injection.dart';
 import 'package:grape_customer_app/presentation/common/utils/app_focus.dart';
@@ -11,6 +12,7 @@ import 'package:grape_customer_app/presentation/core/app_router.gr.dart'
     as autoroute;
 import 'package:grape_customer_app/presentation/core/widgets/inputs/custom_app_bar.dart';
 import 'package:grape_customer_app/presentation/main/tabs/cart/cart_view.dart';
+import 'package:grape_customer_app/presentation/main/tabs/notification/widgets/notification_appbar.dart';
 import 'package:grape_customer_app/presentation/main/tabs/favourite/favourite_view.dart';
 import 'package:grape_customer_app/presentation/main/tabs/home/home_view.dart';
 import 'package:grape_customer_app/presentation/main/tabs/home/widgets/home_app_bar.dart';
@@ -37,36 +39,42 @@ class MainTabView extends StatelessWidget {
         BlocProvider(
           create: (context) => HomeBloc()..add(HomeEvent.getCurrentLocation()),
         ),
+        BlocProvider(
+          create: (context) => NotificationsBloc(),
+        ),
       ],
       child: BlocBuilder<MainTabBloc, MainTabState>(
         builder: (context, state) {
           // context
           //     .read<MainTabBloc>()
           //     .add(MainTabEvent.pushNotificationInitialize(context));
-          return Scaffold(
-            appBar: getAppbar(state, context),
-            body: GestureDetector(
-              onTap: () {
-                AppFocus.unfocus(context);
-              },
-              child: IndexedStack(
-                index: state.pageIndex,
-                children: List<Widget>.generate(
-                  context.read<MainTabBloc>().pageList.length,
-                  (int index) {
-                    return Navigator(
-                      onGenerateRoute: (RouteSettings settings) {
-                        return onGenerateRoute(
-                          settings,
-                          context.read<MainTabBloc>().pageList[index],
-                        );
-                      },
-                    );
-                  },
+          return DefaultTabController(
+            length: 2,
+            child: Scaffold(
+              appBar: getAppbar(state, context),
+              body: GestureDetector(
+                onTap: () {
+                  AppFocus.unfocus(context);
+                },
+                child: IndexedStack(
+                  index: state.pageIndex,
+                  children: List<Widget>.generate(
+                    context.read<MainTabBloc>().pageList.length,
+                    (int index) {
+                      return Navigator(
+                        onGenerateRoute: (RouteSettings settings) {
+                          return onGenerateRoute(
+                            settings,
+                            context.read<MainTabBloc>().pageList[index],
+                          );
+                        },
+                      );
+                    },
+                  ),
                 ),
               ),
+              bottomNavigationBar: CustomBottomNavigationWidget(),
             ),
-            bottomNavigationBar: CustomBottomNavigationWidget(),
           );
         },
       ),
@@ -82,7 +90,7 @@ class MainTabView extends StatelessWidget {
       case 2:
         return CustomAppBar(title: AppLocalizations.of(context).myCart);
       case 3:
-        return CustomAppBar(title: AppLocalizations.of(context).notifications);
+        return NotificationAppBar();
       case 4:
         return CustomAppBar(title: AppLocalizations.of(context).profile);
       default:
