@@ -39,5 +39,6 @@ class AppRouter extends $AppRouter {
         AutoRoute(page: SearchView.page),
         AutoRoute(page: ProductDetailsView.page),
         AutoRoute(page: CheckoutView.page),
+        AutoRoute(page: ChatView.page),
       ];
 }

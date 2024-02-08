@@ -95,25 +95,42 @@ class CustomBottomNavigationWidget extends StatelessWidget {
       height: getSize(34),
       width: getSize(34),
       alignment: Alignment.center,
-      child: isPng
-          ? Image.asset(
-              iconName,
-              height: getSize(24),
-              width: getSize(24),
-            )
-          : SvgPicture.asset(
-              iconName,
-              height: getSize(24),
-              width: getSize(24),
-              colorFilter: ColorFilter.mode(
-                AppColors.black.withOpacity(0.4),
-                BlendMode.srcIn,
+      child: Stack(
+        alignment: Alignment.topRight,
+        children: [
+          isPng
+              ? Image.asset(
+                  iconName,
+                  height: getSize(24),
+                  width: getSize(24),
+                )
+              : SvgPicture.asset(
+                  iconName,
+                  height: getSize(24),
+                  width: getSize(24),
+                  colorFilter: ColorFilter.mode(
+                    AppColors.black.withOpacity(0.4),
+                    BlendMode.srcIn,
+                  ),
+                ),
+          Visibility(
+            visible: iconName.contains(SvgImageConstant.notificationSelected) ||
+                iconName.contains(SvgImageConstant.notificationUnselected),
+            child: Container(
+              height: getSize(8),
+              width: getSize(8),
+              decoration: BoxDecoration(
+                color: AppColors.red,
+                shape: BoxShape.circle,
               ),
             ),
+          ),
+        ],
+      ),
     );
   }
 
-  Container getSelectedIcons({bool isPng = false, required String iconName}) {
+  getSelectedIcons({bool isPng = false, required String iconName}) {
     return Container(
       height: getSize(34),
       width: getSize(34),
@@ -123,23 +140,40 @@ class CustomBottomNavigationWidget extends StatelessWidget {
         color: AppColors.primaryOrange.withOpacity(0.2),
         boxShadow: [
           BoxShadow(
-            color: AppColors.primaryOrange.withOpacity(0.1),
+            color: AppColors.primaryOrange.withOpacity(0.2),
             offset: Offset(1, 1),
             blurRadius: getSize(5),
           ),
         ],
       ),
-      child: isPng
-          ? Image.asset(
-              iconName,
-              height: getSize(24),
-              width: getSize(24),
-            )
-          : SvgPicture.asset(
-              iconName,
-              height: getSize(24),
-              width: getSize(24),
+      child: Stack(
+        alignment: Alignment.topRight,
+        children: [
+          isPng
+              ? Image.asset(
+                  iconName,
+                  height: getSize(24),
+                  width: getSize(24),
+                )
+              : SvgPicture.asset(
+                  iconName,
+                  height: getSize(24),
+                  width: getSize(24),
+                ),
+          Visibility(
+            visible: iconName.contains(SvgImageConstant.notificationSelected) ||
+                iconName.contains(SvgImageConstant.notificationUnselected),
+            child: Container(
+              height: getSize(8),
+              width: getSize(8),
+              decoration: BoxDecoration(
+                color: AppColors.red,
+                shape: BoxShape.circle,
+              ),
             ),
+          ),
+        ],
+      ),
     );
   }
 }
