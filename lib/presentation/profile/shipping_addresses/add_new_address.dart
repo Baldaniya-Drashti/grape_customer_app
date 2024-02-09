@@ -84,7 +84,10 @@ class AddNewAddress extends StatelessWidget {
               ),
               bottomNavigationBar: SafeArea(
                 child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: getSize(18)),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: getSize(18),
+                    vertical: isFullScreenDevice(context) ? 0 : getSize(18),
+                  ),
                   child: CommonButton(
                     onPressed: () {
                       context.read<ShippingAddressesBloc>().add(

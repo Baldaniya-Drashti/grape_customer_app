@@ -93,9 +93,14 @@ abstract class $AppRouter extends _i24.RootStackRouter {
       );
     },
     CheckoutView.name: (routeData) {
+      final args = routeData.argsAs<CheckoutViewArgs>(
+          orElse: () => const CheckoutViewArgs());
       return _i24.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i5.CheckoutView(),
+        child: _i5.CheckoutView(
+          key: args.key,
+          isFromCart: args.isFromCart,
+        ),
       );
     },
     EditProfileScreen.name: (routeData) {
@@ -314,16 +319,40 @@ class ChatView extends _i24.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i5.CheckoutView]
-class CheckoutView extends _i24.PageRouteInfo<void> {
-  const CheckoutView({List<_i24.PageRouteInfo>? children})
-      : super(
+class CheckoutView extends _i24.PageRouteInfo<CheckoutViewArgs> {
+  CheckoutView({
+    _i25.Key? key,
+    bool isFromCart = false,
+    List<_i24.PageRouteInfo>? children,
+  }) : super(
           CheckoutView.name,
+          args: CheckoutViewArgs(
+            key: key,
+            isFromCart: isFromCart,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'CheckoutView';
 
-  static const _i24.PageInfo<void> page = _i24.PageInfo<void>(name);
+  static const _i24.PageInfo<CheckoutViewArgs> page =
+      _i24.PageInfo<CheckoutViewArgs>(name);
+}
+
+class CheckoutViewArgs {
+  const CheckoutViewArgs({
+    this.key,
+    this.isFromCart = false,
+  });
+
+  final _i25.Key? key;
+
+  final bool isFromCart;
+
+  @override
+  String toString() {
+    return 'CheckoutViewArgs{key: $key, isFromCart: $isFromCart}';
+  }
 }
 
 /// generated route for

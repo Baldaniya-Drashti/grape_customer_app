@@ -74,7 +74,7 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
             emit(state.copyWith(secondsRemaining: state.secondsRemaining - 1));
           },
           resendOtp: (ResendOtp value) async {
-            timer.cancel();
+            //timer.cancel();
 
             Either<AuthFailure, String>? failureOrSuccess;
 
@@ -86,7 +86,7 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
             );
 
             failureOrSuccess = await _authFacade.resendOtp(
-              countryCode: state.selectedCountrycode,
+              countryCode: '+${state.selectedCountrycode}',
               mobileNumber: state.mobileNumber,
             );
 
@@ -95,7 +95,7 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
                 isSubmitting: false,
                 //showErrorMessages: true,
                 secondsRemaining: 30,
-                authFailureOrSuccessOption: optionOf(failureOrSuccess),
+                resendFailureOrSuccessOption: optionOf(failureOrSuccess),
               ),
             );
             add(LoginFormEvent.startCountdown());

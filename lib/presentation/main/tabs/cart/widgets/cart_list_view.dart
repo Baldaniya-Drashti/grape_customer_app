@@ -37,7 +37,10 @@ class CartListView extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: getSize(18)),
           child: CommonButton(
             onPressed: () {
-              context.router.push(PageRouteInfo(CheckoutView.name));
+              context.router.push(
+                PageRouteInfo(CheckoutView.name,
+                    args: CheckoutViewArgs(isFromCart: true)),
+              );
             },
             buttonText: 'Checkout',
           ),
@@ -57,10 +60,11 @@ class CartListView extends StatelessWidget {
         color: AppColors.white,
         borderRadius: BorderRadius.circular(getSize(10)),
         border: Border.all(
-          color: AppColors.primaryOrange,
+          color: AppColors.primaryOrange.withOpacity(0.20),
         ),
       ),
       child: Stack(
+        clipBehavior: Clip.none,
         children: [
           Row(
             children: [
@@ -139,11 +143,16 @@ class CartListView extends StatelessWidget {
             ),
           ),
           Positioned.fill(
+            top: getSize(-10),
+            right: getSize(-10),
             child: Align(
               alignment: Alignment.topRight,
               child: IconButton(
                 onPressed: () {},
-                icon: Icon(Icons.close_rounded),
+                icon: Icon(
+                  Icons.close_rounded,
+                  color: AppColors.black.withOpacity(0.60),
+                ),
               ),
             ),
           ),
