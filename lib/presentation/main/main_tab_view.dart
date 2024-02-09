@@ -80,41 +80,41 @@ class MainTabView extends StatelessWidget {
       ),
     );
   }
+}
 
-  getAppbar(MainTabState state, BuildContext context) {
-    switch (state.selectedTab) {
-      case 0:
-        return HomeAppbar();
-      case 1:
-        return CustomAppBar(title: AppLocalizations.of(context).favorites);
-      case 2:
-        return CustomAppBar(title: AppLocalizations.of(context).myCart);
-      case 3:
-        return NotificationAppBar();
-      case 4:
-        return CustomAppBar(title: AppLocalizations.of(context).profile);
-      default:
-    }
+getAppbar(MainTabState state, BuildContext context) {
+  switch (state.selectedTab) {
+    case 0:
+      return HomeAppbar();
+    case 1:
+      return CustomAppBar(title: AppLocalizations.of(context).favorites);
+    case 2:
+      return CustomAppBar(title: AppLocalizations.of(context).myCart);
+    case 3:
+      return NotificationAppBar();
+    case 4:
+      return CustomAppBar(title: AppLocalizations.of(context).profile);
+    default:
   }
+}
 
-  Route? onGenerateRoute(RouteSettings settings, String tabItem) {
-    return MaterialPageRoute(
-      settings: settings,
-      builder: (context) {
-        if (tabItem == autoroute.HomeView.name) {
-          return HomeView();
-        } else if (tabItem == autoroute.FavouriteView.name) {
-          return FavouriteView();
-        } else if (tabItem == autoroute.CartView.name) {
-          return CartView();
-        } else if (tabItem == autoroute.NotificationView.name) {
-          return NotificationView();
-        } else if (tabItem == autoroute.ProfileView.name) {
-          return ProfileView();
-        }
+Route? onGenerateRoute(RouteSettings settings, String tabItem) {
+  return MaterialPageRoute(
+    settings: settings,
+    builder: (context) {
+      if (tabItem == autoroute.HomeView.name) {
+        return HomeView();
+      } else if (tabItem == autoroute.FavouriteView.name) {
+        return FavouriteView();
+      } else if (tabItem == autoroute.CartView.name) {
+        return CartView();
+      } else if (tabItem == autoroute.NotificationView.name) {
+        return NotificationView();
+      } else if (tabItem == autoroute.ProfileView.name) {
+        return ProfileView();
+      }
 
-        return Container();
-      },
-    );
-  }
+      return Container();
+    },
+  );
 }

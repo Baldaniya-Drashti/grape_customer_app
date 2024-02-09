@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:grape_customer_app/application/main_tab/checkout/checkout_bloc.dart';
 import 'package:grape_customer_app/domain/core/math_utils.dart';
 import 'package:grape_customer_app/presentation/common/widgets/base_text.dart';
 import 'package:grape_customer_app/presentation/core/styles/app_colors.dart';
@@ -10,19 +12,156 @@ class GetCheckoutProductDetailWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        SizedBox(
-          height: getSize(10),
-        ),
-        getChooseCategoryView(),
-        getCheckoutContainer(),
-      ],
+    return BlocBuilder<CheckoutBloc, CheckoutState>(
+      builder: (context, state) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: getSize(10),
+            ),
+            getChooseCategoryView(),
+            if (state.isFromCart)
+              Container(
+                padding: EdgeInsets.all(getSize(10)),
+                decoration: BoxDecoration(
+                  color: AppColors.white,
+                  borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(getSize(10)),
+                    bottomRight: Radius.circular(getSize(10)),
+                    bottomLeft: Radius.circular(getSize(10)),
+                  ),
+                  border: Border.all(
+                    color: AppColors.primaryOrange,
+                  ),
+                ),
+                child: ListView.separated(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  padding: EdgeInsets.zero,
+                  itemCount: 3,
+                  itemBuilder: (context, index) => getCheckoutCartContainer(),
+                  separatorBuilder: (BuildContext context, int index) {
+                    return Divider(
+                      height: 0,
+                      color: AppColors.primaryOrange.withOpacity(0.20),
+                    );
+                  },
+                ),
+              )
+            else
+              getCheckoutContainer(),
+          ],
+        );
+      },
     );
   }
 
-  Container getCheckoutContainer() {
+  getCheckoutCartContainer() {
+    return Container(
+      padding: EdgeInsets.all(getSize(10)),
+      decoration: BoxDecoration(
+        color: AppColors.white,
+      ),
+      child: Stack(
+        clipBehavior: Clip.none,
+        children: [
+          Row(
+            children: [
+              Container(
+                height: getSize(90),
+                width: getSize(90),
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(getSize(10)),
+                  ),
+                ),
+                child: CachedNetworkImage(
+                  imageUrl:
+                      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0U3avlAFpuN9Sf5PVhN3MHdXQzh6rJusL93tMQRngAnrK1k0Z9CH4hzhArR0kyV-Fm_E&usqp=CAU',
+                  placeholder: (context, url) => Container(
+                    height: getSize(80),
+                    width: getSize(60),
+                    decoration: BoxDecoration(
+                      color: Colors.grey.shade100,
+                      borderRadius: SmoothBorderRadius.all(
+                        SmoothRadius(
+                          cornerRadius: getSize(4),
+                          cornerSmoothing: 1,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(
+                width: getSize(8),
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  BaseText(
+                    text: 'Nothing Phone 1',
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                  ),
+                  SizedBox(
+                    height: getSize(8),
+                  ),
+                  getProductDetails(
+                    title: 'Colors',
+                    description: 'Black',
+                  ),
+                  SizedBox(
+                    height: getSize(6),
+                  ),
+                  getProductDetails(
+                    title: 'Size',
+                    description: '128 GB',
+                  ),
+                  SizedBox(
+                    height: getSize(6),
+                  ),
+                  getProductDetails(
+                    title: 'Quantity',
+                    description: '1',
+                  ),
+                ],
+              ),
+            ],
+          ),
+          Positioned.fill(
+            child: Align(
+              alignment: Alignment.bottomRight,
+              child: BaseText(
+                text: '\$299',
+                fontSize: 18,
+                textColor: AppColors.mildBlue,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+          Positioned.fill(
+            top: getSize(-10),
+            right: getSize(-10),
+            child: Align(
+              alignment: Alignment.topRight,
+              child: IconButton(
+                onPressed: () {},
+                icon: Icon(
+                  Icons.close_rounded,
+                  color: AppColors.black.withOpacity(0.60),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  getCheckoutContainer() {
     return Container(
       padding: EdgeInsets.all(getSize(10)),
       decoration: BoxDecoration(

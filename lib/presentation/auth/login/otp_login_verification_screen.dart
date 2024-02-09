@@ -32,6 +32,26 @@ class OtpLoginVerificationView extends StatelessWidget {
               LoginFormEvent.getPrefilledPhoneNumber(countryCode, phoneNumber)),
         child: BlocConsumer<LoginFormBloc, LoginFormState>(
           listener: (context, state) {
+            state.resendFailureOrSuccessOption.fold(
+              () => null,
+              (a) => a.fold(
+                (l) {
+                  context.read<LoginFormBloc>().timer.cancel();
+                  showError(
+                    message: l.maybeMap(
+                      showAPIResponseMessage: (value) => value.message,
+                      networkError: (value) =>
+                          'Please check your internet connectivity',
+                      orElse: () => "Server Error. Try again later.",
+                    ),
+                  ).show(context);
+                },
+                (r) {
+                  context.read<LoginFormBloc>().timer.cancel();
+                  showSuccess(message: r).show(context);
+                },
+              ),
+            );
             state.authFailureOrSuccessOption.fold(
               () {},
               (either) => either.fold(

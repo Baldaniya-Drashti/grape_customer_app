@@ -301,6 +301,7 @@ class BuyNowDialog extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Stack(
+            clipBehavior: Clip.none,
             children: [
               Row(
                 children: [
@@ -357,6 +358,8 @@ class BuyNowDialog extends StatelessWidget {
                 ],
               ),
               Positioned.fill(
+                top: getSize(-10),
+                right: getSize(-10),
                 child: Align(
                   alignment: Alignment.topRight,
                   child: IconButton(

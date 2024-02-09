@@ -75,7 +75,7 @@ class AddNewCard extends StatelessWidget {
                 child: Padding(
                   padding: EdgeInsets.symmetric(
                     horizontal: getSize(18),
-                    vertical: getSize(14),
+                    vertical: isFullScreenDevice(context) ? 0 : getSize(18),
                   ),
                   child: CommonButton(
                     onPressed: () {
