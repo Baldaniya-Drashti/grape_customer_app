@@ -20,9 +20,8 @@ class AllNotificationListWidget extends StatelessWidget {
       itemBuilder: (context, index) {
         return GestureDetector(
           onTap: () async {
-            await RateAndReviewBotthomSheet().rateAndReviewBotthomSheet(
-              context
-            );
+            await RateAndReviewBotthomSheet()
+                .rateAndReviewBotthomSheet(context);
           },
           child: Container(
             margin: EdgeInsets.symmetric(vertical: getSize(9)),

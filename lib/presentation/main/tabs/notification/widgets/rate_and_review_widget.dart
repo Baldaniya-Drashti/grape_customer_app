@@ -46,136 +46,141 @@ class RateAndReviewBotthomSheet extends StatelessWidget {
                 onTap: () {
                   AppFocus.unfocus(context);
                 },
-                child: ListView(
-                  shrinkWrap: true,
-                  padding: EdgeInsets.symmetric(horizontal: getSize(18)),
-                  physics: BouncingScrollPhysics(),
-                  children: [
-                    SizedBox(
-                      height: getSize(22),
-                    ),
-                    Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        Stack(
-                          alignment: Alignment.center,
-                          children: [
-                            Align(
-                              alignment: Alignment.center,
-                              child: BaseText(
-                                textAlign: TextAlign.center,
-                                text: 'Rate and Review',
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                                textColor: AppColors.black,
-                              ),
-                            ),
-                            Align(
-                              alignment: Alignment.topRight,
-                              child: IconButton(
-                                onPressed: () {
-                                  context.router.pop(true);
-                                },
-                                icon: Icon(Icons.close_rounded),
-                              ),
-                            )
-                          ],
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: getSize(42),
-                    ),
-                    Container(
-                      padding: EdgeInsets.symmetric(vertical: getSize(10)),
-                      decoration: BoxDecoration(
-                        color: AppColors.grey.withOpacity(0.20),
-                        borderRadius: BorderRadius.circular(getSize(10)),
+                child: AnimatedPadding(
+                  padding: MediaQuery.of(context).viewInsets,
+                  duration: const Duration(milliseconds: 100),
+                  curve: Curves.decelerate,
+                  child: ListView(
+                    shrinkWrap: true,
+                    padding: EdgeInsets.symmetric(horizontal: getSize(18)),
+                    physics: BouncingScrollPhysics(),
+                    children: [
+                      SizedBox(
+                        height: getSize(22),
                       ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                      Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
-                          Container(
-                            height: getSize(40),
-                            width: getSize(40),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(getSize(6)),
-                              image: DecorationImage(
-                                image: CachedNetworkImageProvider(
-                                    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0U3avlAFpuN9Sf5PVhN3MHdXQzh6rJusL93tMQRngAnrK1k0Z9CH4hzhArR0kyV-Fm_E&usqp=CAU'),
+                          Stack(
+                            alignment: Alignment.center,
+                            children: [
+                              Align(
+                                alignment: Alignment.center,
+                                child: BaseText(
+                                  textAlign: TextAlign.center,
+                                  text: 'Rate and Review',
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
+                                  textColor: AppColors.black,
+                                ),
                               ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: getSize(10),
-                          ),
-                          BaseText(
-                            text: 'Google Pixel 7a',
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
+                              Align(
+                                alignment: Alignment.topRight,
+                                child: IconButton(
+                                  onPressed: () {
+                                    context.router.pop(true);
+                                  },
+                                  icon: Icon(Icons.close_rounded),
+                                ),
+                              )
+                            ],
                           ),
                         ],
                       ),
-                    ),
-                    SizedBox(
-                      height: getSize(42),
-                    ),
-                    BaseText(
-                      text: 'What is you rate?',
-                      fontSize: 12,
-                      textAlign: TextAlign.center,
-                      fontWeight: FontWeight.w500,
-                    ),
-                    SizedBox(
-                      height: getSize(8),
-                    ),
-                    Center(
-                      child: CommonRatingBar(
-                        iconnSize: getSize(36),
-                        horizontalPadding: getSize(7),
-                        onRatingUpdate: (p0) {},
+                      SizedBox(
+                        height: getSize(42),
                       ),
-                    ),
-                    SizedBox(
-                      height: getSize(30),
-                    ),
-                    BaseText(
-                      text: 'Please share your opinion about the product',
-                      fontSize: 12,
-                      fontWeight: FontWeight.w500,
-                    ),
-                    SizedBox(
-                      height: getSize(8),
-                    ),
-                    CustomTextField(
-                      hintText: 'Your Review',
-                      maxLines: 3,
-                      onChanged: (p0) => context
-                          .read<NotificationsBloc>()
-                          .add(NotificationsEvent.reviewChanged(p0)),
-                      validator: (p0, p1) => state.reviewndRate.value.fold(
-                          (l) => l.maybeMap(
-                                empty: (value) => 'Please enter review',
-                                orElse: () => null,
+                      Container(
+                        padding: EdgeInsets.symmetric(vertical: getSize(10)),
+                        decoration: BoxDecoration(
+                          color: AppColors.grey.withOpacity(0.20),
+                          borderRadius: BorderRadius.circular(getSize(10)),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              height: getSize(40),
+                              width: getSize(40),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(getSize(6)),
+                                image: DecorationImage(
+                                  image: CachedNetworkImageProvider(
+                                      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0U3avlAFpuN9Sf5PVhN3MHdXQzh6rJusL93tMQRngAnrK1k0Z9CH4hzhArR0kyV-Fm_E&usqp=CAU'),
+                                ),
                               ),
-                          (r) => null),
-                    ),
-                    SizedBox(
-                      height: getSize(30),
-                    ),
-                    CommonButton(
-                      onPressed: () {
-                        context
+                            ),
+                            SizedBox(
+                              width: getSize(10),
+                            ),
+                            BaseText(
+                              text: 'Google Pixel 7a',
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: getSize(42),
+                      ),
+                      BaseText(
+                        text: 'What is you rate?',
+                        fontSize: 12,
+                        textAlign: TextAlign.center,
+                        fontWeight: FontWeight.w500,
+                      ),
+                      SizedBox(
+                        height: getSize(8),
+                      ),
+                      Center(
+                        child: CommonRatingBar(
+                          iconnSize: getSize(36),
+                          horizontalPadding: getSize(7),
+                          onRatingUpdate: (p0) {},
+                        ),
+                      ),
+                      SizedBox(
+                        height: getSize(30),
+                      ),
+                      BaseText(
+                        text: 'Please share your opinion about the product',
+                        fontSize: 12,
+                        fontWeight: FontWeight.w500,
+                      ),
+                      SizedBox(
+                        height: getSize(8),
+                      ),
+                      CustomTextField(
+                        hintText: 'Your Review',
+                        maxLines: 3,
+                        onChanged: (p0) => context
                             .read<NotificationsBloc>()
-                            .add(NotificationsEvent.submitReview());
-                      },
-                      buttonText: 'Submit',
-                    ),
-                    SizedBox(
-                      height: getSize(30),
-                    ),
-                  ],
+                            .add(NotificationsEvent.reviewChanged(p0)),
+                        validator: (p0, p1) => state.reviewndRate.value.fold(
+                            (l) => l.maybeMap(
+                                  empty: (value) => 'Please enter review',
+                                  orElse: () => null,
+                                ),
+                            (r) => null),
+                      ),
+                      SizedBox(
+                        height: getSize(30),
+                      ),
+                      CommonButton(
+                        onPressed: () {
+                          context
+                              .read<NotificationsBloc>()
+                              .add(NotificationsEvent.submitReview());
+                        },
+                        buttonText: 'Submit',
+                      ),
+                      SizedBox(
+                        height: getSize(30),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             );
