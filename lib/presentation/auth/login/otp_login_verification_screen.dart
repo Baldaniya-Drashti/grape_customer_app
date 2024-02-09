@@ -47,7 +47,6 @@ class OtpLoginVerificationView extends StatelessWidget {
                   ).show(context);
                 },
                 (r) {
-                  context.read<LoginFormBloc>().timer.cancel();
                   showSuccess(message: r).show(context);
                 },
               ),
