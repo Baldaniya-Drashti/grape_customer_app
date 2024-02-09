@@ -32,6 +32,25 @@ class OtpRegisterVerificationView extends StatelessWidget {
               countryCode, phoneNumber)),
         child: BlocConsumer<RegisterFormBloc, RegisterFormState>(
           listener: (context, state) {
+            state.resendFailureOrSuccessOption.fold(
+              () => null,
+              (a) => a.fold(
+                (l) {
+                  context.read<RegisterFormBloc>().timer.cancel();
+                  showError(
+                    message: l.maybeMap(
+                      showAPIResponseMessage: (value) => value.message,
+                      networkError: (value) =>
+                          'Please check your internet connectivity',
+                      orElse: () => "Server Error. Try again later.",
+                    ),
+                  ).show(context);
+                },
+                (r) {
+                  showSuccess(message: r).show(context);
+                },
+              ),
+            );
             state.authFailureOrSuccessOption.fold(
               () {},
               (either) => either.fold(

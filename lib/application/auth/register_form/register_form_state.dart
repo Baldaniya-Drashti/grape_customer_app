@@ -13,6 +13,7 @@ class RegisterFormState with _$RegisterFormState {
     required OTPText enteredOTP,
     required int secondsRemaining,
     required Option<Either<AuthFailure, String>> authFailureOrSuccessOption,
+    required Option<Either<AuthFailure, String>> resendFailureOrSuccessOption,
   }) = _RegisterFormState;
 
   factory RegisterFormState.initial() => RegisterFormState(
@@ -26,5 +27,6 @@ class RegisterFormState with _$RegisterFormState {
         selectedCountrycode: '91',
         enteredOTP: OTPText(''),
         secondsRemaining: 0,
+        resendFailureOrSuccessOption: none(),
       );
 }

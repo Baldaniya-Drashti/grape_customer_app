@@ -168,7 +168,7 @@ class RegisterFormBloc extends Bloc<RegisterFormEvent, RegisterFormState> {
             );
 
             failureOrSuccess = await _authFacade.resendOtp(
-              countryCode: state.selectedCountrycode,
+              countryCode: '+${state.selectedCountrycode}',
               mobileNumber: state.mobileNumber,
             );
 
@@ -177,7 +177,7 @@ class RegisterFormBloc extends Bloc<RegisterFormEvent, RegisterFormState> {
                 isSubmitting: false,
                 //showErrorMessages: true,
                 secondsRemaining: 30,
-                authFailureOrSuccessOption: optionOf(failureOrSuccess),
+                resendFailureOrSuccessOption: optionOf(failureOrSuccess),
               ),
             );
             add(RegisterFormEvent.startCountdown());
