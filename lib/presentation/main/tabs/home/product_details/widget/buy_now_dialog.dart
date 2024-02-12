@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:grape_customer_app/application/main/home/product_detail/product_detail_bloc.dart';
 import 'package:grape_customer_app/domain/core/math_utils.dart';
 import 'package:grape_customer_app/presentation/common/widgets/base_text.dart';
 import 'package:grape_customer_app/presentation/core/app_router.gr.dart';
@@ -28,99 +30,106 @@ class BuyNowDialog extends StatelessWidget {
           topRight: Radius.circular(getSize(14)),
         ),
       ),
-      builder: (context) => SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              height: getSize(20),
-            ),
-            productDetailsView(context),
-            SizedBox(
-              height: getSize(16),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: getSize(18)),
-              child: Divider(
-                color: AppColors.black.withOpacity(0.1),
-                height: 0,
+      builder: (context) => BlocProvider(
+        create: (context) => ProductDetailBloc(),
+        child: BlocBuilder<ProductDetailBloc, ProductDetailState>(
+          builder: (context, state) {
+            return SafeArea(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    height: getSize(20),
+                  ),
+                  productDetailsView(context),
+                  SizedBox(
+                    height: getSize(16),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: getSize(18)),
+                    child: Divider(
+                      color: AppColors.black.withOpacity(0.1),
+                      height: 0,
+                    ),
+                  ),
+                  SizedBox(
+                    height: getSize(16),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: getSize(18)),
+                    child: BaseText(
+                      text: 'Colors:',
+                      textColor: AppColors.black.withOpacity(0.7),
+                    ),
+                  ),
+                  SizedBox(
+                    height: getSize(8),
+                  ),
+                  colorSelectionList(),
+                  SizedBox(
+                    height: getSize(16),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: getSize(18)),
+                    child: Divider(
+                      color: AppColors.black.withOpacity(0.1),
+                      height: 0,
+                    ),
+                  ),
+                  SizedBox(
+                    height: getSize(16),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: getSize(18)),
+                    child: BaseText(
+                      text: 'Size:',
+                      textColor: AppColors.black.withOpacity(0.7),
+                    ),
+                  ),
+                  SizedBox(
+                    height: getSize(8),
+                  ),
+                  sizeSelectionListWidget(),
+                  SizedBox(
+                    height: getSize(16),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: getSize(18)),
+                    child: Divider(
+                      color: AppColors.black.withOpacity(0.1),
+                      height: 0,
+                    ),
+                  ),
+                  SizedBox(
+                    height: getSize(16),
+                  ),
+                  quantityContainerWidget(context, state),
+                  SizedBox(
+                    height: getSize(30),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: getSize(18)),
+                    child: CommonButton(
+                      onPressed: () {
+                        context.router.pop();
+                        context.router.push(PageRouteInfo(CheckoutView.name));
+                      },
+                      buttonText: 'Buy Now',
+                    ),
+                  ),
+                  SizedBox(
+                    height: getSize(isFullScreenDevice(context) ? 0 : 30),
+                  ),
+                ],
               ),
-            ),
-            SizedBox(
-              height: getSize(16),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: getSize(18)),
-              child: BaseText(
-                text: 'Colors:',
-                textColor: AppColors.black.withOpacity(0.7),
-              ),
-            ),
-            SizedBox(
-              height: getSize(8),
-            ),
-            colorSelectionList(),
-            SizedBox(
-              height: getSize(16),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: getSize(18)),
-              child: Divider(
-                color: AppColors.black.withOpacity(0.1),
-                height: 0,
-              ),
-            ),
-            SizedBox(
-              height: getSize(16),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: getSize(18)),
-              child: BaseText(
-                text: 'Size:',
-                textColor: AppColors.black.withOpacity(0.7),
-              ),
-            ),
-            SizedBox(
-              height: getSize(8),
-            ),
-            sizeSelectionListWidget(),
-            SizedBox(
-              height: getSize(16),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: getSize(18)),
-              child: Divider(
-                color: AppColors.black.withOpacity(0.1),
-                height: 0,
-              ),
-            ),
-            SizedBox(
-              height: getSize(16),
-            ),
-            quantityContainerWidget(),
-            SizedBox(
-              height: getSize(30),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: getSize(18)),
-              child: CommonButton(
-                onPressed: () {
-                  context.router.pop();
-                  context.router.push(PageRouteInfo(CheckoutView.name));
-                },
-                buttonText: 'Buy Now',
-              ),
-            ),
-            SizedBox(
-              height: getSize(isFullScreenDevice(context) ? 0 : 30),
-            ),
-          ],
+            );
+          },
         ),
       ),
     );
   }
 
-  Container quantityContainerWidget() {
+  quantityContainerWidget(BuildContext context, ProductDetailState state) {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: getSize(18)),
       decoration: BoxDecoration(
@@ -140,7 +149,11 @@ class BuyNowDialog extends StatelessWidget {
           ),
           Spacer(),
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              context
+                  .read<ProductDetailBloc>()
+                  .add(ProductDetailEvent.decreaseProductQuantity());
+            },
             icon: Container(
               height: getSize(20),
               width: getSize(20),
@@ -167,14 +180,18 @@ class BuyNowDialog extends StatelessWidget {
               shape: BoxShape.circle,
             ),
             child: BaseText(
-              text: '01',
+              text: '${state.productQuantity}',
               fontSize: 14,
               fontWeight: FontWeight.w500,
               textColor: AppColors.white,
             ),
           ),
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              context
+                  .read<ProductDetailBloc>()
+                  .add(ProductDetailEvent.increaseProductQuantity());
+            },
             icon: Container(
               height: getSize(20),
               width: getSize(20),
