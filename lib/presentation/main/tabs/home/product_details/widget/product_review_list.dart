@@ -15,7 +15,7 @@ class ProductReviewListWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.builder(
       shrinkWrap: true,
-      itemCount: 5,
+      itemCount: 4,
       padding: EdgeInsets.symmetric(horizontal: getSize(18)),
       physics: BouncingScrollPhysics(),
       itemBuilder: (context, index) => Container(
