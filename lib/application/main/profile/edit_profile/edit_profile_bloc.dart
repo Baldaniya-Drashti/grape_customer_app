@@ -163,19 +163,17 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
           emit(state.copyWith(secondsRemaining: state.secondsRemaining - 1));
         },
         resendOtp: (ResendOtp value) async {
-          timer.cancel();
-
           Either<AuthFailure, String>? failureOrSuccess;
 
           emit(
             state.copyWith(
-              isSubmitting: true,
-              authFailureOrSuccessOption: none(),
+              // isSubmitting: true,
+              otpFailureOrSuccessOption: none(),
             ),
           );
 
           failureOrSuccess = await _authFacade.resendOtp(
-            countryCode: state.countryCode,
+            countryCode: '+${state.countryCode}',
             mobileNumber: state.mobileNumber,
           );
 
@@ -183,11 +181,10 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
             state.copyWith(
               isSubmitting: false,
               //showErrorMessages: true,
-              secondsRemaining: 30,
+              // secondsRemaining: 30,
               otpFailureOrSuccessOption: optionOf(failureOrSuccess),
             ),
           );
-          add(EditProfileEvent.startCountdown());
         },
       );
     });

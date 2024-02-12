@@ -12,7 +12,7 @@ import 'package:grape_customer_app/presentation/common/widgets/base_text.dart';
 import 'package:grape_customer_app/presentation/core/app_router.gr.dart';
 import 'package:grape_customer_app/presentation/core/widgets/buttons/common_button.dart';
 import 'package:grape_customer_app/presentation/core/widgets/inputs/custom_app_bar.dart';
-import 'package:grape_customer_app/presentation/profile/shipping_addresses/widgets/shipping_address_card.dart';
+import 'package:grape_customer_app/presentation/main/tabs/profile/shipping_addresses/widgets/shipping_address_card.dart';
 
 @RoutePage(name: 'ShippingAddresses')
 class ShippingAddress extends StatelessWidget {

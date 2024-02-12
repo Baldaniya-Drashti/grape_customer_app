@@ -40,22 +40,22 @@ import 'package:grape_customer_app/presentation/main/tabs/home/search/search_vie
     as _i20;
 import 'package:grape_customer_app/presentation/main/tabs/notification/notification_view.dart'
     as _i11;
+import 'package:grape_customer_app/presentation/main/tabs/profile/edit_profile/edit_profile.dart'
+    as _i6;
+import 'package:grape_customer_app/presentation/main/tabs/profile/edit_profile/otp_edit_profile_verification_screen.dart'
+    as _i13;
+import 'package:grape_customer_app/presentation/main/tabs/profile/payment_method/add_new_card.dart'
+    as _i2;
+import 'package:grape_customer_app/presentation/main/tabs/profile/payment_method/payment_method.dart'
+    as _i16;
 import 'package:grape_customer_app/presentation/main/tabs/profile/profile_view.dart'
     as _i18;
+import 'package:grape_customer_app/presentation/main/tabs/profile/shipping_addresses/add_new_address.dart'
+    as _i1;
+import 'package:grape_customer_app/presentation/main/tabs/profile/shipping_addresses/shipping_addresses.dart'
+    as _i21;
 import 'package:grape_customer_app/presentation/onboarding/onboarding_page.dart'
     as _i12;
-import 'package:grape_customer_app/presentation/profile/edit_profile/edit_profile.dart'
-    as _i6;
-import 'package:grape_customer_app/presentation/profile/edit_profile/otp_edit_profile_verification_screen.dart'
-    as _i13;
-import 'package:grape_customer_app/presentation/profile/payment_method/add_new_card.dart'
-    as _i2;
-import 'package:grape_customer_app/presentation/profile/payment_method/payment_method.dart'
-    as _i16;
-import 'package:grape_customer_app/presentation/profile/shipping_addresses/add_new_address.dart'
-    as _i1;
-import 'package:grape_customer_app/presentation/profile/shipping_addresses/shipping_addresses.dart'
-    as _i21;
 import 'package:grape_customer_app/presentation/splash/splash_page.dart'
     as _i22;
 

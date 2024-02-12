@@ -26,6 +26,7 @@ class OtpEditProfileVerificationView extends StatelessWidget {
       appBar: CustomAppBar(title: ''),
       body: BlocProvider(
         create: (context) => getIt<EditProfileBloc>()
+          ..add(EditProfileEvent.startCountdown())
           //..add(EditProfileEvent.startCountdown())
           ..add(EditProfileEvent.getPrefilledPhoneNumber(
               countryCode, phoneNumber)),

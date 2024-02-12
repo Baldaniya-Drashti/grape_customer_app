@@ -270,7 +270,7 @@ abstract class AppLocalizations {
   /// No description provided for @enterMobile.
   ///
   /// In en, this message translates to:
-  /// **'Phone number should be between 6 and 15 digits'**
+  /// **'Phone number should be between 10 and 15 digits'**
   String get enterMobile;
 
   /// No description provided for @mobileNumber.
