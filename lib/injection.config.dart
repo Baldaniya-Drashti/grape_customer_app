@@ -15,6 +15,8 @@ import 'package:grape_customer_app/application/auth/login_form/login_form_bloc.d
     as _i12;
 import 'package:grape_customer_app/application/auth/register_form/register_form_bloc.dart'
     as _i15;
+import 'package:grape_customer_app/application/main/checkout/checkout_bloc.dart'
+    as _i4;
 import 'package:grape_customer_app/application/main/favourite/favourite_bloc.dart'
     as _i5;
 import 'package:grape_customer_app/application/main/home/home_bloc.dart' as _i6;
@@ -26,8 +28,6 @@ import 'package:grape_customer_app/application/main/profile/language/language_bl
     as _i11;
 import 'package:grape_customer_app/application/main/profile/shipping_addresses/shipping_addresses_bloc.dart'
     as _i16;
-import 'package:grape_customer_app/application/main_tab/checkout/checkout_bloc.dart'
-    as _i4;
 import 'package:grape_customer_app/application/main_tab/main_tab_bloc.dart'
     as _i13;
 import 'package:grape_customer_app/application/onboarding/onboarding_bloc.dart'

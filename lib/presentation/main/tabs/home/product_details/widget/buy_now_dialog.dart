@@ -21,7 +21,7 @@ class BuyNowDialog extends StatelessWidget {
       backgroundColor: AppColors.white,
       elevation: 0,
       useSafeArea: true,
-      scrollControlDisabledMaxHeightRatio: 0.7,
+      scrollControlDisabledMaxHeightRatio: 0.68,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(getSize(14)),
@@ -110,6 +110,9 @@ class BuyNowDialog extends StatelessWidget {
                 },
                 buttonText: 'Buy Now',
               ),
+            ),
+            SizedBox(
+              height: getSize(isFullScreenDevice(context) ? 0 : 30),
             ),
           ],
         ),

@@ -11,7 +11,6 @@ import 'package:grape_customer_app/domain/account/account.dart';
 import 'package:grape_customer_app/domain/core/l10n/app_localizations.dart';
 import 'package:grape_customer_app/domain/core/math_utils.dart';
 import 'package:grape_customer_app/domain/core/svg_image_constants.dart';
-import 'package:grape_customer_app/presentation/common/utils/flushbar_creator.dart';
 import 'package:grape_customer_app/presentation/common/utils/image_picker_utils.dart';
 import 'package:grape_customer_app/presentation/common/widgets/base_text.dart';
 import 'package:grape_customer_app/presentation/common/widgets/common_country_code_picker.dart';
@@ -30,10 +29,10 @@ class EditProfileForm extends StatelessWidget {
     return BlocBuilder<EditProfileBloc, EditProfileState>(
       builder: (context, state) {
         return Form(
-          autovalidateMode: state.showErrorMessages
-              //|| getIsMobileNumberChange(state)
-              ? AutovalidateMode.always
-              : AutovalidateMode.disabled,
+          autovalidateMode:
+              state.showErrorMessages || getIsMobileNumberChange(state)
+                  ? AutovalidateMode.always
+                  : AutovalidateMode.disabled,
           child: ListView(
             shrinkWrap: true,
             physics: BouncingScrollPhysics(),
@@ -70,6 +69,7 @@ class EditProfileForm extends StatelessWidget {
       labelText: AppLocalizations.of(context).mobileNumber,
       keyboardType: TextInputType.number,
       initialValue: state.currentUser.phone?.toString() ?? "",
+      errorMaxLines: 2,
       onChanged: (mobileNumber) => context
           .read<EditProfileBloc>()
           .add(EditProfileEvent.mobileNumberChanged(mobileNumber)),
@@ -93,23 +93,12 @@ class EditProfileForm extends StatelessWidget {
       ),
       suffixIcon: getIsMobileNumberChange(state)
           ? IconButton(
-              padding: EdgeInsets.only(right: getSize(20)),
               onPressed: () async {
-                showError(message: 'Under Developemnt').show(context);
-                // if (state.mobileNumber.isValid()) {
-                //   var res = await context.router.push(
-                //     PageRouteInfo(
-                //       OtpLoginVerificationView.name,
-                //       args: OtpLoginVerificationViewArgs(
-                //         countryCode: state.countryCode,
-                //         phoneNumber: state.mobileNumber.getValue(),
-                //       ),
-                //     ),
-                //   );
-                //   if (res != null && res == true) {
-                //     context.read<AccountCubit>().getAccount();
-                //   }
-                // }
+                if (state.mobileNumber.isValid()) {
+                  context
+                      .read<EditProfileBloc>()
+                      .add(EditProfileEvent.resendOtp());
+                }
               },
               icon: BaseText(
                 text: 'Verify',
@@ -155,8 +144,9 @@ class EditProfileForm extends StatelessWidget {
   }
 
   bool getIsMobileNumberChange(EditProfileState state) {
-    if (state.currentUser.phone.toString() != state.mobileNumber.getValue() ||
-        state.currentUser.countryCode != state.countryCode) {
+    if ((state.currentUser.phone.toString() != state.mobileNumber.getValue()) ||
+        ((state.currentUser.countryCode?.replaceFirst('+', '')) !=
+            state.countryCode)) {
       return true;
     } else {
       return false;

@@ -124,16 +124,15 @@ class FilterBottomSheet extends StatelessWidget {
                       child: CommonButton(
                         width: getSize(160),
                         onPressed: () {
-                          // context
-                          //     .read<AuthStatusBloc>()
-                          //     .add(AuthStatusEvent.signedOut());
                           context.router.pop(true);
-                          // controller.getLogout();
                         },
                         buttonText: 'Apply',
                       ),
                     )
                   ],
+                ),
+                SizedBox(
+                  height: getSize(isFullScreenDevice(context) ? 0 : 12),
                 ),
               ],
             ),

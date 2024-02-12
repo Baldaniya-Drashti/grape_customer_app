@@ -92,7 +92,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get enterEmail => 'Please enter valid email address';
 
   @override
-  String get enterMobile => 'Phone number should be between 6 and 15 digits';
+  String get enterMobile => 'Phone number should be between 10 and 15 digits';
 
   @override
   String get mobileNumber => 'Mobile Number';
