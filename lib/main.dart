@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:grape_customer_app/domain/core/environment/environment.dart';
 import 'package:grape_customer_app/infrastructure/core/network/injectable_module.dart';
+import 'package:grape_customer_app/presentation/core/helper/dynamic_link_helper.dart';
 import 'package:grape_customer_app/presentation/core/restart_widget.dart';
 import 'package:grape_customer_app/setup_hive.dart';
 import 'package:injectable/injectable.dart';
@@ -33,6 +34,8 @@ Future<void> main() async {
           DeviceOrientation.portraitDown,
         ],
       );
+
+      DynamicLinksService.initDynamicLinks();
       await Firebase.initializeApp(
         options: Platform.isIOS
             ? null
@@ -40,7 +43,8 @@ Future<void> main() async {
                 apiKey: 'AIzaSyAEPe7upukbefIVDSmvNL90bc-MYfObF4I',
                 appId: '1:568471335476:android:870d2cdcbf08727af09061',
                 messagingSenderId: '568471335476',
-                projectId: 'grape-market-place'),
+                projectId: 'grape-market-place',
+              ),
       ).catchError((e) {
         print(e);
         return e;
