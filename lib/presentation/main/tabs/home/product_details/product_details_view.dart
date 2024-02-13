@@ -1,3 +1,4 @@
+
 import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +9,7 @@ import 'package:grape_customer_app/domain/core/math_utils.dart';
 import 'package:grape_customer_app/domain/core/svg_image_constants.dart';
 import 'package:grape_customer_app/presentation/common/widgets/base_text.dart';
 import 'package:grape_customer_app/presentation/core/app_router.gr.dart';
+import 'package:grape_customer_app/presentation/core/helper/dynamic_link_helper.dart';
 import 'package:grape_customer_app/presentation/core/styles/app_colors.dart';
 import 'package:grape_customer_app/presentation/core/widgets/inputs/custom_app_bar.dart';
 import 'package:grape_customer_app/presentation/main/tabs/home/product_details/widget/buy_now_button_widget.dart';
@@ -16,6 +18,7 @@ import 'package:grape_customer_app/presentation/main/tabs/home/product_details/w
 import 'package:grape_customer_app/presentation/main/tabs/home/product_details/widget/product_main_info.dart';
 import 'package:grape_customer_app/presentation/main/tabs/home/product_details/widget/product_review_list.dart';
 import 'package:grape_customer_app/presentation/main/tabs/home/product_details/widget/select_model_widget.dart';
+import 'package:share_plus/share_plus.dart';
 
 @RoutePage(name: 'ProductDetailsView')
 class ProductDetailsView extends StatelessWidget {
@@ -30,7 +33,19 @@ class ProductDetailsView extends StatelessWidget {
           title: 'Product Details',
           actions: [
             GestureDetector(
-              onTap: () {},
+              onTap: () async {
+                var shortlink = await DynamicLinksService.createDynamicLink(
+                  imageURL:
+                      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0U3avlAFpuN9Sf5PVhN3MHdXQzh6rJusL93tMQRngAnrK1k0Z9CH4hzhArR0kyV-Fm_E&usqp=CAU',
+                  title: 'Nothing Phone 1',
+                  description:
+                      'Glyph Interface Meet the Glyph Interface. A new way to communicate. Unique light patterns indicate whos calling. Signals app notifications, charging status and more. Everyday interactions, made joyful. Design Design that goes beyond the surface. Dual-side Gorilla? Glass gives toughness. Advanced vibration motors make touch responses life-like. The symmetrical bezels and aluminium frame adds elegance, lightness and durabilit 50MP Dual camera Time to unlearn. Better quality isnt more cameras. This extraordinary dual camera has two advanced 50 MP sensors. For brilliant realism. Shoots exceptionally stable videos. Has studio lighting built-in. And Night Mode to take images to the next level. Display 1 billion colours. Every hue, powerfully true-to-life. 6.55? OLED display. HDR10+. Richer colour and deeper contrasts, tuned to each scene. Adaptive 120Hz refresh rate for irresistibly responsive interactions, while being reassuringly power-efficient.',
+                );
+
+                if (shortlink.isNotEmpty) {
+                  await Share.share(shortlink);
+                }
+              },
               child: SvgPicture.asset(
                 SvgImageConstant.share,
               ),

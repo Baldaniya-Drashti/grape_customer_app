@@ -23,7 +23,8 @@ class BuyNowDialog extends StatelessWidget {
       backgroundColor: AppColors.white,
       elevation: 0,
       useSafeArea: true,
-      scrollControlDisabledMaxHeightRatio: 0.68,
+      isScrollControlled: true,
+      // scrollControlDisabledMaxHeightRatio: 0.68,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(getSize(14)),
@@ -37,6 +38,7 @@ class BuyNowDialog extends StatelessWidget {
             return SafeArea(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   SizedBox(
                     height: getSize(20),
@@ -254,8 +256,9 @@ class BuyNowDialog extends StatelessWidget {
     );
   }
 
-  Flexible colorSelectionList() {
-    return Flexible(
+  colorSelectionList() {
+    return SizedBox(
+      height: getSize(80),
       child: ListView.builder(
         itemCount: 10,
         shrinkWrap: true,
