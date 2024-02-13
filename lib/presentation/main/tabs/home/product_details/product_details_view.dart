@@ -1,4 +1,3 @@
-
 import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -63,6 +62,7 @@ class ProductDetailsView extends StatelessWidget {
           child: ListView(
             shrinkWrap: true,
             physics: BouncingScrollPhysics(),
+            padding: EdgeInsets.zero,
             children: [
               Center(
                 child: CachedNetworkImage(
@@ -78,10 +78,7 @@ class ProductDetailsView extends StatelessWidget {
               SizedBox(
                 height: getSize(10),
               ),
-              SizedBox(
-                height: getSize(50),
-                child: SelectModelWidget(),
-              ),
+              SelectModelWidget(),
               SizedBox(
                 height: getSize(20),
               ),
