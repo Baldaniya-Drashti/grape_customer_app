@@ -180,4 +180,7 @@ class AppLocalizationsSo extends AppLocalizations {
 
   @override
   String get creditDebitCard => 'Credit/Debit Card';
+
+  @override
+  String get orderDetails => 'Order Details';
 }

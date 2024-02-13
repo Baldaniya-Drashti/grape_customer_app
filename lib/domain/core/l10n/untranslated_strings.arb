@@ -50,6 +50,7 @@
     "enterCardDate",
     "enterCvv",
     "noData",
-    "creditDebitCard"
+    "creditDebitCard",
+    "orderDetails"
   ]
 }

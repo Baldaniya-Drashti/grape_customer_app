@@ -446,6 +446,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Credit/Debit Card'**
   String get creditDebitCard;
+
+  /// No description provided for @orderDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Order Details'**
+  String get orderDetails;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
