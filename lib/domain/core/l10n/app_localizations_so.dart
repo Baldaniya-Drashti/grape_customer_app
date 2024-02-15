@@ -189,4 +189,13 @@ class AppLocalizationsSo extends AppLocalizations {
 
   @override
   String get trackOrder => 'Track Order';
+
+  @override
+  String get title => 'Title';
+
+  @override
+  String get howCanWeHelpYou => 'How can we help you?';
+
+  @override
+  String get send => 'Send';
 }

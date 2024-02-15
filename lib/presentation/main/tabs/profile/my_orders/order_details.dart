@@ -6,11 +6,11 @@ import 'package:grape_customer_app/domain/core/l10n/app_localizations.dart';
 import 'package:grape_customer_app/domain/core/math_utils.dart';
 import 'package:grape_customer_app/presentation/core/widgets/buttons/common_button.dart';
 import 'package:grape_customer_app/presentation/core/widgets/inputs/custom_app_bar.dart';
-import 'package:grape_customer_app/presentation/profile/my_orders/widgets/order_detail_item.dart';
-import 'package:grape_customer_app/presentation/profile/my_orders/widgets/order_detail_paid_amount.dart';
-import 'package:grape_customer_app/presentation/profile/my_orders/widgets/order_detail_payment_method.dart';
-import 'package:grape_customer_app/presentation/profile/my_orders/widgets/order_detail_shipping_address.dart';
-import 'package:grape_customer_app/presentation/profile/my_orders/widgets/order_detail_track_order.dart';
+import 'package:grape_customer_app/presentation/main/tabs/profile/my_orders/widgets/order_detail_item.dart';
+import 'package:grape_customer_app/presentation/main/tabs/profile/my_orders/widgets/order_detail_paid_amount.dart';
+import 'package:grape_customer_app/presentation/main/tabs/profile/my_orders/widgets/order_detail_payment_method.dart';
+import 'package:grape_customer_app/presentation/main/tabs/profile/my_orders/widgets/order_detail_shipping_address.dart';
+import 'package:grape_customer_app/presentation/main/tabs/profile/my_orders/widgets/order_detail_track_order.dart';
 
 @RoutePage(name: 'OrderDetails')
 class OrderDetails extends StatelessWidget {

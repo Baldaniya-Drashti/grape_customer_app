@@ -5,7 +5,7 @@ import 'package:grape_customer_app/application/main/profile/my_orders/my_orders_
 import 'package:grape_customer_app/domain/core/l10n/app_localizations.dart';
 import 'package:grape_customer_app/domain/core/math_utils.dart';
 import 'package:grape_customer_app/presentation/core/widgets/inputs/custom_app_bar.dart';
-import 'package:grape_customer_app/presentation/profile/my_orders/widgets/my_orders_card.dart';
+import 'package:grape_customer_app/presentation/main/tabs/profile/my_orders/widgets/my_orders_card.dart';
 
 @RoutePage(name: 'MyOrders')
 class MyOrders extends StatelessWidget {

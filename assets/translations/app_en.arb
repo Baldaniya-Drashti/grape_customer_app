@@ -60,5 +60,8 @@
     "creditDebitCard":"Credit/Debit Card",
     "orderDetails":"Order Details",
     "contactVendor":"Contact Vendor",
-    "trackOrder":"Track Order"
+    "trackOrder":"Track Order",
+    "title":"Title",
+    "howCanWeHelpYou":"How can we help you?",
+    "send":"Send"
 }

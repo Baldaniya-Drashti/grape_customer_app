@@ -53,6 +53,9 @@
     "creditDebitCard",
     "orderDetails",
     "contactVendor",
-    "trackOrder"
+    "trackOrder",
+    "title",
+    "howCanWeHelpYou",
+    "send"
   ]
 }

@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -5,6 +6,7 @@ import 'package:grape_customer_app/domain/core/l10n/app_localizations.dart';
 import 'package:grape_customer_app/domain/core/math_utils.dart';
 import 'package:grape_customer_app/domain/core/svg_image_constants.dart';
 import 'package:grape_customer_app/presentation/common/widgets/base_text.dart';
+import 'package:grape_customer_app/presentation/core/app_router.gr.dart';
 import 'package:grape_customer_app/presentation/core/styles/styles.dart';
 
 class OrderDetailItem extends StatelessWidget {
@@ -133,24 +135,29 @@ class OrderDetailItem extends StatelessWidget {
             color: AppColors.black.withOpacity(0.1),
             thickness: 1,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SvgPicture.asset(
-                SvgImageConstant.message,
-                colorFilter: ColorFilter.mode(
-                  AppColors.primaryOrange,
-                  BlendMode.srcIn,
+          GestureDetector(
+            onTap: () => context.router.push(PageRouteInfo(
+              ChatView.name,
+            )),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SvgPicture.asset(
+                  SvgImageConstant.message,
+                  colorFilter: ColorFilter.mode(
+                    AppColors.primaryOrange,
+                    BlendMode.srcIn,
+                  ),
                 ),
-              ),
-              SizedBox(
-                width: getSize(10),
-              ),
-              BaseText(
-                text: AppLocalizations.of(context).contactVendor,
-                textColor: AppColors.primaryOrange,
-              )
-            ],
+                SizedBox(
+                  width: getSize(10),
+                ),
+                BaseText(
+                  text: AppLocalizations.of(context).contactVendor,
+                  textColor: AppColors.primaryOrange,
+                )
+              ],
+            ),
           ),
         ],
       ),

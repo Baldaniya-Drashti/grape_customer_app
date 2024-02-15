@@ -154,8 +154,8 @@ class ProfileView extends StatelessWidget {
             selectionListTile(
               iconUrl: SvgImageConstant.customerSupport,
               title: AppLocalizations.of(context).customerSupport,
-              onTap: () {
-                showError(message: 'Under Developemnt').show(context);
+              onTap: () async {
+                await context.router.push(PageRouteInfo(CustomerSupport.name));
               },
             ),
             selectionListTile(
