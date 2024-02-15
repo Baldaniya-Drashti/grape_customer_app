@@ -15,6 +15,7 @@ import 'package:grape_customer_app/presentation/core/app_router.gr.dart';
 import 'package:grape_customer_app/presentation/core/styles/styles.dart';
 import 'package:grape_customer_app/presentation/main/tabs/profile/widget/logout_dialog.dart';
 import 'package:grape_customer_app/presentation/main/tabs/profile/widget/user_profile_widget.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 @RoutePage(name: 'ProfileView')
 class ProfileView extends StatelessWidget {
@@ -161,15 +162,15 @@ class ProfileView extends StatelessWidget {
             selectionListTile(
               iconUrl: SvgImageConstant.privacyPolicy,
               title: AppLocalizations.of(context).privacyPolicy,
-              onTap: () {
-                showError(message: 'Under Developemnt').show(context);
+              onTap: () async {
+                await launchUrl(Uri.parse('https://iroidsolutions.com/'));
               },
             ),
             selectionListTile(
               iconUrl: SvgImageConstant.tc,
               title: AppLocalizations.of(context).termsConditions,
-              onTap: () {
-                showError(message: 'Under Developemnt').show(context);
+              onTap: () async {
+                await launchUrl(Uri.parse('https://iroidsolutions.com/'));
               },
             ),
             selectionListTile(
