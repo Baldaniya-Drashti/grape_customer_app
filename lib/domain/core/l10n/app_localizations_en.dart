@@ -183,4 +183,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get orderDetails => 'Order Details';
+
+  @override
+  String get contactVendor => 'Contact Vendor';
+
+  @override
+  String get trackOrder => 'Track Order';
 }

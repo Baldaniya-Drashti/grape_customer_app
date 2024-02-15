@@ -128,17 +128,6 @@ class ShippingAddressesBloc
               city: InputEmptyOrNot(value.shippingAddressResponce.city ?? ''),
               pinCode:
                   InputEmptyOrNot(value.shippingAddressResponce.pinCode ?? ''),
-              fullName: Username(value.shippingAddressResponce.fullName ?? ""),
-              mobileNumber: MobileNumber(
-                  value.shippingAddressResponce.mobileNumber ?? ""),
-              address:
-                  InputEmptyOrNot(value.shippingAddressResponce.address ?? ""),
-              landMark:
-                  InputEmptyOrNot(value.shippingAddressResponce.landMark ?? ""),
-              state: InputEmptyOrNot(value.shippingAddressResponce.state ?? ""),
-              city: InputEmptyOrNot(value.shippingAddressResponce.city ?? ""),
-              pinCode:
-                  InputEmptyOrNot(value.shippingAddressResponce.pinCode ?? ""),
               isEdit: value.isEdit,
               failureOrSuccessOption: none(),
             ),

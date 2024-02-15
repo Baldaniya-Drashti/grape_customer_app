@@ -53,4 +53,7 @@ class SvgImageConstant {
   //My Orders
   static const calender = 'assets/svg/calender.svg';
   static const sizeIcon = 'assets/svg/size_icon.svg';
+  static const placed = 'assets/svg/placed.svg';
+  static const packed = 'assets/svg/packed.svg';
+  static const shipped = 'assets/svg/shipped.svg';
 }

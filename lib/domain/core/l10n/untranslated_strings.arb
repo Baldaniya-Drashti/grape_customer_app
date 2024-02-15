@@ -51,6 +51,8 @@
     "enterCvv",
     "noData",
     "creditDebitCard",
-    "orderDetails"
+    "orderDetails",
+    "contactVendor",
+    "trackOrder"
   ]
 }

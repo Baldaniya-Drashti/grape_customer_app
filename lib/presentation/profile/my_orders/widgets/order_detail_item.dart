@@ -1,13 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:grape_customer_app/domain/core/l10n/app_localizations.dart';
 import 'package:grape_customer_app/domain/core/math_utils.dart';
 import 'package:grape_customer_app/domain/core/svg_image_constants.dart';
 import 'package:grape_customer_app/presentation/common/widgets/base_text.dart';
 import 'package:grape_customer_app/presentation/core/styles/styles.dart';
 
-class ItemDetailWidget extends StatelessWidget {
-  const ItemDetailWidget({super.key});
+class OrderDetailItem extends StatelessWidget {
+  const OrderDetailItem({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,12 +17,16 @@ class ItemDetailWidget extends StatelessWidget {
         horizontal: getSize(20),
         vertical: getSize(17),
       ),
-      decoration: BoxDecoration(color: AppColors.white, boxShadow: [
-        BoxShadow(
-          color: AppColors.black.withOpacity(0.10),
-          blurRadius: 10,
-        ),
-      ]),
+      decoration: BoxDecoration(
+        color: AppColors.white,
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.black.withOpacity(0.10),
+            blurRadius: 10,
+          ),
+        ],
+        borderRadius: BorderRadius.circular(10),
+      ),
       child: Column(
         children: [
           Row(
@@ -115,12 +120,38 @@ class ItemDetailWidget extends StatelessWidget {
                           ),
                         )
                       ],
-                    )
+                    ),
                   ],
                 ),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: getSize(14),
+          ),
+          Divider(
+            color: AppColors.black.withOpacity(0.1),
+            thickness: 1,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SvgPicture.asset(
+                SvgImageConstant.message,
+                colorFilter: ColorFilter.mode(
+                  AppColors.primaryOrange,
+                  BlendMode.srcIn,
+                ),
+              ),
+              SizedBox(
+                width: getSize(10),
+              ),
+              BaseText(
+                text: AppLocalizations.of(context).contactVendor,
+                textColor: AppColors.primaryOrange,
               )
             ],
-          )
+          ),
         ],
       ),
     );
