@@ -92,7 +92,6 @@ dependencies:
   package_info_plus: ^5.0.1
   firebase_dynamic_links: ^5.4.13
   share_plus: ^7.2.2
-  
 
 
   

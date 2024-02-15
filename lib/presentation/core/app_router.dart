@@ -43,6 +43,8 @@ class AppRouter extends $AppRouter {
         AutoRoute(page: ReviewProductList.page),
         AutoRoute(page: MyOrders.page),
         AutoRoute(page: OrderDetails.page),
+        AutoRoute(page: ChatView.page),
+        AutoRoute(page: ReviewProductList.page),
       ];
 }
 //grapecustomer.page.link
