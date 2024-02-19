@@ -50,6 +50,12 @@
     "enterCardDate",
     "enterCvv",
     "noData",
-    "creditDebitCard"
+    "creditDebitCard",
+    "orderDetails",
+    "contactVendor",
+    "trackOrder",
+    "title",
+    "howCanWeHelpYou",
+    "send"
   ]
 }

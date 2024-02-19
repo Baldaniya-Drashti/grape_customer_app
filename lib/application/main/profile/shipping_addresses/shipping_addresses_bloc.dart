@@ -18,7 +18,7 @@ class ShippingAddressesBloc
     extends Bloc<ShippingAddressesEvent, ShippingAddressesState> {
   ShippingAddressesBloc() : super(ShippingAddressesState.initial()) {
     on<ShippingAddressesEvent>((event, emit) async {
-      await event.map(
+      event.map(
         saveButtonPressed: (value) async {
           final isFullNameValid = state.fullName.isValid();
           final isMobileNumberValid = state.mobileNumber.isValid();

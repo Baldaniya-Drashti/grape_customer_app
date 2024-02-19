@@ -446,6 +446,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Credit/Debit Card'**
   String get creditDebitCard;
+
+  /// No description provided for @orderDetails.
+  ///
+  /// In en, this message translates to:
+  /// **'Order Details'**
+  String get orderDetails;
+
+  /// No description provided for @contactVendor.
+  ///
+  /// In en, this message translates to:
+  /// **'Contact Vendor'**
+  String get contactVendor;
+
+  /// No description provided for @trackOrder.
+  ///
+  /// In en, this message translates to:
+  /// **'Track Order'**
+  String get trackOrder;
+
+  /// No description provided for @title.
+  ///
+  /// In en, this message translates to:
+  /// **'Title'**
+  String get title;
+
+  /// No description provided for @howCanWeHelpYou.
+  ///
+  /// In en, this message translates to:
+  /// **'How can we help you?'**
+  String get howCanWeHelpYou;
+
+  /// No description provided for @send.
+  ///
+  /// In en, this message translates to:
+  /// **'Send'**
+  String get send;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

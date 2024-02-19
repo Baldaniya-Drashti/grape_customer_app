@@ -57,8 +57,11 @@
     "enterCardDate":"Enter the valid card date",
     "enterCvv":"Enter the valid CVV",
     "noData":"No data!",
-    "creditDebitCard":"Credit/Debit Card"
-    
-
-
+    "creditDebitCard":"Credit/Debit Card",
+    "orderDetails":"Order Details",
+    "contactVendor":"Contact Vendor",
+    "trackOrder":"Track Order",
+    "title":"Title",
+    "howCanWeHelpYou":"How can we help you?",
+    "send":"Send"
 }

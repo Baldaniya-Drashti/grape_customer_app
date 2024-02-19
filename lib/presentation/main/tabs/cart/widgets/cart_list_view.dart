@@ -38,8 +38,10 @@ class CartListView extends StatelessWidget {
           child: CommonButton(
             onPressed: () {
               context.router.push(
-                PageRouteInfo(CheckoutView.name,
-                    args: CheckoutViewArgs(isFromCart: true)),
+                PageRouteInfo(
+                  CheckoutView.name,
+                  args: CheckoutViewArgs(isFromCart: true),
+                ),
               );
             },
             buttonText: 'Checkout',

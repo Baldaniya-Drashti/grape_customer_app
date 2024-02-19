@@ -49,4 +49,11 @@ class SvgImageConstant {
   static const help = 'assets/svg/help.svg';
   static const report = 'assets/svg/report.svg';
   static const feedback = 'assets/svg/feedback.svg';
+
+  //My Orders
+  static const calender = 'assets/svg/calender.svg';
+  static const sizeIcon = 'assets/svg/size_icon.svg';
+  static const placed = 'assets/svg/placed.svg';
+  static const packed = 'assets/svg/packed.svg';
+  static const shipped = 'assets/svg/shipped.svg';
 }
