@@ -38,7 +38,6 @@ Future<void> main() async {
         ],
       );
 
-      DynamicLinksService.initDynamicLinks();
       await Firebase.initializeApp(
         options: Platform.isIOS
             ? null
@@ -53,6 +52,7 @@ Future<void> main() async {
         return e;
       }).then((v) async {
         await _initializeCrashlytics();
+        DynamicLinksService.initDynamicLinks();
         await dotenv.load(fileName: ".env");
         configureInjection(Environment.dev);
         String environment = String.fromEnvironment(
