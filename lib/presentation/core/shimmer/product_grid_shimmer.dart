@@ -1,16 +1,13 @@
-import 'package:auto_route/auto_route.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:grape_customer_app/domain/core/math_utils.dart';
 import 'package:grape_customer_app/domain/core/svg_image_constants.dart';
 import 'package:grape_customer_app/presentation/common/widgets/base_text.dart';
-import 'package:grape_customer_app/presentation/core/app_router.gr.dart';
-import 'package:grape_customer_app/presentation/core/styles/styles.dart';
 import 'package:grape_customer_app/presentation/core/widgets/utility/common_rating_bar.dart';
+import 'package:shimmer/shimmer.dart';
 
-class RecommandedProductWidget extends StatelessWidget {
-  const RecommandedProductWidget({super.key});
+class ProductGridShimmerView extends StatelessWidget {
+  const ProductGridShimmerView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,71 +20,60 @@ class RecommandedProductWidget extends StatelessWidget {
       physics: BouncingScrollPhysics(),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
-        childAspectRatio: 0.6,
+        childAspectRatio: 0.7,
         crossAxisSpacing: getSize(21),
         mainAxisSpacing: getSize(20),
       ),
-      itemBuilder: (context, index) {
-        return GestureDetector(
-          onTap: () {
-            context.router.push(PageRouteInfo(ProductDetailsView.name));
-          },
+      itemBuilder: (BuildContext context, int index) {
+        return Shimmer.fromColors(
+          highlightColor: Colors.grey.shade50,
+          baseColor: Colors.grey.shade300,
           child: Stack(
             children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Center(
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(getSize(10)),
-                      child: CachedNetworkImage(
-                        imageUrl:
-                            "https://www.tpci.in/indiabusinesstrade/wp-content/uploads/2023/09/Untitled-design-6-3.png",
-                        placeholder: (context, url) => Container(
-                          height: getSize(160),
-                          decoration: BoxDecoration(
-                            color: Colors.grey.shade100,
-                            borderRadius: BorderRadius.circular(getSize(10)),
-                          ),
-                        ),
-                        height: getSize(160),
-                        fit: BoxFit.cover,
+                    child: Container(
+                      height: getSize(160),
+                      decoration: BoxDecoration(
+                        color: Colors.grey.shade50,
+                        borderRadius: BorderRadius.circular(getSize(10)),
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: getSize(8),
-                  ),
-                  BaseText(
-                    text: 'Google Pixel 7a',
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                    maxLines: 1,
-                  ),
-                  SizedBox(
+                  Spacer(),
+                  Container(
+                    margin: EdgeInsets.symmetric(horizontal: getSize(06)),
+                    width: MediaQuery.of(context).size.width,
                     height: getSize(5),
+                    color: Colors.grey[400],
                   ),
+                  Spacer(),
                   Row(
                     children: [
-                      BaseText(
-                        text: '\$350',
-                        textDecoration: TextDecoration.lineThrough,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w500,
-                        textColor: AppColors.black.withOpacity(0.4),
+                      Expanded(
+                        child: Container(
+                          margin: EdgeInsets.symmetric(horizontal: getSize(06)),
+                          width: MediaQuery.of(context).size.width,
+                          height: getSize(5),
+                          color: Colors.grey[400],
+                        ),
                       ),
                       SizedBox(
                         width: getSize(6),
                       ),
-                      BaseText(
-                        text: '\$350',
-                        fontWeight: FontWeight.w600,
+                      Expanded(
+                        child: Container(
+                          margin: EdgeInsets.symmetric(horizontal: getSize(06)),
+                          width: MediaQuery.of(context).size.width,
+                          height: getSize(5),
+                          color: Colors.grey[400],
+                        ),
                       ),
                     ],
                   ),
-                  SizedBox(
-                    height: getSize(5),
-                  ),
+                  Spacer(),
                   Row(
                     children: [
                       CommonRatingBar(
@@ -100,16 +86,17 @@ class RecommandedProductWidget extends StatelessWidget {
                       SizedBox(
                         width: getSize(4),
                       ),
-                      BaseText(
-                        text: '200 Sold',
-                        fontSize: 8,
-                        fontWeight: FontWeight.w500,
+                      Expanded(
+                        child: Container(
+                          margin: EdgeInsets.symmetric(horizontal: getSize(06)),
+                          width: MediaQuery.of(context).size.width,
+                          height: getSize(5),
+                          color: Colors.grey[400],
+                        ),
                       ),
                     ],
                   ),
-                  SizedBox(
-                    height: getSize(3),
-                  ),
+                  Spacer(),
                   Row(
                     children: [
                       SvgPicture.asset(
@@ -117,18 +104,20 @@ class RecommandedProductWidget extends StatelessWidget {
                         height: getSize(12),
                         width: getSize(12),
                         colorFilter: ColorFilter.mode(
-                          AppColors.black.withOpacity(0.4),
+                          Colors.grey[400]!,
                           BlendMode.srcIn,
                         ),
                       ),
                       SizedBox(
                         width: getSize(2),
                       ),
-                      BaseText(
-                        text: 'Hyderabad',
-                        fontSize: 8,
-                        fontWeight: FontWeight.w500,
-                        textColor: AppColors.black.withOpacity(0.4),
+                      Expanded(
+                        child: Container(
+                          margin: EdgeInsets.symmetric(horizontal: getSize(06)),
+                          width: MediaQuery.of(context).size.width,
+                          height: getSize(5),
+                          color: Colors.grey[400],
+                        ),
                       ),
                     ],
                   ),
@@ -142,7 +131,7 @@ class RecommandedProductWidget extends StatelessWidget {
                   width: getSize(36),
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
-                    color: Color(0xFFFFF094),
+                    color: Colors.grey.shade100,
                     borderRadius: BorderRadius.circular(
                       getSize(4),
                     ),
@@ -151,7 +140,7 @@ class RecommandedProductWidget extends StatelessWidget {
                     text: '-20%',
                     fontSize: 10,
                     fontWeight: FontWeight.w500,
-                    textColor: Color(0xFFFF770E),
+                    textColor: Colors.grey.shade500,
                   ),
                 ),
               ),

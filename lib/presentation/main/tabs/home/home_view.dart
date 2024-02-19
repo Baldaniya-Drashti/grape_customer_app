@@ -85,6 +85,7 @@ class HomeView extends StatelessWidget {
               SizedBox(
                 height: getSize(18),
               ),
+              //ProductGridShimmerView()
               RecommandedProductWidget(),
             ],
           ),
