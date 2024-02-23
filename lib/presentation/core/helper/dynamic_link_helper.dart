@@ -24,7 +24,7 @@ class DynamicLinksService {
       iosParameters: IOSParameters(
         bundleId: packageInfo.packageName,
         minimumVersion: packageInfo.version,
-        appStoreId: '6468869821',
+        appStoreId: '',
       ),
       socialMetaTagParameters: SocialMetaTagParameters(
         title: title,
