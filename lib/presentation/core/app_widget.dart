@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:country_picker/country_picker.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
@@ -65,6 +67,10 @@ class _AppState extends State<_App> {
               routerConfig: _appRouter.config(
                 navigatorObservers: () =>
                     [FirebaseAnalyticsObserver(analytics: analytics)],
+                deepLinkBuilder: (deepLink) {
+                  log(deepLink.path);
+                  return deepLink;
+                },
               ),
               supportedLocales: AppLocalizations.supportedLocales,
               localizationsDelegates: [

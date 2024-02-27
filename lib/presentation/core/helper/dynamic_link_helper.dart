@@ -12,7 +12,7 @@ class DynamicLinksService {
   }) async {
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
 
-    String uriPrefix = "https://grapecustomer.page.link";
+    String uriPrefix = "https://iroid.page.link";
 
     final DynamicLinkParameters parameters = DynamicLinkParameters(
       uriPrefix: uriPrefix,
@@ -24,7 +24,7 @@ class DynamicLinksService {
       iosParameters: IOSParameters(
         bundleId: packageInfo.packageName,
         minimumVersion: packageInfo.version,
-        appStoreId: '',
+        appStoreId: '6478269568',
       ),
       socialMetaTagParameters: SocialMetaTagParameters(
         title: title,
