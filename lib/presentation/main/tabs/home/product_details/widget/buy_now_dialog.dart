@@ -267,38 +267,40 @@ class BuyNowDialog extends StatelessWidget {
         physics: BouncingScrollPhysics(),
         itemBuilder: (context, index) => Column(
           children: [
-            Container(
-              height: getSize(60),
-              width: getSize(60),
-              margin: EdgeInsets.only(
-                left: index != 0 ? getSize(7) : 0,
-                right: index == 9 ? 0 : getSize(7),
-              ),
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                color: index == 0
-                    ? AppColors.primaryOrange.withOpacity(0.20)
-                    : AppColors.white,
-                borderRadius: BorderRadius.circular(getSize(6)),
-                border: Border.all(
-                  color: index == 0
-                      ? AppColors.primaryOrange
-                      : AppColors.black.withOpacity(0.20),
-                ),
-              ),
+            Flexible(
               child: Container(
-                height: getSize(38),
-                width: getSize(38),
+                height: getSize(60),
+                width: getSize(60),
+                margin: EdgeInsets.only(
+                  left: index != 0 ? getSize(7) : 0,
+                  right: index == 9 ? 0 : getSize(7),
+                ),
+                alignment: Alignment.center,
                 decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: AppColors.black.withOpacity(0.10),
-                      offset: Offset(0, 0),
-                      blurRadius: 14,
-                    ),
-                  ],
-                  color: index == 0 ? AppColors.black : AppColors.white,
-                  shape: BoxShape.circle,
+                  color: index == 0
+                      ? AppColors.primaryOrange.withOpacity(0.20)
+                      : AppColors.white,
+                  borderRadius: BorderRadius.circular(getSize(6)),
+                  border: Border.all(
+                    color: index == 0
+                        ? AppColors.primaryOrange
+                        : AppColors.black.withOpacity(0.20),
+                  ),
+                ),
+                child: Container(
+                  height: getSize(38),
+                  width: getSize(38),
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        color: AppColors.black.withOpacity(0.10),
+                        offset: Offset(0, 0),
+                        blurRadius: 14,
+                      ),
+                    ],
+                    color: index == 0 ? AppColors.black : AppColors.white,
+                    shape: BoxShape.circle,
+                  ),
                 ),
               ),
             ),

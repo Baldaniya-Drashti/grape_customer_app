@@ -61,7 +61,7 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
           },
           startCountdown: (StartCountdown value) {
             timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-              if (state.secondsRemaining > 0) {
+              if (state.secondsRemaining > 0 && !isClosed) {
                 add(const LoginFormEvent.decrementTimer());
               } else {
                 timer.cancel();
@@ -71,7 +71,11 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
             emit(state.copyWith(secondsRemaining: 30));
           },
           decrementTimer: (DecrementTimer value) {
-            emit(state.copyWith(secondsRemaining: state.secondsRemaining - 1));
+            emit(state.copyWith(
+              secondsRemaining: state.secondsRemaining - 1,
+              authFailureOrSuccessOption: none(),
+              resendFailureOrSuccessOption: none(),
+            ));
           },
           resendOtp: (ResendOtp value) async {
             //timer.cancel();

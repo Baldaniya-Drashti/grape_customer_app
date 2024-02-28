@@ -112,7 +112,7 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
             emit(
               state.copyWith(
                 isSubmitting: true,
-                authFailureOrSuccessOption: none(),
+                verifyOtpOrSuccessOption: none(),
               ),
             );
 
@@ -127,7 +127,7 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
             state.copyWith(
               isSubmitting: false,
               showErrorMessages: true,
-              otpFailureOrSuccessOption: optionOf(failureOrSuccess),
+              verifyOtpOrSuccessOption: optionOf(failureOrSuccess),
             ),
           );
         },
@@ -150,7 +150,7 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
         },
         startCountdown: (StartCountdown value) {
           timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-            if (state.secondsRemaining > 0) {
+            if (state.secondsRemaining > 0 && !isClosed) {
               add(const EditProfileEvent.decrementTimer());
             } else {
               timer.cancel();
@@ -160,7 +160,14 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
           emit(state.copyWith(secondsRemaining: 30));
         },
         decrementTimer: (DecrementTimer value) {
-          emit(state.copyWith(secondsRemaining: state.secondsRemaining - 1));
+          emit(
+            state.copyWith(
+              secondsRemaining: state.secondsRemaining - 1,
+              otpFailureOrSuccessOption: none(),
+              verifyOtpOrSuccessOption: none(),
+              authFailureOrSuccessOption: none(),
+            ),
+          );
         },
         resendOtp: (ResendOtp value) async {
           Either<AuthFailure, String>? failureOrSuccess;
@@ -181,10 +188,12 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
             state.copyWith(
               isSubmitting: false,
               //showErrorMessages: true,
-              // secondsRemaining: 30,
+              secondsRemaining: 30,
               otpFailureOrSuccessOption: optionOf(failureOrSuccess),
             ),
           );
+
+          add(EditProfileEvent.startCountdown());
         },
       );
     });

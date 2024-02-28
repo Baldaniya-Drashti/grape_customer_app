@@ -145,7 +145,7 @@ class RegisterFormBloc extends Bloc<RegisterFormEvent, RegisterFormState> {
           },
           startCountdown: (StartCountdown value) {
             timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-              if (state.secondsRemaining > 0) {
+              if (state.secondsRemaining > 0 && !isClosed) {
                 add(const RegisterFormEvent.decrementTimer());
               } else {
                 timer.cancel();
@@ -154,7 +154,13 @@ class RegisterFormBloc extends Bloc<RegisterFormEvent, RegisterFormState> {
             emit(state.copyWith(secondsRemaining: 30));
           },
           decrementTimer: (DecrementTimer value) async {
-            emit(state.copyWith(secondsRemaining: state.secondsRemaining - 1));
+            emit(
+              state.copyWith(
+                secondsRemaining: state.secondsRemaining - 1,
+                authFailureOrSuccessOption: none(),
+                resendFailureOrSuccessOption: none(),
+              ),
+            );
           },
           resendOtp: (ResendOtp value) async {
             timer.cancel();

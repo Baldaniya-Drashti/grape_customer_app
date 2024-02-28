@@ -138,8 +138,12 @@ class RecommandedProductWidget extends StatelessWidget {
                 left: getSize(6),
                 top: getSize(6),
                 child: Container(
-                  height: getSize(16),
-                  width: getSize(36),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: getSize(4),
+                    vertical: getSize(2),
+                  ),
+                  // height: getSize(16),
+                  // width: getSize(36),
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
                     color: Color(0xFFFFF094),

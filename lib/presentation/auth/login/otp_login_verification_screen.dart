@@ -36,7 +36,6 @@ class OtpLoginVerificationView extends StatelessWidget {
               () => null,
               (a) => a.fold(
                 (l) {
-                  context.read<LoginFormBloc>().timer.cancel();
                   showError(
                     message: l.maybeMap(
                       showAPIResponseMessage: (value) => value.message,
@@ -55,7 +54,6 @@ class OtpLoginVerificationView extends StatelessWidget {
               () {},
               (either) => either.fold(
                 (failure) {
-                  context.read<LoginFormBloc>().timer.cancel();
                   showError(
                     message: failure.maybeMap(
                       showAPIResponseMessage: (value) => value.message,
@@ -66,7 +64,6 @@ class OtpLoginVerificationView extends StatelessWidget {
                   ).show(context);
                 },
                 (r) {
-                  context.read<LoginFormBloc>().timer.cancel();
                   showSuccess(message: r).show(context).then(
                     (value) {
                       context.router.replaceAll(

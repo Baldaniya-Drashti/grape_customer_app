@@ -5,6 +5,7 @@ class EditProfileState with _$EditProfileState {
   const factory EditProfileState({
     required Option<Either<AccountFailure, List>> authFailureOrSuccessOption,
     required Option<Either<AuthFailure, String>> otpFailureOrSuccessOption,
+    required Option<Either<AuthFailure, String>> verifyOtpOrSuccessOption,
     required bool showErrorMessages,
     required bool isSubmitting,
     required String selectImage,
@@ -31,5 +32,6 @@ class EditProfileState with _$EditProfileState {
         enteredOTP: OTPText(''),
         secondsRemaining: 0,
         otpFailureOrSuccessOption: none(),
+        verifyOtpOrSuccessOption: none(),
       );
 }

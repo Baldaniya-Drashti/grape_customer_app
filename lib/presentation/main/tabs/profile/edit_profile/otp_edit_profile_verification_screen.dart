@@ -33,11 +33,29 @@ class OtpEditProfileVerificationView extends StatelessWidget {
         child: BlocConsumer<EditProfileBloc, EditProfileState>(
           listener: (context, state) {
             state.otpFailureOrSuccessOption.fold(
+              () => null,
+              (a) => a.fold(
+                (l) {
+                  showError(
+                    message: l.maybeMap(
+                      showAPIResponseMessage: (value) => value.message,
+                      networkError: (value) =>
+                          'Please check your internet connectivity',
+                      orElse: () => "Server Error. Try again later.",
+                    ),
+                  ).show(context);
+                },
+                (r) {
+                  showSuccess(message: r).show(context);
+                },
+              ),
+            );
+            state.verifyOtpOrSuccessOption.fold(
               () {},
               (either) => either.fold(
-                (failure) {
-                  context.read<EditProfileBloc>().timer.cancel();
-                  showError(
+                (failure) async {
+                  //  context.read<EditProfileBloc>().timer.cancel();
+                  await showError(
                     message: failure.maybeMap(
                       showAPIResponseMessage: (value) => value.message,
                       networkError: (value) =>
@@ -47,7 +65,7 @@ class OtpEditProfileVerificationView extends StatelessWidget {
                   ).show(context);
                 },
                 (r) {
-                  context.read<EditProfileBloc>().timer.cancel();
+                  //    context.read<EditProfileBloc>().timer.cancel();
                   showSuccess(message: r).show(context).then(
                     (value) {
                       context.router.pop(true);
@@ -111,7 +129,7 @@ class OtpEditProfileVerificationView extends StatelessWidget {
                           ),
                           TextSpan(
                             text:
-                                '(${state.countryCode}) ${state.mobileNumber.getValue()}',
+                                '(+${state.countryCode}) ${state.mobileNumber.getValue()}',
                             style: TextStyle(
                               fontWeight: FontWeight.w500,
                               color: AppColors.black,

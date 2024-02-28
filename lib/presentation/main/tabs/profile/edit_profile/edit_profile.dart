@@ -28,7 +28,7 @@ class EditProfileScreen extends StatelessWidget {
             () => null,
             (a) => a.fold(
               (l) {
-                context.read<EditProfileBloc>().timer.cancel();
+                //  context.read<EditProfileBloc>().timer.cancel();
 
                 showError(
                   message: l.maybeMap(

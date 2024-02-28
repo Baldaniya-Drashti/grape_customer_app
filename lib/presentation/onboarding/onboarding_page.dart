@@ -80,9 +80,9 @@ class OnBoardingPage extends StatelessWidget {
                   //     textColor: Color(0xFF32353A),
                   //   ),
                   // ),
-                  // SizedBox(
-                  //   height: getSize(15),
-                  // ),
+                  SizedBox(
+                    height: getSize(15),
+                  ),
                   // Padding(
                   //   padding: EdgeInsets.symmetric(horizontal: getSize(28)),
                   //   child: BaseText(
@@ -92,10 +92,10 @@ class OnBoardingPage extends StatelessWidget {
                   //     fontSize: 12,
                   //   ),
                   // ),
-                  Spacer(),
+                  // Spacer(),
                   getButtonView(state, context),
                   SizedBox(
-                    height: getSize(40),
+                    height: getSize(20),
                   ),
                   getNextButtonAndDotIndicatorView(state),
                   SizedBox(
@@ -187,27 +187,24 @@ class OnBoardingPage extends StatelessWidget {
     );
   }
 
-  Expanded getNextButtonAndDotIndicatorView(OnboardingState state) {
-    return Expanded(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: List<Widget>.generate(
-          3,
-          (index) => Container(
-            margin: EdgeInsets.symmetric(horizontal: getSize(5)),
-            height: getSize(5),
-            width: getSize(state.currentPage == index ? 18 : 5),
-            decoration: BoxDecoration(
-              color: state.currentPage == index
-                  ? Color(0xFF464646)
-                  : AppColors.grey,
-              borderRadius: state.currentPage == index
-                  ? BorderRadius.circular(getSize(30))
-                  : null,
-              shape: state.currentPage == index
-                  ? BoxShape.rectangle
-                  : BoxShape.circle,
-            ),
+  getNextButtonAndDotIndicatorView(OnboardingState state) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: List<Widget>.generate(
+        3,
+        (index) => Container(
+          margin: EdgeInsets.symmetric(horizontal: getSize(5)),
+          height: getSize(5),
+          width: getSize(state.currentPage == index ? 18 : 5),
+          decoration: BoxDecoration(
+            color:
+                state.currentPage == index ? Color(0xFF464646) : AppColors.grey,
+            borderRadius: state.currentPage == index
+                ? BorderRadius.circular(getSize(30))
+                : null,
+            shape: state.currentPage == index
+                ? BoxShape.rectangle
+                : BoxShape.circle,
           ),
         ),
       ),
@@ -216,7 +213,6 @@ class OnBoardingPage extends StatelessWidget {
 
   getPageView(OnboardingState state, BuildContext context) {
     return Expanded(
-      flex: 10,
       child: PageView.builder(
         controller: pageController,
         itemCount: onboardingList.length,
@@ -233,10 +229,12 @@ class OnBoardingPage extends StatelessWidget {
           ),
           child: Column(
             children: [
-              Image.asset(
-                onboardingList[index].image,
+              Expanded(
+                child: Image.asset(
+                  onboardingList[index].image,
+                ),
               ),
-              Spacer(),
+              //  Spacer(),
               Center(
                 child: BaseText(
                   text: onboardingList[state.currentPage].title,
@@ -270,7 +268,6 @@ class OnBoardingPage extends StatelessWidget {
 
   getTitleAndDescription(OnboardingState state, BuildContext context) {
     return Expanded(
-      flex: 10,
       child: PageView.builder(
         controller: pageController,
         itemCount: onboardingList.length,
