@@ -11,6 +11,11 @@ class ApiConstants {
   static String sendOtp = 'auth/send-otp';
   static String verifyOtp = 'auth/verify-otp';
   static String logout = 'auth/logout';
-  static String updateUser = 'edit/user';
+
   static String getUser = 'user/info';
+
+  //edit user
+  static String updateUser = 'edit/user';
+  static String editUserSendOtp = 'edit/user/send/otp';
+  static String editUserVerifyOtp = 'edit/user/verify/otp';
 }

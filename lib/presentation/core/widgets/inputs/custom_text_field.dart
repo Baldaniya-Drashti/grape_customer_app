@@ -123,6 +123,7 @@ class CustomTextField extends StatelessWidget {
                   horizontal: getSize(18),
                 ),
                 isDense: true,
+
                 border: border,
                 enabledBorder: border,
                 errorMaxLines: errorMaxLines,

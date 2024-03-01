@@ -30,7 +30,7 @@ class ApiService {
       onResponse: (response, handler) {
         return handler.resolve(response); // continue
       },
-      onError: (DioException e, handler) {
+      onError: (DioException e, handler) async {
         return handler.next(e); //continue
       },
     );

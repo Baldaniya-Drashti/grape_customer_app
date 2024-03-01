@@ -6,6 +6,9 @@ import 'package:grape_customer_app/domain/account/account.dart';
 part 'current_user_dto.freezed.dart';
 part 'current_user_dto.g.dart';
 
+
+
+
 @freezed
 class CurrentUserDto with _$CurrentUserDto {
   const CurrentUserDto._();

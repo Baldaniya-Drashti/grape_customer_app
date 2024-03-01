@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:grape_customer_app/domain/core/environment/environment.dart';
 import 'package:grape_customer_app/infrastructure/core/network/injectable_module.dart';
+import 'package:grape_customer_app/presentation/core/app_router.dart';
 import 'package:grape_customer_app/presentation/core/helper/dynamic_link_helper.dart';
 import 'package:grape_customer_app/presentation/core/restart_widget.dart';
 import 'package:grape_customer_app/setup_hive.dart';
@@ -33,7 +34,7 @@ Future<void> main() async {
           DeviceOrientation.portraitDown,
         ],
       );
-
+      getIt.registerSingleton<AppRouter>(AppRouter());
       await Firebase.initializeApp(
         options: Platform.isIOS
             ? null
