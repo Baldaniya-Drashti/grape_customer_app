@@ -44,10 +44,28 @@ class PaginatedListView extends StatelessWidget {
       controller: refreshController,
       physics: BouncingScrollPhysics(),
       footer: CustomFooter(
-        builder: (BuildContext context, LoadStatus? mode) {
-          return SizedBox();
+        builder: (context, mode) {
+          switch (mode) {
+            case LoadStatus.loading:
+              return const Center(child: CircularProgressIndicator());
+            case LoadStatus.canLoading:
+              return const Center(child: CircularProgressIndicator());
+            case LoadStatus.noMore:
+              return const Text('noMore');
+
+            case LoadStatus.failed:
+              return const Text('failed');
+
+            default:
+          }
+          return Container();
         },
       ),
+      // footer: CustomFooter(
+      //   builder: (BuildContext context, LoadStatus? mode) {
+      //     return SizedBox();
+      //   },
+      // ),
       onRefresh: () {
         onRefreshData();
       },

@@ -18,4 +18,7 @@ class ApiConstants {
   static String updateUser = 'edit/user';
   static String editUserSendOtp = 'edit/user/send/otp';
   static String editUserVerifyOtp = 'edit/user/verify/otp';
+
+  //products
+  static String getCustomerProducts = 'customer/products';
 }

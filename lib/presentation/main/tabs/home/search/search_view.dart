@@ -6,6 +6,7 @@ import 'package:grape_customer_app/application/main/home/home_bloc.dart';
 import 'package:grape_customer_app/domain/core/l10n/app_localizations.dart';
 import 'package:grape_customer_app/domain/core/math_utils.dart';
 import 'package:grape_customer_app/domain/core/svg_image_constants.dart';
+import 'package:grape_customer_app/injection.dart';
 import 'package:grape_customer_app/presentation/common/utils/app_focus.dart';
 import 'package:grape_customer_app/presentation/core/styles/app_colors.dart';
 import 'package:grape_customer_app/presentation/core/widgets/inputs/custom_text_field.dart';
@@ -39,7 +40,7 @@ class SearchView extends StatelessWidget {
             AppFocus.unfocus(context);
           },
           child: BlocProvider(
-            create: (context) => HomeBloc(),
+            create: (context) => getIt<HomeBloc>(),
             child: BlocBuilder<HomeBloc, HomeState>(
               builder: (context, state) {
                 return ListView(

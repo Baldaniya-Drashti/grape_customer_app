@@ -224,7 +224,7 @@ class Meta {
 
   Meta.fromJson(Map<String, dynamic> json) {
     total = json['total'];
-    lastPage = json['lastPage'];
+    lastPage = json['last_page'];
     perPage = json['perPage'];
     currentPage = json['currentPage'];
     from = json['from'];

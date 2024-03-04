@@ -38,7 +38,9 @@ class MainTabView extends StatelessWidget {
           create: (context) => getIt<AccountCubit>()..getAccount(),
         ),
         BlocProvider(
-          create: (context) => HomeBloc()..add(HomeEvent.getCurrentLocation()),
+          create: (context) => getIt<HomeBloc>()
+            ..add(HomeEvent.getCurrentLocation())
+            ..add(HomeEvent.getProductList(true)),
         ),
         BlocProvider(
           create: (context) => NotificationsBloc(),
