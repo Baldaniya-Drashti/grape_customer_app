@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:grape_customer_app/application/main/home/product_detail/product_detail_bloc.dart';
 import 'package:grape_customer_app/domain/core/math_utils.dart';
 import 'package:grape_customer_app/presentation/core/styles/app_colors.dart';
 
@@ -7,58 +9,33 @@ class ProductConfigurationWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        getProductDetails(title: 'Brand', description: 'Nothing'),
-        SizedBox(
-          height: getSize(6),
-        ),
-        getProductDetails(title: 'Model Name', description: 'A063'),
-        SizedBox(
-          height: getSize(6),
-        ),
-        getProductDetails(title: 'Wireless Carrier', description: 'MVNO'),
-        SizedBox(
-          height: getSize(6),
-        ),
-        getProductDetails(
-            title: 'Operating System', description: 'Android 12.0'),
-        SizedBox(
-          height: getSize(6),
-        ),
-        getProductDetails(title: 'Cellular Technology', description: '5G'),
-        SizedBox(
-          height: getSize(6),
-        ),
-        getProductDetails(
-            title: 'Storage Capacity', description: '128GB/ 256GB'),
-        SizedBox(
-          height: getSize(6),
-        ),
-        getProductDetails(
-            title: 'Connectivity Technology', description: 'Wi-Fi'),
-        SizedBox(
-          height: getSize(6),
-        ),
-        getProductDetails(title: 'Screen Size', description: '3.1 Inches'),
-        SizedBox(
-          height: getSize(6),
-        ),
-        getProductDetails(
-            title: 'Wireless network technology', description: ' GSM'),
-      ],
+    return BlocBuilder<ProductDetailBloc, ProductDetailState>(
+      builder: (context, state) {
+        return ListView(
+          shrinkWrap: true,
+          padding: EdgeInsets.zero,
+          physics: NeverScrollableScrollPhysics(),
+          children: List.generate(
+            state.productFromJson.data.length,
+            (index) => getProductDetails(
+              title: state.productFromJson.data[index].name ?? "",
+              description: state.productFromJson.data[index].value ?? "",
+            ),
+          ),
+        );
+      },
     );
   }
 
   getProductDetails({required String title, required String description}) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: getSize(18)),
+      padding:
+          EdgeInsets.symmetric(horizontal: getSize(18), vertical: getSize(3)),
       child: RichText(
         text: TextSpan(
           style: TextStyle(
             fontSize: getFontSize(12),
-            color: AppColors.black.withOpacity(0.80),
+            color: AppColors.black.withOpacity(0.60),
             fontFamily: 'SfPro',
             fontWeight: FontWeight.w500,
           ),
@@ -67,7 +44,7 @@ class ProductConfigurationWidget extends StatelessWidget {
             TextSpan(
               text: description,
               style: TextStyle(
-                color: AppColors.black.withOpacity(0.60),
+                color: AppColors.black.withOpacity(0.80),
                 fontFamily: 'SfPro',
                 fontWeight: FontWeight.w400,
               ),

@@ -10,25 +10,27 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:grape_customer_app/application/auth/auth_status/auth_status_bloc.dart'
-    as _i19;
+    as _i20;
 import 'package:grape_customer_app/application/auth/login_form/login_form_bloc.dart'
     as _i13;
 import 'package:grape_customer_app/application/auth/register_form/register_form_bloc.dart'
-    as _i16;
+    as _i17;
 import 'package:grape_customer_app/application/main/checkout/checkout_bloc.dart'
     as _i4;
 import 'package:grape_customer_app/application/main/favourite/favourite_bloc.dart'
     as _i5;
 import 'package:grape_customer_app/application/main/home/home_bloc.dart'
-    as _i21;
+    as _i22;
+import 'package:grape_customer_app/application/main/home/product_detail/product_detail_bloc.dart'
+    as _i16;
 import 'package:grape_customer_app/application/main/profile/edit_profile/edit_profile_bloc.dart'
-    as _i20;
+    as _i21;
 import 'package:grape_customer_app/application/main/profile/get_account/account_cubit.dart'
-    as _i18;
+    as _i19;
 import 'package:grape_customer_app/application/main/profile/language/language_bloc.dart'
     as _i12;
 import 'package:grape_customer_app/application/main/profile/shipping_addresses/shipping_addresses_bloc.dart'
-    as _i17;
+    as _i18;
 import 'package:grape_customer_app/application/main_tab/main_tab_bloc.dart'
     as _i14;
 import 'package:grape_customer_app/application/onboarding/onboarding_bloc.dart'
@@ -74,18 +76,20 @@ extension GetItInjectableX on _i1.GetIt {
           gh<_i6.IAccountRepository>(),
         ));
     gh.factory<_i15.OnboardingBloc>(() => _i15.OnboardingBloc());
-    gh.factory<_i16.RegisterFormBloc>(
-        () => _i16.RegisterFormBloc(gh<_i8.IAuthFacade>()));
-    gh.factory<_i17.ShippingAddressesBloc>(() => _i17.ShippingAddressesBloc());
-    gh.factory<_i18.AccountCubit>(
-        () => _i18.AccountCubit(gh<_i6.IAccountRepository>()));
-    gh.factory<_i19.AuthStatusBloc>(
-        () => _i19.AuthStatusBloc(gh<_i8.IAuthFacade>()));
-    gh.factory<_i20.EditProfileBloc>(() => _i20.EditProfileBloc(
+    gh.factory<_i16.ProductDetailBloc>(
+        () => _i16.ProductDetailBloc(gh<_i10.IMainFacade>()));
+    gh.factory<_i17.RegisterFormBloc>(
+        () => _i17.RegisterFormBloc(gh<_i8.IAuthFacade>()));
+    gh.factory<_i18.ShippingAddressesBloc>(() => _i18.ShippingAddressesBloc());
+    gh.factory<_i19.AccountCubit>(
+        () => _i19.AccountCubit(gh<_i6.IAccountRepository>()));
+    gh.factory<_i20.AuthStatusBloc>(
+        () => _i20.AuthStatusBloc(gh<_i8.IAuthFacade>()));
+    gh.factory<_i21.EditProfileBloc>(() => _i21.EditProfileBloc(
           gh<_i6.IAccountRepository>(),
           gh<_i8.IAuthFacade>(),
         ));
-    gh.factory<_i21.HomeBloc>(() => _i21.HomeBloc(gh<_i10.IMainFacade>()));
+    gh.factory<_i22.HomeBloc>(() => _i22.HomeBloc(gh<_i10.IMainFacade>()));
     return this;
   }
 }

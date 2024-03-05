@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grape_customer_app/application/main/home/product_detail/product_detail_bloc.dart';
 import 'package:grape_customer_app/domain/core/math_utils.dart';
+import 'package:grape_customer_app/infrastructure/main/home_dto/get_product_list_response.dart';
+import 'package:grape_customer_app/injection.dart';
 import 'package:grape_customer_app/presentation/common/widgets/base_text.dart';
 import 'package:grape_customer_app/presentation/core/app_router.gr.dart';
 import 'package:grape_customer_app/presentation/core/styles/app_colors.dart';
@@ -17,7 +19,8 @@ class BuyNowDialog extends StatelessWidget {
     return const Placeholder();
   }
 
-  buyNowDialog(BuildContext context) {
+  buyNowDialog(
+      BuildContext context, GetProductListResponse getProductListResponse) {
     return showModalBottomSheet(
       context: context,
       backgroundColor: AppColors.white,
@@ -32,7 +35,7 @@ class BuyNowDialog extends StatelessWidget {
         ),
       ),
       builder: (context) => BlocProvider(
-        create: (context) => ProductDetailBloc(),
+        create: (context) => getIt<ProductDetailBloc>(),
         child: BlocBuilder<ProductDetailBloc, ProductDetailState>(
           builder: (context, state) {
             return SafeArea(
@@ -43,7 +46,7 @@ class BuyNowDialog extends StatelessWidget {
                   SizedBox(
                     height: getSize(20),
                   ),
-                  productDetailsView(context),
+                  productDetailsView(context, getProductListResponse),
                   SizedBox(
                     height: getSize(16),
                   ),
@@ -318,7 +321,8 @@ class BuyNowDialog extends StatelessWidget {
     );
   }
 
-  productDetailsView(BuildContext context) {
+  productDetailsView(
+      BuildContext context, GetProductListResponse getProductListResponse) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: getSize(18)),
       child: Column(
@@ -340,7 +344,9 @@ class BuyNowDialog extends StatelessWidget {
                       borderRadius: BorderRadius.circular(getSize(6)),
                       image: DecorationImage(
                         image: CachedNetworkImageProvider(
-                            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0U3avlAFpuN9Sf5PVhN3MHdXQzh6rJusL93tMQRngAnrK1k0Z9CH4hzhArR0kyV-Fm_E&usqp=CAU'),
+                          getProductListResponse.images?[0].image ?? "",
+                        ),
+                        fit: BoxFit.cover,
                       ),
                     ),
                   ),
@@ -351,7 +357,7 @@ class BuyNowDialog extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       BaseText(
-                        text: 'Nothing Phone 1',
+                        text: getProductListResponse.product_name ?? "",
                         fontWeight: FontWeight.w600,
                         textColor: AppColors.black.withOpacity(0.80),
                       ),
@@ -371,7 +377,7 @@ class BuyNowDialog extends StatelessWidget {
                             width: getSize(6),
                           ),
                           BaseText(
-                            text: '\$350',
+                            text: '\$${getProductListResponse.price}',
                             fontSize: 20,
                             fontWeight: FontWeight.w600,
                             textColor: Color(0xFF527FF2),

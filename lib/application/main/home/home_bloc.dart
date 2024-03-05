@@ -65,24 +65,26 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           page++;
 
           res.fold(
-              (l) => emit(
-                    state.copyWith(
-                      isErrorInAPI: true,
-                      isLoading: false,
-                      getProductList: [],
-                    ),
-                  ), (r) {
-            lastPage = r.meta?.lastPage ?? 1;
-            return emit(
+            (l) => emit(
               state.copyWith(
+                isErrorInAPI: true,
                 isLoading: false,
-                isErrorInAPI: false,
-                getProductList: (r.data as List<dynamic>)
-                    .map((e) => GetProductListResponse.fromJson(e))
-                    .toList(),
+                getProductList: [],
               ),
-            );
-          });
+            ),
+            (r) {
+              lastPage = r.meta?.lastPage ?? 1;
+              return emit(
+                state.copyWith(
+                  isLoading: false,
+                  isErrorInAPI: false,
+                  getProductList: (r.data as List<dynamic>)
+                      .map((e) => GetProductListResponse.fromJson(e))
+                      .toList(),
+                ),
+              );
+            },
+          );
         },
       );
     });

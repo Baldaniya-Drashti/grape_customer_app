@@ -6,36 +6,26 @@ part 'common_product_from_json_response.freezed.dart';
 part 'common_product_from_json_response.g.dart';
 
 @freezed
-class CommonProductFromJsonResponse with _$CommonProductFromJsonResponse {
-  const factory CommonProductFromJsonResponse({
-    ProductFormJson? product_form_json,
-  }) = _CommonProductFromJsonResponse;
-
-  factory CommonProductFromJsonResponse.fromJson(Map<String, dynamic> json) =>
-      _$CommonProductFromJsonResponseFromJson(json);
-}
-
-@freezed
-class ProductFormJson with _$ProductFormJson {
-  const factory ProductFormJson({
+class ProductFromJson with _$ProductFromJson {
+  factory ProductFromJson({
     bool? shipping_charge,
     String? minimum_amount,
     String? maximum_amount,
-    int? qty,
-    List<Data>? data,
-  }) = _ProductFormJson;
+    String? qty,
+    @Default(<Data>[]) List<Data> data,
+  }) = _ProductFromJson;
 
-  factory ProductFormJson.fromJson(Map<String, dynamic> json) =>
-      _$ProductFormJsonFromJson(json);
+  factory ProductFromJson.fromJson(Map<String, dynamic> json) =>
+      _$ProductFromJsonFromJson(json);
 }
 
 @freezed
 class Data with _$Data {
-  const factory Data({
+  factory Data({
     String? name,
     String? hint,
     int? fieldType,
-    List<dynamic>? list,
+    List<String>? list,
     String? value,
   }) = _Data;
 

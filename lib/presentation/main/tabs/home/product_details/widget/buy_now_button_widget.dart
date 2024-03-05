@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:grape_customer_app/application/main/home/product_detail/product_detail_bloc.dart';
 import 'package:grape_customer_app/domain/core/math_utils.dart';
 import 'package:grape_customer_app/domain/core/png_image_constants.dart';
 import 'package:grape_customer_app/domain/core/svg_image_constants.dart';
@@ -12,53 +14,57 @@ class BuyNowButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Container(
-          height: getSize(42),
-          width: getSize(42),
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(getSize(10)),
-            border: Border.all(color: AppColors.primaryOrange),
-          ),
-          child: Stack(
-            clipBehavior: Clip.none,
-            children: [
-              Image.asset(
-                PngImageConstants.cartUnselected,
-                height: getSize(18),
-                width: getSize(18),
-                color: AppColors.black,
+    return BlocBuilder<ProductDetailBloc, ProductDetailState>(
+      builder: (context, state) {
+        return Row(
+          children: [
+            Container(
+              height: getSize(42),
+              width: getSize(42),
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(getSize(10)),
+                border: Border.all(color: AppColors.primaryOrange),
               ),
-              Positioned.fill(
-                top: getSize(3),
-                left: getSize(-3),
-                child: Align(
-                  alignment: Alignment.topLeft,
-                  child: SvgPicture.asset(
-                    SvgImageConstant.successImage,
-                    height: getSize(9),
-                    width: getSize(9),
+              child: Stack(
+                clipBehavior: Clip.none,
+                children: [
+                  Image.asset(
+                    PngImageConstants.cartUnselected,
+                    height: getSize(18),
+                    width: getSize(18),
+                    color: AppColors.black,
                   ),
-                ),
-              )
-            ],
-          ),
-        ),
-        SizedBox(
-          width: getSize(10),
-        ),
-        Expanded(
-          child: CommonButton(
-            onPressed: () {
-              BuyNowDialog().buyNowDialog(context);
-            },
-            height: 42,
-            buttonText: 'Buy Now',
-          ),
-        ),
-      ],
+                  Positioned.fill(
+                    top: getSize(3),
+                    left: getSize(-3),
+                    child: Align(
+                      alignment: Alignment.topLeft,
+                      child: SvgPicture.asset(
+                        SvgImageConstant.successImage,
+                        height: getSize(9),
+                        width: getSize(9),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
+            SizedBox(
+              width: getSize(10),
+            ),
+            Expanded(
+              child: CommonButton(
+                onPressed: () {
+                  BuyNowDialog().buyNowDialog(context, state.getProductDetails);
+                },
+                height: 42,
+                buttonText: 'Buy Now',
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 }

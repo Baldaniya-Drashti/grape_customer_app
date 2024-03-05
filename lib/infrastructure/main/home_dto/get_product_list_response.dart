@@ -7,7 +7,7 @@ part 'get_product_list_response.g.dart';
 
 @freezed
 class GetProductListResponse with _$GetProductListResponse {
-  const factory GetProductListResponse({
+  factory GetProductListResponse({
     int? id,
     String? category,
     String? sub_category,
@@ -34,7 +34,7 @@ class GetProductListResponse with _$GetProductListResponse {
 
 @freezed
 class Images with _$Images {
-  const factory Images({
+  factory Images({
     int? product_image_id,
     String? image,
   }) = _Images;
@@ -44,7 +44,7 @@ class Images with _$Images {
 
 @freezed
 class Video with _$Video {
-  const factory Video({
+  factory Video({
     int? product_video_id,
     String? video,
   }) = _Video;

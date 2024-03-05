@@ -47,25 +47,28 @@ class PaginatedListView extends StatelessWidget {
         builder: (context, mode) {
           switch (mode) {
             case LoadStatus.loading:
-              return const Center(child: CircularProgressIndicator());
+              return Center(
+                child: CircularProgressIndicator(
+                  color: AppColors.primaryOrange,
+                ),
+              );
             case LoadStatus.canLoading:
-              return const Center(child: CircularProgressIndicator());
+              return Center(
+                child: CircularProgressIndicator(
+                  color: AppColors.primaryOrange,
+                ),
+              );
             case LoadStatus.noMore:
-              return const Text('noMore');
+              return const SizedBox();
 
             case LoadStatus.failed:
-              return const Text('failed');
+              return const SizedBox();
 
             default:
           }
           return Container();
         },
       ),
-      // footer: CustomFooter(
-      //   builder: (BuildContext context, LoadStatus? mode) {
-      //     return SizedBox();
-      //   },
-      // ),
       onRefresh: () {
         onRefreshData();
       },

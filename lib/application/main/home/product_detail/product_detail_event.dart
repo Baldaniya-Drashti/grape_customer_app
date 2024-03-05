@@ -6,4 +6,7 @@ class ProductDetailEvent with _$ProductDetailEvent {
       IncreaseProductQuantity;
   factory ProductDetailEvent.decreaseProductQuantity() =
       DecreaseProductQuantity;
+  factory ProductDetailEvent.getProductDetails(String productId) =
+      GetProductDetails;
+  factory ProductDetailEvent.selectImage(int index) = SelectImage;
 }

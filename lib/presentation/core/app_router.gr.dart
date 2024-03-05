@@ -213,9 +213,13 @@ abstract class $AppRouter extends _i28.RootStackRouter {
       );
     },
     ProductDetailsView.name: (routeData) {
+      final args = routeData.argsAs<ProductDetailsViewArgs>();
       return _i28.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i20.ProductDetailsView(),
+        child: _i20.ProductDetailsView(
+          key: args.key,
+          productId: args.productId,
+        ),
       );
     },
     ProfileView.name: (routeData) {
@@ -690,16 +694,40 @@ class PaymentMethod extends _i28.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i20.ProductDetailsView]
-class ProductDetailsView extends _i28.PageRouteInfo<void> {
-  const ProductDetailsView({List<_i28.PageRouteInfo>? children})
-      : super(
+class ProductDetailsView extends _i28.PageRouteInfo<ProductDetailsViewArgs> {
+  ProductDetailsView({
+    _i29.Key? key,
+    required String productId,
+    List<_i28.PageRouteInfo>? children,
+  }) : super(
           ProductDetailsView.name,
+          args: ProductDetailsViewArgs(
+            key: key,
+            productId: productId,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'ProductDetailsView';
 
-  static const _i28.PageInfo<void> page = _i28.PageInfo<void>(name);
+  static const _i28.PageInfo<ProductDetailsViewArgs> page =
+      _i28.PageInfo<ProductDetailsViewArgs>(name);
+}
+
+class ProductDetailsViewArgs {
+  const ProductDetailsViewArgs({
+    this.key,
+    required this.productId,
+  });
+
+  final _i29.Key? key;
+
+  final String productId;
+
+  @override
+  String toString() {
+    return 'ProductDetailsViewArgs{key: $key, productId: $productId}';
+  }
 }
 
 /// generated route for

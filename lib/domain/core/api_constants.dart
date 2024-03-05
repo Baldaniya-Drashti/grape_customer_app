@@ -21,4 +21,5 @@ class ApiConstants {
 
   //products
   static String getCustomerProducts = 'customer/products';
+  static String getCustomerProductsDetails = 'customer/products/view';
 }
