@@ -11,25 +11,69 @@ class GetProductListResponse with _$GetProductListResponse {
     int? id,
     String? category,
     String? sub_category,
-    String? inner_sub_category,
+    InnerSubCategory? inner_sub_category,
     String? product_name,
-    String? color,
+    Discount? discount,
+    // Color? color,
     String? size,
     String? brand_name,
+    ModelName? model_name,
     int? price,
     int? available_qty,
     int? order_qty,
     int? total_qty,
+    bool? is_cart,
     int? review_rate,
     List<dynamic>? reviews,
     String? product_form_json,
     List<Images>? images,
-    List<Video>? video,
+    List<dynamic>? video,
+    String? seller_name,
+    int? shop_id,
     String? shop_location,
+    int? seller_total_product,
   }) = _GetProductListResponse;
 
   factory GetProductListResponse.fromJson(Map<String, dynamic> json) =>
       _$GetProductListResponseFromJson(json);
+}
+
+@freezed
+class InnerSubCategory with _$InnerSubCategory {
+  factory InnerSubCategory() = _InnerSubCategory;
+
+  factory InnerSubCategory.fromJson(Map<String, dynamic> json) =>
+      _$InnerSubCategoryFromJson(json);
+}
+
+@freezed
+class Discount with _$Discount {
+  factory Discount() = _Discount;
+
+  factory Discount.fromJson(Map<String, dynamic> json) =>
+      _$DiscountFromJson(json);
+}
+
+@freezed
+// class Color with _$Color {
+//   const factory Color() = _Color;
+
+//   factory Color.fromJson(Map<String, dynamic> json) => _$ColorFromJson(json);
+// }
+
+// @freezed
+// class Size with _$Size {
+//   const factory Size() = _Size;
+
+//   factory Size.fromJson(Map<String, dynamic> json) => _$SizeFromJson(json);
+// }
+
+@freezed
+class ModelName with _$ModelName {
+  factory ModelName() = _ModelName;
+
+  factory ModelName.fromJson(Map<String, dynamic> json) =>
+      _$ModelNameFromJson(json);
 }
 
 @freezed
@@ -40,14 +84,4 @@ class Images with _$Images {
   }) = _Images;
 
   factory Images.fromJson(Map<String, dynamic> json) => _$ImagesFromJson(json);
-}
-
-@freezed
-class Video with _$Video {
-  factory Video({
-    int? product_video_id,
-    String? video,
-  }) = _Video;
-
-  factory Video.fromJson(Map<String, dynamic> json) => _$VideoFromJson(json);
 }

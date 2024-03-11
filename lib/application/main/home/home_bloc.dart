@@ -1,8 +1,12 @@
+import 'dart:async';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:grape_customer_app/domain/auth/auth_value_objects.dart';
 import 'package:grape_customer_app/domain/main/i_main_facade.dart';
 
 import 'package:grape_customer_app/infrastructure/main/home_dto/get_product_list_response.dart';
+import 'package:grape_customer_app/infrastructure/main/home_dto/search_product_dto.dart';
 import 'package:grape_customer_app/presentation/core/helper/location_helper.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -15,7 +19,7 @@ part 'home_bloc.freezed.dart';
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   int page = 1;
   int lastPage = 1;
-
+  Timer? searchOnStoppedTyping;
   bool isFetching = false;
   final RefreshController refreshController = RefreshController();
   final IMainFacade mainFacade;
@@ -28,65 +32,120 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     'https://images.unsplash.com/photo-1519985176271-adb1088fa94c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a0c8d632e977f94e5d312d9893258f59&auto=format&fit=crop&w=1355&q=80'
   ];
   HomeBloc(this.mainFacade) : super(HomeState.initial()) {
-    on<HomeEvent>((event, emit) async {
-      await event.map(
-        getCurrentLocation: (value) async {
-          await LocationHelper().getCurrentLocation().then(
-            (value) {
-              emit(
-                state.copyWith(
-                  currentLocation: value.$1 ?? "",
-                  currentLatitude: value.$2,
-                  currentLongitude: value.$3,
-                ),
-              );
-            },
-          );
-        },
-        carousalChange: (CarousalChange value) async {
-          emit(state.copyWith(carousalIndex: value.tabIndex));
-        },
-        getProductList: (GetProductList e) async {
-          if (e.isRefresh) {
-            page = 1;
-            emit(state.copyWith(getProductList: []));
-            refreshController.resetNoData();
-          } else {
-            if (page > lastPage) {
-              refreshController.loadNoData();
-              return;
+    on<HomeEvent>(
+      (event, emit) async {
+        await event.map(
+          getCurrentLocation: (value) async {
+            await LocationHelper().getCurrentLocation().then(
+              (value) {
+                emit(
+                  state.copyWith(
+                    currentLocation: value.$1 ?? "",
+                    currentLatitude: value.$2,
+                    currentLongitude: value.$3,
+                  ),
+                );
+              },
+            );
+          },
+          carousalChange: (CarousalChange value) async {
+            emit(state.copyWith(carousalIndex: value.tabIndex));
+          },
+          getProductList: (GetProductList e) async {
+            if (e.isRefresh) {
+              page = 1;
+              emit(state.copyWith(getProductList: []));
+              refreshController.resetNoData();
+            } else {
+              if (page > lastPage) {
+                refreshController.loadNoData();
+                return;
+              }
             }
-          }
 
-          emit(state.copyWith(isLoading: true));
+            emit(state.copyWith(isLoading: true));
 
-          var res = await mainFacade.getProductListAPI(page: page);
+            var res = await mainFacade.getProductListAPI(page: page);
 
-          page++;
+            page++;
 
-          res.fold(
-            (l) => emit(
-              state.copyWith(
-                isErrorInAPI: true,
-                isLoading: false,
-                getProductList: [],
-              ),
-            ),
-            (r) {
-              lastPage = r.meta?.lastPage ?? 1;
-              return emit(
+            res.fold(
+              (l) => emit(
                 state.copyWith(
+                  isErrorInAPI: true,
                   isLoading: false,
-                  isErrorInAPI: false,
-                  getProductList: (r.data as List<dynamic>)
-                      .map((e) => GetProductListResponse.fromJson(e))
-                      .toList(),
+                  getProductList: [],
                 ),
+              ),
+              (r) {
+                lastPage = r.meta?.lastPage ?? 1;
+                return emit(
+                  state.copyWith(
+                    isLoading: false,
+                    isErrorInAPI: false,
+                    getProductList: (r.data as List<dynamic>)
+                        .map((e) => GetProductListResponse.fromJson(e))
+                        .toList(),
+                  ),
+                );
+              },
+            );
+          },
+          searchProductList: (SearchProductList value) async {
+            if (value.isRefresh) {
+              page = 1;
+              emit(state.copyWith(getProductList: []));
+              refreshController.resetNoData();
+            } else {
+              if (page > lastPage) {
+                refreshController.loadNoData();
+                return;
+              }
+            }
+
+            var isSearchValid = state.searchText.isValid();
+            if (isSearchValid) {
+              emit(state.copyWith(isLoading: true));
+
+              var res = await mainFacade.searchProductListAPI(
+                page: page,
+                searchText: state.searchText.getValue() ?? "",
               );
-            },
-          );
-        },
-      );
-    });
+
+              page++;
+
+              res.fold(
+                (l) => emit(
+                  state.copyWith(
+                      isErrorInAPI: true,
+                      isLoading: false,
+                      searchProductDTO: SearchProductDTO(),
+                      getProductList: []),
+                ),
+                (r) {
+                  lastPage = r.meta?.lastPage ?? 1;
+                  return emit(
+                    state.copyWith(
+                      isLoading: false,
+                      isErrorInAPI: false,
+                      searchProductDTO: SearchProductDTO.fromJson(r.data),
+                      getProductList:
+                          SearchProductDTO.fromJson(r.data).products ?? [],
+                    ),
+                  );
+                },
+              );
+            }
+          },
+          changeSeachText: (ChangeSeachText value) async {
+            emit(
+              state.copyWith(
+                searchText: InputEmptyOrNot(value.searchText),
+              ),
+            );
+          },
+        );
+      },
+    );
   }
 }

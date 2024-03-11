@@ -9,14 +9,18 @@ import 'package:grape_customer_app/presentation/core/widgets/buttons/common_butt
 
 class FilterBottomSheet extends StatelessWidget {
   final String filterTitle;
-  const FilterBottomSheet({super.key, required this.filterTitle});
+  final List<String> list;
+  const FilterBottomSheet(
+      {super.key, required this.filterTitle, required this.list});
 
   @override
   Widget build(BuildContext context) {
     return const Placeholder();
   }
 
-  getFilterBottomSheet(BuildContext context) {
+  getFilterBottomSheet(
+    BuildContext context,
+  ) {
     return showModalBottomSheet(
       context: context,
       backgroundColor: AppColors.white,
@@ -77,7 +81,7 @@ class FilterBottomSheet extends StatelessWidget {
                 ),
                 Expanded(
                   child: ListView.builder(
-                    itemCount: 20,
+                    itemCount: list.length,
                     padding: EdgeInsets.symmetric(vertical: getSize(20)),
                     shrinkWrap: true,
                     physics: BouncingScrollPhysics(),
@@ -91,7 +95,7 @@ class FilterBottomSheet extends StatelessWidget {
                               width: getSize(6),
                             ),
                             BaseText(
-                              text: 'iPhone 11 Pro',
+                              text: list[index],
                               fontSize: 14,
                               fontWeight: FontWeight.w500,
                             ),

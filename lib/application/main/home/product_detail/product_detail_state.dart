@@ -7,7 +7,7 @@ class ProductDetailState with _$ProductDetailState {
     required bool isLoading,
     required bool isErrorInAPI,
     required GetProductListResponse getProductDetails,
-    required ProductFromJson productFromJson,
+    required List<Data> dataList,
     required int selectedImageIndex,
   }) = _ProductDetailState;
   factory ProductDetailState.initial() => ProductDetailState(
@@ -15,7 +15,7 @@ class ProductDetailState with _$ProductDetailState {
         isLoading: false,
         isErrorInAPI: false,
         getProductDetails: GetProductListResponse(),
-        productFromJson: ProductFromJson(),
+        dataList: [],
         selectedImageIndex: 0,
       );
 }

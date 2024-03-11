@@ -7,10 +7,12 @@ import 'package:grape_customer_app/presentation/main/tabs/home/widgets/filter_bo
 class FilterCommonContainer extends StatelessWidget {
   final String filterTitle;
   final bool showDownArrow;
+  final List<String> list;
   const FilterCommonContainer({
     super.key,
     required this.filterTitle,
     this.showDownArrow = true,
+    required this.list,
   });
 
   @override
@@ -20,10 +22,12 @@ class FilterCommonContainer extends StatelessWidget {
       onTap: () {
         FilterBottomSheet(
           filterTitle: filterTitle,
+          list: list,
         ).getFilterBottomSheet(context);
       },
       child: Container(
         padding: EdgeInsets.all(getSize(6)),
+        margin: EdgeInsets.symmetric(horizontal: getSize(4)),
         decoration: BoxDecoration(
           border: Border.all(color: AppColors.black.withOpacity(0.20)),
           borderRadius: BorderRadius.circular(getSize(4)),

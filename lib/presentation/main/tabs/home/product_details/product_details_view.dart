@@ -1,6 +1,3 @@
-import 'dart:convert';
-import 'dart:developer';
-
 import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +10,7 @@ import 'package:grape_customer_app/injection.dart';
 import 'package:grape_customer_app/presentation/common/widgets/base_text.dart';
 import 'package:grape_customer_app/presentation/core/app_router.gr.dart';
 import 'package:grape_customer_app/presentation/core/helper/dynamic_link_helper.dart';
+import 'package:grape_customer_app/presentation/core/shimmer/product_detail_shimmer.dart';
 import 'package:grape_customer_app/presentation/core/styles/app_colors.dart';
 import 'package:grape_customer_app/presentation/core/widgets/inputs/custom_app_bar.dart';
 import 'package:grape_customer_app/presentation/main/tabs/home/product_details/widget/buy_now_button_widget.dart';
@@ -46,7 +44,7 @@ class ProductDetailsView extends StatelessWidget {
                               .images?[state.selectedImageIndex].image ??
                           "",
                       title: state.getProductDetails.product_name ?? "",
-                      description: state.productFromJson.data[4].value ?? "",
+                      description: state.dataList[4].value ?? "",
                     );
 
                     if (shortlink.isNotEmpty) {
@@ -70,16 +68,13 @@ class ProductDetailsView extends StatelessWidget {
               child: BlocBuilder<ProductDetailBloc, ProductDetailState>(
                 builder: (context, state) {
                   if (state.isLoading) {
-                    return Center(
-                      child: CircularProgressIndicator(),
-                    );
+                    return ProductDetailShimmer();
                   } else if (state.isErrorInAPI) {
                     return Center(
                       child:
                           BaseText(text: 'Something wrong. Please try again!!'),
                     );
                   } else {
-                    log('message : ${jsonEncode(state.productFromJson)}');
                     return ListView(
                       shrinkWrap: true,
                       physics: BouncingScrollPhysics(),
@@ -137,8 +132,8 @@ class ProductDetailsView extends StatelessWidget {
                           padding:
                               EdgeInsets.symmetric(horizontal: getSize(18)),
                           child: BaseText(
-                            text: state.productFromJson.data.isNotEmpty
-                                ? state.productFromJson.data
+                            text: state.dataList.isNotEmpty
+                                ? state.dataList
                                         .firstWhere((element) => element.name!
                                             .contains('Product Description'))
                                         .value ??
@@ -205,18 +200,21 @@ class ProductDetailsView extends StatelessWidget {
                 },
               ),
             ),
-            bottomNavigationBar: SafeArea(
-              child: Padding(
-                padding: EdgeInsets.only(
-                  left: getSize(12),
-                  right: getSize(18),
-                  top: getSize(8),
-                  bottom: isFullScreenDevice(context) ? 0 : getSize(18),
+            bottomNavigationBar: Visibility(
+              visible: !state.isLoading && !state.isErrorInAPI,
+              child: SafeArea(
+                child: Padding(
+                  padding: EdgeInsets.only(
+                    left: getSize(12),
+                    right: getSize(18),
+                    top: getSize(8),
+                    bottom: isFullScreenDevice(context) ? 0 : getSize(18),
+                  ),
+                  child: BuyNowButtonWidget(),
+                  //
+                  //
+                  // OutOfStockBottomWidget(),
                 ),
-                child: BuyNowButtonWidget(),
-                //
-                //
-                // OutOfStockBottomWidget(),
               ),
             ),
           );

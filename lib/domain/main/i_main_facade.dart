@@ -6,7 +6,9 @@ import 'package:grape_customer_app/infrastructure/main/home_dto/get_product_list
 abstract class IMainFacade {
   Future<Either<MainFailure, CommonResponse>> getProductListAPI(
       {required int page});
-
-  Future<Either<MainFailure, GetProductListResponse>> getProductDetailsAPI(
-      {required String productId});
+  Future<Either<MainFailure, CommonResponse>> searchProductListAPI(
+      {required int page, String searchText = ''});
+  Future<Either<MainFailure, GetProductListResponse>> getProductDetailsAPI({
+    required String productId,
+  });
 }

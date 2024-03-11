@@ -56,7 +56,11 @@ class BuyNowButtonWidget extends StatelessWidget {
             Expanded(
               child: CommonButton(
                 onPressed: () {
-                  BuyNowDialog().buyNowDialog(context, state.getProductDetails);
+                  BuyNowDialog().buyNowDialog(
+                    context,
+                    state.getProductDetails,
+                    state.dataList,
+                  );
                 },
                 height: 42,
                 buttonText: 'Buy Now',

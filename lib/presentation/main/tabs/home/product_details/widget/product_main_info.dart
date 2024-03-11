@@ -28,21 +28,24 @@ class ProductMainInfo extends StatelessWidget {
                   SizedBox(
                     width: getSize(4),
                   ),
-                  Container(
-                    height: getSize(16),
-                    width: getSize(36),
-                    alignment: Alignment.center,
-                    decoration: BoxDecoration(
-                      color: Color(0xFFFFF094),
-                      borderRadius: BorderRadius.circular(
-                        getSize(4),
+                  Visibility(
+                    visible: state.getProductDetails.discount != null,
+                    child: Container(
+                      height: getSize(16),
+                      width: getSize(36),
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: Color(0xFFFFF094),
+                        borderRadius: BorderRadius.circular(
+                          getSize(4),
+                        ),
                       ),
-                    ),
-                    child: BaseText(
-                      text: '-20%',
-                      fontSize: 10,
-                      fontWeight: FontWeight.w500,
-                      textColor: Color(0xFFFF770E),
+                      child: BaseText(
+                        text: '-${state.getProductDetails.discount}%',
+                        fontSize: 10,
+                        fontWeight: FontWeight.w500,
+                        textColor: Color(0xFFFF770E),
+                      ),
                     ),
                   ),
                   Spacer(),
@@ -76,7 +79,8 @@ class ProductMainInfo extends StatelessWidget {
                   CommonRatingBar(
                     onRatingUpdate: (p0) {},
                     iconnSize: getSize(12),
-                    initialRating: 4.5,
+                    initialRating:
+                        state.getProductDetails.review_rate?.toDouble() ?? 0.0,
                     horizontalPadding: getSize(4),
                     absorbing: true,
                   ),

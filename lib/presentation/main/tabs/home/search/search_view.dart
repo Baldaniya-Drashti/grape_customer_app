@@ -1,3 +1,7 @@
+// ignore_for_file: unused_result
+
+import 'dart:async';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,51 +25,74 @@ class SearchView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CustomAppBar(
-        customTitle: CustomTextField(
-          hintText: AppLocalizations.of(context).searchProduct,
-          textInputAction: TextInputAction.search,
-          suffixIcon: Padding(
-            padding: EdgeInsets.only(right: getSize(18)),
-            child: SvgPicture.asset(SvgImageConstant.search),
-          ),
-        ),
-        title: '',
-        leadingWidth: getSize(25),
-      ),
-      body: SafeArea(
-        child: GestureDetector(
-          onTap: () {
-            AppFocus.unfocus(context);
-          },
-          child: BlocProvider(
-            create: (context) => getIt<HomeBloc>(),
-            child: BlocBuilder<HomeBloc, HomeState>(
-              builder: (context, state) {
-                return ListView(
-                  shrinkWrap: true,
-                  physics: BouncingScrollPhysics(),
-                  children: [
-                    HomeDiscountCarousalWidget(),
-                    SizedBox(
-                      height: getSize(6),
-                    ),
-                    getCarousalWidget(context, state),
-                    SizedBox(
-                      height: getSize(25),
-                    ),
-                    FilterListWidget(),
-                    SizedBox(
-                      height: getSize(18),
-                    ),
-                    RecommandedProductWidget(),
-                  ],
-                );
-              },
+    return BlocProvider(
+      create: (context) => getIt<HomeBloc>(),
+      child: BlocBuilder<HomeBloc, HomeState>(
+        builder: (context, state) {
+          return Scaffold(
+            appBar: CustomAppBar(
+              customTitle: CustomTextField(
+                hintText: AppLocalizations.of(context).searchProduct,
+                textInputAction: TextInputAction.search,
+                onChanged: (value) {
+                  context
+                      .read<HomeBloc>()
+                      .add(HomeEvent.changeSeachText(value));
+                  const duration = Duration(seconds: 2);
+                  if (context.read<HomeBloc>().searchOnStoppedTyping != null) {
+                    context.read<HomeBloc>().searchOnStoppedTyping?.cancel();
+                  }
+                  context.read<HomeBloc>().searchOnStoppedTyping =
+                      Timer(duration, () {
+                    if (value.trim().isNotEmpty) {
+                      context
+                          .read<HomeBloc>()
+                          .add(HomeEvent.searchProductList(true));
+                    } else {
+                      context
+                          .read<HomeBloc>()
+                          .add(HomeEvent.searchProductList(true));
+                    }
+                  });
+                },
+                suffixIcon: Padding(
+                  padding: EdgeInsets.only(right: getSize(18)),
+                  child: SvgPicture.asset(SvgImageConstant.search),
+                ),
+              ),
+              title: '',
+              leadingWidth: getSize(25),
             ),
-          ),
-        ),
+            body: SafeArea(
+              child: GestureDetector(
+                onTap: () {
+                  AppFocus.unfocus(context);
+                },
+                child: state.getProductList.isNotEmpty
+                    ? ListView(
+                        shrinkWrap: true,
+                        physics: BouncingScrollPhysics(),
+                        children: [
+                          HomeDiscountCarousalWidget(),
+                          SizedBox(
+                            height: getSize(6),
+                          ),
+                          getCarousalWidget(context, state),
+                          SizedBox(
+                            height: getSize(25),
+                          ),
+                          FilterListWidget(),
+                          SizedBox(
+                            height: getSize(18),
+                          ),
+                          RecommandedProductWidget(),
+                        ],
+                      )
+                    : Container(),
+              ),
+            ),
+          );
+        },
       ),
     );
   }

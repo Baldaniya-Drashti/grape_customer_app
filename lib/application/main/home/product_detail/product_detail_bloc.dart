@@ -45,22 +45,25 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
               ),
               (r) {
                 var productFromJson = ProductFromJson();
+                var dataList = <Data>[];
                 if (r.product_form_json != null) {
                   productFromJson = ProductFromJson.fromJson(
                     jsonDecode(r.product_form_json ?? ""),
                   );
 
-                  // if (productFromJson.data.isNotEmpty) {
-                  //   productFromJson.data.removeWhere(
-                  //       (element) => element.name!.contains('Product Title'));
-                  // }
+                  if (productFromJson.data.isNotEmpty) {
+                    dataList.addAll(productFromJson.data);
+
+                    dataList.removeWhere(
+                        (element) => element.name!.contains('Product Title'));
+                  }
                 }
                 return emit(
                   state.copyWith(
                     isLoading: false,
                     isErrorInAPI: false,
                     getProductDetails: r,
-                    productFromJson: productFromJson,
+                    dataList: dataList,
                   ),
                 );
               },

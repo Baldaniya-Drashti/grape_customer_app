@@ -74,4 +74,39 @@ class MainFacade implements IMainFacade {
       return left(const MainFailure.serverError());
     }
   }
+
+  @override
+  Future<Either<MainFailure, CommonResponse>> searchProductListAPI(
+      {required int page, String searchText = ''}) async {
+    try {
+      var mapData = <String, dynamic>{
+        'page': page,
+        'limit': _perPage,
+      };
+      if (searchText.isNotEmpty) {
+        mapData.addAll({'product': searchText.trim()});
+      }
+      final res = await apiService.getMethod(ApiConstants.searchProduct,
+          queryParameters: mapData);
+
+      if (res != null) {
+        return right(res);
+      } else {
+        return left(const MainFailure.serverError());
+      }
+    } on DioException catch (err) {
+      if (err.response != null) {
+        var commonRespose = CommonResponse.fromJson(err.response?.data);
+
+        if (commonRespose.dioMessage != null) {
+          return left(
+              MainFailure.showAPIResponseMessage(commonRespose.dioMessage!));
+        }
+      } else if (err.type == DioExceptionType.connectionError) {
+        return left(const MainFailure.networkError());
+      }
+
+      return left(const MainFailure.serverError());
+    }
+  }
 }

@@ -160,28 +160,31 @@ class RecommandedProductWidget extends StatelessWidget {
                         ),
                       ],
                     ),
-                    Positioned(
-                      left: getSize(6),
-                      top: getSize(6),
-                      child: Container(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: getSize(4),
-                          vertical: getSize(2),
-                        ),
-                        // height: getSize(16),
-                        // width: getSize(36),
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          color: Color(0xFFFFF094),
-                          borderRadius: BorderRadius.circular(
-                            getSize(4),
+                    Visibility(
+                      visible: state.getProductList[index].discount != null,
+                      child: Positioned(
+                        left: getSize(6),
+                        top: getSize(6),
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: getSize(4),
+                            vertical: getSize(2),
                           ),
-                        ),
-                        child: BaseText(
-                          text: '-20%',
-                          fontSize: 10,
-                          fontWeight: FontWeight.w500,
-                          textColor: Color(0xFFFF770E),
+                          // height: getSize(16),
+                          // width: getSize(36),
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            color: Color(0xFFFFF094),
+                            borderRadius: BorderRadius.circular(
+                              getSize(4),
+                            ),
+                          ),
+                          child: BaseText(
+                            text: '-${state.getProductList[index].discount}%',
+                            fontSize: 10,
+                            fontWeight: FontWeight.w500,
+                            textColor: Color(0xFFFF770E),
+                          ),
                         ),
                       ),
                     ),
