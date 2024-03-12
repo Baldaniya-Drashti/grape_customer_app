@@ -90,18 +90,27 @@ class RecommandedProductWidget extends StatelessWidget {
                         ),
                         Row(
                           children: [
-                            BaseText(
-                              text: '\$350',
-                              textDecoration: TextDecoration.lineThrough,
-                              fontSize: 12,
-                              fontWeight: FontWeight.w500,
-                              textColor: AppColors.black.withOpacity(0.4),
+                            Visibility(
+                              visible:
+                                  state.getProductList[index].discount != null,
+                              child: BaseText(
+                                text: '\$${state.getProductList[index].price}',
+                                textDecoration: TextDecoration.lineThrough,
+                                fontSize: 12,
+                                fontWeight: FontWeight.w500,
+                                textColor: AppColors.black.withOpacity(0.4),
+                              ),
                             ),
                             SizedBox(
-                              width: getSize(6),
+                              width: getSize(
+                                  state.getProductList[index].discount != null
+                                      ? 6
+                                      : 0),
                             ),
                             BaseText(
-                              text: '\$${state.getProductList[index].price}',
+                              text: state.getProductList[index].discount != null
+                                  ? '\$${(state.getProductList[index].price ?? 0) - (((state.getProductList[index].price ?? 0) / 100) * 20)}'
+                                  : '\$${state.getProductList[index].price}',
                               fontWeight: FontWeight.w600,
                             ),
                           ],

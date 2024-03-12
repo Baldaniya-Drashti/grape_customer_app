@@ -18,7 +18,12 @@ abstract class IMainFacade {
   Future<Either<MainFailure, String>> deleteProductFromCart({
     required String productId,
   });
-
+  Future<Either<MainFailure, String>> addProductToFavourite({
+    required String productId,
+  });
   Future<Either<MainFailure, CommonResponse>> getCartListAPI(
+      {required int page});
+
+  Future<Either<MainFailure, CommonResponse>> getFavouriteAPI(
       {required int page});
 }

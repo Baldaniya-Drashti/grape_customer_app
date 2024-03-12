@@ -28,4 +28,9 @@ class ApiConstants {
   static String addProductToCart = 'cart/store';
   static String removeProductFromCart = 'cart/delete';
   static String getCartList = 'cart';
+
+  //favourite
+  static String addFavourite = 'favorites/store';
+  static String removeFavourite = 'favorites/delete';
+  static String getFavouriteList = 'favorites';
 }

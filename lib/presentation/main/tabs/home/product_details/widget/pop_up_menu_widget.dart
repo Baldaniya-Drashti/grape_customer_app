@@ -66,9 +66,20 @@ class PopMenuWidget extends StatelessWidget {
               height: 0,
             ),
             getMenuItems(
-              title: 'Add Favorite',
-              image: SvgImageConstant.favouriteUnselected,
-              onTap: () {},
+              title: state.getProductDetails.is_favorite == true
+                  ? 'Favourite'
+                  : 'Add Favorite',
+              image: state.getProductDetails.is_favorite == true
+                  ? SvgImageConstant.favouriteSelected
+                  : SvgImageConstant.favouriteUnselected,
+              onTap: () {
+                if (state.getProductDetails.is_favorite == true) {
+                } else {
+                  context
+                      .read<ProductDetailBloc>()
+                      .add(ProductDetailEvent.addToFavourite());
+                }
+              },
             ),
             PopupMenuDivider(
               height: 0,

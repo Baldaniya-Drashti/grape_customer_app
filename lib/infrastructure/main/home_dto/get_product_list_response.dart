@@ -23,6 +23,7 @@ class GetProductListResponse with _$GetProductListResponse {
     int? order_qty,
     int? total_qty,
     bool? is_cart,
+    bool? is_favorite,
     int? review_rate,
     List<dynamic>? reviews,
     String? product_form_json,

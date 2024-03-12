@@ -111,6 +111,22 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
               ),
             );
           },
+          addToFavourite: (AddToFavourite value) async {
+            emit(
+              state.copyWith(
+                failureOrSuccessOption: none(),
+              ),
+            );
+            Either<MainFailure, String>? failureOrSuccess;
+            failureOrSuccess = await mainFacade.addProductToFavourite(
+                productId: state.getProductDetails.id.toString());
+
+            emit(
+              state.copyWith(
+                failureOrSuccessOption: optionOf(failureOrSuccess),
+              ),
+            );
+          },
         );
       },
     );

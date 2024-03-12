@@ -6,6 +6,7 @@ class ProductDetailState with _$ProductDetailState {
     required int productQuantity,
     required bool isLoading,
     required bool isErrorInAPI,
+    required bool isFavourite,
     required GetProductListResponse getProductDetails,
     required List<Data> dataList,
     required int selectedImageIndex,
@@ -19,5 +20,6 @@ class ProductDetailState with _$ProductDetailState {
         dataList: [],
         selectedImageIndex: 0,
         failureOrSuccessOption: none(),
+        isFavourite: false,
       );
 }

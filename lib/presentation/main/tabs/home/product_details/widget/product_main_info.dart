@@ -93,18 +93,25 @@ class ProductMainInfo extends StatelessWidget {
                     fontWeight: FontWeight.w500,
                   ),
                   Spacer(),
-                  BaseText(
-                    text: '\$350',
-                    textDecoration: TextDecoration.lineThrough,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                    textColor: AppColors.black.withOpacity(0.4),
+                  Visibility(
+                    visible: state.getProductDetails.discount != null,
+                    child: BaseText(
+                      text: '\$${state.getProductDetails.price}',
+                      textDecoration: TextDecoration.lineThrough,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w500,
+                      textColor: AppColors.black.withOpacity(0.4),
+                    ),
                   ),
                   SizedBox(
-                    width: getSize(6),
+                    width: getSize(
+                      state.getProductDetails.discount != null ? 6 : 0,
+                    ),
                   ),
                   BaseText(
-                    text: '\$${state.getProductDetails.price}',
+                    text: state.getProductDetails.discount != null
+                        ? '\$${(state.getProductDetails.price ?? 0) - (((state.getProductDetails.price ?? 0) / 100) * 20)}'
+                        : '\$${state.getProductDetails.price}',
                     fontSize: 20,
                     fontWeight: FontWeight.w600,
                     textColor: Color(0xFF527FF2),
