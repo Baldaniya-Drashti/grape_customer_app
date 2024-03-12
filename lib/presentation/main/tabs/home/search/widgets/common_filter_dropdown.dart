@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:grape_customer_app/domain/core/math_utils.dart';
 import 'package:grape_customer_app/presentation/common/widgets/base_text.dart';
@@ -19,11 +21,13 @@ class FilterCommonContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       borderRadius: BorderRadius.circular(getSize(4)),
-      onTap: () {
-        FilterBottomSheet(
+      onTap: () async {
+        var filterList = await FilterBottomSheet(
           filterTitle: filterTitle,
           list: list,
         ).getFilterBottomSheet(context);
+
+        log('filterList : $filterList');
       },
       child: Container(
         padding: EdgeInsets.all(getSize(6)),

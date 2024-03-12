@@ -23,4 +23,9 @@ class ApiConstants {
   static String getCustomerProducts = 'customer/products';
   static String getCustomerProductsDetails = 'customer/products/view';
   static String searchProduct = 'customer/products/search';
+
+  //cart
+  static String addProductToCart = 'cart/store';
+  static String removeProductFromCart = 'cart/delete';
+  static String getCartList = 'cart';
 }

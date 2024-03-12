@@ -7,7 +7,7 @@ part 'search_product_dto.g.dart';
 
 @freezed
 class SearchProductDTO with _$SearchProductDTO {
-  const factory SearchProductDTO({
+  factory SearchProductDTO({
     List<GetProductListResponse>? products,
     FilterData? filter_data,
   }) = _SearchProductDTO;
@@ -18,7 +18,7 @@ class SearchProductDTO with _$SearchProductDTO {
 
 @freezed
 class FilterData with _$FilterData {
-  const factory FilterData({
+  factory FilterData({
     List<String>? sub_category,
     List<String>? inner_sub_category,
     List<String>? color,
@@ -28,4 +28,15 @@ class FilterData with _$FilterData {
 
   factory FilterData.fromJson(Map<String, dynamic> json) =>
       _$FilterDataFromJson(json);
+}
+
+@freezed
+class FilterList with _$FilterList {
+  factory FilterList({
+    String? name,
+    @Default(false) final bool isSelected,
+  }) = _FilterList;
+
+  factory FilterList.fromJson(Map<String, dynamic> json) =>
+      _$FilterListFromJson(json);
 }

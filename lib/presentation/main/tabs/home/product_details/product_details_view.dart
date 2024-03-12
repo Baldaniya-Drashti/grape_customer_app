@@ -7,6 +7,7 @@ import 'package:grape_customer_app/application/main/home/product_detail/product_
 import 'package:grape_customer_app/domain/core/math_utils.dart';
 import 'package:grape_customer_app/domain/core/svg_image_constants.dart';
 import 'package:grape_customer_app/injection.dart';
+import 'package:grape_customer_app/presentation/common/utils/flushbar_creator.dart';
 import 'package:grape_customer_app/presentation/common/widgets/base_text.dart';
 import 'package:grape_customer_app/presentation/core/app_router.gr.dart';
 import 'package:grape_customer_app/presentation/core/helper/dynamic_link_helper.dart';
@@ -31,7 +32,32 @@ class ProductDetailsView extends StatelessWidget {
     return BlocProvider(
       create: (context) => getIt<ProductDetailBloc>()
         ..add(ProductDetailEvent.getProductDetails(productId)),
-      child: BlocBuilder<ProductDetailBloc, ProductDetailState>(
+      child: BlocConsumer<ProductDetailBloc, ProductDetailState>(
+        listener: (context, state) {
+          state.failureOrSuccessOption.fold(
+            () {},
+            (either) => either.fold(
+              (failure) {
+                showError(
+                  message: failure.maybeMap(
+                    showAPIResponseMessage: (value) => value.message,
+                    networkError: (value) =>
+                        'Please check your internet connectivity',
+                    orElse: () => "Server Error. Try again later.",
+                  ),
+                ).show(context);
+              },
+              (r) {
+                showSuccess(
+                  message: r,
+                ).show(context);
+                context.read<ProductDetailBloc>().add(
+                      ProductDetailEvent.getProductDetails(productId),
+                    );
+              },
+            ),
+          );
+        },
         builder: (context, state) {
           return Scaffold(
             appBar: CustomAppBar(

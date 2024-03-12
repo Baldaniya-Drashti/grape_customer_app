@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -23,6 +24,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   bool isFetching = false;
   final RefreshController refreshController = RefreshController();
   final IMainFacade mainFacade;
+  var list = <String>[];
   final imgList = [
     'https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80',
     'https://images.unsplash.com/photo-1522205408450-add114ad53fe?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=368f45b0888aeb0b7b08e3a1084d3ede&auto=format&fit=crop&w=1950&q=80',
@@ -79,10 +81,15 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
               ),
               (r) {
                 lastPage = r.meta?.lastPage ?? 1;
+
                 return emit(
                   state.copyWith(
                     isLoading: false,
                     isErrorInAPI: false,
+                    isNoDataFound: (r.data as List<dynamic>)
+                        .map((e) => GetProductListResponse.fromJson(e))
+                        .toList()
+                        .isEmpty,
                     getProductList: (r.data as List<dynamic>)
                         .map((e) => GetProductListResponse.fromJson(e))
                         .toList(),
@@ -117,10 +124,11 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
               res.fold(
                 (l) => emit(
                   state.copyWith(
-                      isErrorInAPI: true,
-                      isLoading: false,
-                      searchProductDTO: SearchProductDTO(),
-                      getProductList: []),
+                    isErrorInAPI: true,
+                    isLoading: false,
+                    searchProductDTO: SearchProductDTO(),
+                    getProductList: [],
+                  ),
                 ),
                 (r) {
                   lastPage = r.meta?.lastPage ?? 1;
@@ -129,6 +137,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
                       isLoading: false,
                       isErrorInAPI: false,
                       searchProductDTO: SearchProductDTO.fromJson(r.data),
+                      isNoDataFound:
+                          SearchProductDTO.fromJson(r.data).products?.isEmpty ??
+                              false,
                       getProductList:
                           SearchProductDTO.fromJson(r.data).products ?? [],
                     ),
@@ -141,6 +152,16 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
             emit(
               state.copyWith(
                 searchText: InputEmptyOrNot(value.searchText),
+              ),
+            );
+          },
+          changeBrandFilter: (ChangeBrandFilter value) async {
+            list.add(value.selectedBrandFilter);
+
+            log('list : ${list.map((e) => e).toList()}');
+            emit(
+              state.copyWith(
+                brandFilter: list,
               ),
             );
           },

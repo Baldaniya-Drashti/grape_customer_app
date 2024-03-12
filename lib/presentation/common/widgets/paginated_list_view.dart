@@ -80,7 +80,7 @@ class PaginatedListView extends StatelessWidget {
                 width: getSize(280),
                 child: BaseText(
                   textColor: AppColors.black.withOpacity(0.65),
-                  text: dataStatus ?? 'No Result',
+                  text: dataStatus ?? 'No result found.',
                   textAlign: TextAlign.center,
                   lineHeight: 1.2,
                 ),

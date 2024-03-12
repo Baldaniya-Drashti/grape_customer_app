@@ -9,6 +9,7 @@ class ProductDetailState with _$ProductDetailState {
     required GetProductListResponse getProductDetails,
     required List<Data> dataList,
     required int selectedImageIndex,
+    required Option<Either<MainFailure, String>> failureOrSuccessOption,
   }) = _ProductDetailState;
   factory ProductDetailState.initial() => ProductDetailState(
         productQuantity: 1,
@@ -17,5 +18,6 @@ class ProductDetailState with _$ProductDetailState {
         getProductDetails: GetProductListResponse(),
         dataList: [],
         selectedImageIndex: 0,
+        failureOrSuccessOption: none(),
       );
 }

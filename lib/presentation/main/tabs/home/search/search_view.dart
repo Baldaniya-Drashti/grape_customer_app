@@ -12,6 +12,7 @@ import 'package:grape_customer_app/domain/core/math_utils.dart';
 import 'package:grape_customer_app/domain/core/svg_image_constants.dart';
 import 'package:grape_customer_app/injection.dart';
 import 'package:grape_customer_app/presentation/common/utils/app_focus.dart';
+import 'package:grape_customer_app/presentation/common/widgets/paginated_list_view.dart';
 import 'package:grape_customer_app/presentation/core/styles/app_colors.dart';
 import 'package:grape_customer_app/presentation/core/widgets/inputs/custom_text_field.dart';
 import 'package:grape_customer_app/presentation/core/widgets/layout/layout.dart';
@@ -42,18 +43,20 @@ class SearchView extends StatelessWidget {
                   if (context.read<HomeBloc>().searchOnStoppedTyping != null) {
                     context.read<HomeBloc>().searchOnStoppedTyping?.cancel();
                   }
-                  context.read<HomeBloc>().searchOnStoppedTyping =
-                      Timer(duration, () {
-                    if (value.trim().isNotEmpty) {
-                      context
-                          .read<HomeBloc>()
-                          .add(HomeEvent.searchProductList(true));
-                    } else {
-                      context
-                          .read<HomeBloc>()
-                          .add(HomeEvent.searchProductList(true));
-                    }
-                  });
+                  context.read<HomeBloc>().searchOnStoppedTyping = Timer(
+                    duration,
+                    () {
+                      if (value.trim().isNotEmpty) {
+                        context
+                            .read<HomeBloc>()
+                            .add(HomeEvent.searchProductList(true));
+                      } else {
+                        context
+                            .read<HomeBloc>()
+                            .add(HomeEvent.searchProductList(true));
+                      }
+                    },
+                  );
                 },
                 suffixIcon: Padding(
                   padding: EdgeInsets.only(right: getSize(18)),
@@ -68,27 +71,43 @@ class SearchView extends StatelessWidget {
                 onTap: () {
                   AppFocus.unfocus(context);
                 },
-                child: state.getProductList.isNotEmpty
-                    ? ListView(
-                        shrinkWrap: true,
-                        physics: BouncingScrollPhysics(),
-                        children: [
-                          HomeDiscountCarousalWidget(),
-                          SizedBox(
-                            height: getSize(6),
-                          ),
-                          getCarousalWidget(context, state),
-                          SizedBox(
-                            height: getSize(25),
-                          ),
-                          FilterListWidget(),
-                          SizedBox(
-                            height: getSize(18),
-                          ),
-                          RecommandedProductWidget(),
-                        ],
-                      )
-                    : Container(),
+                child: PaginatedListView(
+                  isNoDataFound: state.isNoDataFound,
+                  onRefresh: () {
+                    context.read<HomeBloc>()
+                      ..isFetching = true
+                      ..add(HomeEvent.searchProductList(true));
+                  },
+                  onLoading: () {
+                    context.read<HomeBloc>()
+                      ..isFetching = true
+                      ..add(HomeEvent.searchProductList(false));
+                  },
+                  refreshController: context.read<HomeBloc>().refreshController,
+                  child: ListView(
+                    shrinkWrap: true,
+                    physics: BouncingScrollPhysics(),
+                    children: [
+                      state.getProductList.isEmpty
+                          ? Container()
+                          : HomeDiscountCarousalWidget(),
+                      SizedBox(
+                        height: getSize(6),
+                      ),
+                      state.getProductList.isEmpty
+                          ? Container()
+                          : getCarousalWidget(context, state),
+                      SizedBox(
+                        height: getSize(25),
+                      ),
+                      FilterListWidget(),
+                      SizedBox(
+                        height: getSize(18),
+                      ),
+                      RecommandedProductWidget(),
+                    ],
+                  ),
+                ),
               ),
             ),
           );

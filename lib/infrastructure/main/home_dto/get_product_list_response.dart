@@ -13,11 +13,11 @@ class GetProductListResponse with _$GetProductListResponse {
     String? sub_category,
     InnerSubCategory? inner_sub_category,
     String? product_name,
-    Discount? discount,
-    // Color? color,
+    String? discount,
+    String? color,
     String? size,
     String? brand_name,
-    ModelName? model_name,
+    String? model_name,
     int? price,
     int? available_qty,
     int? order_qty,
@@ -44,36 +44,6 @@ class InnerSubCategory with _$InnerSubCategory {
 
   factory InnerSubCategory.fromJson(Map<String, dynamic> json) =>
       _$InnerSubCategoryFromJson(json);
-}
-
-@freezed
-class Discount with _$Discount {
-  factory Discount() = _Discount;
-
-  factory Discount.fromJson(Map<String, dynamic> json) =>
-      _$DiscountFromJson(json);
-}
-
-@freezed
-// class Color with _$Color {
-//   const factory Color() = _Color;
-
-//   factory Color.fromJson(Map<String, dynamic> json) => _$ColorFromJson(json);
-// }
-
-// @freezed
-// class Size with _$Size {
-//   const factory Size() = _Size;
-
-//   factory Size.fromJson(Map<String, dynamic> json) => _$SizeFromJson(json);
-// }
-
-@freezed
-class ModelName with _$ModelName {
-  factory ModelName() = _ModelName;
-
-  factory ModelName.fromJson(Map<String, dynamic> json) =>
-      _$ModelNameFromJson(json);
 }
 
 @freezed

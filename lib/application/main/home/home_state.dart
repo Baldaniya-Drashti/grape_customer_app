@@ -8,10 +8,12 @@ class HomeState with _$HomeState {
     double? currentLongitude,
     required int carousalIndex,
     required bool isLoading,
+    required bool isNoDataFound,
     required bool isErrorInAPI,
     required InputEmptyOrNot searchText,
     required List<GetProductListResponse> getProductList,
     required SearchProductDTO searchProductDTO,
+    required final List<String> brandFilter,
   }) = _HomeState;
   factory HomeState.initial() => HomeState(
         currentLocation: '',
@@ -19,7 +21,10 @@ class HomeState with _$HomeState {
         getProductList: [],
         isLoading: false,
         isErrorInAPI: false,
-        searchText: InputEmptyOrNot(''), searchProductDTO: SearchProductDTO(),
+        searchText: InputEmptyOrNot(''),
+        searchProductDTO: SearchProductDTO(),
+        isNoDataFound: false,
+        brandFilter: [],
       );
 
   // const factory HomeState.loadAPISuccess(List<GetProductListResponse> apiList) =

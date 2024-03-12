@@ -31,6 +31,7 @@ class HomeView extends StatelessWidget {
               ..add(HomeEvent.getProductList(false));
           },
           refreshController: context.read<HomeBloc>().refreshController,
+          isNoDataFound: state.isNoDataFound,
           child: GestureDetector(
             onTap: () {
               AppFocus.unfocus(context);

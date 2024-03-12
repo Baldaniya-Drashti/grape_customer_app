@@ -1,60 +1,99 @@
+import 'dart:convert';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:grape_customer_app/application/main/cart/cart_bloc.dart';
 import 'package:grape_customer_app/domain/core/math_utils.dart';
+import 'package:grape_customer_app/infrastructure/core/common_product_from_json_response.dart';
 import 'package:grape_customer_app/presentation/common/widgets/base_text.dart';
+import 'package:grape_customer_app/presentation/common/widgets/paginated_list_view.dart';
 import 'package:grape_customer_app/presentation/core/app_router.gr.dart';
 import 'package:grape_customer_app/presentation/core/styles/app_colors.dart';
 import 'package:grape_customer_app/presentation/core/widgets/buttons/common_button.dart';
+import 'package:grape_customer_app/presentation/main/tabs/cart/widgets/empty_cart_view.dart';
 
 class CartListView extends StatelessWidget {
   const CartListView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Expanded(
-          child: ListView.builder(
-            itemCount: 10,
-            padding: EdgeInsets.all(getSize(18)),
-            shrinkWrap: true,
-            physics: BouncingScrollPhysics(),
-            itemBuilder: (context, index) {
-              return getCheckoutContainer();
-            },
-          ),
-        ),
-        SizedBox(
-          height: getSize(8),
-        ),
-        getSubTotal(title: 'Subtotal', description: '\$548'),
-        SizedBox(
-          height: getSize(14),
-        ),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: getSize(18)),
-          child: CommonButton(
-            onPressed: () {
-              context.router.push(
-                PageRouteInfo(
-                  CheckoutView.name,
-                  args: CheckoutViewArgs(isFromCart: true),
+    return BlocBuilder<CartBloc, CartState>(
+      builder: (context, state) {
+        return Column(
+          children: [
+            Expanded(
+              child: PaginatedListView(
+                onRefresh: () {
+                  context.read<CartBloc>().add(CartEvent.getCartList(true));
+                },
+                refreshController: context.read<CartBloc>().refreshController,
+                onLoading: () {
+                  context.read<CartBloc>().add(CartEvent.getCartList(false));
+                },
+                //isNoDataFound: state.isNoDataFound,
+                child: state.isNoDataFound
+                    ? EmptyCartView()
+                    : ListView.builder(
+                        itemCount: state.cartListDTO.length,
+                        padding: EdgeInsets.all(getSize(18)),
+                        shrinkWrap: true,
+                        physics: BouncingScrollPhysics(),
+                        itemBuilder: (context, index) {
+                          return getCheckoutContainer(state, index, context);
+                        },
+                      ),
+              ),
+            ),
+            SizedBox(
+              height: getSize(state.isNoDataFound ? 0 : 8),
+            ),
+            Visibility(
+              visible: !state.isNoDataFound,
+              child: getSubTotal(
+                  title: 'Subtotal',
+                  description:
+                      '\$${state.cartTotal.toStringAsFixed(state.cartTotal is int ? 0 : 2)}'),
+            ),
+            SizedBox(
+              height: getSize(state.isNoDataFound ? 0 : 14),
+            ),
+            Visibility(
+              visible: !state.isNoDataFound,
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: getSize(18)),
+                child: CommonButton(
+                  onPressed: () {
+                    context.router.push(
+                      PageRouteInfo(
+                        CheckoutView.name,
+                        args: CheckoutViewArgs(isFromCart: true),
+                      ),
+                    );
+                  },
+                  buttonText: 'Checkout',
                 ),
-              );
-            },
-            buttonText: 'Checkout',
-          ),
-        ),
-        SizedBox(
-          height: getSize(8),
-        ),
-      ],
+              ),
+            ),
+            SizedBox(
+              height: getSize(state.isNoDataFound ? 0 : 8),
+            ),
+          ],
+        );
+      },
     );
   }
 
-  getCheckoutContainer() {
+  getCheckoutContainer(CartState state, int index, BuildContext context) {
+    var productConfigarationList =
+        jsonDecode(state.cartListDTO[index].product?.product_form_json ?? "");
+    var dataList = ProductFromJson.fromJson(productConfigarationList)
+        .data
+        .where((element) => element.fieldType == 1)
+        .toList();
+
     return Container(
       padding: EdgeInsets.all(getSize(10)),
       margin: EdgeInsets.symmetric(vertical: getSize(9)),
@@ -81,7 +120,8 @@ class CartListView extends StatelessWidget {
                 ),
                 child: CachedNetworkImage(
                   imageUrl:
-                      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0U3avlAFpuN9Sf5PVhN3MHdXQzh6rJusL93tMQRngAnrK1k0Z9CH4hzhArR0kyV-Fm_E&usqp=CAU',
+                      state.cartListDTO[index].product?.images?.first.image ??
+                          "",
                   placeholder: (context, url) => Container(
                     height: getSize(80),
                     width: getSize(60),
@@ -95,6 +135,7 @@ class CartListView extends StatelessWidget {
                       ),
                     ),
                   ),
+                  fit: BoxFit.cover,
                 ),
               ),
               SizedBox(
@@ -104,30 +145,45 @@ class CartListView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   BaseText(
-                    text: 'Nothing Phone 1',
+                    text: state.cartListDTO[index].product?.product_name ?? "",
                     fontSize: 14,
                     fontWeight: FontWeight.w500,
                   ),
                   SizedBox(
                     height: getSize(8),
                   ),
-                  getProductDetails(
-                    title: 'Colors',
-                    description: 'Black',
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: List.generate(
+                      dataList.length,
+                      (index) => Padding(
+                        padding: EdgeInsets.symmetric(vertical: getSize(3)),
+                        child: getProductDetails(
+                          title: dataList[index].name ?? "",
+                          description: dataList[index].value ?? "",
+                        ),
+                      ),
+                    ),
                   ),
+                  // getProductDetails(
+                  //   title: 'Colors',
+                  //   description: state.cartListDTO[index].product?.color ?? "",
+                  // ),
+                  // SizedBox(
+                  //   height: getSize(6),
+                  // ),
+                  // getProductDetails(
+                  //   title: 'Size',
+                  //   description: state.cartListDTO[index].product?.size ?? "",
+                  // ),
                   SizedBox(
-                    height: getSize(6),
-                  ),
-                  getProductDetails(
-                    title: 'Size',
-                    description: '128 GB',
-                  ),
-                  SizedBox(
-                    height: getSize(6),
+                    height: getSize(3),
                   ),
                   getProductDetails(
                     title: 'Quantity',
-                    description: '1',
+                    description: state.cartListDTO[index].product?.order_qty
+                            ?.toString() ??
+                        "1",
                   ),
                 ],
               ),
@@ -137,7 +193,7 @@ class CartListView extends StatelessWidget {
             child: Align(
               alignment: Alignment.bottomRight,
               child: BaseText(
-                text: '\$299',
+                text: '\$${state.cartListDTO[index].product?.price}',
                 fontSize: 18,
                 textColor: AppColors.mildBlue,
                 fontWeight: FontWeight.w600,
@@ -150,7 +206,12 @@ class CartListView extends StatelessWidget {
             child: Align(
               alignment: Alignment.topRight,
               child: IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  context.read<CartBloc>().add(
+                        CartEvent.removeProductFromCart(
+                            state.cartListDTO[index].id?.toString() ?? ""),
+                      );
+                },
                 icon: Icon(
                   Icons.close_rounded,
                   color: AppColors.black.withOpacity(0.60),
@@ -195,7 +256,7 @@ class CartListView extends StatelessWidget {
       text: TextSpan(
         style: TextStyle(
           fontSize: getFontSize(10),
-          color: AppColors.black.withOpacity(0.80),
+          color: AppColors.black,
           fontFamily: 'SfPro',
           fontWeight: FontWeight.w500,
         ),
@@ -203,7 +264,7 @@ class CartListView extends StatelessWidget {
           TextSpan(
             text: '$title: ',
             style: TextStyle(
-              color: AppColors.black,
+              color: AppColors.black.withOpacity(0.80),
               fontFamily: 'SfPro',
               fontWeight: FontWeight.w400,
             ),

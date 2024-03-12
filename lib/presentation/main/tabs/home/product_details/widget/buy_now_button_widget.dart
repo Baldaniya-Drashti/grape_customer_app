@@ -18,36 +18,56 @@ class BuyNowButtonWidget extends StatelessWidget {
       builder: (context, state) {
         return Row(
           children: [
-            Container(
-              height: getSize(42),
-              width: getSize(42),
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(getSize(10)),
-                border: Border.all(color: AppColors.primaryOrange),
-              ),
-              child: Stack(
-                clipBehavior: Clip.none,
-                children: [
-                  Image.asset(
-                    PngImageConstants.cartUnselected,
-                    height: getSize(18),
-                    width: getSize(18),
-                    color: AppColors.black,
-                  ),
-                  Positioned.fill(
-                    top: getSize(3),
-                    left: getSize(-3),
-                    child: Align(
-                      alignment: Alignment.topLeft,
-                      child: SvgPicture.asset(
-                        SvgImageConstant.successImage,
-                        height: getSize(9),
-                        width: getSize(9),
-                      ),
+            GestureDetector(
+              onTap: () {
+                if (state.getProductDetails.is_cart == true) {
+                  // context.read<ProductDetailBloc>().add(
+                  //       ProductDetailEvent.removeProductFromCart(),
+                  //     );
+                } else {
+                  context.read<ProductDetailBloc>().add(
+                        ProductDetailEvent.addProductToCart(),
+                      );
+                }
+              },
+              child: Container(
+                height: getSize(42),
+                width: getSize(42),
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(getSize(10)),
+                  border: Border.all(color: AppColors.primaryOrange),
+                ),
+                child: Stack(
+                  clipBehavior: Clip.none,
+                  children: [
+                    Image.asset(
+                      PngImageConstants.cartSelected,
+                      height: getSize(18),
+                      width: getSize(18),
+                      color: state.getProductDetails.is_cart == true
+                          ? AppColors.primaryOrange
+                          : AppColors.black,
                     ),
-                  )
-                ],
+                    Visibility(
+                      visible: state.getProductDetails.is_cart == true,
+                      child: Positioned.fill(
+                        top: getSize(3),
+                        left: getSize(-3),
+                        child: Align(
+                          alignment: Alignment.topLeft,
+                          child: SvgPicture.asset(
+                            SvgImageConstant.successImage,
+                            height: getSize(9),
+                            width: getSize(9),
+                            colorFilter: ColorFilter.mode(
+                                AppColors.green, BlendMode.srcATop),
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
             SizedBox(
