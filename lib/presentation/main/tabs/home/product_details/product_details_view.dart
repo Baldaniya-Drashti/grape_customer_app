@@ -15,11 +15,14 @@ import 'package:grape_customer_app/presentation/core/shimmer/product_detail_shim
 import 'package:grape_customer_app/presentation/core/styles/app_colors.dart';
 import 'package:grape_customer_app/presentation/core/widgets/inputs/custom_app_bar.dart';
 import 'package:grape_customer_app/presentation/main/tabs/home/product_details/widget/buy_now_button_widget.dart';
+import 'package:grape_customer_app/presentation/main/tabs/home/product_details/widget/from_same_store_widget.dart';
 import 'package:grape_customer_app/presentation/main/tabs/home/product_details/widget/pop_up_menu_widget.dart';
 import 'package:grape_customer_app/presentation/main/tabs/home/product_details/widget/product_configuration_widget.dart';
 import 'package:grape_customer_app/presentation/main/tabs/home/product_details/widget/product_main_info.dart';
 import 'package:grape_customer_app/presentation/main/tabs/home/product_details/widget/product_review_list.dart';
+import 'package:grape_customer_app/presentation/main/tabs/home/product_details/widget/product_vender_detail_widget.dart';
 import 'package:grape_customer_app/presentation/main/tabs/home/product_details/widget/select_model_widget.dart';
+import 'package:grape_customer_app/presentation/main/tabs/home/product_details/widget/similar_product_widget.dart';
 import 'package:share_plus/share_plus.dart';
 
 @RoutePage(name: 'ProductDetailsView')
@@ -172,6 +175,44 @@ class ProductDetailsView extends StatelessWidget {
                             textColor: AppColors.black.withOpacity(0.6),
                           ),
                         ),
+                        SizedBox(
+                          height: getSize(20),
+                        ),
+                        Padding(
+                          padding:
+                              EdgeInsets.symmetric(horizontal: getSize(18)),
+                          child: BaseText(
+                            text: 'Similar Products',
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                            textColor: AppColors.black.withOpacity(0.8),
+                          ),
+                        ),
+                        SizedBox(
+                          height: getSize(10),
+                        ),
+                        SimilarProductWidget(),
+                        SizedBox(
+                          height: getSize(20),
+                        ),
+                        ProductVenderDetailWidget(),
+                        SizedBox(
+                          height: getSize(20),
+                        ),
+                        Padding(
+                          padding:
+                              EdgeInsets.symmetric(horizontal: getSize(18)),
+                          child: BaseText(
+                            text: 'From the Same Store',
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                            textColor: AppColors.black.withOpacity(0.8),
+                          ),
+                        ),
+                        SizedBox(
+                          height: getSize(10),
+                        ),
+                        FromSameStoreWidget(),
                         SizedBox(
                           height: getSize(20),
                         ),

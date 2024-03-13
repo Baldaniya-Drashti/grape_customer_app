@@ -37,18 +37,11 @@ class VendorDetails with _$VendorDetails {
     int? shop_id,
     String? shop_location,
     int? seller_total_product,
-    Review? review,
+    num? review,
   }) = _VendorDetails;
 
   factory VendorDetails.fromJson(Map<String, dynamic> json) =>
       _$VendorDetailsFromJson(json);
-}
-
-@freezed
-class Review with _$Review {
-  const factory Review() = _Review;
-
-  factory Review.fromJson(Map<String, dynamic> json) => _$ReviewFromJson(json);
 }
 
 @freezed
