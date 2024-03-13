@@ -65,7 +65,7 @@ class FromSameStoreWidget extends StatelessWidget {
                               ),
                               height: getSize(110),
                               width: getSize(110),
-                              fit: BoxFit.cover,
+                              //fit: BoxFit.cover,
                             ),
                           ),
                         ),

@@ -21,6 +21,7 @@ import 'package:grape_customer_app/presentation/main/tabs/home/product_details/w
 import 'package:grape_customer_app/presentation/main/tabs/home/product_details/widget/product_main_info.dart';
 import 'package:grape_customer_app/presentation/main/tabs/home/product_details/widget/product_review_list.dart';
 import 'package:grape_customer_app/presentation/main/tabs/home/product_details/widget/product_vender_detail_widget.dart';
+import 'package:grape_customer_app/presentation/main/tabs/home/product_details/widget/product_you_may_like_widget.dart';
 import 'package:grape_customer_app/presentation/main/tabs/home/product_details/widget/select_model_widget.dart';
 import 'package:grape_customer_app/presentation/main/tabs/home/product_details/widget/similar_product_widget.dart';
 import 'package:share_plus/share_plus.dart';
@@ -176,20 +177,30 @@ class ProductDetailsView extends StatelessWidget {
                           ),
                         ),
                         SizedBox(
-                          height: getSize(20),
+                          height: getSize(state
+                                  .getProductDetails.similar_product!.isNotEmpty
+                              ? 20
+                              : 0),
                         ),
-                        Padding(
-                          padding:
-                              EdgeInsets.symmetric(horizontal: getSize(18)),
-                          child: BaseText(
-                            text: 'Similar Products',
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600,
-                            textColor: AppColors.black.withOpacity(0.8),
+                        Visibility(
+                          visible: state
+                              .getProductDetails.similar_product!.isNotEmpty,
+                          child: Padding(
+                            padding:
+                                EdgeInsets.symmetric(horizontal: getSize(18)),
+                            child: BaseText(
+                              text: 'Similar Products',
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
+                              textColor: AppColors.black.withOpacity(0.8),
+                            ),
                           ),
                         ),
                         SizedBox(
-                          height: getSize(10),
+                          height: getSize(state
+                                  .getProductDetails.similar_product!.isNotEmpty
+                              ? 10
+                              : 0),
                         ),
                         SimilarProductWidget(),
                         SizedBox(
@@ -197,24 +208,37 @@ class ProductDetailsView extends StatelessWidget {
                         ),
                         ProductVenderDetailWidget(),
                         SizedBox(
-                          height: getSize(20),
+                          height: getSize(
+                              state.getProductDetails.same_store!.isNotEmpty
+                                  ? 20
+                                  : 0),
                         ),
-                        Padding(
-                          padding:
-                              EdgeInsets.symmetric(horizontal: getSize(18)),
-                          child: BaseText(
-                            text: 'From the Same Store',
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600,
-                            textColor: AppColors.black.withOpacity(0.8),
+                        Visibility(
+                          visible:
+                              state.getProductDetails.same_store!.isNotEmpty,
+                          child: Padding(
+                            padding:
+                                EdgeInsets.symmetric(horizontal: getSize(18)),
+                            child: BaseText(
+                              text: 'From the Same Store',
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
+                              textColor: AppColors.black.withOpacity(0.8),
+                            ),
                           ),
                         ),
                         SizedBox(
-                          height: getSize(10),
+                          height: getSize(
+                              state.getProductDetails.same_store!.isNotEmpty
+                                  ? 10
+                                  : 0),
                         ),
                         FromSameStoreWidget(),
                         SizedBox(
-                          height: getSize(20),
+                          height: getSize(
+                              state.getProductDetails.same_store!.isNotEmpty
+                                  ? 20
+                                  : 0),
                         ),
                         Visibility(
                           visible: state.getProductDetails.product?.reviews !=
@@ -267,7 +291,33 @@ class ProductDetailsView extends StatelessWidget {
                               state.getProductDetails.product!.reviews!
                                   .isNotEmpty,
                           child: ProductReviewListWidget(),
-                        )
+                        ),
+                        Container(
+                          alignment: Alignment.center,
+                          margin: EdgeInsets.symmetric(
+                            horizontal: getSize(18),
+                          ),
+                          padding: EdgeInsets.symmetric(
+                            vertical: getSize(12),
+                          ),
+                          decoration: BoxDecoration(
+                            color: Color(0xFFFFEEE1),
+                            borderRadius: BorderRadius.circular(getSize(6)),
+                          ),
+                          child: BaseText(
+                            text: 'Products You May Also Like',
+                            fontSize: 14,
+                            fontWeight: FontWeight.w600,
+                            textColor: AppColors.primaryOrange,
+                          ),
+                        ),
+                        SizedBox(
+                          height: getSize(10),
+                        ),
+                        ProductYouMayLikeWidget(),
+                        SizedBox(
+                          height: getSize(20),
+                        ),
                       ],
                     );
                   }
