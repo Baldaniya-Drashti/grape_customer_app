@@ -20,7 +20,7 @@ class BuyNowButtonWidget extends StatelessWidget {
           children: [
             GestureDetector(
               onTap: () {
-                if (state.getProductDetails.is_cart == true) {
+                if (state.getProductDetails.product?.is_cart == true) {
                   // context.read<ProductDetailBloc>().add(
                   //       ProductDetailEvent.removeProductFromCart(),
                   //     );
@@ -45,12 +45,12 @@ class BuyNowButtonWidget extends StatelessWidget {
                       PngImageConstants.cartSelected,
                       height: getSize(18),
                       width: getSize(18),
-                      color: state.getProductDetails.is_cart == true
+                      color: state.getProductDetails.product?.is_cart == true
                           ? AppColors.primaryOrange
                           : AppColors.black,
                     ),
                     Visibility(
-                      visible: state.getProductDetails.is_cart == true,
+                      visible: state.getProductDetails.product?.is_cart == true,
                       child: Positioned.fill(
                         top: getSize(3),
                         left: getSize(-3),
@@ -78,7 +78,7 @@ class BuyNowButtonWidget extends StatelessWidget {
                 onPressed: () {
                   BuyNowDialog().buyNowDialog(
                     context,
-                    state.getProductDetails,
+                    state.getProductDetails.product!,
                     state.dataList,
                   );
                 },

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:grape_customer_app/domain/core/math_utils.dart';
@@ -25,8 +27,15 @@ class ShippingAddressWidget extends StatelessWidget {
               fontWeight: FontWeight.w600,
             ),
             GestureDetector(
-              onTap: () {
-                context.router.push(PageRouteInfo(ShippingAddresses.name));
+              onTap: () async {
+                var res = await context.router.push(
+                  PageRouteInfo(
+                    ShippingAddresses.name,
+                    args: ShippingAddressesArgs(isFromChangeAddress: true),
+                  ),
+                );
+
+                log('res : $res');
               },
               child: BaseText(
                 text: 'Change',

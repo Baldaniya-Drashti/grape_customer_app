@@ -66,10 +66,11 @@ class ProductDetailsView extends StatelessWidget {
                 GestureDetector(
                   onTap: () async {
                     var shortlink = await DynamicLinksService.createDynamicLink(
-                      imageURL: state.getProductDetails
-                              .images?[state.selectedImageIndex].image ??
+                      imageURL: state.getProductDetails.product
+                              ?.images?[state.selectedImageIndex].image ??
                           "",
-                      title: state.getProductDetails.product_name ?? "",
+                      title:
+                          state.getProductDetails.product?.product_name ?? "",
                       description: state.dataList[4].value ?? "",
                     );
 
@@ -107,11 +108,12 @@ class ProductDetailsView extends StatelessWidget {
                       padding: EdgeInsets.zero,
                       children: [
                         Center(
-                          child: state.getProductDetails.images != null
+                          child: state.getProductDetails.product?.images != null
                               ? CachedNetworkImage(
                                   imageUrl: state
                                           .getProductDetails
-                                          .images?[state.selectedImageIndex]
+                                          .product
+                                          ?.images?[state.selectedImageIndex]
                                           .image ??
                                       "",
                                   height: getSize(216),
@@ -174,8 +176,10 @@ class ProductDetailsView extends StatelessWidget {
                           height: getSize(20),
                         ),
                         Visibility(
-                          visible: state.getProductDetails.reviews != null &&
-                              state.getProductDetails.reviews!.isNotEmpty,
+                          visible: state.getProductDetails.product?.reviews !=
+                                  null &&
+                              state.getProductDetails.product!.reviews!
+                                  .isNotEmpty,
                           child: Padding(
                             padding:
                                 EdgeInsets.symmetric(horizontal: getSize(18)),
@@ -209,15 +213,18 @@ class ProductDetailsView extends StatelessWidget {
                         ),
                         SizedBox(
                           height: getSize(
-                            state.getProductDetails.reviews != null &&
-                                    state.getProductDetails.reviews!.isNotEmpty
+                            state.getProductDetails.product?.reviews != null &&
+                                    state.getProductDetails.product!.reviews!
+                                        .isNotEmpty
                                 ? 5
                                 : 0,
                           ),
                         ),
                         Visibility(
-                          visible: state.getProductDetails.reviews != null &&
-                              state.getProductDetails.reviews!.isNotEmpty,
+                          visible: state.getProductDetails.product?.reviews !=
+                                  null &&
+                              state.getProductDetails.product!.reviews!
+                                  .isNotEmpty,
                           child: ProductReviewListWidget(),
                         )
                       ],

@@ -21,4 +21,6 @@ class PaymentMethodEvent with _$PaymentMethodEvent {
   const factory PaymentMethodEvent.deleteCard(String id) = DeleteCard;
 
   const factory PaymentMethodEvent.changeCard(int index) = ChangedCard;
+
+  const factory PaymentMethodEvent.getPaymentMethod() = GetPaymentMethod;
 }

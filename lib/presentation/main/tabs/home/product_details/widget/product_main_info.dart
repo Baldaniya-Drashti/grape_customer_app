@@ -22,14 +22,14 @@ class ProductMainInfo extends StatelessWidget {
               child: Row(
                 children: [
                   BaseText(
-                    text: state.getProductDetails.product_name ?? "",
+                    text: state.getProductDetails.product?.product_name ?? "",
                     fontWeight: FontWeight.w600,
                   ),
                   SizedBox(
                     width: getSize(4),
                   ),
                   Visibility(
-                    visible: state.getProductDetails.discount != null,
+                    visible: state.getProductDetails.product?.discount != null,
                     child: Container(
                       height: getSize(16),
                       width: getSize(36),
@@ -41,7 +41,7 @@ class ProductMainInfo extends StatelessWidget {
                         ),
                       ),
                       child: BaseText(
-                        text: '-${state.getProductDetails.discount}%',
+                        text: '-${state.getProductDetails.product?.discount}%',
                         fontSize: 10,
                         fontWeight: FontWeight.w500,
                         textColor: Color(0xFFFF770E),
@@ -50,7 +50,8 @@ class ProductMainInfo extends StatelessWidget {
                   ),
                   Spacer(),
                   Visibility(
-                    visible: state.getProductDetails.available_qty == 0,
+                    visible:
+                        state.getProductDetails.product?.available_qty == 0,
                     child: Container(
                       alignment: Alignment.center,
                       padding: EdgeInsets.symmetric(
@@ -79,8 +80,9 @@ class ProductMainInfo extends StatelessWidget {
                   CommonRatingBar(
                     onRatingUpdate: (p0) {},
                     iconnSize: getSize(12),
-                    initialRating:
-                        state.getProductDetails.review_rate?.toDouble() ?? 0.0,
+                    initialRating: state.getProductDetails.product?.review_rate
+                            ?.toDouble() ??
+                        0.0,
                     horizontalPadding: getSize(4),
                     absorbing: true,
                   ),
@@ -88,15 +90,15 @@ class ProductMainInfo extends StatelessWidget {
                     width: getSize(4),
                   ),
                   BaseText(
-                    text: '${state.getProductDetails.order_qty} Sold',
+                    text: '${state.getProductDetails.product?.order_qty} Sold',
                     fontSize: 12,
                     fontWeight: FontWeight.w500,
                   ),
                   Spacer(),
                   Visibility(
-                    visible: state.getProductDetails.discount != null,
+                    visible: state.getProductDetails.product?.discount != null,
                     child: BaseText(
-                      text: '\$${state.getProductDetails.price}',
+                      text: '\$${state.getProductDetails.product?.price}',
                       textDecoration: TextDecoration.lineThrough,
                       fontSize: 12,
                       fontWeight: FontWeight.w500,
@@ -105,13 +107,13 @@ class ProductMainInfo extends StatelessWidget {
                   ),
                   SizedBox(
                     width: getSize(
-                      state.getProductDetails.discount != null ? 6 : 0,
+                      state.getProductDetails.product?.discount != null ? 6 : 0,
                     ),
                   ),
                   BaseText(
-                    text: state.getProductDetails.discount != null
-                        ? '\$${(state.getProductDetails.price ?? 0) - (((state.getProductDetails.price ?? 0) / 100) * 20)}'
-                        : '\$${state.getProductDetails.price}',
+                    text: state.getProductDetails.product?.discount != null
+                        ? '\$${(state.getProductDetails.product?.price ?? 0) - (((state.getProductDetails.product?.price ?? 0) / 100) * 20)}'
+                        : '\$${state.getProductDetails.product?.price}',
                     fontSize: 20,
                     fontWeight: FontWeight.w600,
                     textColor: Color(0xFF527FF2),
@@ -136,7 +138,9 @@ class ProductMainInfo extends StatelessWidget {
                     width: getSize(2),
                   ),
                   BaseText(
-                    text: state.getProductDetails.shop_location ?? "",
+                    text:
+                        state.getProductDetails.vendor_details?.shop_location ??
+                            "",
                     fontSize: 12,
                     fontWeight: FontWeight.w500,
                     textColor: AppColors.black.withOpacity(0.7),

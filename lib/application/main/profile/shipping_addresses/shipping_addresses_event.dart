@@ -22,13 +22,17 @@ class ShippingAddressesEvent with _$ShippingAddressesEvent {
   const factory ShippingAddressesEvent.pinCodeChanged(String pinCode) =
       PinCodeChanged;
 
-  const factory ShippingAddressesEvent.saveButtonPressed(BuildContext context) =
-      SaveButtonPressed;
-  const factory ShippingAddressesEvent.addAddresses(
-      ShippingAddressResponse shippingAddressResponce) = AddAddresses;
+  const factory ShippingAddressesEvent.addShippingAddress() =
+      AddShippingAddress;
+  const factory ShippingAddressesEvent.editShippingAddress(String id) =
+      EditShippingAddress;
+  const factory ShippingAddressesEvent.deleteShippingAddress(String id) =
+      DeleteShippingAddress;
+  const factory ShippingAddressesEvent.getShippingAddress() =
+      GetShippingAddress;
+
   const factory ShippingAddressesEvent.prefillEditAddressData(
-          ShippingAddressResponse shippingAddressResponce, bool isEdit) =
+          ShippingAddressDTO shippingAddressResponce, bool isEdit) =
       PrefillEditAddressData;
   const factory ShippingAddressesEvent.selectedIndex(int index) = SeletedIndex;
-  const factory ShippingAddressesEvent.deleteAddress(int index) = DeleteAddress;
 }

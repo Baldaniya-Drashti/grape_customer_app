@@ -33,4 +33,15 @@ class ApiConstants {
   static String addFavourite = 'favorites/store';
   static String removeFavourite = 'favorites/delete';
   static String getFavouriteList = 'favorites';
+
+  //shipping address
+  static String getShippingAddressList = 'shipping/address';
+  static String addShippingAddress = 'shipping/address/store';
+  static String updateShippingAddress = 'shipping/address/edit';
+  static String deleteShippingAddress = 'shipping/address/delete';
+
+  //payment methods
+  static String getPaymentMethod = 'payment/card';
+  static String addPaymentMethod = 'payment/card/store';
+  static String deletePaymentMethod = 'payment/card';
 }

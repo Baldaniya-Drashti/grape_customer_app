@@ -10,7 +10,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i28;
 import 'package:flutter/material.dart' as _i29;
-import 'package:grape_customer_app/application/main/profile/shipping_addresses/shipping_addresses_response.dart'
+import 'package:grape_customer_app/infrastructure/main/shipping_address_dto/shipping_address_dto.dart'
     as _i30;
 import 'package:grape_customer_app/presentation/auth/login/login_screen.dart'
     as _i10;
@@ -247,9 +247,14 @@ abstract class $AppRouter extends _i28.RootStackRouter {
       );
     },
     ShippingAddresses.name: (routeData) {
+      final args = routeData.argsAs<ShippingAddressesArgs>(
+          orElse: () => const ShippingAddressesArgs());
       return _i28.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i25.ShippingAddress(),
+        child: _i25.ShippingAddress(
+          key: args.key,
+          isFromChangeAddress: args.isFromChangeAddress,
+        ),
       );
     },
     SplashPage.name: (routeData) {
@@ -278,7 +283,7 @@ abstract class $AppRouter extends _i28.RootStackRouter {
 class AddNewAddress extends _i28.PageRouteInfo<AddNewAddressArgs> {
   AddNewAddress({
     _i29.Key? key,
-    required _i30.ShippingAddressResponse shippingAddressResponce,
+    required _i30.ShippingAddressDTO shippingAddressResponce,
     List<_i28.PageRouteInfo>? children,
   }) : super(
           AddNewAddress.name,
@@ -303,7 +308,7 @@ class AddNewAddressArgs {
 
   final _i29.Key? key;
 
-  final _i30.ShippingAddressResponse shippingAddressResponce;
+  final _i30.ShippingAddressDTO shippingAddressResponce;
 
   @override
   String toString() {
@@ -788,16 +793,40 @@ class SearchView extends _i28.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i25.ShippingAddress]
-class ShippingAddresses extends _i28.PageRouteInfo<void> {
-  const ShippingAddresses({List<_i28.PageRouteInfo>? children})
-      : super(
+class ShippingAddresses extends _i28.PageRouteInfo<ShippingAddressesArgs> {
+  ShippingAddresses({
+    _i29.Key? key,
+    bool isFromChangeAddress = false,
+    List<_i28.PageRouteInfo>? children,
+  }) : super(
           ShippingAddresses.name,
+          args: ShippingAddressesArgs(
+            key: key,
+            isFromChangeAddress: isFromChangeAddress,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'ShippingAddresses';
 
-  static const _i28.PageInfo<void> page = _i28.PageInfo<void>(name);
+  static const _i28.PageInfo<ShippingAddressesArgs> page =
+      _i28.PageInfo<ShippingAddressesArgs>(name);
+}
+
+class ShippingAddressesArgs {
+  const ShippingAddressesArgs({
+    this.key,
+    this.isFromChangeAddress = false,
+  });
+
+  final _i29.Key? key;
+
+  final bool isFromChangeAddress;
+
+  @override
+  String toString() {
+    return 'ShippingAddressesArgs{key: $key, isFromChangeAddress: $isFromChangeAddress}';
+  }
 }
 
 /// generated route for

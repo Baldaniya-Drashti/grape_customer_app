@@ -51,8 +51,16 @@ class FavouriteGridView extends StatelessWidget {
                   itemBuilder: (context, index) {
                     return GestureDetector(
                       onTap: () {
-                        context.router
-                            .push(PageRouteInfo(ProductDetailsView.name));
+                        context.router.push(
+                          PageRouteInfo(
+                            ProductDetailsView.name,
+                            args: ProductDetailsViewArgs(
+                                productId: state
+                                        .favouriteListDTO[index].product?.id
+                                        .toString() ??
+                                    ""),
+                          ),
+                        );
                       },
                       child: Stack(
                         children: [

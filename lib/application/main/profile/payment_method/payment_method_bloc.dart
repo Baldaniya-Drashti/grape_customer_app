@@ -1,21 +1,27 @@
-import 'package:auto_route/auto_route.dart';
+import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:grape_customer_app/application/main/profile/payment_method/payment_method_response.dart';
 import 'package:grape_customer_app/domain/auth/auth_value_objects.dart';
+import 'package:grape_customer_app/domain/main/i_main_facade.dart';
+import 'package:grape_customer_app/domain/main/main_failure.dart';
+import 'package:injectable/injectable.dart';
 
 part 'payment_method_state.dart';
 part 'payment_method_event.dart';
 part 'payment_method_bloc.freezed.dart';
 
+@injectable
 class PaymentMethodBloc extends Bloc<PaymentMethodEvent, PaymentMethodState> {
-  PaymentMethodBloc() : super(PaymentMethodState.initial()) {
+  final IMainFacade mainFacade;
+  PaymentMethodBloc(this.mainFacade) : super(PaymentMethodState.initial()) {
     on<PaymentMethodEvent>(
       (event, emit) async {
-        event.map(
-          saveButtonPressed: (value) {
+        await event.map(
+          saveButtonPressed: (value) async {
+            Either<MainFailure, String>? failureOrSuccess;
             final isCardHolderNameValid = state.cardHoldersName.isValid();
             final isCardNumberValid = state.cardNumber.isValid();
             final isCardDateValid = state.cardDate.isValid();
@@ -25,14 +31,26 @@ class PaymentMethodBloc extends Bloc<PaymentMethodEvent, PaymentMethodState> {
                 isCardNumberValid &&
                 isCardDateValid &&
                 isCvvValid) {
-              value.context.router.pop(PaymentMethodResponse(
-                id: DateTime.now().toString(),
-                cardNumber: state.cardNumber.getValue(),
-              ));
+              emit(
+                state.copyWith(
+                  isSubmitting: true,
+                  failureOrSuccessOption: none(),
+                ),
+              );
+              failureOrSuccess = await mainFacade.addPaymentMethod(
+                cardHoldersName: state.cardHoldersName,
+                cardNumber: state.cardNumber,
+                cardDate: state.cardDate,
+                cvv: state.cvv,
+              );
             }
-            emit(state.copyWith(
-              showErrorMessages: true,
-            ));
+            emit(
+              state.copyWith(
+                showErrorMessages: true,
+                isSubmitting: false,
+                failureOrSuccessOption: optionOf(failureOrSuccess),
+              ),
+            );
           },
           cardHolderNameChanged: (value) {
             emit(
@@ -66,12 +84,16 @@ class PaymentMethodBloc extends Bloc<PaymentMethodEvent, PaymentMethodState> {
             ));
           },
           deleteCard: (value) {
-            emit(state.copyWith(
+            emit(
+              state.copyWith(
                 cardDetail: List.of(state.cardDetail)
                   ..removeWhere(
                     (element) => element.id == value.id,
-                  )));
+                  ),
+              ),
+            );
           },
+          getPaymentMethod: (GetPaymentMethod value) async {},
         );
       },
     );

@@ -8,7 +8,6 @@ import 'package:grape_customer_app/domain/main/i_main_facade.dart';
 
 import 'package:grape_customer_app/infrastructure/main/home_dto/get_product_list_response.dart';
 import 'package:grape_customer_app/infrastructure/main/home_dto/search_product_dto.dart';
-import 'package:grape_customer_app/presentation/core/helper/location_helper.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -37,19 +36,19 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<HomeEvent>(
       (event, emit) async {
         await event.map(
-          getCurrentLocation: (value) async {
-            await LocationHelper().getCurrentLocation().then(
-              (value) {
-                emit(
-                  state.copyWith(
-                    currentLocation: value.$1 ?? "",
-                    currentLatitude: value.$2,
-                    currentLongitude: value.$3,
-                  ),
-                );
-              },
-            );
-          },
+          // getCurrentLocation: (value) async {
+          //   await LocationHelper().getCurrentLocation().then(
+          //     (value) {
+          //       emit(
+          //         state.copyWith(
+          //           currentLocation: value.$1 ?? "",
+          //           currentLatitude: value.$2,
+          //           currentLongitude: value.$3,
+          //         ),
+          //       );
+          //     },
+          //   );
+          // },
           carousalChange: (CarousalChange value) async {
             emit(state.copyWith(carousalIndex: value.tabIndex));
           },

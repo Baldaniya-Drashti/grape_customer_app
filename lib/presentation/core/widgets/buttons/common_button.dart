@@ -86,7 +86,7 @@ class CommonButton extends StatelessWidget {
               text: buttonText,
               fontSize: buttonFontSize ?? 16,
               textAlign: TextAlign.center,
-              maxLines: 1,
+              //maxLines: 1,
               fontWeight: buttonFontWeight ?? FontWeight.w500,
               textColor: buttonTextColor ?? Colors.white,
             ),

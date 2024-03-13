@@ -5,7 +5,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grape_customer_app/application/main/profile/payment_method/payment_method_bloc.dart';
 import 'package:grape_customer_app/domain/core/l10n/app_localizations.dart';
 import 'package:grape_customer_app/domain/core/math_utils.dart';
+import 'package:grape_customer_app/injection.dart';
 import 'package:grape_customer_app/presentation/common/utils/app_focus.dart';
+import 'package:grape_customer_app/presentation/common/utils/flushbar_creator.dart';
 import 'package:grape_customer_app/presentation/core/widgets/buttons/common_button.dart';
 import 'package:grape_customer_app/presentation/core/widgets/inputs/custom_app_bar.dart';
 import 'package:grape_customer_app/presentation/core/widgets/inputs/custom_text_field.dart';
@@ -18,8 +20,31 @@ class AddNewCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => PaymentMethodBloc(),
+      create: (context) => getIt<PaymentMethodBloc>(),
       child: BlocConsumer<PaymentMethodBloc, PaymentMethodState>(
+        listener: (BuildContext context, PaymentMethodState state) {
+          state.failureOrSuccessOption.fold(
+            () {},
+            (either) => either.fold(
+              (failure) {
+                showError(
+                  message: failure.maybeMap(
+                    badRequest: (value) => value.error,
+                    showAPIResponseMessage: (value) => value.message,
+                    networkError: (value) =>
+                        'Please check your internet connectivity',
+                    orElse: () => "Server Error. Try again later.",
+                  ),
+                ).show(context);
+              },
+              (r) {
+                showSuccess(message: r).show(context).then((value) async {
+                  await context.router.pop(true);
+                });
+              },
+            ),
+          );
+        },
         builder: (context, state) {
           return GestureDetector(
             onTap: () => AppFocus.unfocus(context),
@@ -84,13 +109,13 @@ class AddNewCard extends StatelessWidget {
                           .add(PaymentMethodEvent.saveButtonPressed(context));
                     },
                     buttonText: AppLocalizations.of(context).save,
+                    isSubmitting: state.isSubmitting,
                   ),
                 ),
               ),
             ),
           );
         },
-        listener: (context, state) {},
       ),
     );
   }

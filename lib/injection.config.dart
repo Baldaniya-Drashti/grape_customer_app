@@ -10,29 +10,31 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:grape_customer_app/application/auth/auth_status/auth_status_bloc.dart'
-    as _i19;
+    as _i20;
 import 'package:grape_customer_app/application/auth/login_form/login_form_bloc.dart'
     as _i12;
 import 'package:grape_customer_app/application/auth/register_form/register_form_bloc.dart'
-    as _i16;
+    as _i17;
 import 'package:grape_customer_app/application/main/cart/cart_bloc.dart'
-    as _i20;
+    as _i21;
 import 'package:grape_customer_app/application/main/checkout/checkout_bloc.dart'
     as _i4;
 import 'package:grape_customer_app/application/main/favourite/favourite_bloc.dart'
-    as _i22;
-import 'package:grape_customer_app/application/main/home/home_bloc.dart'
     as _i23;
+import 'package:grape_customer_app/application/main/home/home_bloc.dart'
+    as _i24;
 import 'package:grape_customer_app/application/main/home/product_detail/product_detail_bloc.dart'
-    as _i15;
+    as _i16;
 import 'package:grape_customer_app/application/main/profile/edit_profile/edit_profile_bloc.dart'
-    as _i21;
+    as _i22;
 import 'package:grape_customer_app/application/main/profile/get_account/account_cubit.dart'
-    as _i18;
+    as _i19;
 import 'package:grape_customer_app/application/main/profile/language/language_bloc.dart'
     as _i11;
+import 'package:grape_customer_app/application/main/profile/payment_method/payment_method_bloc.dart'
+    as _i15;
 import 'package:grape_customer_app/application/main/profile/shipping_addresses/shipping_addresses_bloc.dart'
-    as _i17;
+    as _i18;
 import 'package:grape_customer_app/application/main_tab/main_tab_bloc.dart'
     as _i13;
 import 'package:grape_customer_app/application/onboarding/onboarding_bloc.dart'
@@ -77,23 +79,26 @@ extension GetItInjectableX on _i1.GetIt {
           gh<_i5.IAccountRepository>(),
         ));
     gh.factory<_i14.OnboardingBloc>(() => _i14.OnboardingBloc());
-    gh.factory<_i15.ProductDetailBloc>(
-        () => _i15.ProductDetailBloc(gh<_i9.IMainFacade>()));
-    gh.factory<_i16.RegisterFormBloc>(
-        () => _i16.RegisterFormBloc(gh<_i7.IAuthFacade>()));
-    gh.factory<_i17.ShippingAddressesBloc>(() => _i17.ShippingAddressesBloc());
-    gh.factory<_i18.AccountCubit>(
-        () => _i18.AccountCubit(gh<_i5.IAccountRepository>()));
-    gh.factory<_i19.AuthStatusBloc>(
-        () => _i19.AuthStatusBloc(gh<_i7.IAuthFacade>()));
-    gh.factory<_i20.CartBloc>(() => _i20.CartBloc(gh<_i9.IMainFacade>()));
-    gh.factory<_i21.EditProfileBloc>(() => _i21.EditProfileBloc(
+    gh.factory<_i15.PaymentMethodBloc>(
+        () => _i15.PaymentMethodBloc(gh<_i9.IMainFacade>()));
+    gh.factory<_i16.ProductDetailBloc>(
+        () => _i16.ProductDetailBloc(gh<_i9.IMainFacade>()));
+    gh.factory<_i17.RegisterFormBloc>(
+        () => _i17.RegisterFormBloc(gh<_i7.IAuthFacade>()));
+    gh.factory<_i18.ShippingAddressesBloc>(
+        () => _i18.ShippingAddressesBloc(gh<_i9.IMainFacade>()));
+    gh.factory<_i19.AccountCubit>(
+        () => _i19.AccountCubit(gh<_i5.IAccountRepository>()));
+    gh.factory<_i20.AuthStatusBloc>(
+        () => _i20.AuthStatusBloc(gh<_i7.IAuthFacade>()));
+    gh.factory<_i21.CartBloc>(() => _i21.CartBloc(gh<_i9.IMainFacade>()));
+    gh.factory<_i22.EditProfileBloc>(() => _i22.EditProfileBloc(
           gh<_i5.IAccountRepository>(),
           gh<_i7.IAuthFacade>(),
         ));
-    gh.factory<_i22.FavouriteBloc>(
-        () => _i22.FavouriteBloc(gh<_i9.IMainFacade>()));
-    gh.factory<_i23.HomeBloc>(() => _i23.HomeBloc(gh<_i9.IMainFacade>()));
+    gh.factory<_i23.FavouriteBloc>(
+        () => _i23.FavouriteBloc(gh<_i9.IMainFacade>()));
+    gh.factory<_i24.HomeBloc>(() => _i24.HomeBloc(gh<_i9.IMainFacade>()));
     return this;
   }
 }

@@ -1,15 +1,15 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:grape_customer_app/application/main/profile/shipping_addresses/shipping_addresses_response.dart';
 import 'package:grape_customer_app/domain/core/l10n/app_localizations.dart';
 import 'package:grape_customer_app/domain/core/math_utils.dart';
 import 'package:grape_customer_app/domain/core/svg_image_constants.dart';
+import 'package:grape_customer_app/infrastructure/main/shipping_address_dto/shipping_address_dto.dart';
 import 'package:grape_customer_app/presentation/common/widgets/base_text.dart';
 import 'package:grape_customer_app/presentation/core/styles/styles.dart';
 import 'package:grape_customer_app/presentation/core/widgets/buttons/common_button.dart';
 
 class ShippingAddressCard extends StatelessWidget {
-  final ShippingAddressResponse shippingAddress;
+  final ShippingAddressDTO shippingAddress;
   final void Function()? onTapSelectCard;
   final void Function()? onTapDelete;
   final void Function()? onTapEdit;
@@ -43,7 +43,7 @@ class ShippingAddressCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             BaseText(
-              text: shippingAddress.fullName ?? '',
+              text: shippingAddress.full_name ?? '',
               fontSize: 14,
               fontWeight: FontWeight.w600,
             ),
@@ -52,7 +52,7 @@ class ShippingAddressCard extends StatelessWidget {
             ),
             BaseText(
               text:
-                  '+${shippingAddress.countryCode} ${shippingAddress.mobileNumber}',
+                  '+${shippingAddress.country_code} ${shippingAddress.mobile}',
               fontSize: 14,
               fontWeight: FontWeight.w600,
             ),
@@ -61,17 +61,17 @@ class ShippingAddressCard extends StatelessWidget {
             ),
             BaseText(
               text:
-                  '${shippingAddress.address},${shippingAddress.state},${shippingAddress.city},${shippingAddress.pinCode}',
+                  '${shippingAddress.address},${shippingAddress.state},${shippingAddress.city},${shippingAddress.pincode}',
               textColor: AppColors.black.withOpacity(0.6),
               fontSize: 14,
-              maxLines: 3,
+              showFullDescription: true,
             ),
             SizedBox(
               height: getSize(5),
             ),
             BaseText(
               text:
-                  '${AppLocalizations.of(context).landMark}: ${shippingAddress.landMark}',
+                  '${AppLocalizations.of(context).landMark}: ${shippingAddress.landmark}',
               fontSize: 14,
             ),
             SizedBox(
@@ -83,7 +83,7 @@ class ShippingAddressCard extends StatelessWidget {
                   buttonFontSize: 14,
                   height: getSize(37),
                   buttonFontWeight: FontWeight.w800,
-                  width: getSize(77),
+                  width: getSize(90),
                   onPressed: onTapEdit ?? () {},
                   buttonText: AppLocalizations.of(context).edit,
                 ),

@@ -3,9 +3,9 @@ part of 'home_bloc.dart';
 @freezed
 class HomeState with _$HomeState {
   factory HomeState({
-    required String currentLocation,
-    double? currentLatitude,
-    double? currentLongitude,
+    // required String currentLocation,
+    // double? currentLatitude,
+    // double? currentLongitude,
     required int carousalIndex,
     required bool isLoading,
     required bool isNoDataFound,
@@ -16,7 +16,7 @@ class HomeState with _$HomeState {
     required final List<String> brandFilter,
   }) = _HomeState;
   factory HomeState.initial() => HomeState(
-        currentLocation: '',
+        //  currentLocation: '',
         carousalIndex: 0,
         getProductList: [],
         isLoading: false,

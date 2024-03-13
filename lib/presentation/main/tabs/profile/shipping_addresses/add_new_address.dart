@@ -2,11 +2,12 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grape_customer_app/application/main/profile/shipping_addresses/shipping_addresses_bloc.dart';
-import 'package:grape_customer_app/application/main/profile/shipping_addresses/shipping_addresses_response.dart';
 import 'package:grape_customer_app/domain/core/l10n/app_localizations.dart';
 import 'package:grape_customer_app/domain/core/math_utils.dart';
+import 'package:grape_customer_app/infrastructure/main/shipping_address_dto/shipping_address_dto.dart';
 import 'package:grape_customer_app/injection.dart';
 import 'package:grape_customer_app/presentation/common/utils/app_focus.dart';
+import 'package:grape_customer_app/presentation/common/utils/flushbar_creator.dart';
 import 'package:grape_customer_app/presentation/common/widgets/common_country_code_picker.dart';
 import 'package:grape_customer_app/presentation/core/widgets/buttons/common_button.dart';
 import 'package:grape_customer_app/presentation/core/widgets/inputs/custom_app_bar.dart';
@@ -14,7 +15,7 @@ import 'package:grape_customer_app/presentation/core/widgets/inputs/inputs.dart'
 
 @RoutePage(name: 'AddNewAddress')
 class AddNewAddress extends StatelessWidget {
-  final ShippingAddressResponse shippingAddressResponce;
+  final ShippingAddressDTO shippingAddressResponce;
   const AddNewAddress({super.key, required this.shippingAddressResponce});
 
   @override
@@ -26,11 +27,33 @@ class AddNewAddress extends StatelessWidget {
           ..add(
             ShippingAddressesEvent.prefillEditAddressData(
               shippingAddressResponce,
-              shippingAddressResponce.fullName == null ? false : true,
+              shippingAddressResponce.full_name == null ? false : true,
             ),
           ),
         child: BlocConsumer<ShippingAddressesBloc, ShippingAddressesState>(
-          listener: (context, state) {},
+          listener: (BuildContext context, ShippingAddressesState state) {
+            state.failureOrSuccessOption.fold(
+              () {},
+              (either) => either.fold(
+                (failure) {
+                  showError(
+                    message: failure.maybeMap(
+                      badRequest: (value) => value.error,
+                      showAPIResponseMessage: (value) => value.message,
+                      networkError: (value) =>
+                          'Please check your internet connectivity',
+                      orElse: () => "Server Error. Try again later.",
+                    ),
+                  ).show(context);
+                },
+                (r) {
+                  showSuccess(message: r).show(context).then((value) async {
+                    await context.router.pop(true);
+                  });
+                },
+              ),
+            );
+          },
           builder: (context, state) {
             return Scaffold(
               appBar: CustomAppBar(
@@ -90,10 +113,20 @@ class AddNewAddress extends StatelessWidget {
                   ),
                   child: CommonButton(
                     onPressed: () {
-                      context.read<ShippingAddressesBloc>().add(
-                          ShippingAddressesEvent.saveButtonPressed(context));
+                      if (state.isEdit) {
+                        context.read<ShippingAddressesBloc>().add(
+                              ShippingAddressesEvent.editShippingAddress(
+                                shippingAddressResponce.id?.toString() ?? "",
+                              ),
+                            );
+                      } else {
+                        context.read<ShippingAddressesBloc>().add(
+                              ShippingAddressesEvent.addShippingAddress(),
+                            );
+                      }
                     },
                     buttonText: AppLocalizations.of(context).save,
+                    isSubmitting: state.isSubmitting,
                   ),
                 ),
               ),

@@ -50,10 +50,10 @@ class PopMenuWidget extends StatelessWidget {
               image: SvgImageConstant.share,
               onTap: () async {
                 var shortlink = await DynamicLinksService.createDynamicLink(
-                  imageURL: state.getProductDetails
-                          .images?[state.selectedImageIndex].image ??
+                  imageURL: state.getProductDetails.product
+                          ?.images?[state.selectedImageIndex].image ??
                       "",
-                  title: state.getProductDetails.product_name ?? "",
+                  title: state.getProductDetails.product?.product_name ?? "",
                   description: state.dataList[4].value ?? "",
                 );
 
@@ -66,14 +66,14 @@ class PopMenuWidget extends StatelessWidget {
               height: 0,
             ),
             getMenuItems(
-              title: state.getProductDetails.is_favorite == true
+              title: state.getProductDetails.product?.is_favorite == true
                   ? 'Favourite'
                   : 'Add Favorite',
-              image: state.getProductDetails.is_favorite == true
+              image: state.getProductDetails.product?.is_favorite == true
                   ? SvgImageConstant.favouriteSelected
                   : SvgImageConstant.favouriteUnselected,
               onTap: () {
-                if (state.getProductDetails.is_favorite == true) {
+                if (state.getProductDetails.product?.is_favorite == true) {
                 } else {
                   context
                       .read<ProductDetailBloc>()

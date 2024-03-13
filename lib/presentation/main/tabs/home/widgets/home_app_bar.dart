@@ -7,7 +7,6 @@ import 'package:grape_customer_app/application/main/home/home_bloc.dart';
 import 'package:grape_customer_app/domain/core/l10n/app_localizations.dart';
 import 'package:grape_customer_app/domain/core/math_utils.dart';
 import 'package:grape_customer_app/domain/core/svg_image_constants.dart';
-import 'package:grape_customer_app/presentation/common/widgets/base_text.dart';
 import 'package:grape_customer_app/presentation/core/app_router.gr.dart';
 import 'package:grape_customer_app/presentation/core/styles/app_colors.dart';
 import "package:grape_customer_app/presentation/core/widgets/inputs/custom_text_field.dart";
@@ -24,23 +23,6 @@ class HomeAppbar extends StatelessWidget implements PreferredSizeWidget {
           automaticallyImplyLeading: true,
           scrolledUnderElevation: 0,
           backgroundColor: AppColors.white,
-          title: Row(
-            children: [
-              SvgPicture.asset(
-                SvgImageConstant.location,
-              ),
-              SizedBox(
-                width: getSize(8),
-              ),
-              Expanded(
-                child: BaseText(
-                  text: state.currentLocation,
-                  fontSize: 12,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ],
-          ),
           elevation: 0,
           bottom: PreferredSize(
             preferredSize: preferredSize,
@@ -67,5 +49,5 @@ class HomeAppbar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(getSize(100));
+  Size get preferredSize => Size.fromHeight(getSize(70));
 }

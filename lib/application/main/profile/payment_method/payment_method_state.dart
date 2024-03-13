@@ -9,7 +9,12 @@ class PaymentMethodState with _$PaymentMethodState {
     required bool showErrorMessages,
     required CVV cvv,
     required List<PaymentMethodResponse> cardDetail,
+    required Option<Either<MainFailure, String>> failureOrSuccessOption,
     required int selectedCard,
+    required bool isSubmitting,
+    required bool isLoading,
+    required bool isErrorInAPI,
+    required bool isNoDataFound,
   }) = _PaymentMethodState;
   factory PaymentMethodState.initial() => PaymentMethodState(
         cardHoldersName: Username(''),
@@ -19,5 +24,10 @@ class PaymentMethodState with _$PaymentMethodState {
         cvv: CVV(''),
         cardDetail: [],
         selectedCard: 0,
+        failureOrSuccessOption: none(),
+        isSubmitting: false,
+        isLoading: false,
+        isErrorInAPI: false,
+        isNoDataFound: false,
       );
 }

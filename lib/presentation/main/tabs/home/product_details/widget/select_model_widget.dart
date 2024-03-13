@@ -17,7 +17,7 @@ class SelectModelWidget extends StatelessWidget {
         return SizedBox(
           height: getSize(50),
           child: ListView.builder(
-            itemCount: state.getProductDetails.images?.length ?? 0,
+            itemCount: state.getProductDetails.product?.images?.length ?? 0,
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) => GestureDetector(
@@ -35,7 +35,9 @@ class SelectModelWidget extends StatelessWidget {
                     left: getSize(index == 0 ? 18 : 5),
                     right: getSize(
                       index ==
-                              ((state.getProductDetails.images?.length ?? 0) -
+                              ((state.getProductDetails.product?.images
+                                          ?.length ??
+                                      0) -
                                   1)
                           ? 18
                           : 5,
@@ -61,7 +63,8 @@ class SelectModelWidget extends StatelessWidget {
                     ),
                     image: DecorationImage(
                       image: CachedNetworkImageProvider(
-                        state.getProductDetails.images?[index].image ?? "",
+                        state.getProductDetails.product?.images?[index].image ??
+                            "",
                       ),
                       fit: BoxFit.cover,
                     ),

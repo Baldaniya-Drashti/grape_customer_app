@@ -6,7 +6,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:grape_customer_app/domain/main/i_main_facade.dart';
 import 'package:grape_customer_app/domain/main/main_failure.dart';
 import 'package:grape_customer_app/infrastructure/core/common_product_from_json_response.dart';
-import 'package:grape_customer_app/infrastructure/main/home_dto/get_product_list_response.dart';
+import 'package:grape_customer_app/infrastructure/main/home_dto/product_detail_dto.dart';
 import 'package:injectable/injectable.dart';
 
 part 'product_detail_state.dart';
@@ -45,16 +45,16 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
                 state.copyWith(
                   isErrorInAPI: true,
                   isLoading: false,
-                  getProductDetails: GetProductListResponse(),
+                  getProductDetails: ProductDetailDTO(),
                   failureOrSuccessOption: none(),
                 ),
               ),
               (r) {
                 var productFromJson = ProductFromJson();
                 var dataList = <Data>[];
-                if (r.product_form_json != null) {
+                if (r.product?.product_form_json != null) {
                   productFromJson = ProductFromJson.fromJson(
-                    jsonDecode(r.product_form_json ?? ""),
+                    jsonDecode(r.product?.product_form_json ?? ""),
                   );
 
                   if (productFromJson.data.isNotEmpty) {
@@ -87,7 +87,8 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
             );
             Either<MainFailure, String>? failureOrSuccess;
             failureOrSuccess = await mainFacade.addProductToCart(
-                productId: state.getProductDetails.id.toString());
+                productId:
+                    state.getProductDetails.product?.id.toString() ?? "");
 
             emit(
               state.copyWith(
@@ -103,7 +104,8 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
             );
             Either<MainFailure, String>? failureOrSuccess;
             failureOrSuccess = await mainFacade.deleteProductFromCart(
-                productId: state.getProductDetails.id.toString());
+                productId:
+                    state.getProductDetails.product?.id.toString() ?? "");
 
             emit(
               state.copyWith(
@@ -119,7 +121,8 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
             );
             Either<MainFailure, String>? failureOrSuccess;
             failureOrSuccess = await mainFacade.addProductToFavourite(
-                productId: state.getProductDetails.id.toString());
+                productId:
+                    state.getProductDetails.product?.id.toString() ?? "");
 
             emit(
               state.copyWith(

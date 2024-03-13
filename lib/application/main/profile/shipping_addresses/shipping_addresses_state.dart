@@ -12,11 +12,14 @@ class ShippingAddressesState with _$ShippingAddressesState {
     required InputEmptyOrNot city,
     required InputEmptyOrNot pinCode,
     required bool showErrorMessages,
-    required Option<Either<AuthFailure, String>> failureOrSuccessOption,
-    required List<ShippingAddressResponse> addressList,
-    
+    required bool isSubmitting,
+    required bool isLoading,
+    required Option<Either<MainFailure, String>> failureOrSuccessOption,
+    required List<ShippingAddressDTO> addressList,
     required int selectedIndex,
     required bool isEdit,
+    required bool isErrorInAPI,
+    required bool isNoDataFound,
   }) = _ShippingAddressesState;
   factory ShippingAddressesState.initial() => ShippingAddressesState(
         fullName: Username(''),
@@ -32,6 +35,9 @@ class ShippingAddressesState with _$ShippingAddressesState {
         addressList: [],
         selectedIndex: 0,
         isEdit: false,
-     
+        isSubmitting: false,
+        isLoading: false,
+        isErrorInAPI: false,
+        isNoDataFound: false,
       );
 }
