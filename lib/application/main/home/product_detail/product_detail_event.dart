@@ -6,10 +6,14 @@ class ProductDetailEvent with _$ProductDetailEvent {
       IncreaseProductQuantity;
   factory ProductDetailEvent.decreaseProductQuantity() =
       DecreaseProductQuantity;
-  factory ProductDetailEvent.getProductDetails(String productId) =
-      GetProductDetails;
+  factory ProductDetailEvent.getProductDetails(
+      String productId, bool isRefresh) = GetProductDetails;
   factory ProductDetailEvent.addToFavourite() = AddToFavourite;
   factory ProductDetailEvent.selectImage(int index) = SelectImage;
   factory ProductDetailEvent.addProductToCart() = AddProductToCart;
-  factory ProductDetailEvent.removeProductFromCart() = RemoveProductFromCart;
+  factory ProductDetailEvent.removeProductFromFavourite() =
+      RemoveProductFromFavourite;
+
+  factory ProductDetailEvent.getProductYouMayAlsoLikeProductList(
+      bool isRefresh) = GetProductYouMayAlsoLikeProductList;
 }

@@ -77,24 +77,28 @@ class HomeView extends StatelessWidget {
                 ),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: getSize(18)),
-                  child: Row(
-                    children: [
-                      BaseText(
-                        text: AppLocalizations.of(context).recommendedForYou,
-                        textColor: AppColors.authBlack,
-                      ),
-                      Spacer(),
-                      BaseText(
-                        text: AppLocalizations.of(context).seeMore,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 12,
-                      ),
-                      Icon(
-                        Icons.arrow_forward_ios_rounded,
-                        size: getSize(18),
-                      )
-                    ],
+                  child: BaseText(
+                    text: AppLocalizations.of(context).recommendedForYou,
+                    textColor: AppColors.authBlack,
                   ),
+                  // child: Row(
+                  //   children: [
+                  //     BaseText(
+                  //       text: AppLocalizations.of(context).recommendedForYou,
+                  //       textColor: AppColors.authBlack,
+                  //     ),
+                  //     Spacer(),
+                  //     BaseText(
+                  //       text: AppLocalizations.of(context).seeMore,
+                  //       fontWeight: FontWeight.w500,
+                  //       fontSize: 12,
+                  //     ),
+                  //     Icon(
+                  //       Icons.arrow_forward_ios_rounded,
+                  //       size: getSize(18),
+                  //     )
+                  //   ],
+                  // ),
                 ),
                 SizedBox(
                   height: getSize(18),

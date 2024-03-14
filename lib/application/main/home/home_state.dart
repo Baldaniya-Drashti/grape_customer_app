@@ -14,6 +14,7 @@ class HomeState with _$HomeState {
     required List<GetProductListResponse> getProductList,
     required SearchProductDTO searchProductDTO,
     required final List<String> brandFilter,
+    required List<Map<String, dynamic>> filterList,
   }) = _HomeState;
   factory HomeState.initial() => HomeState(
         //  currentLocation: '',
@@ -24,7 +25,7 @@ class HomeState with _$HomeState {
         searchText: InputEmptyOrNot(''),
         searchProductDTO: SearchProductDTO(),
         isNoDataFound: false,
-        brandFilter: [],
+        brandFilter: [], filterList: [],
       );
 
   // const factory HomeState.loadAPISuccess(List<GetProductListResponse> apiList) =

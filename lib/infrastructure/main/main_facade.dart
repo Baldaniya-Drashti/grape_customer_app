@@ -6,7 +6,6 @@ import 'package:grape_customer_app/domain/main/i_main_facade.dart';
 import 'package:grape_customer_app/domain/main/main_failure.dart';
 import 'package:grape_customer_app/infrastructure/core/common_response.dart';
 import 'package:grape_customer_app/infrastructure/core/network/injectable_module.dart';
-import 'package:grape_customer_app/infrastructure/main/home_dto/product_detail_dto.dart';
 import 'package:grape_customer_app/infrastructure/main/shipping_address_dto/shipping_address_dto.dart';
 import 'package:injectable/injectable.dart';
 
@@ -18,14 +17,23 @@ class MainFacade implements IMainFacade {
   MainFacade({required this.apiService});
 
   @override
-  Future<Either<MainFailure, CommonResponse>> getProductListAPI(
-      {required int page}) async {
+  Future<Either<MainFailure, CommonResponse>> getProductListAPI({
+    required int page,
+    String? productId,
+  }) async {
     try {
-      final res = await apiService
-          .getMethod(ApiConstants.getCustomerProducts, queryParameters: {
+      Map<String, dynamic> mapData = {
         'page': page,
         'limit': _perPage,
-      });
+      };
+      if (productId != null) {
+        mapData.addAll({
+          'is_like_list': "1",
+          'product_id': productId,
+        });
+      }
+      final res = await apiService.getMethod(ApiConstants.getCustomerProducts,
+          queryParameters: mapData);
 
       if (res != null) {
         return right(res);
@@ -49,15 +57,20 @@ class MainFacade implements IMainFacade {
   }
 
   @override
-  Future<Either<MainFailure, ProductDetailDTO>> getProductDetailsAPI(
-      {required String productId}) async {
+  Future<Either<MainFailure, CommonResponse>> getProductDetailsAPI({
+    required String productId,
+    required int page,
+  }) async {
     try {
       final res = await apiService.getMethod(
-        '${ApiConstants.getCustomerProductsDetails}/$productId',
-      );
+          '${ApiConstants.getCustomerProductsDetails}/$productId',
+          queryParameters: {
+            'page': page,
+            'limit': _perPage,
+          });
 
       if (res != null && res.data != null) {
-        return right(ProductDetailDTO.fromJson(res.data));
+        return right(res);
       } else {
         return left(const MainFailure.serverError());
       }
@@ -467,6 +480,34 @@ class MainFacade implements IMainFacade {
       if (res != null && res.data != null) {
         var list = res.data as List<dynamic>;
         return right(list.map((e) => ShippingAddressDTO.fromJson(e)).toList());
+      } else {
+        return left(const MainFailure.serverError());
+      }
+    } on DioException catch (err) {
+      if (err.response != null) {
+        var commonRespose = CommonResponse.fromJson(err.response?.data);
+
+        if (commonRespose.dioMessage != null) {
+          return left(
+              MainFailure.showAPIResponseMessage(commonRespose.dioMessage!));
+        }
+      } else if (err.type == DioExceptionType.connectionError) {
+        return left(const MainFailure.networkError());
+      }
+
+      return left(const MainFailure.serverError());
+    }
+  }
+
+  @override
+  Future<Either<MainFailure, String>> deleteProductFromFavourite(
+      {required String productId}) async {
+    try {
+      final res = await apiService
+          .deleteMethod('${ApiConstants.removeFavourite}/$productId');
+
+      if (res != null && res.dioMessage != null) {
+        return right(res.dioMessage ?? "");
       } else {
         return left(const MainFailure.serverError());
       }

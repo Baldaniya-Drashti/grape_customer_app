@@ -9,4 +9,6 @@ class HomeEvent with _$HomeEvent {
   factory HomeEvent.changeSeachText(String searchText) = ChangeSeachText;
   factory HomeEvent.changeBrandFilter(String selectedBrandFilter) =
       ChangeBrandFilter;
+  factory HomeEvent.addFilterInList(Map<String, dynamic> selectedBrandFilter) =
+      AddFilterInList;
 }

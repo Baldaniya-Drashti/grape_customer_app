@@ -8,8 +8,11 @@ class ProductDetailState with _$ProductDetailState {
     required bool isErrorInAPI,
     required bool isFavourite,
     required ProductDetailDTO getProductDetails,
+    required List<SimilarProduct> similarProduct,
     required List<Data> dataList,
     required int selectedImageIndex,
+    required bool isNoDataFound,
+    required List<GetProductListResponse> getProductList,
     required Option<Either<MainFailure, String>> failureOrSuccessOption,
   }) = _ProductDetailState;
   factory ProductDetailState.initial() => ProductDetailState(
@@ -21,5 +24,8 @@ class ProductDetailState with _$ProductDetailState {
         selectedImageIndex: 0,
         failureOrSuccessOption: none(),
         isFavourite: false,
+        similarProduct: [],
+        getProductList: [],
+        isNoDataFound: false,
       );
 }

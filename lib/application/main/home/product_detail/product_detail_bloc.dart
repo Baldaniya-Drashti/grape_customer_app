@@ -6,8 +6,10 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:grape_customer_app/domain/main/i_main_facade.dart';
 import 'package:grape_customer_app/domain/main/main_failure.dart';
 import 'package:grape_customer_app/infrastructure/core/common_product_from_json_response.dart';
+import 'package:grape_customer_app/infrastructure/main/home_dto/get_product_list_response.dart';
 import 'package:grape_customer_app/infrastructure/main/home_dto/product_detail_dto.dart';
 import 'package:injectable/injectable.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 part 'product_detail_state.dart';
 part 'product_detail_event.dart';
@@ -16,6 +18,19 @@ part 'product_detail_bloc.freezed.dart';
 @injectable
 class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
   final IMainFacade mainFacade;
+  int page = 1;
+  int lastPage = 1;
+
+  bool isFetching = false;
+
+  int pageForProductYoumayLike = 1;
+  int lastPageForProductYoumayLike = 1;
+
+  bool isFetchingForProductYoumayLike = false;
+  final RefreshController similarProductRefreshController = RefreshController();
+  final RefreshController productYouMayLikeRefreshController =
+      RefreshController();
+
   ProductDetailBloc(this.mainFacade) : super(ProductDetailState.initial()) {
     on<ProductDetailEvent>(
       (event, emit) async {
@@ -32,14 +47,26 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
             );
           },
           getProductDetails: (GetProductDetails value) async {
-            emit(state.copyWith(
-              isLoading: true,
-              failureOrSuccessOption: none(),
-            ));
+            if (value.isRefresh) {
+              page = 1;
+              emit(state.copyWith(similarProduct: []));
+              similarProductRefreshController.resetNoData();
+            } else {
+              if (page > lastPage) {
+                similarProductRefreshController.loadNoData();
+                return;
+              }
+            }
+            emit(
+              state.copyWith(
+                isLoading: true,
+                failureOrSuccessOption: none(),
+              ),
+            );
 
             var res = await mainFacade.getProductDetailsAPI(
-                productId: value.productId);
-
+                productId: value.productId, page: page);
+            page++;
             res.fold(
               (l) => emit(
                 state.copyWith(
@@ -52,9 +79,11 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
               (r) {
                 var productFromJson = ProductFromJson();
                 var dataList = <Data>[];
-                if (r.product?.product_form_json != null) {
+                var productDetailRes = ProductDetailDTO.fromJson(r.data);
+                if (productDetailRes.product?.product_form_json != null) {
                   productFromJson = ProductFromJson.fromJson(
-                    jsonDecode(r.product?.product_form_json ?? ""),
+                    jsonDecode(
+                        productDetailRes.product?.product_form_json ?? ""),
                   );
 
                   if (productFromJson.data.isNotEmpty) {
@@ -64,12 +93,15 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
                         (element) => element.name!.contains('Product Title'));
                   }
                 }
+                add(ProductDetailEvent.getProductYouMayAlsoLikeProductList(
+                    true));
                 return emit(
                   state.copyWith(
                     isLoading: false,
                     isErrorInAPI: false,
-                    getProductDetails: r,
+                    getProductDetails: productDetailRes,
                     dataList: dataList,
+                    similarProduct: productDetailRes.similar_product ?? [],
                     failureOrSuccessOption: none(),
                   ),
                 );
@@ -96,14 +128,14 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
               ),
             );
           },
-          removeProductFromCart: (RemoveProductFromCart value) async {
+          removeProductFromFavourite: (value) async {
             emit(
               state.copyWith(
                 failureOrSuccessOption: none(),
               ),
             );
             Either<MainFailure, String>? failureOrSuccess;
-            failureOrSuccess = await mainFacade.deleteProductFromCart(
+            failureOrSuccess = await mainFacade.deleteProductFromFavourite(
                 productId:
                     state.getProductDetails.product?.id.toString() ?? "");
 
@@ -128,6 +160,55 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
               state.copyWith(
                 failureOrSuccessOption: optionOf(failureOrSuccess),
               ),
+            );
+          },
+          getProductYouMayAlsoLikeProductList:
+              (GetProductYouMayAlsoLikeProductList value) async {
+            if (value.isRefresh) {
+              pageForProductYoumayLike = 1;
+              emit(state.copyWith(getProductList: []));
+              productYouMayLikeRefreshController.resetNoData();
+            } else {
+              if (pageForProductYoumayLike > lastPageForProductYoumayLike) {
+                productYouMayLikeRefreshController.loadNoData();
+                return;
+              }
+            }
+
+            emit(state.copyWith(isLoading: true));
+
+            var res = await mainFacade.getProductListAPI(
+                page: pageForProductYoumayLike,
+                productId:
+                    state.getProductDetails.product?.id.toString() ?? "");
+
+            pageForProductYoumayLike++;
+
+            res.fold(
+              (l) => emit(
+                state.copyWith(
+                  isErrorInAPI: true,
+                  isLoading: false,
+                  getProductList: [],
+                ),
+              ),
+              (r) {
+                lastPageForProductYoumayLike = r.meta?.lastPage ?? 1;
+
+                return emit(
+                  state.copyWith(
+                    isLoading: false,
+                    isErrorInAPI: false,
+                    isNoDataFound: (r.data as List<dynamic>)
+                        .map((e) => GetProductListResponse.fromJson(e))
+                        .toList()
+                        .isEmpty,
+                    getProductList: (r.data as List<dynamic>)
+                        .map((e) => GetProductListResponse.fromJson(e))
+                        .toList(),
+                  ),
+                );
+              },
             );
           },
         );

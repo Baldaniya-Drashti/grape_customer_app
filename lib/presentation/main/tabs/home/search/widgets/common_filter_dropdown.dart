@@ -1,6 +1,9 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:grape_customer_app/application/main/home/home_bloc.dart';
+
 import 'package:grape_customer_app/domain/core/math_utils.dart';
 import 'package:grape_customer_app/presentation/common/widgets/base_text.dart';
 import 'package:grape_customer_app/presentation/core/styles/app_colors.dart';
@@ -10,53 +13,71 @@ class FilterCommonContainer extends StatelessWidget {
   final String filterTitle;
   final bool showDownArrow;
   final List<String> list;
+
   const FilterCommonContainer({
-    super.key,
+    Key? key,
     required this.filterTitle,
     this.showDownArrow = true,
     required this.list,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      borderRadius: BorderRadius.circular(getSize(4)),
-      onTap: () async {
-        var filterList = await FilterBottomSheet(
-          filterTitle: filterTitle,
-          list: list,
-        ).getFilterBottomSheet(context);
-
-        log('filterList : $filterList');
-      },
-      child: Container(
-        padding: EdgeInsets.all(getSize(6)),
-        margin: EdgeInsets.symmetric(horizontal: getSize(4)),
-        decoration: BoxDecoration(
-          border: Border.all(color: AppColors.black.withOpacity(0.20)),
+    return BlocBuilder<HomeBloc, HomeState>(
+      builder: (context, state) {
+        log('message : ${state.filterList.map((e) => e).toList()}');
+        return InkWell(
           borderRadius: BorderRadius.circular(getSize(4)),
-        ),
-        child: Row(
-          children: [
-            BaseText(
-              text: filterTitle,
-              fontSize: 11,
-              fontWeight: FontWeight.w500,
-              textColor: AppColors.black.withOpacity(0.6),
+          onTap: !showDownArrow
+              ? null
+              : () async {
+                  Map<String, dynamic>? filterList = await FilterBottomSheet(
+                    filterTitle: filterTitle,
+                    list: list,
+                  ).getFilterBottomSheet(context);
+
+                  if (filterList != null) {
+                    // log('filterList : $filterList');
+                    context
+                        .read<HomeBloc>()
+                        .add(HomeEvent.addFilterInList(filterList));
+                  }
+                },
+          child: Container(
+            padding: EdgeInsets.all(getSize(6)),
+            margin: EdgeInsets.symmetric(horizontal: getSize(4)),
+            decoration: BoxDecoration(
+              color: state.filterList
+                      .where((element) => element.keys.contains(filterTitle))
+                      .isNotEmpty
+                  ? AppColors.primaryOrange
+                  : AppColors.white,
+              border: Border.all(color: AppColors.black.withOpacity(0.20)),
+              borderRadius: BorderRadius.circular(getSize(4)),
             ),
-            SizedBox(
-              width: getSize(showDownArrow ? 2 : 0),
+            child: Row(
+              children: [
+                BaseText(
+                  text: filterTitle,
+                  fontSize: 11,
+                  fontWeight: FontWeight.w500,
+                  textColor: AppColors.black.withOpacity(0.6),
+                ),
+                SizedBox(
+                  width: getSize(showDownArrow ? 2 : 0),
+                ),
+                Visibility(
+                  visible: showDownArrow,
+                  child: Icon(
+                    Icons.keyboard_arrow_down,
+                    size: getSize(16),
+                  ),
+                )
+              ],
             ),
-            Visibility(
-              visible: showDownArrow,
-              child: Icon(
-                Icons.keyboard_arrow_down,
-                size: getSize(16),
-              ),
-            )
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 }

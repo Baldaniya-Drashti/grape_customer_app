@@ -13,33 +13,30 @@ class FilterListWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<HomeBloc, HomeState>(
       builder: (context, state) {
+        var filterList = state.searchProductDTO.filter_data
+            ?.toJson()
+            .entries
+            .toList()
+            .where((element) => (element.value as List).isNotEmpty)
+            .toList();
+        filterList?.addAll(
+          [
+            MapEntry('free_shipping', ['']),
+            // MapEntry('min_price', [state.searchProductDTO.]),
+            // MapEntry('max_price', ['']),
+          ],
+        );
         //   log('${state.searchProductDTO.filter_data?.toJson().entries.toList().asMap()}');
         return SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           padding: EdgeInsets.symmetric(horizontal: getSize(14)),
           child: Row(
             children: List.generate(
-              state.searchProductDTO.filter_data
-                      ?.toJson()
-                      .entries
-                      .toList()
-                      .where((element) => (element.value as List).isNotEmpty)
-                      .length ??
-                  0,
+              filterList?.length ?? 0,
               (index) => FilterCommonContainer(
-                filterTitle: state.searchProductDTO.filter_data
-                        ?.toJson()
-                        .entries
-                        .where((element) => (element.value as List).isNotEmpty)
-                        .toList()[index]
-                        .key ??
-                    "",
-                list: state.searchProductDTO.filter_data
-                    ?.toJson()
-                    .entries
-                    .where((element) => (element.value as List).isNotEmpty)
-                    .toList()[index]
-                    .value,
+                filterTitle: filterList?[index].key ?? "",
+                list: filterList?[index].value,
+                showDownArrow: filterList?[index].key != 'free_shipping',
               ),
             ),
           ),

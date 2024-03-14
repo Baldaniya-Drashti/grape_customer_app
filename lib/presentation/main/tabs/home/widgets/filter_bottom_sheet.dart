@@ -152,7 +152,8 @@ class FilterBottomSheet extends StatelessWidget {
                           child: CommonButton(
                             width: getSize(160),
                             onPressed: () {
-                              context.router.pop(selectedFilterList);
+                              context.router
+                                  .pop({filterTitle: selectedFilterList});
                             },
                             buttonText: 'Apply',
                           ),

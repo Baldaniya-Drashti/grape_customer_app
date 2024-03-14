@@ -16,6 +16,7 @@ import 'package:grape_customer_app/presentation/core/styles/app_colors.dart';
 import 'package:grape_customer_app/presentation/core/widgets/inputs/custom_app_bar.dart';
 import 'package:grape_customer_app/presentation/main/tabs/home/product_details/widget/buy_now_button_widget.dart';
 import 'package:grape_customer_app/presentation/main/tabs/home/product_details/widget/from_same_store_widget.dart';
+import 'package:grape_customer_app/presentation/main/tabs/home/product_details/widget/out_of_stock_bottom.dart';
 import 'package:grape_customer_app/presentation/main/tabs/home/product_details/widget/pop_up_menu_widget.dart';
 import 'package:grape_customer_app/presentation/main/tabs/home/product_details/widget/product_configuration_widget.dart';
 import 'package:grape_customer_app/presentation/main/tabs/home/product_details/widget/product_main_info.dart';
@@ -35,7 +36,7 @@ class ProductDetailsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => getIt<ProductDetailBloc>()
-        ..add(ProductDetailEvent.getProductDetails(productId)),
+        ..add(ProductDetailEvent.getProductDetails(productId, true)),
       child: BlocConsumer<ProductDetailBloc, ProductDetailState>(
         listener: (context, state) {
           state.failureOrSuccessOption.fold(
@@ -56,7 +57,7 @@ class ProductDetailsView extends StatelessWidget {
                   message: r,
                 ).show(context);
                 context.read<ProductDetailBloc>().add(
-                      ProductDetailEvent.getProductDetails(productId),
+                      ProductDetailEvent.getProductDetails(productId, true),
                     );
               },
             ),
@@ -177,14 +178,18 @@ class ProductDetailsView extends StatelessWidget {
                           ),
                         ),
                         SizedBox(
-                          height: getSize(state
-                                  .getProductDetails.similar_product!.isNotEmpty
-                              ? 20
-                              : 0),
+                          height: getSize(
+                              state.getProductDetails.similar_product != null &&
+                                      state.getProductDetails.similar_product!
+                                          .isNotEmpty
+                                  ? 20
+                                  : 0),
                         ),
                         Visibility(
-                          visible: state
-                              .getProductDetails.similar_product!.isNotEmpty,
+                          visible:
+                              state.getProductDetails.similar_product != null &&
+                                  state.getProductDetails.similar_product!
+                                      .isNotEmpty,
                           child: Padding(
                             padding:
                                 EdgeInsets.symmetric(horizontal: getSize(18)),
@@ -197,10 +202,12 @@ class ProductDetailsView extends StatelessWidget {
                           ),
                         ),
                         SizedBox(
-                          height: getSize(state
-                                  .getProductDetails.similar_product!.isNotEmpty
-                              ? 10
-                              : 0),
+                          height: getSize(
+                              state.getProductDetails.similar_product != null &&
+                                      state.getProductDetails.similar_product!
+                                          .isNotEmpty
+                                  ? 10
+                                  : 0),
                         ),
                         SimilarProductWidget(),
                         SizedBox(
@@ -208,13 +215,14 @@ class ProductDetailsView extends StatelessWidget {
                         ),
                         ProductVenderDetailWidget(),
                         SizedBox(
-                          height: getSize(
-                              state.getProductDetails.same_store!.isNotEmpty
-                                  ? 20
-                                  : 0),
+                          height: getSize(state.getProductDetails.same_store !=
+                                      null &&
+                                  state.getProductDetails.same_store!.isNotEmpty
+                              ? 20
+                              : 0),
                         ),
                         Visibility(
-                          visible:
+                          visible: state.getProductDetails.same_store != null &&
                               state.getProductDetails.same_store!.isNotEmpty,
                           child: Padding(
                             padding:
@@ -228,17 +236,19 @@ class ProductDetailsView extends StatelessWidget {
                           ),
                         ),
                         SizedBox(
-                          height: getSize(
-                              state.getProductDetails.same_store!.isNotEmpty
-                                  ? 10
-                                  : 0),
+                          height: getSize(state.getProductDetails.same_store !=
+                                      null &&
+                                  state.getProductDetails.same_store!.isNotEmpty
+                              ? 10
+                              : 0),
                         ),
                         FromSameStoreWidget(),
                         SizedBox(
-                          height: getSize(
-                              state.getProductDetails.same_store!.isNotEmpty
-                                  ? 20
-                                  : 0),
+                          height: getSize(state.getProductDetails.same_store !=
+                                      null &&
+                                  state.getProductDetails.same_store!.isNotEmpty
+                              ? 20
+                              : 0),
                         ),
                         Visibility(
                           visible: state.getProductDetails.product?.reviews !=
@@ -292,23 +302,26 @@ class ProductDetailsView extends StatelessWidget {
                                   .isNotEmpty,
                           child: ProductReviewListWidget(),
                         ),
-                        Container(
-                          alignment: Alignment.center,
-                          margin: EdgeInsets.symmetric(
-                            horizontal: getSize(18),
-                          ),
-                          padding: EdgeInsets.symmetric(
-                            vertical: getSize(12),
-                          ),
-                          decoration: BoxDecoration(
-                            color: Color(0xFFFFEEE1),
-                            borderRadius: BorderRadius.circular(getSize(6)),
-                          ),
-                          child: BaseText(
-                            text: 'Products You May Also Like',
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600,
-                            textColor: AppColors.primaryOrange,
+                        Visibility(
+                          visible: state.getProductList.isNotEmpty,
+                          child: Container(
+                            alignment: Alignment.center,
+                            margin: EdgeInsets.symmetric(
+                              horizontal: getSize(18),
+                            ),
+                            padding: EdgeInsets.symmetric(
+                              vertical: getSize(12),
+                            ),
+                            decoration: BoxDecoration(
+                              color: Color(0xFFFFEEE1),
+                              borderRadius: BorderRadius.circular(getSize(6)),
+                            ),
+                            child: BaseText(
+                              text: 'Products You May Also Like',
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
+                              textColor: AppColors.primaryOrange,
+                            ),
                           ),
                         ),
                         SizedBox(
@@ -316,7 +329,8 @@ class ProductDetailsView extends StatelessWidget {
                         ),
                         ProductYouMayLikeWidget(),
                         SizedBox(
-                          height: getSize(20),
+                          height:
+                              getSize(state.getProductList.isNotEmpty ? 20 : 0),
                         ),
                       ],
                     );
@@ -334,7 +348,9 @@ class ProductDetailsView extends StatelessWidget {
                     top: getSize(8),
                     bottom: isFullScreenDevice(context) ? 0 : getSize(18),
                   ),
-                  child: BuyNowButtonWidget(),
+                  child: state.getProductDetails.product?.available_qty == 0
+                      ? OutOfStockBottomWidget()
+                      : BuyNowButtonWidget(),
                   //
                   //
                   // OutOfStockBottomWidget(),

@@ -74,6 +74,9 @@ class PopMenuWidget extends StatelessWidget {
                   : SvgImageConstant.favouriteUnselected,
               onTap: () {
                 if (state.getProductDetails.product?.is_favorite == true) {
+                  context
+                      .read<ProductDetailBloc>()
+                      .add(ProductDetailEvent.removeProductFromFavourite());
                 } else {
                   context
                       .read<ProductDetailBloc>()
