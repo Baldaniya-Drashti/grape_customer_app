@@ -25,22 +25,27 @@ class FilterCommonContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<HomeBloc, HomeState>(
       builder: (context, state) {
-        log('message : ${state.filterList.map((e) => e).toList()}');
+        // var list = getListBaseOnTitle(state, filterTitle);
+        log('brandFilter : ${state.brandFilter.map((e) => e).toList()}');
+        log('innerSubCategoryFilter : ${state.innerSubCategoryFilter.map((e) => e).toList()}');
+        log('subCategoryFilter : ${state.subCategoryFilter.map((e) => e).toList()}');
+        log('colorFilter : ${state.colorFilter.map((e) => e).toList()}');
+        log('sizeFilter : ${state.sizeFilter.map((e) => e).toList()}');
+
         return InkWell(
           borderRadius: BorderRadius.circular(getSize(4)),
           onTap: !showDownArrow
               ? null
               : () async {
-                  Map<String, dynamic>? filterList = await FilterBottomSheet(
+                  List<String>? filterList = await FilterBottomSheet(
                     filterTitle: filterTitle,
                     list: list,
+                    selectedList: [],
                   ).getFilterBottomSheet(context);
 
                   if (filterList != null) {
-                    // log('filterList : $filterList');
-                    context
-                        .read<HomeBloc>()
-                        .add(HomeEvent.addFilterInList(filterList));
+                    getAddEventBaseOnTitle(
+                        state, filterTitle, context, filterList);
                   }
                 },
           child: Container(
@@ -79,5 +84,58 @@ class FilterCommonContainer extends StatelessWidget {
         );
       },
     );
+  }
+
+  getAddEventBaseOnTitle(HomeState homeState, String filterTitle,
+      BuildContext context, List<String> filterList) async {
+    switch (filterTitle) {
+      case 'sub_category':
+        return context
+            .read<HomeBloc>()
+            .add(HomeEvent.addSubCategoryFilterInList(filterList));
+
+      //  return homeState.subCategoryFilter;
+      case 'inner_sub_category':
+        return context
+            .read<HomeBloc>()
+            .add(HomeEvent.addInnerSubCategoryFilterInList(filterList));
+
+      case 'color':
+        return context
+            .read<HomeBloc>()
+            .add(HomeEvent.addColorFilterInList(filterList));
+      case 'size':
+        return context
+            .read<HomeBloc>()
+            .add(HomeEvent.addSizeFilterInList(filterList));
+
+      case 'brand_name':
+        return context
+            .read<HomeBloc>()
+            .add(HomeEvent.addBrandFilterInList(filterList));
+
+      default:
+    }
+  }
+
+  getListBaseOnTitle(
+    HomeState homeState,
+    String filterTitle,
+  ) async {
+    switch (filterTitle) {
+      case 'sub_category':
+        return homeState.subCategoryFilter;
+      case 'inner_sub_category':
+        return homeState.innerSubCategoryFilter;
+
+      case 'color':
+        return homeState.colorFilter;
+      case 'size':
+        return homeState.sizeFilter;
+      case 'brand_name':
+        return homeState.brandFilter;
+      default:
+        return [];
+    }
   }
 }

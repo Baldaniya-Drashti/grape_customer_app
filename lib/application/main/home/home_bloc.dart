@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -24,7 +23,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final RefreshController refreshController = RefreshController();
   final IMainFacade mainFacade;
   var list = <String>[];
-  var filterList = <Map<String, dynamic>>[];
 
   final imgList = [
     'https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80',
@@ -166,6 +164,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
             );
           },
           addFilterInList: (AddFilterInList value) {
+            var filterList = <Map<String, dynamic>>[];
             filterList.add(value.selectedBrandFilter);
 
             emit(
@@ -174,6 +173,40 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
               ),
             );
           },
+          addBrandFilterInList: (AddBrandFilterInList value) async {
+            var filterList = <String>[];
+            filterList.addAll(value.selectedBrandFilter);
+
+            emit(
+              state.copyWith(
+                brandFilter: filterList,
+              ),
+            );
+          },
+          addSizeFilterInList: (AddSizeFilterInList value) async {
+            var filterList = <String>[];
+            filterList.addAll(value.selectedBrandFilter);
+
+            emit(
+              state.copyWith(
+                sizeFilter: filterList,
+              ),
+            );
+          },
+          addColorFilterInList: (AddColorFilterInList value) async {
+            var filterList = <String>[];
+            filterList.addAll(value.selectedBrandFilter);
+
+            emit(
+              state.copyWith(
+                colorFilter: filterList,
+              ),
+            );
+          },
+          addSubCategoryFilterInList:
+              (AddSubCategoryFilterInList value) async {},
+          addInnerSubCategoryFilterInList:
+              (AddInnerSubCategoryFilterInList value) async {},
         );
       },
     );

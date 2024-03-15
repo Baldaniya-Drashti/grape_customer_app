@@ -119,8 +119,10 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
             );
             Either<MainFailure, String>? failureOrSuccess;
             failureOrSuccess = await mainFacade.addProductToCart(
-                productId:
-                    state.getProductDetails.product?.id.toString() ?? "");
+              productId: value.productId ??
+                  state.getProductDetails.product?.id.toString() ??
+                  "",
+            );
 
             emit(
               state.copyWith(
@@ -136,8 +138,9 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
             );
             Either<MainFailure, String>? failureOrSuccess;
             failureOrSuccess = await mainFacade.deleteProductFromFavourite(
-                productId:
-                    state.getProductDetails.product?.id.toString() ?? "");
+                productId: value.productId ??
+                    state.getProductDetails.product?.id.toString() ??
+                    "");
 
             emit(
               state.copyWith(
@@ -153,8 +156,9 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
             );
             Either<MainFailure, String>? failureOrSuccess;
             failureOrSuccess = await mainFacade.addProductToFavourite(
-                productId:
-                    state.getProductDetails.product?.id.toString() ?? "");
+                productId: value.productId ??
+                    state.getProductDetails.product?.id.toString() ??
+                    "");
 
             emit(
               state.copyWith(

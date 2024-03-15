@@ -10,8 +10,13 @@ import 'package:grape_customer_app/presentation/core/widgets/buttons/common_butt
 class FilterBottomSheet extends StatelessWidget {
   final String filterTitle;
   final List<String> list;
+  final List<String> selectedList;
+
   const FilterBottomSheet(
-      {super.key, required this.filterTitle, required this.list});
+      {super.key,
+      required this.filterTitle,
+      required this.list,
+      required this.selectedList});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +26,7 @@ class FilterBottomSheet extends StatelessWidget {
   getFilterBottomSheet(
     BuildContext context,
   ) {
-    var selectedFilterList = <String>[];
+    var selectedFilterList = selectedList;
     return showModalBottomSheet(
       context: context,
       backgroundColor: AppColors.white,
@@ -152,8 +157,7 @@ class FilterBottomSheet extends StatelessWidget {
                           child: CommonButton(
                             width: getSize(160),
                             onPressed: () {
-                              context.router
-                                  .pop({filterTitle: selectedFilterList});
+                              context.router.pop(selectedFilterList);
                             },
                             buttonText: 'Apply',
                           ),

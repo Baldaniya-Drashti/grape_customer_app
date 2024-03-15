@@ -8,10 +8,12 @@ class ProductDetailEvent with _$ProductDetailEvent {
       DecreaseProductQuantity;
   factory ProductDetailEvent.getProductDetails(
       String productId, bool isRefresh) = GetProductDetails;
-  factory ProductDetailEvent.addToFavourite() = AddToFavourite;
+  factory ProductDetailEvent.addToFavourite({String? productId}) =
+      AddToFavourite;
   factory ProductDetailEvent.selectImage(int index) = SelectImage;
-  factory ProductDetailEvent.addProductToCart() = AddProductToCart;
-  factory ProductDetailEvent.removeProductFromFavourite() =
+  factory ProductDetailEvent.addProductToCart({String? productId}) =
+      AddProductToCart;
+  factory ProductDetailEvent.removeProductFromFavourite({String? productId}) =
       RemoveProductFromFavourite;
 
   factory ProductDetailEvent.getProductYouMayAlsoLikeProductList(

@@ -51,180 +51,199 @@ class SimilarProductWidget extends StatelessWidget {
                 ),
                 physics: BouncingScrollPhysics(),
                 itemBuilder: (BuildContext context, int index) {
-                  return GestureDetector(
-                    onTap: () {
-                      context.router.push(
-                        PageRouteInfo(
-                          ProductDetailsView.name,
-                          args: ProductDetailsViewArgs(
-                            productId:
-                                state.similarProduct[index].id.toString(),
+                  return Padding(
+                    padding: EdgeInsets.only(
+                      left: getSize(index == 0 ? 18 : 9),
+                      right: getSize(
+                        index ==
+                                ((state.getProductDetails.same_store?.length ??
+                                        0) -
+                                    1)
+                            ? 18
+                            : 9,
+                      ),
+                    ),
+                    child: GestureDetector(
+                      onTap: () {
+                        context.router.push(
+                          PageRouteInfo(
+                            ProductDetailsView.name,
+                            args: ProductDetailsViewArgs(
+                              productId:
+                                  state.similarProduct[index].id.toString(),
+                            ),
                           ),
-                        ),
-                      );
-                    },
-                    child: Stack(
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Center(
-                              child: ClipRRect(
-                                borderRadius:
-                                    BorderRadius.circular(getSize(10)),
-                                child: state.similarProduct[index].images?.first
-                                            .image !=
-                                        null
-                                    ? CachedNetworkImage(
-                                        imageUrl: state.similarProduct[index]
-                                                .images?.first.image ??
-                                            "",
-                                        placeholder: (context, url) =>
-                                            Container(
+                        );
+                      },
+                      child: Stack(
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Center(
+                                child: ClipRRect(
+                                  borderRadius:
+                                      BorderRadius.circular(getSize(10)),
+                                  child: state.similarProduct[index].images
+                                              ?.first.image !=
+                                          null
+                                      ? CachedNetworkImage(
+                                          imageUrl: state.similarProduct[index]
+                                                  .images?.first.image ??
+                                              "",
+                                          placeholder: (context, url) =>
+                                              Container(
+                                            height: getSize(110),
+                                            width: getSize(110),
+                                            decoration: BoxDecoration(
+                                              color: Colors.grey.shade100,
+                                              borderRadius:
+                                                  BorderRadius.circular(
+                                                      getSize(10)),
+                                            ),
+                                          ),
                                           height: getSize(110),
                                           width: getSize(110),
-                                          decoration: BoxDecoration(
-                                            color: Colors.grey.shade100,
-                                            borderRadius: BorderRadius.circular(
-                                                getSize(10)),
-                                          ),
-                                        ),
-                                        height: getSize(110),
-                                        width: getSize(110),
-                                        // fit: BoxFit.cover,
-                                      )
-                                    : Container(),
+                                          // fit: BoxFit.cover,
+                                        )
+                                      : Container(),
+                                ),
                               ),
-                            ),
-                            SizedBox(
-                              height: getSize(8),
-                            ),
-                            BaseText(
-                              text: state.similarProduct[index].product_name ??
-                                  "",
-                              fontSize: 14,
-                              fontWeight: FontWeight.w500,
-                              maxLines: 1,
-                            ),
-                            SizedBox(
-                              height: getSize(5),
-                            ),
-                            Row(
-                              children: [
-                                Visibility(
-                                  visible:
-                                      state.similarProduct[index].discount !=
-                                          null,
-                                  child: BaseText(
+                              SizedBox(
+                                height: getSize(8),
+                              ),
+                              BaseText(
+                                text:
+                                    state.similarProduct[index].product_name ??
+                                        "",
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                                maxLines: 1,
+                              ),
+                              SizedBox(
+                                height: getSize(5),
+                              ),
+                              Row(
+                                children: [
+                                  Visibility(
+                                    visible:
+                                        state.similarProduct[index].discount !=
+                                            null,
+                                    child: BaseText(
+                                      text:
+                                          '\$${state.similarProduct[index].price}',
+                                      textDecoration:
+                                          TextDecoration.lineThrough,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w500,
+                                      textColor:
+                                          AppColors.black.withOpacity(0.4),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: getSize(
+                                        state.similarProduct[index].discount !=
+                                                null
+                                            ? 6
+                                            : 0),
+                                  ),
+                                  BaseText(
+                                    text: state.similarProduct[index]
+                                                .discount !=
+                                            null
+                                        ? '\$${(state.similarProduct[index].price ?? 0) - (((state.similarProduct[index].price ?? 0) / 100) * 20)}'
+                                        : '\$${state.similarProduct[index].price}',
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: getSize(5),
+                              ),
+                              Row(
+                                children: [
+                                  CommonRatingBar(
+                                    onRatingUpdate: (p0) {},
+                                    iconnSize: getSize(9),
+                                    initialRating: state
+                                            .similarProduct[index].review_rate
+                                            ?.toDouble() ??
+                                        0,
+                                    horizontalPadding: getSize(2),
+                                    absorbing: true,
+                                  ),
+                                  SizedBox(
+                                    width: getSize(4),
+                                  ),
+                                  BaseText(
                                     text:
-                                        '\$${state.similarProduct[index].price}',
-                                    textDecoration: TextDecoration.lineThrough,
-                                    fontSize: 12,
+                                        '${state.similarProduct[index].order_qty} Sold',
+                                    fontSize: 8,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: getSize(3),
+                              ),
+                              Row(
+                                children: [
+                                  SvgPicture.asset(
+                                    SvgImageConstant.location,
+                                    height: getSize(12),
+                                    width: getSize(12),
+                                    colorFilter: ColorFilter.mode(
+                                      AppColors.black.withOpacity(0.4),
+                                      BlendMode.srcIn,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: getSize(2),
+                                  ),
+                                  BaseText(
+                                    text: state.similarProduct[index]
+                                            .shop_location ??
+                                        "",
+                                    fontSize: 8,
                                     fontWeight: FontWeight.w500,
                                     textColor: AppColors.black.withOpacity(0.4),
                                   ),
+                                ],
+                              ),
+                            ],
+                          ),
+                          Visibility(
+                            visible:
+                                state.similarProduct[index].discount != null,
+                            child: Positioned(
+                              left: getSize(6),
+                              top: getSize(6),
+                              child: Container(
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: getSize(4),
+                                  vertical: getSize(2),
                                 ),
-                                SizedBox(
-                                  width: getSize(
-                                      state.similarProduct[index].discount !=
-                                              null
-                                          ? 6
-                                          : 0),
-                                ),
-                                BaseText(
-                                  text: state.similarProduct[index].discount !=
-                                          null
-                                      ? '\$${(state.similarProduct[index].price ?? 0) - (((state.similarProduct[index].price ?? 0) / 100) * 20)}'
-                                      : '\$${state.similarProduct[index].price}',
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: getSize(5),
-                            ),
-                            Row(
-                              children: [
-                                CommonRatingBar(
-                                  onRatingUpdate: (p0) {},
-                                  iconnSize: getSize(9),
-                                  initialRating: state
-                                          .similarProduct[index].review_rate
-                                          ?.toDouble() ??
-                                      0,
-                                  horizontalPadding: getSize(2),
-                                  absorbing: true,
-                                ),
-                                SizedBox(
-                                  width: getSize(4),
-                                ),
-                                BaseText(
-                                  text:
-                                      '${state.similarProduct[index].order_qty} Sold',
-                                  fontSize: 8,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: getSize(3),
-                            ),
-                            Row(
-                              children: [
-                                SvgPicture.asset(
-                                  SvgImageConstant.location,
-                                  height: getSize(12),
-                                  width: getSize(12),
-                                  colorFilter: ColorFilter.mode(
-                                    AppColors.black.withOpacity(0.4),
-                                    BlendMode.srcIn,
+                                // height: getSize(16),
+                                // width: getSize(36),
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                  color: Color(0xFFFFF094),
+                                  borderRadius: BorderRadius.circular(
+                                    getSize(4),
                                   ),
                                 ),
-                                SizedBox(
-                                  width: getSize(2),
-                                ),
-                                BaseText(
-                                  text: state.similarProduct[index]
-                                          .shop_location ??
-                                      "",
-                                  fontSize: 8,
+                                child: BaseText(
+                                  text:
+                                      '-${state.similarProduct[index].discount}%',
+                                  fontSize: 10,
                                   fontWeight: FontWeight.w500,
-                                  textColor: AppColors.black.withOpacity(0.4),
+                                  textColor: Color(0xFFFF770E),
                                 ),
-                              ],
-                            ),
-                          ],
-                        ),
-                        Visibility(
-                          visible: state.similarProduct[index].discount != null,
-                          child: Positioned(
-                            left: getSize(6),
-                            top: getSize(6),
-                            child: Container(
-                              padding: EdgeInsets.symmetric(
-                                horizontal: getSize(4),
-                                vertical: getSize(2),
-                              ),
-                              // height: getSize(16),
-                              // width: getSize(36),
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                color: Color(0xFFFFF094),
-                                borderRadius: BorderRadius.circular(
-                                  getSize(4),
-                                ),
-                              ),
-                              child: BaseText(
-                                text:
-                                    '-${state.similarProduct[index].discount}%',
-                                fontSize: 10,
-                                fontWeight: FontWeight.w500,
-                                textColor: Color(0xFFFF770E),
                               ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   );
                 },

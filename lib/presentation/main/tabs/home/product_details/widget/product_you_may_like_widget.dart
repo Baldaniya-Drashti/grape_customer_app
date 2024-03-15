@@ -52,275 +52,306 @@ class ProductYouMayLikeWidget extends StatelessWidget {
                 ),
                 physics: BouncingScrollPhysics(),
                 itemBuilder: (BuildContext context, int index) {
-                  return GestureDetector(
-                    onTap: () {
-                      context.router.push(
-                        PageRouteInfo(
-                          ProductDetailsView.name,
-                          args: ProductDetailsViewArgs(
-                            productId:
-                                state.getProductList[index].id.toString(),
+                  return Padding(
+                    padding: EdgeInsets.only(
+                      left: getSize(index == 0 ? 18 : 9),
+                      right: getSize(
+                        index ==
+                                ((state.getProductDetails.same_store?.length ??
+                                        0) -
+                                    1)
+                            ? 18
+                            : 9,
+                      ),
+                    ),
+                    child: GestureDetector(
+                      onTap: () {
+                        context.router.push(
+                          PageRouteInfo(
+                            ProductDetailsView.name,
+                            args: ProductDetailsViewArgs(
+                              productId:
+                                  state.getProductList[index].id.toString(),
+                            ),
                           ),
-                        ),
-                      );
-                    },
-                    child: Stack(
-                      children: [
-                        Row(
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Center(
-                                  child: ClipRRect(
-                                    borderRadius:
-                                        BorderRadius.circular(getSize(10)),
-                                    child: state.getProductList[index].images
-                                                ?.first.image !=
-                                            null
-                                        ? CachedNetworkImage(
-                                            imageUrl: state
-                                                    .getProductList[index]
-                                                    .images
-                                                    ?.first
-                                                    .image ??
-                                                "",
-                                            placeholder: (context, url) =>
-                                                Container(
+                        );
+                      },
+                      child: Stack(
+                        children: [
+                          Row(
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Center(
+                                    child: ClipRRect(
+                                      borderRadius:
+                                          BorderRadius.circular(getSize(10)),
+                                      child: state.getProductList[index].images
+                                                  ?.first.image !=
+                                              null
+                                          ? CachedNetworkImage(
+                                              imageUrl: state
+                                                      .getProductList[index]
+                                                      .images
+                                                      ?.first
+                                                      .image ??
+                                                  "",
+                                              placeholder: (context, url) =>
+                                                  Container(
+                                                height: getSize(110),
+                                                width: getSize(110),
+                                                decoration: BoxDecoration(
+                                                  color: Colors.grey.shade100,
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          getSize(10)),
+                                                ),
+                                              ),
                                               height: getSize(110),
                                               width: getSize(110),
-                                              decoration: BoxDecoration(
-                                                color: Colors.grey.shade100,
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                        getSize(10)),
-                                              ),
-                                            ),
-                                            height: getSize(110),
-                                            width: getSize(110),
-                                            //  fit: BoxFit.cover,
-                                          )
-                                        : Container(),
+                                              //  fit: BoxFit.cover,
+                                            )
+                                          : Container(),
+                                    ),
                                   ),
-                                ),
-                                SizedBox(
-                                  height: getSize(8),
-                                ),
-                                BaseText(
-                                  text: state
-                                          .getProductList[index].product_name ??
-                                      "",
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w500,
-                                  maxLines: 1,
-                                ),
-                                SizedBox(
-                                  height: getSize(5),
-                                ),
-                                Row(
-                                  children: [
-                                    Visibility(
-                                      visible: state
-                                              .getProductList[index].discount !=
-                                          null,
-                                      child: BaseText(
+                                  SizedBox(
+                                    height: getSize(8),
+                                  ),
+                                  BaseText(
+                                    text: state.getProductList[index]
+                                            .product_name ??
+                                        "",
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w500,
+                                    maxLines: 1,
+                                  ),
+                                  SizedBox(
+                                    height: getSize(5),
+                                  ),
+                                  Row(
+                                    children: [
+                                      Visibility(
+                                        visible: state.getProductList[index]
+                                                .discount !=
+                                            null,
+                                        child: BaseText(
+                                          text:
+                                              '\$${state.getProductList[index].price}',
+                                          textDecoration:
+                                              TextDecoration.lineThrough,
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w500,
+                                          textColor:
+                                              AppColors.black.withOpacity(0.4),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: getSize(state
+                                                    .getProductList[index]
+                                                    .discount !=
+                                                null
+                                            ? 6
+                                            : 0),
+                                      ),
+                                      BaseText(
+                                        text: state.getProductList[index]
+                                                    .discount !=
+                                                null
+                                            ? '\$${(state.getProductList[index].price ?? 0) - (((state.getProductList[index].price ?? 0) / 100) * 20)}'
+                                            : '\$${state.getProductList[index].price}',
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: getSize(5),
+                                  ),
+                                  Row(
+                                    children: [
+                                      CommonRatingBar(
+                                        onRatingUpdate: (p0) {},
+                                        iconnSize: getSize(9),
+                                        initialRating: state
+                                                .getProductList[index]
+                                                .review_rate
+                                                ?.toDouble() ??
+                                            0,
+                                        horizontalPadding: getSize(2),
+                                        absorbing: true,
+                                      ),
+                                      SizedBox(
+                                        width: getSize(4),
+                                      ),
+                                      BaseText(
                                         text:
-                                            '\$${state.getProductList[index].price}',
-                                        textDecoration:
-                                            TextDecoration.lineThrough,
-                                        fontSize: 12,
+                                            '${state.getProductList[index].order_qty} Sold',
+                                        fontSize: 8,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: getSize(3),
+                                  ),
+                                  Row(
+                                    children: [
+                                      SvgPicture.asset(
+                                        SvgImageConstant.location,
+                                        height: getSize(12),
+                                        width: getSize(12),
+                                        colorFilter: ColorFilter.mode(
+                                          AppColors.black.withOpacity(0.4),
+                                          BlendMode.srcIn,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: getSize(2),
+                                      ),
+                                      BaseText(
+                                        text: state.getProductList[index]
+                                                .shop_location ??
+                                            "",
+                                        fontSize: 8,
                                         fontWeight: FontWeight.w500,
                                         textColor:
                                             AppColors.black.withOpacity(0.4),
                                       ),
-                                    ),
-                                    SizedBox(
-                                      width: getSize(state.getProductList[index]
-                                                  .discount !=
-                                              null
-                                          ? 6
-                                          : 0),
-                                    ),
-                                    BaseText(
-                                      text: state.getProductList[index]
-                                                  .discount !=
-                                              null
-                                          ? '\$${(state.getProductList[index].price ?? 0) - (((state.getProductList[index].price ?? 0) / 100) * 20)}'
-                                          : '\$${state.getProductList[index].price}',
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: getSize(5),
-                                ),
-                                Row(
-                                  children: [
-                                    CommonRatingBar(
-                                      onRatingUpdate: (p0) {},
-                                      iconnSize: getSize(9),
-                                      initialRating: state
-                                              .getProductList[index].review_rate
-                                              ?.toDouble() ??
-                                          0,
-                                      horizontalPadding: getSize(2),
-                                      absorbing: true,
-                                    ),
-                                    SizedBox(
-                                      width: getSize(4),
-                                    ),
-                                    BaseText(
-                                      text:
-                                          '${state.getProductList[index].order_qty} Sold',
-                                      fontSize: 8,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: getSize(3),
-                                ),
-                                Row(
-                                  children: [
-                                    SvgPicture.asset(
-                                      SvgImageConstant.location,
-                                      height: getSize(12),
-                                      width: getSize(12),
-                                      colorFilter: ColorFilter.mode(
-                                        AppColors.black.withOpacity(0.4),
-                                        BlendMode.srcIn,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: getSize(2),
-                                    ),
-                                    BaseText(
-                                      text: state.getProductList[index]
-                                              .shop_location ??
-                                          "",
-                                      fontSize: 8,
-                                      fontWeight: FontWeight.w500,
-                                      textColor:
-                                          AppColors.black.withOpacity(0.4),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                GestureDetector(
-                                  onTap: () {
-                                    if (state.getProductList[index]
-                                            .is_favorite ==
-                                        true) {
-                                      context.read<ProductDetailBloc>().add(
-                                          ProductDetailEvent
-                                              .removeProductFromFavourite());
-                                    } else {
-                                      context.read<ProductDetailBloc>().add(
-                                          ProductDetailEvent.addToFavourite());
-                                    }
-                                  },
-                                  child: SvgPicture.asset(
-                                    state.getProductList[index].is_favorite ==
-                                            true
-                                        ? SvgImageConstant.favouriteSelected
-                                        : SvgImageConstant.favouriteUnselected,
+                                    ],
                                   ),
-                                ),
-                                GestureDetector(
-                                  onTap: () {
-                                    if (state.getProductDetails.product
-                                            ?.is_cart ==
-                                        true) {
-                                    } else {
-                                      context.read<ProductDetailBloc>().add(
-                                          ProductDetailEvent
-                                              .addProductToCart());
-                                    }
-                                  },
-                                  child: Container(
-                                    height: getSize(22),
-                                    width: getSize(22),
-                                    alignment: Alignment.center,
-                                    decoration: BoxDecoration(
-                                      color: AppColors.white,
-                                      borderRadius:
-                                          BorderRadius.circular(getSize(5)),
-                                      border: Border.all(
-                                          color: AppColors.primaryOrange),
+                                ],
+                              ),
+                              Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  GestureDetector(
+                                    onTap: () {
+                                      if (state.getProductList[index]
+                                              .is_favorite ==
+                                          true) {
+                                        context.read<ProductDetailBloc>().add(
+                                                ProductDetailEvent
+                                                    .removeProductFromFavourite(
+                                              productId: state
+                                                  .getProductList[index].id
+                                                  .toString(),
+                                            ));
+                                      } else {
+                                        context.read<ProductDetailBloc>().add(
+                                              ProductDetailEvent.addToFavourite(
+                                                productId: state
+                                                    .getProductList[index].id
+                                                    .toString(),
+                                              ),
+                                            );
+                                      }
+                                    },
+                                    child: SvgPicture.asset(
+                                      state.getProductList[index].is_favorite ==
+                                              true
+                                          ? SvgImageConstant.favouriteSelected
+                                          : SvgImageConstant
+                                              .favouriteUnselected,
                                     ),
-                                    child: Stack(
-                                      clipBehavior: Clip.none,
-                                      children: [
-                                        Image.asset(
-                                          PngImageConstants.cartSelected,
-                                          height: getSize(13),
-                                          width: getSize(13),
-                                          color: state.getProductDetails.product
-                                                      ?.is_cart ==
-                                                  true
-                                              ? AppColors.primaryOrange
-                                              : AppColors.black,
-                                        ),
-                                        Visibility(
-                                          visible: state.getProductList[index]
-                                                  .is_cart ==
-                                              true,
-                                          child: Positioned.fill(
-                                            top: getSize(2),
-                                            left: getSize(-2),
-                                            child: Align(
-                                              alignment: Alignment.topLeft,
-                                              child: SvgPicture.asset(
-                                                SvgImageConstant.successImage,
-                                                height: getSize(4),
-                                                width: getSize(4),
-                                                colorFilter: ColorFilter.mode(
-                                                    AppColors.green,
-                                                    BlendMode.srcATop),
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      if (state.getProductDetails.product
+                                              ?.is_cart ==
+                                          true) {
+                                      } else {
+                                        context.read<ProductDetailBloc>().add(
+                                                ProductDetailEvent
+                                                    .addProductToCart(
+                                              productId: state
+                                                  .getProductList[index].id
+                                                  .toString(),
+                                            ));
+                                      }
+                                    },
+                                    child: Container(
+                                      height: getSize(22),
+                                      width: getSize(22),
+                                      alignment: Alignment.center,
+                                      decoration: BoxDecoration(
+                                        color: AppColors.white,
+                                        borderRadius:
+                                            BorderRadius.circular(getSize(5)),
+                                        border: Border.all(
+                                            color: AppColors.primaryOrange),
+                                      ),
+                                      child: Stack(
+                                        clipBehavior: Clip.none,
+                                        children: [
+                                          Image.asset(
+                                            PngImageConstants.cartSelected,
+                                            height: getSize(13),
+                                            width: getSize(13),
+                                            color: state.getProductDetails
+                                                        .product?.is_cart ==
+                                                    true
+                                                ? AppColors.primaryOrange
+                                                : AppColors.black,
+                                          ),
+                                          Visibility(
+                                            visible: state.getProductList[index]
+                                                    .is_cart ==
+                                                true,
+                                            child: Positioned.fill(
+                                              top: getSize(2),
+                                              left: getSize(-2),
+                                              child: Align(
+                                                alignment: Alignment.topLeft,
+                                                child: SvgPicture.asset(
+                                                  SvgImageConstant.successImage,
+                                                  height: getSize(4),
+                                                  width: getSize(4),
+                                                  colorFilter: ColorFilter.mode(
+                                                      AppColors.green,
+                                                      BlendMode.srcATop),
+                                                ),
                                               ),
                                             ),
-                                          ),
-                                        )
-                                      ],
+                                          )
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                )
-                              ],
-                            )
-                          ],
-                        ),
-                        Visibility(
-                          visible: state.getProductList[index].discount != null,
-                          child: Positioned(
-                            left: getSize(6),
-                            top: getSize(6),
-                            child: Container(
-                              padding: EdgeInsets.symmetric(
-                                horizontal: getSize(4),
-                                vertical: getSize(2),
-                              ),
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                color: Color(0xFFFFF094),
-                                borderRadius: BorderRadius.circular(
-                                  getSize(4),
+                                  )
+                                ],
+                              )
+                            ],
+                          ),
+                          Visibility(
+                            visible:
+                                state.getProductList[index].discount != null,
+                            child: Positioned(
+                              left: getSize(6),
+                              top: getSize(6),
+                              child: Container(
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: getSize(4),
+                                  vertical: getSize(2),
                                 ),
-                              ),
-                              child: BaseText(
-                                text:
-                                    '-${state.getProductList[index].discount}%',
-                                fontSize: 10,
-                                fontWeight: FontWeight.w500,
-                                textColor: Color(0xFFFF770E),
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                  color: Color(0xFFFFF094),
+                                  borderRadius: BorderRadius.circular(
+                                    getSize(4),
+                                  ),
+                                ),
+                                child: BaseText(
+                                  text:
+                                      '-${state.getProductList[index].discount}%',
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.w500,
+                                  textColor: Color(0xFFFF770E),
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   );
                 },

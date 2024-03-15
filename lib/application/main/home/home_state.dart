@@ -14,6 +14,10 @@ class HomeState with _$HomeState {
     required List<GetProductListResponse> getProductList,
     required SearchProductDTO searchProductDTO,
     required final List<String> brandFilter,
+    required final List<String> subCategoryFilter,
+    required final List<String> innerSubCategoryFilter,
+    required final List<String> colorFilter,
+    required final List<String> sizeFilter,
     required List<Map<String, dynamic>> filterList,
   }) = _HomeState;
   factory HomeState.initial() => HomeState(
@@ -25,7 +29,8 @@ class HomeState with _$HomeState {
         searchText: InputEmptyOrNot(''),
         searchProductDTO: SearchProductDTO(),
         isNoDataFound: false,
-        brandFilter: [], filterList: [],
+        brandFilter: [], filterList: [], subCategoryFilter: [], sizeFilter: [],
+        innerSubCategoryFilter: [], colorFilter: [],
       );
 
   // const factory HomeState.loadAPISuccess(List<GetProductListResponse> apiList) =
