@@ -22,7 +22,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   bool isFetching = false;
   final RefreshController refreshController = RefreshController();
   final IMainFacade mainFacade;
-  var list = <String>[];
 
   final imgList = [
     'https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80',
@@ -36,19 +35,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<HomeEvent>(
       (event, emit) async {
         await event.map(
-          // getCurrentLocation: (value) async {
-          //   await LocationHelper().getCurrentLocation().then(
-          //     (value) {
-          //       emit(
-          //         state.copyWith(
-          //           currentLocation: value.$1 ?? "",
-          //           currentLatitude: value.$2,
-          //           currentLongitude: value.$3,
-          //         ),
-          //       );
-          //     },
-          //   );
-          // },
           carousalChange: (CarousalChange value) async {
             emit(state.copyWith(carousalIndex: value.tabIndex));
           },
@@ -116,6 +102,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
               var res = await mainFacade.searchProductListAPI(
                 page: page,
                 searchText: state.searchText.getValue() ?? "",
+                selectedFilterList: state.selectedFilterList,
               );
 
               page++;
@@ -131,11 +118,27 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
                 ),
                 (r) {
                   lastPage = r.meta?.lastPage ?? 1;
+                  var searchRes = SearchProductDTO.fromJson(r.data);
+                  var filterAPIList = searchRes.filter_data
+                      ?.toJson()
+                      .entries
+                      .toList()
+                      .where((element) => (element.value as List).isNotEmpty)
+                      .toList();
+                  filterAPIList?.addAll(
+                    [
+                      MapEntry('free_shipping', ['']),
+                      // MapEntry('min_price', [state.searchProductDTO.]),
+                      // MapEntry('max_price', ['']),
+                    ],
+                  );
+
                   return emit(
                     state.copyWith(
                       isLoading: false,
                       isErrorInAPI: false,
                       searchProductDTO: SearchProductDTO.fromJson(r.data),
+                      filterList: filterAPIList ?? [],
                       isNoDataFound:
                           SearchProductDTO.fromJson(r.data).products?.isEmpty ??
                               false,
@@ -154,59 +157,27 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
               ),
             );
           },
-          changeBrandFilter: (ChangeBrandFilter value) async {
-            list.add(value.selectedBrandFilter);
-
-            emit(
-              state.copyWith(
-                brandFilter: list,
-              ),
-            );
-          },
           addFilterInList: (AddFilterInList value) {
-            var filterList = <Map<String, dynamic>>[];
-            filterList.add(value.selectedBrandFilter);
+            var updateList = <MapEntry<String, dynamic>>[];
+
+            if ((value.selectedBrandFilter.value as List).isEmpty) {
+              updateList = List<MapEntry<String, dynamic>>.from(
+                  state.selectedFilterList)
+                ..removeWhere(
+                    (element) => element.key == value.selectedBrandFilter.key);
+            } else {
+              updateList =
+                  List<MapEntry<String, dynamic>>.from(state.selectedFilterList)
+                    ..removeWhere((element) =>
+                        element.key == value.selectedBrandFilter.key)
+                    ..add(value.selectedBrandFilter);
+            }
 
             emit(
-              state.copyWith(
-                filterList: filterList,
-              ),
+              state.copyWith(selectedFilterList: updateList),
             );
+            add(HomeEvent.searchProductList(true));
           },
-          addBrandFilterInList: (AddBrandFilterInList value) async {
-            var filterList = <String>[];
-            filterList.addAll(value.selectedBrandFilter);
-
-            emit(
-              state.copyWith(
-                brandFilter: filterList,
-              ),
-            );
-          },
-          addSizeFilterInList: (AddSizeFilterInList value) async {
-            var filterList = <String>[];
-            filterList.addAll(value.selectedBrandFilter);
-
-            emit(
-              state.copyWith(
-                sizeFilter: filterList,
-              ),
-            );
-          },
-          addColorFilterInList: (AddColorFilterInList value) async {
-            var filterList = <String>[];
-            filterList.addAll(value.selectedBrandFilter);
-
-            emit(
-              state.copyWith(
-                colorFilter: filterList,
-              ),
-            );
-          },
-          addSubCategoryFilterInList:
-              (AddSubCategoryFilterInList value) async {},
-          addInnerSubCategoryFilterInList:
-              (AddInnerSubCategoryFilterInList value) async {},
         );
       },
     );

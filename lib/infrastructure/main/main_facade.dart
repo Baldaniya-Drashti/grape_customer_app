@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:grape_customer_app/domain/auth/auth_value_objects.dart';
@@ -91,13 +93,22 @@ class MainFacade implements IMainFacade {
   }
 
   @override
-  Future<Either<MainFailure, CommonResponse>> searchProductListAPI(
-      {required int page, String searchText = ''}) async {
+  Future<Either<MainFailure, CommonResponse>> searchProductListAPI({
+    required int page,
+    String searchText = '',
+    required List<MapEntry<String, dynamic>> selectedFilterList,
+  }) async {
     try {
       var mapData = <String, dynamic>{
         'page': page,
         'limit': _perPage,
       };
+      // for (var i = 0; i < selectedFilterList.length; i++) {
+      //   mapData.addEntries(selectedFilterList[i]);
+      // }
+      // if (selectedFilterList.isNotEmpty) {
+      //   mapData.addEntries(selectedFilterList);
+      // }
       if (searchText.isNotEmpty) {
         mapData.addAll({'product': searchText.trim()});
       }

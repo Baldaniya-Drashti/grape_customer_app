@@ -9,8 +9,11 @@ abstract class IMainFacade {
     required int page,
     String productId,
   });
-  Future<Either<MainFailure, CommonResponse>> searchProductListAPI(
-      {required int page, String searchText = ''});
+  Future<Either<MainFailure, CommonResponse>> searchProductListAPI({
+    required int page,
+    String searchText = '',
+    required List<MapEntry<String, dynamic>> selectedFilterList,
+  });
   Future<Either<MainFailure, CommonResponse>> getProductDetailsAPI({
     required String productId,
     required int page,

@@ -13,12 +13,8 @@ class HomeState with _$HomeState {
     required InputEmptyOrNot searchText,
     required List<GetProductListResponse> getProductList,
     required SearchProductDTO searchProductDTO,
-    required final List<String> brandFilter,
-    required final List<String> subCategoryFilter,
-    required final List<String> innerSubCategoryFilter,
-    required final List<String> colorFilter,
-    required final List<String> sizeFilter,
-    required List<Map<String, dynamic>> filterList,
+    required List<MapEntry<String, dynamic>> filterList,
+    required List<MapEntry<String, dynamic>> selectedFilterList,
   }) = _HomeState;
   factory HomeState.initial() => HomeState(
         //  currentLocation: '',
@@ -29,12 +25,11 @@ class HomeState with _$HomeState {
         searchText: InputEmptyOrNot(''),
         searchProductDTO: SearchProductDTO(),
         isNoDataFound: false,
-        brandFilter: [], filterList: [], subCategoryFilter: [], sizeFilter: [],
-        innerSubCategoryFilter: [], colorFilter: [],
+        filterList: [], selectedFilterList: [],
       );
 
-  // const factory HomeState.loadAPISuccess(List<GetProductListResponse> apiList) =
-  //     LoadAPISuccess;
+  // const factory HomeState.loadAPISuccess(
+  //     List<MapEntry<String, dynamic>> selectedFilterList) = LoadAPISuccess;
   // const factory HomeState.loadInProgress() = DataTransferInProgress;
   // const factory HomeState.loadAPIFailure() = LoadAPIFailure;
 }

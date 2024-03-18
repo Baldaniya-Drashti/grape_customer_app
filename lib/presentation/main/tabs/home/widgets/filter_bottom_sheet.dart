@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:grape_customer_app/application/main/home/home_bloc.dart';
 import 'package:grape_customer_app/domain/core/math_utils.dart';
 import 'package:grape_customer_app/domain/core/svg_image_constants.dart';
 import 'package:grape_customer_app/presentation/common/widgets/base_text.dart';
@@ -10,13 +11,16 @@ import 'package:grape_customer_app/presentation/core/widgets/buttons/common_butt
 class FilterBottomSheet extends StatelessWidget {
   final String filterTitle;
   final List<String> list;
+  final HomeState homeState;
   final List<String> selectedList;
 
-  const FilterBottomSheet(
-      {super.key,
-      required this.filterTitle,
-      required this.list,
-      required this.selectedList});
+  const FilterBottomSheet({
+    super.key,
+    required this.filterTitle,
+    required this.list,
+    required this.selectedList,
+    required this.homeState,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -144,7 +148,6 @@ class FilterBottomSheet extends StatelessWidget {
                             width: getSize(160),
                             onPressed: () {
                               context.router.pop(null);
-                              //   Get.back();
                             },
                             borderColor: AppColors.primaryOrange,
                             buttonTextColor: AppColors.primaryOrange,
@@ -157,7 +160,8 @@ class FilterBottomSheet extends StatelessWidget {
                           child: CommonButton(
                             width: getSize(160),
                             onPressed: () {
-                              context.router.pop(selectedFilterList);
+                              context.router.pop(
+                                  MapEntry(filterTitle, selectedFilterList));
                             },
                             buttonText: 'Apply',
                           ),

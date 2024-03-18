@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grape_customer_app/application/main/home/home_bloc.dart';
@@ -13,30 +15,17 @@ class FilterListWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<HomeBloc, HomeState>(
       builder: (context, state) {
-        var filterList = state.searchProductDTO.filter_data
-            ?.toJson()
-            .entries
-            .toList()
-            .where((element) => (element.value as List).isNotEmpty)
-            .toList();
-        filterList?.addAll(
-          [
-            MapEntry('free_shipping', ['']),
-            // MapEntry('min_price', [state.searchProductDTO.]),
-            // MapEntry('max_price', ['']),
-          ],
-        );
-        //   log('${state.searchProductDTO.filter_data?.toJson().entries.toList().asMap()}');
+        log('message : ${state.selectedFilterList}');
         return SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           padding: EdgeInsets.symmetric(horizontal: getSize(14)),
           child: Row(
             children: List.generate(
-              filterList?.length ?? 0,
+              state.filterList.length,
               (index) => FilterCommonContainer(
-                filterTitle: filterList?[index].key ?? "",
-                list: filterList?[index].value,
-                showDownArrow: filterList?[index].key != 'free_shipping',
+                filterTitle: state.filterList[index].key,
+                list: state.filterList[index].value,
+                showDownArrow: state.filterList[index].key != 'free_shipping',
               ),
             ),
           ),

@@ -257,17 +257,17 @@ class ProductYouMayLikeWidget extends StatelessWidget {
                                   ),
                                   GestureDetector(
                                     onTap: () {
-                                      if (state.getProductDetails.product
-                                              ?.is_cart ==
+                                      if (state.getProductList[index].is_cart ==
                                           true) {
                                       } else {
                                         context.read<ProductDetailBloc>().add(
-                                                ProductDetailEvent
-                                                    .addProductToCart(
-                                              productId: state
-                                                  .getProductList[index].id
-                                                  .toString(),
-                                            ));
+                                              ProductDetailEvent
+                                                  .addProductToCart(
+                                                productId: state
+                                                    .getProductList[index].id
+                                                    .toString(),
+                                              ),
+                                            );
                                       }
                                     },
                                     child: Container(
@@ -288,8 +288,8 @@ class ProductYouMayLikeWidget extends StatelessWidget {
                                             PngImageConstants.cartSelected,
                                             height: getSize(13),
                                             width: getSize(13),
-                                            color: state.getProductDetails
-                                                        .product?.is_cart ==
+                                            color: state.getProductList[index]
+                                                        .is_cart ==
                                                     true
                                                 ? AppColors.primaryOrange
                                                 : AppColors.black,
@@ -308,8 +308,9 @@ class ProductYouMayLikeWidget extends StatelessWidget {
                                                   height: getSize(4),
                                                   width: getSize(4),
                                                   colorFilter: ColorFilter.mode(
-                                                      AppColors.green,
-                                                      BlendMode.srcATop),
+                                                    AppColors.green,
+                                                    BlendMode.srcATop,
+                                                  ),
                                                 ),
                                               ),
                                             ),
