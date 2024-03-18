@@ -4,6 +4,7 @@ class ApiConstants {
   static String baseUrl = dotenv.env['DEV_API_BASE_URL']!;
   //core
   static String registerForPush = 'register-for-push';
+  static String contactSupport = 'contact/support';
 
   //auth
   static String register = 'auth/register';

@@ -6,6 +6,9 @@ import 'package:grape_customer_app/application/main/profile/customer_support/con
 import 'package:grape_customer_app/domain/core/l10n/app_localizations.dart';
 import 'package:grape_customer_app/domain/core/math_utils.dart';
 import 'package:grape_customer_app/domain/core/svg_image_constants.dart';
+import 'package:grape_customer_app/injection.dart';
+import 'package:grape_customer_app/presentation/common/utils/app_focus.dart';
+import 'package:grape_customer_app/presentation/common/utils/flushbar_creator.dart';
 import 'package:grape_customer_app/presentation/common/widgets/base_text.dart';
 import 'package:grape_customer_app/presentation/core/styles/app_colors.dart';
 import 'package:grape_customer_app/presentation/core/widgets/buttons/common_button.dart';
@@ -19,20 +22,25 @@ class CustomerSupport extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => CustomerSupportBloc(),
+      create: (context) => getIt<CustomerSupportBloc>(),
       child: BlocConsumer<CustomerSupportBloc, CustomerSupportState>(
         builder: (context, state) {
           return Scaffold(
             appBar: CustomAppBar(
               title: AppLocalizations.of(context).customerSupport,
             ),
-            body: Padding(
-              padding: EdgeInsets.symmetric(horizontal: getSize(18)),
+            body: GestureDetector(
+              onTap: () {
+                AppFocus.unfocus(context);
+              },
               child: Form(
                 autovalidateMode: state.isShowError
                     ? AutovalidateMode.always
                     : AutovalidateMode.disabled,
-                child: Column(
+                child: ListView(
+                  shrinkWrap: true,
+                  padding: EdgeInsets.symmetric(horizontal: getSize(18)),
+                  physics: BouncingScrollPhysics(),
                   children: [
                     SizedBox(
                       height: getSize(40),
@@ -46,6 +54,7 @@ class CustomerSupport extends StatelessWidget {
                       height: getSize(40),
                     ),
                     CommonButton(
+                      isSubmitting: state.isSubmitting,
                       onPressed: () {
                         context.read<CustomerSupportBloc>().add(
                               CustomerSupportEvent.sendButtonPressed(),
@@ -53,36 +62,68 @@ class CustomerSupport extends StatelessWidget {
                       },
                       buttonText: AppLocalizations.of(context).send,
                     ),
-                    Spacer(),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SvgPicture.asset(
-                          SvgImageConstant.message,
-                          colorFilter: ColorFilter.mode(
-                              AppColors.primaryOrange, BlendMode.srcIn),
-                        ),
-                        SizedBox(
-                          width: getSize(10),
-                        ),
-                        BaseText(
-                          text: 'Ask Help?',
-                          textColor: AppColors.primaryOrange,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                        )
-                      ],
-                    ),
-                    SizedBox(
-                      height: getSize(50),
-                    )
                   ],
                 ),
               ),
             ),
+            bottomNavigationBar: Padding(
+              padding: EdgeInsets.symmetric(vertical: getSize(18)),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SvgPicture.asset(
+                    SvgImageConstant.message,
+                    colorFilter: ColorFilter.mode(
+                        AppColors.primaryOrange, BlendMode.srcIn),
+                  ),
+                  SizedBox(
+                    width: getSize(10),
+                  ),
+                  BaseText(
+                    text: 'Ask Help?',
+                    textColor: AppColors.primaryOrange,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                  )
+                ],
+              ),
+            ),
           );
         },
-        listener: (context, state) {},
+        listener: (context, state) {
+          state.failureOrSuccessOption.fold(
+            () {},
+            (either) => either.fold(
+              (failure) {
+                showError(
+                  message: failure.maybeMap(
+                    badRequest: (value) => value.error,
+                    showAPIResponseMessage: (value) => value.message,
+                    networkError: (value) =>
+                        'Please check your internet connectivity',
+                    orElse: () => "Server Error. Try again later.",
+                  ),
+                ).show(context);
+              },
+              (r) {
+                showSuccess(message: r)
+                    .show(context)
+                    .then((value) => context.router.back());
+                // context.router.push(
+                //   PageRouteInfo(
+                //     OtpRegisterVerificationView.name,
+                //     args: OtpRegisterVerificationViewArgs(
+                //       countryCode: state.selectedCountrycode,
+                //       phoneNumber: state.mobileNumber.getValue(),
+                //     ),
+                //   ),
+                // );
+
+                // RestartWidget.restartApp(context);
+              },
+            ),
+          );
+        },
       ),
     );
   }

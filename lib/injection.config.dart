@@ -20,13 +20,15 @@ import 'package:grape_customer_app/application/main/cart/cart_bloc.dart'
 import 'package:grape_customer_app/application/main/checkout/checkout_bloc.dart'
     as _i4;
 import 'package:grape_customer_app/application/main/favourite/favourite_bloc.dart'
-    as _i23;
-import 'package:grape_customer_app/application/main/home/home_bloc.dart'
     as _i24;
+import 'package:grape_customer_app/application/main/home/home_bloc.dart'
+    as _i25;
 import 'package:grape_customer_app/application/main/home/product_detail/product_detail_bloc.dart'
     as _i16;
-import 'package:grape_customer_app/application/main/profile/edit_profile/edit_profile_bloc.dart'
+import 'package:grape_customer_app/application/main/profile/customer_support/contact_support_bloc.dart'
     as _i22;
+import 'package:grape_customer_app/application/main/profile/edit_profile/edit_profile_bloc.dart'
+    as _i23;
 import 'package:grape_customer_app/application/main/profile/get_account/account_cubit.dart'
     as _i19;
 import 'package:grape_customer_app/application/main/profile/language/language_bloc.dart'
@@ -92,13 +94,15 @@ extension GetItInjectableX on _i1.GetIt {
     gh.factory<_i20.AuthStatusBloc>(
         () => _i20.AuthStatusBloc(gh<_i7.IAuthFacade>()));
     gh.factory<_i21.CartBloc>(() => _i21.CartBloc(gh<_i9.IMainFacade>()));
-    gh.factory<_i22.EditProfileBloc>(() => _i22.EditProfileBloc(
+    gh.factory<_i22.CustomerSupportBloc>(
+        () => _i22.CustomerSupportBloc(gh<_i9.IMainFacade>()));
+    gh.factory<_i23.EditProfileBloc>(() => _i23.EditProfileBloc(
           gh<_i5.IAccountRepository>(),
           gh<_i7.IAuthFacade>(),
         ));
-    gh.factory<_i23.FavouriteBloc>(
-        () => _i23.FavouriteBloc(gh<_i9.IMainFacade>()));
-    gh.factory<_i24.HomeBloc>(() => _i24.HomeBloc(gh<_i9.IMainFacade>()));
+    gh.factory<_i24.FavouriteBloc>(
+        () => _i24.FavouriteBloc(gh<_i9.IMainFacade>()));
+    gh.factory<_i25.HomeBloc>(() => _i25.HomeBloc(gh<_i9.IMainFacade>()));
     return this;
   }
 }

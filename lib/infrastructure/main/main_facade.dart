@@ -526,4 +526,39 @@ class MainFacade implements IMainFacade {
       return left(const MainFailure.serverError());
     }
   }
+
+  @override
+  Future<Either<MainFailure, String>> addContactSupport(
+      {required InputEmptyOrNot title,
+      required InputEmptyOrNot message}) async {
+    try {
+      // log(cardDate.getOrCrash()?.split('/')[0] ?? "");
+      final res = await apiService.postMethod(
+        ApiConstants.contactSupport,
+        {
+          "title": title.getOrCrash(),
+          "description": title.getOrCrash(),
+        },
+      );
+
+      if (res.dioMessage != null) {
+        return right(res.dioMessage ?? "");
+      } else {
+        return left(const MainFailure.serverError());
+      }
+    } on DioException catch (err) {
+      if (err.response != null) {
+        var commonRespose = CommonResponse.fromJson(err.response?.data);
+
+        if (commonRespose.dioMessage != null) {
+          return left(
+              MainFailure.showAPIResponseMessage(commonRespose.dioMessage!));
+        }
+      } else if (err.type == DioExceptionType.connectionError) {
+        return left(const MainFailure.networkError());
+      }
+
+      return left(const MainFailure.serverError());
+    }
+  }
 }

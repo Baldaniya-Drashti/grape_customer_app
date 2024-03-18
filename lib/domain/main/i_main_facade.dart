@@ -7,7 +7,7 @@ import 'package:grape_customer_app/infrastructure/main/shipping_address_dto/ship
 abstract class IMainFacade {
   Future<Either<MainFailure, CommonResponse>> getProductListAPI({
     required int page,
-     String productId,
+    String productId,
   });
   Future<Either<MainFailure, CommonResponse>> searchProductListAPI(
       {required int page, String searchText = ''});
@@ -67,4 +67,9 @@ abstract class IMainFacade {
     required CVV cvv,
   });
   Future<Either<MainFailure, List<ShippingAddressDTO>>> getPaymentMethod();
+
+  Future<Either<MainFailure, String>> addContactSupport({
+    required InputEmptyOrNot title,
+    required InputEmptyOrNot message,
+  });
 }
