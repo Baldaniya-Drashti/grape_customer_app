@@ -6,6 +6,7 @@ import 'package:grape_customer_app/domain/main/i_main_facade.dart';
 import 'package:grape_customer_app/domain/main/main_failure.dart';
 import 'package:grape_customer_app/infrastructure/core/common_response.dart';
 import 'package:grape_customer_app/infrastructure/core/network/injectable_module.dart';
+import 'package:grape_customer_app/infrastructure/main/payemnt_method_dto/get_cards_dto.dart';
 import 'package:grape_customer_app/infrastructure/main/shipping_address_dto/shipping_address_dto.dart';
 import 'package:injectable/injectable.dart';
 
@@ -437,22 +438,21 @@ class MainFacade implements IMainFacade {
   }
 
   @override
-  Future<Either<MainFailure, String>> addPaymentMethod(
-      {required Username cardHoldersName,
-      required CardNumber cardNumber,
-      required CardDate cardDate,
-      required CVV cvv}) async {
+  Future<Either<MainFailure, String>> addPaymentMethod({
+    required String paymentMethodId,
+    bool isDefault = false,
+  }) async {
     try {
+      var mapData = {
+        "payment_method_id": paymentMethodId,
+      };
+      if (isDefault) {
+        mapData.addAll({"is_default": "1"});
+      }
       // log(cardDate.getOrCrash()?.split('/')[0] ?? "");
       final res = await apiService.postMethod(
         ApiConstants.addPaymentMethod,
-        {
-          "card_holder_name": cardHoldersName.getOrCrash(),
-          "card_number": cardNumber.getOrCrash(),
-          "expiry_month": cardDate.getOrCrash()?.split('/')[0],
-          "expiry_year": cardDate.getOrCrash()?.split('/')[1],
-          "cvv": cvv.getOrCrash(),
-        },
+        mapData,
       );
 
       if (res.dioMessage != null) {
@@ -477,8 +477,7 @@ class MainFacade implements IMainFacade {
   }
 
   @override
-  Future<Either<MainFailure, List<ShippingAddressDTO>>>
-      getPaymentMethod() async {
+  Future<Either<MainFailure, List<GetCardsDTO>>> getPaymentMethod() async {
     try {
       final res = await apiService.getMethod(
         ApiConstants.getPaymentMethod,
@@ -486,7 +485,7 @@ class MainFacade implements IMainFacade {
 
       if (res != null && res.data != null) {
         var list = res.data as List<dynamic>;
-        return right(list.map((e) => ShippingAddressDTO.fromJson(e)).toList());
+        return right(list.map((e) => GetCardsDTO.fromJson(e)).toList());
       } else {
         return left(const MainFailure.serverError());
       }
@@ -546,6 +545,65 @@ class MainFacade implements IMainFacade {
           "title": title.getOrCrash(),
           "description": title.getOrCrash(),
         },
+      );
+
+      if (res.dioMessage != null) {
+        return right(res.dioMessage ?? "");
+      } else {
+        return left(const MainFailure.serverError());
+      }
+    } on DioException catch (err) {
+      if (err.response != null) {
+        var commonRespose = CommonResponse.fromJson(err.response?.data);
+
+        if (commonRespose.dioMessage != null) {
+          return left(
+              MainFailure.showAPIResponseMessage(commonRespose.dioMessage!));
+        }
+      } else if (err.type == DioExceptionType.connectionError) {
+        return left(const MainFailure.networkError());
+      }
+
+      return left(const MainFailure.serverError());
+    }
+  }
+
+  @override
+  Future<Either<MainFailure, String>> deleteCard({required String id}) async {
+    try {
+      final res = await apiService.deleteMethod(
+        '${ApiConstants.deletePaymentMethod}/$id',
+      );
+
+      if (res != null && res.dioMessage != null) {
+        return right(res.dioMessage ?? "");
+      } else {
+        return left(const MainFailure.serverError());
+      }
+    } on DioException catch (err) {
+      if (err.response != null) {
+        var commonRespose = CommonResponse.fromJson(err.response?.data);
+
+        if (commonRespose.dioMessage != null) {
+          return left(
+              MainFailure.showAPIResponseMessage(commonRespose.dioMessage!));
+        }
+      } else if (err.type == DioExceptionType.connectionError) {
+        return left(const MainFailure.networkError());
+      }
+
+      return left(const MainFailure.serverError());
+    }
+  }
+
+  @override
+  Future<Either<MainFailure, String>> makeCardDefault(
+      {required String id}) async {
+    try {
+      // log(cardDate.getOrCrash()?.split('/')[0] ?? "");
+      final res = await apiService.postMethod(
+        ApiConstants.makeDefaultPaymentMethod,
+        {"payment_method_id": id},
       );
 
       if (res.dioMessage != null) {

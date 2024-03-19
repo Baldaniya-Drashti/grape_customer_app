@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:grape_customer_app/domain/core/environment/environment.dart';
 import 'package:grape_customer_app/infrastructure/core/network/injectable_module.dart';
 import 'package:grape_customer_app/presentation/core/app_router.dart';
@@ -59,6 +60,8 @@ Future<void> main() async {
         EnvironmentCongig().initConfig(environment);
         await setupHive();
         ApiService.initAPIService();
+
+        Stripe.publishableKey = dotenv.get("STIPE_TEST_KEY");
         runApp(RestartWidget(child: AppWidget()));
       });
     },

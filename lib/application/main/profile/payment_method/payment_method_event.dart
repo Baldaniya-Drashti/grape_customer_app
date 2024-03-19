@@ -11,7 +11,8 @@ class PaymentMethodEvent with _$PaymentMethodEvent {
   const factory PaymentMethodEvent.validUpToChanged(String date) =
       ValidUpToChanged;
 
-  const factory PaymentMethodEvent.cvvChanged(String cvv) = CvvChanged;
+  const factory PaymentMethodEvent.cvvChanged(
+      String cvv, BuildContext context) = CvvChanged;
 
   const factory PaymentMethodEvent.saveButtonPressed(BuildContext context) =
       SaveButtonPressed;
@@ -19,8 +20,9 @@ class PaymentMethodEvent with _$PaymentMethodEvent {
       PaymentMethodResponse paymentMethodResponse) = AddCard;
 
   const factory PaymentMethodEvent.deleteCard(String id) = DeleteCard;
+  const factory PaymentMethodEvent.makeCardDefault() = MakeCardDefault;
 
-  const factory PaymentMethodEvent.changeCard(int index) = ChangedCard;
+  const factory PaymentMethodEvent.getCardList() = GetCardList;
 
-  const factory PaymentMethodEvent.getPaymentMethod() = GetPaymentMethod;
+  const factory PaymentMethodEvent.changeCard(String index) = ChangedCard;
 }

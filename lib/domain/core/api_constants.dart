@@ -42,7 +42,11 @@ class ApiConstants {
   static String deleteShippingAddress = 'shipping/address/delete';
 
   //payment methods
-  static String getPaymentMethod = 'payment/card';
-  static String addPaymentMethod = 'payment/card/store';
-  static String deletePaymentMethod = 'payment/card';
+  static String getPaymentMethod = 'payment/get-card';
+  static String addPaymentMethod = 'payment/add-card';
+  static String makeDefaultPaymentMethod = 'payment/change-default-card';
+
+  static String deletePaymentMethod = 'payment/detach';
+
+  //order
 }

@@ -8,9 +8,11 @@ class PaymentMethodState with _$PaymentMethodState {
     required CardDate cardDate,
     required bool showErrorMessages,
     required CVV cvv,
-    required List<PaymentMethodResponse> cardDetail,
+    required List<GetCardsDTO> cardDetail,
     required Option<Either<MainFailure, String>> failureOrSuccessOption,
-    required int selectedCard,
+    required Option<Either<MainFailure, String>>
+        defaultCardfailureOrSuccessOption,
+    required String selectedCard,
     required bool isSubmitting,
     required bool isLoading,
     required bool isErrorInAPI,
@@ -23,11 +25,12 @@ class PaymentMethodState with _$PaymentMethodState {
         showErrorMessages: false,
         cvv: CVV(''),
         cardDetail: [],
-        selectedCard: 0,
+        selectedCard: '',
         failureOrSuccessOption: none(),
         isSubmitting: false,
         isLoading: false,
         isErrorInAPI: false,
         isNoDataFound: false,
+        defaultCardfailureOrSuccessOption: none(),
       );
 }

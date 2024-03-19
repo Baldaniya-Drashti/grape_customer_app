@@ -10,6 +10,8 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i28;
 import 'package:flutter/material.dart' as _i29;
+import 'package:grape_customer_app/infrastructure/main/payemnt_method_dto/get_cards_dto.dart'
+    as _i31;
 import 'package:grape_customer_app/infrastructure/main/shipping_address_dto/shipping_address_dto.dart'
     as _i30;
 import 'package:grape_customer_app/presentation/auth/login/login_screen.dart'
@@ -83,9 +85,13 @@ abstract class $AppRouter extends _i28.RootStackRouter {
       );
     },
     AddNewCard.name: (routeData) {
+      final args = routeData.argsAs<AddNewCardArgs>();
       return _i28.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i2.AddNewCard(),
+        child: _i2.AddNewCard(
+          key: args.key,
+          getCardsDTO: args.getCardsDTO,
+        ),
       );
     },
     CartView.name: (routeData) {
@@ -207,9 +213,14 @@ abstract class $AppRouter extends _i28.RootStackRouter {
       );
     },
     PaymentMethod.name: (routeData) {
+      final args = routeData.argsAs<PaymentMethodArgs>(
+          orElse: () => const PaymentMethodArgs());
       return _i28.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i19.PaymentMethod(),
+        child: _i19.PaymentMethod(
+          key: args.key,
+          isFromChangePayment: args.isFromChangePayment,
+        ),
       );
     },
     ProductDetailsView.name: (routeData) {
@@ -318,16 +329,40 @@ class AddNewAddressArgs {
 
 /// generated route for
 /// [_i2.AddNewCard]
-class AddNewCard extends _i28.PageRouteInfo<void> {
-  const AddNewCard({List<_i28.PageRouteInfo>? children})
-      : super(
+class AddNewCard extends _i28.PageRouteInfo<AddNewCardArgs> {
+  AddNewCard({
+    _i29.Key? key,
+    required _i31.GetCardsDTO getCardsDTO,
+    List<_i28.PageRouteInfo>? children,
+  }) : super(
           AddNewCard.name,
+          args: AddNewCardArgs(
+            key: key,
+            getCardsDTO: getCardsDTO,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'AddNewCard';
 
-  static const _i28.PageInfo<void> page = _i28.PageInfo<void>(name);
+  static const _i28.PageInfo<AddNewCardArgs> page =
+      _i28.PageInfo<AddNewCardArgs>(name);
+}
+
+class AddNewCardArgs {
+  const AddNewCardArgs({
+    this.key,
+    required this.getCardsDTO,
+  });
+
+  final _i29.Key? key;
+
+  final _i31.GetCardsDTO getCardsDTO;
+
+  @override
+  String toString() {
+    return 'AddNewCardArgs{key: $key, getCardsDTO: $getCardsDTO}';
+  }
 }
 
 /// generated route for
@@ -685,16 +720,40 @@ class OtpRegisterVerificationViewArgs {
 
 /// generated route for
 /// [_i19.PaymentMethod]
-class PaymentMethod extends _i28.PageRouteInfo<void> {
-  const PaymentMethod({List<_i28.PageRouteInfo>? children})
-      : super(
+class PaymentMethod extends _i28.PageRouteInfo<PaymentMethodArgs> {
+  PaymentMethod({
+    _i29.Key? key,
+    bool isFromChangePayment = false,
+    List<_i28.PageRouteInfo>? children,
+  }) : super(
           PaymentMethod.name,
+          args: PaymentMethodArgs(
+            key: key,
+            isFromChangePayment: isFromChangePayment,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'PaymentMethod';
 
-  static const _i28.PageInfo<void> page = _i28.PageInfo<void>(name);
+  static const _i28.PageInfo<PaymentMethodArgs> page =
+      _i28.PageInfo<PaymentMethodArgs>(name);
+}
+
+class PaymentMethodArgs {
+  const PaymentMethodArgs({
+    this.key,
+    this.isFromChangePayment = false,
+  });
+
+  final _i29.Key? key;
+
+  final bool isFromChangePayment;
+
+  @override
+  String toString() {
+    return 'PaymentMethodArgs{key: $key, isFromChangePayment: $isFromChangePayment}';
+  }
 }
 
 /// generated route for

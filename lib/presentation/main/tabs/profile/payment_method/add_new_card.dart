@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grape_customer_app/application/main/profile/payment_method/payment_method_bloc.dart';
 import 'package:grape_customer_app/domain/core/l10n/app_localizations.dart';
 import 'package:grape_customer_app/domain/core/math_utils.dart';
+import 'package:grape_customer_app/infrastructure/main/payemnt_method_dto/get_cards_dto.dart';
 import 'package:grape_customer_app/injection.dart';
 import 'package:grape_customer_app/presentation/common/utils/app_focus.dart';
 import 'package:grape_customer_app/presentation/common/utils/flushbar_creator.dart';
@@ -15,7 +16,8 @@ import 'package:grape_customer_app/presentation/core/widgets/utility/card_input_
 
 @RoutePage(name: 'AddNewCard')
 class AddNewCard extends StatelessWidget {
-  const AddNewCard({super.key});
+  final GetCardsDTO getCardsDTO;
+  const AddNewCard({super.key, required this.getCardsDTO});
 
   @override
   Widget build(BuildContext context) {
@@ -129,7 +131,7 @@ class AddNewCard extends StatelessWidget {
       obscureText: true,
       onChanged: (cvv) => context
           .read<PaymentMethodBloc>()
-          .add(PaymentMethodEvent.cvvChanged(cvv)),
+          .add(PaymentMethodEvent.cvvChanged(cvv, context)),
       validator: (p0, p1) =>
           context.read<PaymentMethodBloc>().state.cvv.value.fold(
               (l) => l.maybeMap(
