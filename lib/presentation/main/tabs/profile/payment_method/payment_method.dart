@@ -41,8 +41,8 @@ class PaymentMethod extends StatelessWidget {
                   ),
                 ).show(context);
               },
-              (r) {
-                showSuccess(message: r).show(context).then((value) {
+              (r) async {
+                await showSuccess(message: r).show(context).then((value) {
                   context.router.pop(state.cardDetail.firstWhere((element) =>
                       element.payment_method_id == state.selectedCard));
                 });
@@ -104,7 +104,7 @@ class PaymentMethod extends StatelessWidget {
             body: Padding(
               padding: EdgeInsets.symmetric(
                 horizontal: getSize(18),
-                vertical: getSize(40),
+                vertical: getSize(20),
               ),
               child: state.isLoading
                   ? Center(

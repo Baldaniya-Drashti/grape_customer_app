@@ -3,9 +3,6 @@ part of 'home_bloc.dart';
 @freezed
 class HomeState with _$HomeState {
   factory HomeState({
-    // required String currentLocation,
-    // double? currentLatitude,
-    // double? currentLongitude,
     required int carousalIndex,
     required bool isLoading,
     required bool isNoDataFound,
@@ -27,9 +24,4 @@ class HomeState with _$HomeState {
         isNoDataFound: false,
         filterList: [], selectedFilterList: [],
       );
-
-  // const factory HomeState.loadAPISuccess(
-  //     List<MapEntry<String, dynamic>> selectedFilterList) = LoadAPISuccess;
-  // const factory HomeState.loadInProgress() = DataTransferInProgress;
-  // const factory HomeState.loadAPIFailure() = LoadAPIFailure;
 }

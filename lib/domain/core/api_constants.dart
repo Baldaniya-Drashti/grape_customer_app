@@ -48,5 +48,7 @@ class ApiConstants {
 
   static String deletePaymentMethod = 'payment/detach';
 
-  //order
+  //checkout
+  static String orderCheckout = 'checkout';
+  static String orderPlace = 'order/place';
 }

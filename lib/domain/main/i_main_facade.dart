@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:grape_customer_app/domain/auth/auth_value_objects.dart';
 import 'package:grape_customer_app/domain/main/main_failure.dart';
 import 'package:grape_customer_app/infrastructure/core/common_response.dart';
+import 'package:grape_customer_app/infrastructure/main/checkout_dto/checkout_dto.dart';
 import 'package:grape_customer_app/infrastructure/main/payemnt_method_dto/get_cards_dto.dart';
 import 'package:grape_customer_app/infrastructure/main/shipping_address_dto/shipping_address_dto.dart';
 
@@ -75,5 +76,16 @@ abstract class IMainFacade {
   Future<Either<MainFailure, String>> addContactSupport({
     required InputEmptyOrNot title,
     required InputEmptyOrNot message,
+  });
+
+  Future<Either<MainFailure, CommonResponse>> orderCheckoutAPI({
+    String productId,
+    String quantity,
+    bool isFromcart = false,
+    required int page,
+  });
+
+  Future<Either<MainFailure, String>> orderPlacetAPI({
+    required CheckoutDTO checkoutDTO,
   });
 }

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
@@ -5,6 +7,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grape_customer_app/application/main/checkout/checkout_bloc.dart';
 
 import 'package:grape_customer_app/domain/core/math_utils.dart';
+import 'package:grape_customer_app/infrastructure/core/common_product_from_json_response.dart';
+import 'package:grape_customer_app/infrastructure/main/home_dto/get_product_list_response.dart';
 import 'package:grape_customer_app/presentation/common/widgets/base_text.dart';
 import 'package:grape_customer_app/presentation/core/styles/app_colors.dart';
 
@@ -40,8 +44,10 @@ class GetCheckoutProductDetailWidget extends StatelessWidget {
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
                   padding: EdgeInsets.zero,
-                  itemCount: 3,
-                  itemBuilder: (context, index) => getCheckoutCartContainer(),
+                  itemCount: state.getProductList.length,
+                  itemBuilder: (context, index) => getCheckoutCartContainer(
+                      getProductListResponse: state.getProductList[index],
+                      context: context),
                   separatorBuilder: (BuildContext context, int index) {
                     return Divider(
                       height: 0,
@@ -51,14 +57,26 @@ class GetCheckoutProductDetailWidget extends StatelessWidget {
                 ),
               )
             else
-              getCheckoutContainer(),
+              getCheckoutContainer(
+                getProductListResponse: state.getProductList.isNotEmpty
+                    ? state.getProductList.first
+                    : GetProductListResponse(),
+              ),
           ],
         );
       },
     );
   }
 
-  getCheckoutCartContainer() {
+  getCheckoutCartContainer(
+      {required GetProductListResponse getProductListResponse,
+      required BuildContext context}) {
+    var productConfigarationList =
+        jsonDecode(getProductListResponse.product_form_json ?? "");
+    var dataList = ProductFromJson.fromJson(productConfigarationList)
+        .data
+        .where((element) => element.fieldType == 1)
+        .toList();
     return Container(
       padding: EdgeInsets.all(getSize(10)),
       decoration: BoxDecoration(
@@ -79,8 +97,7 @@ class GetCheckoutProductDetailWidget extends StatelessWidget {
                   ),
                 ),
                 child: CachedNetworkImage(
-                  imageUrl:
-                      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0U3avlAFpuN9Sf5PVhN3MHdXQzh6rJusL93tMQRngAnrK1k0Z9CH4hzhArR0kyV-Fm_E&usqp=CAU',
+                  imageUrl: getProductListResponse.images?.first.image ?? "",
                   placeholder: (context, url) => Container(
                     height: getSize(80),
                     width: getSize(60),
@@ -103,30 +120,25 @@ class GetCheckoutProductDetailWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   BaseText(
-                    text: 'Nothing Phone 1',
+                    text: getProductListResponse.product_name ?? "",
                     fontSize: 14,
                     fontWeight: FontWeight.w500,
                   ),
                   SizedBox(
                     height: getSize(8),
                   ),
-                  getProductDetails(
-                    title: 'Colors',
-                    description: 'Black',
-                  ),
-                  SizedBox(
-                    height: getSize(6),
-                  ),
-                  getProductDetails(
-                    title: 'Size',
-                    description: '128 GB',
-                  ),
-                  SizedBox(
-                    height: getSize(6),
-                  ),
-                  getProductDetails(
-                    title: 'Quantity',
-                    description: '1',
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: List.generate(
+                      dataList.length,
+                      (index) => Padding(
+                        padding: EdgeInsets.symmetric(vertical: getSize(3)),
+                        child: getProductDetails(
+                          title: dataList[index].name ?? "",
+                          description: dataList[index].value ?? "",
+                        ),
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -136,7 +148,7 @@ class GetCheckoutProductDetailWidget extends StatelessWidget {
             child: Align(
               alignment: Alignment.bottomRight,
               child: BaseText(
-                text: '\$299',
+                text: '\$${getProductListResponse.price}',
                 fontSize: 18,
                 textColor: AppColors.mildBlue,
                 fontWeight: FontWeight.w600,
@@ -149,7 +161,13 @@ class GetCheckoutProductDetailWidget extends StatelessWidget {
             child: Align(
               alignment: Alignment.topRight,
               child: IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  context.read<CheckoutBloc>().add(
+                        CheckoutEvent.removeCheckoutProduct(
+                          getProductListResponse.id.toString(),
+                        ),
+                      );
+                },
                 icon: Icon(
                   Icons.close_rounded,
                   color: AppColors.black.withOpacity(0.60),
@@ -162,7 +180,14 @@ class GetCheckoutProductDetailWidget extends StatelessWidget {
     );
   }
 
-  getCheckoutContainer() {
+  getCheckoutContainer(
+      {required GetProductListResponse getProductListResponse}) {
+    var productConfigarationList =
+        jsonDecode(getProductListResponse.product_form_json ?? "");
+    var dataList = ProductFromJson.fromJson(productConfigarationList)
+        .data
+        .where((element) => element.fieldType == 1)
+        .toList();
     return Container(
       padding: EdgeInsets.all(getSize(10)),
       decoration: BoxDecoration(
@@ -190,8 +215,7 @@ class GetCheckoutProductDetailWidget extends StatelessWidget {
                   ),
                 ),
                 child: CachedNetworkImage(
-                  imageUrl:
-                      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0U3avlAFpuN9Sf5PVhN3MHdXQzh6rJusL93tMQRngAnrK1k0Z9CH4hzhArR0kyV-Fm_E&usqp=CAU',
+                  imageUrl: getProductListResponse.images?.first.image ?? "",
                   placeholder: (context, url) => Container(
                     height: getSize(80),
                     width: getSize(60),
@@ -214,30 +238,25 @@ class GetCheckoutProductDetailWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   BaseText(
-                    text: 'Nothing Phone 1',
+                    text: getProductListResponse.product_name ?? "",
                     fontSize: 14,
                     fontWeight: FontWeight.w500,
                   ),
                   SizedBox(
                     height: getSize(8),
                   ),
-                  getProductDetails(
-                    title: 'Colors',
-                    description: 'Black',
-                  ),
-                  SizedBox(
-                    height: getSize(6),
-                  ),
-                  getProductDetails(
-                    title: 'Size',
-                    description: '128 GB',
-                  ),
-                  SizedBox(
-                    height: getSize(6),
-                  ),
-                  getProductDetails(
-                    title: 'Quantity',
-                    description: '1',
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: List.generate(
+                      dataList.length,
+                      (index) => Padding(
+                        padding: EdgeInsets.symmetric(vertical: getSize(3)),
+                        child: getProductDetails(
+                          title: dataList[index].name ?? "",
+                          description: dataList[index].value ?? "",
+                        ),
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -247,7 +266,7 @@ class GetCheckoutProductDetailWidget extends StatelessWidget {
             child: Align(
               alignment: Alignment.bottomRight,
               child: BaseText(
-                text: '\$299',
+                text: '\$${getProductListResponse.price}',
                 fontSize: 18,
                 textColor: AppColors.mildBlue,
                 fontWeight: FontWeight.w600,

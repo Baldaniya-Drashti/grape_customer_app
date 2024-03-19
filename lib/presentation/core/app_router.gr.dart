@@ -114,6 +114,8 @@ abstract class $AppRouter extends _i28.RootStackRouter {
         child: _i5.CheckoutView(
           key: args.key,
           isFromCart: args.isFromCart,
+          productId: args.productId,
+          quantity: args.quantity,
         ),
       );
     },
@@ -399,12 +401,16 @@ class CheckoutView extends _i28.PageRouteInfo<CheckoutViewArgs> {
   CheckoutView({
     _i29.Key? key,
     bool isFromCart = false,
+    String productId = '',
+    num quantity = 1,
     List<_i28.PageRouteInfo>? children,
   }) : super(
           CheckoutView.name,
           args: CheckoutViewArgs(
             key: key,
             isFromCart: isFromCart,
+            productId: productId,
+            quantity: quantity,
           ),
           initialChildren: children,
         );
@@ -419,15 +425,21 @@ class CheckoutViewArgs {
   const CheckoutViewArgs({
     this.key,
     this.isFromCart = false,
+    this.productId = '',
+    this.quantity = 1,
   });
 
   final _i29.Key? key;
 
   final bool isFromCart;
 
+  final String productId;
+
+  final num quantity;
+
   @override
   String toString() {
-    return 'CheckoutViewArgs{key: $key, isFromCart: $isFromCart}';
+    return 'CheckoutViewArgs{key: $key, isFromCart: $isFromCart, productId: $productId, quantity: $quantity}';
   }
 }
 

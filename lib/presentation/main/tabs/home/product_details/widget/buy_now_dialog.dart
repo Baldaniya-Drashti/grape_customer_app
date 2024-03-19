@@ -21,10 +21,10 @@ class BuyNowDialog extends StatelessWidget {
   }
 
   buyNowDialog(
-    BuildContext context,
-    GetProductListResponse getProductListResponse,
-    List<Data> productFromJson,
-  ) {
+      BuildContext context,
+      GetProductListResponse getProductListResponse,
+      List<Data> productFromJson,
+      ProductDetailState state) {
     return showModalBottomSheet(
       context: context,
       backgroundColor: AppColors.white,
@@ -39,60 +39,73 @@ class BuyNowDialog extends StatelessWidget {
         ),
       ),
       builder: (context) => SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            SizedBox(
-              height: getSize(20),
-            ),
-            productDetailsView(context, getProductListResponse),
-            SizedBox(
-              height: getSize(16),
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: List.generate(
-                productFromJson
-                    .where((element) => element.fieldType == 1)
-                    .length,
-                (index) => getProductDetails(
-                  title: productFromJson
+        child: BlocProvider(
+          create: (context) => getIt<ProductDetailBloc>(),
+          child: BlocBuilder<ProductDetailBloc, ProductDetailState>(
+            builder: (context, state) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  SizedBox(
+                    height: getSize(20),
+                  ),
+                  productDetailsView(context, getProductListResponse),
+                  SizedBox(
+                    height: getSize(16),
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: List.generate(
+                      productFromJson
                           .where((element) => element.fieldType == 1)
-                          .toList()[index]
-                          .name ??
-                      "",
-                  description: productFromJson
-                          .where((element) => element.fieldType == 1)
-                          .toList()[index]
-                          .value ??
-                      "",
-                ),
-              ),
-            ),
-            SizedBox(
-              height: getSize(16),
-            ),
-            quantityContainerWidget(
-              context,
-            ),
-            SizedBox(
-              height: getSize(30),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: getSize(18)),
-              child: CommonButton(
-                onPressed: () {
-                  context.router.pop();
-                  context.router.push(PageRouteInfo(CheckoutView.name));
-                },
-                buttonText: 'Buy Now',
-              ),
-            ),
-            SizedBox(
-              height: getSize(isFullScreenDevice(context) ? 0 : 30),
-            ),
-          ],
+                          .length,
+                      (index) => getProductDetails(
+                        title: productFromJson
+                                .where((element) => element.fieldType == 1)
+                                .toList()[index]
+                                .name ??
+                            "",
+                        description: productFromJson
+                                .where((element) => element.fieldType == 1)
+                                .toList()[index]
+                                .value ??
+                            "",
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: getSize(16),
+                  ),
+                  quantityContainerWidget(context, state),
+                  SizedBox(
+                    height: getSize(30),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: getSize(18)),
+                    child: CommonButton(
+                      onPressed: () {
+                        context.router.pop();
+                        context.router.push(
+                          PageRouteInfo(
+                            CheckoutView.name,
+                            args: CheckoutViewArgs(
+                              productId: getProductListResponse.id.toString(),
+                              quantity: state.productQuantity,
+                            ),
+                          ),
+                        );
+                      },
+                      buttonText: 'Buy Now',
+                    ),
+                  ),
+                  SizedBox(
+                    height: getSize(isFullScreenDevice(context) ? 0 : 30),
+                  ),
+                ],
+              );
+            },
+          ),
         ),
       ),
     );
@@ -132,92 +145,173 @@ getProductDetails({required String title, required String description}) {
 
 quantityContainerWidget(
   BuildContext context,
+  ProductDetailState state,
 ) {
-  return BlocProvider(
-    create: (context) => getIt<ProductDetailBloc>(),
-    child: BlocBuilder<ProductDetailBloc, ProductDetailState>(
-      builder: (context, state) {
-        return Container(
-          margin: EdgeInsets.symmetric(horizontal: getSize(18)),
+  return Container(
+    margin: EdgeInsets.symmetric(horizontal: getSize(18)),
+    decoration: BoxDecoration(
+      color: Color(0xFFD9D9D9).withOpacity(0.20),
+      borderRadius: BorderRadius.circular(getSize(10)),
+    ),
+    padding: EdgeInsets.symmetric(
+      horizontal: getSize(20),
+      vertical: getSize(4),
+    ),
+    child: Row(
+      children: [
+        BaseText(
+          text: 'Quantity',
+          fontSize: 14,
+          fontWeight: FontWeight.w500,
+        ),
+        Spacer(),
+        IconButton(
+          onPressed: () => context
+              .read<ProductDetailBloc>()
+              .add(ProductDetailEvent.decreaseProductQuantity()),
+          icon: Container(
+            height: getSize(20),
+            width: getSize(20),
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              color: AppColors.white,
+              borderRadius: BorderRadius.circular(getSize(6)),
+              border: Border.all(
+                color: AppColors.black.withOpacity(0.20),
+              ),
+            ),
+            child: Icon(
+              Icons.remove,
+              size: getSize(12),
+            ),
+          ),
+        ),
+        Container(
+          height: getSize(27),
+          width: getSize(27),
+          alignment: Alignment.center,
           decoration: BoxDecoration(
-            color: Color(0xFFD9D9D9).withOpacity(0.20),
-            borderRadius: BorderRadius.circular(getSize(10)),
+            color: AppColors.primaryOrange,
+            shape: BoxShape.circle,
           ),
-          padding: EdgeInsets.symmetric(
-            horizontal: getSize(20),
-            vertical: getSize(4),
+          child: BaseText(
+            text: '${state.productQuantity}',
+            fontSize: 14,
+            fontWeight: FontWeight.w500,
+            textColor: AppColors.white,
           ),
-          child: Row(
-            children: [
-              BaseText(
-                text: 'Quantity',
-                fontSize: 14,
-                fontWeight: FontWeight.w500,
+        ),
+        IconButton(
+          onPressed: () => context
+              .read<ProductDetailBloc>()
+              .add(ProductDetailEvent.increaseProductQuantity()),
+          icon: Container(
+            height: getSize(20),
+            width: getSize(20),
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              color: AppColors.white,
+              borderRadius: BorderRadius.circular(getSize(6)),
+              border: Border.all(
+                color: AppColors.black.withOpacity(0.20),
               ),
-              Spacer(),
-              IconButton(
-                onPressed: () => context
-                    .read<ProductDetailBloc>()
-                    .add(ProductDetailEvent.decreaseProductQuantity()),
-                icon: Container(
-                  height: getSize(20),
-                  width: getSize(20),
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    color: AppColors.white,
-                    borderRadius: BorderRadius.circular(getSize(6)),
-                    border: Border.all(
-                      color: AppColors.black.withOpacity(0.20),
-                    ),
-                  ),
-                  child: Icon(
-                    Icons.remove,
-                    size: getSize(12),
-                  ),
-                ),
-              ),
-              Container(
-                height: getSize(27),
-                width: getSize(27),
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: AppColors.primaryOrange,
-                  shape: BoxShape.circle,
-                ),
-                child: BaseText(
-                  text: '${state.productQuantity}',
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500,
-                  textColor: AppColors.white,
-                ),
-              ),
-              IconButton(
-                onPressed: () => context
-                    .read<ProductDetailBloc>()
-                    .add(ProductDetailEvent.increaseProductQuantity()),
-                icon: Container(
-                  height: getSize(20),
-                  width: getSize(20),
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    color: AppColors.white,
-                    borderRadius: BorderRadius.circular(getSize(6)),
-                    border: Border.all(
-                      color: AppColors.black.withOpacity(0.20),
-                    ),
-                  ),
-                  child: Icon(
-                    Icons.add,
-                    size: getSize(12),
-                  ),
-                ),
-              )
-            ],
+            ),
+            child: Icon(
+              Icons.add,
+              size: getSize(12),
+            ),
           ),
-        );
-      },
+        )
+      ],
     ),
   );
+
+  // return BlocProvider(
+  //   create: (context) => getIt<ProductDetailBloc>(),
+  //   child: BlocBuilder<ProductDetailBloc, ProductDetailState>(
+  //     builder: (context, state) {
+  //       return Container(
+  //         margin: EdgeInsets.symmetric(horizontal: getSize(18)),
+  //         decoration: BoxDecoration(
+  //           color: Color(0xFFD9D9D9).withOpacity(0.20),
+  //           borderRadius: BorderRadius.circular(getSize(10)),
+  //         ),
+  //         padding: EdgeInsets.symmetric(
+  //           horizontal: getSize(20),
+  //           vertical: getSize(4),
+  //         ),
+  //         child: Row(
+  //           children: [
+  //             BaseText(
+  //               text: 'Quantity',
+  //               fontSize: 14,
+  //               fontWeight: FontWeight.w500,
+  //             ),
+  //             Spacer(),
+  //             IconButton(
+  //               onPressed: () => context
+  //                   .read<ProductDetailBloc>()
+  //                   .add(ProductDetailEvent.decreaseProductQuantity()),
+  //               icon: Container(
+  //                 height: getSize(20),
+  //                 width: getSize(20),
+  //                 alignment: Alignment.center,
+  //                 decoration: BoxDecoration(
+  //                   color: AppColors.white,
+  //                   borderRadius: BorderRadius.circular(getSize(6)),
+  //                   border: Border.all(
+  //                     color: AppColors.black.withOpacity(0.20),
+  //                   ),
+  //                 ),
+  //                 child: Icon(
+  //                   Icons.remove,
+  //                   size: getSize(12),
+  //                 ),
+  //               ),
+  //             ),
+  //             Container(
+  //               height: getSize(27),
+  //               width: getSize(27),
+  //               alignment: Alignment.center,
+  //               decoration: BoxDecoration(
+  //                 color: AppColors.primaryOrange,
+  //                 shape: BoxShape.circle,
+  //               ),
+  //               child: BaseText(
+  //                 text: '${state.productQuantity}',
+  //                 fontSize: 14,
+  //                 fontWeight: FontWeight.w500,
+  //                 textColor: AppColors.white,
+  //               ),
+  //             ),
+  //             IconButton(
+  //               onPressed: () => context
+  //                   .read<ProductDetailBloc>()
+  //                   .add(ProductDetailEvent.increaseProductQuantity()),
+  //               icon: Container(
+  //                 height: getSize(20),
+  //                 width: getSize(20),
+  //                 alignment: Alignment.center,
+  //                 decoration: BoxDecoration(
+  //                   color: AppColors.white,
+  //                   borderRadius: BorderRadius.circular(getSize(6)),
+  //                   border: Border.all(
+  //                     color: AppColors.black.withOpacity(0.20),
+  //                   ),
+  //                 ),
+  //                 child: Icon(
+  //                   Icons.add,
+  //                   size: getSize(12),
+  //                 ),
+  //               ),
+  //             )
+  //           ],
+  //         ),
+  //       );
+
+  //     },
+  //   ),
+  // );
 }
 
 productDetailsView(

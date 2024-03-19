@@ -6,6 +6,7 @@ import 'package:grape_customer_app/domain/main/i_main_facade.dart';
 import 'package:grape_customer_app/domain/main/main_failure.dart';
 import 'package:grape_customer_app/infrastructure/core/common_response.dart';
 import 'package:grape_customer_app/infrastructure/core/network/injectable_module.dart';
+import 'package:grape_customer_app/infrastructure/main/checkout_dto/checkout_dto.dart';
 import 'package:grape_customer_app/infrastructure/main/payemnt_method_dto/get_cards_dto.dart';
 import 'package:grape_customer_app/infrastructure/main/shipping_address_dto/shipping_address_dto.dart';
 import 'package:injectable/injectable.dart';
@@ -604,6 +605,94 @@ class MainFacade implements IMainFacade {
       final res = await apiService.postMethod(
         ApiConstants.makeDefaultPaymentMethod,
         {"payment_method_id": id},
+      );
+
+      if (res.dioMessage != null) {
+        return right(res.dioMessage ?? "");
+      } else {
+        return left(const MainFailure.serverError());
+      }
+    } on DioException catch (err) {
+      if (err.response != null) {
+        var commonRespose = CommonResponse.fromJson(err.response?.data);
+
+        if (commonRespose.dioMessage != null) {
+          return left(
+              MainFailure.showAPIResponseMessage(commonRespose.dioMessage!));
+        }
+      } else if (err.type == DioExceptionType.connectionError) {
+        return left(const MainFailure.networkError());
+      }
+
+      return left(const MainFailure.serverError());
+    }
+  }
+
+  @override
+  Future<Either<MainFailure, CommonResponse>> orderCheckoutAPI(
+      {String? productId,
+      String? quantity,
+      bool isFromcart = false,
+      required int page}) async {
+    try {
+      Map<String, dynamic> mapData = {
+        'page': page,
+        'limit': _perPage,
+      };
+      if (isFromcart) {
+        mapData.addAll({'is_cart': "1"});
+      } else {
+        mapData.addAll({
+          'product_id': productId,
+          'quantity': quantity,
+        });
+      }
+      final res = await apiService.getMethod(ApiConstants.orderCheckout,
+          queryParameters: mapData);
+
+      if (res != null && res.data != null) {
+        return right(res);
+      } else {
+        return left(const MainFailure.serverError());
+      }
+    } on DioException catch (err) {
+      if (err.response != null) {
+        var commonRespose = CommonResponse.fromJson(err.response?.data);
+
+        if (commonRespose.dioMessage != null) {
+          return left(
+              MainFailure.showAPIResponseMessage(commonRespose.dioMessage!));
+        }
+      } else if (err.type == DioExceptionType.connectionError) {
+        return left(const MainFailure.networkError());
+      }
+
+      return left(const MainFailure.serverError());
+    }
+  }
+
+  @override
+  Future<Either<MainFailure, String>> orderPlacetAPI(
+      {required CheckoutDTO checkoutDTO}) async {
+    try {
+      var productList = <Map<String, dynamic>>[];
+      for (var i = 0; i < (checkoutDTO.products?.length ?? 0); i++) {
+        productList.add({
+          "product_id": checkoutDTO.products?[i].id.toString() ?? "",
+          "quantity": checkoutDTO.products?[i].quantity.toString() ?? "",
+          "amount": checkoutDTO.products?[i].price.toString() ?? ""
+        });
+      }
+      Map<String, dynamic> mapData = {
+        "product": productList,
+        "shipping_address_id":
+            checkoutDTO.shipping_address?.id.toString() ?? "",
+        "shipping_charge": checkoutDTO.shipping_charge?.toString() ?? "",
+        "tax": checkoutDTO.tax?.toString() ?? "",
+      };
+      final res = await apiService.postMethod(
+        ApiConstants.orderPlace,
+        mapData,
       );
 
       if (res.dioMessage != null) {

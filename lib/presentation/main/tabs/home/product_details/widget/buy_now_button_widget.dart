@@ -80,6 +80,7 @@ class BuyNowButtonWidget extends StatelessWidget {
                     context,
                     state.getProductDetails.product!,
                     state.dataList,
+                    state,
                   );
                 },
                 height: 42,

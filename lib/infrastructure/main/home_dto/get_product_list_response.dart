@@ -1,4 +1,4 @@
-// ignore_for_file: non_constant_identifier_names
+// ignore_for_file: non_constant_identifier_names, invalid_annotation_target
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -33,6 +33,7 @@ class GetProductListResponse with _$GetProductListResponse {
     int? shop_id,
     String? shop_location,
     int? seller_total_product,
+    @JsonKey(includeFromJson: true) num? quantity,
   }) = _GetProductListResponse;
 
   factory GetProductListResponse.fromJson(Map<String, dynamic> json) =>

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -77,7 +75,7 @@ class PaymentMethodBloc extends Bloc<PaymentMethodEvent, PaymentMethodState> {
                   );
                 }
               } catch (e) {
-                log(e.toString());
+                // log(e.toString());
                 showError(message: e.toString()).show(value.context);
                 emit(
                   state.copyWith(
