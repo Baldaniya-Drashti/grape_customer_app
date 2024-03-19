@@ -160,7 +160,13 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           addFilterInList: (AddFilterInList value) {
             var updateList = <MapEntry<String, dynamic>>[];
 
-            if ((value.selectedBrandFilter.value as List).isEmpty) {
+            if ((value.selectedBrandFilter.value as List).isEmpty ||
+                List<MapEntry<String, dynamic>>.from(state.selectedFilterList)
+                    .where((element) => element.key.contains('free_shipping'))
+                    .toList()
+                    .map((e) => e)
+                    .toList()
+                    .isNotEmpty) {
               updateList = List<MapEntry<String, dynamic>>.from(
                   state.selectedFilterList)
                 ..removeWhere(

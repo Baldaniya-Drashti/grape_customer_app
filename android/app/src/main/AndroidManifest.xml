@@ -40,7 +40,7 @@
                 <category android:name="android.intent.category.DEFAULT"/>
                 <category android:name="android.intent.category.BROWSABLE"/>
                 <data
-                    android:host="grapecustomer.page.link"
+                    android:host="iroid.page.link"
                     android:scheme="https"/>
             </intent-filter>
         </activity>

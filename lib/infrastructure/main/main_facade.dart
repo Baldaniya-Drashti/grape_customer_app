@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:grape_customer_app/domain/auth/auth_value_objects.dart';
@@ -103,12 +101,10 @@ class MainFacade implements IMainFacade {
         'page': page,
         'limit': _perPage,
       };
-      // for (var i = 0; i < selectedFilterList.length; i++) {
-      //   mapData.addEntries(selectedFilterList[i]);
-      // }
-      // if (selectedFilterList.isNotEmpty) {
-      //   mapData.addEntries(selectedFilterList);
-      // }
+
+      if (selectedFilterList.isNotEmpty) {
+        mapData.addEntries(selectedFilterList);
+      }
       if (searchText.isNotEmpty) {
         mapData.addAll({'product': searchText.trim()});
       }

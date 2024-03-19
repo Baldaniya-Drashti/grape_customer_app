@@ -33,7 +33,7 @@ class FilterCommonContainer extends StatelessWidget {
               ? () {
                   context.read<HomeBloc>().add(
                         HomeEvent.addFilterInList(
-                          MapEntry(filterTitle, ['']),
+                          MapEntry(filterTitle, ['1']),
                         ),
                       );
                 }
