@@ -15,41 +15,22 @@ class PaymentMethodWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<CheckoutBloc, CheckoutState>(
       builder: (context, state) {
-        if (state.checkoutDTO.payment_method == null) {
-          return GestureDetector(
-            onTap: () async {
-              var res =
-                  await context.router.push(PageRouteInfo(PaymentMethod.name));
-
-              if (res != null) {
-                context
-                    .read<CheckoutBloc>()
-                    .add(CheckoutEvent.changePaymentMethod(res as GetCardsDTO));
-              }
-            },
-            child: Center(
-              child: BaseText(
-                text: 'Add payment method',
-                textColor: AppColors.primaryOrange,
-                textDecoration: TextDecoration.underline,
-              ),
+        return Column(
+          children: [
+            SizedBox(
+              height: getSize(30),
             ),
-          );
-        } else {
-          return Column(
-            children: [
-              SizedBox(
-                height: getSize(30),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  BaseText(
-                    text: 'Payment Method',
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                  ),
-                  GestureDetector(
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                BaseText(
+                  text: 'Payment Method',
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                ),
+                Visibility(
+                  visible: state.checkoutDTO.payment_method != null,
+                  child: GestureDetector(
                     onTap: () async {
                       var res = await context.router
                           .push(PageRouteInfo(PaymentMethod.name));
@@ -67,42 +48,62 @@ class PaymentMethodWidget extends StatelessWidget {
                       textColor: AppColors.primaryOrange,
                     ),
                   ),
-                ],
-              ),
-              SizedBox(
-                height: getSize(10),
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(
-                  vertical: getSize(18),
-                  horizontal: getSize(24),
                 ),
-                decoration: BoxDecoration(
-                  color: AppColors.grey.withOpacity(0.20),
-                  borderRadius: BorderRadius.circular(getSize(10)),
-                ),
-                child: Row(
-                  children: [
-                    getCardIcon(
-                            state.checkoutDTO.payment_method?.brand ?? "") ??
-                        Container(),
-                    SizedBox(
-                      width: getSize(8),
-                    ),
-                    BaseText(
-                      text:
-                          '**** **** **** ${state.checkoutDTO.payment_method?.last4 ?? ""}',
-                      fontSize: 12,
+              ],
+            ),
+            SizedBox(
+              height: getSize(10),
+            ),
+            Container(
+              padding: EdgeInsets.symmetric(
+                vertical: getSize(18),
+                horizontal: getSize(24),
+              ),
+              decoration: BoxDecoration(
+                color: AppColors.grey.withOpacity(0.20),
+                borderRadius: BorderRadius.circular(getSize(10)),
+              ),
+              child: state.checkoutDTO.payment_method == null
+                  ? GestureDetector(
+                      onTap: () async {
+                        var res = await context.router
+                            .push(PageRouteInfo(PaymentMethod.name));
+
+                        if (res != null) {
+                          context.read<CheckoutBloc>().add(
+                              CheckoutEvent.changePaymentMethod(
+                                  res as GetCardsDTO));
+                        }
+                      },
+                      child: Center(
+                        child: BaseText(
+                          text: 'Add payment method',
+                          textColor: AppColors.primaryOrange,
+                          textDecoration: TextDecoration.underline,
+                        ),
+                      ),
                     )
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: getSize(30),
-              ),
-            ],
-          );
-        }
+                  : Row(
+                      children: [
+                        getCardIcon(state.checkoutDTO.payment_method?.brand ??
+                                "") ??
+                            Container(),
+                        SizedBox(
+                          width: getSize(8),
+                        ),
+                        BaseText(
+                          text:
+                              '**** **** **** ${state.checkoutDTO.payment_method?.last4 ?? ""}',
+                          fontSize: 12,
+                        )
+                      ],
+                    ),
+            ),
+            SizedBox(
+              height: getSize(30),
+            ),
+          ],
+        );
       },
     );
   }

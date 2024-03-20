@@ -15,46 +15,23 @@ class ShippingAddressWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<CheckoutBloc, CheckoutState>(
       builder: (context, state) {
-        if (state.checkoutDTO.shipping_address == null) {
-          return GestureDetector(
-            onTap: () async {
-              var res = await context.router.push(
-                PageRouteInfo(
-                  ShippingAddresses.name,
-                  args: ShippingAddressesArgs(isFromChangeAddress: true),
-                ),
-              );
-
-              if (res != null) {
-                context.read<CheckoutBloc>().add(
-                    CheckoutEvent.changeShippingAddress(
-                        res as ShippingAddressDTO));
-              }
-            },
-            child: Center(
-              child: BaseText(
-                text: 'Add shipping address',
-                textColor: AppColors.primaryOrange,
-                textDecoration: TextDecoration.underline,
-              ),
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(
+              height: getSize(30),
             ),
-          );
-        } else {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                height: getSize(30),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  BaseText(
-                    text: 'Shipping Address',
-                    fontSize: 14,
-                    fontWeight: FontWeight.w600,
-                  ),
-                  GestureDetector(
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                BaseText(
+                  text: 'Shipping Address',
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                ),
+                Visibility(
+                  visible: state.checkoutDTO.shipping_address != null,
+                  child: GestureDetector(
                     onTap: () async {
                       var res = await context.router.push(
                         PageRouteInfo(
@@ -77,53 +54,79 @@ class ShippingAddressWidget extends StatelessWidget {
                       textColor: AppColors.primaryOrange,
                     ),
                   ),
-                ],
-              ),
-              SizedBox(
-                height: getSize(10),
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(
-                  vertical: getSize(18),
-                  horizontal: getSize(24),
                 ),
-                decoration: BoxDecoration(
-                  color: AppColors.grey.withOpacity(0.20),
-                  borderRadius: BorderRadius.circular(getSize(10)),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    BaseText(
-                      text: state.checkoutDTO.shipping_address?.full_name ?? "",
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600,
-                    ),
-                    BaseText(
-                      text:
-                          '+${state.checkoutDTO.shipping_address?.country_code} ${state.checkoutDTO.shipping_address?.mobile}',
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600,
-                    ),
-                    BaseText(
-                      text:
-                          '${state.checkoutDTO.shipping_address?.address},${state.checkoutDTO.shipping_address?.state},${state.checkoutDTO.shipping_address?.city},${state.checkoutDTO.shipping_address?.pincode}',
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400,
-                      showFullDescription: true,
-                    ),
-                    BaseText(
-                      text:
-                          'Landmark: ${state.checkoutDTO.shipping_address?.landmark}',
-                      fontSize: 14,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  ],
-                ),
+              ],
+            ),
+            SizedBox(
+              height: getSize(10),
+            ),
+            Container(
+              padding: EdgeInsets.symmetric(
+                vertical: getSize(18),
+                horizontal: getSize(24),
               ),
-            ],
-          );
-        }
+              decoration: BoxDecoration(
+                color: AppColors.grey.withOpacity(0.20),
+                borderRadius: BorderRadius.circular(getSize(10)),
+              ),
+              child: state.checkoutDTO.shipping_address == null
+                  ? GestureDetector(
+                      onTap: () async {
+                        var res = await context.router.push(
+                          PageRouteInfo(
+                            ShippingAddresses.name,
+                            args: ShippingAddressesArgs(
+                                isFromChangeAddress: true),
+                          ),
+                        );
+
+                        if (res != null) {
+                          context.read<CheckoutBloc>().add(
+                              CheckoutEvent.changeShippingAddress(
+                                  res as ShippingAddressDTO));
+                        }
+                      },
+                      child: Center(
+                        child: BaseText(
+                          text: 'Add shipping address',
+                          textColor: AppColors.primaryOrange,
+                          textDecoration: TextDecoration.underline,
+                        ),
+                      ),
+                    )
+                  : Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        BaseText(
+                          text: state.checkoutDTO.shipping_address?.full_name ??
+                              "",
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                        ),
+                        BaseText(
+                          text:
+                              '+${state.checkoutDTO.shipping_address?.country_code} ${state.checkoutDTO.shipping_address?.mobile}',
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                        ),
+                        BaseText(
+                          text:
+                              '${state.checkoutDTO.shipping_address?.address},${state.checkoutDTO.shipping_address?.state},${state.checkoutDTO.shipping_address?.city},${state.checkoutDTO.shipping_address?.pincode}',
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                          showFullDescription: true,
+                        ),
+                        BaseText(
+                          text:
+                              'Landmark: ${state.checkoutDTO.shipping_address?.landmark}',
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ],
+                    ),
+            ),
+          ],
+        );
       },
     );
   }

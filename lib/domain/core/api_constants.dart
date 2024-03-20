@@ -51,4 +51,7 @@ class ApiConstants {
   //checkout
   static String orderCheckout = 'checkout';
   static String orderPlace = 'order/place';
+
+  //order
+  static String getMyOrder = 'my-order';
 }

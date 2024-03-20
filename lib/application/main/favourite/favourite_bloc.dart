@@ -58,7 +58,7 @@ class FavouriteBloc extends Bloc<FavouriteEvent, FavouriteState> {
                 var cartList = (r.data as List<dynamic>)
                     .map((e) => GetCartListDTO.fromJson(e))
                     .toList();
-
+                lastPage = r.meta?.lastPage ?? 1;
                 return emit(
                   state.copyWith(
                     isLoading: false,

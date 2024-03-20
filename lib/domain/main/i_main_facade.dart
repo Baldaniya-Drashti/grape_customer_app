@@ -88,4 +88,7 @@ abstract class IMainFacade {
   Future<Either<MainFailure, String>> orderPlacetAPI({
     required CheckoutDTO checkoutDTO,
   });
+
+  Future<Either<MainFailure, CommonResponse>> getMyOrdersAPI(
+      {required int page});
 }

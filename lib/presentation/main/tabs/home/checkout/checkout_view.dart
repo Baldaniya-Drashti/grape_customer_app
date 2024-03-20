@@ -131,10 +131,6 @@ class CheckoutView extends StatelessWidget {
                   Duration(seconds: 3),
                   () => context.router.popUntil((route) => route.isFirst),
                 );
-                // await showSuccess(message: r).show(context).then((value) {
-                //   context.router.pop(state.cardDetail.firstWhere((element) =>
-                //       element.payment_method_id == state.selectedCard));
-                // });
               },
             ),
           );

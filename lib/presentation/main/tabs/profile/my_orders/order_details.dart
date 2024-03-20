@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grape_customer_app/application/main/profile/my_orders/my_orders_bloc.dart';
 import 'package:grape_customer_app/domain/core/l10n/app_localizations.dart';
 import 'package:grape_customer_app/domain/core/math_utils.dart';
+import 'package:grape_customer_app/injection.dart';
 import 'package:grape_customer_app/presentation/core/widgets/buttons/common_button.dart';
 import 'package:grape_customer_app/presentation/core/widgets/inputs/custom_app_bar.dart';
 import 'package:grape_customer_app/presentation/main/tabs/profile/my_orders/widgets/order_detail_item.dart';
@@ -19,7 +20,7 @@ class OrderDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => MyOrdersBloc(),
+      create: (context) => getIt<MyOrdersBloc>(),
       child: BlocConsumer<MyOrdersBloc, MyOrdersState>(
         builder: (context, state) {
           return Scaffold(

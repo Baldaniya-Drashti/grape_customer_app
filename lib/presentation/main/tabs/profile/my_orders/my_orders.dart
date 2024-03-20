@@ -4,6 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grape_customer_app/application/main/profile/my_orders/my_orders_bloc.dart';
 import 'package:grape_customer_app/domain/core/l10n/app_localizations.dart';
 import 'package:grape_customer_app/domain/core/math_utils.dart';
+import 'package:grape_customer_app/injection.dart';
+import 'package:grape_customer_app/presentation/common/widgets/paginated_list_view.dart';
+import 'package:grape_customer_app/presentation/core/styles/app_colors.dart';
 import 'package:grape_customer_app/presentation/core/widgets/inputs/custom_app_bar.dart';
 import 'package:grape_customer_app/presentation/main/tabs/profile/my_orders/widgets/my_orders_card.dart';
 
@@ -14,26 +17,48 @@ class MyOrders extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => MyOrdersBloc(),
+      create: (context) =>
+          getIt<MyOrdersBloc>()..add(MyOrdersEvent.getMyOrderseList(true)),
       child: BlocConsumer<MyOrdersBloc, MyOrdersState>(
         builder: (context, state) {
           return Scaffold(
             appBar: CustomAppBar(
               title: AppLocalizations.of(context).myOrders,
             ),
-            body: SafeArea(
-              child: ListView.separated(
-                padding: EdgeInsets.symmetric(
-                  horizontal: getSize(20),
-                  vertical: getSize(20),
-                ),
-                itemCount: 5,
-                separatorBuilder: (context, index) => SizedBox(
-                  height: getSize(18),
-                ),
-                itemBuilder: (context, index) => MyOrdesCard(),
-              ),
-            ),
+            body: state.isLoading
+                ? Center(
+                    child: CircularProgressIndicator(
+                      color: AppColors.primaryOrange,
+                    ),
+                  )
+                : PaginatedListView(
+                    onRefresh: () {
+                      context
+                          .read<MyOrdersBloc>()
+                          .add(MyOrdersEvent.getMyOrderseList(true));
+                    },
+                    refreshController:
+                        context.read<MyOrdersBloc>().refreshController,
+                    onLoading: () {
+                      context
+                          .read<MyOrdersBloc>()
+                          .add(MyOrdersEvent.getMyOrderseList(false));
+                    },
+                    isNoDataFound: state.isNoDataFound,
+                    child: ListView.separated(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: getSize(20),
+                        vertical: getSize(20),
+                      ),
+                      itemCount: state.getMyOrderList.length,
+                      separatorBuilder: (context, index) => SizedBox(
+                        height: getSize(18),
+                      ),
+                      itemBuilder: (context, index) => MyOrdesCard(
+                        index: index,
+                      ),
+                    ),
+                  ),
           );
         },
         listener: (context, state) {},

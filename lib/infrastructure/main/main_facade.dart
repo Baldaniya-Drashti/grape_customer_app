@@ -680,7 +680,9 @@ class MainFacade implements IMainFacade {
         productList.add({
           "product_id": checkoutDTO.products?[i].id.toString() ?? "",
           "quantity": checkoutDTO.products?[i].quantity.toString() ?? "",
-          "amount": checkoutDTO.products?[i].price.toString() ?? ""
+          "amount": ((checkoutDTO.products?[i].price ?? 0) *
+                  (checkoutDTO.products?[i].quantity ?? 1))
+              .toString()
         });
       }
       Map<String, dynamic> mapData = {
@@ -697,6 +699,39 @@ class MainFacade implements IMainFacade {
 
       if (res.dioMessage != null) {
         return right(res.dioMessage ?? "");
+      } else {
+        return left(const MainFailure.serverError());
+      }
+    } on DioException catch (err) {
+      if (err.response != null) {
+        var commonRespose = CommonResponse.fromJson(err.response?.data);
+
+        if (commonRespose.dioMessage != null) {
+          return left(
+              MainFailure.showAPIResponseMessage(commonRespose.dioMessage!));
+        }
+      } else if (err.type == DioExceptionType.connectionError) {
+        return left(const MainFailure.networkError());
+      }
+
+      return left(const MainFailure.serverError());
+    }
+  }
+
+  @override
+  Future<Either<MainFailure, CommonResponse>> getMyOrdersAPI(
+      {required int page}) async {
+    try {
+      var mapData = <String, dynamic>{
+        'page': page,
+        'limit': _perPage,
+      };
+
+      final res = await apiService.getMethod(ApiConstants.getMyOrder,
+          queryParameters: mapData);
+
+      if (res != null) {
+        return right(res);
       } else {
         return left(const MainFailure.serverError());
       }

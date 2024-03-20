@@ -109,35 +109,38 @@ class GetCheckoutProductDetailWidget extends StatelessWidget {
                       )
                     : Container(),
               ),
-            
+
               SizedBox(
                 width: getSize(8),
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  BaseText(
-                    text: getProductListResponse.product_name ?? "",
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                  ),
-                  SizedBox(
-                    height: getSize(8),
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: List.generate(
-                      dataList.length,
-                      (index) => Padding(
-                        padding: EdgeInsets.symmetric(vertical: getSize(3)),
-                        child: getProductDetails(
-                          title: dataList[index].name ?? "",
-                          description: dataList[index].value ?? "",
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    BaseText(
+                      text: getProductListResponse.product_name ?? "",
+                      fontSize: 14,
+                      maxLines: 2,
+                      fontWeight: FontWeight.w500,
+                    ),
+                    SizedBox(
+                      height: getSize(8),
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: List.generate(
+                        dataList.length,
+                        (index) => Padding(
+                          padding: EdgeInsets.symmetric(vertical: getSize(3)),
+                          child: getProductDetails(
+                            title: dataList[index].name ?? "",
+                            description: dataList[index].value ?? "",
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
               // Column(
               //   children: [
@@ -254,31 +257,33 @@ class GetCheckoutProductDetailWidget extends StatelessWidget {
               SizedBox(
                 width: getSize(8),
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  BaseText(
-                    text: getProductListResponse.product_name ?? "",
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                  ),
-                  SizedBox(
-                    height: getSize(8),
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: List.generate(
-                      dataList.length,
-                      (index) => Padding(
-                        padding: EdgeInsets.symmetric(vertical: getSize(3)),
-                        child: getProductDetails(
-                          title: dataList[index].name ?? "",
-                          description: dataList[index].value ?? "",
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    BaseText(
+                      text: getProductListResponse.product_name ?? "",
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                    ),
+                    SizedBox(
+                      height: getSize(8),
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: List.generate(
+                        dataList.length,
+                        (index) => Padding(
+                          padding: EdgeInsets.symmetric(vertical: getSize(3)),
+                          child: getProductDetails(
+                            title: dataList[index].name ?? "",
+                            description: dataList[index].value ?? "",
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ],
           ),
