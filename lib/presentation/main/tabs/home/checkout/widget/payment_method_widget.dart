@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grape_customer_app/application/main/checkout/checkout_bloc.dart';
 import 'package:grape_customer_app/domain/core/math_utils.dart';
+import 'package:grape_customer_app/infrastructure/main/payemnt_method_dto/get_cards_dto.dart';
 import 'package:grape_customer_app/presentation/common/widgets/base_text.dart';
 import 'package:grape_customer_app/presentation/core/app_router.gr.dart';
 import 'package:grape_customer_app/presentation/core/styles/app_colors.dart';
@@ -14,71 +15,94 @@ class PaymentMethodWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<CheckoutBloc, CheckoutState>(
       builder: (context, state) {
-        return Column(
-          children: [
-            SizedBox(
-              height: getSize(30),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                BaseText(
-                  text: 'Payment Method',
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                ),
-                GestureDetector(
-                  onTap: () async {
-                    var res = await context.router
-                        .push(PageRouteInfo(PaymentMethod.name));
+        if (state.checkoutDTO.payment_method == null) {
+          return GestureDetector(
+            onTap: () async {
+              var res =
+                  await context.router.push(PageRouteInfo(PaymentMethod.name));
 
-                    if (res != null) {
-                      context
-                          .read<CheckoutBloc>()
-                          .add(CheckoutEvent.getCheckoutDetail(true));
-                    }
-                  },
-                  child: BaseText(
-                    text: 'Change',
-                    fontSize: 12,
-                    fontWeight: FontWeight.w500,
-                    textColor: AppColors.primaryOrange,
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: getSize(10),
-            ),
-            Container(
-              padding: EdgeInsets.symmetric(
-                vertical: getSize(18),
-                horizontal: getSize(24),
+              if (res != null) {
+                context
+                    .read<CheckoutBloc>()
+                    .add(CheckoutEvent.changePaymentMethod(res as GetCardsDTO));
+              }
+            },
+            child: Center(
+              child: BaseText(
+                text: 'Add payment method',
+                textColor: AppColors.primaryOrange,
+                textDecoration: TextDecoration.underline,
               ),
-              decoration: BoxDecoration(
-                color: AppColors.grey.withOpacity(0.20),
-                borderRadius: BorderRadius.circular(getSize(10)),
+            ),
+          );
+        } else {
+          return Column(
+            children: [
+              SizedBox(
+                height: getSize(30),
               ),
-              child: Row(
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  getCardIcon(state.checkoutDTO.payment_method?.brand ?? "") ??
-                      Container(),
-                  SizedBox(
-                    width: getSize(8),
-                  ),
                   BaseText(
-                    text:
-                        '**** **** **** ${state.checkoutDTO.payment_method?.last4 ?? ""}',
-                    fontSize: 12,
-                  )
+                    text: 'Payment Method',
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                  ),
+                  GestureDetector(
+                    onTap: () async {
+                      var res = await context.router
+                          .push(PageRouteInfo(PaymentMethod.name));
+
+                      if (res != null) {
+                        context.read<CheckoutBloc>().add(
+                            CheckoutEvent.changePaymentMethod(
+                                res as GetCardsDTO));
+                      }
+                    },
+                    child: BaseText(
+                      text: 'Change',
+                      fontSize: 12,
+                      fontWeight: FontWeight.w500,
+                      textColor: AppColors.primaryOrange,
+                    ),
+                  ),
                 ],
               ),
-            ),
-            SizedBox(
-              height: getSize(30),
-            ),
-          ],
-        );
+              SizedBox(
+                height: getSize(10),
+              ),
+              Container(
+                padding: EdgeInsets.symmetric(
+                  vertical: getSize(18),
+                  horizontal: getSize(24),
+                ),
+                decoration: BoxDecoration(
+                  color: AppColors.grey.withOpacity(0.20),
+                  borderRadius: BorderRadius.circular(getSize(10)),
+                ),
+                child: Row(
+                  children: [
+                    getCardIcon(
+                            state.checkoutDTO.payment_method?.brand ?? "") ??
+                        Container(),
+                    SizedBox(
+                      width: getSize(8),
+                    ),
+                    BaseText(
+                      text:
+                          '**** **** **** ${state.checkoutDTO.payment_method?.last4 ?? ""}',
+                      fontSize: 12,
+                    )
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: getSize(30),
+              ),
+            ],
+          );
+        }
       },
     );
   }

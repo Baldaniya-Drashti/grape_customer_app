@@ -5,6 +5,8 @@ import 'package:grape_customer_app/domain/main/i_main_facade.dart';
 import 'package:grape_customer_app/domain/main/main_failure.dart';
 import 'package:grape_customer_app/infrastructure/main/checkout_dto/checkout_dto.dart';
 import 'package:grape_customer_app/infrastructure/main/home_dto/get_product_list_response.dart';
+import 'package:grape_customer_app/infrastructure/main/payemnt_method_dto/get_cards_dto.dart';
+import 'package:grape_customer_app/infrastructure/main/shipping_address_dto/shipping_address_dto.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -73,15 +75,20 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
 
                 for (var i = 0; i < productList.length; i++) {
                   cartTotal += (productList[i].price! * state.quantity);
-                  productList[i].copyWith(quantity: state.quantity);
-                }
 
+                  // productList[i].copyWith(quantity: state.quantity);
+                }
+                var updatedProductList = productList
+                    .map((e) => e.copyWith(quantity: state.quantity))
+                    .toList();
+                final updateCheckoutDto =
+                    productDetailRes.copyWith(products: updatedProductList);
                 return emit(
                   state.copyWith(
                     isLoading: false,
                     isErrorInAPI: false,
-                    checkoutDTO: productDetailRes,
-                    getProductList: productDetailRes.products ?? [],
+                    checkoutDTO: updateCheckoutDto,
+                    getProductList: updatedProductList,
                     cartTotal: cartTotal,
                     orderTotal: cartTotal +
                         (productDetailRes.shipping_charge ?? 0) +
@@ -97,7 +104,8 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
                 List<GetProductListResponse>.from(state.getProductList)
                   ..removeWhere(
                       (element) => element.id.toString() == value.productId);
-
+            final updateCheckoutDto =
+                state.checkoutDTO.copyWith(products: updatedList);
             num cartTotal = 0;
 
             for (var i = 0; i < updatedList.length; i++) {
@@ -106,12 +114,13 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
 
             emit(
               state.copyWith(
-                checkoutDTO: state.checkoutDTO,
+                checkoutDTO: updateCheckoutDto,
                 getProductList: updatedList,
                 cartTotal: cartTotal,
                 orderTotal: cartTotal +
                     (state.checkoutDTO.shipping_charge ?? 0) +
                     (state.checkoutDTO.tax ?? 0),
+                failureOrSuccessOption: none(),
               ),
             );
           },
@@ -132,6 +141,28 @@ class CheckoutBloc extends Bloc<CheckoutEvent, CheckoutState> {
               state.copyWith(
                 isSubmitting: false,
                 failureOrSuccessOption: optionOf(failureOrSuccess),
+              ),
+            );
+          },
+          changeShippingAddress: (ChangeShippingAddress value) async {
+            var updateCheckoutDTO = state.checkoutDTO.copyWith(
+              shipping_address: value.shippingAddressDTO,
+            );
+            emit(
+              state.copyWith(
+                checkoutDTO: updateCheckoutDTO,
+                failureOrSuccessOption: none(),
+              ),
+            );
+          },
+          changePaymentMethod: (ChangePaymentMethodEvent value) async {
+            var updateCheckoutDTO = state.checkoutDTO.copyWith(
+              payment_method: value.getCartListDTO,
+            );
+            emit(
+              state.copyWith(
+                checkoutDTO: updateCheckoutDTO,
+                failureOrSuccessOption: none(),
               ),
             );
           },

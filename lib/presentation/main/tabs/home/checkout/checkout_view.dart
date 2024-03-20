@@ -83,9 +83,17 @@ class CheckoutView extends StatelessWidget {
                 child: CommonButton(
                   isSubmitting: state.isSubmitting,
                   onPressed: () async {
-                    context
-                        .read<CheckoutBloc>()
-                        .add(CheckoutEvent.orderPlace());
+                    if (state.checkoutDTO.shipping_address == null) {
+                      await showError(message: 'please add shipping address')
+                          .show(context);
+                    } else if (state.checkoutDTO.payment_method == null) {
+                      await showError(message: 'please add payment method')
+                          .show(context);
+                    } else {
+                      context
+                          .read<CheckoutBloc>()
+                          .add(CheckoutEvent.orderPlace());
+                    }
                   },
                   buttonText: 'Pay Now',
                 ),

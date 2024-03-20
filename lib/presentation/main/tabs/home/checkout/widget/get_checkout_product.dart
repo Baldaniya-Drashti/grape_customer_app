@@ -87,32 +87,29 @@ class GetCheckoutProductDetailWidget extends StatelessWidget {
         children: [
           Row(
             children: [
-              Container(
-                height: getSize(90),
-                width: getSize(90),
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(getSize(10)),
-                  ),
-                ),
-                child: CachedNetworkImage(
-                  imageUrl: getProductListResponse.images?.first.image ?? "",
-                  placeholder: (context, url) => Container(
-                    height: getSize(80),
-                    width: getSize(60),
-                    decoration: BoxDecoration(
-                      color: Colors.grey.shade100,
-                      borderRadius: SmoothBorderRadius.all(
-                        SmoothRadius(
-                          cornerRadius: getSize(4),
-                          cornerSmoothing: 1,
+              Center(
+                child: getProductListResponse.images?.first.image != null
+                    ? ClipRRect(
+                        borderRadius: BorderRadius.circular(getSize(10)),
+                        child: CachedNetworkImage(
+                          imageUrl:
+                              getProductListResponse.images?.first.image ?? "",
+                          placeholder: (context, url) => Container(
+                            height: getSize(90),
+                            width: getSize(90),
+                            decoration: BoxDecoration(
+                              color: Colors.grey.shade100,
+                              borderRadius: BorderRadius.circular(getSize(10)),
+                            ),
+                          ),
+                          height: getSize(90),
+                          width: getSize(90),
+                          fit: BoxFit.cover,
                         ),
-                      ),
-                    ),
-                  ),
-                ),
+                      )
+                    : Container(),
               ),
+            
               SizedBox(
                 width: getSize(8),
               ),
@@ -142,6 +139,29 @@ class GetCheckoutProductDetailWidget extends StatelessWidget {
                   ),
                 ],
               ),
+              // Column(
+              //   children: [
+              //     IconButton(
+              //       onPressed: () {
+              //         context.read<CheckoutBloc>().add(
+              //               CheckoutEvent.removeCheckoutProduct(
+              //                 getProductListResponse.id.toString(),
+              //               ),
+              //             );
+              //       },
+              //       icon: Icon(
+              //         Icons.close_rounded,
+              //         color: AppColors.black.withOpacity(0.60),
+              //       ),
+              //     ),
+              //     BaseText(
+              //       text: '\$${getProductListResponse.price}',
+              //       fontSize: 18,
+              //       textColor: AppColors.mildBlue,
+              //       fontWeight: FontWeight.w600,
+              //     )
+              //   ],
+              // )
             ],
           ),
           Positioned.fill(

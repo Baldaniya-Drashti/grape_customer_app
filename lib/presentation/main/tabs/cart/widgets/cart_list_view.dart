@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grape_customer_app/application/main/cart/cart_bloc.dart';
@@ -109,34 +108,29 @@ class CartListView extends StatelessWidget {
         children: [
           Row(
             children: [
-              Container(
-                height: getSize(90),
-                width: getSize(90),
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(getSize(10)),
-                  ),
-                ),
-                child: CachedNetworkImage(
-                  imageUrl:
-                      state.cartListDTO[index].product?.images?.first.image ??
-                          "",
-                  placeholder: (context, url) => Container(
-                    height: getSize(80),
-                    width: getSize(60),
-                    decoration: BoxDecoration(
-                      color: Colors.grey.shade100,
-                      borderRadius: SmoothBorderRadius.all(
-                        SmoothRadius(
-                          cornerRadius: getSize(4),
-                          cornerSmoothing: 1,
+              Center(
+                child: state.cartListDTO[index].product?.images?.first.image !=
+                        null
+                    ? ClipRRect(
+                        borderRadius: BorderRadius.circular(getSize(10)),
+                        child: CachedNetworkImage(
+                          imageUrl: state.cartListDTO[index].product?.images
+                                  ?.first.image ??
+                              "",
+                          placeholder: (context, url) => Container(
+                            height: getSize(90),
+                            width: getSize(90),
+                            decoration: BoxDecoration(
+                              color: Colors.grey.shade100,
+                              borderRadius: BorderRadius.circular(getSize(10)),
+                            ),
+                          ),
+                          height: getSize(90),
+                          width: getSize(90),
+                          fit: BoxFit.cover,
                         ),
-                      ),
-                    ),
-                  ),
-                  fit: BoxFit.cover,
-                ),
+                      )
+                    : Container(),
               ),
               SizedBox(
                 width: getSize(8),

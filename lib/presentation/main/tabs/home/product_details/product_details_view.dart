@@ -9,6 +9,7 @@ import 'package:grape_customer_app/domain/core/svg_image_constants.dart';
 import 'package:grape_customer_app/injection.dart';
 import 'package:grape_customer_app/presentation/common/utils/flushbar_creator.dart';
 import 'package:grape_customer_app/presentation/common/widgets/base_text.dart';
+import 'package:grape_customer_app/presentation/common/widgets/paginated_list_view.dart';
 import 'package:grape_customer_app/presentation/core/app_router.gr.dart';
 import 'package:grape_customer_app/presentation/core/helper/dynamic_link_helper.dart';
 import 'package:grape_customer_app/presentation/core/shimmer/product_detail_shimmer.dart';
@@ -107,232 +108,261 @@ class ProductDetailsView extends StatelessWidget {
                           BaseText(text: 'Something wrong. Please try again!!'),
                     );
                   } else {
-                    return ListView(
-                      shrinkWrap: true,
-                      physics: BouncingScrollPhysics(),
-                      padding: EdgeInsets.zero,
-                      children: [
-                        Center(
-                          child: state.getProductDetails.product?.images != null
-                              ? CachedNetworkImage(
-                                  imageUrl: state
-                                          .getProductDetails
-                                          .product
-                                          ?.images?[state.selectedImageIndex]
-                                          .image ??
-                                      "",
-                                  height: getSize(216),
-                                  placeholder: (context, url) => Container(
+                    return PaginatedListView(
+                      onRefresh: () {
+                        context.read<ProductDetailBloc>().add(
+                              ProductDetailEvent
+                                  .getProductYouMayAlsoLikeProductList(
+                                true,
+                              ),
+                            );
+                      },
+                      onLoading: () {
+                        context.read<ProductDetailBloc>().add(
+                              ProductDetailEvent
+                                  .getProductYouMayAlsoLikeProductList(
+                                false,
+                              ),
+                            );
+                      },
+                      refreshController: context
+                          .read<ProductDetailBloc>()
+                          .productYouMayLikeRefreshController,
+                      child: ListView(
+                        shrinkWrap: true,
+                        physics: BouncingScrollPhysics(),
+                        padding: EdgeInsets.zero,
+                        children: [
+                          Center(
+                            child: state.getProductDetails.product?.images !=
+                                    null
+                                ? CachedNetworkImage(
+                                    imageUrl: state
+                                            .getProductDetails
+                                            .product
+                                            ?.images?[state.selectedImageIndex]
+                                            .image ??
+                                        "",
+                                    height: getSize(216),
+                                    placeholder: (context, url) => Container(
+                                      height: getSize(216),
+                                      color: Colors.grey.shade300,
+                                    ),
+                                    fit: BoxFit.cover,
+                                  )
+                                : Container(
                                     height: getSize(216),
                                     color: Colors.grey.shade300,
                                   ),
-                                  fit: BoxFit.cover,
-                                )
-                              : Container(
-                                  height: getSize(216),
-                                  color: Colors.grey.shade300,
-                                ),
-                        ),
-                        SizedBox(
-                          height: getSize(10),
-                        ),
-                        SelectModelWidget(),
-                        SizedBox(
-                          height: getSize(20),
-                        ),
-                        ProductMainInfo(),
-                        SizedBox(
-                          height: getSize(20),
-                        ),
-                        ProductConfigurationWidget(),
-                        SizedBox(
-                          height: getSize(20),
-                        ),
-                        Padding(
-                          padding:
-                              EdgeInsets.symmetric(horizontal: getSize(18)),
-                          child: BaseText(
-                            text: 'Product Specification:',
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600,
-                            textColor: AppColors.black.withOpacity(0.8),
                           ),
-                        ),
-                        SizedBox(
-                          height: getSize(10),
-                        ),
-                        Padding(
-                          padding:
-                              EdgeInsets.symmetric(horizontal: getSize(18)),
-                          child: BaseText(
-                            text: state.dataList.isNotEmpty
-                                ? state.dataList
-                                        .firstWhere((element) => element.name!
-                                            .contains('Product Description'))
-                                        .value ??
-                                    ""
-                                : "",
-                            fontSize: 12,
-                            showFullDescription: true,
-                            textColor: AppColors.black.withOpacity(0.6),
+                          SizedBox(
+                            height: getSize(10),
                           ),
-                        ),
-                        SizedBox(
-                          height: getSize(
-                              state.getProductDetails.similar_product != null &&
-                                      state.getProductDetails.similar_product!
-                                          .isNotEmpty
-                                  ? 20
-                                  : 0),
-                        ),
-                        Visibility(
-                          visible:
-                              state.getProductDetails.similar_product != null &&
-                                  state.getProductDetails.similar_product!
-                                      .isNotEmpty,
-                          child: Padding(
+                          SelectModelWidget(),
+                          SizedBox(
+                            height: getSize(20),
+                          ),
+                          ProductMainInfo(),
+                          SizedBox(
+                            height: getSize(20),
+                          ),
+                          ProductConfigurationWidget(),
+                          SizedBox(
+                            height: getSize(20),
+                          ),
+                          Padding(
                             padding:
                                 EdgeInsets.symmetric(horizontal: getSize(18)),
                             child: BaseText(
-                              text: 'Similar Products',
+                              text: 'Product Specification:',
                               fontSize: 14,
                               fontWeight: FontWeight.w600,
                               textColor: AppColors.black.withOpacity(0.8),
                             ),
                           ),
-                        ),
-                        SizedBox(
-                          height: getSize(
-                              state.getProductDetails.similar_product != null &&
-                                      state.getProductDetails.similar_product!
-                                          .isNotEmpty
-                                  ? 10
-                                  : 0),
-                        ),
-                        SimilarProductWidget(),
-                        SizedBox(
-                          height: getSize(20),
-                        ),
-                        ProductVenderDetailWidget(),
-                        SizedBox(
-                          height: getSize(state.getProductDetails.same_store !=
-                                      null &&
-                                  state.getProductDetails.same_store!.isNotEmpty
-                              ? 20
-                              : 0),
-                        ),
-                        Visibility(
-                          visible: state.getProductDetails.same_store != null &&
-                              state.getProductDetails.same_store!.isNotEmpty,
-                          child: Padding(
+                          SizedBox(
+                            height: getSize(10),
+                          ),
+                          Padding(
                             padding:
                                 EdgeInsets.symmetric(horizontal: getSize(18)),
                             child: BaseText(
-                              text: 'From the Same Store',
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
-                              textColor: AppColors.black.withOpacity(0.8),
+                              text: state.dataList.isNotEmpty
+                                  ? state.dataList
+                                          .firstWhere((element) => element.name!
+                                              .contains('Product Description'))
+                                          .value ??
+                                      ""
+                                  : "",
+                              fontSize: 12,
+                              showFullDescription: true,
+                              textColor: AppColors.black.withOpacity(0.6),
                             ),
                           ),
-                        ),
-                        SizedBox(
-                          height: getSize(state.getProductDetails.same_store !=
-                                      null &&
-                                  state.getProductDetails.same_store!.isNotEmpty
-                              ? 10
-                              : 0),
-                        ),
-                        FromSameStoreWidget(),
-                        SizedBox(
-                          height: getSize(state.getProductDetails.same_store !=
-                                      null &&
-                                  state.getProductDetails.same_store!.isNotEmpty
-                              ? 20
-                              : 0),
-                        ),
-                        Visibility(
-                          visible: state.getProductDetails.product?.reviews !=
-                                  null &&
-                              state.getProductDetails.product!.reviews!
-                                  .isNotEmpty,
-                          child: Padding(
-                            padding:
-                                EdgeInsets.symmetric(horizontal: getSize(18)),
-                            child: Row(
-                              children: [
-                                BaseText(
-                                  text: 'Review Product',
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                                Spacer(),
-                                GestureDetector(
-                                  onTap: () {
-                                    context.router.push(
-                                      PageRouteInfo(ReviewProductList.name),
-                                    );
-                                  },
-                                  child: BaseText(
-                                    text: 'See More',
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 12,
+                          SizedBox(
+                            height: getSize(
+                                state.getProductDetails.similar_product !=
+                                            null &&
+                                        state.getProductDetails.similar_product!
+                                            .isNotEmpty
+                                    ? 20
+                                    : 0),
+                          ),
+                          Visibility(
+                            visible: state.getProductDetails.similar_product !=
+                                    null &&
+                                state.getProductDetails.similar_product!
+                                    .isNotEmpty,
+                            child: Padding(
+                              padding:
+                                  EdgeInsets.symmetric(horizontal: getSize(18)),
+                              child: BaseText(
+                                text: 'Similar Products',
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600,
+                                textColor: AppColors.black.withOpacity(0.8),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: getSize(
+                                state.getProductDetails.similar_product !=
+                                            null &&
+                                        state.getProductDetails.similar_product!
+                                            .isNotEmpty
+                                    ? 10
+                                    : 0),
+                          ),
+                          SimilarProductWidget(),
+                          SizedBox(
+                            height: getSize(20),
+                          ),
+                          ProductVenderDetailWidget(),
+                          SizedBox(
+                            height: getSize(
+                                state.getProductDetails.same_store != null &&
+                                        state.getProductDetails.same_store!
+                                            .isNotEmpty
+                                    ? 20
+                                    : 0),
+                          ),
+                          Visibility(
+                            visible: state.getProductDetails.same_store !=
+                                    null &&
+                                state.getProductDetails.same_store!.isNotEmpty,
+                            child: Padding(
+                              padding:
+                                  EdgeInsets.symmetric(horizontal: getSize(18)),
+                              child: BaseText(
+                                text: 'From the Same Store',
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600,
+                                textColor: AppColors.black.withOpacity(0.8),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: getSize(
+                                state.getProductDetails.same_store != null &&
+                                        state.getProductDetails.same_store!
+                                            .isNotEmpty
+                                    ? 10
+                                    : 0),
+                          ),
+                          FromSameStoreWidget(),
+                          SizedBox(
+                            height: getSize(
+                                state.getProductDetails.same_store != null &&
+                                        state.getProductDetails.same_store!
+                                            .isNotEmpty
+                                    ? 20
+                                    : 0),
+                          ),
+                          Visibility(
+                            visible: state.getProductDetails.product?.reviews !=
+                                    null &&
+                                state.getProductDetails.product!.reviews!
+                                    .isNotEmpty,
+                            child: Padding(
+                              padding:
+                                  EdgeInsets.symmetric(horizontal: getSize(18)),
+                              child: Row(
+                                children: [
+                                  BaseText(
+                                    text: 'Review Product',
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600,
                                   ),
-                                ),
-                                Icon(
-                                  Icons.arrow_forward_ios_rounded,
-                                  size: getSize(18),
-                                )
-                              ],
+                                  Spacer(),
+                                  GestureDetector(
+                                    onTap: () {
+                                      context.router.push(
+                                        PageRouteInfo(ReviewProductList.name),
+                                      );
+                                    },
+                                    child: BaseText(
+                                      text: 'See More',
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 12,
+                                    ),
+                                  ),
+                                  Icon(
+                                    Icons.arrow_forward_ios_rounded,
+                                    size: getSize(18),
+                                  )
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                        SizedBox(
-                          height: getSize(
-                            state.getProductDetails.product?.reviews != null &&
-                                    state.getProductDetails.product!.reviews!
-                                        .isNotEmpty
-                                ? 5
-                                : 0,
-                          ),
-                        ),
-                        Visibility(
-                          visible: state.getProductDetails.product?.reviews !=
-                                  null &&
-                              state.getProductDetails.product!.reviews!
-                                  .isNotEmpty,
-                          child: ProductReviewListWidget(),
-                        ),
-                        Visibility(
-                          visible: state.getProductList.isNotEmpty,
-                          child: Container(
-                            alignment: Alignment.center,
-                            margin: EdgeInsets.symmetric(
-                              horizontal: getSize(18),
-                            ),
-                            padding: EdgeInsets.symmetric(
-                              vertical: getSize(12),
-                            ),
-                            decoration: BoxDecoration(
-                              color: Color(0xFFFFEEE1),
-                              borderRadius: BorderRadius.circular(getSize(6)),
-                            ),
-                            child: BaseText(
-                              text: 'Products You May Also Like',
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
-                              textColor: AppColors.primaryOrange,
+                          SizedBox(
+                            height: getSize(
+                              state.getProductDetails.product?.reviews !=
+                                          null &&
+                                      state.getProductDetails.product!.reviews!
+                                          .isNotEmpty
+                                  ? 5
+                                  : 0,
                             ),
                           ),
-                        ),
-                        SizedBox(
-                          height: getSize(10),
-                        ),
-                        ProductYouMayLikeWidget(),
-                        SizedBox(
-                          height:
-                              getSize(state.getProductList.isNotEmpty ? 20 : 0),
-                        ),
-                      ],
+                          Visibility(
+                            visible: state.getProductDetails.product?.reviews !=
+                                    null &&
+                                state.getProductDetails.product!.reviews!
+                                    .isNotEmpty,
+                            child: ProductReviewListWidget(),
+                          ),
+                          Visibility(
+                            visible: state.getProductList.isNotEmpty,
+                            child: Container(
+                              alignment: Alignment.center,
+                              margin: EdgeInsets.symmetric(
+                                horizontal: getSize(18),
+                              ),
+                              padding: EdgeInsets.symmetric(
+                                vertical: getSize(12),
+                              ),
+                              decoration: BoxDecoration(
+                                color: Color(0xFFFFEEE1),
+                                borderRadius: BorderRadius.circular(getSize(6)),
+                              ),
+                              child: BaseText(
+                                text: 'Products You May Also Like',
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600,
+                                textColor: AppColors.primaryOrange,
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: getSize(10),
+                          ),
+                          ProductYouMayLikeWidget(),
+                          SizedBox(
+                            height: getSize(
+                                state.getProductList.isNotEmpty ? 20 : 0),
+                          ),
+                        ],
+                      ),
                     );
                   }
                 },

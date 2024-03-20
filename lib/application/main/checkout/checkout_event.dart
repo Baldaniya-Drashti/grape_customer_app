@@ -9,4 +9,10 @@ class CheckoutEvent with _$CheckoutEvent {
   factory CheckoutEvent.removeCheckoutProduct(String productId) =
       ChangePaymentMethod;
   factory CheckoutEvent.orderPlace() = OrderPlace;
+
+  factory CheckoutEvent.changeShippingAddress(
+      ShippingAddressDTO shippingAddressDTO) = ChangeShippingAddress;
+
+  factory CheckoutEvent.changePaymentMethod(GetCardsDTO getCartListDTO) =
+      ChangePaymentMethodEvent;
 }

@@ -219,34 +219,37 @@ class ProfileView extends StatelessWidget {
   }
 
   Widget liveChatSupport(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: getSize(20)),
-      padding: EdgeInsets.symmetric(vertical: getSize(9)),
-      decoration: BoxDecoration(
-        color: Color(0xFFFFEEE1),
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(
-          color: AppColors.primaryOrange.withOpacity(0.4),
-          width: getSize(1),
+    return GestureDetector(
+      onTap: () => context.router.push(PageRouteInfo(ChatView.name)),
+      child: Container(
+        margin: EdgeInsets.symmetric(horizontal: getSize(20)),
+        padding: EdgeInsets.symmetric(vertical: getSize(9)),
+        decoration: BoxDecoration(
+          color: Color(0xFFFFEEE1),
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(
+            color: AppColors.primaryOrange.withOpacity(0.4),
+            width: getSize(1),
+          ),
         ),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Image.asset(
-            PngImageConstants.liveChat,
-            height: 30,
-          ),
-          SizedBox(
-            width: getSize(8),
-          ),
-          BaseText(
-            text: AppLocalizations.of(context).liveChatSupport,
-            textColor: AppColors.primaryOrange,
-            fontWeight: FontWeight.w500,
-            fontSize: 14,
-          )
-        ],
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              PngImageConstants.liveChat,
+              height: 30,
+            ),
+            SizedBox(
+              width: getSize(8),
+            ),
+            BaseText(
+              text: AppLocalizations.of(context).liveChatSupport,
+              textColor: AppColors.primaryOrange,
+              fontWeight: FontWeight.w500,
+              fontSize: 14,
+            )
+          ],
+        ),
       ),
     );
   }

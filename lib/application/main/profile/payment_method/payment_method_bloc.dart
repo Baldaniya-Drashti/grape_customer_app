@@ -173,10 +173,13 @@ class PaymentMethodBloc extends Bloc<PaymentMethodEvent, PaymentMethodState> {
                   isNoDataFound: r.isEmpty,
                   failureOrSuccessOption: none(),
                   cardDetail: r,
-                  selectedCard: r
-                          .firstWhere((element) => element.is_default == true)
-                          .payment_method_id ??
-                      "",
+                  selectedCard: r.isNotEmpty
+                      ? r
+                              .firstWhere(
+                                  (element) => element.is_default == true)
+                              .payment_method_id ??
+                          ""
+                      : '',
                 ),
               ),
             );
