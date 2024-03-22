@@ -132,7 +132,7 @@ class FavouriteGridView extends StatelessWidget {
                                     text: state.favouriteListDTO[index].product
                                                 ?.discount !=
                                             null
-                                        ? '\$${(state.favouriteListDTO[index].product?.price ?? 0) - (((state.favouriteListDTO[index].product?.price ?? 0) / 100) * 20)}'
+                                        ? '\$${(state.favouriteListDTO[index].product?.price ?? 0) - (((state.favouriteListDTO[index].product?.price ?? 0) / 100) * (int.tryParse(state.favouriteListDTO[index].product?.discount ?? "") ?? 0))}'
                                         : '\$${state.favouriteListDTO[index].product?.price}',
                                     fontWeight: FontWeight.w600,
                                   ),

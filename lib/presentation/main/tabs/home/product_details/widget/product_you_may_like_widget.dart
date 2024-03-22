@@ -30,7 +30,7 @@ class ProductYouMayLikeWidget extends StatelessWidget {
             physics: NeverScrollableScrollPhysics(),
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
-              childAspectRatio: 0.75,
+              childAspectRatio: 0.65,
               crossAxisSpacing: getSize(20),
               mainAxisSpacing: getSize(20),
             ),
@@ -62,14 +62,16 @@ class ProductYouMayLikeWidget extends StatelessWidget {
                                             ?.first.image ??
                                         "",
                                     placeholder: (context, url) => Container(
-                                      height: getSize(110),
+                                      height: getSize(145),
+                                      width: MediaQuery.of(context).size.width,
                                       decoration: BoxDecoration(
                                         color: Colors.grey.shade100,
                                         borderRadius:
                                             BorderRadius.circular(getSize(10)),
                                       ),
                                     ),
-                                    height: getSize(110),
+                                    height: getSize(145),
+                                    width: MediaQuery.of(context).size.width,
                                     fit: BoxFit.cover,
                                   )
                                 : Container(),
@@ -106,11 +108,15 @@ class ProductYouMayLikeWidget extends StatelessWidget {
                                       ? 6
                                       : 0),
                             ),
-                            BaseText(
-                              text: state.getProductList[index].discount != null
-                                  ? '\$${(state.getProductList[index].price ?? 0) - (((state.getProductList[index].price ?? 0) / 100) * 20)}'
-                                  : '\$${state.getProductList[index].price}',
-                              fontWeight: FontWeight.w600,
+                            Expanded(
+                              child: BaseText(
+                                text: state.getProductList[index].discount !=
+                                        null
+                                    ? '\$${(state.getProductList[index].price ?? 0) - (((state.getProductList[index].price ?? 0) / 100) * (int.tryParse(state.getProductDetails.product?.discount ?? "") ?? 0))}'
+                                    : '\$${state.getProductList[index].price}',
+                                fontWeight: FontWeight.w600,
+                                maxLines: 1,
+                              ),
                             ),
                           ],
                         ),

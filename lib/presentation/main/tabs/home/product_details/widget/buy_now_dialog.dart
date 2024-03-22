@@ -384,7 +384,7 @@ productDetailsView(
                         ),
                         BaseText(
                           text: getProductListResponse.discount != null
-                              ? '\$${(getProductListResponse.price ?? 0) - (((getProductListResponse.price ?? 0) / 100) * 20)}'
+                              ? '\$${(getProductListResponse.price ?? 0) - (((getProductListResponse.price ?? 0) / 100) * (int.tryParse(getProductListResponse.discount ?? "") ?? 0))}'
                               : '\$${getProductListResponse.price}',
                           fontSize: 20,
                           fontWeight: FontWeight.w600,

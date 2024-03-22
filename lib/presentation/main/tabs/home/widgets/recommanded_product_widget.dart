@@ -40,6 +40,12 @@ class RecommandedProductWidget extends StatelessWidget {
               mainAxisSpacing: getSize(20),
             ),
             itemBuilder: (context, index) {
+              var dicountAmount = (state.getProductList[index].price ?? 0) -
+                  (((state.getProductList[index].price ?? 0) / 100) *
+                      (int.tryParse(
+                              state.getProductList[index].discount ?? "") ??
+                          0));
+
               return GestureDetector(
                 onTap: () {
                   context.router.push(
@@ -107,12 +113,16 @@ class RecommandedProductWidget extends StatelessWidget {
                                       ? 6
                                       : 0),
                             ),
-                            BaseText(
-                              text: state.getProductList[index].discount != null
-                                  ? '\$${(state.getProductList[index].price ?? 0) - (((state.getProductList[index].price ?? 0) / 100) * 20)}'
-                                  : '\$${state.getProductList[index].price}',
-                              fontWeight: FontWeight.w600,
-                            ),
+                            Expanded(
+                              child: BaseText(
+                                text: state.getProductList[index].discount !=
+                                        null
+                                    ? '\$$dicountAmount'
+                                    : '\$${state.getProductList[index].price}',
+                                fontWeight: FontWeight.w600,
+                                maxLines: 1,
+                              ),
+                            )
                           ],
                         ),
                         SizedBox(

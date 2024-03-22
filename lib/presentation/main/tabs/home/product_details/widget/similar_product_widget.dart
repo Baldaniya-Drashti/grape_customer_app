@@ -153,13 +153,16 @@ class SimilarProductWidget extends StatelessWidget {
                                           ? 6
                                           : 0),
                                     ),
-                                    BaseText(
-                                      text: state.similarProduct[index]
-                                                  .discount !=
-                                              null
-                                          ? '\$${(state.similarProduct[index].price ?? 0) - (((state.similarProduct[index].price ?? 0) / 100) * 20)}'
-                                          : '\$${state.similarProduct[index].price}',
-                                      fontWeight: FontWeight.w600,
+                                    Expanded(
+                                      child: BaseText(
+                                        text: state.similarProduct[index]
+                                                    .discount !=
+                                                null
+                                            ? '\$${(state.similarProduct[index].price ?? 0) - (((state.similarProduct[index].price ?? 0) / 100) * (int.tryParse(state.getProductDetails.product?.discount ?? "") ?? 0))}'
+                                            : '\$${state.similarProduct[index].price}',
+                                        fontWeight: FontWeight.w600,
+                                        maxLines: 1,
+                                      ),
                                     ),
                                   ],
                                 ),

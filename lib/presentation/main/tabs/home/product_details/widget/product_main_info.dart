@@ -112,7 +112,7 @@ class ProductMainInfo extends StatelessWidget {
                   ),
                   BaseText(
                     text: state.getProductDetails.product?.discount != null
-                        ? '\$${(state.getProductDetails.product?.price ?? 0) - (((state.getProductDetails.product?.price ?? 0) / 100) * 20)}'
+                        ? '\$${(state.getProductDetails.product?.price ?? 0) - (((state.getProductDetails.product?.price ?? 0) / 100) * (int.tryParse(state.getProductDetails.product?.discount ?? "") ?? 0))}'
                         : '\$${state.getProductDetails.product?.price}',
                     fontSize: 20,
                     fontWeight: FontWeight.w600,

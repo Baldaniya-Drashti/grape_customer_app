@@ -144,7 +144,7 @@ class FromSameStoreWidget extends StatelessWidget {
                                     text: state.getProductDetails
                                                 .same_store?[index].discount !=
                                             null
-                                        ? '\$${(state.getProductDetails.same_store?[index].price ?? 0) - (((state.getProductDetails.same_store?[index].price ?? 0) / 100) * 20)}'
+                                        ? '\$${(state.getProductDetails.same_store?[index].price ?? 0) - (((state.getProductDetails.same_store?[index].price ?? 0) / 100) * (int.tryParse(state.getProductDetails.product?.discount ?? "") ?? 0))}'
                                         : '\$${state.getProductDetails.same_store?[index].price}',
                                     fontWeight: FontWeight.w600,
                                   ),
