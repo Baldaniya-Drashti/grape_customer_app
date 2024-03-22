@@ -32,7 +32,8 @@ class MainTabView extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (_) => getIt<MainTabBloc>(),
+          create: (_) =>
+              getIt<MainTabBloc>()..add(MainTabEvent.initDynamicLink(context)),
         ),
         BlocProvider<AccountCubit>(
           create: (context) => getIt<AccountCubit>()..getAccount(),

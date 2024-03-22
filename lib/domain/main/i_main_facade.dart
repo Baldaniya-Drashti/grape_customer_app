@@ -48,7 +48,7 @@ abstract class IMainFacade {
     required InputEmptyOrNot landMark,
     required InputEmptyOrNot state,
     required InputEmptyOrNot city,
-    required InputEmptyOrNot pinCode,
+    required PinCode pinCode,
   });
 
   Future<Either<MainFailure, String>> editShippingAddress({
@@ -60,7 +60,7 @@ abstract class IMainFacade {
     required InputEmptyOrNot landMark,
     required InputEmptyOrNot state,
     required InputEmptyOrNot city,
-    required InputEmptyOrNot pinCode,
+    required PinCode pinCode,
   });
   Future<Either<MainFailure, String>> deleteShippinAddress(
       {required String id});

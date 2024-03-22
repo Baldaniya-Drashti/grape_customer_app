@@ -101,9 +101,14 @@ abstract class $AppRouter extends _i28.RootStackRouter {
       );
     },
     ChatView.name: (routeData) {
+      final args =
+          routeData.argsAs<ChatViewArgs>(orElse: () => const ChatViewArgs());
       return _i28.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i4.ChatView(),
+        child: _i4.ChatView(
+          key: args.key,
+          fromLiveChatSupport: args.fromLiveChatSupport,
+        ),
       );
     },
     CheckoutView.name: (routeData) {
@@ -383,16 +388,40 @@ class CartView extends _i28.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i4.ChatView]
-class ChatView extends _i28.PageRouteInfo<void> {
-  const ChatView({List<_i28.PageRouteInfo>? children})
-      : super(
+class ChatView extends _i28.PageRouteInfo<ChatViewArgs> {
+  ChatView({
+    _i29.Key? key,
+    bool fromLiveChatSupport = false,
+    List<_i28.PageRouteInfo>? children,
+  }) : super(
           ChatView.name,
+          args: ChatViewArgs(
+            key: key,
+            fromLiveChatSupport: fromLiveChatSupport,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'ChatView';
 
-  static const _i28.PageInfo<void> page = _i28.PageInfo<void>(name);
+  static const _i28.PageInfo<ChatViewArgs> page =
+      _i28.PageInfo<ChatViewArgs>(name);
+}
+
+class ChatViewArgs {
+  const ChatViewArgs({
+    this.key,
+    this.fromLiveChatSupport = false,
+  });
+
+  final _i29.Key? key;
+
+  final bool fromLiveChatSupport;
+
+  @override
+  String toString() {
+    return 'ChatViewArgs{key: $key, fromLiveChatSupport: $fromLiveChatSupport}';
+  }
 }
 
 /// generated route for

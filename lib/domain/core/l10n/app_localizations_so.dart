@@ -113,10 +113,10 @@ class AppLocalizationsSo extends AppLocalizations {
   String get enterAddress => 'Enter Address';
 
   @override
-  String get landMark => 'LandMark';
+  String get landMark => 'Landmark';
 
   @override
-  String get enterLandMark => 'Enter LandMark';
+  String get enterLandMark => 'Enter landmark';
 
   @override
   String get state => 'State';
@@ -131,10 +131,10 @@ class AppLocalizationsSo extends AppLocalizations {
   String get enterCity => 'Enter City';
 
   @override
-  String get pinCode => 'PinCode';
+  String get pinCode => 'Pincode';
 
   @override
-  String get enterPinCode => 'Enter PinCode';
+  String get enterPinCode => 'Enter pincode';
 
   @override
   String get edit => 'Edit';

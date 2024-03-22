@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -52,12 +54,12 @@ class PaymentMethodBloc extends Bloc<PaymentMethodEvent, PaymentMethodState> {
                 await Stripe.instance.dangerouslyUpdateCardDetails(card);
                 final billingDetails = BillingDetails(
                   address: Address(
-                    city: '',
-                    country: '',
-                    line1: '',
-                    line2: '',
-                    state: '',
-                    postalCode: '',
+                    city: 'Delhi',
+                    country: 'IN',
+                    line1: 'C 30/2, Acharaya Niketan, Mayur Vihar',
+                    line2: 'J 3, A11, Mahavir Nagar, Kandivali (west)',
+                    state: 'Delhi',
+                    postalCode: '110091',
                   ),
                 ); // mocked data for tests
 
@@ -75,7 +77,7 @@ class PaymentMethodBloc extends Bloc<PaymentMethodEvent, PaymentMethodState> {
                   );
                 }
               } catch (e) {
-                // log(e.toString());
+                log(e.toString());
                 showError(message: e.toString()).show(value.context);
                 emit(
                   state.copyWith(

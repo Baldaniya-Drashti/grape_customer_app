@@ -294,7 +294,7 @@ class MainFacade implements IMainFacade {
       required InputEmptyOrNot landMark,
       required InputEmptyOrNot state,
       required InputEmptyOrNot city,
-      required InputEmptyOrNot pinCode}) async {
+      required PinCode pinCode}) async {
     try {
       final res = await apiService.postMethod(
         ApiConstants.addShippingAddress,
@@ -371,7 +371,7 @@ class MainFacade implements IMainFacade {
       required InputEmptyOrNot landMark,
       required InputEmptyOrNot state,
       required InputEmptyOrNot city,
-      required InputEmptyOrNot pinCode}) async {
+      required PinCode pinCode}) async {
     try {
       final res = await apiService.postMethod(
         ApiConstants.updateShippingAddress,

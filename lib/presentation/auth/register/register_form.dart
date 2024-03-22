@@ -214,15 +214,15 @@ class RegisterForm extends StatelessWidget {
       onChanged: (value) => context
           .read<RegisterFormBloc>()
           .add(RegisterFormEvent.emailChanged(value)),
-      validator: (_, context) =>
-          context.read<RegisterFormBloc>().state.emailAddress.value.fold(
-                (f) => f.maybeMap(
-                  empty: (value) => 'Please enter email',
-                  invalidEmail: (_) => 'Please enter valid email address',
-                  orElse: () => null,
-                ),
-                (_) => null,
-              ),
+      // validator: (_, context) =>
+      //     context.read<RegisterFormBloc>().state.emailAddress.value.fold(
+      //           (f) => f.maybeMap(
+      //             empty: (value) => 'Please enter email',
+      //             invalidEmail: (_) => 'Please enter valid email address',
+      //             orElse: () => null,
+      //           ),
+      //           (_) => null,
+      //         ),
     );
   }
 
@@ -232,6 +232,7 @@ class RegisterForm extends StatelessWidget {
       labelText: 'Mobile Number',
       hintText: 'Mobile Number',
       keyboardType: TextInputType.phone,
+      errorMaxLines: 2,
       onChanged: (value) => context
           .read<RegisterFormBloc>()
           .add(RegisterFormEvent.mobileNumberChanged(value)),

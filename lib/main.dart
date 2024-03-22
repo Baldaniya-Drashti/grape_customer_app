@@ -6,7 +6,6 @@ import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:grape_customer_app/domain/core/environment/environment.dart';
 import 'package:grape_customer_app/infrastructure/core/network/injectable_module.dart';
 import 'package:grape_customer_app/presentation/core/app_router.dart';
-import 'package:grape_customer_app/presentation/core/helper/dynamic_link_helper.dart';
 import 'package:grape_customer_app/presentation/core/restart_widget.dart';
 import 'package:grape_customer_app/setup_hive.dart';
 import 'package:injectable/injectable.dart';
@@ -50,7 +49,7 @@ Future<void> main() async {
         return e;
       }).then((v) async {
         await _initializeCrashlytics();
-        DynamicLinksService.initDynamicLinks();
+
         await dotenv.load(fileName: ".env");
         configureInjection(Environment.dev);
         String environment = String.fromEnvironment(

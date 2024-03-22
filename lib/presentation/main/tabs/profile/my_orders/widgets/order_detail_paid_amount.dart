@@ -15,7 +15,7 @@ class OrderDetailPaidAmount extends StatelessWidget {
           height: getSize(30),
         ),
         BaseText(
-          text: 'Payable Amount',
+          text: 'Paid Amount',
           fontSize: 14,
           fontWeight: FontWeight.w600,
           textColor: AppColors.black.withOpacity(0.80),

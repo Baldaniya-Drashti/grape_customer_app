@@ -143,7 +143,7 @@ class AddNewAddress extends StatelessWidget {
       key: state.isEdit ? Key('pinCode') : null,
       hintText: AppLocalizations.of(context).pinCode,
       labelText: AppLocalizations.of(context).pinCode,
-      initialValue: state.pinCode.getValue() ?? "",
+      initialValue: state.pinCode.getValue(),
       keyboardType: TextInputType.number,
       onChanged: (pinCode) => context.read<ShippingAddressesBloc>().add(
             ShippingAddressesEvent.pinCodeChanged(pinCode),
@@ -153,6 +153,8 @@ class AddNewAddress extends StatelessWidget {
               (l) => l.maybeMap(
                     orElse: () => null,
                     empty: (value) => AppLocalizations.of(context).enterPinCode,
+                    exceedingLength: (value) =>
+                        'Pincode should be atleast 6 character long',
                   ),
               (r) => null),
     );

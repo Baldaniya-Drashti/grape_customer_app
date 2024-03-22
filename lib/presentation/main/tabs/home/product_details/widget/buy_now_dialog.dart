@@ -7,6 +7,7 @@ import 'package:grape_customer_app/domain/core/math_utils.dart';
 import 'package:grape_customer_app/infrastructure/core/common_product_from_json_response.dart';
 import 'package:grape_customer_app/infrastructure/main/home_dto/get_product_list_response.dart';
 import 'package:grape_customer_app/injection.dart';
+import 'package:grape_customer_app/presentation/common/utils/flushbar_creator.dart';
 import 'package:grape_customer_app/presentation/common/widgets/base_text.dart';
 import 'package:grape_customer_app/presentation/core/app_router.gr.dart';
 import 'package:grape_customer_app/presentation/core/styles/app_colors.dart';
@@ -85,16 +86,24 @@ class BuyNowDialog extends StatelessWidget {
                     padding: EdgeInsets.symmetric(horizontal: getSize(18)),
                     child: CommonButton(
                       onPressed: () {
-                        context.router.pop();
-                        context.router.push(
-                          PageRouteInfo(
-                            CheckoutView.name,
-                            args: CheckoutViewArgs(
-                              productId: getProductListResponse.id.toString(),
-                              quantity: state.productQuantity,
+                        if (state.productQuantity >
+                            (getProductListResponse.available_qty ?? 0)) {
+                          showError(
+                                  message:
+                                      'only ${getProductListResponse.available_qty} quantity left to buy!!')
+                              .show(context);
+                        } else {
+                          context.router.pop();
+                          context.router.push(
+                            PageRouteInfo(
+                              CheckoutView.name,
+                              args: CheckoutViewArgs(
+                                productId: getProductListResponse.id.toString(),
+                                quantity: state.productQuantity,
+                              ),
                             ),
-                          ),
-                        );
+                          );
+                        }
                       },
                       buttonText: 'Buy Now',
                     ),
@@ -359,18 +368,24 @@ productDetailsView(
                     ),
                     Row(
                       children: [
-                        BaseText(
-                          text: '\$350',
-                          textDecoration: TextDecoration.lineThrough,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                          textColor: AppColors.black.withOpacity(0.4),
+                        Visibility(
+                          visible: getProductListResponse.discount != null,
+                          child: BaseText(
+                            text: '\$${getProductListResponse.price}',
+                            textDecoration: TextDecoration.lineThrough,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                            textColor: AppColors.black.withOpacity(0.4),
+                          ),
                         ),
                         SizedBox(
-                          width: getSize(6),
+                          width: getSize(
+                              getProductListResponse.discount != null ? 6 : 0),
                         ),
                         BaseText(
-                          text: '\$${getProductListResponse.price}',
+                          text: getProductListResponse.discount != null
+                              ? '\$${(getProductListResponse.price ?? 0) - (((getProductListResponse.price ?? 0) / 100) * 20)}'
+                              : '\$${getProductListResponse.price}',
                           fontSize: 20,
                           fontWeight: FontWeight.w600,
                           textColor: Color(0xFF527FF2),

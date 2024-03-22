@@ -7,7 +7,7 @@ abstract class IAuthFacade {
   Future<Either<AuthFailure, String>> register({
     required Username firstName,
     required Username lastName,
-    required EmailAddress emailAddress,
+    required String emailAddress,
     required String countryCode,
     required MobileNumber mobileNumber,
   });

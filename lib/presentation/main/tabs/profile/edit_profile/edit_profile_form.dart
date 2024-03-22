@@ -120,26 +120,27 @@ class EditProfileForm extends StatelessWidget {
   }
 
   emailAddressTextFiled(BuildContext context, EditProfileState state) {
-    return AbsorbPointer(
-      child: CustomTextField(
-        hintText: AppLocalizations.of(context).emailAddress,
-        labelText: AppLocalizations.of(context).emailAddress,
-        keyboardType: TextInputType.emailAddress,
-        initialValue: state.currentUser.email,
-        onChanged: (email) => context
-            .read<EditProfileBloc>()
-            .add(EditProfileEvent.emailAddressChanged(email)),
-        validator: (_, context) =>
-            context.read<EditProfileBloc>().state.emailAddress.value.fold(
-                  (l) => l.maybeMap(
-                    empty: (value) => AppLocalizations.of(context).enterEmail,
-                    invalidEmail: (value) =>
-                        AppLocalizations.of(context).enterEmail,
-                    orElse: () => null,
-                  ),
-                  (r) => null,
-                ),
-      ),
+    return CustomTextField(
+      hintText: AppLocalizations.of(context).emailAddress,
+      labelText: AppLocalizations.of(context).emailAddress,
+      keyboardType: TextInputType.emailAddress,
+      initialValue: state.currentUser.email,
+      onChanged: (email) => context
+          .read<EditProfileBloc>()
+          .add(EditProfileEvent.emailAddressChanged(email)),
+      // validator: (_, context) => context
+      //     .read<EditProfileBloc>()
+      //     .state
+      //     .emailAddress
+      //     .value
+      //     .fold(
+      //       (l) => l.maybeMap(
+      //         empty: (value) => AppLocalizations.of(context).enterEmail,
+      //         invalidEmail: (value) => AppLocalizations.of(context).enterEmail,
+      //         orElse: () => null,
+      //       ),
+      //       (r) => null,
+      //     ),
     );
   }
 

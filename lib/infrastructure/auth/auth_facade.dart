@@ -64,21 +64,27 @@ class AuthFacade implements IAuthFacade {
   Future<Either<AuthFailure, String>> register({
     required Username firstName,
     required Username lastName,
-    required EmailAddress emailAddress,
+    required String emailAddress,
     required String countryCode,
     required MobileNumber mobileNumber,
   }) async {
     try {
+      var mapData = {
+        "role": 2,
+        "first_name": firstName.getOrCrash(),
+        "last_name": lastName.getOrCrash(),
+        "country_code": countryCode,
+        "mobile": mobileNumber.getOrCrash()
+      };
+
+      if (emailAddress.isNotEmpty) {
+        mapData.addAll({
+          "email": emailAddress,
+        });
+      }
       final response = await apiService.postMethod(
         ApiConstants.register,
-        {
-          "role": 2,
-          "first_name": firstName.getOrCrash(),
-          "last_name": lastName.getOrCrash(),
-          "email": emailAddress.getOrCrash(),
-          "country_code": countryCode,
-          "mobile": mobileNumber.getOrCrash()
-        },
+        mapData,
       );
 
       final account = CurrentUserDto.fromJson(response.data).toDomain();

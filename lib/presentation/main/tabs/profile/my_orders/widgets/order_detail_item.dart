@@ -105,7 +105,7 @@ class OrderDetailItem extends StatelessWidget {
                               ),
                             ],
                           ),
-                          title: 'Oty',
+                          title: 'Qty',
                         ),
                         Spacer(),
                         Container(

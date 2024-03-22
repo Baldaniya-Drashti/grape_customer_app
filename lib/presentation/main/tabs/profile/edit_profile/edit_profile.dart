@@ -106,4 +106,14 @@ class EditProfileScreen extends StatelessWidget {
       ),
     );
   }
+
+  bool getIsMobileNumberChange(EditProfileState state) {
+    if ((state.currentUser.phone.toString() != state.mobileNumber.getValue()) ||
+        ((state.currentUser.countryCode?.replaceFirst('+', '')) !=
+            state.countryCode)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }

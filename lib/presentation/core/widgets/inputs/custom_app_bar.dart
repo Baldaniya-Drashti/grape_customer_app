@@ -15,6 +15,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool? centerTile;
   final PreferredSizeWidget? bottom;
   final Function()? onPressed;
+  final double? titleSpacing;
   const CustomAppBar({
     super.key,
     required this.title,
@@ -27,6 +28,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.customTitle,
     this.onPressed,
     this.bottom,
+    this.titleSpacing = 0,
   });
 
   @override
@@ -38,7 +40,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       shadowColor: Color(0xFFE1E1E1),
       surfaceTintColor: Colors.transparent,
       scrolledUnderElevation: elevation,
-
+      titleSpacing: titleSpacing,
       leadingWidth: leadingWidth,
       shape: isRoundedCorner
           ? RoundedRectangleBorder(

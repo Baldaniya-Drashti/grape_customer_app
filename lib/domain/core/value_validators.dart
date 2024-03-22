@@ -142,11 +142,17 @@ Either<ValueFailure<String>, String> validateMaxStringLength(
   }
 }
 
-Either<ValueFailure<String>, String> validateChannelName(String input) {
-  if (input.length >= 3 && input.length <= 30) {
-    return right(input);
+Either<ValueFailure<String>, String> validatePincode(String input) {
+  if (validateStringNotEmpty(input).isRight()) {
+    if ((input.trim().length == 6 || input.trim().length == 5)) {
+      return right(input);
+    } else {
+      return left(ValueFailure.exceedingLength(failedValue: input, max: 6));
+    }
   } else {
-    return left(ValueFailure.invalidChannelName(failedValue: input));
+    return left(
+      ValueFailure.empty(failedValue: input),
+    );
   }
 }
 

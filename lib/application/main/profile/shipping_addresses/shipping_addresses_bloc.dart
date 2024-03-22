@@ -67,7 +67,7 @@ class ShippingAddressesBloc
           },
           pinCodeChanged: (value) {
             emit(
-              state.copyWith(pinCode: InputEmptyOrNot(value.pinCode)),
+              state.copyWith(pinCode: PinCode(value.pinCode)),
             );
           },
           selectedIndex: (value) {
@@ -90,8 +90,7 @@ class ShippingAddressesBloc
                 state:
                     InputEmptyOrNot(value.shippingAddressResponce.state ?? ''),
                 city: InputEmptyOrNot(value.shippingAddressResponce.city ?? ''),
-                pinCode: InputEmptyOrNot(
-                    value.shippingAddressResponce.pincode ?? ''),
+                pinCode: PinCode(value.shippingAddressResponce.pincode ?? ''),
                 isEdit: value.isEdit,
                 failureOrSuccessOption: none(),
               ),

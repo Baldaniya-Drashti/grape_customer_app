@@ -11,7 +11,7 @@ class CheckoutEvent with _$CheckoutEvent {
   factory CheckoutEvent.orderPlace() = OrderPlace;
 
   factory CheckoutEvent.changeShippingAddress(
-      ShippingAddressDTO shippingAddressDTO) = ChangeShippingAddress;
+      ShippingAddressDTO? shippingAddressDTO) = ChangeShippingAddress;
 
   factory CheckoutEvent.changePaymentMethod(GetCardsDTO getCartListDTO) =
       ChangePaymentMethodEvent;

@@ -142,6 +142,15 @@ class GetCheckoutProductDetailWidget extends StatelessWidget {
                   ],
                 ),
               ),
+              SizedBox(
+                height: getSize(3),
+              ),
+              getProductDetails(
+                title: 'Quantity',
+                description: getProductListResponse.quantity?.toStringAsFixed(
+                        getProductListResponse.quantity is int ? 0 : 2) ??
+                    "1",
+              ),
               // Column(
               //   children: [
               //     IconButton(
@@ -281,6 +290,18 @@ class GetCheckoutProductDetailWidget extends StatelessWidget {
                           ),
                         ),
                       ),
+                    ),
+                    SizedBox(
+                      height: getSize(3),
+                    ),
+                    getProductDetails(
+                      title: 'Quantity',
+                      description: getProductListResponse.quantity
+                              ?.toStringAsFixed(
+                                  getProductListResponse.quantity is int
+                                      ? 0
+                                      : 2) ??
+                          "1",
                     ),
                   ],
                 ),

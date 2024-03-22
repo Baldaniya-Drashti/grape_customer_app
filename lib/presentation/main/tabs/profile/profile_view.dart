@@ -220,7 +220,12 @@ class ProfileView extends StatelessWidget {
 
   Widget liveChatSupport(BuildContext context) {
     return GestureDetector(
-      onTap: () => context.router.push(PageRouteInfo(ChatView.name)),
+      onTap: () => context.router.push(
+        PageRouteInfo(
+          ChatView.name,
+          args: ChatViewArgs(fromLiveChatSupport: true),
+        ),
+      ),
       child: Container(
         margin: EdgeInsets.symmetric(horizontal: getSize(20)),
         padding: EdgeInsets.symmetric(vertical: getSize(9)),

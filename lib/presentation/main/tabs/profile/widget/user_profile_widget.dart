@@ -73,21 +73,24 @@ class UserProfileWidget extends StatelessWidget {
                         maxLines: 1,
                       ),
                       SizedBox(
-                        height: getSize(6),
+                        height: getSize(account.email != null ? 6 : 0),
                       ),
-                      Row(
-                        children: [
-                          SvgPicture.asset(SvgImageConstant.email),
-                          SizedBox(
-                            width: getSize(4),
-                          ),
-                          BaseText(
-                            text: account.email ?? "",
-                            textColor: AppColors.white,
-                            fontSize: 9,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ],
+                      Visibility(
+                        visible: account.email != null,
+                        child: Row(
+                          children: [
+                            SvgPicture.asset(SvgImageConstant.email),
+                            SizedBox(
+                              width: getSize(4),
+                            ),
+                            BaseText(
+                              text: account.email ?? "",
+                              textColor: AppColors.white,
+                              fontSize: 9,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ],
+                        ),
                       ),
                       SizedBox(
                         height: getSize(4),

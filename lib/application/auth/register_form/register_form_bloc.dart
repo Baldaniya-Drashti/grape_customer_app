@@ -25,7 +25,7 @@ class RegisterFormBloc extends Bloc<RegisterFormEvent, RegisterFormState> {
           emailChanged: (e) async {
             emit(
               state.copyWith(
-                emailAddress: EmailAddress(e.email),
+                emailAddress: e.email,
                 authFailureOrSuccessOption: none(),
               ),
             );
@@ -33,15 +33,12 @@ class RegisterFormBloc extends Bloc<RegisterFormEvent, RegisterFormState> {
           registerPressed: (e) async {
             Either<AuthFailure, String>? failureOrSuccess;
 
-            final isEmailValid = state.emailAddress.isValid();
+            //final isEmailValid = state.emailAddress.isValid();
             final isFirstNameValid = state.firstName.isValid();
             final isLastNameValid = state.lastName.isValid();
             final isMobileNumberValid = state.mobileNumber.isValid();
 
-            if (isEmailValid &&
-                isFirstNameValid &&
-                isLastNameValid &&
-                isMobileNumberValid) {
+            if (isFirstNameValid && isLastNameValid && isMobileNumberValid) {
               emit(
                 state.copyWith(
                   isSubmitting: true,

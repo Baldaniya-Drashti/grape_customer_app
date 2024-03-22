@@ -26,7 +26,7 @@ class AccountRepository extends IAccountRepository {
   Future<Either<AccountFailure, List>> updateUser({
     required Username firstName,
     required Username lastName,
-    required EmailAddress emailAddress,
+    required String emailAddress,
     required String countryCode,
     required MobileNumber mobileNumber,
     String? profileImage,
@@ -35,10 +35,14 @@ class AccountRepository extends IAccountRepository {
       var formData = FormData.fromMap({
         "first_name": firstName.getOrCrash(),
         "last_name": lastName.getOrCrash(),
-        "email": emailAddress.getOrCrash(),
         "country_code": countryCode,
         "mobile": mobileNumber.getOrCrash(),
       });
+
+      if (emailAddress.isNotEmpty) {
+        formData.fields.add(MapEntry('email', emailAddress));
+      }
+
       if (profileImage != null &&
           profileImage.isNotEmpty &&
           !profileImage.contains('https')) {

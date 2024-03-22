@@ -4,6 +4,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:grape_customer_app/domain/account/i_account_repository.dart';
 import 'package:grape_customer_app/domain/auth/i_auth_facade.dart';
 import 'package:grape_customer_app/presentation/core/app_router.gr.dart';
+import 'package:grape_customer_app/presentation/core/helper/dynamic_link_helper.dart';
 import 'package:grape_customer_app/presentation/core/helper/push_notification_helper.dart';
 import 'package:injectable/injectable.dart';
 
@@ -69,6 +70,9 @@ class MainTabBloc extends Bloc<MainTabEvent, MainTabState> {
           },
           pushNotificationInitialize: (PushNotificationInitialize value) {
             PushNotificationService().setupInteractedMessage(value.context);
+          },
+          initDynamicLink: (InitDynamicLink value) async {
+            DynamicLinksService.initDynamicLinks(value.context);
           },
         );
       },

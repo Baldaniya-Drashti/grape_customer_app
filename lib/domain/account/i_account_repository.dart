@@ -8,7 +8,7 @@ abstract class IAccountRepository {
   Future<Either<AccountFailure, List>> updateUser({
     required Username firstName,
     required Username lastName,
-    required EmailAddress emailAddress,
+    required String emailAddress,
     required String countryCode,
     required MobileNumber mobileNumber,
     String? profileImage,

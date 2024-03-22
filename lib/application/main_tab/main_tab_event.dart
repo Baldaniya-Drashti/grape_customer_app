@@ -7,4 +7,5 @@ class MainTabEvent with _$MainTabEvent {
 
   factory MainTabEvent.pushNotificationInitialize(BuildContext context) =
       PushNotificationInitialize;
+  factory MainTabEvent.initDynamicLink(BuildContext context) = InitDynamicLink;
 }

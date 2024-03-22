@@ -45,6 +45,10 @@ class ShippingAddressWidget extends StatelessWidget {
                         context.read<CheckoutBloc>().add(
                             CheckoutEvent.changeShippingAddress(
                                 res as ShippingAddressDTO));
+                      } else {
+                        context
+                            .read<CheckoutBloc>()
+                            .add(CheckoutEvent.getCheckoutDetail(true));
                       }
                     },
                     child: BaseText(
@@ -61,6 +65,7 @@ class ShippingAddressWidget extends StatelessWidget {
               height: getSize(10),
             ),
             Container(
+              width: MediaQuery.of(context).size.width,
               padding: EdgeInsets.symmetric(
                 vertical: getSize(18),
                 horizontal: getSize(24),

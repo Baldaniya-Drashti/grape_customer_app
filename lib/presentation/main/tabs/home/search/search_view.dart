@@ -32,6 +32,7 @@ class SearchView extends StatelessWidget {
         builder: (context, state) {
           return Scaffold(
             appBar: CustomAppBar(
+              titleSpacing: null,
               customTitle: CustomTextField(
                 hintText: AppLocalizations.of(context).searchProduct,
                 textInputAction: TextInputAction.search,

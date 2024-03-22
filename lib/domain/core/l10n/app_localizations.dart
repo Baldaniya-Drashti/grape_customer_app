@@ -312,13 +312,13 @@ abstract class AppLocalizations {
   /// No description provided for @landMark.
   ///
   /// In en, this message translates to:
-  /// **'LandMark'**
+  /// **'Landmark'**
   String get landMark;
 
   /// No description provided for @enterLandMark.
   ///
   /// In en, this message translates to:
-  /// **'Enter LandMark'**
+  /// **'Enter landmark'**
   String get enterLandMark;
 
   /// No description provided for @state.
@@ -348,13 +348,13 @@ abstract class AppLocalizations {
   /// No description provided for @pinCode.
   ///
   /// In en, this message translates to:
-  /// **'PinCode'**
+  /// **'Pincode'**
   String get pinCode;
 
   /// No description provided for @enterPinCode.
   ///
   /// In en, this message translates to:
-  /// **'Enter PinCode'**
+  /// **'Enter pincode'**
   String get enterPinCode;
 
   /// No description provided for @edit.

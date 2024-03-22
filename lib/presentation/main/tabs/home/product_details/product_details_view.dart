@@ -78,6 +78,8 @@ class ProductDetailsView extends StatelessWidget {
                       title:
                           state.getProductDetails.product?.product_name ?? "",
                       description: state.dataList[4].value ?? "",
+                      productId:
+                          state.getProductDetails.product?.id.toString() ?? "",
                     );
 
                     if (shortlink.isNotEmpty) {

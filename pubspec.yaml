@@ -93,6 +93,7 @@ dependencies:
   firebase_dynamic_links: ^5.4.13
   share_plus: ^7.2.2
   flutter_stripe: ^10.1.1
+  firebase_core: ^2.27.0
 
 
   

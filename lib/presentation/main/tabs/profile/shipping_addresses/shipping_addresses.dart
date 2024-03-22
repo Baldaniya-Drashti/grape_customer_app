@@ -102,7 +102,8 @@ class ShippingAddress extends StatelessWidget {
                           )
                         : ListView.separated(
                             padding: EdgeInsets.symmetric(
-                                horizontal: getSize(16), vertical: getSize(32)),
+                                horizontal: getSize(16),
+                                vertical: getSize(32)),
                             physics: BouncingScrollPhysics(),
                             shrinkWrap: true,
                             separatorBuilder: (context, index) => SizedBox(
@@ -111,11 +112,11 @@ class ShippingAddress extends StatelessWidget {
                             itemCount: state.addressList.length,
                             itemBuilder: (context1, index) =>
                                 ShippingAddressCard(
-                              onTapSelectCard: () => context
-                                  .read<ShippingAddressesBloc>()
-                                  .add(
-                                    ShippingAddressesEvent.selectedIndex(index),
-                                  ),
+                              onTapSelectCard: () =>
+                                  context.read<ShippingAddressesBloc>().add(
+                                        ShippingAddressesEvent.selectedIndex(
+                                            index),
+                                      ),
                               onTapDelete: () =>
                                   context.read<ShippingAddressesBloc>().add(
                                         ShippingAddressesEvent

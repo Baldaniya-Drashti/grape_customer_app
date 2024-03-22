@@ -16,6 +16,19 @@ class EmailAddress extends ValueObject<String> {
   const EmailAddress._(this.value);
 }
 
+class PinCode extends ValueObject<String> {
+  @override
+  final Either<ValueFailure<String>, String> value;
+
+  factory PinCode(String input) {
+    return PinCode._(
+      validatePincode(input),
+    );
+  }
+
+  const PinCode._(this.value);
+}
+
 class OTPText extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;
@@ -102,7 +115,8 @@ class CVV extends ValueObject<String?> {
     return CVV._(
       validateCvv(value),
     );
-  }  const CVV._(this.value);
+  }
+  const CVV._(this.value);
 }
 
 class Password extends ValueObject<String> {

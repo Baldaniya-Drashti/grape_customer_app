@@ -137,13 +137,16 @@ class ProductMainInfo extends StatelessWidget {
                   SizedBox(
                     width: getSize(2),
                   ),
-                  BaseText(
-                    text:
-                        state.getProductDetails.vendor_details?.shop_location ??
-                            "",
-                    fontSize: 12,
-                    fontWeight: FontWeight.w500,
-                    textColor: AppColors.black.withOpacity(0.7),
+                  Expanded(
+                    child: BaseText(
+                      text: state.getProductDetails.vendor_details
+                              ?.shop_location ??
+                          "",
+                      fontSize: 12,
+                      maxLines: 2,
+                      fontWeight: FontWeight.w500,
+                      textColor: AppColors.black.withOpacity(0.7),
+                    ),
                   ),
                 ],
               ),

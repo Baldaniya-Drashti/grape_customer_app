@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:grape_customer_app/domain/core/math_utils.dart';
+import 'package:grape_customer_app/domain/core/png_image_constants.dart';
 import 'package:grape_customer_app/presentation/common/utils/app_focus.dart';
 import 'package:grape_customer_app/presentation/common/widgets/base_text.dart';
 import 'package:grape_customer_app/presentation/common/widgets/paginated_list_view.dart';
@@ -13,33 +14,36 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 @RoutePage(name: 'ChatView')
 class ChatView extends StatelessWidget {
-  const ChatView({super.key});
+  final bool fromLiveChatSupport;
+  const ChatView({super.key, this.fromLiveChatSupport = false});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomSheet: Container(
-        padding: EdgeInsets.symmetric(
-          horizontal: getSize(18),
-          vertical: getSize(isFullScreenDevice(context) ? 0 : 12),
-        ),
-        color: AppColors.white,
-        child: CustomTextField(
-          hintText: 'Type a message',
-          maxLines: 5,
-          minLines: 1,
-          keyboardType: TextInputType.text,
-          textInputAction: TextInputAction.send,
-          suffixIcon: IconButton(
-            onPressed: () {},
-            icon: Icon(
-              Icons.send_rounded,
-              color: AppColors.primaryOrange,
+      bottomSheet: SafeArea(
+        child: Container(
+          padding: EdgeInsets.symmetric(
+            horizontal: getSize(18),
+            vertical: getSize(isFullScreenDevice(context) ? 0 : 12),
+          ),
+          color: AppColors.white,
+          child: CustomTextField(
+            hintText: 'Type a message',
+            maxLines: 5,
+            minLines: 1,
+            keyboardType: TextInputType.text,
+            textInputAction: TextInputAction.send,
+            suffixIcon: IconButton(
+              onPressed: () {},
+              icon: Icon(
+                Icons.send_rounded,
+                color: AppColors.primaryOrange,
+              ),
             ),
           ),
         ),
       ),
-      appBar: getUserAppBar(),
+      appBar: fromLiveChatSupport ? getLiveChatAppBar() : getUserAppBar(),
       body: GestureDetector(
         onTap: () {
           AppFocus.unfocus(context);
@@ -67,6 +71,33 @@ class ChatView extends StatelessWidget {
             itemBuilder: (context, index) => ChatBubbleView(index: index),
           ),
         ),
+      ),
+    );
+  }
+
+  getLiveChatAppBar() {
+    return CustomAppBar(
+      title: '',
+      leadingWidth: null,
+      customTitle: Row(
+        children: [
+          Image.asset(
+            PngImageConstants.cartSelected,
+            height: getSize(25),
+            width: getSize(30),
+          ),
+          SizedBox(
+            width: getSize(10),
+          ),
+          Expanded(
+            child: BaseText(
+              text: 'Live Chat Support',
+              maxLines: 1,
+              fontSize: 16,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ],
       ),
     );
   }

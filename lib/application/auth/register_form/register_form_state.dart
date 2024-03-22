@@ -3,7 +3,7 @@ part of 'register_form_bloc.dart';
 @freezed
 class RegisterFormState with _$RegisterFormState {
   const factory RegisterFormState({
-    required EmailAddress emailAddress,
+    required String emailAddress,
     required Username firstName,
     required Username lastName,
     required MobileNumber mobileNumber,
@@ -17,7 +17,7 @@ class RegisterFormState with _$RegisterFormState {
   }) = _RegisterFormState;
 
   factory RegisterFormState.initial() => RegisterFormState(
-        emailAddress: EmailAddress(''),
+        emailAddress: '',
         showErrorMessages: false,
         isSubmitting: false,
         authFailureOrSuccessOption: none(),

@@ -5,7 +5,7 @@ import 'package:grape_customer_app/application/main/profile/my_orders/my_orders_
 import 'package:grape_customer_app/domain/core/l10n/app_localizations.dart';
 import 'package:grape_customer_app/domain/core/math_utils.dart';
 import 'package:grape_customer_app/injection.dart';
-import 'package:grape_customer_app/presentation/core/widgets/buttons/common_button.dart';
+import 'package:grape_customer_app/presentation/common/widgets/base_text.dart';
 import 'package:grape_customer_app/presentation/core/widgets/inputs/custom_app_bar.dart';
 import 'package:grape_customer_app/presentation/main/tabs/profile/my_orders/widgets/order_detail_item.dart';
 import 'package:grape_customer_app/presentation/main/tabs/profile/my_orders/widgets/order_detail_paid_amount.dart';
@@ -44,11 +44,12 @@ class OrderDetails extends StatelessWidget {
               child: Padding(
                 padding: EdgeInsets.symmetric(
                   horizontal: getSize(18),
-                  vertical: isFullScreenDevice(context) ? 0 : getSize(8),
+                  vertical: isFullScreenDevice(context) ? 0 : getSize(18),
                 ),
-                child: CommonButton(
-                  onPressed: () {},
-                  buttonText: 'Pay Now',
+                child: BaseText(
+                  text: 'Cancel Order',
+                  textAlign: TextAlign.center,
+                  textColor: Color(0xFFDC0505),
                 ),
               ),
             ),

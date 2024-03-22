@@ -158,12 +158,16 @@ class RecommandedProductWidget extends StatelessWidget {
                             SizedBox(
                               width: getSize(2),
                             ),
-                            BaseText(
-                              text: state.getProductList[index].shop_location ??
-                                  "",
-                              fontSize: 8,
-                              fontWeight: FontWeight.w500,
-                              textColor: AppColors.black.withOpacity(0.4),
+                            Expanded(
+                              child: BaseText(
+                                text:
+                                    state.getProductList[index].shop_location ??
+                                        "",
+                                fontSize: 8,
+                                maxLines: 1,
+                                fontWeight: FontWeight.w500,
+                                textColor: AppColors.black.withOpacity(0.4),
+                              ),
                             ),
                           ],
                         ),
@@ -200,7 +204,6 @@ class RecommandedProductWidget extends StatelessWidget {
                   ],
                 ),
               );
-          
             },
           );
         }

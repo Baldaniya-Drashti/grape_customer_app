@@ -38,8 +38,7 @@ class SuccessScreen extends StatelessWidget {
             SizedBox(
               height: getSize(60),
             ),
-            Padding(
-              padding: EdgeInsets.only(left: getSize(20)),
+            Center(
               child: BaseText(
                 text: title,
                 fontSize: 24,
