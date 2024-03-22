@@ -71,6 +71,7 @@ class RecommandedProductWidget extends StatelessWidget {
                                   "",
                               placeholder: (context, url) => Container(
                                 height: getSize(160),
+                                width: MediaQuery.of(context).size.width,
                                 decoration: BoxDecoration(
                                   color: Colors.grey.shade100,
                                   borderRadius:
@@ -78,6 +79,7 @@ class RecommandedProductWidget extends StatelessWidget {
                                 ),
                               ),
                               height: getSize(160),
+                              width: MediaQuery.of(context).size.width,
                               fit: BoxFit.cover,
                             ),
                           ),

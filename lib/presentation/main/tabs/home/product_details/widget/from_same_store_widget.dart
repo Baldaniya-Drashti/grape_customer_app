@@ -22,7 +22,7 @@ class FromSameStoreWidget extends StatelessWidget {
           visible: state.getProductDetails.same_store != null &&
               state.getProductDetails.same_store!.isNotEmpty,
           child: SizedBox(
-            height: getSize(200),
+            height: getSize(218),
             child: ListView.builder(
               itemCount: state.getProductDetails.same_store?.length,
               shrinkWrap: true,
@@ -86,8 +86,11 @@ class FromSameStoreWidget extends StatelessWidget {
                                               "",
                                           placeholder: (context, url) =>
                                               Container(
-                                            height: getSize(110),
-                                            width: getSize(110),
+                                            height: getSize(130),
+                                            width: MediaQuery.of(context)
+                                                .size
+                                                .width,
+                                            //  width: getSize(110),
                                             decoration: BoxDecoration(
                                               color: Colors.grey.shade100,
                                               borderRadius:
@@ -95,8 +98,10 @@ class FromSameStoreWidget extends StatelessWidget {
                                                       getSize(10)),
                                             ),
                                           ),
-                                          height: getSize(110),
-                                          width: getSize(110),
+                                          height: getSize(130),
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                          // width: getSize(110),
                                           fit: BoxFit.cover,
                                         )
                                       : Container(),
@@ -140,13 +145,18 @@ class FromSameStoreWidget extends StatelessWidget {
                                         ? 6
                                         : 0),
                                   ),
-                                  BaseText(
-                                    text: state.getProductDetails
-                                                .same_store?[index].discount !=
-                                            null
-                                        ? '\$${(state.getProductDetails.same_store?[index].price ?? 0) - (((state.getProductDetails.same_store?[index].price ?? 0) / 100) * (int.tryParse(state.getProductDetails.product?.discount ?? "") ?? 0))}'
-                                        : '\$${state.getProductDetails.same_store?[index].price}',
-                                    fontWeight: FontWeight.w600,
+                                  Expanded(
+                                    child: BaseText(
+                                      text: state
+                                                  .getProductDetails
+                                                  .same_store?[index]
+                                                  .discount !=
+                                              null
+                                          ? '\$${(state.getProductDetails.same_store?[index].price ?? 0) - (((state.getProductDetails.same_store?[index].price ?? 0) / 100) * (int.tryParse(state.getProductDetails.product?.discount ?? "") ?? 0))}'
+                                          : '\$${state.getProductDetails.same_store?[index].price}',
+                                      fontWeight: FontWeight.w600,
+                                      maxLines: 1,
+                                    ),
                                   ),
                                 ],
                               ),

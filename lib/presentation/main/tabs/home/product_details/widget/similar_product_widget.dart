@@ -22,7 +22,7 @@ class SimilarProductWidget extends StatelessWidget {
         return Visibility(
           visible: state.similarProduct.isNotEmpty,
           child: SizedBox(
-            height: getSize(200),
+            height: getSize(218),
             child: PaginatedListView(
               onRefresh: () {
                 context.read<ProductDetailBloc>().add(
@@ -99,8 +99,10 @@ class SimilarProductWidget extends StatelessWidget {
                                                 "",
                                             placeholder: (context, url) =>
                                                 Container(
-                                              height: getSize(110),
-                                              width: getSize(110),
+                                              height: getSize(130),
+                                              width: MediaQuery.of(context)
+                                                  .size
+                                                  .width,
                                               decoration: BoxDecoration(
                                                 color: Colors.grey.shade100,
                                                 borderRadius:
@@ -108,8 +110,10 @@ class SimilarProductWidget extends StatelessWidget {
                                                         getSize(10)),
                                               ),
                                             ),
-                                            height: getSize(110),
-                                            width: getSize(110),
+                                            height: getSize(130),
+                                            width: MediaQuery.of(context)
+                                                .size
+                                                .width,
                                             fit: BoxFit.cover,
                                           )
                                         : Container(),
