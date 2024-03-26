@@ -10,6 +10,7 @@ import 'package:grape_customer_app/presentation/common/widgets/base_text.dart';
 import 'package:grape_customer_app/presentation/core/app_router.gr.dart';
 import 'package:grape_customer_app/presentation/core/styles/app_colors.dart';
 import 'package:grape_customer_app/presentation/core/widgets/utility/common_rating_bar.dart';
+import 'package:intl/intl.dart';
 
 class FromSameStoreWidget extends StatelessWidget {
   const FromSameStoreWidget({super.key});
@@ -22,7 +23,7 @@ class FromSameStoreWidget extends StatelessWidget {
           visible: state.getProductDetails.same_store != null &&
               state.getProductDetails.same_store!.isNotEmpty,
           child: SizedBox(
-            height: getSize(218),
+            height: getSize(220),
             child: ListView.builder(
               itemCount: state.getProductDetails.same_store?.length,
               shrinkWrap: true,
@@ -128,8 +129,17 @@ class FromSameStoreWidget extends StatelessWidget {
                                             .same_store?[index].discount !=
                                         null,
                                     child: BaseText(
-                                      text:
-                                          '\$${state.getProductDetails.same_store?[index].price}',
+                                      text: NumberFormat.simpleCurrency(
+                                        decimalDigits: num.tryParse(state
+                                                    .getProductDetails
+                                                    .same_store?[index]
+                                                    .price
+                                                    .toString() ??
+                                                "") is int
+                                            ? 0
+                                            : 2,
+                                      ).format(state.getProductDetails
+                                          .same_store?[index].price),
                                       textDecoration:
                                           TextDecoration.lineThrough,
                                       fontSize: 12,
@@ -147,13 +157,47 @@ class FromSameStoreWidget extends StatelessWidget {
                                   ),
                                   Expanded(
                                     child: BaseText(
-                                      text: state
-                                                  .getProductDetails
-                                                  .same_store?[index]
-                                                  .discount !=
+                                      text: state.getProductDetails.same_store?[index].discount !=
                                               null
-                                          ? '\$${(state.getProductDetails.same_store?[index].price ?? 0) - (((state.getProductDetails.same_store?[index].price ?? 0) / 100) * (int.tryParse(state.getProductDetails.product?.discount ?? "") ?? 0))}'
-                                          : '\$${state.getProductDetails.same_store?[index].price}',
+                                          ? NumberFormat.simpleCurrency(
+                                              decimalDigits: num.tryParse(state
+                                                          .getProductDetails
+                                                          .same_store?[index]
+                                                          .price
+                                                          .toString() ??
+                                                      "") is int
+                                                  ? 0
+                                                  : 2,
+                                            ).format((state
+                                                      .getProductDetails
+                                                      .same_store?[index]
+                                                      .price ??
+                                                  0) -
+                                              (((state
+                                                              .getProductDetails
+                                                              .same_store?[
+                                                                  index]
+                                                              .price ??
+                                                          0) /
+                                                      100) *
+                                                  (int.tryParse(state
+                                                              .getProductDetails
+                                                              .same_store?[index]
+                                                              .discount ??
+                                                          "") ??
+                                                      0)))
+                                          //'\$${(state.getProductList[index].price ?? 0) - (((state.getProductList[index].price ?? 0) / 100) * (int.tryParse(state.getProductList[index].discount ?? "") ?? 0))}'
+                                          : NumberFormat.simpleCurrency(
+                                              decimalDigits: num.tryParse(state
+                                                          .getProductDetails
+                                                          .same_store?[index]
+                                                          .price
+                                                          .toString() ??
+                                                      "") is int
+                                                  ? 0
+                                                  : 2,
+                                            ).format(state.getProductDetails.same_store?[index].price),
+                                      //  : '\$${state.getProductList[index].price}',
                                       fontWeight: FontWeight.w600,
                                       maxLines: 1,
                                     ),

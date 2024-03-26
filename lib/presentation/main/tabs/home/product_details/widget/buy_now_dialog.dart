@@ -12,6 +12,7 @@ import 'package:grape_customer_app/presentation/common/widgets/base_text.dart';
 import 'package:grape_customer_app/presentation/core/app_router.gr.dart';
 import 'package:grape_customer_app/presentation/core/styles/app_colors.dart';
 import 'package:grape_customer_app/presentation/core/widgets/buttons/common_button.dart';
+import 'package:intl/intl.dart';
 
 class BuyNowDialog extends StatelessWidget {
   const BuyNowDialog({super.key});
@@ -234,93 +235,6 @@ quantityContainerWidget(
       ],
     ),
   );
-
-  // return BlocProvider(
-  //   create: (context) => getIt<ProductDetailBloc>(),
-  //   child: BlocBuilder<ProductDetailBloc, ProductDetailState>(
-  //     builder: (context, state) {
-  //       return Container(
-  //         margin: EdgeInsets.symmetric(horizontal: getSize(18)),
-  //         decoration: BoxDecoration(
-  //           color: Color(0xFFD9D9D9).withOpacity(0.20),
-  //           borderRadius: BorderRadius.circular(getSize(10)),
-  //         ),
-  //         padding: EdgeInsets.symmetric(
-  //           horizontal: getSize(20),
-  //           vertical: getSize(4),
-  //         ),
-  //         child: Row(
-  //           children: [
-  //             BaseText(
-  //               text: 'Quantity',
-  //               fontSize: 14,
-  //               fontWeight: FontWeight.w500,
-  //             ),
-  //             Spacer(),
-  //             IconButton(
-  //               onPressed: () => context
-  //                   .read<ProductDetailBloc>()
-  //                   .add(ProductDetailEvent.decreaseProductQuantity()),
-  //               icon: Container(
-  //                 height: getSize(20),
-  //                 width: getSize(20),
-  //                 alignment: Alignment.center,
-  //                 decoration: BoxDecoration(
-  //                   color: AppColors.white,
-  //                   borderRadius: BorderRadius.circular(getSize(6)),
-  //                   border: Border.all(
-  //                     color: AppColors.black.withOpacity(0.20),
-  //                   ),
-  //                 ),
-  //                 child: Icon(
-  //                   Icons.remove,
-  //                   size: getSize(12),
-  //                 ),
-  //               ),
-  //             ),
-  //             Container(
-  //               height: getSize(27),
-  //               width: getSize(27),
-  //               alignment: Alignment.center,
-  //               decoration: BoxDecoration(
-  //                 color: AppColors.primaryOrange,
-  //                 shape: BoxShape.circle,
-  //               ),
-  //               child: BaseText(
-  //                 text: '${state.productQuantity}',
-  //                 fontSize: 14,
-  //                 fontWeight: FontWeight.w500,
-  //                 textColor: AppColors.white,
-  //               ),
-  //             ),
-  //             IconButton(
-  //               onPressed: () => context
-  //                   .read<ProductDetailBloc>()
-  //                   .add(ProductDetailEvent.increaseProductQuantity()),
-  //               icon: Container(
-  //                 height: getSize(20),
-  //                 width: getSize(20),
-  //                 alignment: Alignment.center,
-  //                 decoration: BoxDecoration(
-  //                   color: AppColors.white,
-  //                   borderRadius: BorderRadius.circular(getSize(6)),
-  //                   border: Border.all(
-  //                     color: AppColors.black.withOpacity(0.20),
-  //                   ),
-  //                 ),
-  //                 child: Icon(
-  //                   Icons.add,
-  //                   size: getSize(12),
-  //                 ),
-  //               ),
-  //             )
-  //           ],
-  //         ),
-  //       );
-
-  //     },
-  //   ),
-  // );
 }
 
 productDetailsView(
@@ -371,9 +285,15 @@ productDetailsView(
                         Visibility(
                           visible: getProductListResponse.discount != null,
                           child: BaseText(
-                            text: '\$${getProductListResponse.price}',
+                            text: NumberFormat.simpleCurrency(
+                              decimalDigits: num.tryParse(getProductListResponse
+                                      .price
+                                      .toString()) is int
+                                  ? 0
+                                  : 2,
+                            ).format(getProductListResponse.price),
                             textDecoration: TextDecoration.lineThrough,
-                            fontSize: 14,
+                            fontSize: 12,
                             fontWeight: FontWeight.w500,
                             textColor: AppColors.black.withOpacity(0.4),
                           ),
@@ -384,12 +304,32 @@ productDetailsView(
                         ),
                         BaseText(
                           text: getProductListResponse.discount != null
-                              ? '\$${(getProductListResponse.price ?? 0) - (((getProductListResponse.price ?? 0) / 100) * (int.tryParse(getProductListResponse.discount ?? "") ?? 0))}'
-                              : '\$${getProductListResponse.price}',
-                          fontSize: 20,
+                              ? NumberFormat.simpleCurrency(
+                                  decimalDigits: num.tryParse(
+                                          getProductListResponse.price
+                                              .toString()) is int
+                                      ? 0
+                                      : 2,
+                                ).format((getProductListResponse.price ?? 0) -
+                                  (((getProductListResponse.price ?? 0) / 100) *
+                                      (int.tryParse(
+                                              getProductListResponse.discount ??
+                                                  "") ??
+                                          0)))
+                              //'\$${(state.getProductList[index].price ?? 0) - (((state.getProductList[index].price ?? 0) / 100) * (int.tryParse(state.getProductList[index].discount ?? "") ?? 0))}'
+                              : NumberFormat.simpleCurrency(
+                                  decimalDigits: num.tryParse(
+                                          getProductListResponse.price
+                                              .toString()) is int
+                                      ? 0
+                                      : 2,
+                                ).format(getProductListResponse.price),
+                          //  : '\$${state.getProductList[index].price}',
                           fontWeight: FontWeight.w600,
-                          textColor: Color(0xFF527FF2),
+                          maxLines: 1,
                         ),
+
+                        // Vi
                       ],
                     )
                   ],

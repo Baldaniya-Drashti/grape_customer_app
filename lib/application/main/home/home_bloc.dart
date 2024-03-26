@@ -122,6 +122,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
                   var filterAPIList = searchRes.filter_data
                       ?.toJson()
                       .entries
+                      
                       .toList()
                       .where((element) => (element.value as List).isNotEmpty)
                       .toList();

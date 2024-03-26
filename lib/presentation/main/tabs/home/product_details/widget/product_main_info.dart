@@ -7,6 +7,7 @@ import 'package:grape_customer_app/domain/core/svg_image_constants.dart';
 import 'package:grape_customer_app/presentation/common/widgets/base_text.dart';
 import 'package:grape_customer_app/presentation/core/styles/app_colors.dart';
 import 'package:grape_customer_app/presentation/core/widgets/utility/common_rating_bar.dart';
+import 'package:intl/intl.dart';
 
 class ProductMainInfo extends StatelessWidget {
   const ProductMainInfo({super.key});
@@ -95,10 +96,18 @@ class ProductMainInfo extends StatelessWidget {
                     fontWeight: FontWeight.w500,
                   ),
                   Spacer(),
+
                   Visibility(
                     visible: state.getProductDetails.product?.discount != null,
                     child: BaseText(
-                      text: '\$${state.getProductDetails.product?.price}',
+                      text: NumberFormat.simpleCurrency(
+                        decimalDigits: num.tryParse(state
+                                    .getProductDetails.product?.price
+                                    .toString() ??
+                                "") is int
+                            ? 0
+                            : 2,
+                      ).format(state.getProductDetails.product?.price),
                       textDecoration: TextDecoration.lineThrough,
                       fontSize: 12,
                       fontWeight: FontWeight.w500,
@@ -107,17 +116,66 @@ class ProductMainInfo extends StatelessWidget {
                   ),
                   SizedBox(
                     width: getSize(
-                      state.getProductDetails.product?.discount != null ? 6 : 0,
+                        state.getProductDetails.product?.discount != null
+                            ? 6
+                            : 0),
+                  ),
+                  Expanded(
+                    child: BaseText(
+                      text: state.getProductDetails.product?.discount != null
+                          ? NumberFormat.simpleCurrency(
+                              decimalDigits: num.tryParse(state
+                                          .getProductDetails.product?.price
+                                          .toString() ??
+                                      "") is int
+                                  ? 0
+                                  : 2,
+                            ).format((state.getProductDetails.product?.price ??
+                                  0) -
+                              (((state.getProductDetails.product?.price ?? 0) /
+                                      100) *
+                                  (int.tryParse(state.getProductDetails.product
+                                              ?.discount ??
+                                          "") ??
+                                      0)))
+                          //'\$${(state.getProductList[index].price ?? 0) - (((state.getProductList[index].price ?? 0) / 100) * (int.tryParse(state.getProductList[index].discount ?? "") ?? 0))}'
+                          : NumberFormat.simpleCurrency(
+                              decimalDigits: num.tryParse(state
+                                          .getProductDetails.product?.price
+                                          .toString() ??
+                                      "") is int
+                                  ? 0
+                                  : 2,
+                            ).format(state.getProductDetails.product?.price),
+                      //  : '\$${state.getProductList[index].price}',
+                      fontWeight: FontWeight.w600,
+                      maxLines: 1,
                     ),
                   ),
-                  BaseText(
-                    text: state.getProductDetails.product?.discount != null
-                        ? '\$${(state.getProductDetails.product?.price ?? 0) - (((state.getProductDetails.product?.price ?? 0) / 100) * (int.tryParse(state.getProductDetails.product?.discount ?? "") ?? 0))}'
-                        : '\$${state.getProductDetails.product?.price}',
-                    fontSize: 20,
-                    fontWeight: FontWeight.w600,
-                    textColor: Color(0xFF527FF2),
-                  ),
+                  
+                  // Visibility(
+                  //   visible: state.getProductDetails.product?.discount != null,
+                  //   child: BaseText(
+                  //     text: '\$${state.getProductDetails.product?.price}',
+                  //     textDecoration: TextDecoration.lineThrough,
+                  //     fontSize: 12,
+                  //     fontWeight: FontWeight.w500,
+                  //     textColor: AppColors.black.withOpacity(0.4),
+                  //   ),
+                  // ),
+                  // SizedBox(
+                  //   width: getSize(
+                  //     state.getProductDetails.product?.discount != null ? 6 : 0,
+                  //   ),
+                  // ),
+                  // BaseText(
+                  //   text: state.getProductDetails.product?.discount != null
+                  //       ? '\$${(state.getProductDetails.product?.price ?? 0) - (((state.getProductDetails.product?.price ?? 0) / 100) * (int.tryParse(state.getProductDetails.product?.discount ?? "") ?? 0))}'
+                  //       : '\$${state.getProductDetails.product?.price}',
+                  //   fontSize: 20,
+                  //   fontWeight: FontWeight.w600,
+                  //   textColor: Color(0xFF527FF2),
+                  // ),
                 ],
               ),
             ),

@@ -4,6 +4,7 @@ import 'package:grape_customer_app/application/main/checkout/checkout_bloc.dart'
 import 'package:grape_customer_app/domain/core/math_utils.dart';
 import 'package:grape_customer_app/presentation/common/widgets/base_text.dart';
 import 'package:grape_customer_app/presentation/core/styles/app_colors.dart';
+import 'package:intl/intl.dart';
 
 class PayableAmountWidget extends StatelessWidget {
   const PayableAmountWidget({super.key});
@@ -40,19 +41,30 @@ class PayableAmountWidget extends StatelessWidget {
                 children: [
                   getPriceDetails(
                       title: 'Item (${state.getProductList.length})',
-                      price:
-                          '\$${state.cartTotal.toStringAsFixed(state.cartTotal is int ? 0 : 2)}'),
+                      price: NumberFormat.simpleCurrency(
+                              decimalDigits: state.cartTotal is int ? 0 : 2)
+                          .format(state.cartTotal)),
                   SizedBox(
                     height: getSize(18),
                   ),
                   getPriceDetails(
-                      title: 'Shipping',
-                      price: '\$${state.checkoutDTO.shipping_charge}'),
+                    title: 'Shipping',
+                    price: NumberFormat.simpleCurrency(
+                            decimalDigits:
+                                state.checkoutDTO.shipping_charge is int
+                                    ? 0
+                                    : 2)
+                        .format(state.checkoutDTO.shipping_charge),
+                  ),
                   SizedBox(
                     height: getSize(18),
                   ),
                   getPriceDetails(
-                      title: 'Tax', price: '\$${state.checkoutDTO.tax}'),
+                      title: 'Tax',
+                      price: NumberFormat.simpleCurrency(
+                              decimalDigits:
+                                  state.checkoutDTO.tax is int ? 0 : 2)
+                          .format(state.checkoutDTO.tax)),
                   SizedBox(
                     height: getSize(18),
                   ),
@@ -64,9 +76,11 @@ class PayableAmountWidget extends StatelessWidget {
                     height: getSize(18),
                   ),
                   getTotalPriceDetails(
-                      title: 'Total Price',
-                      price:
-                          '\$${state.orderTotal.toStringAsFixed(state.orderTotal is int ? 0 : 2)}'),
+                    title: 'Total Price',
+                    price: NumberFormat.simpleCurrency(
+                            decimalDigits: state.orderTotal is int ? 0 : 2)
+                        .format(state.orderTotal),
+                  ),
                 ],
               ),
             ),

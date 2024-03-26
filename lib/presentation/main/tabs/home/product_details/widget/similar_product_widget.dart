@@ -11,6 +11,7 @@ import 'package:grape_customer_app/presentation/common/widgets/paginated_list_vi
 import 'package:grape_customer_app/presentation/core/app_router.gr.dart';
 import 'package:grape_customer_app/presentation/core/styles/app_colors.dart';
 import 'package:grape_customer_app/presentation/core/widgets/utility/common_rating_bar.dart';
+import 'package:intl/intl.dart';
 
 class SimilarProductWidget extends StatelessWidget {
   const SimilarProductWidget({super.key});
@@ -22,7 +23,7 @@ class SimilarProductWidget extends StatelessWidget {
         return Visibility(
           visible: state.similarProduct.isNotEmpty,
           child: SizedBox(
-            height: getSize(218),
+            height: getSize(220),
             child: PaginatedListView(
               onRefresh: () {
                 context.read<ProductDetailBloc>().add(
@@ -140,8 +141,14 @@ class SimilarProductWidget extends StatelessWidget {
                                               .similarProduct[index].discount !=
                                           null,
                                       child: BaseText(
-                                        text:
-                                            '\$${state.similarProduct[index].price}',
+                                        text: NumberFormat.simpleCurrency(
+                                          decimalDigits: num.tryParse(state
+                                                  .similarProduct[index].price
+                                                  .toString()) is int
+                                              ? 0
+                                              : 2,
+                                        ).format(
+                                            state.similarProduct[index].price),
                                         textDecoration:
                                             TextDecoration.lineThrough,
                                         fontSize: 12,
@@ -162,8 +169,40 @@ class SimilarProductWidget extends StatelessWidget {
                                         text: state.similarProduct[index]
                                                     .discount !=
                                                 null
-                                            ? '\$${(state.similarProduct[index].price ?? 0) - (((state.similarProduct[index].price ?? 0) / 100) * (int.tryParse(state.getProductDetails.product?.discount ?? "") ?? 0))}'
-                                            : '\$${state.similarProduct[index].price}',
+                                            ? NumberFormat.simpleCurrency(
+                                                decimalDigits: num.tryParse(
+                                                        state
+                                                            .similarProduct[
+                                                                index]
+                                                            .price
+                                                            .toString()) is int
+                                                    ? 0
+                                                    : 2,
+                                              ).format((state
+                                                        .similarProduct[index]
+                                                        .price ??
+                                                    0) -
+                                                (((state.similarProduct[index]
+                                                                .price ??
+                                                            0) /
+                                                        100) *
+                                                    (int.tryParse(state
+                                                                .similarProduct[index]
+                                                                .discount ??
+                                                            "") ??
+                                                        0)))
+                                            //'\$${(state.getProductList[index].price ?? 0) - (((state.getProductList[index].price ?? 0) / 100) * (int.tryParse(state.getProductList[index].discount ?? "") ?? 0))}'
+                                            : NumberFormat.simpleCurrency(
+                                                decimalDigits: num.tryParse(
+                                                        state
+                                                            .similarProduct[
+                                                                index]
+                                                            .price
+                                                            .toString()) is int
+                                                    ? 0
+                                                    : 2,
+                                              ).format(state.similarProduct[index].price),
+                                        //  : '\$${state.getProductList[index].price}',
                                         fontWeight: FontWeight.w600,
                                         maxLines: 1,
                                       ),

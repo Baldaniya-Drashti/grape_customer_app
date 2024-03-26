@@ -12,6 +12,7 @@ import 'package:grape_customer_app/presentation/core/app_router.gr.dart';
 import 'package:grape_customer_app/presentation/core/styles/app_colors.dart';
 import 'package:grape_customer_app/presentation/core/widgets/utility/common_rating_bar.dart';
 import 'package:grape_customer_app/presentation/main/tabs/favourite/widgets/empty_favourite_view.dart';
+import 'package:intl/intl.dart';
 
 class FavouriteGridView extends StatelessWidget {
   const FavouriteGridView({super.key});
@@ -77,6 +78,7 @@ class FavouriteGridView extends StatelessWidget {
                                         "",
                                     placeholder: (context, url) => Container(
                                       height: getSize(160),
+                                      width: MediaQuery.of(context).size.width,
                                       decoration: BoxDecoration(
                                         color: Colors.grey.shade100,
                                         borderRadius:
@@ -84,6 +86,7 @@ class FavouriteGridView extends StatelessWidget {
                                       ),
                                     ),
                                     height: getSize(160),
+                                    width: MediaQuery.of(context).size.width,
                                     fit: BoxFit.cover,
                                   ),
                                 ),
@@ -109,8 +112,17 @@ class FavouriteGridView extends StatelessWidget {
                                             .product?.discount !=
                                         null,
                                     child: BaseText(
-                                      text:
-                                          '\$${state.favouriteListDTO[index].product?.price}',
+                                      text: NumberFormat.simpleCurrency(
+                                        decimalDigits: num.tryParse(state
+                                                    .favouriteListDTO[index]
+                                                    .product
+                                                    ?.price
+                                                    .toString() ??
+                                                "") is int
+                                            ? 0
+                                            : 2,
+                                      ).format(state.favouriteListDTO[index]
+                                          .product?.price),
                                       textDecoration:
                                           TextDecoration.lineThrough,
                                       fontSize: 12,
@@ -120,21 +132,57 @@ class FavouriteGridView extends StatelessWidget {
                                     ),
                                   ),
                                   SizedBox(
-                                    width: getSize(
-                                      state.favouriteListDTO[index].product
-                                                  ?.discount !=
-                                              null
-                                          ? 6
-                                          : 0,
-                                    ),
-                                  ),
-                                  BaseText(
-                                    text: state.favouriteListDTO[index].product
-                                                ?.discount !=
+                                    width: getSize(state.favouriteListDTO[index]
+                                                .product?.discount !=
                                             null
-                                        ? '\$${(state.favouriteListDTO[index].product?.price ?? 0) - (((state.favouriteListDTO[index].product?.price ?? 0) / 100) * (int.tryParse(state.favouriteListDTO[index].product?.discount ?? "") ?? 0))}'
-                                        : '\$${state.favouriteListDTO[index].product?.price}',
-                                    fontWeight: FontWeight.w600,
+                                        ? 6
+                                        : 0),
+                                  ),
+                                  Expanded(
+                                    child: BaseText(
+                                      text: state.favouriteListDTO[index].product?.discount !=
+                                              null
+                                          ? NumberFormat.simpleCurrency(
+                                              decimalDigits: num.tryParse(state
+                                                          .favouriteListDTO[
+                                                              index]
+                                                          .product
+                                                          ?.price
+                                                          .toString() ??
+                                                      "") is int
+                                                  ? 0
+                                                  : 2,
+                                            ).format((state
+                                                      .favouriteListDTO[index]
+                                                      .product
+                                                      ?.price ??
+                                                  0) -
+                                              (((state.favouriteListDTO[index]
+                                                              .product?.price ??
+                                                          0) /
+                                                      100) *
+                                                  (int.tryParse(state
+                                                              .favouriteListDTO[index]
+                                                              .product
+                                                              ?.discount ??
+                                                          "") ??
+                                                      0)))
+                                          //'\$${(state.getProductList[index].price ?? 0) - (((state.getProductList[index].price ?? 0) / 100) * (int.tryParse(state.getProductList[index].discount ?? "") ?? 0))}'
+                                          : NumberFormat.simpleCurrency(
+                                              decimalDigits: num.tryParse(state
+                                                          .favouriteListDTO[
+                                                              index]
+                                                          .product
+                                                          ?.price
+                                                          .toString() ??
+                                                      "") is int
+                                                  ? 0
+                                                  : 2,
+                                            ).format(state.favouriteListDTO[index].product?.price),
+                                      //  : '\$${state.getProductList[index].price}',
+                                      fontWeight: FontWeight.w600,
+                                      maxLines: 1,
+                                    ),
                                   ),
                                 ],
                               ),

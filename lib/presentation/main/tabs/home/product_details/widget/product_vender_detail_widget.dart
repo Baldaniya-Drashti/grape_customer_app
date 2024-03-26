@@ -60,7 +60,7 @@ class ProductVenderDetailWidget extends StatelessWidget {
                   CommonButton(
                     onPressed: () {},
                     height: 29,
-                    width: 130,
+                    width: 92,
                     buttonText: 'View Shop',
                     buttonFontSize: 14,
                     buttonFontWeight: FontWeight.w500,

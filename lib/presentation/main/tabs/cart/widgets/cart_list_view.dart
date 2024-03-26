@@ -13,6 +13,7 @@ import 'package:grape_customer_app/presentation/core/app_router.gr.dart';
 import 'package:grape_customer_app/presentation/core/styles/app_colors.dart';
 import 'package:grape_customer_app/presentation/core/widgets/buttons/common_button.dart';
 import 'package:grape_customer_app/presentation/main/tabs/cart/widgets/empty_cart_view.dart';
+import 'package:intl/intl.dart';
 
 class CartListView extends StatelessWidget {
   const CartListView({super.key});
@@ -53,8 +54,9 @@ class CartListView extends StatelessWidget {
               visible: !state.isNoDataFound,
               child: getSubTotal(
                   title: 'Subtotal',
-                  description:
-                      '\$${state.cartTotal.toStringAsFixed(state.cartTotal is int ? 0 : 2)}'),
+                  description: NumberFormat.simpleCurrency(
+                          decimalDigits: state.cartTotal is int ? 0 : 2)
+                      .format(state.cartTotal)),
             ),
             SizedBox(
               height: getSize(state.isNoDataFound ? 0 : 14),
@@ -187,7 +189,14 @@ class CartListView extends StatelessWidget {
             child: Align(
               alignment: Alignment.bottomRight,
               child: BaseText(
-                text: '\$${state.cartListDTO[index].product?.price}',
+                text: NumberFormat.simpleCurrency(
+                        decimalDigits: num.tryParse(state
+                                    .cartListDTO[index].product?.price
+                                    .toString() ??
+                                "") is int
+                            ? 0
+                            : 2)
+                    .format(state.cartListDTO[index].product?.price),
                 fontSize: 18,
                 textColor: AppColors.mildBlue,
                 fontWeight: FontWeight.w600,

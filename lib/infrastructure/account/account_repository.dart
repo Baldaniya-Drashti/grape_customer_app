@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:dartz/dartz.dart';
@@ -32,17 +33,15 @@ class AccountRepository extends IAccountRepository {
     String? profileImage,
   }) async {
     try {
+      log('${emailAddress.isEmpty}');
       var formData = FormData.fromMap({
         "first_name": firstName.getOrCrash(),
         "last_name": lastName.getOrCrash(),
         "country_code": countryCode,
+        "email": emailAddress.isEmpty ? null : emailAddress,
         "mobile": mobileNumber.getOrCrash(),
       });
-
-      if (emailAddress.isNotEmpty) {
-        formData.fields.add(MapEntry('email', emailAddress));
-      }
-
+      log('formData : ${formData.fields.map((e) => e)}');
       if (profileImage != null &&
           profileImage.isNotEmpty &&
           !profileImage.contains('https')) {

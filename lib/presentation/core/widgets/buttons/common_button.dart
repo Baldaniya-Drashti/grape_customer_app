@@ -58,6 +58,7 @@ class CommonButton extends StatelessWidget {
         splashFactory: NoSplash.splashFactory,
         backgroundColor: backgroundColor ?? AppColors.primaryOrange,
         disabledBackgroundColor: backgroundColor ?? AppColors.primaryOrange,
+        padding: EdgeInsets.zero,
         fixedSize: Size(
           getSize(width ?? MediaQuery.of(context).size.width),
           getSize(

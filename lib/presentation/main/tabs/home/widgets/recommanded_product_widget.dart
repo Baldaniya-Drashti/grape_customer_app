@@ -11,6 +11,7 @@ import 'package:grape_customer_app/presentation/core/app_router.gr.dart';
 import 'package:grape_customer_app/presentation/core/shimmer/product_grid_shimmer.dart';
 import 'package:grape_customer_app/presentation/core/styles/styles.dart';
 import 'package:grape_customer_app/presentation/core/widgets/utility/common_rating_bar.dart';
+import 'package:intl/intl.dart';
 
 class RecommandedProductWidget extends StatelessWidget {
   const RecommandedProductWidget({super.key});
@@ -40,12 +41,6 @@ class RecommandedProductWidget extends StatelessWidget {
               mainAxisSpacing: getSize(20),
             ),
             itemBuilder: (context, index) {
-              var dicountAmount = (state.getProductList[index].price ?? 0) -
-                  (((state.getProductList[index].price ?? 0) / 100) *
-                      (int.tryParse(
-                              state.getProductList[index].discount ?? "") ??
-                          0));
-
               return GestureDetector(
                 onTap: () {
                   context.router.push(
@@ -102,7 +97,13 @@ class RecommandedProductWidget extends StatelessWidget {
                               visible:
                                   state.getProductList[index].discount != null,
                               child: BaseText(
-                                text: '\$${state.getProductList[index].price}',
+                                text: NumberFormat.simpleCurrency(
+                                  decimalDigits: num.tryParse(state
+                                          .getProductList[index].price
+                                          .toString()) is int
+                                      ? 0
+                                      : 2,
+                                ).format(state.getProductList[index].price),
                                 textDecoration: TextDecoration.lineThrough,
                                 fontSize: 12,
                                 fontWeight: FontWeight.w500,
@@ -119,12 +120,37 @@ class RecommandedProductWidget extends StatelessWidget {
                               child: BaseText(
                                 text: state.getProductList[index].discount !=
                                         null
-                                    ? '\$$dicountAmount'
-                                    : '\$${state.getProductList[index].price}',
+                                    ? NumberFormat.simpleCurrency(
+                                        decimalDigits: num.tryParse(state
+                                                .getProductList[index].price
+                                                .toString()) is int
+                                            ? 0
+                                            : 2,
+                                      ).format((state
+                                                .getProductList[index].price ??
+                                            0) -
+                                        (((state.getProductList[index].price ??
+                                                    0) /
+                                                100) *
+                                            (int.tryParse(state
+                                                        .getProductList[index]
+                                                        .discount ??
+                                                    "") ??
+                                                0)))
+                                    //'\$${(state.getProductList[index].price ?? 0) - (((state.getProductList[index].price ?? 0) / 100) * (int.tryParse(state.getProductList[index].discount ?? "") ?? 0))}'
+                                    : NumberFormat.simpleCurrency(
+                                        decimalDigits: num.tryParse(state
+                                                .getProductList[index].price
+                                                .toString()) is int
+                                            ? 0
+                                            : 2,
+                                      ).format(
+                                        state.getProductList[index].price),
+                                //  : '\$${state.getProductList[index].price}',
                                 fontWeight: FontWeight.w600,
                                 maxLines: 1,
                               ),
-                            )
+                            ),
                           ],
                         ),
                         SizedBox(

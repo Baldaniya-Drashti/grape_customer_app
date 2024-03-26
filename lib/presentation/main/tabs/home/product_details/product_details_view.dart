@@ -321,7 +321,7 @@ class ProductDetailsView extends StatelessWidget {
                               state.getProductDetails.product?.reviews !=
                                           null &&
                                       state.getProductDetails.product!.reviews!
-                                          .isNotEmpty
+                                          .isEmpty
                                   ? 5
                                   : 0,
                             ),

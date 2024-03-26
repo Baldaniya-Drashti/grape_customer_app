@@ -44,7 +44,7 @@ class MyOrdesCard extends StatelessWidget {
             child: Column(
               children: [
                 Row(
-                  // crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Center(
                       child: ClipRRect(
@@ -62,39 +62,51 @@ class MyOrdesCard extends StatelessWidget {
                     SizedBox(
                       width: getSize(8),
                     ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        BaseText(
-                          text: state.getMyOrderList[index].product
-                                  ?.product_name ??
-                              "",
-                          fontSize: 12,
-                          fontWeight: FontWeight.w600,
-                        ),
-                        SizedBox(
-                          height: getSize(2),
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: List.generate(
-                            dataList.length,
-                            (index) => Padding(
-                              padding:
-                                  EdgeInsets.symmetric(vertical: getSize(3)),
-                              child: getProductDetailsTile(
-                                title: dataList[index].name ?? "",
-                                description: dataList[index].value ?? "",
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          BaseText(
+                            text: state.getMyOrderList[index].product
+                                    ?.product_name ??
+                                "",
+                            fontSize: 12,
+                            fontWeight: FontWeight.w600,
+                          ),
+                          SizedBox(
+                            height: getSize(2),
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: List.generate(
+                              dataList.length,
+                              (index) => Padding(
+                                padding:
+                                    EdgeInsets.symmetric(vertical: getSize(3)),
+                                child: getProductDetailsTile(
+                                  title: dataList[index].name ?? "",
+                                  description: dataList[index].value ?? "",
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      ],
+                          SizedBox(
+                            height: getSize(3),
+                          ),
+                          getProductDetailsTile(
+                            title: 'Quantity',
+                            description: state.getMyOrderList[index].quantity
+                                    ?.toString() ??
+                                "1",
+                          ),
+                        ],
+                      ),
                     ),
-                    Spacer(),
+                    SizedBox(
+                      width: getSize(4),
+                    ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
-                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         BaseText(
                           text: DateFormat('dd MMM yyyy').format(
@@ -211,7 +223,10 @@ class MyOrdesCard extends StatelessWidget {
           textColor: AppColors.black.withOpacity(0.6),
         ),
         BaseText(
-          text: '\$${state.getMyOrderList[index].amount}',
+          text: NumberFormat.simpleCurrency(
+                  decimalDigits:
+                      state.getMyOrderList[index].amount is int ? 0 : 2)
+              .format(state.getMyOrderList[index].amount),
           fontSize: 18,
           fontWeight: FontWeight.w600,
           textColor: AppColors.mildBlue,

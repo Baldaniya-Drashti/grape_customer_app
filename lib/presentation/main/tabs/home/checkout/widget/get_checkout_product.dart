@@ -11,6 +11,7 @@ import 'package:grape_customer_app/infrastructure/core/common_product_from_json_
 import 'package:grape_customer_app/infrastructure/main/home_dto/get_product_list_response.dart';
 import 'package:grape_customer_app/presentation/common/widgets/base_text.dart';
 import 'package:grape_customer_app/presentation/core/styles/app_colors.dart';
+import 'package:intl/intl.dart';
 
 class GetCheckoutProductDetailWidget extends StatelessWidget {
   const GetCheckoutProductDetailWidget({super.key});
@@ -109,7 +110,6 @@ class GetCheckoutProductDetailWidget extends StatelessWidget {
                       )
                     : Container(),
               ),
-
               SizedBox(
                 width: getSize(8),
               ),
@@ -139,48 +139,36 @@ class GetCheckoutProductDetailWidget extends StatelessWidget {
                         ),
                       ),
                     ),
+                    SizedBox(
+                      height: getSize(3),
+                    ),
+                    getProductDetails(
+                      title: 'Quantity',
+                      description: getProductListResponse.quantity
+                              ?.toStringAsFixed(
+                                  getProductListResponse.quantity is int
+                                      ? 0
+                                      : 2) ??
+                          "1",
+                    ),
                   ],
                 ),
               ),
               SizedBox(
                 height: getSize(3),
               ),
-              getProductDetails(
-                title: 'Quantity',
-                description: getProductListResponse.quantity?.toStringAsFixed(
-                        getProductListResponse.quantity is int ? 0 : 2) ??
-                    "1",
-              ),
-              // Column(
-              //   children: [
-              //     IconButton(
-              //       onPressed: () {
-              //         context.read<CheckoutBloc>().add(
-              //               CheckoutEvent.removeCheckoutProduct(
-              //                 getProductListResponse.id.toString(),
-              //               ),
-              //             );
-              //       },
-              //       icon: Icon(
-              //         Icons.close_rounded,
-              //         color: AppColors.black.withOpacity(0.60),
-              //       ),
-              //     ),
-              //     BaseText(
-              //       text: '\$${getProductListResponse.price}',
-              //       fontSize: 18,
-              //       textColor: AppColors.mildBlue,
-              //       fontWeight: FontWeight.w600,
-              //     )
-              //   ],
-              // )
             ],
           ),
           Positioned.fill(
             child: Align(
               alignment: Alignment.bottomRight,
               child: BaseText(
-                text: '\$${getProductListResponse.price}',
+                text: NumberFormat.simpleCurrency(
+                        decimalDigits: num.tryParse(
+                                getProductListResponse.price.toString()) is int
+                            ? 0
+                            : 0)
+                    .format(getProductListResponse.price),
                 fontSize: 18,
                 textColor: AppColors.mildBlue,
                 fontWeight: FontWeight.w600,
