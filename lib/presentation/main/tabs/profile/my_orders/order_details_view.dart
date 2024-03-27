@@ -6,6 +6,7 @@ import 'package:grape_customer_app/domain/core/l10n/app_localizations.dart';
 import 'package:grape_customer_app/domain/core/math_utils.dart';
 import 'package:grape_customer_app/injection.dart';
 import 'package:grape_customer_app/presentation/common/widgets/base_text.dart';
+import 'package:grape_customer_app/presentation/core/styles/app_colors.dart';
 import 'package:grape_customer_app/presentation/core/widgets/inputs/custom_app_bar.dart';
 import 'package:grape_customer_app/presentation/main/tabs/profile/my_orders/widgets/order_detail_item.dart';
 import 'package:grape_customer_app/presentation/main/tabs/profile/my_orders/widgets/order_detail_paid_amount.dart';
@@ -15,31 +16,44 @@ import 'package:grape_customer_app/presentation/main/tabs/profile/my_orders/widg
 
 @RoutePage(name: 'OrderDetails')
 class OrderDetails extends StatelessWidget {
-  const OrderDetails({super.key});
+  final String orderId;
+  const OrderDetails({super.key, required this.orderId});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt<MyOrdersBloc>(),
+      create: (context) =>
+          getIt<MyOrdersBloc>()..add(MyOrdersEvent.getOrderDetail(orderId)),
       child: BlocConsumer<MyOrdersBloc, MyOrdersState>(
         builder: (context, state) {
           return Scaffold(
             appBar:
                 CustomAppBar(title: AppLocalizations.of(context).orderDetails),
-            body: ListView(
-              padding: EdgeInsets.symmetric(
-                horizontal: getSize(18),
-                vertical: getSize(20),
-              ),
-              physics: BouncingScrollPhysics(),
-              children: [
-                OrderDetailItem(),
-                OrderDetailTrackOrder(),
-                OrderDetailPaidAmount(),
-                OrderDetailShippingAddress(),
-                OrderDetailPaymentMethod(),
-              ],
-            ),
+            body: state.isLoading
+                ? Center(
+                    child: CircularProgressIndicator(
+                      color: AppColors.primaryOrange,
+                    ),
+                  )
+                : state.isErrorInAPI
+                    ? Center(
+                        child: BaseText(
+                            text: 'Something went wrong. Please try again'),
+                      )
+                    : ListView(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: getSize(18),
+                          vertical: getSize(20),
+                        ),
+                        physics: BouncingScrollPhysics(),
+                        children: [
+                          OrderDetailItem(),
+                          OrderDetailTrackOrder(),
+                          OrderDetailPaidAmount(),
+                          OrderDetailShippingAddress(),
+                          OrderDetailPaymentMethod(),
+                        ],
+                      ),
             bottomNavigationBar: SafeArea(
               child: Padding(
                 padding: EdgeInsets.symmetric(

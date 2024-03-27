@@ -27,7 +27,14 @@ class MyOrdesCard extends StatelessWidget {
             .where((element) => element.fieldType == 1)
             .toList();
         return GestureDetector(
-          onTap: () => context.router.push(PageRouteInfo(OrderDetails.name)),
+          onTap: () => context.router.push(
+            PageRouteInfo(
+              OrderDetails.name,
+              args: OrderDetailsArgs(
+                orderId: state.getMyOrderList[index].order_id?.toString() ?? "",
+              ),
+            ),
+          ),
           child: Container(
             padding: EdgeInsets.all(getSize(10)),
             decoration: BoxDecoration(
@@ -139,7 +146,7 @@ class MyOrdesCard extends StatelessWidget {
                   children: [
                     getAmountDetails(state),
                     Spacer(),
-                    getOrderDetails(context),
+                    getOrderDetails(context, state),
                   ],
                 )
               ],
@@ -150,9 +157,16 @@ class MyOrdesCard extends StatelessWidget {
     );
   }
 
-  Widget getOrderDetails(BuildContext context) {
+  Widget getOrderDetails(BuildContext context, MyOrdersState state) {
     return GestureDetector(
-      onTap: () => context.router.push(PageRouteInfo(OrderDetails.name)),
+      onTap: () => context.router.push(
+        PageRouteInfo(
+          OrderDetails.name,
+          args: OrderDetailsArgs(
+            orderId: state.getMyOrderList[index].order_id?.toString() ?? "",
+          ),
+        ),
+      ),
       child: Container(
         padding: EdgeInsets.symmetric(
           horizontal: getSize(16),

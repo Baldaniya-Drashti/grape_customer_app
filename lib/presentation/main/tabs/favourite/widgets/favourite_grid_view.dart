@@ -229,13 +229,17 @@ class FavouriteGridView extends StatelessWidget {
                                   SizedBox(
                                     width: getSize(2),
                                   ),
-                                  BaseText(
-                                    text: state.favouriteListDTO[index].product
-                                            ?.shop_location ??
-                                        "",
-                                    fontSize: 8,
-                                    fontWeight: FontWeight.w500,
-                                    textColor: AppColors.black.withOpacity(0.4),
+                                  Expanded(
+                                    child: BaseText(
+                                      text: state.favouriteListDTO[index]
+                                              .product?.shop_location ??
+                                          "",
+                                      fontSize: 8,
+                                      maxLines: 1,
+                                      fontWeight: FontWeight.w500,
+                                      textColor:
+                                          AppColors.black.withOpacity(0.4),
+                                    ),
                                   ),
                                 ],
                               ),

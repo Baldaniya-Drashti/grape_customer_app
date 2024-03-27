@@ -54,7 +54,7 @@ import 'package:grape_customer_app/presentation/main/tabs/profile/edit_profile/o
     as _i16;
 import 'package:grape_customer_app/presentation/main/tabs/profile/my_orders/my_orders.dart'
     as _i12;
-import 'package:grape_customer_app/presentation/main/tabs/profile/my_orders/order_details.dart'
+import 'package:grape_customer_app/presentation/main/tabs/profile/my_orders/order_details_view.dart'
     as _i15;
 import 'package:grape_customer_app/presentation/main/tabs/profile/payment_method/add_new_card.dart'
     as _i2;
@@ -183,9 +183,13 @@ abstract class $AppRouter extends _i29.RootStackRouter {
       );
     },
     OrderDetails.name: (routeData) {
+      final args = routeData.argsAs<OrderDetailsArgs>();
       return _i29.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i15.OrderDetails(),
+        child: _i15.OrderDetails(
+          key: args.key,
+          orderId: args.orderId,
+        ),
       );
     },
     OtpEditProfileVerificationView.name: (routeData) {
@@ -627,16 +631,40 @@ class OnboardingArgs {
 
 /// generated route for
 /// [_i15.OrderDetails]
-class OrderDetails extends _i29.PageRouteInfo<void> {
-  const OrderDetails({List<_i29.PageRouteInfo>? children})
-      : super(
+class OrderDetails extends _i29.PageRouteInfo<OrderDetailsArgs> {
+  OrderDetails({
+    _i30.Key? key,
+    required String orderId,
+    List<_i29.PageRouteInfo>? children,
+  }) : super(
           OrderDetails.name,
+          args: OrderDetailsArgs(
+            key: key,
+            orderId: orderId,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'OrderDetails';
 
-  static const _i29.PageInfo<void> page = _i29.PageInfo<void>(name);
+  static const _i29.PageInfo<OrderDetailsArgs> page =
+      _i29.PageInfo<OrderDetailsArgs>(name);
+}
+
+class OrderDetailsArgs {
+  const OrderDetailsArgs({
+    this.key,
+    required this.orderId,
+  });
+
+  final _i30.Key? key;
+
+  final String orderId;
+
+  @override
+  String toString() {
+    return 'OrderDetailsArgs{key: $key, orderId: $orderId}';
+  }
 }
 
 /// generated route for

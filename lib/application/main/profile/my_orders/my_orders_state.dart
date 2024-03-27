@@ -8,6 +8,7 @@ class MyOrdersState with _$MyOrdersState {
     required bool isNoDataFound,
     required bool isErrorInAPI,
     required Option<Either<MainFailure, String>> failureOrSuccessOption,
+    required OrderDetailDTO orderDetailDTO,
   }) = _MyOrdersState;
   factory MyOrdersState.initial() => MyOrdersState(
         isLoading: false,
@@ -15,5 +16,6 @@ class MyOrdersState with _$MyOrdersState {
         isErrorInAPI: false,
         failureOrSuccessOption: none(),
         getMyOrderList: [],
+        orderDetailDTO: OrderDetailDTO(),
       );
 }

@@ -40,10 +40,11 @@ class PayableAmountWidget extends StatelessWidget {
               child: Column(
                 children: [
                   getPriceDetails(
-                      title: 'Item (${state.getProductList.length})',
-                      price: NumberFormat.simpleCurrency(
-                              decimalDigits: state.cartTotal is int ? 0 : 2)
-                          .format(state.cartTotal)),
+                    title: 'Item (${state.getProductList.length})',
+                    price: NumberFormat.simpleCurrency(
+                            decimalDigits: state.cartTotal is int ? 0 : 2)
+                        .format(state.cartTotal),
+                  ),
                   SizedBox(
                     height: getSize(18),
                   ),
@@ -60,11 +61,11 @@ class PayableAmountWidget extends StatelessWidget {
                     height: getSize(18),
                   ),
                   getPriceDetails(
-                      title: 'Tax',
-                      price: NumberFormat.simpleCurrency(
-                              decimalDigits:
-                                  state.checkoutDTO.tax is int ? 0 : 2)
-                          .format(state.checkoutDTO.tax)),
+                    title: 'Tax',
+                    price: NumberFormat.simpleCurrency(
+                            decimalDigits: state.checkoutDTO.tax is int ? 0 : 2)
+                        .format(state.checkoutDTO.tax),
+                  ),
                   SizedBox(
                     height: getSize(18),
                   ),

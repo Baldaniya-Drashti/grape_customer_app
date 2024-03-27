@@ -27,18 +27,18 @@ class AccountRepository extends IAccountRepository {
   Future<Either<AccountFailure, List>> updateUser({
     required Username firstName,
     required Username lastName,
-    required String emailAddress,
+    required EmailAddress emailAddress,
     required String countryCode,
     required MobileNumber mobileNumber,
     String? profileImage,
   }) async {
     try {
-      log('${emailAddress.isEmpty}');
+      log('${emailAddress.getOrCrash().isEmpty}');
       var formData = FormData.fromMap({
         "first_name": firstName.getOrCrash(),
         "last_name": lastName.getOrCrash(),
         "country_code": countryCode,
-        "email": emailAddress.isEmpty ? null : emailAddress,
+        "email": emailAddress.getOrCrash().isEmpty ? null : emailAddress,
         "mobile": mobileNumber.getOrCrash(),
       });
       log('formData : ${formData.fields.map((e) => e)}');

@@ -18,7 +18,7 @@ class MyOrders extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) =>
-          getIt<MyOrdersBloc>()..add(MyOrdersEvent.getMyOrderseList(true)),
+          getIt<MyOrdersBloc>()..add(MyOrdersEvent.getMyOrdersList(true)),
       child: BlocConsumer<MyOrdersBloc, MyOrdersState>(
         builder: (context, state) {
           return Scaffold(
@@ -35,14 +35,14 @@ class MyOrders extends StatelessWidget {
                     onRefresh: () {
                       context
                           .read<MyOrdersBloc>()
-                          .add(MyOrdersEvent.getMyOrderseList(true));
+                          .add(MyOrdersEvent.getMyOrdersList(true));
                     },
                     refreshController:
                         context.read<MyOrdersBloc>().refreshController,
                     onLoading: () {
                       context
                           .read<MyOrdersBloc>()
-                          .add(MyOrdersEvent.getMyOrderseList(false));
+                          .add(MyOrdersEvent.getMyOrdersList(false));
                     },
                     isNoDataFound: state.isNoDataFound,
                     child: ListView.separated(

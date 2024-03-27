@@ -49,7 +49,7 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
         emailAddressChanged: (EmailAddressChanged value) async {
           emit(
             state.copyWith(
-              emailAddress: value.email,
+              emailAddress: EmailAddress(value.email),
               authFailureOrSuccessOption: none(),
             ),
           );
@@ -73,10 +73,13 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
           Either<AccountFailure, List>? failureOrSuccess;
           final isFirstNameValid = state.firstName.isValid();
           final isLastNameValid = state.lastName.isValid();
-          //final isEmailAddressValid = state.emailAddress.isValid();
+          final isEmailAddressValid = state.emailAddress.isValid();
           final isMobileNumberValid = state.mobileNumber.isValid();
 
-          if (isFirstNameValid && isLastNameValid && isMobileNumberValid) {
+          if (isFirstNameValid &&
+              isLastNameValid &&
+              isMobileNumberValid &&
+              isEmailAddressValid) {
             emit(
               state.copyWith(
                 isSubmitting: true,

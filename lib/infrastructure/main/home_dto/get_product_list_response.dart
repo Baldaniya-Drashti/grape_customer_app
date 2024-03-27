@@ -11,7 +11,7 @@ class GetProductListResponse with _$GetProductListResponse {
     int? id,
     String? category,
     String? sub_category,
-    InnerSubCategory? inner_sub_category,
+    String? inner_sub_category,
     String? product_name,
     String? discount,
     String? color,

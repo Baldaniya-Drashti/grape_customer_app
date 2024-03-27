@@ -3,6 +3,7 @@ import 'package:grape_customer_app/domain/auth/auth_value_objects.dart';
 import 'package:grape_customer_app/domain/main/main_failure.dart';
 import 'package:grape_customer_app/infrastructure/core/common_response.dart';
 import 'package:grape_customer_app/infrastructure/main/checkout_dto/checkout_dto.dart';
+import 'package:grape_customer_app/infrastructure/main/order_detail_dto/order_detail_dto.dart';
 import 'package:grape_customer_app/infrastructure/main/payemnt_method_dto/get_cards_dto.dart';
 import 'package:grape_customer_app/infrastructure/main/shipping_address_dto/shipping_address_dto.dart';
 
@@ -98,5 +99,9 @@ abstract class IMainFacade {
     required int page,
     required String shopID,
     required List<MapEntry<String, dynamic>> selectedFilterList,
+  });
+
+  Future<Either<MainFailure, OrderDetailDTO>> getOrderDetailAPI({
+    required String orderId,
   });
 }

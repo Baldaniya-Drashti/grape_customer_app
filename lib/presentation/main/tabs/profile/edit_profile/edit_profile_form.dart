@@ -128,19 +128,19 @@ class EditProfileForm extends StatelessWidget {
       onChanged: (email) => context
           .read<EditProfileBloc>()
           .add(EditProfileEvent.emailAddressChanged(email)),
-      // validator: (_, context) => context
-      //     .read<EditProfileBloc>()
-      //     .state
-      //     .emailAddress
-      //     .value
-      //     .fold(
-      //       (l) => l.maybeMap(
-      //         empty: (value) => AppLocalizations.of(context).enterEmail,
-      //         invalidEmail: (value) => AppLocalizations.of(context).enterEmail,
-      //         orElse: () => null,
-      //       ),
-      //       (r) => null,
-      //     ),
+      validator: (_, context) => context
+          .read<EditProfileBloc>()
+          .state
+          .emailAddress
+          .value
+          .fold(
+            (l) => l.maybeMap(
+              empty: (value) => 'Please enter email address',
+              invalidEmail: (value) => AppLocalizations.of(context).enterEmail,
+              orElse: () => null,
+            ),
+            (r) => null,
+          ),
     );
   }
 
