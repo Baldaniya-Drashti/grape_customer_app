@@ -91,4 +91,12 @@ abstract class IMainFacade {
 
   Future<Either<MainFailure, CommonResponse>> getMyOrdersAPI(
       {required int page});
+
+  Future<Either<MainFailure, CommonResponse>> getShopDetailAPI(
+      {required int page, required String shopID});
+  Future<Either<MainFailure, CommonResponse>> getShopDetailFilterAPI({
+    required int page,
+    required String shopID,
+    required List<MapEntry<String, dynamic>> selectedFilterList,
+  });
 }

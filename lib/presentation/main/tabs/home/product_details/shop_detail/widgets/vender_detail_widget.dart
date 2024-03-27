@@ -1,16 +1,13 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grape_customer_app/application/main/home/product_detail/product_detail_bloc.dart';
 import 'package:grape_customer_app/domain/core/math_utils.dart';
 import 'package:grape_customer_app/presentation/common/widgets/base_text.dart';
-import 'package:grape_customer_app/presentation/core/app_router.gr.dart';
 import 'package:grape_customer_app/presentation/core/styles/app_colors.dart';
-import 'package:grape_customer_app/presentation/core/widgets/buttons/common_button.dart';
 
-class ProductVenderDetailWidget extends StatelessWidget {
-  const ProductVenderDetailWidget({super.key});
+class VenderDetailWidget extends StatelessWidget {
+  const VenderDetailWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -32,24 +29,21 @@ class ProductVenderDetailWidget extends StatelessWidget {
                   CircleAvatar(
                     backgroundColor: Color(0xFFAEFFFF),
                     radius: getSize(25),
-                    backgroundImage:
-                        state.getProductDetails.vendor_details?.profile != null
-                            ? CachedNetworkImageProvider(state.getProductDetails
-                                    .vendor_details?.profile ??
-                                "")
-                            : null,
-                    child:
-                        state.getProductDetails.vendor_details?.profile == null
-                            ? BaseText(
-                                text: getInitials(state.getProductDetails
-                                        .vendor_details?.seller_name ??
+                    backgroundImage: state.shopDetailDTO.vendor?.profile != null
+                        ? CachedNetworkImageProvider(
+                            state.shopDetailDTO.vendor?.profile ?? "")
+                        : null,
+                    child: state.shopDetailDTO.vendor?.profile == null
+                        ? BaseText(
+                            text: getInitials(
+                                state.shopDetailDTO.vendor?.seller_name ??
                                     "Temp Name"),
-                                fontSize: 24,
-                                textAlign: TextAlign.center,
-                                fontWeight: FontWeight.w600,
-                                textColor: AppColors.black,
-                              )
-                            : Container(),
+                            fontSize: 24,
+                            textAlign: TextAlign.center,
+                            fontWeight: FontWeight.w600,
+                            textColor: AppColors.black,
+                          )
+                        : Container(),
                   ),
                   SizedBox(
                     width: getSize(6),
@@ -59,9 +53,7 @@ class ProductVenderDetailWidget extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         BaseText(
-                          text: state.getProductDetails.vendor_details
-                                  ?.seller_name ??
-                              "",
+                          text: state.shopDetailDTO.vendor?.seller_name ?? "",
                           fontSize: 16,
                           fontWeight: FontWeight.w500,
                         ),
@@ -77,23 +69,6 @@ class ProductVenderDetailWidget extends StatelessWidget {
                       ],
                     ),
                   ),
-                  CommonButton(
-                    onPressed: () {
-                      context.router.push(
-                        PageRouteInfo(ShopDetailView.name,
-                            args: ShopDetailViewArgs(
-                                shopId: state.getProductDetails.vendor_details
-                                        ?.shop_id
-                                        .toString() ??
-                                    "")),
-                      );
-                    },
-                    height: 29,
-                    width: 92,
-                    buttonText: 'View Shop',
-                    buttonFontSize: 14,
-                    buttonFontWeight: FontWeight.w500,
-                  )
                 ],
               ),
               SizedBox(
@@ -102,13 +77,13 @@ class ProductVenderDetailWidget extends StatelessWidget {
               Row(
                 children: [
                   commonContainer(
-                    '${state.getProductDetails.vendor_details?.seller_total_product ?? "0"} Products',
+                    '${state.shopDetailDTO.vendor?.seller_total_product ?? "0"} Products',
                   ),
                   SizedBox(
                     width: getSize(18),
                   ),
                   commonContainer(
-                    'Rating ${state.getProductDetails.vendor_details?.review ?? "0"}/5',
+                    'Rating ${state.shopDetailDTO.vendor?.review ?? "0"}/5',
                   ),
                 ],
               )
@@ -119,13 +94,6 @@ class ProductVenderDetailWidget extends StatelessWidget {
     );
   }
 
-  String getInitials(String venderName) => venderName
-      .trim()
-      .split(' ')
-      .map((l) => l[0])
-      .take(2)
-      .join()
-      .toUpperCase();
   commonContainer(String title) {
     return Container(
       padding:
@@ -142,4 +110,12 @@ class ProductVenderDetailWidget extends StatelessWidget {
       ),
     );
   }
+
+  String getInitials(String venderName) => venderName
+      .trim()
+      .split(' ')
+      .map((l) => l[0])
+      .take(2)
+      .join()
+      .toUpperCase();
 }

@@ -100,14 +100,17 @@ class ProductMainInfo extends StatelessWidget {
                   Visibility(
                     visible: state.getProductDetails.product?.discount != null,
                     child: BaseText(
-                      text: NumberFormat.simpleCurrency(
-                        decimalDigits: num.tryParse(state
-                                    .getProductDetails.product?.price
-                                    .toString() ??
-                                "") is int
-                            ? 0
-                            : 2,
-                      ).format(state.getProductDetails.product?.price),
+                      text: state.getProductDetails.product != null
+                          ? NumberFormat.simpleCurrency(
+                              decimalDigits: num.tryParse(state
+                                          .getProductDetails.product?.price
+                                          .toString() ??
+                                      "0") is int
+                                  ? 0
+                                  : 2,
+                            ).format(
+                              state.getProductDetails.product?.price ?? "0")
+                          : '',
                       textDecoration: TextDecoration.lineThrough,
                       fontSize: 12,
                       fontWeight: FontWeight.w500,
@@ -127,7 +130,7 @@ class ProductMainInfo extends StatelessWidget {
                               decimalDigits: num.tryParse(state
                                           .getProductDetails.product?.price
                                           .toString() ??
-                                      "") is int
+                                      "0") is int
                                   ? 0
                                   : 2,
                             ).format((state.getProductDetails.product?.price ??
@@ -136,23 +139,24 @@ class ProductMainInfo extends StatelessWidget {
                                       100) *
                                   (int.tryParse(state.getProductDetails.product
                                               ?.discount ??
-                                          "") ??
+                                          "0") ??
                                       0)))
                           //'\$${(state.getProductList[index].price ?? 0) - (((state.getProductList[index].price ?? 0) / 100) * (int.tryParse(state.getProductList[index].discount ?? "") ?? 0))}'
                           : NumberFormat.simpleCurrency(
                               decimalDigits: num.tryParse(state
                                           .getProductDetails.product?.price
                                           .toString() ??
-                                      "") is int
+                                      "0") is int
                                   ? 0
                                   : 2,
-                            ).format(state.getProductDetails.product?.price),
+                            ).format(
+                              state.getProductDetails.product?.price ?? 0),
                       //  : '\$${state.getProductList[index].price}',
                       fontWeight: FontWeight.w600,
                       maxLines: 1,
                     ),
                   ),
-                  
+
                   // Visibility(
                   //   visible: state.getProductDetails.product?.discount != null,
                   //   child: BaseText(

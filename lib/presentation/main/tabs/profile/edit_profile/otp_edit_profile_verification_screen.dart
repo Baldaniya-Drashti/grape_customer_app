@@ -54,7 +54,6 @@ class OtpEditProfileVerificationView extends StatelessWidget {
               () {},
               (either) => either.fold(
                 (failure) async {
-                  //  context.read<EditProfileBloc>().timer.cancel();
                   await showError(
                     message: failure.maybeMap(
                       showAPIResponseMessage: (value) => value.message,
@@ -64,16 +63,10 @@ class OtpEditProfileVerificationView extends StatelessWidget {
                     ),
                   ).show(context);
                 },
-                (r) {
-                  //    context.read<EditProfileBloc>().timer.cancel();
-                  showSuccess(message: r).show(context).then(
+                (r) async {
+                  await showSuccess(message: r).show(context).then(
                     (value) {
                       context.router.pop(true);
-                      // context.router.replaceAll(
-                      //   [
-                      //     const PageRouteInfo(MainTabView.name),
-                      //   ],
-                      // );
                     },
                   );
                 },

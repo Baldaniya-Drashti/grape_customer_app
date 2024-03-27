@@ -54,4 +54,8 @@ class ApiConstants {
 
   //order
   static String getMyOrder = 'my-order';
+
+  //shop
+  static String getVenderDetail = 'customer/view/shop';
+  static String getVenderDetailFilter = 'customer/shop/product/filter';
 }

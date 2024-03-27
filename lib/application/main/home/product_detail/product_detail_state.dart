@@ -5,6 +5,7 @@ class ProductDetailState with _$ProductDetailState {
   factory ProductDetailState({
     required int productQuantity,
     required bool isLoading,
+    required bool isShopDetailLoading,
     required bool isErrorInAPI,
     required bool isFavourite,
     required ProductDetailDTO getProductDetails,
@@ -14,6 +15,9 @@ class ProductDetailState with _$ProductDetailState {
     required bool isNoDataFound,
     required List<GetProductListResponse> getProductList,
     required Option<Either<MainFailure, String>> failureOrSuccessOption,
+    required List<MapEntry<String, dynamic>> filterList,
+    required List<MapEntry<String, dynamic>> selectedFilterList,
+    required ShopDetailDTO shopDetailDTO,
   }) = _ProductDetailState;
   factory ProductDetailState.initial() => ProductDetailState(
         productQuantity: 1,
@@ -27,5 +31,11 @@ class ProductDetailState with _$ProductDetailState {
         similarProduct: [],
         getProductList: [],
         isNoDataFound: false,
+        filterList: [],
+        selectedFilterList: [
+          MapEntry('All', ['1'])
+        ],
+        shopDetailDTO: ShopDetailDTO(),
+        isShopDetailLoading: false,
       );
 }

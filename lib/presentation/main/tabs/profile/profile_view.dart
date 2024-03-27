@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -117,7 +119,7 @@ class ProfileView extends StatelessWidget {
               onTap: () async {
                 var res = await context.router
                     .push(PageRouteInfo(EditProfileScreen.name));
-
+                log('res : $res');
                 if (res != null) {
                   context.read<AccountCubit>().updateAccount(res as Account);
                 }

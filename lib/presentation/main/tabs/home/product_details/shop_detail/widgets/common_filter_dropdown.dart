@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:grape_customer_app/application/main/home/home_bloc.dart';
+
+import 'package:grape_customer_app/application/main/home/product_detail/product_detail_bloc.dart';
 
 import 'package:grape_customer_app/domain/core/math_utils.dart';
 import 'package:grape_customer_app/presentation/common/widgets/base_text.dart';
 import 'package:grape_customer_app/presentation/core/styles/app_colors.dart';
 import 'package:grape_customer_app/presentation/main/tabs/home/widgets/filter_bottom_sheet.dart';
 
-class FilterCommonContainer extends StatelessWidget {
+class VenderFilterCommonContainer extends StatelessWidget {
   final String filterTitle;
   final bool showDownArrow;
   final List<String> list;
-  const FilterCommonContainer({
+  const VenderFilterCommonContainer({
     Key? key,
     required this.filterTitle,
     this.showDownArrow = true,
@@ -20,19 +21,19 @@ class FilterCommonContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<HomeBloc, HomeState>(
+    return BlocBuilder<ProductDetailBloc, ProductDetailState>(
       builder: (context, state) {
         var selectedList = state.selectedFilterList
             .where((element) => element.key.contains(filterTitle))
             .map((e) => e.value as List<String>)
             .toList();
-
+        //  return Container();
         return InkWell(
           borderRadius: BorderRadius.circular(getSize(4)),
           onTap: !showDownArrow
               ? () {
-                  context.read<HomeBloc>().add(
-                        HomeEvent.addFilterInList(
+                  context.read<ProductDetailBloc>().add(
+                        ProductDetailEvent.addFilterInList(
                           MapEntry(filterTitle, ['1']),
                         ),
                       );
@@ -42,14 +43,15 @@ class FilterCommonContainer extends StatelessWidget {
                       await FilterBottomSheet(
                     filterTitle: filterTitle,
                     list: list,
+                    //selectedList: [],
                     selectedList:
                         selectedList.isNotEmpty ? selectedList[0] : [],
                   ).getFilterBottomSheet(context);
 
                   if (filterList != null) {
                     context
-                        .read<HomeBloc>()
-                        .add(HomeEvent.addFilterInList(filterList));
+                        .read<ProductDetailBloc>()
+                        .add(ProductDetailEvent.addFilterInList(filterList));
                   }
                 },
           child: Container(

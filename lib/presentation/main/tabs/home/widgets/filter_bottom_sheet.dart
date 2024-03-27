@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:grape_customer_app/application/main/home/home_bloc.dart';
 import 'package:grape_customer_app/domain/core/math_utils.dart';
 import 'package:grape_customer_app/domain/core/svg_image_constants.dart';
 import 'package:grape_customer_app/presentation/common/widgets/base_text.dart';
@@ -11,7 +10,7 @@ import 'package:grape_customer_app/presentation/core/widgets/buttons/common_butt
 class FilterBottomSheet extends StatelessWidget {
   final String filterTitle;
   final List<String> list;
-  final HomeState homeState;
+
   final List<String> selectedList;
 
   const FilterBottomSheet({
@@ -19,7 +18,6 @@ class FilterBottomSheet extends StatelessWidget {
     required this.filterTitle,
     required this.list,
     required this.selectedList,
-    required this.homeState,
   });
 
   @override

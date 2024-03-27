@@ -8,6 +8,7 @@ import 'package:grape_customer_app/domain/main/main_failure.dart';
 import 'package:grape_customer_app/infrastructure/core/common_product_from_json_response.dart';
 import 'package:grape_customer_app/infrastructure/main/home_dto/get_product_list_response.dart';
 import 'package:grape_customer_app/infrastructure/main/home_dto/product_detail_dto.dart';
+import 'package:grape_customer_app/infrastructure/main/shop_detail_dto/shop_detail_dto.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -210,6 +211,170 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
                     getProductList: (r.data as List<dynamic>)
                         .map((e) => GetProductListResponse.fromJson(e))
                         .toList(),
+                  ),
+                );
+              },
+            );
+          },
+          getShopDetailAPI: (GetShopDetailAPI value) async {
+            if (value.isRefresh) {
+              page = 1;
+              emit(
+                state.copyWith(
+                  getProductList: [],
+                  isShopDetailLoading: true,
+                ),
+              );
+              productYouMayLikeRefreshController.resetNoData();
+            } else {
+              if (page > lastPage) {
+                productYouMayLikeRefreshController.loadNoData();
+                return;
+              }
+            }
+            var res = await mainFacade.getShopDetailAPI(
+              page: page,
+              shopID: value.shopId ?? "",
+            );
+
+            page++;
+
+            res.fold(
+              (l) => emit(
+                state.copyWith(
+                  isErrorInAPI: true,
+                  isShopDetailLoading: false,
+                  shopDetailDTO: ShopDetailDTO(),
+                  getProductList: [],
+                ),
+              ),
+              (r) {
+                lastPage = r.meta?.lastPage ?? 1;
+                var searchRes = ShopDetailDTO.fromJson(r.data);
+                var filterAPIList = <MapEntry<String, dynamic>>[];
+                filterAPIList.addAll(
+                  [
+                    MapEntry('All', ['']),
+                    MapEntry('New', ['']),
+                    MapEntry('Top Selling', ['']),
+                    MapEntry('Categories',
+                        searchRes.categories?.map((e) => e).toList()),
+                    MapEntry('Price \u{2191}', ['']),
+                    MapEntry('Price \u{2193}', ['']),
+                  ],
+                );
+                // var updatedSelectedFilter = state.selectedFilterList.isNotEmpty
+                //     ? []
+                //     : List<MapEntry<String, dynamic>>.from(
+                //         state.selectedFilterList)
+                //   ..add(
+                //     MapEntry('All', ['1']),
+                //   );
+                return emit(
+                  state.copyWith(
+                    isShopDetailLoading: false,
+                    isErrorInAPI: false,
+                    shopDetailDTO: searchRes,
+                    filterList: filterAPIList,
+                    isNoDataFound: searchRes.product?.isEmpty ?? false,
+                    getProductList: searchRes.product ?? [],
+                    //  selectedFilterList: updatedSelectedFilter,
+                  ),
+                );
+              },
+            );
+          },
+          addFilterInList: (AddFilterInList value) async {
+            var updateList = <MapEntry<String, dynamic>>[];
+
+            if (List<MapEntry<String, dynamic>>.from(state.selectedFilterList)
+                .toList()
+                .map((e) => e)
+                .toList()
+                .map((e) => e.key.contains(value.addFilter.key))
+                .contains(true)) {
+              updateList = List<MapEntry<String, dynamic>>.from(
+                  state.selectedFilterList)
+                ..removeWhere((element) => element.key == value.addFilter.key);
+            } else {
+              updateList =
+                  List<MapEntry<String, dynamic>>.from(state.selectedFilterList)
+                    ..clear()
+                    ..add(value.addFilter);
+            }
+
+            emit(
+              state.copyWith(selectedFilterList: updateList),
+            );
+            add(ProductDetailEvent.getShopDetailFilterAPI(
+                state.shopDetailDTO.vendor?.shop_id.toString() ?? "", true));
+          },
+          getShopDetailFilterAPI: (GetShopDetailFilterAPI value) async {
+            if (value.isRefresh) {
+              page = 1;
+              emit(
+                state.copyWith(
+                  getProductList: [],
+                  isLoading: true,
+                ),
+              );
+              productYouMayLikeRefreshController.resetNoData();
+            } else {
+              if (page > lastPage) {
+                productYouMayLikeRefreshController.loadNoData();
+                return;
+              }
+            }
+            var res = await mainFacade.getShopDetailFilterAPI(
+              page: page,
+              shopID: value.shopId ?? "",
+              selectedFilterList: state.selectedFilterList,
+            );
+
+            page++;
+
+            res.fold(
+              (l) => emit(
+                state.copyWith(
+                  isErrorInAPI: true,
+                  isLoading: false,
+                  shopDetailDTO: ShopDetailDTO(),
+                  getProductList: [],
+                ),
+              ),
+              (r) {
+                lastPage = r.meta?.lastPage ?? 1;
+                var list = r.data as List;
+                var filterData = list
+                    .map((e) => GetProductListResponse.fromJson(e))
+                    .toList();
+                //var filterAPIList = <MapEntry<String, dynamic>>[];
+                // filterAPIList.addAll(
+                //   [
+                //     MapEntry('All', ['']),
+                //     MapEntry('New', ['']),
+                //     MapEntry('Top Selling', ['']),
+                //     MapEntry('Categories',
+                //         searchRes.categories?.map((e) => e).toList()),
+                //     MapEntry('Price \u{2191}', ['']),
+                //     MapEntry('Price \u{2193}', ['']),
+                //   ],
+                // );
+                // var updatedSelectedFilter =
+                //     List<MapEntry<String, dynamic>>.from(
+                //         state.selectedFilterList)
+                //       ..add(
+                //         MapEntry('All', ['1']),
+                //     );
+                return emit(
+                  state.copyWith(
+                    isLoading: false,
+                    isErrorInAPI: false,
+                    //shopDetailDTO: searchRes,
+                    //   filterList: filterAPIList,
+                    isNoDataFound: filterData.isEmpty,
+                    getProductList: filterData,
+                    //  selectedFilterList: updatedSelectedFilter,
                   ),
                 );
               },

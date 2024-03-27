@@ -47,9 +47,6 @@ class SimilarProductWidget extends StatelessWidget {
                 itemCount: state.similarProduct.length,
                 shrinkWrap: true,
                 scrollDirection: Axis.horizontal,
-                // padding: EdgeInsets.symmetric(
-                //   horizontal: getSize(18),
-                // ),
                 physics: BouncingScrollPhysics(),
                 itemBuilder: (BuildContext context, int index) {
                   return SizedBox(
@@ -306,6 +303,8 @@ class SimilarProductWidget extends StatelessWidget {
                 },
               ),
             ),
+    
+    
           ),
         );
       },

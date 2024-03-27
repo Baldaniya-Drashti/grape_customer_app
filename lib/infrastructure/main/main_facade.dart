@@ -750,4 +750,98 @@ class MainFacade implements IMainFacade {
       return left(const MainFailure.serverError());
     }
   }
+
+  @override
+  Future<Either<MainFailure, CommonResponse>> getShopDetailAPI(
+      {required int page, required String shopID}) async {
+    try {
+      var mapData = <String, dynamic>{
+        'page': page,
+        'limit': _perPage,
+        'shop_id': shopID,
+      };
+
+      final res = await apiService.getMethod(ApiConstants.getVenderDetail,
+          queryParameters: mapData);
+
+      if (res != null) {
+        return right(res);
+      } else {
+        return left(const MainFailure.serverError());
+      }
+    } on DioException catch (err) {
+      if (err.response != null) {
+        var commonRespose = CommonResponse.fromJson(err.response?.data);
+
+        if (commonRespose.dioMessage != null) {
+          return left(
+              MainFailure.showAPIResponseMessage(commonRespose.dioMessage!));
+        }
+      } else if (err.type == DioExceptionType.connectionError) {
+        return left(const MainFailure.networkError());
+      }
+
+      return left(const MainFailure.serverError());
+    }
+  }
+
+  @override
+  Future<Either<MainFailure, CommonResponse>> getShopDetailFilterAPI({
+    required int page,
+    required String shopID,
+    required List<MapEntry<String, dynamic>> selectedFilterList,
+  }) async {
+    try {
+      var mapData = <String, dynamic>{
+        'page': page,
+        'limit': _perPage,
+      };
+
+      if (selectedFilterList.isNotEmpty) {
+        for (var i = 0; i < selectedFilterList.length; i++) {
+          if (selectedFilterList[i].key.contains('New')) {
+            mapData.addAll({'is_new': '1'});
+          }
+          if (selectedFilterList[i].key.contains('Top Selling')) {
+            mapData.addAll({'top_selling': '1'});
+          }
+
+          if (selectedFilterList[i].key.contains('Price \u{2191}')) {
+            mapData.addAll({'price': '0'});
+          }
+
+          if (selectedFilterList[i].key.contains('Price \u{2193}')) {
+            mapData.addAll({'price': '1'});
+          }
+          if (selectedFilterList[i].key.contains('Categories')) {
+            mapData.addAll({'category[]': selectedFilterList[i].value});
+          }
+        }
+        // mapData.addEntries(selectedFilterList);
+      }
+
+      final res = await apiService.getMethod(
+          '${ApiConstants.getVenderDetailFilter}/$shopID',
+          queryParameters: mapData);
+
+      if (res != null) {
+        return right(res);
+      } else {
+        return left(const MainFailure.serverError());
+      }
+    } on DioException catch (err) {
+      if (err.response != null) {
+        var commonRespose = CommonResponse.fromJson(err.response?.data);
+
+        if (commonRespose.dioMessage != null) {
+          return left(
+              MainFailure.showAPIResponseMessage(commonRespose.dioMessage!));
+        }
+      } else if (err.type == DioExceptionType.connectionError) {
+        return left(const MainFailure.networkError());
+      }
+
+      return left(const MainFailure.serverError());
+    }
+  }
 }

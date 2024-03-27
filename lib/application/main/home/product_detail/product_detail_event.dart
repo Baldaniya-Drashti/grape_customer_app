@@ -18,4 +18,11 @@ class ProductDetailEvent with _$ProductDetailEvent {
 
   factory ProductDetailEvent.getProductYouMayAlsoLikeProductList(
       bool isRefresh) = GetProductYouMayAlsoLikeProductList;
+
+  factory ProductDetailEvent.getShopDetailAPI(String? shopId, bool isRefresh) =
+      GetShopDetailAPI;
+  factory ProductDetailEvent.getShopDetailFilterAPI(
+      String? shopId, bool isRefresh) = GetShopDetailFilterAPI;
+  factory ProductDetailEvent.addFilterInList(
+      MapEntry<String, dynamic> addFilter) = AddFilterInList;
 }

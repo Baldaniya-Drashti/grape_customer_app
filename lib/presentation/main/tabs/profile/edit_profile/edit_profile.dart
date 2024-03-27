@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grape_customer_app/application/main/profile/edit_profile/edit_profile_bloc.dart';
-import 'package:grape_customer_app/application/main/profile/get_account/account_cubit.dart';
 
 import 'package:grape_customer_app/domain/core/l10n/app_localizations.dart';
 import 'package:grape_customer_app/domain/core/math_utils.dart';
@@ -40,7 +39,7 @@ class EditProfileScreen extends StatelessWidget {
                 ).show(context);
               },
               (r) async {
-                var res = await context.router.push(
+                await context.router.push(
                   PageRouteInfo(
                     OtpEditProfileVerificationView.name,
                     args: OtpEditProfileVerificationViewArgs(
@@ -49,9 +48,13 @@ class EditProfileScreen extends StatelessWidget {
                     ),
                   ),
                 );
-                if (res != null && res == true) {
-                  context.read<AccountCubit>().getAccount();
-                }
+
+                // // log('res : $res');
+                // if (res != null && res == true) {
+                //   context.read<EditProfileBloc>().add(
+                //         EditProfileEvent.saveButtonPressed(),
+                //       );
+                // }
               },
             ),
           );
@@ -67,8 +70,8 @@ class EditProfileScreen extends StatelessWidget {
                   orElse: () => "Server Error. Try again later.",
                 )).show(context);
               },
-              (r) {
-                showSuccess(message: r[1])
+              (r) async {
+                await showSuccess(message: r[1])
                     .show(context)
                     .then((value) => context.router.pop(r[0]));
               },
