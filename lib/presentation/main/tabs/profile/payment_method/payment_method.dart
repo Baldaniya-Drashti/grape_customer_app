@@ -167,7 +167,18 @@ class PaymentMethod extends StatelessWidget {
                                           child: Row(
                                             children: [
                                               IconButton(
-                                                onPressed: () {},
+                                                onPressed: () {
+                                                  context
+                                                      .read<PaymentMethodBloc>()
+                                                      .add(
+                                                        PaymentMethodEvent
+                                                            .changeCard(state
+                                                                    .cardDetail[
+                                                                        index]
+                                                                    .payment_method_id ??
+                                                                ""),
+                                                      );
+                                                },
                                                 icon: SvgPicture.asset(
                                                   state.cardDetail[index]
                                                               .payment_method_id !=
