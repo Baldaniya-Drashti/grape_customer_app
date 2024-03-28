@@ -7,6 +7,8 @@ class MyOrdersState with _$MyOrdersState {
     required bool isLoading,
     required bool isNoDataFound,
     required bool isErrorInAPI,
+    required bool showErrorMessages,
+    required bool isSubmitting,
     required Option<Either<MainFailure, String>> failureOrSuccessOption,
     required OrderDetailDTO orderDetailDTO,
   }) = _MyOrdersState;
@@ -17,5 +19,7 @@ class MyOrdersState with _$MyOrdersState {
         failureOrSuccessOption: none(),
         getMyOrderList: [],
         orderDetailDTO: OrderDetailDTO(),
+        showErrorMessages: false,
+        isSubmitting: false,
       );
 }

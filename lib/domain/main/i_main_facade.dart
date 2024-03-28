@@ -104,4 +104,6 @@ abstract class IMainFacade {
   Future<Either<MainFailure, OrderDetailDTO>> getOrderDetailAPI({
     required String orderId,
   });
+
+  Future<Either<MainFailure, String>> cancelOrderAPI({required String id});
 }

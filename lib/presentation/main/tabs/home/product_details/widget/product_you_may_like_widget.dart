@@ -206,6 +206,69 @@ class ProductYouMayLikeWidget extends StatelessWidget {
                                 textColor: AppColors.black.withOpacity(0.4),
                               ),
                             ),
+                            GestureDetector(
+                              onTap: () {
+                                if (state.getProductList[index].is_cart ==
+                                    true) {
+                                } else {
+                                  context.read<ProductDetailBloc>().add(
+                                        ProductDetailEvent.addProductToCart(
+                                          productId: state
+                                              .getProductList[index].id
+                                              .toString(),
+                                        ),
+                                      );
+                                }
+                              },
+                              child: Container(
+                                height: getSize(22),
+                                width: getSize(22),
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                  color: AppColors.white,
+                                  borderRadius:
+                                      BorderRadius.circular(getSize(5)),
+                                  border: Border.all(
+                                      color: AppColors.primaryOrange),
+                                ),
+                                child: Stack(
+                                  clipBehavior: Clip.none,
+                                  children: [
+                                    Image.asset(
+                                      PngImageConstants.cartSelected,
+                                      height: getSize(13),
+                                      width: getSize(13),
+                                      color:
+                                          state.getProductList[index].is_cart ==
+                                                  true
+                                              ? AppColors.primaryOrange
+                                              : AppColors.black,
+                                    ),
+                                    Visibility(
+                                      visible:
+                                          state.getProductList[index].is_cart ==
+                                              true,
+                                      child: Positioned.fill(
+                                        top: getSize(2),
+                                        left: getSize(-2),
+                                        child: Align(
+                                          alignment: Alignment.topLeft,
+                                          child: SvgPicture.asset(
+                                            SvgImageConstant.successImage,
+                                            height: getSize(4),
+                                            width: getSize(4),
+                                            colorFilter: ColorFilter.mode(
+                                              AppColors.green,
+                                              BlendMode.srcATop,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
                           ],
                         ),
                       ],
@@ -238,67 +301,6 @@ class ProductYouMayLikeWidget extends StatelessWidget {
                           state.getProductList[index].is_favorite == true
                               ? SvgImageConstant.favouriteSelected
                               : SvgImageConstant.favouriteUnselected,
-                        ),
-                      ),
-                    ),
-                    Positioned(
-                      right: getSize(5),
-                      bottom: getSize(5),
-                      child: GestureDetector(
-                        onTap: () {
-                          if (state.getProductList[index].is_cart == true) {
-                          } else {
-                            context.read<ProductDetailBloc>().add(
-                                  ProductDetailEvent.addProductToCart(
-                                    productId: state.getProductList[index].id
-                                        .toString(),
-                                  ),
-                                );
-                          }
-                        },
-                        child: Container(
-                          height: getSize(22),
-                          width: getSize(22),
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                            color: AppColors.white,
-                            borderRadius: BorderRadius.circular(getSize(5)),
-                            border: Border.all(color: AppColors.primaryOrange),
-                          ),
-                          child: Stack(
-                            clipBehavior: Clip.none,
-                            children: [
-                              Image.asset(
-                                PngImageConstants.cartSelected,
-                                height: getSize(13),
-                                width: getSize(13),
-                                color:
-                                    state.getProductList[index].is_cart == true
-                                        ? AppColors.primaryOrange
-                                        : AppColors.black,
-                              ),
-                              Visibility(
-                                visible:
-                                    state.getProductList[index].is_cart == true,
-                                child: Positioned.fill(
-                                  top: getSize(2),
-                                  left: getSize(-2),
-                                  child: Align(
-                                    alignment: Alignment.topLeft,
-                                    child: SvgPicture.asset(
-                                      SvgImageConstant.successImage,
-                                      height: getSize(4),
-                                      width: getSize(4),
-                                      colorFilter: ColorFilter.mode(
-                                        AppColors.green,
-                                        BlendMode.srcATop,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
                         ),
                       ),
                     ),

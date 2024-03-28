@@ -5,17 +5,21 @@ import 'package:dartz/dartz.dart';
 import 'package:grape_customer_app/domain/core/failures.dart';
 
 Either<ValueFailure<String>, String> validateEmailAddress(String input) {
-  if (validateStringNotEmpty(input).isRight()) {
-    const emailRegex =
-        r"""^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+""";
-
-    if (RegExp(emailRegex).hasMatch(input)) {
-      return right(input);
-    } else {
-      return left(ValueFailure.invalidEmail(failedValue: input));
-    }
+  if (input.isEmpty) {
+    return right(input);
   } else {
-    return left(ValueFailure.empty(failedValue: input));
+    if (validateStringNotEmpty(input).isRight()) {
+      const emailRegex =
+          r"""^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+""";
+
+      if (RegExp(emailRegex).hasMatch(input)) {
+        return right(input);
+      } else {
+        return left(ValueFailure.invalidEmail(failedValue: input));
+      }
+    } else {
+      return left(ValueFailure.empty(failedValue: input));
+    }
   }
 }
 

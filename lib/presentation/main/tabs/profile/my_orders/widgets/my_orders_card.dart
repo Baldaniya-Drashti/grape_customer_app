@@ -27,14 +27,23 @@ class MyOrdesCard extends StatelessWidget {
             .where((element) => element.fieldType == 1)
             .toList();
         return GestureDetector(
-          onTap: () => context.router.push(
-            PageRouteInfo(
-              OrderDetails.name,
-              args: OrderDetailsArgs(
-                orderId: state.getMyOrderList[index].order_id?.toString() ?? "",
+          onTap: () async {
+            var res = await context.router.push(
+              PageRouteInfo(
+                OrderDetails.name,
+                args: OrderDetailsArgs(
+                  orderId:
+                      state.getMyOrderList[index].order_id?.toString() ?? "",
+                ),
               ),
-            ),
-          ),
+            );
+
+            if (res != null && res == true) {
+              context
+                  .read<MyOrdersBloc>()
+                  .add(MyOrdersEvent.getMyOrdersList(true));
+            }
+          },
           child: Container(
             padding: EdgeInsets.all(getSize(10)),
             decoration: BoxDecoration(
@@ -213,15 +222,17 @@ class MyOrdesCard extends StatelessWidget {
   String getOrderStatus(int status) {
     switch (status) {
       case 0:
-        return 'Request';
+        return 'Pending';
       case 1:
         return 'Accept';
       case 2:
         return 'Processing';
       case 3:
-        return 'Refund';
+        return 'Shipped';
       case 4:
-        return 'Cancel';
+        return 'Delivered';
+      case 5:
+        return 'Cancelled';
       default:
         return '';
     }

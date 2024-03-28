@@ -146,14 +146,17 @@ class ProductDetailsView extends StatelessWidget {
                                             .image ??
                                         "",
                                     height: getSize(216),
+                                    width: MediaQuery.of(context).size.width,
                                     placeholder: (context, url) => Container(
                                       height: getSize(216),
+                                      width: MediaQuery.of(context).size.width,
                                       color: Colors.grey.shade300,
                                     ),
                                     fit: BoxFit.cover,
                                   )
                                 : Container(
                                     height: getSize(216),
+                                    width: MediaQuery.of(context).size.width,
                                     color: Colors.grey.shade300,
                                   ),
                           ),

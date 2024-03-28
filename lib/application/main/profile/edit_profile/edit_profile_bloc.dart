@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
 
@@ -76,24 +77,41 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
           final isEmailAddressValid = state.emailAddress.isValid();
           final isMobileNumberValid = state.mobileNumber.isValid();
 
-          if (isFirstNameValid &&
-              isLastNameValid &&
-              isMobileNumberValid &&
-              isEmailAddressValid) {
-            emit(
-              state.copyWith(
-                isSubmitting: true,
-                authFailureOrSuccessOption: none(),
-              ),
-            );
-            failureOrSuccess = await accountRepository.updateUser(
-              firstName: state.firstName,
-              lastName: state.lastName,
-              emailAddress: state.emailAddress,
-              countryCode: '+${state.countryCode}',
-              mobileNumber: state.mobileNumber,
-              profileImage: state.selectImage,
-            );
+          if (isFirstNameValid && isLastNameValid && isMobileNumberValid) {
+            log(state.emailAddress.getValue());
+            if (state.emailAddress.getValue().isNotEmpty) {
+              if (isEmailAddressValid) {
+                emit(
+                  state.copyWith(
+                    isSubmitting: true,
+                    authFailureOrSuccessOption: none(),
+                  ),
+                );
+                failureOrSuccess = await accountRepository.updateUser(
+                  firstName: state.firstName,
+                  lastName: state.lastName,
+                  emailAddress: state.emailAddress,
+                  countryCode: '+${state.countryCode}',
+                  mobileNumber: state.mobileNumber,
+                  profileImage: state.selectImage,
+                );
+              }
+            } else {
+              emit(
+                state.copyWith(
+                  isSubmitting: true,
+                  authFailureOrSuccessOption: none(),
+                ),
+              );
+              failureOrSuccess = await accountRepository.updateUser(
+                firstName: state.firstName,
+                lastName: state.lastName,
+                emailAddress: state.emailAddress,
+                countryCode: '+${state.countryCode}',
+                mobileNumber: state.mobileNumber,
+                profileImage: state.selectImage,
+              );
+            }
           }
           emit(
             state.copyWith(

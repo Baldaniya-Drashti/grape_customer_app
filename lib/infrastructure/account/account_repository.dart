@@ -38,10 +38,12 @@ class AccountRepository extends IAccountRepository {
         "first_name": firstName.getOrCrash(),
         "last_name": lastName.getOrCrash(),
         "country_code": countryCode,
-        "email": emailAddress.getOrCrash().isEmpty ? null : emailAddress,
+        "email": emailAddress.getOrCrash().isEmpty
+            ? null
+            : emailAddress.getOrCrash(),
         "mobile": mobileNumber.getOrCrash(),
       });
-      log('formData : ${formData.fields.map((e) => e)}');
+      //log('formData : ${formData.fields.map((e) => e)}');
       if (profileImage != null &&
           profileImage.isNotEmpty &&
           !profileImage.contains('https')) {

@@ -100,6 +100,27 @@ class MyOrdersBloc extends Bloc<MyOrdersEvent, MyOrdersState> {
               },
             );
           },
+          cancelOrder: (CancelOrder value) async {
+            Either<MainFailure, String>? failureOrSuccess;
+            emit(
+              state.copyWith(
+                isSubmitting: true,
+                failureOrSuccessOption: none(),
+              ),
+            );
+
+            failureOrSuccess = await mainFacade.cancelOrderAPI(
+              id: value.orderId,
+            );
+
+            emit(
+              state.copyWith(
+                isSubmitting: false,
+                showErrorMessages: true,
+                failureOrSuccessOption: optionOf(failureOrSuccess),
+              ),
+            );
+          },
         );
       },
     );
