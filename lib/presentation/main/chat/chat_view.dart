@@ -22,9 +22,11 @@ class ChatView extends StatelessWidget {
     return Scaffold(
       bottomSheet: SafeArea(
         child: Container(
-          padding: EdgeInsets.symmetric(
-            horizontal: getSize(18),
-            vertical: getSize(isFullScreenDevice(context) ? 0 : 12),
+          padding: EdgeInsets.only(
+            left: getSize(18),
+            right: getSize(18),
+            bottom: getSize(30),
+            top: getSize(18),
           ),
           color: AppColors.white,
           child: CustomTextField(

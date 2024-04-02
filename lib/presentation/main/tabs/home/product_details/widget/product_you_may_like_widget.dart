@@ -210,10 +210,14 @@ class ProductYouMayLikeWidget extends StatelessWidget {
                               onTap: () {
                                 if (state.getProductList[index].is_cart ==
                                     true) {
-                                  // context.read<ProductDetailBloc>().add(
-                                  //       ProductDetailEvent
-                                  //           .removeProductFromCart(state.getProductList[index].id?.toString()?""),
-                                  //     );
+                                  context.read<ProductDetailBloc>().add(
+                                        ProductDetailEvent
+                                            .removeProductFromCart(state
+                                                    .getProductList[index]
+                                                    .cart_id
+                                                    ?.toString() ??
+                                                ""),
+                                      );
                                 } else {
                                   context.read<ProductDetailBloc>().add(
                                         ProductDetailEvent.addProductToCart(

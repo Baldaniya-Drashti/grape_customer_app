@@ -33,6 +33,7 @@ class GetProductListResponse with _$GetProductListResponse {
     int? shop_id,
     String? shop_location,
     int? seller_total_product,
+    int? cart_id,
     @JsonKey(includeFromJson: true) num? quantity,
   }) = _GetProductListResponse;
 
