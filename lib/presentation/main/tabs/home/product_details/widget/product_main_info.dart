@@ -24,9 +24,7 @@ class ProductMainInfo extends StatelessWidget {
                 children: [
                   Expanded(
                     child: BaseText(
-                      text:
-                          'dmkfsmfjdjgkfdgfkhfgjjsdsjkfjfhdjughughfujgfjuhfjfkjdeiorereureiturt yrujhgfjgndfjmgdhne fjdhfrsfhasjudfraswuehwy',
-                      //state.getProductDetails.product?.product_name ?? "",
+                      text: state.getProductDetails.product?.product_name ?? "",
                       fontWeight: FontWeight.w600,
                       showFullDescription: true,
                     ),

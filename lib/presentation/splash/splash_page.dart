@@ -22,20 +22,20 @@ class SplashPage extends StatelessWidget {
           initial: (_) {},
           authenticated: (_) async {
             await Future.delayed(
-              Duration(seconds: 3),
+              Duration(seconds: 1),
               () =>
                   context.router.replace(const PageRouteInfo(MainTabView.name)),
             );
           },
           unauthenticated: (_) async {
             await Future.delayed(
-              Duration(seconds: 3),
+              Duration(seconds: 1),
               () => context.router.replace(const PageRouteInfo(LoginPage.name)),
             );
           },
           introScreenVisibilty: (IntroScreenVisibilty value) async {
             await Future.delayed(
-              Duration(seconds: 3),
+              Duration(seconds: 1),
               () =>
                   context.router.replace(const PageRouteInfo(Onboarding.name)),
             );

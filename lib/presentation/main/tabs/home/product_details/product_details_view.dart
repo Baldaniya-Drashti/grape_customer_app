@@ -37,7 +37,7 @@ class ProductDetailsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => getIt<ProductDetailBloc>()
-        ..add(ProductDetailEvent.getProductDetails(productId, true)),
+        ..add(ProductDetailEvent.getProductDetails(productId, true, true)),
       child: BlocConsumer<ProductDetailBloc, ProductDetailState>(
         listener: (context, state) {
           state.failureOrSuccessOption.fold(
@@ -58,7 +58,8 @@ class ProductDetailsView extends StatelessWidget {
                   message: r,
                 ).show(context);
                 context.read<ProductDetailBloc>().add(
-                      ProductDetailEvent.getProductDetails(productId, true),
+                      ProductDetailEvent.getProductDetails(
+                          productId, true, false),
                     );
               },
             ),
@@ -132,7 +133,7 @@ class ProductDetailsView extends StatelessWidget {
                           .productYouMayLikeRefreshController,
                       child: ListView(
                         shrinkWrap: true,
-                        physics: BouncingScrollPhysics(),
+                        physics: NeverScrollableScrollPhysics(),
                         padding: EdgeInsets.zero,
                         children: [
                           Center(

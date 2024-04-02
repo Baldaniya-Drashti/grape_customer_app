@@ -31,7 +31,7 @@ class ProductYouMayLikeWidget extends StatelessWidget {
             physics: NeverScrollableScrollPhysics(),
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
-              childAspectRatio: 0.65,
+              childAspectRatio: 0.62,
               crossAxisSpacing: getSize(20),
               mainAxisSpacing: getSize(20),
             ),
@@ -210,6 +210,10 @@ class ProductYouMayLikeWidget extends StatelessWidget {
                               onTap: () {
                                 if (state.getProductList[index].is_cart ==
                                     true) {
+                                  // context.read<ProductDetailBloc>().add(
+                                  //       ProductDetailEvent
+                                  //           .removeProductFromCart(state.getProductList[index].id?.toString()?""),
+                                  //     );
                                 } else {
                                   context.read<ProductDetailBloc>().add(
                                         ProductDetailEvent.addProductToCart(

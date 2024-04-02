@@ -41,7 +41,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           getProductList: (GetProductList e) async {
             if (e.isRefresh) {
               page = 1;
-              emit(state.copyWith(getProductList: []));
+              emit(state.copyWith(getProductList: [], isLoading: true));
               refreshController.resetNoData();
             } else {
               if (page > lastPage) {
@@ -49,8 +49,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
                 return;
               }
             }
-
-            emit(state.copyWith(isLoading: true));
 
             var res = await mainFacade.getProductListAPI(page: page);
 
@@ -66,7 +64,9 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
               ),
               (r) {
                 lastPage = r.meta?.lastPage ?? 1;
-
+                if (e.isRefresh) {
+                  List.from(state.getProductList).clear();
+                }
                 return emit(
                   state.copyWith(
                     isLoading: false,
@@ -75,9 +75,11 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
                         .map((e) => GetProductListResponse.fromJson(e))
                         .toList()
                         .isEmpty,
-                    getProductList: (r.data as List<dynamic>)
-                        .map((e) => GetProductListResponse.fromJson(e))
-                        .toList(),
+                    //  getProductList: []
+                    getProductList: List.from(state.getProductList)
+                      ..addAll((r.data as List<dynamic>)
+                          .map((e) => GetProductListResponse.fromJson(e))
+                          .toList()),
                   ),
                 );
               },
@@ -122,7 +124,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
                   var filterAPIList = searchRes.filter_data
                       ?.toJson()
                       .entries
-                      
                       .toList()
                       .where((element) => (element.value as List).isNotEmpty)
                       .toList();

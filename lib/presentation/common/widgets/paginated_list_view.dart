@@ -33,41 +33,15 @@ class PaginatedListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SmartRefresher(
-      header: MaterialClassicHeader(
-        color: AppColors.primaryOrange,
-      ),
+      // header: MaterialClassicHeader(
+      //   color: AppColors.primaryOrange,
+      // ),
       enablePullUp: true,
       enablePullDown: true,
       reverse: reverse,
       scrollDirection: scrollDirection,
       controller: refreshController,
       physics: BouncingScrollPhysics(),
-      footer: CustomFooter(
-        builder: (context, mode) {
-          switch (mode) {
-            case LoadStatus.loading:
-              return Center(
-                child: CircularProgressIndicator(
-                  color: AppColors.primaryOrange,
-                ),
-              );
-            case LoadStatus.canLoading:
-              return Center(
-                child: CircularProgressIndicator(
-                  color: AppColors.primaryOrange,
-                ),
-              );
-            case LoadStatus.noMore:
-              return const SizedBox();
-
-            case LoadStatus.failed:
-              return const SizedBox();
-
-            default:
-          }
-          return Container();
-        },
-      ),
       onRefresh: () {
         onRefreshData();
       },

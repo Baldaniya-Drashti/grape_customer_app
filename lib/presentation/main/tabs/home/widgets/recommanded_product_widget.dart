@@ -33,7 +33,7 @@ class RecommandedProductWidget extends StatelessWidget {
             padding: EdgeInsets.symmetric(
               horizontal: getSize(18),
             ),
-            physics: BouncingScrollPhysics(),
+            physics: NeverScrollableScrollPhysics(),
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               childAspectRatio: 0.6,

@@ -15,7 +15,7 @@ import 'package:injectable/injectable.dart';
 @LazySingleton(as: IMainFacade)
 class MainFacade implements IMainFacade {
   final ApiService apiService;
-  static const int _perPage = 25;
+  static const int _perPage = 10;
 
   MainFacade({required this.apiService});
 

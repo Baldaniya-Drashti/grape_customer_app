@@ -21,14 +21,10 @@ class HomeView extends StatelessWidget {
       builder: (context, state) {
         return PaginatedListView(
           onRefresh: () {
-            context.read<HomeBloc>()
-              ..isFetching = true
-              ..add(HomeEvent.getProductList(true));
+            context.read<HomeBloc>().add(HomeEvent.getProductList(true));
           },
           onLoading: () {
-            context.read<HomeBloc>()
-              ..isFetching = true
-              ..add(HomeEvent.getProductList(false));
+            context.read<HomeBloc>().add(HomeEvent.getProductList(false));
           },
           refreshController: context.read<HomeBloc>().refreshController,
           isNoDataFound: state.isNoDataFound,

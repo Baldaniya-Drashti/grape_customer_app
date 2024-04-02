@@ -7,12 +7,14 @@ class ProductDetailEvent with _$ProductDetailEvent {
   factory ProductDetailEvent.decreaseProductQuantity() =
       DecreaseProductQuantity;
   factory ProductDetailEvent.getProductDetails(
-      String productId, bool isRefresh) = GetProductDetails;
+      String productId, bool isRefresh, bool showLoading) = GetProductDetails;
   factory ProductDetailEvent.addToFavourite({String? productId}) =
       AddToFavourite;
   factory ProductDetailEvent.selectImage(int index) = SelectImage;
   factory ProductDetailEvent.addProductToCart({String? productId}) =
       AddProductToCart;
+  factory ProductDetailEvent.removeProductFromCart(String cartId) =
+      RemoveProductFromCart;
   factory ProductDetailEvent.removeProductFromFavourite({String? productId}) =
       RemoveProductFromFavourite;
 

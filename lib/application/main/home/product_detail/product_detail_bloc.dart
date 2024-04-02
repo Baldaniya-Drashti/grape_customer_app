@@ -50,7 +50,11 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
           getProductDetails: (GetProductDetails value) async {
             if (value.isRefresh) {
               page = 1;
-              emit(state.copyWith(similarProduct: []));
+              emit(state.copyWith(
+                similarProduct: [],
+                isLoading: value.showLoading ? true : false,
+                failureOrSuccessOption: none(),
+              ));
               similarProductRefreshController.resetNoData();
             } else {
               if (page > lastPage) {
@@ -58,12 +62,12 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
                 return;
               }
             }
-            emit(
-              state.copyWith(
-                isLoading: true,
-                failureOrSuccessOption: none(),
-              ),
-            );
+            // emit(
+            //   state.copyWith(
+            //     isLoading: true,
+            //     failureOrSuccessOption: none(),
+            //   ),
+            // );
 
             var res = await mainFacade.getProductDetailsAPI(
                 productId: value.productId, page: page);
@@ -81,6 +85,10 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
                 var productFromJson = ProductFromJson();
                 var dataList = <Data>[];
                 var productDetailRes = ProductDetailDTO.fromJson(r.data);
+                lastPage = r.meta?.lastPage ?? 1;
+                if (value.isRefresh) {
+                  List.from(productDetailRes.similar_product ?? []).clear();
+                }
                 if (productDetailRes.product?.product_form_json != null) {
                   productFromJson = ProductFromJson.fromJson(
                     jsonDecode(
@@ -94,20 +102,22 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
                         (element) => element.name!.contains('Product Title'));
                   }
                 }
-                add(ProductDetailEvent.getProductYouMayAlsoLikeProductList(
-                    true));
+
                 return emit(
                   state.copyWith(
                     isLoading: false,
                     isErrorInAPI: false,
                     getProductDetails: productDetailRes,
                     dataList: dataList,
-                    similarProduct: productDetailRes.similar_product ?? [],
+                    similarProduct:
+                        List.from(productDetailRes.similar_product ?? [])
+                          ..addAll(productDetailRes.similar_product ?? []),
                     failureOrSuccessOption: none(),
                   ),
                 );
               },
             );
+            add(ProductDetailEvent.getProductYouMayAlsoLikeProductList(true));
           },
           selectImage: (SelectImage value) {
             emit(state.copyWith(selectedImageIndex: value.index));
@@ -152,6 +162,7 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
           addToFavourite: (AddToFavourite value) async {
             emit(
               state.copyWith(
+                isLoading: false,
                 failureOrSuccessOption: none(),
               ),
             );
@@ -171,7 +182,10 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
               (GetProductYouMayAlsoLikeProductList value) async {
             if (value.isRefresh) {
               pageForProductYoumayLike = 1;
-              emit(state.copyWith(getProductList: []));
+              emit(state.copyWith(
+                getProductList: [],
+                isLoading: false,
+              ));
               productYouMayLikeRefreshController.resetNoData();
             } else {
               if (pageForProductYoumayLike > lastPageForProductYoumayLike) {
@@ -180,7 +194,7 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
               }
             }
 
-            emit(state.copyWith(isLoading: true));
+            //  emit(state.copyWith(isLoading: true));
 
             var res = await mainFacade.getProductListAPI(
                 page: pageForProductYoumayLike,
@@ -199,7 +213,9 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
               ),
               (r) {
                 lastPageForProductYoumayLike = r.meta?.lastPage ?? 1;
-
+                if (value.isRefresh) {
+                  List.from(state.getProductList).clear();
+                }
                 return emit(
                   state.copyWith(
                     isLoading: false,
@@ -208,9 +224,10 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
                         .map((e) => GetProductListResponse.fromJson(e))
                         .toList()
                         .isEmpty,
-                    getProductList: (r.data as List<dynamic>)
-                        .map((e) => GetProductListResponse.fromJson(e))
-                        .toList(),
+                    getProductList: List.from(state.getProductList)
+                      ..addAll((r.data as List<dynamic>)
+                          .map((e) => GetProductListResponse.fromJson(e))
+                          .toList()),
                   ),
                 );
               },
@@ -263,13 +280,9 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
                     MapEntry('Price \u{2193}', ['']),
                   ],
                 );
-                // var updatedSelectedFilter = state.selectedFilterList.isNotEmpty
-                //     ? []
-                //     : List<MapEntry<String, dynamic>>.from(
-                //         state.selectedFilterList)
-                //   ..add(
-                //     MapEntry('All', ['1']),
-                //   );
+                if (value.isRefresh) {
+                  List.from(state.getProductList).clear();
+                }
                 return emit(
                   state.copyWith(
                     isShopDetailLoading: false,
@@ -277,7 +290,8 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
                     shopDetailDTO: searchRes,
                     filterList: filterAPIList,
                     isNoDataFound: searchRes.product?.isEmpty ?? false,
-                    getProductList: searchRes.product ?? [],
+                    getProductList: List.from(state.getProductList)
+                      ..addAll(searchRes.product ?? []),
                     //  selectedFilterList: updatedSelectedFilter,
                   ),
                 );
@@ -378,6 +392,22 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
                   ),
                 );
               },
+            );
+          },
+          removeProductFromCart: (RemoveProductFromCart value) async {
+            emit(
+              state.copyWith(
+                failureOrSuccessOption: none(),
+              ),
+            );
+            Either<MainFailure, String>? failureOrSuccess;
+            failureOrSuccess =
+                await mainFacade.deleteProductFromCart(productId: value.cartId);
+
+            emit(
+              state.copyWith(
+                failureOrSuccessOption: optionOf(failureOrSuccess),
+              ),
             );
           },
         );

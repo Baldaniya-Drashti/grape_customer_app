@@ -29,6 +29,7 @@ class SimilarProductWidget extends StatelessWidget {
                 context.read<ProductDetailBloc>().add(
                       ProductDetailEvent.getProductDetails(
                           state.getProductDetails.product?.id.toString() ?? "",
+                          true,
                           true),
                     );
               },
@@ -36,6 +37,7 @@ class SimilarProductWidget extends StatelessWidget {
                 context.read<ProductDetailBloc>().add(
                       ProductDetailEvent.getProductDetails(
                           state.getProductDetails.product?.id.toString() ?? "",
+                          false,
                           false),
                     );
               },
@@ -303,8 +305,6 @@ class SimilarProductWidget extends StatelessWidget {
                 },
               ),
             ),
-    
-    
           ),
         );
       },
