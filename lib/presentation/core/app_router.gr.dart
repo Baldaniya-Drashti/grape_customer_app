@@ -163,9 +163,11 @@ abstract class $AppRouter extends _i30.RootStackRouter {
       );
     },
     LoginPage.name: (routeData) {
+      final args =
+          routeData.argsAs<LoginPageArgs>(orElse: () => const LoginPageArgs());
       return _i30.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i11.LoginScreen(),
+        child: _i11.LoginScreen(key: args.key),
       );
     },
     MainTabView.name: (routeData) {
@@ -596,16 +598,31 @@ class HomeView extends _i30.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i11.LoginScreen]
-class LoginPage extends _i30.PageRouteInfo<void> {
-  const LoginPage({List<_i30.PageRouteInfo>? children})
-      : super(
+class LoginPage extends _i30.PageRouteInfo<LoginPageArgs> {
+  LoginPage({
+    _i31.Key? key,
+    List<_i30.PageRouteInfo>? children,
+  }) : super(
           LoginPage.name,
+          args: LoginPageArgs(key: key),
           initialChildren: children,
         );
 
   static const String name = 'LoginPage';
 
-  static const _i30.PageInfo<void> page = _i30.PageInfo<void>(name);
+  static const _i30.PageInfo<LoginPageArgs> page =
+      _i30.PageInfo<LoginPageArgs>(name);
+}
+
+class LoginPageArgs {
+  const LoginPageArgs({this.key});
+
+  final _i31.Key? key;
+
+  @override
+  String toString() {
+    return 'LoginPageArgs{key: $key}';
+  }
 }
 
 /// generated route for

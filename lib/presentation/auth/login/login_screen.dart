@@ -5,26 +5,33 @@ import 'package:grape_customer_app/application/auth/login_form/login_form_bloc.d
 import 'package:grape_customer_app/injection.dart';
 import 'package:grape_customer_app/presentation/auth/login/login_form.dart';
 import 'package:grape_customer_app/presentation/common/utils/app_focus.dart';
+import 'package:grape_customer_app/presentation/core/widgets/inputs/custom_keboard_config.dart';
+import 'package:keyboard_actions/keyboard_actions.dart';
 
 @RoutePage(name: 'loginPage')
 class LoginScreen extends StatelessWidget {
+  final FocusNode focusNode = FocusNode();
   static const routeName = '/login';
 
-  const LoginScreen({super.key});
+  LoginScreen({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       // appBar: AppBar(
       //   backgroundColor: AppColors.appBackground,
       // ),
-      body: BlocProvider(
-        create: (context) => getIt<LoginFormBloc>(),
-        child: GestureDetector(
-          onTap: () {
-            AppFocus.unfocus(context);
-          },
-          child: LoginForm(),
+      body: GestureDetector(
+        onTap: () {
+          AppFocus.unfocus(context);
+        },
+        child: KeyboardActions(
+          tapOutsideBehavior: TapOutsideBehavior.translucentDismiss,
+          config:
+              CustomKeyboardConfig(focusNode: focusNode).buildConfig(context),
+          child: BlocProvider(
+            create: (context) => getIt<LoginFormBloc>(),
+            child: LoginForm(),
+          ),
         ),
       ),
     );
