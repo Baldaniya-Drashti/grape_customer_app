@@ -6,8 +6,8 @@ import 'package:grape_customer_app/presentation/common/widgets/base_text.dart';
 import 'package:grape_customer_app/presentation/core/styles/app_colors.dart';
 
 class CustomTextField extends StatelessWidget {
-  final FocusNode focusNode = FocusNode();
-  CustomTextField({
+  //final FocusNode focusNode = FocusNode();
+  const CustomTextField({
     Key? key,
     this.inputFormatters,
     this.controller,
@@ -90,7 +90,7 @@ class CustomTextField extends StatelessWidget {
           readOnly: readOnly,
           inputFormatters: inputFormatters,
           minLines: minLines,
-          focusNode: focusNode,
+          // focusNode: focusNode,
           onTap: onTap,
           onChanged: onChanged,
           initialValue: initialValue,
