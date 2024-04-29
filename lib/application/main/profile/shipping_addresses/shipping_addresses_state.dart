@@ -4,6 +4,7 @@ part of 'shipping_addresses_bloc.dart';
 class ShippingAddressesState with _$ShippingAddressesState {
   const factory ShippingAddressesState({
     required Username fullName,
+    required FocusNode mobileNumberFocusNode,
     required MobileNumber mobileNumber,
     required String countryCode,
     required InputEmptyOrNot address,
@@ -39,5 +40,6 @@ class ShippingAddressesState with _$ShippingAddressesState {
         isLoading: false,
         isErrorInAPI: false,
         isNoDataFound: false,
+        mobileNumberFocusNode: FocusNode(),
       );
 }

@@ -73,7 +73,7 @@ class EditProfileScreen extends StatelessWidget {
               (r) async {
                 await showSuccess(message: r[1])
                     .show(context)
-                    .then((value) => context.router.pop(r[0]));
+                    .then((value) => context.router.maybePop(r[0]));
               },
             ),
           );

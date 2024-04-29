@@ -7,6 +7,7 @@ class RegisterFormState with _$RegisterFormState {
     required Username firstName,
     required Username lastName,
     required MobileNumber mobileNumber,
+    required FocusNode mobileNumberFocusNode,
     required bool showErrorMessages,
     required bool isSubmitting,
     required String selectedCountrycode,
@@ -27,6 +28,7 @@ class RegisterFormState with _$RegisterFormState {
         selectedCountrycode: '91',
         enteredOTP: OTPText(''),
         secondsRemaining: 0,
+        mobileNumberFocusNode: FocusNode(),
         resendFailureOrSuccessOption: none(),
       );
 }

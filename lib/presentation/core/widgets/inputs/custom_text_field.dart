@@ -30,6 +30,7 @@ class CustomTextField extends StatelessWidget {
     this.suffixIcon,
     this.maxLength,
     this.obscureText = false,
+    this.focusNode,
   }) : super(key: key);
 
   final List<TextInputFormatter>? inputFormatters;
@@ -53,6 +54,7 @@ class CustomTextField extends StatelessWidget {
   final int? maxLength;
   final bool obscureText;
   final int? minLines;
+  final FocusNode? focusNode;
   @override
   Widget build(BuildContext context) {
     final border = OutlineInputBorder(
@@ -67,7 +69,20 @@ class CustomTextField extends StatelessWidget {
       borderSide: const BorderSide(color: AppColors.red),
       borderRadius: BorderRadius.circular(getSize(10)),
     );
+    if (focusNode != null) {
+      return getCommonTextFieldMethod(
+          context, border, focusedBorder, errorBorder);
+    } else {
+      return getCommonTextFieldMethod(
+          context, border, focusedBorder, errorBorder);
+    }
+  }
 
+  Column getCommonTextFieldMethod(
+      BuildContext context,
+      OutlineInputBorder border,
+      OutlineInputBorder focusedBorder,
+      OutlineInputBorder errorBorder) {
     return Column(
       key: key,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -90,7 +105,7 @@ class CustomTextField extends StatelessWidget {
           readOnly: readOnly,
           inputFormatters: inputFormatters,
           minLines: minLines,
-          // focusNode: focusNode,
+          focusNode: focusNode,
           onTap: onTap,
           onChanged: onChanged,
           initialValue: initialValue,

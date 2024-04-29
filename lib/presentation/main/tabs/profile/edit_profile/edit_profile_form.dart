@@ -16,8 +16,10 @@ import 'package:grape_customer_app/presentation/common/widgets/base_text.dart';
 import 'package:grape_customer_app/presentation/common/widgets/common_country_code_picker.dart';
 import 'package:grape_customer_app/presentation/core/styles/app_colors.dart';
 import 'package:grape_customer_app/presentation/common/widgets/image_chosser.dialog.dart';
+import 'package:grape_customer_app/presentation/core/widgets/inputs/custom_keboard_config.dart';
 import 'package:grape_customer_app/presentation/core/widgets/inputs/inputs.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:keyboard_actions/keyboard_actions.dart';
 
 class EditProfileForm extends StatelessWidget {
   const EditProfileForm({
@@ -28,34 +30,38 @@ class EditProfileForm extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<EditProfileBloc, EditProfileState>(
       builder: (context, state) {
-        return Form(
-          autovalidateMode:
-              state.showErrorMessages || getIsMobileNumberChange(state)
-                  ? AutovalidateMode.always
-                  : AutovalidateMode.disabled,
-          child: ListView(
-            shrinkWrap: true,
-            physics: BouncingScrollPhysics(),
-            padding: EdgeInsets.symmetric(horizontal: getSize(18)),
-            children: [
-              profileSection(state, context),
-              SizedBox(
-                height: getSize(25),
-              ),
-              firstNameTextFiled(context, state),
-              SizedBox(
-                height: getSize(20),
-              ),
-              lastNameTextFiled(context, state),
-              SizedBox(
-                height: getSize(20),
-              ),
-              emailAddressTextFiled(context, state),
-              SizedBox(
-                height: getSize(20),
-              ),
-              mobileNumberTextfiled(context, state),
-            ],
+        return KeyboardActions(
+          config: CustomKeyboardConfig(focusNode: state.mobileNumberFocusNode)
+              .buildConfig(context),
+          child: Form(
+            autovalidateMode:
+                state.showErrorMessages || getIsMobileNumberChange(state)
+                    ? AutovalidateMode.always
+                    : AutovalidateMode.disabled,
+            child: ListView(
+              shrinkWrap: true,
+              physics: BouncingScrollPhysics(),
+              padding: EdgeInsets.symmetric(horizontal: getSize(18)),
+              children: [
+                profileSection(state, context),
+                SizedBox(
+                  height: getSize(25),
+                ),
+                firstNameTextFiled(context, state),
+                SizedBox(
+                  height: getSize(20),
+                ),
+                lastNameTextFiled(context, state),
+                SizedBox(
+                  height: getSize(20),
+                ),
+                emailAddressTextFiled(context, state),
+                SizedBox(
+                  height: getSize(20),
+                ),
+                mobileNumberTextfiled(context, state),
+              ],
+            ),
           ),
         );
       },
@@ -70,6 +76,7 @@ class EditProfileForm extends StatelessWidget {
       keyboardType: TextInputType.number,
       initialValue: state.currentUser.phone?.toString() ?? "",
       errorMaxLines: 2,
+      focusNode: state.mobileNumberFocusNode,
       onChanged: (mobileNumber) => context
           .read<EditProfileBloc>()
           .add(EditProfileEvent.mobileNumberChanged(mobileNumber)),
