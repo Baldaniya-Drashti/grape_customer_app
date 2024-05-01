@@ -9,14 +9,21 @@ import 'package:grape_customer_app/injection.dart';
 import 'package:grape_customer_app/presentation/common/utils/app_focus.dart';
 import 'package:grape_customer_app/presentation/common/utils/flushbar_creator.dart';
 import 'package:grape_customer_app/presentation/common/widgets/common_country_code_picker.dart';
+import 'package:grape_customer_app/presentation/core/app_router.gr.dart';
 import 'package:grape_customer_app/presentation/core/widgets/buttons/common_button.dart';
 import 'package:grape_customer_app/presentation/core/widgets/inputs/custom_app_bar.dart';
+import 'package:grape_customer_app/presentation/core/widgets/inputs/custom_keboard_config.dart';
 import 'package:grape_customer_app/presentation/core/widgets/inputs/inputs.dart';
+import 'package:keyboard_actions/keyboard_actions.dart';
 
 @RoutePage(name: 'AddNewAddress')
 class AddNewAddress extends StatelessWidget {
   final ShippingAddressDTO shippingAddressResponce;
-  const AddNewAddress({super.key, required this.shippingAddressResponce});
+  final bool isFromAuthFlow;
+  const AddNewAddress(
+      {super.key,
+      required this.shippingAddressResponce,
+      this.isFromAuthFlow = false});
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +55,15 @@ class AddNewAddress extends StatelessWidget {
                 },
                 (r) {
                   showSuccess(message: r).show(context).then((value) async {
-                    await context.router.pop(true);
+                    if (isFromAuthFlow) {
+                      context.router.replaceAll(
+                        [
+                          PageRouteInfo(MainTabView.name),
+                        ],
+                      );
+                    } else {
+                      await context.router.maybePop(true);
+                    }
                   });
                 },
               ),
@@ -60,47 +75,54 @@ class AddNewAddress extends StatelessWidget {
                   title: state.isEdit ? 'Edit Address' : 'Add New Address'),
               body: BlocBuilder<ShippingAddressesBloc, ShippingAddressesState>(
                 builder: (context, state) {
-                  return Form(
-                    autovalidateMode: state.showErrorMessages
-                        //|| getIsMobileNumberChange(state)
-                        ? AutovalidateMode.always
-                        : AutovalidateMode.disabled,
-                    child: ListView(
-                      physics: BouncingScrollPhysics(),
-                      padding: EdgeInsets.symmetric(horizontal: getSize(18)),
-                      children: [
-                        SizedBox(
-                          height: getSize(30),
-                        ),
-                        fullNameTextFiled(context, state),
-                        SizedBox(
-                          height: getSize(20),
-                        ),
-                        mobileNumberTextFiled(context, state),
-                        SizedBox(
-                          height: getSize(20),
-                        ),
-                        addressTextFiled(context, state),
-                        SizedBox(
-                          height: getSize(20),
-                        ),
-                        landMarkTextFiled(context, state),
-                        SizedBox(
-                          height: getSize(20),
-                        ),
-                        stateTextFiled(context, state),
-                        SizedBox(
-                          height: getSize(20),
-                        ),
-                        cityTextFiled(context, state),
-                        SizedBox(
-                          height: getSize(20),
-                        ),
-                        pinCodeTextFiled(context, state),
-                        SizedBox(
-                          height: getSize(20),
-                        ),
-                      ],
+                  return KeyboardActions(
+                    config: CustomKeyboardConfig(focusNode: [
+                      state.mobileNumberFocusNode,
+                      state.pinCodeFocusNode,
+                    ]).buildConfig(context),
+                    child: Form(
+                      autovalidateMode: state.showErrorMessages
+                          //|| getIsMobileNumberChange(state)
+                          ? AutovalidateMode.always
+                          : AutovalidateMode.disabled,
+                      child: ListView(
+                        shrinkWrap: true,
+                        physics: BouncingScrollPhysics(),
+                        padding: EdgeInsets.symmetric(horizontal: getSize(18)),
+                        children: [
+                          SizedBox(
+                            height: getSize(30),
+                          ),
+                          fullNameTextFiled(context, state),
+                          SizedBox(
+                            height: getSize(20),
+                          ),
+                          mobileNumberTextFiled(context, state),
+                          SizedBox(
+                            height: getSize(20),
+                          ),
+                          addressTextFiled(context, state),
+                          SizedBox(
+                            height: getSize(20),
+                          ),
+                          landMarkTextFiled(context, state),
+                          SizedBox(
+                            height: getSize(20),
+                          ),
+                          stateTextFiled(context, state),
+                          SizedBox(
+                            height: getSize(20),
+                          ),
+                          cityTextFiled(context, state),
+                          SizedBox(
+                            height: getSize(20),
+                          ),
+                          pinCodeTextFiled(context, state),
+                          SizedBox(
+                            height: getSize(20),
+                          ),
+                        ],
+                      ),
                     ),
                   );
                 },
@@ -144,6 +166,7 @@ class AddNewAddress extends StatelessWidget {
       hintText: AppLocalizations.of(context).pinCode,
       labelText: AppLocalizations.of(context).pinCode,
       initialValue: state.pinCode.getValue(),
+      focusNode: state.pinCodeFocusNode,
       keyboardType: TextInputType.number,
       onChanged: (pinCode) => context.read<ShippingAddressesBloc>().add(
             ShippingAddressesEvent.pinCodeChanged(pinCode),
@@ -251,6 +274,7 @@ class AddNewAddress extends StatelessWidget {
       hintText: AppLocalizations.of(context).mobileNumber,
       initialValue: state.isEdit ? state.mobileNumber.getValue() : null,
       keyboardType: TextInputType.phone,
+      focusNode: state.mobileNumberFocusNode,
       onChanged: (mobileNumber) => context
           .read<ShippingAddressesBloc>()
           .add(ShippingAddressesEvent.mobileNumberChanged(mobileNumber)),

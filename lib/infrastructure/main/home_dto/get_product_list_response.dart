@@ -1,6 +1,8 @@
 // ignore_for_file: non_constant_identifier_names, invalid_annotation_target
 
+import 'package:chewie/chewie.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:video_player/video_player.dart';
 
 part 'get_product_list_response.freezed.dart';
 part 'get_product_list_response.g.dart';
@@ -28,7 +30,7 @@ class GetProductListResponse with _$GetProductListResponse {
     List<dynamic>? reviews,
     String? product_form_json,
     List<Images>? images,
-    List<dynamic>? video,
+    List<Media>? media,
     String? seller_name,
     int? shop_id,
     String? shop_location,
@@ -47,6 +49,22 @@ class InnerSubCategory with _$InnerSubCategory {
 
   factory InnerSubCategory.fromJson(Map<String, dynamic> json) =>
       _$InnerSubCategoryFromJson(json);
+}
+
+@freezed
+class Media with _$Media {
+  factory Media({
+    int? product_media_id,
+    String? media,
+    String? short_path,
+    String? thumbnail,
+    int? media_type,
+    @JsonKey(includeFromJson: false)
+    VideoPlayerController? videoPlayerController,
+    @JsonKey(includeFromJson: false) ChewieController? chewieController,
+  }) = _Media;
+
+  factory Media.fromJson(Map<String, dynamic> json) => _$MediaFromJson(json);
 }
 
 @freezed

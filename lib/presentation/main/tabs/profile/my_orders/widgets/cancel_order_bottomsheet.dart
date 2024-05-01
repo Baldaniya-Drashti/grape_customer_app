@@ -24,65 +24,67 @@ class CancelOrderBottomSheet extends StatelessWidget {
           topRight: Radius.circular(getSize(14)),
         ),
       ),
-      builder: (context) => Padding(
-        padding: EdgeInsets.symmetric(
-            horizontal: getSize(18), vertical: getSize(20)),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            BaseText(
-              text: 'Cancel Order',
-              fontWeight: FontWeight.w600,
-              textAlign: TextAlign.center,
-            ),
-            SizedBox(
-              height: getSize(30),
-            ),
-            BaseText(
-              text: 'Are you sure want to cancel this order?',
-              fontWeight: FontWeight.w500,
-              textColor: AppColors.black.withOpacity(0.60),
-              textAlign: TextAlign.center,
-            ),
-            SizedBox(
-              height: getSize(10),
-            ),
-            BaseText(
-              text: 'Note: 20% amount will be deduct for cancellation charge',
-              fontWeight: FontWeight.w500,
-              textColor: AppColors.black.withOpacity(0.60),
-              textAlign: TextAlign.center,
-            ),
-            SizedBox(
-              height: getSize(30),
-            ),
-            Row(
-              children: [
-                Expanded(
-                  child: CommonButton(
-                    width: getSize(160),
-                    onPressed: () {
-                      context.router.pop(false);
-                    },
-                    borderColor: AppColors.primaryOrange,
-                    buttonTextColor: AppColors.primaryOrange,
-                    backgroundColor: AppColors.white,
-                    buttonText: 'No',
+      builder: (context) => SafeArea(
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+              horizontal: getSize(18), vertical: getSize(20)),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              BaseText(
+                text: 'Cancel Order',
+                fontWeight: FontWeight.w600,
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(
+                height: getSize(30),
+              ),
+              BaseText(
+                text: 'Are you sure want to cancel this order?',
+                fontWeight: FontWeight.w500,
+                textColor: AppColors.black.withOpacity(0.60),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(
+                height: getSize(10),
+              ),
+              BaseText(
+                text: 'Note: 20% amount will be deduct for cancellation charge',
+                fontWeight: FontWeight.w500,
+                textColor: AppColors.black.withOpacity(0.60),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(
+                height: getSize(30),
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    child: CommonButton(
+                      width: getSize(160),
+                      onPressed: () {
+                        context.router.pop(false);
+                      },
+                      borderColor: AppColors.primaryOrange,
+                      buttonTextColor: AppColors.primaryOrange,
+                      backgroundColor: AppColors.white,
+                      buttonText: 'No',
+                    ),
                   ),
-                ),
-                SizedBox(width: getSize(19)),
-                Expanded(
-                  child: CommonButton(
-                    width: getSize(160),
-                    onPressed: () {
-                      context.router.pop(true);
-                    },
-                    buttonText: 'Yes',
-                  ),
-                )
-              ],
-            ),
-          ],
+                  SizedBox(width: getSize(19)),
+                  Expanded(
+                    child: CommonButton(
+                      width: getSize(160),
+                      onPressed: () {
+                        context.router.pop(true);
+                      },
+                      buttonText: 'Yes',
+                    ),
+                  )
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

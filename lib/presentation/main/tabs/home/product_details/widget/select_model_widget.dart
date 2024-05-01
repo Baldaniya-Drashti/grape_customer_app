@@ -17,9 +17,10 @@ class SelectModelWidget extends StatelessWidget {
         return SizedBox(
           height: getSize(50),
           child: ListView.builder(
-            itemCount: state.getProductDetails.product?.images?.length ?? 0,
+            itemCount: state.getProductDetails.product?.media?.length ?? 0,
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,
+            clipBehavior: Clip.none,
             itemBuilder: (context, index) => GestureDetector(
               onTap: () {
                 context
@@ -35,7 +36,7 @@ class SelectModelWidget extends StatelessWidget {
                     left: getSize(index == 0 ? 18 : 5),
                     right: getSize(
                       index ==
-                              ((state.getProductDetails.product?.images
+                              ((state.getProductDetails.product?.media
                                           ?.length ??
                                       0) -
                                   1)
@@ -63,10 +64,36 @@ class SelectModelWidget extends StatelessWidget {
                     ),
                     image: DecorationImage(
                       image: CachedNetworkImageProvider(
-                        state.getProductDetails.product?.images?[index].image ??
+                        state.getProductDetails.product?.media?[index]
+                                .thumbnail ??
                             "",
                       ),
                       fit: BoxFit.cover,
+                    ),
+                  ),
+                  child: Visibility(
+                    visible: state.getProductDetails.product?.media?[index]
+                            .media_type ==
+                        2,
+                    child: Container(
+                      height: getSize(20),
+                      width: getSize(20),
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: AppColors.white,
+                        shape: BoxShape.circle,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.08),
+                            offset: Offset(0, 2),
+                            spreadRadius: 12,
+                          ),
+                        ],
+                      ),
+                      child: Icon(
+                        Icons.play_arrow_rounded,
+                        size: getSize(16),
+                      ),
                     ),
                   ),
                 ),

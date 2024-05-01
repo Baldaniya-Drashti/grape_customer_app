@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -20,6 +19,7 @@ import 'package:grape_customer_app/presentation/main/tabs/home/product_details/w
 import 'package:grape_customer_app/presentation/main/tabs/home/product_details/widget/out_of_stock_bottom.dart';
 import 'package:grape_customer_app/presentation/main/tabs/home/product_details/widget/pop_up_menu_widget.dart';
 import 'package:grape_customer_app/presentation/main/tabs/home/product_details/widget/product_configuration_widget.dart';
+import 'package:grape_customer_app/presentation/main/tabs/home/product_details/widget/product_image_view.dart';
 import 'package:grape_customer_app/presentation/main/tabs/home/product_details/widget/product_main_info.dart';
 import 'package:grape_customer_app/presentation/main/tabs/home/product_details/widget/product_review_list.dart';
 import 'package:grape_customer_app/presentation/main/tabs/home/product_details/widget/product_vender_detail_widget.dart';
@@ -136,51 +136,7 @@ class ProductDetailsView extends StatelessWidget {
                         physics: NeverScrollableScrollPhysics(),
                         padding: EdgeInsets.zero,
                         children: [
-                          Center(
-                            child: state.getProductDetails.product?.images !=
-                                    null
-                                ? GestureDetector(
-                                    onTap: () {
-                                      context.router.push(
-                                        PageRouteInfo(
-                                          FullImageView.name,
-                                          args: FullImageViewArgs(
-                                            imageUrl: state
-                                                    .getProductDetails
-                                                    .product
-                                                    ?.images?[state
-                                                        .selectedImageIndex]
-                                                    .image ??
-                                                "",
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                    child: CachedNetworkImage(
-                                      imageUrl: state
-                                              .getProductDetails
-                                              .product
-                                              ?.images?[
-                                                  state.selectedImageIndex]
-                                              .image ??
-                                          "",
-                                      height: getSize(216),
-                                      width: MediaQuery.of(context).size.width,
-                                      placeholder: (context, url) => Container(
-                                        height: getSize(216),
-                                        width:
-                                            MediaQuery.of(context).size.width,
-                                        color: Colors.grey.shade300,
-                                      ),
-                                      fit: BoxFit.cover,
-                                    ),
-                                  )
-                                : Container(
-                                    height: getSize(216),
-                                    width: MediaQuery.of(context).size.width,
-                                    color: Colors.grey.shade300,
-                                  ),
-                          ),
+                          ProductImageView(),
                           SizedBox(
                             height: getSize(10),
                           ),

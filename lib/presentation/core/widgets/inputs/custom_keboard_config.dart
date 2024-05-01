@@ -3,7 +3,7 @@ import 'package:grape_customer_app/presentation/common/utils/app_focus.dart';
 import 'package:keyboard_actions/keyboard_actions.dart';
 
 class CustomKeyboardConfig extends StatelessWidget {
-  final FocusNode focusNode;
+  final List<FocusNode> focusNode;
   const CustomKeyboardConfig({super.key, required this.focusNode});
 
   @override
@@ -16,15 +16,16 @@ class CustomKeyboardConfig extends StatelessWidget {
   KeyboardActionsConfig buildConfig(BuildContext context) {
     return KeyboardActionsConfig(
       keyboardActionsPlatform: KeyboardActionsPlatform.IOS,
-      actions: [
-        KeyboardActionsItem(
-          focusNode: focusNode,
+      actions: List.generate(
+        focusNode.length,
+        (index) => KeyboardActionsItem(
+          focusNode: focusNode[index],
           displayArrows: false,
           onTapAction: () {
             AppFocus.unfocus(context);
           },
         ),
-      ],
+      ),
     );
   }
 }

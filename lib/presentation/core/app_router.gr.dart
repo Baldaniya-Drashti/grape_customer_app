@@ -9,6 +9,7 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i30;
+import 'package:chewie/chewie.dart' as _i34;
 import 'package:flutter/material.dart' as _i31;
 import 'package:grape_customer_app/infrastructure/main/payemnt_method_dto/get_cards_dto.dart'
     as _i33;
@@ -85,6 +86,7 @@ abstract class $AppRouter extends _i30.RootStackRouter {
         child: _i1.AddNewAddress(
           key: args.key,
           shippingAddressResponce: args.shippingAddressResponce,
+          isFromAuthFlow: args.isFromAuthFlow,
         ),
       );
     },
@@ -153,6 +155,7 @@ abstract class $AppRouter extends _i30.RootStackRouter {
         child: _i9.FullImageView(
           key: args.key,
           imageUrl: args.imageUrl,
+          chewieController: args.chewieController,
         ),
       );
     },
@@ -332,12 +335,14 @@ class AddNewAddress extends _i30.PageRouteInfo<AddNewAddressArgs> {
   AddNewAddress({
     _i31.Key? key,
     required _i32.ShippingAddressDTO shippingAddressResponce,
+    bool isFromAuthFlow = false,
     List<_i30.PageRouteInfo>? children,
   }) : super(
           AddNewAddress.name,
           args: AddNewAddressArgs(
             key: key,
             shippingAddressResponce: shippingAddressResponce,
+            isFromAuthFlow: isFromAuthFlow,
           ),
           initialChildren: children,
         );
@@ -352,15 +357,18 @@ class AddNewAddressArgs {
   const AddNewAddressArgs({
     this.key,
     required this.shippingAddressResponce,
+    this.isFromAuthFlow = false,
   });
 
   final _i31.Key? key;
 
   final _i32.ShippingAddressDTO shippingAddressResponce;
 
+  final bool isFromAuthFlow;
+
   @override
   String toString() {
-    return 'AddNewAddressArgs{key: $key, shippingAddressResponce: $shippingAddressResponce}';
+    return 'AddNewAddressArgs{key: $key, shippingAddressResponce: $shippingAddressResponce, isFromAuthFlow: $isFromAuthFlow}';
   }
 }
 
@@ -550,12 +558,14 @@ class FullImageView extends _i30.PageRouteInfo<FullImageViewArgs> {
   FullImageView({
     _i31.Key? key,
     required String imageUrl,
+    _i34.ChewieController? chewieController,
     List<_i30.PageRouteInfo>? children,
   }) : super(
           FullImageView.name,
           args: FullImageViewArgs(
             key: key,
             imageUrl: imageUrl,
+            chewieController: chewieController,
           ),
           initialChildren: children,
         );
@@ -570,15 +580,18 @@ class FullImageViewArgs {
   const FullImageViewArgs({
     this.key,
     required this.imageUrl,
+    this.chewieController,
   });
 
   final _i31.Key? key;
 
   final String imageUrl;
 
+  final _i34.ChewieController? chewieController;
+
   @override
   String toString() {
-    return 'FullImageViewArgs{key: $key, imageUrl: $imageUrl}';
+    return 'FullImageViewArgs{key: $key, imageUrl: $imageUrl, chewieController: $chewieController}';
   }
 }
 

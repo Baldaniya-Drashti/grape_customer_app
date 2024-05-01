@@ -245,12 +245,14 @@ class PaymentMethod extends StatelessWidget {
                   vertical: isFullScreenDevice(context) ? 0 : getSize(18),
                 ),
                 child: CommonButton(
-                  onPressed: () {
-                    context
-                        .read<PaymentMethodBloc>()
-                        .add(PaymentMethodEvent.makeCardDefault());
-                    // context.router.pop(state.cardDetail[state.selectedCard]);
-                  },
+                  onPressed: state.cardDetail.isEmpty
+                      ? () {}
+                      : () {
+                          context
+                              .read<PaymentMethodBloc>()
+                              .add(PaymentMethodEvent.makeCardDefault());
+                          // context.router.pop(state.cardDetail[state.selectedCard]);
+                        },
                   isSubmitting: state.isSubmitting,
                   buttonText: AppLocalizations.of(context).save,
                 ),

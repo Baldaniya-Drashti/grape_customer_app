@@ -43,6 +43,7 @@ class OrderDetails extends StatelessWidget {
                             text: 'Something went wrong. Please try again'),
                       )
                     : ListView(
+                        shrinkWrap: true,
                         padding: EdgeInsets.symmetric(
                           horizontal: getSize(18),
                           vertical: getSize(20),

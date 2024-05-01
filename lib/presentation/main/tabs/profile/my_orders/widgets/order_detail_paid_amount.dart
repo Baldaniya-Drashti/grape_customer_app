@@ -13,79 +13,83 @@ class OrderDetailPaidAmount extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<MyOrdersBloc, MyOrdersState>(
       builder: (context, state) {
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              height: getSize(30),
-            ),
-            BaseText(
-              text: 'Paid Amount',
-              fontSize: 14,
-              fontWeight: FontWeight.w600,
-              textColor: AppColors.black.withOpacity(0.80),
-            ),
-            SizedBox(
-              height: getSize(10),
-            ),
-            Container(
-              padding: EdgeInsets.symmetric(
-                vertical: getSize(18),
-                horizontal: getSize(24),
+        if (state.orderDetailDTO.amount != null) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: getSize(30),
               ),
-              decoration: BoxDecoration(
-                color: AppColors.grey.withOpacity(0.20),
-                borderRadius: BorderRadius.circular(getSize(10)),
+              BaseText(
+                text: 'Paid Amount',
+                fontSize: 14,
+                fontWeight: FontWeight.w600,
+                textColor: AppColors.black.withOpacity(0.80),
               ),
-              child: Column(
-                children: [
-                  getPriceDetails(
-                      title: 'Item (1)',
-                      price: NumberFormat.simpleCurrency(
-                              decimalDigits:
-                                  state.orderDetailDTO.amount is int ? 0 : 2)
-                          .format(state.orderDetailDTO.amount)),
-                  SizedBox(
-                    height: getSize(18),
-                  ),
-                  getPriceDetails(
-                      title: 'Shipping',
-                      price: NumberFormat.simpleCurrency(
-                              decimalDigits:
-                                  state.orderDetailDTO.shipping_charge is int
-                                      ? 0
-                                      : 2)
-                          .format(state.orderDetailDTO.shipping_charge)),
-                  SizedBox(
-                    height: getSize(18),
-                  ),
-                  getPriceDetails(
-                      title: 'Tax',
-                      price: NumberFormat.simpleCurrency(
-                              decimalDigits:
-                                  state.orderDetailDTO.tax is int ? 0 : 2)
-                          .format(state.orderDetailDTO.tax)),
-                  SizedBox(
-                    height: getSize(18),
-                  ),
-                  Divider(
-                    height: 0,
-                    color: AppColors.black.withOpacity(0.10),
-                  ),
-                  SizedBox(
-                    height: getSize(18),
-                  ),
-                  getTotalPriceDetails(
-                      title: 'Total Price',
-                      price: NumberFormat.simpleCurrency(
-                              decimalDigits:
-                                  state.orderDetailDTO.amount is int ? 0 : 2)
-                          .format(state.orderDetailDTO.amount)),
-                ],
+              SizedBox(
+                height: getSize(10),
               ),
-            ),
-          ],
-        );
+              Container(
+                padding: EdgeInsets.symmetric(
+                  vertical: getSize(18),
+                  horizontal: getSize(24),
+                ),
+                decoration: BoxDecoration(
+                  color: AppColors.grey.withOpacity(0.20),
+                  borderRadius: BorderRadius.circular(getSize(10)),
+                ),
+                child: Column(
+                  children: [
+                    getPriceDetails(
+                        title: 'Item (1)',
+                        price: NumberFormat.simpleCurrency(
+                                decimalDigits:
+                                    state.orderDetailDTO.amount is int ? 0 : 2)
+                            .format(state.orderDetailDTO.amount)),
+                    SizedBox(
+                      height: getSize(18),
+                    ),
+                    getPriceDetails(
+                        title: 'Shipping',
+                        price: NumberFormat.simpleCurrency(
+                                decimalDigits:
+                                    state.orderDetailDTO.shipping_charge is int
+                                        ? 0
+                                        : 2)
+                            .format(state.orderDetailDTO.shipping_charge)),
+                    SizedBox(
+                      height: getSize(18),
+                    ),
+                    getPriceDetails(
+                        title: 'Tax',
+                        price: NumberFormat.simpleCurrency(
+                                decimalDigits:
+                                    state.orderDetailDTO.tax is int ? 0 : 2)
+                            .format(state.orderDetailDTO.tax)),
+                    SizedBox(
+                      height: getSize(18),
+                    ),
+                    Divider(
+                      height: 0,
+                      color: AppColors.black.withOpacity(0.10),
+                    ),
+                    SizedBox(
+                      height: getSize(18),
+                    ),
+                    getTotalPriceDetails(
+                        title: 'Total Price',
+                        price: NumberFormat.simpleCurrency(
+                                decimalDigits:
+                                    state.orderDetailDTO.amount is int ? 0 : 2)
+                            .format(state.orderDetailDTO.amount)),
+                  ],
+                ),
+              ),
+            ],
+          );
+        } else {
+          return Container();
+        }
       },
     );
   }

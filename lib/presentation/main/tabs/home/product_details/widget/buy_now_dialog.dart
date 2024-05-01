@@ -260,7 +260,7 @@ productDetailsView(
                     borderRadius: BorderRadius.circular(getSize(6)),
                     image: DecorationImage(
                       image: CachedNetworkImageProvider(
-                        getProductListResponse.images?[0].image ?? "",
+                        getProductListResponse.media?[0].thumbnail ?? "",
                       ),
                       fit: BoxFit.cover,
                     ),

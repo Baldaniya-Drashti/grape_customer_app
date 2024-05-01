@@ -5,6 +5,7 @@ class ShippingAddressesState with _$ShippingAddressesState {
   const factory ShippingAddressesState({
     required Username fullName,
     required FocusNode mobileNumberFocusNode,
+    required FocusNode pinCodeFocusNode,
     required MobileNumber mobileNumber,
     required String countryCode,
     required InputEmptyOrNot address,
@@ -41,5 +42,6 @@ class ShippingAddressesState with _$ShippingAddressesState {
         isErrorInAPI: false,
         isNoDataFound: false,
         mobileNumberFocusNode: FocusNode(),
+        pinCodeFocusNode: FocusNode(),
       );
 }

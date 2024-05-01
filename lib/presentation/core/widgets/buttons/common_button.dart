@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:grape_customer_app/presentation/common/utils/app_focus.dart';
 import 'package:grape_customer_app/presentation/core/styles/app_colors.dart';
@@ -5,7 +7,7 @@ import 'package:grape_customer_app/presentation/core/styles/app_colors.dart';
 import 'package:grape_customer_app/domain/core/math_utils.dart';
 import 'package:grape_customer_app/presentation/common/widgets/base_text.dart';
 
-class CommonButton extends StatelessWidget {
+class CommonButton extends StatefulWidget {
   final double borderRadius;
   final double? width;
   final double? height;
@@ -43,26 +45,52 @@ class CommonButton extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  State<CommonButton> createState() => _CommonButtonState();
+}
+
+class _CommonButtonState extends State<CommonButton> {
+  bool isButtonDisabled = false;
+  Timer? buttonTimer;
+  void _handleButtonTap() {
+    if (!isButtonDisabled) {
+      setState(() {
+        isButtonDisabled = true;
+      });
+      AppFocus.unfocus(context);
+      widget.onPressed();
+      // Enable the button after a specified duration (e.g., 3 seconds).
+      buttonTimer = Timer(Duration(seconds: 3), () {
+        setState(() {
+          isButtonDisabled = false;
+        });
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    buttonTimer?.cancel();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: isSubmitting
-          ? null
-          : () {
-              AppFocus.unfocus(context);
-              onPressed();
-            },
+      onPressed:
+          widget.isSubmitting || isButtonDisabled ? null : _handleButtonTap,
       style: ElevatedButton.styleFrom(
-        side: BorderSide(color: borderColor ?? Colors.transparent),
+        side: BorderSide(color: widget.borderColor ?? Colors.transparent),
         elevation: 0,
         shadowColor: Colors.transparent,
         splashFactory: NoSplash.splashFactory,
-        backgroundColor: backgroundColor ?? AppColors.primaryOrange,
-        disabledBackgroundColor: backgroundColor ?? AppColors.primaryOrange,
+        backgroundColor: widget.backgroundColor ?? AppColors.primaryOrange,
+        disabledBackgroundColor:
+            widget.backgroundColor ?? AppColors.primaryOrange,
         padding: EdgeInsets.zero,
         fixedSize: Size(
-          getSize(width ?? MediaQuery.of(context).size.width),
+          getSize(widget.width ?? MediaQuery.of(context).size.width),
           getSize(
-            height ?? 42,
+            widget.height ?? 42,
           ),
         ),
         visualDensity: VisualDensity(
@@ -71,11 +99,11 @@ class CommonButton extends StatelessWidget {
         ),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(
-            getSize(borderRadius),
+            getSize(widget.borderRadius),
           ),
         ),
       ),
-      child: isSubmitting
+      child: widget.isSubmitting
           ? SizedBox(
               height: getSize(20),
               width: getSize(20),
@@ -84,12 +112,12 @@ class CommonButton extends StatelessWidget {
               ),
             )
           : BaseText(
-              text: buttonText,
-              fontSize: buttonFontSize ?? 16,
+              text: widget.buttonText,
+              fontSize: widget.buttonFontSize ?? 16,
               textAlign: TextAlign.center,
               //maxLines: 1,
-              fontWeight: buttonFontWeight ?? FontWeight.w500,
-              textColor: buttonTextColor ?? Colors.white,
+              fontWeight: widget.buttonFontWeight ?? FontWeight.w500,
+              textColor: widget.buttonTextColor ?? Colors.white,
             ),
     );
   }

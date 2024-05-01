@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grape_customer_app/application/auth/register_form/register_form_bloc.dart';
 import 'package:grape_customer_app/domain/core/math_utils.dart';
 import 'package:grape_customer_app/domain/core/png_image_constants.dart';
+import 'package:grape_customer_app/infrastructure/main/shipping_address_dto/shipping_address_dto.dart';
 import 'package:grape_customer_app/injection.dart';
 import 'package:grape_customer_app/presentation/common/utils/app_focus.dart';
 import 'package:grape_customer_app/presentation/common/utils/flushbar_creator.dart';
@@ -81,7 +82,14 @@ class OtpRegisterVerificationView extends StatelessWidget {
                     Duration(seconds: 2),
                     () => context.router.replaceAll(
                       [
-                        PageRouteInfo(MainTabView.name),
+                        PageRouteInfo(
+                          AddNewAddress.name,
+                          args: AddNewAddressArgs(
+                            shippingAddressResponce: ShippingAddressDTO(),
+                            isFromAuthFlow: true,
+                          ),
+                        ),
+                        //  PageRouteInfo(MainTabView.name),
                       ],
                     ),
                   );

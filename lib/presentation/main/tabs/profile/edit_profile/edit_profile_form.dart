@@ -31,7 +31,7 @@ class EditProfileForm extends StatelessWidget {
     return BlocBuilder<EditProfileBloc, EditProfileState>(
       builder: (context, state) {
         return KeyboardActions(
-          config: CustomKeyboardConfig(focusNode: state.mobileNumberFocusNode)
+          config: CustomKeyboardConfig(focusNode: [state.mobileNumberFocusNode])
               .buildConfig(context),
           child: Form(
             autovalidateMode:

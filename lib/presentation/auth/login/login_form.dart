@@ -55,7 +55,7 @@ class LoginForm extends StatelessWidget {
       },
       builder: (context, state) {
         return KeyboardActions(
-          config: CustomKeyboardConfig(focusNode: state.mobileNumberFocusNode)
+          config: CustomKeyboardConfig(focusNode: [state.mobileNumberFocusNode])
               .buildConfig(context),
           child: GestureDetector(
             onTap: () {
@@ -106,6 +106,7 @@ class LoginForm extends StatelessWidget {
                     hintText: 'Mobile Number',
                     keyboardType: TextInputType.phone,
                     errorMaxLines: 2,
+                    focusNode: state.mobileNumberFocusNode,
                     onChanged: (value) => context
                         .read<LoginFormBloc>()
                         .add(LoginFormEvent.mobileNumberChanged(value)),

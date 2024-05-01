@@ -12,8 +12,10 @@ import 'package:grape_customer_app/presentation/core/app_router.gr.dart';
 
 import 'package:grape_customer_app/presentation/core/styles/app_colors.dart';
 import 'package:grape_customer_app/presentation/core/widgets/buttons/common_button.dart';
+import 'package:grape_customer_app/presentation/core/widgets/inputs/custom_keboard_config.dart';
 import 'package:grape_customer_app/presentation/core/widgets/inputs/custom_text_field.dart';
 import 'package:grape_customer_app/presentation/core/widgets/layout/common_url_launcher.dart';
+import 'package:keyboard_actions/keyboard_actions.dart';
 
 class RegisterForm extends StatelessWidget {
   const RegisterForm({super.key});
@@ -53,57 +55,61 @@ class RegisterForm extends StatelessWidget {
         );
       },
       builder: (context, state) {
-        return Form(
-          autovalidateMode: state.showErrorMessages
-              ? AutovalidateMode.always
-              : AutovalidateMode.disabled,
-          child: ListView(
-            shrinkWrap: true,
-            padding: EdgeInsets.symmetric(horizontal: getSize(18)),
-            physics: BouncingScrollPhysics(),
-            children: [
-              BaseText(
-                text: 'Create Account',
-                fontSize: 24,
-                fontWeight: FontWeight.w800,
-                textColor: AppColors.authBlack,
-              ),
-              SizedBox(
-                height: getSize(30),
-              ),
-              firstNameTextFieldView(context, state),
-              SizedBox(
-                height: getSize(20),
-              ),
-              lasttNameTextFieldView(context, state),
-              SizedBox(
-                height: getSize(20),
-              ),
-              emailTextFieldView(context, state),
-              SizedBox(
-                height: getSize(20),
-              ),
-              mobileNumberTextFieldView(context, state),
-              SizedBox(
-                height: getSize(30),
-              ),
-              CommonButton(
-                isSubmitting: state.isSubmitting,
-                onPressed: () {
-                  context
-                      .read<RegisterFormBloc>()
-                      .add(RegisterFormEvent.registerPressed());
-                },
-                buttonText: 'Continue',
-              ),
-              SizedBox(
-                height: getSize(30),
-              ),
-              getPrivacyPolicyText(),
-              SizedBox(
-                height: getSize(20),
-              ),
-            ],
+        return KeyboardActions(
+          config: CustomKeyboardConfig(focusNode: [state.mobileNumberFocusNode])
+              .buildConfig(context),
+          child: Form(
+            autovalidateMode: state.showErrorMessages
+                ? AutovalidateMode.always
+                : AutovalidateMode.disabled,
+            child: ListView(
+              shrinkWrap: true,
+              padding: EdgeInsets.symmetric(horizontal: getSize(18)),
+              physics: BouncingScrollPhysics(),
+              children: [
+                BaseText(
+                  text: 'Create Account',
+                  fontSize: 24,
+                  fontWeight: FontWeight.w800,
+                  textColor: AppColors.authBlack,
+                ),
+                SizedBox(
+                  height: getSize(30),
+                ),
+                firstNameTextFieldView(context, state),
+                SizedBox(
+                  height: getSize(20),
+                ),
+                lasttNameTextFieldView(context, state),
+                SizedBox(
+                  height: getSize(20),
+                ),
+                emailTextFieldView(context, state),
+                SizedBox(
+                  height: getSize(20),
+                ),
+                mobileNumberTextFieldView(context, state),
+                SizedBox(
+                  height: getSize(30),
+                ),
+                CommonButton(
+                  isSubmitting: state.isSubmitting,
+                  onPressed: () {
+                    context
+                        .read<RegisterFormBloc>()
+                        .add(RegisterFormEvent.registerPressed());
+                  },
+                  buttonText: 'Continue',
+                ),
+                SizedBox(
+                  height: getSize(30),
+                ),
+                getPrivacyPolicyText(),
+                SizedBox(
+                  height: getSize(20),
+                ),
+              ],
+            ),
           ),
         );
       },
@@ -233,6 +239,7 @@ class RegisterForm extends StatelessWidget {
       hintText: 'Mobile Number',
       keyboardType: TextInputType.phone,
       errorMaxLines: 2,
+      focusNode: state.mobileNumberFocusNode,
       onChanged: (value) => context
           .read<RegisterFormBloc>()
           .add(RegisterFormEvent.mobileNumberChanged(value)),

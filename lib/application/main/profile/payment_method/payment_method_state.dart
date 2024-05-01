@@ -17,6 +17,9 @@ class PaymentMethodState with _$PaymentMethodState {
     required bool isLoading,
     required bool isErrorInAPI,
     required bool isNoDataFound,
+    required FocusNode mobileNumberFocusNode,
+    required FocusNode cvvNumberFocusNode,
+    required FocusNode validUptoFocusNode,
   }) = _PaymentMethodState;
   factory PaymentMethodState.initial() => PaymentMethodState(
         cardHoldersName: Username(''),
@@ -32,5 +35,8 @@ class PaymentMethodState with _$PaymentMethodState {
         isErrorInAPI: false,
         isNoDataFound: false,
         defaultCardfailureOrSuccessOption: none(),
+        mobileNumberFocusNode: FocusNode(),
+        cvvNumberFocusNode: FocusNode(),
+        validUptoFocusNode: FocusNode(),
       );
 }

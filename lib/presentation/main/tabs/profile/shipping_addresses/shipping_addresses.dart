@@ -102,8 +102,7 @@ class ShippingAddress extends StatelessWidget {
                           )
                         : ListView.separated(
                             padding: EdgeInsets.symmetric(
-                                horizontal: getSize(16),
-                                vertical: getSize(32)),
+                                horizontal: getSize(16), vertical: getSize(32)),
                             physics: BouncingScrollPhysics(),
                             shrinkWrap: true,
                             separatorBuilder: (context, index) => SizedBox(
@@ -112,11 +111,11 @@ class ShippingAddress extends StatelessWidget {
                             itemCount: state.addressList.length,
                             itemBuilder: (context1, index) =>
                                 ShippingAddressCard(
-                              onTapSelectCard: () =>
-                                  context.read<ShippingAddressesBloc>().add(
-                                        ShippingAddressesEvent.selectedIndex(
-                                            index),
-                                      ),
+                              onTapSelectCard: () => context
+                                  .read<ShippingAddressesBloc>()
+                                  .add(
+                                    ShippingAddressesEvent.selectedIndex(index),
+                                  ),
                               onTapDelete: () =>
                                   context.read<ShippingAddressesBloc>().add(
                                         ShippingAddressesEvent
@@ -154,10 +153,12 @@ class ShippingAddress extends StatelessWidget {
                     vertical: isFullScreenDevice(context) ? 0 : getSize(14),
                   ),
                   child: CommonButton(
-                    onPressed: () {
-                      context.router
-                          .pop(state.addressList[state.selectedIndex]);
-                    },
+                    onPressed: state.addressList.isEmpty
+                        ? () {}
+                        : () {
+                            context.router.maybePop(
+                                state.addressList[state.selectedIndex]);
+                          },
                     buttonText: AppLocalizations.of(context).save,
                   ),
                 ),

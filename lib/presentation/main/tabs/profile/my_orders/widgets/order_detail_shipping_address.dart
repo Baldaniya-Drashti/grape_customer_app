@@ -27,6 +27,7 @@ class OrderDetailShippingAddress extends StatelessWidget {
               height: getSize(10),
             ),
             Container(
+              width: MediaQuery.of(context).size.width,
               padding: EdgeInsets.symmetric(
                 vertical: getSize(18),
                 horizontal: getSize(24),

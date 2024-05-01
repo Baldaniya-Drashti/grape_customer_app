@@ -1,12 +1,19 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:grape_customer_app/presentation/core/widgets/layout/layout.dart';
 
 @RoutePage(name: 'FullImageView')
 class FullImageView extends StatelessWidget {
   final String imageUrl;
-  const FullImageView({super.key, required this.imageUrl});
+
+  final ChewieController? chewieController;
+  const FullImageView({
+    super.key,
+    required this.imageUrl,
+    this.chewieController,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -14,13 +21,20 @@ class FullImageView extends StatelessWidget {
       appBar: CustomAppBar(title: ''),
       body: SafeArea(
         child: Center(
-          child: CachedNetworkImage(
-            imageUrl: imageUrl,
-            //width: MediaQuery.of(context).size.width,
-            placeholder: (context, url) => Container(
-              color: Colors.grey.shade300,
-            ),
-          ),
+          child: imageUrl.contains('mp4')
+              ? chewieController != null &&
+                      chewieController!
+                          .videoPlayerController.value.isInitialized
+                  ? Chewie(controller: chewieController!)
+                  : Center(
+                      child: CircularProgressIndicator(),
+                    )
+              : CachedNetworkImage(
+                  imageUrl: imageUrl,
+                  placeholder: (context, url) => Container(
+                    color: Colors.grey.shade300,
+                  ),
+                ),
         ),
       ),
     );

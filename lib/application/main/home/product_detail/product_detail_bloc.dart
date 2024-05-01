@@ -1,5 +1,8 @@
+// ignore_for_file: unused_result
+
 import 'dart:convert';
 
+import 'package:chewie/chewie.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -11,6 +14,7 @@ import 'package:grape_customer_app/infrastructure/main/home_dto/product_detail_d
 import 'package:grape_customer_app/infrastructure/main/shop_detail_dto/shop_detail_dto.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:video_player/video_player.dart';
 
 part 'product_detail_state.dart';
 part 'product_detail_event.dart';
@@ -62,12 +66,6 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
                 return;
               }
             }
-            // emit(
-            //   state.copyWith(
-            //     isLoading: true,
-            //     failureOrSuccessOption: none(),
-            //   ),
-            // );
 
             var res = await mainFacade.getProductDetailsAPI(
                 productId: value.productId, page: page);
@@ -81,11 +79,12 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
                   failureOrSuccessOption: none(),
                 ),
               ),
-              (r) {
+              (r) async {
                 var productFromJson = ProductFromJson();
                 var dataList = <Data>[];
                 var productDetailRes = ProductDetailDTO.fromJson(r.data);
                 lastPage = r.meta?.lastPage ?? 1;
+
                 if (value.isRefresh) {
                   List.from(productDetailRes.similar_product ?? []).clear();
                 }
@@ -117,7 +116,41 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
                 );
               },
             );
+            var updatedMediaList = List<Media>.from(
+                state.getProductDetails.product?.media?.toList() ?? <Media>[]);
+
+            for (var i = 0; i < (updatedMediaList.length); i++) {
+              if (updatedMediaList[i].media_type == 2) {
+                final media = updatedMediaList[i];
+
+                final mediaUrl = media.media;
+                if (mediaUrl != null && mediaUrl.isNotEmpty) {
+                  final videoPlayerController =
+                      VideoPlayerController.networkUrl(Uri.tryParse(mediaUrl)!);
+
+                  await videoPlayerController.initialize().then((value) {
+                    var updatedMedia = media.copyWith(
+                      videoPlayerController: videoPlayerController,
+                      chewieController: ChewieController(
+                        videoPlayerController: videoPlayerController,
+                        aspectRatio: videoPlayerController.value.aspectRatio,
+                      ),
+                    );
+                    updatedMediaList[i] = updatedMedia;
+                  });
+                }
+              }
+            }
             add(ProductDetailEvent.getProductYouMayAlsoLikeProductList(true));
+
+            return emit(
+              state.copyWith(
+                getProductDetails: state.getProductDetails.copyWith(
+                  product: state.getProductDetails.product
+                      ?.copyWith(media: updatedMediaList),
+                ),
+              ),
+            );
           },
           selectImage: (SelectImage value) {
             emit(state.copyWith(selectedImageIndex: value.index));
@@ -362,33 +395,13 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
                 var filterData = list
                     .map((e) => GetProductListResponse.fromJson(e))
                     .toList();
-                //var filterAPIList = <MapEntry<String, dynamic>>[];
-                // filterAPIList.addAll(
-                //   [
-                //     MapEntry('All', ['']),
-                //     MapEntry('New', ['']),
-                //     MapEntry('Top Selling', ['']),
-                //     MapEntry('Categories',
-                //         searchRes.categories?.map((e) => e).toList()),
-                //     MapEntry('Price \u{2191}', ['']),
-                //     MapEntry('Price \u{2193}', ['']),
-                //   ],
-                // );
-                // var updatedSelectedFilter =
-                //     List<MapEntry<String, dynamic>>.from(
-                //         state.selectedFilterList)
-                //       ..add(
-                //         MapEntry('All', ['1']),
-                //     );
+
                 return emit(
                   state.copyWith(
                     isLoading: false,
                     isErrorInAPI: false,
-                    //shopDetailDTO: searchRes,
-                    //   filterList: filterAPIList,
                     isNoDataFound: filterData.isEmpty,
                     getProductList: filterData,
-                    //  selectedFilterList: updatedSelectedFilter,
                   ),
                 );
               },

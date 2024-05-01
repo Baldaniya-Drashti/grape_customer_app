@@ -10,6 +10,7 @@ class ProductDetailState with _$ProductDetailState {
     required bool isFavourite,
     required ProductDetailDTO getProductDetails,
     required List<SimilarProduct> similarProduct,
+    required List<Media> mediaList,
     required List<Data> dataList,
     required int selectedImageIndex,
     required bool isNoDataFound,
@@ -37,5 +38,6 @@ class ProductDetailState with _$ProductDetailState {
         ],
         shopDetailDTO: ShopDetailDTO(),
         isShopDetailLoading: false,
+        mediaList: [],
       );
 }

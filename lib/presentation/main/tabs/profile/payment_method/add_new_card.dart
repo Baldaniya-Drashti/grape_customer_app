@@ -11,8 +11,10 @@ import 'package:grape_customer_app/presentation/common/utils/app_focus.dart';
 import 'package:grape_customer_app/presentation/common/utils/flushbar_creator.dart';
 import 'package:grape_customer_app/presentation/core/widgets/buttons/common_button.dart';
 import 'package:grape_customer_app/presentation/core/widgets/inputs/custom_app_bar.dart';
+import 'package:grape_customer_app/presentation/core/widgets/inputs/custom_keboard_config.dart';
 import 'package:grape_customer_app/presentation/core/widgets/inputs/custom_text_field.dart';
 import 'package:grape_customer_app/presentation/core/widgets/utility/card_input_formetter.dart';
+import 'package:keyboard_actions/keyboard_actions.dart';
 
 @RoutePage(name: 'AddNewCard')
 class AddNewCard extends StatelessWidget {
@@ -53,49 +55,57 @@ class AddNewCard extends StatelessWidget {
             child: Scaffold(
               appBar:
                   CustomAppBar(title: AppLocalizations.of(context).addNewCard),
-              body: Form(
-                autovalidateMode: state.showErrorMessages
-                    ? AutovalidateMode.always
-                    : AutovalidateMode.disabled,
-                child: ListView(
-                  physics: BouncingScrollPhysics(),
-                  padding: EdgeInsets.symmetric(
-                    horizontal: getSize(18),
-                    vertical: getSize(32),
-                  ),
-                  children: [
-                    cardHolderNameTextFiled(context),
-                    SizedBox(
-                      height: getSize(20),
+              body: KeyboardActions(
+                config: CustomKeyboardConfig(focusNode: [
+                  state.mobileNumberFocusNode,
+                  state.cvvNumberFocusNode,
+                  state.validUptoFocusNode,
+                ]).buildConfig(context),
+                child: Form(
+                  autovalidateMode: state.showErrorMessages
+                      ? AutovalidateMode.always
+                      : AutovalidateMode.disabled,
+                  child: ListView(
+                    shrinkWrap: true,
+                    physics: BouncingScrollPhysics(),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: getSize(18),
+                      vertical: getSize(32),
                     ),
-                    cardNumberTextFiled(context),
-                    SizedBox(
-                      height: getSize(20),
-                    ),
-                    IntrinsicHeight(
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: Column(
-                              children: [
-                                validUpToTextFiled(context),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            width: getSize(19),
-                          ),
-                          Expanded(
-                            child: Column(
-                              children: [
-                                cvvTextFiled(context),
-                              ],
-                            ),
-                          ),
-                        ],
+                    children: [
+                      cardHolderNameTextFiled(context),
+                      SizedBox(
+                        height: getSize(20),
                       ),
-                    )
-                  ],
+                      cardNumberTextFiled(context, state),
+                      SizedBox(
+                        height: getSize(20),
+                      ),
+                      IntrinsicHeight(
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Column(
+                                children: [
+                                  validUpToTextFiled(context, state),
+                                ],
+                              ),
+                            ),
+                            SizedBox(
+                              width: getSize(19),
+                            ),
+                            Expanded(
+                              child: Column(
+                                children: [
+                                  cvvTextFiled(context, state),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
               bottomNavigationBar: SafeArea(
@@ -122,10 +132,11 @@ class AddNewCard extends StatelessWidget {
     );
   }
 
-  CustomTextField cvvTextFiled(BuildContext context) {
+  CustomTextField cvvTextFiled(BuildContext context, PaymentMethodState state) {
     return CustomTextField(
       labelText: AppLocalizations.of(context).cvv,
       hintText: AppLocalizations.of(context).cvv,
+      focusNode: state.cvvNumberFocusNode,
       maxLength: 4,
       keyboardType: TextInputType.number,
       obscureText: true,
@@ -143,9 +154,11 @@ class AddNewCard extends StatelessWidget {
     );
   }
 
-  CustomTextField validUpToTextFiled(BuildContext context) {
+  CustomTextField validUpToTextFiled(
+      BuildContext context, PaymentMethodState state) {
     return CustomTextField(
       errorMaxLines: 2,
+      focusNode: state.validUptoFocusNode,
       labelText: AppLocalizations.of(context).validUpTo,
       hintText: AppLocalizations.of(context).validUpToHintText,
       keyboardType: TextInputType.number,
@@ -176,11 +189,13 @@ class AddNewCard extends StatelessWidget {
     );
   }
 
-  CustomTextField cardNumberTextFiled(BuildContext context) {
+  CustomTextField cardNumberTextFiled(
+      BuildContext context, PaymentMethodState state) {
     return CustomTextField(
       labelText: AppLocalizations.of(context).cardNumber,
       hintText: AppLocalizations.of(context).cardNumberHintText,
       keyboardType: TextInputType.number,
+      focusNode: state.mobileNumberFocusNode,
       inputFormatters: [
         FilteringTextInputFormatter.digitsOnly,
         LengthLimitingTextInputFormatter(19),
