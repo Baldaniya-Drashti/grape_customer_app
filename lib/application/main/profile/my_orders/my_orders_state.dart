@@ -4,7 +4,9 @@ part of 'my_orders_bloc.dart';
 class MyOrdersState with _$MyOrdersState {
   factory MyOrdersState({
     required List<MyOrderDTO> getMyOrderList,
+    required List<String> refundReasonList,
     required bool isLoading,
+    required int selectedRefundReason,
     required bool isNoDataFound,
     required bool isErrorInAPI,
     required bool showErrorMessages,
@@ -21,5 +23,14 @@ class MyOrdersState with _$MyOrdersState {
         orderDetailDTO: OrderDetailDTO(),
         showErrorMessages: false,
         isSubmitting: false,
+        refundReasonList: [
+          'Item is damaged or defective',
+          'Item is not as described',
+          'Seller sent the wrong item',
+          'Warranty-related returns',
+          'Recall or quality assurance issues',
+          'Manufacturer defects',
+        ],
+        selectedRefundReason: -1,
       );
 }

@@ -5,4 +5,5 @@ class MyOrdersEvent with _$MyOrdersEvent {
   factory MyOrdersEvent.getMyOrdersList(bool isRefresh) = GetMyOrderseList;
   factory MyOrdersEvent.getOrderDetail(String orderId) = GetOrderDetail;
   factory MyOrdersEvent.cancelOrder(String orderId) = CancelOrder;
+  factory MyOrdersEvent.changeReturnReason(int index) = ChangeReturnReason;
 }

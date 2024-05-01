@@ -1,14 +1,14 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:grape_customer_app/application/main/profile/my_orders/my_orders_bloc.dart';
 import 'package:grape_customer_app/domain/core/l10n/app_localizations.dart';
 import 'package:grape_customer_app/domain/core/math_utils.dart';
-import 'package:grape_customer_app/domain/core/svg_image_constants.dart';
 import 'package:grape_customer_app/injection.dart';
 import 'package:grape_customer_app/presentation/common/utils/flushbar_creator.dart';
 import 'package:grape_customer_app/presentation/common/widgets/base_text.dart';
+import 'package:grape_customer_app/presentation/core/app_router.gr.dart';
 import 'package:grape_customer_app/presentation/core/styles/app_colors.dart';
 import 'package:grape_customer_app/presentation/core/widgets/buttons/common_button.dart';
 import 'package:grape_customer_app/presentation/core/widgets/inputs/custom_app_bar.dart';
@@ -34,30 +34,6 @@ class OrderDetails extends StatelessWidget {
           return Scaffold(
             appBar: CustomAppBar(
               title: AppLocalizations.of(context).orderDetails,
-              actions: [
-                Padding(
-                  padding: EdgeInsets.only(right: getSize(18)),
-                  child: Row(
-                    children: [
-                      SvgPicture.asset(
-                        SvgImageConstant.feedback,
-                        colorFilter: ColorFilter.mode(
-                          AppColors.primaryOrange,
-                          BlendMode.srcATop,
-                        ),
-                      ),
-                      SizedBox(
-                        width: getSize(6),
-                      ),
-                      BaseText(
-                        text: 'Help',
-                        fontSize: 12,
-                        textColor: AppColors.primaryOrange,
-                      )
-                    ],
-                  ),
-                )
-              ],
             ),
             body: state.isLoading
                 ? Center(
@@ -100,7 +76,14 @@ class OrderDetails extends StatelessWidget {
                   ),
                   child: state.orderDetailDTO.status == 3
                       ? CommonButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            context.router.push(
+                              PageRouteInfo(
+                                RefundRequestView.name,
+                                args: RefundRequestViewArgs(orderId: orderId),
+                              ),
+                            );
+                          },
                           buttonText: 'Return/Refund Request',
                         )
                       : state.orderDetailDTO.status != 2 &&

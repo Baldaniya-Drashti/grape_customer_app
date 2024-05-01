@@ -121,6 +121,9 @@ class MyOrdersBloc extends Bloc<MyOrdersEvent, MyOrdersState> {
               ),
             );
           },
+          changeReturnReason: (ChangeReturnReason value) async {
+            emit(state.copyWith(selectedRefundReason: value.index));
+          },
         );
       },
     );
