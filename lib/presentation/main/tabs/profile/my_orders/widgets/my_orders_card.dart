@@ -142,7 +142,8 @@ class MyOrdesCard extends StatelessWidget {
                               state.getMyOrderList[index].status ?? 0),
                           fontSize: 10,
                           fontWeight: FontWeight.w500,
-                          textColor: AppColors.red,
+                          textColor: getOrderStatusColor(
+                              state.getMyOrderList[index].status ?? 0),
                         ),
                       ],
                     ),
@@ -222,19 +223,36 @@ class MyOrdesCard extends StatelessWidget {
   String getOrderStatus(int status) {
     switch (status) {
       case 0:
-        return 'Pending';
+        return 'Placed';
       case 1:
-        return 'Accept';
+        return 'Packed';
       case 2:
-        return 'Processing';
-      case 3:
         return 'Shipped';
-      case 4:
+      case 3:
         return 'Delivered';
-      case 5:
+      case 4:
         return 'Cancelled';
+
       default:
         return '';
+    }
+  }
+
+  Color getOrderStatusColor(int status) {
+    switch (status) {
+      case 0:
+        return Color(0XFFD0A200);
+      case 1:
+        return Color(0XFFD0A200);
+      case 2:
+        return Color(0XFFD0A200);
+      case 3:
+        return AppColors.green;
+      case 4:
+        return AppColors.red;
+
+      default:
+        return Color(0XFFD0A200);
     }
   }
 

@@ -1,13 +1,16 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:grape_customer_app/application/main/profile/my_orders/my_orders_bloc.dart';
 import 'package:grape_customer_app/domain/core/l10n/app_localizations.dart';
 import 'package:grape_customer_app/domain/core/math_utils.dart';
+import 'package:grape_customer_app/domain/core/svg_image_constants.dart';
 import 'package:grape_customer_app/injection.dart';
 import 'package:grape_customer_app/presentation/common/utils/flushbar_creator.dart';
 import 'package:grape_customer_app/presentation/common/widgets/base_text.dart';
 import 'package:grape_customer_app/presentation/core/styles/app_colors.dart';
+import 'package:grape_customer_app/presentation/core/widgets/buttons/common_button.dart';
 import 'package:grape_customer_app/presentation/core/widgets/inputs/custom_app_bar.dart';
 import 'package:grape_customer_app/presentation/main/tabs/profile/my_orders/widgets/cancel_order_bottomsheet.dart';
 import 'package:grape_customer_app/presentation/main/tabs/profile/my_orders/widgets/order_detail_item.dart';
@@ -29,8 +32,33 @@ class OrderDetails extends StatelessWidget {
       child: BlocConsumer<MyOrdersBloc, MyOrdersState>(
         builder: (context, state) {
           return Scaffold(
-            appBar:
-                CustomAppBar(title: AppLocalizations.of(context).orderDetails),
+            appBar: CustomAppBar(
+              title: AppLocalizations.of(context).orderDetails,
+              actions: [
+                Padding(
+                  padding: EdgeInsets.only(right: getSize(18)),
+                  child: Row(
+                    children: [
+                      SvgPicture.asset(
+                        SvgImageConstant.feedback,
+                        colorFilter: ColorFilter.mode(
+                          AppColors.primaryOrange,
+                          BlendMode.srcATop,
+                        ),
+                      ),
+                      SizedBox(
+                        width: getSize(6),
+                      ),
+                      BaseText(
+                        text: 'Help',
+                        fontSize: 12,
+                        textColor: AppColors.primaryOrange,
+                      )
+                    ],
+                  ),
+                )
+              ],
+            ),
             body: state.isLoading
                 ? Center(
                     child: CircularProgressIndicator(
@@ -60,39 +88,50 @@ class OrderDetails extends StatelessWidget {
             bottomNavigationBar: Visibility(
               visible: !state.isLoading && !state.isErrorInAPI,
               child: SafeArea(
-                child: GestureDetector(
-                  onTap: (state.orderDetailDTO.status == 0 ||
-                          state.orderDetailDTO.status == 1 ||
-                          state.orderDetailDTO.status == 2)
-                      ? () async {
-                          var res = await CancelOrderBottomSheet()
-                              .cancelOrderBottomSheet(context);
-                          if (res != null && res == true) {
-                            context.read<MyOrdersBloc>().add(
-                                MyOrdersEvent.cancelOrder(
-                                    state.orderDetailDTO.order_id?.toString() ??
-                                        ""));
-                          }
-                        }
-                      : null,
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: getSize(18),
-                      vertical: isFullScreenDevice(context) ? 0 : getSize(18),
-                    ),
-                    child: state.isSubmitting
-                        ? Center(
-                            child: CircularProgressIndicator(
-                              color: AppColors.primaryOrange,
-                            ),
-                          )
-                        : BaseText(
-                            text: getOrderStatus(
-                                state.orderDetailDTO.status ?? 0),
-                            textAlign: TextAlign.center,
-                            textColor: Color(0xFFDC0505),
-                          ),
+                child:
+                    // state.orderDetailDTO.status == 3
+                    //     ?
+                    Padding(
+                  padding: EdgeInsets.only(
+                    left: getSize(18),
+                    right: getSize(18),
+                    top: getSize(18),
+                    bottom: isFullScreenDevice(context) ? 0 : getSize(18),
                   ),
+                  child: state.orderDetailDTO.status == 3
+                      ? CommonButton(
+                          onPressed: () {},
+                          buttonText: 'Return/Refund Request',
+                        )
+                      : state.orderDetailDTO.status != 2 &&
+                              state.orderDetailDTO.status != 4
+                          ? GestureDetector(
+                              onTap: () async {
+                                var res = await CancelOrderBottomSheet()
+                                    .cancelOrderBottomSheet(context);
+                                if (res != null && res == true) {
+                                  context.read<MyOrdersBloc>().add(
+                                        MyOrdersEvent.cancelOrder(state
+                                                .orderDetailDTO.order_id
+                                                ?.toString() ??
+                                            ""),
+                                      );
+                                }
+                              },
+                              child: BaseText(
+                                text: 'Cancel Order',
+                                textAlign: TextAlign.center,
+                                textColor: AppColors.red,
+                              ),
+                            )
+                          : state.orderDetailDTO.status == 4
+                              ? BaseText(
+                                  text: getOrderStatus(
+                                      state.orderDetailDTO.status ?? 0),
+                                  textAlign: TextAlign.center,
+                                  textColor: AppColors.red,
+                                )
+                              : SizedBox(),
                 ),
               ),
             ),
@@ -115,7 +154,7 @@ class OrderDetails extends StatelessWidget {
               },
               (r) {
                 showSuccess(message: r).show(context).then((value) {
-                  context.router.pop(true);
+                  context.router.maybePop(true);
                 });
               },
             ),
@@ -128,19 +167,36 @@ class OrderDetails extends StatelessWidget {
   String getOrderStatus(int status) {
     switch (status) {
       case 0:
-        return 'Pending';
+        return 'Placed';
       case 1:
-        return 'Accept';
+        return 'Packed';
       case 2:
-        return 'Processing';
-      case 3:
         return 'Shipped';
-      case 4:
+      case 3:
         return 'Delivered';
-      case 5:
+      case 4:
         return 'Cancelled';
+
       default:
         return '';
+    }
+  }
+
+  Color getOrderStatusColor(int status) {
+    switch (status) {
+      case 0:
+        return Color(0XFFD0A200);
+      case 1:
+        return Color(0XFFD0A200);
+      case 2:
+        return Color(0XFFD0A200);
+      case 3:
+        return AppColors.green;
+      case 4:
+        return AppColors.red;
+
+      default:
+        return Color(0XFFD0A200);
     }
   }
 }

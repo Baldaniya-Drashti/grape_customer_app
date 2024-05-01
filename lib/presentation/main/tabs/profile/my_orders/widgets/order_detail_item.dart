@@ -154,7 +154,7 @@ class OrderDetailItem extends StatelessWidget {
                               ),
                               Spacer(),
                               Container(
-                                padding: EdgeInsets.all(getSize(4)),
+                                padding: EdgeInsets.all(getSize(6)),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
                                   color: getOrderStatusColor(
@@ -221,7 +221,7 @@ class OrderDetailItem extends StatelessWidget {
   String getOrderStatus(int status) {
     switch (status) {
       case 0:
-        return 'Pending';
+        return 'Placed';
       case 1:
         return 'Packed';
       case 2:
