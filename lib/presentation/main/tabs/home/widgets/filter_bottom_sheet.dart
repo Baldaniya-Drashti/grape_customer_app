@@ -73,7 +73,7 @@ class FilterBottomSheet extends StatelessWidget {
                             ),
                             GestureDetector(
                               onTap: () {
-                                context.router.pop();
+                                context.router.maybePop();
                               },
                               child: Align(
                                 alignment: Alignment.centerRight,
@@ -145,7 +145,7 @@ class FilterBottomSheet extends StatelessWidget {
                           child: CommonButton(
                             width: getSize(160),
                             onPressed: () {
-                              context.router.pop(null);
+                              context.router.maybePop(null);
                             },
                             borderColor: AppColors.primaryOrange,
                             buttonTextColor: AppColors.primaryOrange,
@@ -158,7 +158,7 @@ class FilterBottomSheet extends StatelessWidget {
                           child: CommonButton(
                             width: getSize(160),
                             onPressed: () {
-                              context.router.pop(
+                              context.router.maybePop(
                                   MapEntry(filterTitle, selectedFilterList));
                             },
                             buttonText: 'Apply',

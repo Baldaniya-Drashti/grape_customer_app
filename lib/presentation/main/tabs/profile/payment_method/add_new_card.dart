@@ -43,7 +43,7 @@ class AddNewCard extends StatelessWidget {
               },
               (r) {
                 showSuccess(message: r).show(context).then((value) async {
-                  await context.router.pop(true);
+                  await context.router.maybePop(true);
                 });
               },
             ),

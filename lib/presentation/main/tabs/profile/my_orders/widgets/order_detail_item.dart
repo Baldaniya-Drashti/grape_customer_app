@@ -30,6 +30,7 @@ class OrderDetailItem extends StatelessWidget {
               .where((element) => element.fieldType == 1)
               .toList();
           return Container(
+            margin: EdgeInsets.symmetric(horizontal: getSize(18)),
             padding: EdgeInsets.symmetric(
               horizontal: getSize(20),
               vertical: getSize(17),

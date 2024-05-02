@@ -98,6 +98,7 @@ dependencies:
   keyboard_actions: ^4.2.0
   chewie: ^1.7.5
   video_player: ^2.8.6
+  dotted_border: ^2.1.0
  
 
 

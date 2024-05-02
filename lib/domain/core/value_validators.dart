@@ -104,7 +104,7 @@ Either<ValueFailure<String>, String> validatePassword(String input) {
 }
 
 Either<ValueFailure<String>, String> validateStringNotEmpty(String input) {
-  if (input.isNotEmpty) {
+  if (input.trim().isNotEmpty) {
     return right(input);
   } else {
     return left(ValueFailure.empty(failedValue: input));

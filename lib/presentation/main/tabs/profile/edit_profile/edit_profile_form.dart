@@ -259,7 +259,7 @@ class EditProfileForm extends StatelessWidget {
                           EditProfileEvent.changeProfilePicture(path),
                         );
                   }
-                  context.router.pop();
+                  context.router.maybePop();
                 },
                 selectPhotoCallback: () async {
                   String path = await ImagePickerUtils().pickImage(
@@ -270,7 +270,7 @@ class EditProfileForm extends StatelessWidget {
                           EditProfileEvent.changeProfilePicture(path),
                         );
                   }
-                  context.router.pop();
+                  context.router.maybePop();
                 },
                 context: context,
               );

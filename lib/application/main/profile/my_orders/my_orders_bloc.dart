@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:grape_customer_app/domain/auth/auth_value_objects.dart';
 import 'package:grape_customer_app/domain/main/i_main_facade.dart';
 import 'package:grape_customer_app/domain/main/main_failure.dart';
 import 'package:grape_customer_app/infrastructure/main/my_order_dto/my_order_dto.dart';
@@ -123,6 +124,55 @@ class MyOrdersBloc extends Bloc<MyOrdersEvent, MyOrdersState> {
           },
           changeReturnReason: (ChangeReturnReason value) async {
             emit(state.copyWith(selectedRefundReason: value.index));
+          },
+          addRefundPhoto: (AddRefundPhoto value) async {
+            var updatedList = List<String>.from(state.uploadImageList);
+            updatedList.insert(0, value.path);
+            emit(state.copyWith(uploadImageList: updatedList));
+          },
+          removeRefundPhoto: (RemoveRefundPhoto value) async {
+            var updatedList = List<String>.from(state.uploadImageList);
+            updatedList.removeAt(value.index);
+            emit(state.copyWith(uploadImageList: updatedList));
+          },
+          additionalCommentChange: (AdditionalCommentChange value) {
+            emit(
+              state.copyWith(
+                additonalComment: InputEmptyOrNot(value.input),
+                failureOrSuccessOption: none(),
+              ),
+            );
+          },
+          submitRefundRequest: (SubmitRefundRequest value) async {
+            Either<MainFailure, String>? failureOrSuccess;
+
+            //final isEmailValid = state.emailAddress.isValid();
+            final isAdditionalCommentValid = state.additonalComment.isValid();
+
+            if (isAdditionalCommentValid) {
+              emit(
+                state.copyWith(
+                  isSubmitting: true,
+                  failureOrSuccessOption: none(),
+                ),
+              );
+
+              // failureOrSuccess = await _authFacade.register(
+              //   emailAddress: state.emailAddress,
+              //   firstName: state.firstName,
+              //   lastName: state.lastName,
+              //   countryCode: '+${state.selectedCountrycode}',
+              //   mobileNumber: state.mobileNumber,
+              // );
+            }
+
+            emit(
+              state.copyWith(
+                isSubmitting: false,
+                showErrorMessages: true,
+                failureOrSuccessOption: optionOf(failureOrSuccess),
+              ),
+            );
           },
         );
       },

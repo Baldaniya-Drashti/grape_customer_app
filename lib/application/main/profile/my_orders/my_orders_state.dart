@@ -5,6 +5,7 @@ class MyOrdersState with _$MyOrdersState {
   factory MyOrdersState({
     required List<MyOrderDTO> getMyOrderList,
     required List<String> refundReasonList,
+    required List<String> uploadImageList,
     required bool isLoading,
     required int selectedRefundReason,
     required bool isNoDataFound,
@@ -13,6 +14,7 @@ class MyOrdersState with _$MyOrdersState {
     required bool isSubmitting,
     required Option<Either<MainFailure, String>> failureOrSuccessOption,
     required OrderDetailDTO orderDetailDTO,
+    required InputEmptyOrNot additonalComment,
   }) = _MyOrdersState;
   factory MyOrdersState.initial() => MyOrdersState(
         isLoading: false,
@@ -32,5 +34,7 @@ class MyOrdersState with _$MyOrdersState {
           'Manufacturer defects',
         ],
         selectedRefundReason: -1,
+        uploadImageList: [""],
+        additonalComment: InputEmptyOrNot(''),
       );
 }

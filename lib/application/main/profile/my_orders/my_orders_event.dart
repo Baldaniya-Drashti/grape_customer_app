@@ -6,4 +6,9 @@ class MyOrdersEvent with _$MyOrdersEvent {
   factory MyOrdersEvent.getOrderDetail(String orderId) = GetOrderDetail;
   factory MyOrdersEvent.cancelOrder(String orderId) = CancelOrder;
   factory MyOrdersEvent.changeReturnReason(int index) = ChangeReturnReason;
+  factory MyOrdersEvent.addRefundPhoto(String path) = AddRefundPhoto;
+  factory MyOrdersEvent.removeRefundPhoto(int index) = RemoveRefundPhoto;
+  factory MyOrdersEvent.additionalCommentChange(String input) =
+      AdditionalCommentChange;
+  factory MyOrdersEvent.submitRefundRequest() = SubmitRefundRequest;
 }

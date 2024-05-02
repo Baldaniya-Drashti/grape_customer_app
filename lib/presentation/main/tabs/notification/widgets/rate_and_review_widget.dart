@@ -80,7 +80,7 @@ class RateAndReviewBotthomSheet extends StatelessWidget {
                                 alignment: Alignment.topRight,
                                 child: IconButton(
                                   onPressed: () {
-                                    context.router.pop(true);
+                                    context.router.maybePop(true);
                                   },
                                   icon: Icon(Icons.close_rounded),
                                 ),

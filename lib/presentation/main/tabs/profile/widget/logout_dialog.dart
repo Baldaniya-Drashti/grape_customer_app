@@ -54,7 +54,7 @@ class LogOutDialog extends StatelessWidget {
                       child: CommonButton(
                         width: getSize(160),
                         onPressed: () {
-                          context.router.pop(false);
+                          context.router.maybePop(false);
                           //   Get.back();
                         },
                         borderColor: AppColors.primaryOrange,
@@ -71,7 +71,7 @@ class LogOutDialog extends StatelessWidget {
                           // context
                           //     .read<AuthStatusBloc>()
                           //     .add(AuthStatusEvent.signedOut());
-                          context.router.pop(true);
+                          context.router.maybePop(true);
                           // controller.getLogout();
                         },
                         buttonText: 'Logout',

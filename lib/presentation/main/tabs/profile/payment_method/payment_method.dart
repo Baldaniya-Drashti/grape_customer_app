@@ -43,8 +43,9 @@ class PaymentMethod extends StatelessWidget {
               },
               (r) async {
                 await showSuccess(message: r).show(context).then((value) {
-                  context.router.pop(state.cardDetail.firstWhere((element) =>
-                      element.payment_method_id == state.selectedCard));
+                  context.router.maybePop(state.cardDetail.firstWhere(
+                      (element) =>
+                          element.payment_method_id == state.selectedCard));
                 });
               },
             ),
@@ -251,7 +252,7 @@ class PaymentMethod extends StatelessWidget {
                           context
                               .read<PaymentMethodBloc>()
                               .add(PaymentMethodEvent.makeCardDefault());
-                          // context.router.pop(state.cardDetail[state.selectedCard]);
+                          // context.router.maybePop(state.cardDetail[state.selectedCard]);
                         },
                   isSubmitting: state.isSubmitting,
                   buttonText: AppLocalizations.of(context).save,

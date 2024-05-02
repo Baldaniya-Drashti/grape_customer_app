@@ -63,7 +63,7 @@ class CancelOrderBottomSheet extends StatelessWidget {
                     child: CommonButton(
                       width: getSize(160),
                       onPressed: () {
-                        context.router.pop(false);
+                        context.router.maybePop(false);
                       },
                       borderColor: AppColors.primaryOrange,
                       buttonTextColor: AppColors.primaryOrange,
@@ -76,7 +76,7 @@ class CancelOrderBottomSheet extends StatelessWidget {
                     child: CommonButton(
                       width: getSize(160),
                       onPressed: () {
-                        context.router.pop(true);
+                        context.router.maybePop(true);
                       },
                       buttonText: 'Yes',
                     ),

@@ -66,7 +66,7 @@ class OtpEditProfileVerificationView extends StatelessWidget {
                 (r) async {
                   await showSuccess(message: r).show(context).then(
                     (value) {
-                      context.router.pop(true);
+                      context.router.maybePop(true);
                     },
                   );
                 },

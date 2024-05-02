@@ -7,11 +7,15 @@ import 'package:grape_customer_app/domain/core/l10n/app_localizations.dart';
 import 'package:grape_customer_app/domain/core/math_utils.dart';
 import 'package:grape_customer_app/domain/core/svg_image_constants.dart';
 import 'package:grape_customer_app/injection.dart';
+import 'package:grape_customer_app/presentation/common/utils/app_focus.dart';
 import 'package:grape_customer_app/presentation/common/widgets/base_text.dart';
 import 'package:grape_customer_app/presentation/core/app_router.gr.dart';
 import 'package:grape_customer_app/presentation/core/styles/app_colors.dart';
+import 'package:grape_customer_app/presentation/core/widgets/buttons/common_button.dart';
 import 'package:grape_customer_app/presentation/core/widgets/inputs/custom_app_bar.dart';
+import 'package:grape_customer_app/presentation/core/widgets/inputs/custom_text_field.dart';
 import 'package:grape_customer_app/presentation/main/tabs/profile/my_orders/widgets/order_detail_item.dart';
+import 'package:grape_customer_app/presentation/main/tabs/profile/my_orders/widgets/return-refund/upload_photo_view.dart';
 
 @RoutePage(name: 'RefundRequestView')
 class RefundRequestView extends StatelessWidget {
@@ -20,129 +24,209 @@ class RefundRequestView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: CustomAppBar(
-        title: AppLocalizations.of(context).orderDetails,
-        actions: [helpView(context)],
-      ),
-      body: SafeArea(
-        child: BlocProvider(
-          create: (context) =>
-              getIt<MyOrdersBloc>()..add(MyOrdersEvent.getOrderDetail(orderId)),
-          child: BlocBuilder<MyOrdersBloc, MyOrdersState>(
-            builder: (context, state) {
-              if (state.isLoading) {
-                return Center(
-                  child: CircularProgressIndicator(
-                    color: AppColors.primaryOrange,
-                  ),
-                );
-              } else {
-                return ListView(
-                  shrinkWrap: true,
-                  padding: EdgeInsets.symmetric(
-                    horizontal: getSize(18),
-                    vertical: getSize(20),
-                  ),
-                  physics: BouncingScrollPhysics(),
-                  children: [
-                    OrderDetailItem(),
-                    SizedBox(
-                      height: getSize(30),
-                    ),
-                    BaseText(
-                      text: 'Reason For Return',
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600,
-                    ),
-                    SizedBox(
-                      height: getSize(5),
-                    ),
-                    BaseText(
-                      text:
-                          'Please tell us the correct reason for the return. This information is only to improve our service',
-                      fontSize: 8,
-                      fontWeight: FontWeight.w500,
-                    ),
-                    SizedBox(
-                      height: getSize(15),
-                    ),
-                    Divider(
-                      color: Colors.black.withOpacity(0.10),
-                      height: 0,
-                    ),
-                    SizedBox(
-                      height: getSize(15),
-                    ),
-                    ListView.builder(
-                      shrinkWrap: true,
-                      padding: EdgeInsets.zero,
-                      itemCount: state.refundReasonList.length,
-                      physics: NeverScrollableScrollPhysics(),
-                      itemBuilder: (context, index) => Theme(
-                        data: ThemeData(
-                          splashFactory: NoSplash.splashFactory,
-                          highlightColor: Colors.transparent,
+    return BlocProvider(
+      create: (context) =>
+          getIt<MyOrdersBloc>()..add(MyOrdersEvent.getOrderDetail(orderId)),
+      child: BlocConsumer<MyOrdersBloc, MyOrdersState>(
+        listener: (context, state) {},
+        builder: (context, state) {
+          return Scaffold(
+            appBar: CustomAppBar(
+              title: AppLocalizations.of(context).orderDetails,
+              actions: [helpView(context)],
+            ),
+            body: Form(
+              autovalidateMode: state.showErrorMessages
+                  ? AutovalidateMode.always
+                  : AutovalidateMode.disabled,
+              child: GestureDetector(
+                onTap: () {
+                  AppFocus.unfocus(context);
+                },
+                child: state.isLoading
+                    ? Center(
+                        child: CircularProgressIndicator(
+                          color: AppColors.primaryOrange,
                         ),
-                        child: ListTile(
-                          contentPadding:
-                              EdgeInsets.symmetric(vertical: getSize(5)),
-                          splashColor: Colors.transparent,
-                          onTap: () {
-                            context
-                                .read<MyOrdersBloc>()
-                                .add(MyOrdersEvent.changeReturnReason(index));
-                          },
-                          minVerticalPadding: 0,
-                          minLeadingWidth: 0,
-                          dense: true,
-                          visualDensity: VisualDensity(
-                            vertical: VisualDensity.minimumDensity,
-                            horizontal: VisualDensity.minimumDensity,
-                          ),
-                          leading: SvgPicture.asset(
-                            state.selectedRefundReason == index
-                                ? SvgImageConstant.emptyRadio
-                                : SvgImageConstant.selectedRadio,
-                          ),
-                          title: BaseText(
-                            text: state.refundReasonList[index],
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                          ),
+                      )
+                    : ListView(
+                        shrinkWrap: true,
+                        padding: EdgeInsets.symmetric(
+                          vertical: getSize(20),
                         ),
+                        //   physics: BouncingScrollPhysics(),
+                        children: [
+                          OrderDetailItem(),
+                          SizedBox(
+                            height: getSize(30),
+                          ),
+                          Padding(
+                            padding:
+                                EdgeInsets.symmetric(horizontal: getSize(18)),
+                            child: BaseText(
+                              text: 'Reason For Return',
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          SizedBox(
+                            height: getSize(5),
+                          ),
+                          Padding(
+                            padding:
+                                EdgeInsets.symmetric(horizontal: getSize(18)),
+                            child: BaseText(
+                              text:
+                                  'Please tell us the correct reason for the return. This information is only to improve our service',
+                              fontSize: 8,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          SizedBox(
+                            height: getSize(15),
+                          ),
+                          Padding(
+                            padding:
+                                EdgeInsets.symmetric(horizontal: getSize(18)),
+                            child: Divider(
+                              color: Colors.black.withOpacity(0.10),
+                              height: 0,
+                            ),
+                          ),
+                          SizedBox(
+                            height: getSize(8),
+                          ),
+                          ListView.builder(
+                            shrinkWrap: true,
+                            padding:
+                                EdgeInsets.symmetric(horizontal: getSize(18)),
+                            itemCount: state.refundReasonList.length,
+                            physics: NeverScrollableScrollPhysics(),
+                            itemBuilder: (context, index) => Theme(
+                              data: ThemeData(
+                                splashFactory: NoSplash.splashFactory,
+                                highlightColor: Colors.transparent,
+                              ),
+                              child: ListTile(
+                                contentPadding:
+                                    EdgeInsets.symmetric(vertical: getSize(5)),
+                                splashColor: Colors.transparent,
+                                onTap: () {
+                                  context.read<MyOrdersBloc>().add(
+                                      MyOrdersEvent.changeReturnReason(index));
+                                },
+                                minVerticalPadding: 0,
+                                minLeadingWidth: 0,
+                                dense: true,
+                                visualDensity: VisualDensity(
+                                  vertical: VisualDensity.minimumDensity,
+                                  horizontal: VisualDensity.minimumDensity,
+                                ),
+                                leading: SvgPicture.asset(
+                                  state.selectedRefundReason == index
+                                      ? SvgImageConstant.emptyRadio
+                                      : SvgImageConstant.selectedRadio,
+                                ),
+                                title: BaseText(
+                                  text: state.refundReasonList[index],
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: getSize(8),
+                          ),
+                          Padding(
+                            padding:
+                                EdgeInsets.symmetric(horizontal: getSize(18)),
+                            child: Divider(
+                              color: Colors.black.withOpacity(0.10),
+                              height: 0,
+                            ),
+                          ),
+                          SizedBox(
+                            height: getSize(15),
+                          ),
+                          Padding(
+                            padding:
+                                EdgeInsets.symmetric(horizontal: getSize(18)),
+                            child: BaseText(
+                              text: 'Upload Photo',
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          SizedBox(
+                            height: getSize(5),
+                          ),
+                          Padding(
+                            padding:
+                                EdgeInsets.symmetric(horizontal: getSize(18)),
+                            child: BaseText(
+                              text:
+                                  'Please upload the photo of defective product. This information is only to improve our service',
+                              fontSize: 8,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          SizedBox(
+                            height: getSize(8),
+                          ),
+                          UploadPhotoView(),
+                          SizedBox(
+                            height: getSize(8),
+                          ),
+                          Padding(
+                            padding:
+                                EdgeInsets.symmetric(horizontal: getSize(18)),
+                            child: CustomTextField(
+                              maxLines: 5,
+                              hintText: 'Addition comment',
+                              textInputAction: TextInputAction.newline,
+                              keyboardType: TextInputType.multiline,
+                              validator: (p0, p1) => context
+                                  .read<MyOrdersBloc>()
+                                  .state
+                                  .additonalComment
+                                  .value
+                                  .fold(
+                                    (l) => l.maybeMap(
+                                      empty: (value) => 'Please enter comment',
+                                      orElse: () => null,
+                                    ),
+                                    (r) => null,
+                                  ),
+                              onChanged: (p0) => context
+                                  .read<MyOrdersBloc>()
+                                  .add(
+                                    MyOrdersEvent.additionalCommentChange(p0),
+                                  ),
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                    SizedBox(
-                      height: getSize(15),
-                    ),
-                    Divider(
-                      color: Colors.black.withOpacity(0.10),
-                      height: 0,
-                    ),
-                    SizedBox(
-                      height: getSize(15),
-                    ),
-                    BaseText(
-                      text: 'Upload Photo',
-                      fontSize: 14,
-                      fontWeight: FontWeight.w600,
-                    ),
-                    SizedBox(
-                      height: getSize(5),
-                    ),
-                    BaseText(
-                      text:
-                          'Please upload the photo of defective product. This information is only to improve our service',
-                      fontSize: 8,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ],
-                );
-              }
-            },
-          ),
-        ),
+              ),
+            ),
+            bottomNavigationBar: Padding(
+              padding: EdgeInsets.only(
+                left: getSize(18),
+                right: getSize(18),
+                top: getSize(18),
+                bottom: isFullScreenDevice(context) ? 0 : getSize(18),
+              ),
+              child: CommonButton(
+                onPressed: () {
+                  context
+                      .read<MyOrdersBloc>()
+                      .add(MyOrdersEvent.submitRefundRequest());
+                },
+                buttonText: 'Continue',
+              ),
+            ),
+          );
+        },
       ),
     );
   }

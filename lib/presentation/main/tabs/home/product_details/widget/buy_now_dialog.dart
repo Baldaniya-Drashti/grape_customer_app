@@ -94,7 +94,7 @@ class BuyNowDialog extends StatelessWidget {
                                       'only ${getProductListResponse.available_qty} quantity left to buy!!')
                               .show(context);
                         } else {
-                          context.router.pop();
+                          context.router.maybePop();
                           context.router.push(
                             PageRouteInfo(
                               CheckoutView.name,
@@ -344,7 +344,7 @@ productDetailsView(
                 child: IconButton(
                   padding: EdgeInsets.zero,
                   onPressed: () {
-                    context.router.pop();
+                    context.router.maybePop();
                   },
                   icon: Icon(Icons.close_rounded),
                 ),
