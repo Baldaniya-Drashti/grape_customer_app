@@ -4,7 +4,7 @@ part of 'my_orders_bloc.dart';
 class MyOrdersState with _$MyOrdersState {
   factory MyOrdersState({
     required List<MyOrderDTO> getMyOrderList,
-    required List<String> refundReasonList,
+    required List<ReturnReasonModel> refundReasonList,
     required List<String> uploadImageList,
     required bool isLoading,
     required int selectedRefundReason,
@@ -14,7 +14,7 @@ class MyOrdersState with _$MyOrdersState {
     required bool isSubmitting,
     required Option<Either<MainFailure, String>> failureOrSuccessOption,
     required OrderDetailDTO orderDetailDTO,
-    required InputEmptyOrNot additonalComment,
+    required String additonalComment,
   }) = _MyOrdersState;
   factory MyOrdersState.initial() => MyOrdersState(
         isLoading: false,
@@ -25,16 +25,9 @@ class MyOrdersState with _$MyOrdersState {
         orderDetailDTO: OrderDetailDTO(),
         showErrorMessages: false,
         isSubmitting: false,
-        refundReasonList: [
-          'Item is damaged or defective',
-          'Item is not as described',
-          'Seller sent the wrong item',
-          'Warranty-related returns',
-          'Recall or quality assurance issues',
-          'Manufacturer defects',
-        ],
+        refundReasonList: [],
         selectedRefundReason: -1,
         uploadImageList: [""],
-        additonalComment: InputEmptyOrNot(''),
+        additonalComment: '',
       );
 }

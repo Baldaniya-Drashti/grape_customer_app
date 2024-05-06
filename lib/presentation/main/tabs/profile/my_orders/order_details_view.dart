@@ -73,7 +73,8 @@ class OrderDetails extends StatelessWidget {
                     top: getSize(18),
                     bottom: isFullScreenDevice(context) ? 0 : getSize(18),
                   ),
-                  child: state.orderDetailDTO.status == 3
+                  child: state.orderDetailDTO.status == 3 &&
+                          state.orderDetailDTO.return_applicable == true
                       ? CommonButton(
                           onPressed: () {
                             context.router.push(
@@ -86,7 +87,8 @@ class OrderDetails extends StatelessWidget {
                           buttonText: 'Return/Refund Request',
                         )
                       : state.orderDetailDTO.status != 2 &&
-                              state.orderDetailDTO.status != 4
+                              state.orderDetailDTO.status != 4 &&
+                              state.orderDetailDTO.status != 3
                           ? GestureDetector(
                               onTap: () async {
                                 var res = await CancelOrderBottomSheet()

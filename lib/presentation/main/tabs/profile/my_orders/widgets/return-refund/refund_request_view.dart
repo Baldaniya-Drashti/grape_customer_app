@@ -8,6 +8,7 @@ import 'package:grape_customer_app/domain/core/math_utils.dart';
 import 'package:grape_customer_app/domain/core/svg_image_constants.dart';
 import 'package:grape_customer_app/injection.dart';
 import 'package:grape_customer_app/presentation/common/utils/app_focus.dart';
+import 'package:grape_customer_app/presentation/common/utils/flushbar_creator.dart';
 import 'package:grape_customer_app/presentation/common/widgets/base_text.dart';
 import 'package:grape_customer_app/presentation/core/app_router.gr.dart';
 import 'package:grape_customer_app/presentation/core/styles/app_colors.dart';
@@ -25,10 +26,33 @@ class RefundRequestView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          getIt<MyOrdersBloc>()..add(MyOrdersEvent.getOrderDetail(orderId)),
+      create: (context) => getIt<MyOrdersBloc>()
+        ..add(MyOrdersEvent.getOrderDetail(orderId))
+        ..add(MyOrdersEvent.getReasonRefundList()),
       child: BlocConsumer<MyOrdersBloc, MyOrdersState>(
-        listener: (context, state) {},
+        listener: (context, state) {
+          state.failureOrSuccessOption.fold(
+            () {},
+            (either) => either.fold(
+              (failure) {
+                showError(
+                  message: failure.maybeMap(
+                    showAPIResponseMessage: (value) => value.message,
+                    networkError: (value) =>
+                        'Please check your internet connectivity',
+                    orElse: () => "Server Error. Try again later.",
+                  ),
+                ).show(context);
+              },
+              (r) {
+                showSuccess(message: r).show(context).then((value) =>
+                    context.router.popUntil((route) => route.isFirst));
+
+                // RestartWidget.restartApp(context);
+              },
+            ),
+          );
+        },
         builder: (context, state) {
           return Scaffold(
             appBar: CustomAppBar(
@@ -56,7 +80,9 @@ class RefundRequestView extends StatelessWidget {
                         ),
                         //   physics: BouncingScrollPhysics(),
                         children: [
-                          OrderDetailItem(),
+                          OrderDetailItem(
+                            showPadding: true,
+                          ),
                           SizedBox(
                             height: getSize(30),
                           ),
@@ -128,7 +154,8 @@ class RefundRequestView extends StatelessWidget {
                                       : SvgImageConstant.selectedRadio,
                                 ),
                                 title: BaseText(
-                                  text: state.refundReasonList[index],
+                                  text: state.refundReasonList[index].reason ??
+                                      "",
                                   fontSize: 14,
                                   fontWeight: FontWeight.w500,
                                 ),
@@ -186,18 +213,6 @@ class RefundRequestView extends StatelessWidget {
                               hintText: 'Addition comment',
                               textInputAction: TextInputAction.newline,
                               keyboardType: TextInputType.multiline,
-                              validator: (p0, p1) => context
-                                  .read<MyOrdersBloc>()
-                                  .state
-                                  .additonalComment
-                                  .value
-                                  .fold(
-                                    (l) => l.maybeMap(
-                                      empty: (value) => 'Please enter comment',
-                                      orElse: () => null,
-                                    ),
-                                    (r) => null,
-                                  ),
                               onChanged: (p0) => context
                                   .read<MyOrdersBloc>()
                                   .add(
@@ -217,10 +232,18 @@ class RefundRequestView extends StatelessWidget {
                 bottom: isFullScreenDevice(context) ? 0 : getSize(18),
               ),
               child: CommonButton(
-                onPressed: () {
-                  context
-                      .read<MyOrdersBloc>()
-                      .add(MyOrdersEvent.submitRefundRequest());
+                isSubmitting: state.isSubmitting,
+                onPressed: () async {
+                  if (state.selectedRefundReason == -1) {
+                    await showError(
+                            message:
+                                "Please select reason for return your product")
+                        .show(context);
+                  } else {
+                    context
+                        .read<MyOrdersBloc>()
+                        .add(MyOrdersEvent.submitRefundRequest());
+                  }
                 },
                 buttonText: 'Continue',
               ),

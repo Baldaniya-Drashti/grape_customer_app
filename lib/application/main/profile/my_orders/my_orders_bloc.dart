@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:grape_customer_app/domain/auth/auth_value_objects.dart';
+import 'package:grape_customer_app/application/main/profile/my_orders/return_reson_dto.dart';
 import 'package:grape_customer_app/domain/main/i_main_facade.dart';
 import 'package:grape_customer_app/domain/main/main_failure.dart';
 import 'package:grape_customer_app/infrastructure/main/my_order_dto/my_order_dto.dart';
@@ -138,7 +138,7 @@ class MyOrdersBloc extends Bloc<MyOrdersEvent, MyOrdersState> {
           additionalCommentChange: (AdditionalCommentChange value) {
             emit(
               state.copyWith(
-                additonalComment: InputEmptyOrNot(value.input),
+                additonalComment: value.input,
                 failureOrSuccessOption: none(),
               ),
             );
@@ -146,31 +146,46 @@ class MyOrdersBloc extends Bloc<MyOrdersEvent, MyOrdersState> {
           submitRefundRequest: (SubmitRefundRequest value) async {
             Either<MainFailure, String>? failureOrSuccess;
 
-            //final isEmailValid = state.emailAddress.isValid();
-            final isAdditionalCommentValid = state.additonalComment.isValid();
+            emit(
+              state.copyWith(
+                isSubmitting: true,
+                failureOrSuccessOption: none(),
+              ),
+            );
 
-            if (isAdditionalCommentValid) {
-              emit(
-                state.copyWith(
-                  isSubmitting: true,
-                  failureOrSuccessOption: none(),
-                ),
-              );
-
-              // failureOrSuccess = await _authFacade.register(
-              //   emailAddress: state.emailAddress,
-              //   firstName: state.firstName,
-              //   lastName: state.lastName,
-              //   countryCode: '+${state.selectedCountrycode}',
-              //   mobileNumber: state.mobileNumber,
-              // );
-            }
+            failureOrSuccess = await mainFacade.returnRequestAPI(
+              orderId: state.orderDetailDTO.order_id.toString(),
+              reasonId: state.refundReasonList[state.selectedRefundReason].id
+                  .toString(),
+              imageList: state.uploadImageList,
+              comment: state.additonalComment,
+            );
 
             emit(
               state.copyWith(
                 isSubmitting: false,
                 showErrorMessages: true,
                 failureOrSuccessOption: optionOf(failureOrSuccess),
+              ),
+            );
+          },
+          getReasonRefundList: (GetReasonRefundList value) async {
+            emit(state.copyWith(isLoading: true));
+
+            var res = await mainFacade.geReasonRefundList();
+            res.fold(
+              (l) => emit(
+                state.copyWith(
+                  isLoading: false,
+                  isErrorInAPI: true,
+                ),
+              ),
+              (r) => emit(
+                state.copyWith(
+                  refundReasonList: r,
+                  isErrorInAPI: false,
+                  isLoading: false,
+                ),
               ),
             );
           },

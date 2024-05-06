@@ -78,14 +78,16 @@ class BlankImageContainer extends StatelessWidget {
                     width: getSize(160),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(getSize(10)),
-                      image: DecorationImage(
-                        image: FileImage(
-                          File(
-                            state.uploadImageList[index],
-                          ),
-                        ),
-                        fit: BoxFit.cover,
-                      ),
+                      image: state.uploadImageList[index].isEmpty
+                          ? null
+                          : DecorationImage(
+                              image: FileImage(
+                                File(
+                                  state.uploadImageList[index],
+                                ),
+                              ),
+                              fit: BoxFit.cover,
+                            ),
                     ),
                     child: state.uploadImageList[index].isEmpty
                         ? Column(

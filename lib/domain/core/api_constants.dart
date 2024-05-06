@@ -55,6 +55,8 @@ class ApiConstants {
   //order
   static String getMyOrder = 'my-order';
   static String cancelOrder = 'my-order/cancel';
+  static String returnReasonList = 'return/reason/list';
+  static String returnRequest = 'return/request';
 
   //shop
   static String getVenderDetail = 'customer/view/shop';

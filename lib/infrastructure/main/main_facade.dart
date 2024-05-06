@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:grape_customer_app/application/main/profile/my_orders/return_reson_dto.dart';
 import 'package:grape_customer_app/domain/auth/auth_value_objects.dart';
 import 'package:grape_customer_app/domain/core/api_constants.dart';
 import 'package:grape_customer_app/domain/main/i_main_facade.dart';
@@ -884,6 +885,88 @@ class MainFacade implements IMainFacade {
       );
 
       if (res != null && res.dioMessage != null) {
+        return right(res.dioMessage ?? "");
+      } else {
+        return left(const MainFailure.serverError());
+      }
+    } on DioException catch (err) {
+      if (err.response != null) {
+        var commonRespose = CommonResponse.fromJson(err.response?.data);
+
+        if (commonRespose.dioMessage != null) {
+          return left(
+              MainFailure.showAPIResponseMessage(commonRespose.dioMessage!));
+        }
+      } else if (err.type == DioExceptionType.connectionError) {
+        return left(const MainFailure.networkError());
+      }
+
+      return left(const MainFailure.serverError());
+    }
+  }
+
+  @override
+  Future<Either<MainFailure, List<ReturnReasonModel>>>
+      geReasonRefundList() async {
+    try {
+      final res = await apiService.getMethod(
+        ApiConstants.returnReasonList,
+      );
+
+      if (res != null && res.data != null) {
+        var list = res.data as List<dynamic>;
+        return right(list.map((e) => ReturnReasonModel.fromJson(e)).toList());
+      } else {
+        return left(const MainFailure.serverError());
+      }
+    } on DioException catch (err) {
+      if (err.response != null) {
+        var commonRespose = CommonResponse.fromJson(err.response?.data);
+
+        if (commonRespose.dioMessage != null) {
+          return left(
+              MainFailure.showAPIResponseMessage(commonRespose.dioMessage!));
+        }
+      } else if (err.type == DioExceptionType.connectionError) {
+        return left(const MainFailure.networkError());
+      }
+
+      return left(const MainFailure.serverError());
+    }
+  }
+
+  @override
+  Future<Either<MainFailure, String>> returnRequestAPI(
+      {required String orderId,
+      required String reasonId,
+      required List<String> imageList,
+      String? comment}) async {
+    try {
+      List<MultipartFile> photoMultipartFileList = [];
+
+      for (int i = 0; i < imageList.length; i++) {
+        if (imageList[i].isNotEmpty) {
+          var photoMultipartFile = await MultipartFile.fromFile(
+            imageList[i],
+            filename: imageList[i],
+            //contentType: MediaType('image', 'png'),
+          );
+          photoMultipartFileList.add(photoMultipartFile);
+        }
+      }
+
+      //   formData.files.add(MapEntry(key, value));
+
+      var formData = FormData.fromMap(<String, dynamic>{
+        'order_id': orderId,
+        'reason_id': reasonId,
+        "images[]": photoMultipartFileList,
+        'comment': comment,
+      });
+      final res = await apiService.postMethod(ApiConstants.returnRequest, {},
+          isMultipart: true, formData: formData);
+
+      if (res.dioMessage != null) {
         return right(res.dioMessage ?? "");
       } else {
         return left(const MainFailure.serverError());

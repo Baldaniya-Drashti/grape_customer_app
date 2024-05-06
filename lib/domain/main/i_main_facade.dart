@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:grape_customer_app/application/main/profile/my_orders/return_reson_dto.dart';
 import 'package:grape_customer_app/domain/auth/auth_value_objects.dart';
 import 'package:grape_customer_app/domain/main/main_failure.dart';
 import 'package:grape_customer_app/infrastructure/core/common_response.dart';
@@ -73,6 +74,7 @@ abstract class IMainFacade {
     bool isDefault = false,
   });
   Future<Either<MainFailure, List<GetCardsDTO>>> getPaymentMethod();
+  Future<Either<MainFailure, List<ReturnReasonModel>>> geReasonRefundList();
 
   Future<Either<MainFailure, String>> addContactSupport({
     required InputEmptyOrNot title,
@@ -106,4 +108,11 @@ abstract class IMainFacade {
   });
 
   Future<Either<MainFailure, String>> cancelOrderAPI({required String id});
+
+  Future<Either<MainFailure, String>> returnRequestAPI({
+    required String orderId,
+    required String reasonId,
+    required List<String> imageList,
+    String? comment,
+  });
 }

@@ -24,10 +24,12 @@ class OrderDetailDTO with _$OrderDetailDTO {
     int? cancel_date,
     int? payment_status,
     String? payment_id,
+    bool? is_return,
     ShippingAddressDTO? shipping_address,
     GetCardsDTO? payment_method,
     GetProductListResponse? product,
     int? vendor_id,
+    bool? return_applicable,
   }) = _OrderDetailDTO;
 
   factory OrderDetailDTO.fromJson(Map<String, dynamic> json) =>

@@ -16,7 +16,8 @@ import 'package:grape_customer_app/presentation/core/styles/styles.dart';
 import 'package:intl/intl.dart';
 
 class OrderDetailItem extends StatelessWidget {
-  const OrderDetailItem({super.key});
+  final bool showPadding;
+  const OrderDetailItem({super.key, this.showPadding = false});
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +31,8 @@ class OrderDetailItem extends StatelessWidget {
               .where((element) => element.fieldType == 1)
               .toList();
           return Container(
-            margin: EdgeInsets.symmetric(horizontal: getSize(18)),
+            margin:
+                EdgeInsets.symmetric(horizontal: getSize(showPadding ? 18 : 0)),
             padding: EdgeInsets.symmetric(
               horizontal: getSize(20),
               vertical: getSize(17),
@@ -186,9 +188,11 @@ class OrderDetailItem extends StatelessWidget {
                   thickness: 1,
                 ),
                 GestureDetector(
-                  onTap: () => context.router.push(PageRouteInfo(
-                    ChatView.name,
-                  )),
+                  onTap: () => context.router.push(
+                    PageRouteInfo(
+                      ChatView.name,
+                    ),
+                  ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
