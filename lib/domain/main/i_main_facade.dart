@@ -38,7 +38,12 @@ abstract class IMainFacade {
   });
   Future<Either<MainFailure, CommonResponse>> getCartListAPI(
       {required int page});
-
+  Future<Either<MainFailure, CommonResponse>> getChatListAPI({
+    required int page,
+    required String recieverId,
+  });
+  Future<Either<MainFailure, CommonResponse>> getChatDetailListAPI(
+      {required int page});
   Future<Either<MainFailure, CommonResponse>> getFavouriteAPI(
       {required int page});
   Future<Either<MainFailure, List<ShippingAddressDTO>>> getShippingAddressAPI();

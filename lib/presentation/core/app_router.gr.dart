@@ -111,13 +111,13 @@ abstract class $AppRouter extends _i32.RootStackRouter {
       );
     },
     ChatView.name: (routeData) {
-      final args =
-          routeData.argsAs<ChatViewArgs>(orElse: () => const ChatViewArgs());
+      final args = routeData.argsAs<ChatViewArgs>();
       return _i32.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: _i4.ChatView(
           key: args.key,
           fromLiveChatSupport: args.fromLiveChatSupport,
+          recieverID: args.recieverID,
         ),
       );
     },
@@ -450,12 +450,14 @@ class ChatView extends _i32.PageRouteInfo<ChatViewArgs> {
   ChatView({
     _i33.Key? key,
     bool fromLiveChatSupport = false,
+    required String recieverID,
     List<_i32.PageRouteInfo>? children,
   }) : super(
           ChatView.name,
           args: ChatViewArgs(
             key: key,
             fromLiveChatSupport: fromLiveChatSupport,
+            recieverID: recieverID,
           ),
           initialChildren: children,
         );
@@ -470,15 +472,18 @@ class ChatViewArgs {
   const ChatViewArgs({
     this.key,
     this.fromLiveChatSupport = false,
+    required this.recieverID,
   });
 
   final _i33.Key? key;
 
   final bool fromLiveChatSupport;
 
+  final String recieverID;
+
   @override
   String toString() {
-    return 'ChatViewArgs{key: $key, fromLiveChatSupport: $fromLiveChatSupport}';
+    return 'ChatViewArgs{key: $key, fromLiveChatSupport: $fromLiveChatSupport, recieverID: $recieverID}';
   }
 }
 

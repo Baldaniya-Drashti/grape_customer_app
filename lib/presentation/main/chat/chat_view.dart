@@ -1,78 +1,114 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:grape_customer_app/application/chat/chat_bloc.dart';
 import 'package:grape_customer_app/domain/core/math_utils.dart';
 import 'package:grape_customer_app/domain/core/png_image_constants.dart';
+import 'package:grape_customer_app/domain/main/chat/message_dto.dart';
+import 'package:grape_customer_app/injection.dart';
 import 'package:grape_customer_app/presentation/common/utils/app_focus.dart';
+import 'package:grape_customer_app/presentation/common/utils/get_current_user.dart';
 import 'package:grape_customer_app/presentation/common/widgets/base_text.dart';
-import 'package:grape_customer_app/presentation/common/widgets/paginated_list_view.dart';
 import 'package:grape_customer_app/presentation/core/styles/styles.dart';
 import 'package:grape_customer_app/presentation/core/widgets/inputs/custom_text_field.dart';
 import 'package:grape_customer_app/presentation/core/widgets/layout/layout.dart';
-import 'package:grape_customer_app/presentation/main/chat/widget/chat_bubble_view.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:grape_customer_app/presentation/main/chat/widget/chat_shimmer.dart';
+import 'package:grape_customer_app/presentation/main/chat/widget/chat_widget.dart';
 
 @RoutePage(name: 'ChatView')
 class ChatView extends StatelessWidget {
   final bool fromLiveChatSupport;
-  const ChatView({super.key, this.fromLiveChatSupport = false});
+  final String recieverID;
+  const ChatView(
+      {super.key, this.fromLiveChatSupport = false, required this.recieverID});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      bottomSheet: SafeArea(
-        child: Container(
-          padding: EdgeInsets.only(
-            left: getSize(18),
-            right: getSize(18),
-            bottom: getSize(30),
-            top: getSize(18),
+    var textEditingController = TextEditingController();
+    return BlocProvider(
+      create: (context) => getIt<ChatBloc>()
+        ..add(
+          ChatEvent.getSenderAndRecieverID(
+            getCurrentUser().userId.toString(),
+            recieverID,
           ),
-          color: AppColors.white,
-          child: CustomTextField(
-            hintText: 'Type a message',
-            maxLines: 5,
-            minLines: 1,
-            keyboardType: TextInputType.text,
-            textInputAction: TextInputAction.send,
-            suffixIcon: IconButton(
-              onPressed: () {},
-              icon: Icon(
-                Icons.send_rounded,
-                color: AppColors.primaryOrange,
+        ),
+      child: BlocBuilder<ChatBloc, ChatState>(
+        builder: (context, state) {
+          return Scaffold(
+            bottomSheet: SafeArea(
+              child: Container(
+                padding: EdgeInsets.only(
+                  left: getSize(18),
+                  right: getSize(18),
+                  bottom:
+                      isFullScreenDevice(context) ? getSize(0) : getSize(18),
+                  top: getSize(18),
+                ),
+                color: AppColors.white,
+                child: CustomTextField(
+                  hintText: 'Type a message',
+                  maxLines: 5,
+                  controller: textEditingController,
+                  //key: Key(state.textFieldValue),
+                  //initialValue: state.textFieldValue,
+                  //  initialValue: state.textFieldValue,
+                  minLines: 1,
+                  keyboardType: TextInputType.multiline,
+                  textInputAction: TextInputAction.newline,
+                  onChanged: (value) => context
+                      .read<ChatBloc>()
+                      .add(ChatEvent.sendMessageTextChange(value)),
+                  suffixIcon: IconButton(
+                    onPressed: () {
+                      // log(textEditingController.text);
+                      AppFocus.unfocus(context);
+                      if (state.textFieldValue.trim().isNotEmpty) {
+                        textEditingController.clear();
+                        context.read<ChatBloc>().add(
+                              ChatEvent.sendMessage(
+                                Message(
+                                  content: state.textFieldValue.trim(),
+                                  sender: getCurrentUser().userId.toString(),
+                                  receiver: recieverID,
+                                  roomId: state.roomId,
+                                  type: 0,
+                                ),
+                              ),
+                            );
+                      }
+                    },
+                    icon: Icon(
+                      Icons.send_rounded,
+                      color: AppColors.primaryOrange,
+                    ),
+                  ),
+                ),
               ),
             ),
-          ),
-        ),
-      ),
-      appBar: fromLiveChatSupport ? getLiveChatAppBar() : getUserAppBar(),
-      body: GestureDetector(
-        onTap: () {
-          AppFocus.unfocus(context);
-        },
-        child: PaginatedListView(
-          reverse: true,
-          onRefresh: () {
-            // controller.getChatDetailsAPI(isRefresh: true);
-          },
-          onLoading: () {
-            //  controller.getChatDetailsAPI();
-          },
-          refreshController: RefreshController(),
-          child: ListView.builder(
-            shrinkWrap: true,
-            reverse: true,
-            padding: EdgeInsets.only(
-              left: getSize(18),
-              right: getSize(18),
-              bottom: getSize(80),
-              top: getSize(30),
+            appBar: fromLiveChatSupport ? getLiveChatAppBar() : getUserAppBar(),
+            body: WillPopScope(
+              onWillPop: () {
+                context.read<ChatBloc>().add(ChatEvent.removeListners());
+                return Future.value(true);
+              },
+              child: state.isLoading
+                  ? Center(
+                      child: ShimmerChatBubble(),
+                    )
+                  : state.isApiFailed
+                      ? Center(
+                          child: BaseText(
+                            text: 'Something went wrong. Please try again!!',
+                          ),
+                        )
+                      : state.isConnectedToSocket
+                          ? ChatWidget()
+                          : SizedBox(),
             ),
-            itemCount: 10,
-            physics: BouncingScrollPhysics(),
-            itemBuilder: (context, index) => ChatBubbleView(index: index),
-          ),
-        ),
+          );
+        },
       ),
     );
   }
@@ -108,25 +144,32 @@ class ChatView extends StatelessWidget {
     return CustomAppBar(
       title: '',
       leadingWidth: null,
-      customTitle: Row(
-        children: [
-          CircleAvatar(
-            backgroundImage: CachedNetworkImageProvider(
-                'https://www.tpci.in/indiabusinesstrade/wp-content/uploads/2023/09/Untitled-design-6-3.png'),
-            radius: getSize(20),
-          ),
-          SizedBox(
-            width: getSize(10),
-          ),
-          Expanded(
-            child: BaseText(
-              text: 'Sansa Indira',
-              maxLines: 1,
-              fontSize: 16,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-        ],
+      customTitle: BlocBuilder<ChatBloc, ChatState>(
+        builder: (context, state) {
+          return Row(
+            children: [
+              if (state.apiSuccessData.profile != null)
+                CircleAvatar(
+                  backgroundImage: CachedNetworkImageProvider(
+                    state.apiSuccessData.profile ?? "",
+                  ),
+                  radius: getSize(20),
+                ),
+              SizedBox(
+                width: getSize(10),
+              ),
+              Expanded(
+                child: BaseText(
+                  text:
+                      '${state.apiSuccessData.first_name ?? ""} ${state.apiSuccessData.last_name ?? ""}',
+                  maxLines: 1,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ],
+          );
+        },
       ),
     );
   }

@@ -191,6 +191,9 @@ class OrderDetailItem extends StatelessWidget {
                   onTap: () => context.router.push(
                     PageRouteInfo(
                       ChatView.name,
+                      args: ChatViewArgs(
+                        recieverID: state.orderDetailDTO.vendor_id.toString(),
+                      ),
                     ),
                   ),
                   child: Row(

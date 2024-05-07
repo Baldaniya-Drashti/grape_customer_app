@@ -225,7 +225,7 @@ class ProfileView extends StatelessWidget {
       onTap: () => context.router.push(
         PageRouteInfo(
           ChatView.name,
-          args: ChatViewArgs(fromLiveChatSupport: true),
+          args: ChatViewArgs(fromLiveChatSupport: true, recieverID: '-1'),
         ),
       ),
       child: Container(
