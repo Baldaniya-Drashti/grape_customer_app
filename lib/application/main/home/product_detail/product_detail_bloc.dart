@@ -423,6 +423,22 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
               ),
             );
           },
+          disposeController: (DisposeController value) async {
+            var updateList =
+                List<Media>.from(state.getProductDetails.product?.media ?? []);
+            await updateList[state.selectedImageIndex]
+                .videoPlayerController
+                ?.dispose();
+            updateList[state.selectedImageIndex].chewieController?.dispose();
+            emit(
+              state.copyWith(
+                getProductDetails: state.getProductDetails.copyWith(
+                  product: state.getProductDetails.product
+                      ?.copyWith(media: updateList),
+                ),
+              ),
+            );
+          },
         );
       },
     );

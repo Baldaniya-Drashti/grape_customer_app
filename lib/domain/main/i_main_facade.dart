@@ -38,12 +38,20 @@ abstract class IMainFacade {
   });
   Future<Either<MainFailure, CommonResponse>> getCartListAPI(
       {required int page});
-  Future<Either<MainFailure, CommonResponse>> getChatListAPI({
+  Future<Either<MainFailure, CommonResponse>> getChatDetailListAPI({
     required int page,
     required String recieverId,
   });
-  Future<Either<MainFailure, CommonResponse>> getChatDetailListAPI(
+  Future<Either<MainFailure, CommonResponse>> getChatListAPI(
       {required int page});
+  Future<Either<MainFailure, CommonResponse>> getNotificationListAPI(
+      {required int page});
+  Future<Either<MainFailure, String>> getReadNotificationAPI({
+    required String notificationId,
+  });
+  Future<Either<MainFailure, String>> reviewNotificationAPI({
+    required String dataId,
+  });
   Future<Either<MainFailure, CommonResponse>> getFavouriteAPI(
       {required int page});
   Future<Either<MainFailure, List<ShippingAddressDTO>>> getShippingAddressAPI();

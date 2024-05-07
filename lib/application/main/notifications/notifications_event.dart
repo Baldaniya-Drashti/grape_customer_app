@@ -7,4 +7,10 @@ class NotificationsEvent with _$NotificationsEvent {
       bool isShowBottomSheet) = OnClickOfRateAndReviewTile;
   const factory NotificationsEvent.reviewChanged(String review) = ReviewChanged;
   const factory NotificationsEvent.submitReview() = SubmitReview;
+  factory NotificationsEvent.getMessageList(bool isRefresh) = GetMessageList;
+  factory NotificationsEvent.getNotificationList(bool isRefresh) =
+      GetNotificationList;
+  factory NotificationsEvent.readNotification(String notificationID) =
+      ReadNotification;
+  factory NotificationsEvent.reviewProduct(String dataID) = ReviewProduct;
 }

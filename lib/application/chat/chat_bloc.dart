@@ -152,7 +152,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
               }
             }
             emit(state.copyWith(isLoading: value.isRefresh));
-            var res = await mainFacade.getChatListAPI(
+            var res = await mainFacade.getChatDetailListAPI(
               page: page,
               recieverId: value.receiverId,
             );

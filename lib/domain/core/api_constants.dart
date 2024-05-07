@@ -65,4 +65,9 @@ class ApiConstants {
   //chat
   static String getChatList = 'chat/list';
   static String getChatDetailList = 'chat/details';
+
+  //notification
+  static String getNotificationList = 'notification';
+  static String readNotification = 'notification/read';
+  static String getReviewProduct = 'review/product';
 }

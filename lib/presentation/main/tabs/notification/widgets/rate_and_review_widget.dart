@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grape_customer_app/application/main/notifications/notifications_bloc.dart';
 
 import 'package:grape_customer_app/domain/core/math_utils.dart';
+import 'package:grape_customer_app/injection.dart';
 import 'package:grape_customer_app/presentation/common/utils/app_focus.dart';
 import 'package:grape_customer_app/presentation/common/widgets/base_text.dart';
 import 'package:grape_customer_app/presentation/core/styles/app_colors.dart';
@@ -36,7 +37,7 @@ class RateAndReviewBotthomSheet extends StatelessWidget {
         ),
       ),
       builder: (context) => BlocProvider(
-        create: (context) => NotificationsBloc(),
+        create: (context) => getIt<NotificationsBloc>(),
         child: BlocBuilder<NotificationsBloc, NotificationsState>(
           builder: (context, state) {
             return Form(

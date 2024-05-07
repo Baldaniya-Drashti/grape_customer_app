@@ -10,11 +10,11 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:grape_customer_app/application/auth/auth_status/auth_status_bloc.dart'
-    as _i26;
-import 'package:grape_customer_app/application/auth/login_form/login_form_bloc.dart'
-    as _i28;
-import 'package:grape_customer_app/application/auth/register_form/register_form_bloc.dart'
     as _i27;
+import 'package:grape_customer_app/application/auth/login_form/login_form_bloc.dart'
+    as _i29;
+import 'package:grape_customer_app/application/auth/register_form/register_form_bloc.dart'
+    as _i28;
 import 'package:grape_customer_app/application/chat/chat_bloc.dart' as _i9;
 import 'package:grape_customer_app/application/main/cart/cart_bloc.dart'
     as _i21;
@@ -26,12 +26,14 @@ import 'package:grape_customer_app/application/main/home/home_bloc.dart'
     as _i14;
 import 'package:grape_customer_app/application/main/home/product_detail/product_detail_bloc.dart'
     as _i15;
+import 'package:grape_customer_app/application/main/notifications/notifications_bloc.dart'
+    as _i23;
 import 'package:grape_customer_app/application/main/profile/customer_support/contact_support_bloc.dart'
     as _i18;
 import 'package:grape_customer_app/application/main/profile/edit_profile/edit_profile_bloc.dart'
-    as _i24;
+    as _i25;
 import 'package:grape_customer_app/application/main/profile/get_account/account_cubit.dart'
-    as _i23;
+    as _i24;
 import 'package:grape_customer_app/application/main/profile/language/language_bloc.dart'
     as _i3;
 import 'package:grape_customer_app/application/main/profile/my_orders/my_orders_bloc.dart'
@@ -41,7 +43,7 @@ import 'package:grape_customer_app/application/main/profile/payment_method/payme
 import 'package:grape_customer_app/application/main/profile/shipping_addresses/shipping_addresses_bloc.dart'
     as _i17;
 import 'package:grape_customer_app/application/main_tab/main_tab_bloc.dart'
-    as _i25;
+    as _i26;
 import 'package:grape_customer_app/application/onboarding/onboarding_bloc.dart'
     as _i4;
 import 'package:grape_customer_app/domain/account/i_account_repository.dart'
@@ -100,22 +102,24 @@ extension GetItInjectableX on _i1.GetIt {
     gh.factory<_i21.CartBloc>(() => _i21.CartBloc(gh<_i7.IMainFacade>()));
     gh.factory<_i22.FavouriteBloc>(
         () => _i22.FavouriteBloc(gh<_i7.IMainFacade>()));
-    gh.factory<_i23.AccountCubit>(
-        () => _i23.AccountCubit(gh<_i12.IAccountRepository>()));
-    gh.factory<_i24.EditProfileBloc>(() => _i24.EditProfileBloc(
+    gh.factory<_i23.NotificationsBloc>(
+        () => _i23.NotificationsBloc(gh<_i7.IMainFacade>()));
+    gh.factory<_i24.AccountCubit>(
+        () => _i24.AccountCubit(gh<_i12.IAccountRepository>()));
+    gh.factory<_i25.EditProfileBloc>(() => _i25.EditProfileBloc(
           gh<_i12.IAccountRepository>(),
           gh<_i10.IAuthFacade>(),
         ));
-    gh.factory<_i25.MainTabBloc>(() => _i25.MainTabBloc(
+    gh.factory<_i26.MainTabBloc>(() => _i26.MainTabBloc(
           gh<_i10.IAuthFacade>(),
           gh<_i12.IAccountRepository>(),
         ));
-    gh.factory<_i26.AuthStatusBloc>(
-        () => _i26.AuthStatusBloc(gh<_i10.IAuthFacade>()));
-    gh.factory<_i27.RegisterFormBloc>(
-        () => _i27.RegisterFormBloc(gh<_i10.IAuthFacade>()));
-    gh.factory<_i28.LoginFormBloc>(
-        () => _i28.LoginFormBloc(gh<_i10.IAuthFacade>()));
+    gh.factory<_i27.AuthStatusBloc>(
+        () => _i27.AuthStatusBloc(gh<_i10.IAuthFacade>()));
+    gh.factory<_i28.RegisterFormBloc>(
+        () => _i28.RegisterFormBloc(gh<_i10.IAuthFacade>()));
+    gh.factory<_i29.LoginFormBloc>(
+        () => _i29.LoginFormBloc(gh<_i10.IAuthFacade>()));
     return this;
   }
 }

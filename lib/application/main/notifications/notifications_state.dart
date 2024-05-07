@@ -7,6 +7,13 @@ class NotificationsState with _$NotificationsState {
     required bool isShowClickAndReviewBottomSheet,
     required InputEmptyOrNot reviewndRate,
     required bool showErrorMessages,
+    required List<ChatListDTO> messageListDTO,
+    required List<NotificationListDTO> notificationListDTO,
+    required bool isLoading,
+    required bool isNoDataFound,
+    required bool isErrorInAPI,
+    required RefreshController notificationRefreshController,
+    required RefreshController messageRefreshController,
     required Option<Either<AuthFailure, String>> failureOrSuccessOption,
   }) = _NotificationsState;
   factory NotificationsState.initial() => NotificationsState(
@@ -15,5 +22,12 @@ class NotificationsState with _$NotificationsState {
         reviewndRate: InputEmptyOrNot(''),
         showErrorMessages: false,
         failureOrSuccessOption: none(),
+        messageListDTO: [],
+        isLoading: false,
+        isNoDataFound: false,
+        isErrorInAPI: false,
+        notificationRefreshController: RefreshController(),
+        messageRefreshController: RefreshController(),
+        notificationListDTO: [],
       );
 }

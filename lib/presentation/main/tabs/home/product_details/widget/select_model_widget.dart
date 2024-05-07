@@ -85,8 +85,8 @@ class SelectModelWidget extends StatelessWidget {
                         boxShadow: [
                           BoxShadow(
                             color: Colors.black.withOpacity(0.08),
-                            offset: Offset(0, 2),
-                            spreadRadius: 12,
+                            offset: Offset(0, 0),
+                            spreadRadius: 2,
                           ),
                         ],
                       ),

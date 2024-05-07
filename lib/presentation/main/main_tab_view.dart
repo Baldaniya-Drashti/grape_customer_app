@@ -43,7 +43,11 @@ class MainTabView extends StatelessWidget {
               getIt<HomeBloc>()..add(HomeEvent.getProductList(true)),
         ),
         BlocProvider(
-          create: (context) => NotificationsBloc(),
+          create: (context) => getIt<NotificationsBloc>()
+            ..add(NotificationsEvent.getNotificationList(true))
+            ..add(
+              NotificationsEvent.getMessageList(true),
+            ),
         ),
       ],
       child: BlocBuilder<MainTabBloc, MainTabState>(

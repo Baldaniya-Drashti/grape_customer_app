@@ -20,7 +20,7 @@ class ProductDetailEvent with _$ProductDetailEvent {
 
   factory ProductDetailEvent.getProductYouMayAlsoLikeProductList(
       bool isRefresh) = GetProductYouMayAlsoLikeProductList;
-
+  factory ProductDetailEvent.disposeController() = DisposeController;
   factory ProductDetailEvent.getShopDetailAPI(String? shopId, bool isRefresh) =
       GetShopDetailAPI;
   factory ProductDetailEvent.getShopDetailFilterAPI(

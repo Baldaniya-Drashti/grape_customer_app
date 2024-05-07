@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -19,8 +21,8 @@ class ProductImageView extends StatelessWidget {
         return Center(
           child: state.getProductDetails.product?.media != null
               ? GestureDetector(
-                  onTap: () {
-                    context.router.push(
+                  onTap: () async {
+                    var res = await context.router.push(
                       PageRouteInfo(
                         FullImageView.name,
                         args: FullImageViewArgs(
@@ -35,6 +37,18 @@ class ProductImageView extends StatelessWidget {
                         ),
                       ),
                     );
+
+                    log('res : $res');
+                    if (res != null && res == true) {
+                      if ((state.getProductDetails.product
+                                  ?.media?[state.selectedImageIndex].media ??
+                              "")
+                          .contains('mp4')) {
+                        context
+                            .read<ProductDetailBloc>()
+                            .add(ProductDetailEvent.disposeController());
+                      }
+                    }
                   },
                   child: Stack(
                     alignment: Alignment.center,
@@ -66,8 +80,8 @@ class ProductImageView extends StatelessWidget {
                             boxShadow: [
                               BoxShadow(
                                 color: Colors.black.withOpacity(0.08),
-                                offset: Offset(0, 2),
-                                spreadRadius: 12,
+                                offset: Offset(0, 0),
+                                spreadRadius: 2,
                               ),
                             ],
                           ),

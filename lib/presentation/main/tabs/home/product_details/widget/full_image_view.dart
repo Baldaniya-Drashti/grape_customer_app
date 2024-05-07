@@ -19,22 +19,28 @@ class FullImageView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(title: ''),
-      body: SafeArea(
-        child: Center(
-          child: imageUrl.contains('mp4')
-              ? chewieController != null &&
-                      chewieController!
-                          .videoPlayerController.value.isInitialized
-                  ? Chewie(controller: chewieController!)
-                  : Center(
-                      child: CircularProgressIndicator(),
-                    )
-              : CachedNetworkImage(
-                  imageUrl: imageUrl,
-                  placeholder: (context, url) => Container(
-                    color: Colors.grey.shade300,
+      body: WillPopScope(
+        onWillPop: () {
+          Navigator.pop(context, true);
+          return Future.value(true);
+        },
+        child: SafeArea(
+          child: Center(
+            child: imageUrl.contains('mp4')
+                ? chewieController != null &&
+                        chewieController!
+                            .videoPlayerController.value.isInitialized
+                    ? Chewie(controller: chewieController!)
+                    : Center(
+                        child: CircularProgressIndicator(),
+                      )
+                : CachedNetworkImage(
+                    imageUrl: imageUrl,
+                    placeholder: (context, url) => Container(
+                      color: Colors.grey.shade300,
+                    ),
                   ),
-                ),
+          ),
         ),
       ),
     );
