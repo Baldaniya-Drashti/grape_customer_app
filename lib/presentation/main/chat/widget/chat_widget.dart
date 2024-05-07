@@ -21,6 +21,7 @@ class ChatWidget extends StatelessWidget {
         builder: (context, state) {
           return PaginatedListView(
             reverse: true,
+            isNoDataFound: state.isLoading == false && state.chatList.isEmpty,
             onRefresh: () {
               context.read<ChatBloc>().add(
                     GetChatDetailList(
