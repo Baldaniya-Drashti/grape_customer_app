@@ -1,13 +1,12 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'dart:async';
 import 'dart:developer';
 import 'dart:io';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:grape_customer_app/application/main_tab/main_tab_bloc.dart';
 import 'package:grape_customer_app/domain/auth/i_auth_facade.dart';
 
 late final IAuthFacade authFacade;
@@ -17,14 +16,17 @@ void notificationTapBackground(NotificationResponse notificationResponse) {
 }
 
 class PushNotificationService {
+  final FirebaseMessaging firebaseMessaging = FirebaseMessaging.instance;
+  // final StreamController<String> _fcmTokenController =
+  //     StreamController<String>();
+  // Stream<String> get fcmTokenStream => _fcmTokenController.stream;
+
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
   bool notificationsEnabled = false;
 // It is assumed that all messages contain a data field with the key 'type'
   Future<void> setupInteractedMessage(BuildContext context) async {
-    await FirebaseMessaging.instance
-        .getInitialMessage()
-        .then((RemoteMessage? message) {
+    await firebaseMessaging.getInitialMessage().then((RemoteMessage? message) {
       log('getInitialMessage : ${message?.data}');
     });
 
@@ -81,13 +83,6 @@ class PushNotificationService {
             AndroidFlutterLocalNotificationsPlugin>()
         ?.createNotificationChannel(channel);
 
-    await FirebaseMessaging.instance.getToken().then((value) async {
-      log('FCM Token===>:$value');
-
-      context
-          .read<MainTabBloc>()
-          .add(MainTabEvent.registerForPush(value ?? ""));
-    });
     const AndroidInitializationSettings androidSettings =
         AndroidInitializationSettings('@drawable/ic_notification');
     const DarwinInitializationSettings iOSSettings =
@@ -103,9 +98,12 @@ class PushNotificationService {
       onDidReceiveNotificationResponse: (NotificationResponse details) {
         switch (details.notificationResponseType) {
           case NotificationResponseType.selectedNotification:
+            log('NotificationResponseType.selectedNotification : ${details.payload}');
             break;
 
           case NotificationResponseType.selectedNotificationAction:
+            log('NotificationResponseType.selectedNotificationAction : ${details.payload}');
+
             break;
           default:
         }
@@ -113,8 +111,7 @@ class PushNotificationService {
       onDidReceiveBackgroundNotificationResponse: notificationTapBackground,
     );
 
-    await FirebaseMessaging.instance
-        .setForegroundNotificationPresentationOptions(
+    await firebaseMessaging.setForegroundNotificationPresentationOptions(
       alert: true, // Required to display a heads up notification
       badge: true,
       sound: true,

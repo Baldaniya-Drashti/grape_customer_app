@@ -296,9 +296,13 @@ abstract class $AppRouter extends _i32.RootStackRouter {
       );
     },
     ReviewProductList.name: (routeData) {
+      final args = routeData.argsAs<ReviewProductListArgs>();
       return _i32.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i26.ReviewProductList(),
+        child: _i26.ReviewProductList(
+          key: args.key,
+          productId: args.productId,
+        ),
       );
     },
     SearchView.name: (routeData) {
@@ -1062,16 +1066,40 @@ class RegisterScreen extends _i32.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i26.ReviewProductList]
-class ReviewProductList extends _i32.PageRouteInfo<void> {
-  const ReviewProductList({List<_i32.PageRouteInfo>? children})
-      : super(
+class ReviewProductList extends _i32.PageRouteInfo<ReviewProductListArgs> {
+  ReviewProductList({
+    _i33.Key? key,
+    required String productId,
+    List<_i32.PageRouteInfo>? children,
+  }) : super(
           ReviewProductList.name,
+          args: ReviewProductListArgs(
+            key: key,
+            productId: productId,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'ReviewProductList';
 
-  static const _i32.PageInfo<void> page = _i32.PageInfo<void>(name);
+  static const _i32.PageInfo<ReviewProductListArgs> page =
+      _i32.PageInfo<ReviewProductListArgs>(name);
+}
+
+class ReviewProductListArgs {
+  const ReviewProductListArgs({
+    this.key,
+    required this.productId,
+  });
+
+  final _i33.Key? key;
+
+  final String productId;
+
+  @override
+  String toString() {
+    return 'ReviewProductListArgs{key: $key, productId: $productId}';
+  }
 }
 
 /// generated route for

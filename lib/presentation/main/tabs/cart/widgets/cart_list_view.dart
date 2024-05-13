@@ -109,6 +109,7 @@ class CartListView extends StatelessWidget {
         clipBehavior: Clip.none,
         children: [
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Center(
                 child: state.cartListDTO[index].product?.images?.first.image !=
@@ -137,51 +138,55 @@ class CartListView extends StatelessWidget {
               SizedBox(
                 width: getSize(8),
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  BaseText(
-                    text: state.cartListDTO[index].product?.product_name ?? "",
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                  ),
-                  SizedBox(
-                    height: getSize(8),
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: List.generate(
-                      dataList.length,
-                      (index) => Padding(
-                        padding: EdgeInsets.symmetric(vertical: getSize(3)),
-                        child: getProductDetails(
-                          title: dataList[index].name ?? "",
-                          description: dataList[index].value ?? "",
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    BaseText(
+                      text:
+                          state.cartListDTO[index].product?.product_name ?? "",
+                      fontSize: 14,
+                      maxLines: 3,
+                      fontWeight: FontWeight.w500,
+                    ),
+                    SizedBox(
+                      height: getSize(8),
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: List.generate(
+                        dataList.length,
+                        (index) => Padding(
+                          padding: EdgeInsets.symmetric(vertical: getSize(3)),
+                          child: getProductDetails(
+                            title: dataList[index].name ?? "",
+                            description: dataList[index].value ?? "",
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  // getProductDetails(
-                  //   title: 'Colors',
-                  //   description: state.cartListDTO[index].product?.color ?? "",
-                  // ),
-                  // SizedBox(
-                  //   height: getSize(6),
-                  // ),
-                  // getProductDetails(
-                  //   title: 'Size',
-                  //   description: state.cartListDTO[index].product?.size ?? "",
-                  // ),
-                  SizedBox(
-                    height: getSize(3),
-                  ),
-                  getProductDetails(
-                    title: 'Quantity',
-                    description: state.cartListDTO[index].product?.order_qty
-                            ?.toString() ??
-                        "1",
-                  ),
-                ],
+                    // getProductDetails(
+                    //   title: 'Colors',
+                    //   description: state.cartListDTO[index].product?.color ?? "",
+                    // ),
+                    // SizedBox(
+                    //   height: getSize(6),
+                    // ),
+                    // getProductDetails(
+                    //   title: 'Size',
+                    //   description: state.cartListDTO[index].product?.size ?? "",
+                    // ),
+                    SizedBox(
+                      height: getSize(3),
+                    ),
+                    getProductDetails(
+                      title: 'Quantity',
+                      description: state.cartListDTO[index].product?.order_qty
+                              ?.toString() ??
+                          "1",
+                    ),
+                  ],
+                ),
               ),
             ],
           ),

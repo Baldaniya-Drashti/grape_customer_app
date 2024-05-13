@@ -5,12 +5,14 @@ class ProductDetailState with _$ProductDetailState {
   factory ProductDetailState({
     required int productQuantity,
     required bool isLoading,
+    required bool isProductYouMayLikeLoading,
     required bool isShopDetailLoading,
     required bool isErrorInAPI,
     required bool isFavourite,
     required ProductDetailDTO getProductDetails,
     required List<SimilarProduct> similarProduct,
     required List<Media> mediaList,
+    required List<Reviews> reviewList,
     required List<Data> dataList,
     required int selectedImageIndex,
     required bool isNoDataFound,
@@ -39,5 +41,7 @@ class ProductDetailState with _$ProductDetailState {
         shopDetailDTO: ShopDetailDTO(),
         isShopDetailLoading: false,
         mediaList: [],
+        reviewList: [],
+        isProductYouMayLikeLoading: false,
       );
 }

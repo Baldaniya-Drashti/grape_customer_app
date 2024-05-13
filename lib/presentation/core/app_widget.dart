@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart' as bloc;
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:grape_customer_app/application/auth/auth_status/auth_status_bloc.dart';
+import 'package:grape_customer_app/application/chat/chat_bloc.dart';
 import 'package:grape_customer_app/application/main/profile/language/language_bloc.dart';
 import 'package:grape_customer_app/domain/core/l10n/app_localizations.dart';
 
@@ -30,6 +31,9 @@ class AppWidget extends StatelessWidget {
         ),
         bloc.BlocProvider(
           create: (context) => getIt<LanguageBloc>(),
+        ),
+        bloc.BlocProvider(
+          create: (context) => getIt<ChatBloc>(),
         )
       ],
       child: _App(),
@@ -54,8 +58,8 @@ class _AppState extends State<_App> {
     // }
 
     return bloc.BlocBuilder<LanguageBloc, LanguageState>(
-      builder: (context, state) {
-        print('Locale : ${state.locale}');
+      builder: (context, state1) {
+        print('Locale : ${state1.locale}');
         return LifecycleWatcher(
           child: ScreenUtilInit(
             ensureScreenSize: true,
@@ -63,7 +67,7 @@ class _AppState extends State<_App> {
               title: 'Grape Customer App',
               debugShowCheckedModeBanner: false,
               theme: ThemeConfig.lightTheme,
-              locale: state.locale,
+              locale: state1.locale,
               routerConfig: _appRouter.config(
                 navigatorObservers: () =>
                     [FirebaseAnalyticsObserver(analytics: analytics)],

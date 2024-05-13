@@ -62,7 +62,8 @@ class NotificationAppBar extends StatelessWidget
               Tab(
                 child: getTabTitleMethod(
                   title: 'All Notification',
-                  count: '20',
+                  count:
+                      state.notificationListDTO.total_unread_notification ?? 0,
                   index: 0,
                   notificationsState: state,
                 ),
@@ -70,7 +71,7 @@ class NotificationAppBar extends StatelessWidget
               Tab(
                 child: getTabTitleMethod(
                   title: 'All Messages',
-                  count: '01',
+                  count: state.messageListDTO.total_unread_messages ?? 0,
                   index: 1,
                   notificationsState: state,
                 ),
@@ -84,7 +85,7 @@ class NotificationAppBar extends StatelessWidget
 
   Row getTabTitleMethod(
       {required String title,
-      required String count,
+      required int count,
       required int index,
       required NotificationsState notificationsState}) {
     return Row(
@@ -100,18 +101,21 @@ class NotificationAppBar extends StatelessWidget
         SizedBox(
           width: getSize(4),
         ),
-        Container(
-          padding: EdgeInsets.all(getSize(5)),
-          alignment: Alignment.center,
-          decoration: BoxDecoration(
-            color: AppColors.primaryOrange,
-            shape: BoxShape.circle,
-          ),
-          child: BaseText(
-            text: count,
-            fontSize: 10,
-            fontWeight: FontWeight.w500,
-            textColor: AppColors.white,
+        Visibility(
+          visible: count > 0,
+          child: Container(
+            padding: EdgeInsets.all(getSize(5)),
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              color: AppColors.primaryOrange,
+              shape: BoxShape.circle,
+            ),
+            child: BaseText(
+              text: count.toString(),
+              fontSize: 10,
+              fontWeight: FontWeight.w500,
+              textColor: AppColors.white,
+            ),
           ),
         )
       ],

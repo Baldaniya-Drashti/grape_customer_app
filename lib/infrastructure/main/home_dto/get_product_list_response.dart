@@ -27,7 +27,7 @@ class GetProductListResponse with _$GetProductListResponse {
     bool? is_cart,
     bool? is_favorite,
     int? review_rate,
-    List<dynamic>? reviews,
+    List<Reviews>? reviews,
     String? product_form_json,
     List<Images>? images,
     List<Media>? media,
@@ -65,6 +65,20 @@ class Media with _$Media {
   }) = _Media;
 
   factory Media.fromJson(Map<String, dynamic> json) => _$MediaFromJson(json);
+}
+
+@freezed
+class Reviews with _$Reviews {
+  const factory Reviews({
+    int? review_id,
+    String? fullname,
+    num? rate,
+    String? review,
+    int? created_at,
+  }) = _Reviews;
+
+  factory Reviews.fromJson(Map<String, dynamic> json) =>
+      _$ReviewsFromJson(json);
 }
 
 @freezed

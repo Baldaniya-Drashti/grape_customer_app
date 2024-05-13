@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 class LifecycleWatcher extends StatefulWidget {
@@ -42,7 +44,7 @@ class LifecycleWatcherState extends State<LifecycleWatcher>
       case AppLifecycleState.resumed:
       default:
     }
-    debugPrint('App Life Cycle state ===> $_lastLifecycleState.');
+    log('App Life Cycle state ===> $_lastLifecycleState.');
 
     return widget.child;
   }

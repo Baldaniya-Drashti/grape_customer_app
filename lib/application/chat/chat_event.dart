@@ -23,6 +23,7 @@ class ChatEvent with _$ChatEvent {
       RemoveTyping;
   const factory ChatEvent.getOpponentOnlineStatus(
       String sender, String receiver) = GetOpponentOnlineStatus;
+
   factory ChatEvent.getChatDetailList(bool isRefresh, String receiverId) =
       GetChatDetailList;
 }

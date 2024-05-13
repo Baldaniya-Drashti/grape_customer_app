@@ -11,20 +11,20 @@ class SocketChatService implements ChatService {
   late io.Socket socket;
 
   // Streams for events
-  final StreamController<bool> _statusOnlineController =
-      StreamController<bool>();
+  final StreamController<dynamic> _statusOnlineController =
+      StreamController<dynamic>();
+  final StreamController<dynamic> _getOnlineStatusController =
+      StreamController<dynamic>();
   final StreamController<bool> _socketConnectController =
       StreamController<bool>();
   final StreamController<String> _roomConnectedController =
       StreamController<String>();
   final StreamController<Chats> _newMessageController =
       StreamController<Chats>();
-  final StreamController<String> _displayTypingController =
-      StreamController<String>();
+  final StreamController<dynamic> _displayTypingController =
+      StreamController<dynamic>();
   final StreamController<String> _removeTypingController =
       StreamController<String>();
-  final StreamController<bool> _getOnlineStatusController =
-      StreamController<bool>();
 
   SocketChatService() {
     socket = io.io('https://www.grape.market:3001',
@@ -41,19 +41,19 @@ class SocketChatService implements ChatService {
     // Listen for statusOnline event
     socket.on('statusOnline', (data) {
       log('statusOnline : $data');
-      _statusOnlineController.add(data['is_online'] == 1 ? true : false);
+      _statusOnlineController.add(data);
+      _getOnlineStatusController.add(data);
     });
 
     // Listen for roomConnected event
     socket.on('roomConnected', (data) {
-      log('roomConnected : $data');
+      //log('roomConnected : $data');
       var list = data as List<dynamic>;
       _roomConnectedController.add(list.first.toString());
     });
 
     // Listen for newMessage event
     socket.on('newMessage', (data) {
-      log('newMessage : $data');
       if (data != null) {
         var messageObject = Chats(
           id: data['chatId'],
@@ -64,14 +64,15 @@ class SocketChatService implements ChatService {
           time: DateTime.now().millisecondsSinceEpoch,
         );
         _newMessageController.add(messageObject);
+        Map<String, dynamic> receivedMessageData = {
+          'roomId': data['roomId'],
+          'sender_id': data['sender_id'],
+          'receiver_id': data['receiver_id'],
+          'chatId': data['chatId']
+        };
+
+        socket.emit('ReadMessage', receivedMessageData);
       }
-      Map<String, dynamic> receivedMessageData = {
-        'roomId': data['roomId'],
-        'senderId': data['senderId'],
-        'receiverId': data['receiverId'],
-        'chatId': data['chatId']
-      };
-      socket.emit('ReadMessage', receivedMessageData);
     });
 
     // Listen for DisplayTyping event
@@ -87,13 +88,6 @@ class SocketChatService implements ChatService {
 
       _removeTypingController.add(data.toString());
     });
-
-    // Listen for getOnlineStatus event
-    socket.on('statusOnline', (data) {
-      log('statusOnline : $data');
-
-      _getOnlineStatusController.add(data['is_online']);
-    });
   }
 
   void connectToSocket() {
@@ -101,14 +95,18 @@ class SocketChatService implements ChatService {
   }
 
   // Getters for event streams
-  Stream<bool> get statusOnlineStream => _statusOnlineController.stream;
+  Stream<dynamic> get statusOnlineStream => _statusOnlineController.stream;
+  Stream<dynamic> get getOpponenetStatusOnlineStream =>
+      _statusOnlineController.stream;
+
   Stream<bool> get socketConnectStream => _socketConnectController.stream;
 
   Stream<String> get roomConnectedStream => _roomConnectedController.stream;
   Stream<Chats> get newMessageStream => _newMessageController.stream;
-  Stream<String> get displayTypingStream => _displayTypingController.stream;
+  Stream<dynamic> get displayTypingStream => _displayTypingController.stream;
   Stream<String> get removeTypingStream => _removeTypingController.stream;
-  Stream<bool> get getOnlineStatusStream => _getOnlineStatusController.stream;
+  Stream<dynamic> get getOnlineStatusStream =>
+      _getOnlineStatusController.stream;
 
   @override
   Stream<List<Chats>> getMessages() {
@@ -125,7 +123,7 @@ class SocketChatService implements ChatService {
       'receiver_id': message.receiver,
       'roomId': message.roomId
     };
-    //log('requestData : $requestData');
+
     // Emit sendMessage event
     socket.emit('sendMessage', requestData);
   }
@@ -156,10 +154,10 @@ class SocketChatService implements ChatService {
   }
 
   @override
-  void getOpponentOnlineStatus(String sender, String receiver) {
+  void getOpponentOnlineStatus(String sender, String receiver, String roomId) {
     // Emit getOnlineStatus event
-    socket.emit(
-        'getOnlineStatus', {'sender_id': sender, 'receiver_id': receiver});
+    socket.emit('getOnlineStatus',
+        {'sender_id': sender, 'receiver_id': receiver, 'roomId': roomId});
   }
 
   @override

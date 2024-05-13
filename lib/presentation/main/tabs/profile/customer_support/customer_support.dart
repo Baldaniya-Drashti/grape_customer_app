@@ -10,6 +10,7 @@ import 'package:grape_customer_app/injection.dart';
 import 'package:grape_customer_app/presentation/common/utils/app_focus.dart';
 import 'package:grape_customer_app/presentation/common/utils/flushbar_creator.dart';
 import 'package:grape_customer_app/presentation/common/widgets/base_text.dart';
+import 'package:grape_customer_app/presentation/core/app_router.gr.dart';
 import 'package:grape_customer_app/presentation/core/styles/app_colors.dart';
 import 'package:grape_customer_app/presentation/core/widgets/buttons/common_button.dart';
 import 'package:grape_customer_app/presentation/core/widgets/inputs/custom_app_bar.dart';
@@ -68,24 +69,35 @@ class CustomerSupport extends StatelessWidget {
             ),
             bottomNavigationBar: Padding(
               padding: EdgeInsets.symmetric(vertical: getSize(18)),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SvgPicture.asset(
-                    SvgImageConstant.message,
-                    colorFilter: ColorFilter.mode(
-                        AppColors.primaryOrange, BlendMode.srcIn),
-                  ),
-                  SizedBox(
-                    width: getSize(10),
-                  ),
-                  BaseText(
-                    text: 'Ask Help?',
-                    textColor: AppColors.primaryOrange,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                  )
-                ],
+              child: GestureDetector(
+                onTap: () {
+                  context.router.push(
+                    PageRouteInfo(
+                      ChatView.name,
+                      args: ChatViewArgs(
+                          fromLiveChatSupport: true, recieverID: '-1'),
+                    ),
+                  );
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SvgPicture.asset(
+                      SvgImageConstant.message,
+                      colorFilter: ColorFilter.mode(
+                          AppColors.primaryOrange, BlendMode.srcIn),
+                    ),
+                    SizedBox(
+                      width: getSize(10),
+                    ),
+                    BaseText(
+                      text: 'Ask Help?',
+                      textColor: AppColors.primaryOrange,
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                    )
+                  ],
+                ),
               ),
             ),
           );

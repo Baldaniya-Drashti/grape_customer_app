@@ -87,6 +87,7 @@ class GetCheckoutProductDetailWidget extends StatelessWidget {
         clipBehavior: Clip.none,
         children: [
           Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Center(
                 child: getProductListResponse.images?.first.image != null
@@ -117,14 +118,32 @@ class GetCheckoutProductDetailWidget extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    BaseText(
-                      text: getProductListResponse.product_name ?? "",
-                      fontSize: 14,
-                      maxLines: 2,
-                      fontWeight: FontWeight.w500,
-                    ),
-                    SizedBox(
-                      height: getSize(8),
+                    Row(
+                      //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          child: BaseText(
+                            text: getProductListResponse.product_name ?? "",
+                            fontSize: 14,
+                            maxLines: 2,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        // IconButton(
+                        //   onPressed: () {
+                        //     context.read<CheckoutBloc>().add(
+                        //           CheckoutEvent.removeCheckoutProduct(
+                        //             getProductListResponse.id.toString(),
+                        //           ),
+                        //         );
+                        //   },
+                        //   icon: Icon(
+                        //     Icons.close_rounded,
+                        //     color: AppColors.black.withOpacity(0.60),
+                        //   ),
+                        // ),
+                      ],
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -139,61 +158,54 @@ class GetCheckoutProductDetailWidget extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(
-                      height: getSize(3),
-                    ),
-                    getProductDetails(
-                      title: 'Quantity',
-                      description: getProductListResponse.quantity
-                              ?.toStringAsFixed(
-                                  getProductListResponse.quantity is int
+                    Row(
+                      //crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        getProductDetails(
+                          title: 'Quantity',
+                          description: getProductListResponse.quantity
+                                  ?.toStringAsFixed(
+                                      getProductListResponse.quantity is int
+                                          ? 0
+                                          : 2) ??
+                              "1",
+                        ),
+                        BaseText(
+                          text: NumberFormat.simpleCurrency(
+                                  decimalDigits: num.tryParse(
+                                          getProductListResponse.price
+                                              .toString()) is int
                                       ? 0
-                                      : 2) ??
-                          "1",
+                                      : 0)
+                              .format(getProductListResponse.price),
+                          fontSize: 18,
+                          textColor: AppColors.mildBlue,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ],
                     ),
                   ],
                 ),
               ),
-              SizedBox(
-                height: getSize(3),
-              ),
+              Column(
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      context.read<CheckoutBloc>().add(
+                            CheckoutEvent.removeCheckoutProduct(
+                              getProductListResponse.id.toString(),
+                            ),
+                          );
+                    },
+                    icon: Icon(
+                      Icons.close_rounded,
+                      color: AppColors.black.withOpacity(0.60),
+                    ),
+                  ),
+                ],
+              )
             ],
-          ),
-          Positioned.fill(
-            child: Align(
-              alignment: Alignment.bottomRight,
-              child: BaseText(
-                text: NumberFormat.simpleCurrency(
-                        decimalDigits: num.tryParse(
-                                getProductListResponse.price.toString()) is int
-                            ? 0
-                            : 0)
-                    .format(getProductListResponse.price),
-                fontSize: 18,
-                textColor: AppColors.mildBlue,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ),
-          Positioned.fill(
-            top: getSize(-10),
-            right: getSize(-10),
-            child: Align(
-              alignment: Alignment.topRight,
-              child: IconButton(
-                onPressed: () {
-                  context.read<CheckoutBloc>().add(
-                        CheckoutEvent.removeCheckoutProduct(
-                          getProductListResponse.id.toString(),
-                        ),
-                      );
-                },
-                icon: Icon(
-                  Icons.close_rounded,
-                  color: AppColors.black.withOpacity(0.60),
-                ),
-              ),
-            ),
           ),
         ],
       ),

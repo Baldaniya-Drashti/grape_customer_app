@@ -22,7 +22,10 @@ abstract class IMainFacade {
     required String productId,
     required int page,
   });
-
+  Future<Either<MainFailure, CommonResponse>> getProductReviewAPI({
+    required String productId,
+    required int page,
+  });
   Future<Either<MainFailure, String>> addProductToCart({
     required String productId,
   });
@@ -54,6 +57,7 @@ abstract class IMainFacade {
   });
   Future<Either<MainFailure, CommonResponse>> getFavouriteAPI(
       {required int page});
+
   Future<Either<MainFailure, List<ShippingAddressDTO>>> getShippingAddressAPI();
   Future<Either<MainFailure, String>> addShippingAddress({
     required Username fullName,

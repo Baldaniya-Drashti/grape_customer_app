@@ -4,10 +4,10 @@ part of 'chat_bloc.dart';
 class ChatState with _$ChatState {
   const factory ChatState({
     required bool isConnectedToSocket,
-    required bool isStatusOnlineReceived,
+    required int isStatusOnlineReceived,
     required bool isRoomConnectedReceived,
     required String textFieldValue,
-    required bool isNewMessageReceived,
+    required String onlineUserID,
     required String displayTypingData,
     required String removeTypingData,
     required bool isLoading,
@@ -15,18 +15,18 @@ class ChatState with _$ChatState {
     required ChatDetailDTO apiSuccessData,
     required List<Chats> chatList,
     required bool isRemoveLoading,
-    required String getOnlineStatusData,
     required RefreshController refreshController,
     required String roomId,
+    required String recieverId,
+
     // Add more properties as needed
   }) = _ChatState;
 
   factory ChatState.initial() => ChatState(
         isConnectedToSocket: false,
-        isStatusOnlineReceived: false,
+        isStatusOnlineReceived: -1,
         isRoomConnectedReceived: false,
         textFieldValue: '',
-        isNewMessageReceived: false,
 
         displayTypingData: '',
         removeTypingData: '',
@@ -35,8 +35,9 @@ class ChatState with _$ChatState {
         apiSuccessData:
             ChatDetailDTO(), // Initialize with appropriate default values
         isRemoveLoading: false,
-        getOnlineStatusData: '', refreshController: RefreshController(),
+        refreshController: RefreshController(),
         roomId: '', chatList: [],
+        onlineUserID: getCurrentUser().userId.toString(), recieverId: '-1',
         // Initialize other properties
       );
 }

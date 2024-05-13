@@ -33,9 +33,9 @@ class PaginatedListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SmartRefresher(
-      // header: MaterialClassicHeader(
-      //   color: AppColors.primaryOrange,
-      // ),
+      header: MaterialClassicHeader(
+        color: AppColors.primaryOrange,
+      ),
       enablePullUp: true,
       enablePullDown: true,
       reverse: reverse,

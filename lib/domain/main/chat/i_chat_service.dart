@@ -11,5 +11,5 @@ abstract class ChatService {
   void createRoom(String sender, String receiver);
   void sendTypingEvent(String sender, String receiver);
   void sendRemoveTypingEvent(String sender, String receiver);
-  void getOpponentOnlineStatus(String sender, String receiver);
+  void getOpponentOnlineStatus(String sender, String receiver, String roomId);
 }

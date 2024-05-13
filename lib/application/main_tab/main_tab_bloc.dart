@@ -68,11 +68,25 @@ class MainTabBloc extends Bloc<MainTabEvent, MainTabState> {
           registerForPush: (RegisterForPush value) async {
             await authFacade.registerForPush(fcmToken: value.fcmToken);
           },
-          pushNotificationInitialize: (PushNotificationInitialize value) {
-            PushNotificationService().setupInteractedMessage(value.context);
+          pushNotificationInitialize: (PushNotificationInitialize value) async {
+            await PushNotificationService()
+                .setupInteractedMessage(value.context);
+            PushNotificationService()
+                .firebaseMessaging
+                .onTokenRefresh
+                .listen((event) {
+              add(MainTabEvent.registerForPush(event));
+            });
+            await PushNotificationService()
+                .firebaseMessaging
+                .getToken()
+                .then((value) async {
+              add(MainTabEvent.registerForPush(value ?? ""));
+            });
           },
           initDynamicLink: (InitDynamicLink value) async {
             DynamicLinksService.initDynamicLinks(value.context);
+            add(MainTabEvent.pushNotificationInitialize(value.context));
           },
         );
       },

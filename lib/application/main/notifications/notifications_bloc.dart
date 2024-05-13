@@ -58,7 +58,7 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
               page = 1;
               emit(
                 state.copyWith(
-                  messageListDTO: [],
+                  messageList: [],
                   failureOrSuccessOption: none(),
                 ),
               );
@@ -70,7 +70,7 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
               }
             }
 
-            emit(state.copyWith(isLoading: true));
+            emit(state.copyWith(isLoading: value.isRefresh));
 
             var res = await mainFacade.getChatListAPI(page: page);
 
@@ -81,25 +81,26 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
                 state.copyWith(
                   isErrorInAPI: true,
                   isLoading: false,
-                  messageListDTO: [],
+                  messageList: [],
                   failureOrSuccessOption: none(),
                 ),
               ),
               (r) {
-                var cartList = (r.data as List<dynamic>)
-                    .map((e) => ChatListDTO.fromJson(e))
-                    .toList();
+                var res = ChatListDTO.fromJson(r.data);
+                // var cartList = (r.data as List<dynamic>)
+                //     .map((e) => ChatListDTO.fromJson(e))
+                //     .toList();
                 lastPage = r.meta?.lastPage ?? 1;
                 return emit(
                   state.copyWith(
                     isLoading: false,
                     isErrorInAPI: false,
                     failureOrSuccessOption: none(),
-                    isNoDataFound: (r.data as List<dynamic>)
-                        .map((e) => ChatListDTO.fromJson(e))
-                        .toList()
-                        .isEmpty,
-                    messageListDTO: cartList,
+                    isNoDataFound:
+                        res.messages != null && res.messages!.isEmpty,
+                    messageList: List.from(state.messageList)
+                      ..addAll(res.messages ?? []),
+                    messageListDTO: res,
                   ),
                 );
               },
@@ -110,7 +111,7 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
               page = 1;
               emit(
                 state.copyWith(
-                  notificationListDTO: [],
+                  notificationList: [],
                   failureOrSuccessOption: none(),
                 ),
               );
@@ -122,7 +123,7 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
               }
             }
 
-            emit(state.copyWith(isLoading: true));
+            emit(state.copyWith(isLoading: value.isRefresh));
 
             var res = await mainFacade.getNotificationListAPI(page: page);
 
@@ -133,26 +134,23 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
                 state.copyWith(
                   isErrorInAPI: true,
                   isLoading: false,
-                  notificationListDTO: [],
+                  notificationList: [],
                   failureOrSuccessOption: none(),
                 ),
               ),
               (r) {
-                var cartList = (r.data as List<dynamic>)
-                    .map((e) => NotificationListDTO.fromJson(e))
-                    .toList();
+                var res = NotificationListDTO.fromJson(r.data);
                 lastPage = r.meta?.lastPage ?? 1;
                 return emit(
                   state.copyWith(
                     isLoading: false,
                     isErrorInAPI: false,
                     failureOrSuccessOption: none(),
-                    isNoDataFound: (r.data as List<dynamic>)
-                        .map((e) => NotificationListDTO.fromJson(e))
-                        .toList()
-                        .isEmpty,
-                    notificationListDTO: List.from(state.notificationListDTO)
-                      ..addAll(cartList),
+                    isNoDataFound:
+                        res.notifications != null && res.notifications!.isEmpty,
+                    notificationListDTO: res,
+                    notificationList: List.from(state.notificationList)
+                      ..addAll(res.notifications ?? []),
                   ),
                 );
               },

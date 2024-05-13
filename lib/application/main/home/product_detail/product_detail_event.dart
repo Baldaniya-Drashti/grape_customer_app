@@ -8,6 +8,8 @@ class ProductDetailEvent with _$ProductDetailEvent {
       DecreaseProductQuantity;
   factory ProductDetailEvent.getProductDetails(
       String productId, bool isRefresh, bool showLoading) = GetProductDetails;
+  factory ProductDetailEvent.getProductReviews(
+      String productId, bool isRefresh) = GetProductReviews;
   factory ProductDetailEvent.addToFavourite({String? productId}) =
       AddToFavourite;
   factory ProductDetailEvent.selectImage(int index) = SelectImage;

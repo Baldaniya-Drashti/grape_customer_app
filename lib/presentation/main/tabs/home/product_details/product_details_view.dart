@@ -54,13 +54,13 @@ class ProductDetailsView extends StatelessWidget {
                 ).show(context);
               },
               (r) {
-                showSuccess(
-                  message: r,
-                ).show(context);
-                context.read<ProductDetailBloc>().add(
-                      ProductDetailEvent.getProductDetails(
-                          productId, true, false),
-                    );
+                // showSuccess(
+                //   message: r,
+                // ).show(context);
+                // context.read<ProductDetailBloc>().add(
+                //       ProductDetailEvent.getProductDetails(
+                //           productId, true, false),
+                //     );
               },
             ),
           );
@@ -279,7 +279,12 @@ class ProductDetailsView extends StatelessWidget {
                                   GestureDetector(
                                     onTap: () {
                                       context.router.push(
-                                        PageRouteInfo(ReviewProductList.name),
+                                        PageRouteInfo(
+                                          ReviewProductList.name,
+                                          args: ReviewProductListArgs(
+                                            productId: productId,
+                                          ),
+                                        ),
                                       );
                                     },
                                     child: BaseText(
@@ -312,6 +317,16 @@ class ProductDetailsView extends StatelessWidget {
                                 state.getProductDetails.product!.reviews!
                                     .isNotEmpty,
                             child: ProductReviewListWidget(),
+                          ),
+                          SizedBox(
+                            height: getSize(
+                              state.getProductDetails.product?.reviews !=
+                                          null &&
+                                      state.getProductDetails.product!.reviews!
+                                          .isNotEmpty
+                                  ? 5
+                                  : 0,
+                            ),
                           ),
                           Visibility(
                             visible: state.getProductList.isNotEmpty,

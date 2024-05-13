@@ -70,4 +70,7 @@ class ApiConstants {
   static String getNotificationList = 'notification';
   static String readNotification = 'notification/read';
   static String getReviewProduct = 'review/product';
+
+  //review
+  static String getReviews = 'reviews';
 }

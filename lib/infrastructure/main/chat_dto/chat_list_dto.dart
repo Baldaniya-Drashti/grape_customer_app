@@ -8,6 +8,17 @@ part 'chat_list_dto.g.dart';
 @freezed
 class ChatListDTO with _$ChatListDTO {
   const factory ChatListDTO({
+    List<Messages>? messages,
+    int? total_unread_messages,
+  }) = _ChatListDTO;
+
+  factory ChatListDTO.fromJson(Map<String, dynamic> json) =>
+      _$ChatListDTOFromJson(json);
+}
+
+@freezed
+class Messages with _$Messages {
+  const factory Messages({
     int? receiver_id,
     String? first_name,
     String? last_name,
@@ -16,8 +27,8 @@ class ChatListDTO with _$ChatListDTO {
     int? message_type,
     String? message,
     int? time,
-  }) = _ChatListDTO;
+  }) = _Messages;
 
-  factory ChatListDTO.fromJson(Map<String, dynamic> json) =>
-      _$ChatListDTOFromJson(json);
+  factory Messages.fromJson(Map<String, dynamic> json) =>
+      _$MessagesFromJson(json);
 }

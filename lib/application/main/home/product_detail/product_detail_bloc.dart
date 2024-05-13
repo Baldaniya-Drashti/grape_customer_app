@@ -35,7 +35,7 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
   final RefreshController similarProductRefreshController = RefreshController();
   final RefreshController productYouMayLikeRefreshController =
       RefreshController();
-
+  final RefreshController productReviewRefreshController = RefreshController();
   ProductDetailBloc(this.mainFacade) : super(ProductDetailState.initial()) {
     on<ProductDetailEvent>(
       (event, emit) async {
@@ -173,6 +173,7 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
                 failureOrSuccessOption: optionOf(failureOrSuccess),
               ),
             );
+            add(ProductDetailEvent.getProductYouMayAlsoLikeProductList(true));
           },
           removeProductFromFavourite: (value) async {
             emit(
@@ -191,6 +192,7 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
                 failureOrSuccessOption: optionOf(failureOrSuccess),
               ),
             );
+            add(ProductDetailEvent.getProductYouMayAlsoLikeProductList(true));
           },
           addToFavourite: (AddToFavourite value) async {
             emit(
@@ -210,15 +212,19 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
                 failureOrSuccessOption: optionOf(failureOrSuccess),
               ),
             );
+
+            add(ProductDetailEvent.getProductYouMayAlsoLikeProductList(true));
           },
           getProductYouMayAlsoLikeProductList:
               (GetProductYouMayAlsoLikeProductList value) async {
             if (value.isRefresh) {
               pageForProductYoumayLike = 1;
-              emit(state.copyWith(
-                getProductList: [],
-                isLoading: false,
-              ));
+              emit(
+                state.copyWith(
+                  getProductList: [],
+                  isProductYouMayLikeLoading: value.isRefresh,
+                ),
+              );
               productYouMayLikeRefreshController.resetNoData();
             } else {
               if (pageForProductYoumayLike > lastPageForProductYoumayLike) {
@@ -240,7 +246,7 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
               (l) => emit(
                 state.copyWith(
                   isErrorInAPI: true,
-                  isLoading: false,
+                  isProductYouMayLikeLoading: false,
                   getProductList: [],
                 ),
               ),
@@ -251,7 +257,7 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
                 }
                 return emit(
                   state.copyWith(
-                    isLoading: false,
+                    isProductYouMayLikeLoading: false,
                     isErrorInAPI: false,
                     isNoDataFound: (r.data as List<dynamic>)
                         .map((e) => GetProductListResponse.fromJson(e))
@@ -422,6 +428,7 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
                 failureOrSuccessOption: optionOf(failureOrSuccess),
               ),
             );
+            add(ProductDetailEvent.getProductYouMayAlsoLikeProductList(true));
           },
           disposeController: (DisposeController value) async {
             var updateList =
@@ -437,6 +444,48 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
                       ?.copyWith(media: updateList),
                 ),
               ),
+            );
+          },
+          getProductReviews: (GetProductReviews value) async {
+            if (value.isRefresh) {
+              page = 1;
+              emit(state.copyWith(
+                reviewList: [],
+                isLoading: value.isRefresh,
+                failureOrSuccessOption: none(),
+              ));
+              productReviewRefreshController.resetNoData();
+            } else {
+              if (page > lastPage) {
+                productReviewRefreshController.loadNoData();
+                return;
+              }
+            }
+
+            var res = await mainFacade.getProductReviewAPI(
+                productId: value.productId, page: page);
+            page++;
+            res.fold(
+              (l) => emit(
+                state.copyWith(
+                  isErrorInAPI: true,
+                  isLoading: false,
+                ),
+              ),
+              (r) {
+                lastPage = r.meta?.lastPage ?? 1;
+                var list = r.data as List;
+                var filterData = list.map((e) => Reviews.fromJson(e)).toList();
+
+                return emit(
+                  state.copyWith(
+                    isLoading: false,
+                    isErrorInAPI: false,
+                    isNoDataFound: filterData.isEmpty,
+                    reviewList: filterData,
+                  ),
+                );
+              },
             );
           },
         );

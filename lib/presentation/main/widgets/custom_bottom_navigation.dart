@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:grape_customer_app/application/main/notifications/notifications_bloc.dart';
 import 'package:grape_customer_app/application/main_tab/main_tab_bloc.dart';
 import 'package:grape_customer_app/domain/core/l10n/app_localizations.dart';
 import 'package:grape_customer_app/domain/core/math_utils.dart';
@@ -160,17 +161,27 @@ class CustomBottomNavigationWidget extends StatelessWidget {
                   height: getSize(24),
                   width: getSize(24),
                 ),
-          Visibility(
-            visible: iconName.contains(SvgImageConstant.notificationSelected) ||
-                iconName.contains(SvgImageConstant.notificationUnselected),
-            child: Container(
-              height: getSize(8),
-              width: getSize(8),
-              decoration: BoxDecoration(
-                color: AppColors.red,
-                shape: BoxShape.circle,
-              ),
-            ),
+          BlocBuilder<NotificationsBloc, NotificationsState>(
+            builder: (context, state) {
+              return Visibility(
+                visible: (iconName
+                        .contains(SvgImageConstant.notificationSelected) ||
+                    iconName.contains(
+                            SvgImageConstant.notificationUnselected) &&
+                        (state.notificationListDTO.total_unread_notification ??
+                                0) >
+                            0 ||
+                    (state.messageListDTO.total_unread_messages ?? 0) > 0),
+                child: Container(
+                  height: getSize(8),
+                  width: getSize(8),
+                  decoration: BoxDecoration(
+                    color: AppColors.red,
+                    shape: BoxShape.circle,
+                  ),
+                ),
+              );
+            },
           ),
         ],
       ),

@@ -17,141 +17,161 @@ class AllMessageListWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<NotificationsBloc, NotificationsState>(
       builder: (context, state) {
-        return PaginatedListView(
-          onRefresh: () {
-            context
-                .read<NotificationsBloc>()
-                .add(NotificationsEvent.getMessageList(true));
-          },
-          onLoading: () {
-            context
-                .read<NotificationsBloc>()
-                .add(NotificationsEvent.getMessageList(false));
-          },
-          refreshController: state.messageRefreshController,
-          isNoDataFound:
-              state.isLoading == false && state.messageListDTO.isEmpty,
-          child: ListView.builder(
-            itemCount: state.messageListDTO.length,
-            padding: EdgeInsets.symmetric(
-                horizontal: getSize(12), vertical: getSize(10)),
-            shrinkWrap: true,
-            physics: BouncingScrollPhysics(),
-            itemBuilder: (context, index) {
-              return GestureDetector(
-                onTap: () => context.router.push(PageRouteInfo(
-                  ChatView.name,
-                  args: ChatViewArgs(
-                    recieverID:
-                        state.messageListDTO[index].receiver_id.toString(),
-                  ),
-                )),
-                child: Container(
-                  margin: EdgeInsets.symmetric(vertical: getSize(9)),
-                  padding: EdgeInsets.symmetric(
-                    horizontal: getSize(6),
-                    vertical: getSize(8),
-                  ),
-                  decoration: BoxDecoration(
-                    color:
-                        state.messageListDTO[index].unseen_messages_count != 0
-                            ? Color(0xFFFFEEE1)
-                            : Color(0xFFF5F5F5),
-                    borderRadius: BorderRadius.circular(
-                      getSize(10),
+        if (state.isLoading) {
+          return Center(
+            child: CircularProgressIndicator(
+              color: AppColors.primaryOrange,
+            ),
+          );
+        } else if (state.isErrorInAPI) {
+          return Center(
+            child: BaseText(text: 'Something went wrong. Please try again!!'),
+          );
+        } else {
+          return PaginatedListView(
+            onRefresh: () {
+              context
+                  .read<NotificationsBloc>()
+                  .add(NotificationsEvent.getMessageList(true));
+            },
+            onLoading: () {
+              context
+                  .read<NotificationsBloc>()
+                  .add(NotificationsEvent.getMessageList(false));
+            },
+            refreshController: state.messageRefreshController,
+            isNoDataFound:
+                state.isLoading == false && state.messageList.isEmpty,
+            child: ListView.builder(
+              itemCount: state.messageList.length,
+              padding: EdgeInsets.symmetric(
+                  horizontal: getSize(12), vertical: getSize(10)),
+              shrinkWrap: true,
+              physics: BouncingScrollPhysics(),
+              itemBuilder: (context, index) {
+                return GestureDetector(
+                  onTap: () async {
+                    var res = await context.router.push(
+                      PageRouteInfo(
+                        ChatView.name,
+                        args: ChatViewArgs(
+                          recieverID:
+                              state.messageList[index].receiver_id.toString(),
+                        ),
+                      ),
+                    );
+                    if (res != null && res == true) {
+                      context
+                          .read<NotificationsBloc>()
+                          .add(NotificationsEvent.getMessageList(true));
+                    }
+                  },
+                  child: Container(
+                    margin: EdgeInsets.symmetric(vertical: getSize(9)),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: getSize(6),
+                      vertical: getSize(8),
                     ),
-                    border: Border.all(
-                      color:
-                          state.messageListDTO[index].unseen_messages_count != 0
-                              ? AppColors.primaryOrange.withOpacity(0.4)
-                              : Colors.transparent,
+                    decoration: BoxDecoration(
+                      color: state.messageList[index].unseen_messages_count != 0
+                          ? Color(0xFFFFEEE1)
+                          : Color(0xFFF5F5F5),
+                      borderRadius: BorderRadius.circular(
+                        getSize(10),
+                      ),
+                      border: Border.all(
+                        color:
+                            state.messageList[index].unseen_messages_count != 0
+                                ? AppColors.primaryOrange.withOpacity(0.4)
+                                : Colors.transparent,
+                      ),
                     ),
-                  ),
-                  child: Row(
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(getSize(6)),
-                        child: CachedNetworkImage(
-                          height: getSize(50),
-                          width: getSize(50),
-                          imageUrl: state.messageListDTO[index].profile ?? "",
-                          placeholder: (context, url) => Container(
+                    child: Row(
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(getSize(6)),
+                          child: CachedNetworkImage(
                             height: getSize(50),
                             width: getSize(50),
-                            decoration: BoxDecoration(
-                              color: Colors.grey.shade100,
-                              borderRadius: SmoothBorderRadius.all(
-                                SmoothRadius(
-                                  cornerRadius: getSize(6),
-                                  cornerSmoothing: 1,
+                            imageUrl: state.messageList[index].profile ?? "",
+                            placeholder: (context, url) => Container(
+                              height: getSize(50),
+                              width: getSize(50),
+                              decoration: BoxDecoration(
+                                color: Colors.grey.shade100,
+                                borderRadius: SmoothBorderRadius.all(
+                                  SmoothRadius(
+                                    cornerRadius: getSize(6),
+                                    cornerSmoothing: 1,
+                                  ),
                                 ),
                               ),
                             ),
+                            fit: BoxFit.cover,
                           ),
-                          fit: BoxFit.cover,
                         ),
-                      ),
-                      SizedBox(
-                        width: getSize(8),
-                      ),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            BaseText(
-                              text:
-                                  '${state.messageListDTO[index].first_name ?? ""} ${state.messageListDTO[index].last_name ?? ""}',
-                              fontSize: 14,
+                        SizedBox(
+                          width: getSize(8),
+                        ),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              BaseText(
+                                text:
+                                    '${state.messageList[index].first_name ?? ""} ${state.messageList[index].last_name ?? ""}',
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                                textColor: state.messageList[index]
+                                            .unseen_messages_count !=
+                                        0
+                                    ? AppColors.primaryOrange
+                                    : AppColors.black.withOpacity(0.60),
+                              ),
+                              SizedBox(
+                                height: getSize(4),
+                              ),
+                              BaseText(
+                                text: state.messageList[index].message ?? "",
+                                fontSize: 12,
+                                maxLines: 2,
+                                textColor: AppColors.black
+                                    .withOpacity(index == 0 ? 0.60 : 0.40),
+                              )
+                            ],
+                          ),
+                        ),
+                        Visibility(
+                          visible:
+                              state.messageList[index].unseen_messages_count !=
+                                  0,
+                          child: Container(
+                            height: getSize(18),
+                            width: getSize(18),
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              color: AppColors.primaryOrange,
+                              shape: BoxShape.circle,
+                            ),
+                            child: BaseText(
+                              text: state
+                                      .messageList[index].unseen_messages_count
+                                      ?.toString() ??
+                                  "",
+                              fontSize: 10,
                               fontWeight: FontWeight.w500,
-                              textColor: state.messageListDTO[index]
-                                          .unseen_messages_count !=
-                                      0
-                                  ? AppColors.primaryOrange
-                                  : AppColors.black.withOpacity(0.60),
+                              textColor: AppColors.white,
                             ),
-                            SizedBox(
-                              height: getSize(4),
-                            ),
-                            BaseText(
-                              text: state.messageListDTO[index].message ?? "",
-                              fontSize: 12,
-                              maxLines: 2,
-                              textColor: AppColors.black
-                                  .withOpacity(index == 0 ? 0.60 : 0.40),
-                            )
-                          ],
-                        ),
-                      ),
-                      Visibility(
-                        visible:
-                            state.messageListDTO[index].unseen_messages_count !=
-                                0,
-                        child: Container(
-                          height: getSize(18),
-                          width: getSize(18),
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                            color: AppColors.primaryOrange,
-                            shape: BoxShape.circle,
                           ),
-                          child: BaseText(
-                            text: state
-                                    .messageListDTO[index].unseen_messages_count
-                                    ?.toString() ??
-                                "",
-                            fontSize: 10,
-                            fontWeight: FontWeight.w500,
-                            textColor: AppColors.white,
-                          ),
-                        ),
-                      )
-                    ],
+                        )
+                      ],
+                    ),
                   ),
-                ),
-              );
-            },
-          ),
-        );
+                );
+              },
+            ),
+          );
+        }
       },
     );
   }
