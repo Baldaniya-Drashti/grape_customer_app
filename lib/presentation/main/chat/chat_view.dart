@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -149,7 +151,7 @@ class ChatView extends StatelessWidget {
       leadingWidth: null,
       customTitle: BlocBuilder<ChatBloc, ChatState>(
         builder: (context, state) {
-          //log('${state.isStatusOnlineReceived} ${state.onlineUserID != getCurrentUser().userId.toString()}');
+          log('isReciverTyping : ${state.isUserTyping}');
           return Row(
             children: [
               if (state.apiSuccessData.profile != null)

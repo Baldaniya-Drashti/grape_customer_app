@@ -66,6 +66,8 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
                     value.sender, value.receiver));
 
                 add(ChatEvent.recieveMessage());
+                add(ChatEvent.typing(sender, receiver));
+                add(ChatEvent.removeTyping(sender, receiver));
                 return state.copyWith(
                   roomId: data,
                 );
@@ -104,7 +106,10 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
             await emit.forEach(
               chatService.displayTypingStream,
               onData: (data) {
-                return state.copyWith(displayTypingData: data);
+                return state.copyWith(
+                  displayTypingData: data['receiver_id'],
+                  //   isUserTyping: true,
+                );
               },
             );
           },
@@ -115,7 +120,10 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
             await emit.forEach(
               chatService.removeTypingStream,
               onData: (data) {
-                return state.copyWith(removeTypingData: data);
+                return state.copyWith(
+                  removeTypingData: data,
+                  isUserTyping: false,
+                );
               },
             );
           },
@@ -175,8 +183,6 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
 
             page++;
 
-
-
             res.fold(
               (l) => emit(
                 state.copyWith(isApiFailed: true, isLoading: false),
@@ -192,7 +198,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
                     'receiver_id': state.recieverId,
                     'chatId': chatList.first.id.toString(),
                   };
-                  // log('receivedMessageData : $receivedMessageData');
+                  //log('receivedMessageDataFromBloc : $receivedMessageData');
                   SocketChatService()
                       .socket
                       .emit('ReadMessage', receivedMessageData);
@@ -215,7 +221,17 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
             );
           },
           sendMessageTextChange: (SendMessageTextChange value) async {
-            //   add(ChatEvent.typing('4', '2'));
+            // if (!state.isUserTyping) {
+            //   add(ChatEvent.typing(
+            //       getCurrentUser().userId.toString(), state.recieverId));
+            //   emit(state.copyWith(isUserTyping: true));
+
+            //   await Future.delayed(Duration(seconds: 2)).whenComplete(() {
+            //     add(ChatEvent.removeTyping(
+            //         getCurrentUser().userId.toString(), state.recieverId));
+            //     emit(state.copyWith(isUserTyping: false));
+            //   });
+            // }
             return emit(state.copyWith(textFieldValue: value.value));
           },
         );

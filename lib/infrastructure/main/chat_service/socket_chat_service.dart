@@ -66,11 +66,11 @@ class SocketChatService implements ChatService {
         _newMessageController.add(messageObject);
         Map<String, dynamic> receivedMessageData = {
           'roomId': data['roomId'],
-          'sender_id': data['sender_id'],
-          'receiver_id': data['receiver_id'],
+          'sender_id': data['receiver_id'],
+          'receiver_id': data['sender_id'],
           'chatId': data['chatId']
         };
-
+        // log('receivedMessageData : $receivedMessageData');
         socket.emit('ReadMessage', receivedMessageData);
       }
     });
@@ -79,12 +79,19 @@ class SocketChatService implements ChatService {
     socket.on('DisplayTyping', (data) {
       log('DisplayTyping : $data');
 
-      _displayTypingController.add(data.toString());
+      _displayTypingController.add(data);
     });
 
     // Listen for removeTypingMessage event
     socket.on('removeTypingMessage', (data) {
       log('removeTypingMessage : $data');
+
+      _removeTypingController.add(data.toString());
+    });
+
+    // Listen for removeTyping event from reciever
+    socket.on('removeTyping', (data) {
+      log('removeTyping : $data');
 
       _removeTypingController.add(data.toString());
     });
