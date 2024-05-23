@@ -41,7 +41,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           getProductList: (GetProductList e) async {
             if (e.isRefresh) {
               page = 1;
-              emit(state.copyWith(getProductList: [], isLoading: true));
+              emit(state.copyWith(getProductList: [], isLoading: e.isRefresh));
               refreshController.resetNoData();
             } else {
               if (page > lastPage) {

@@ -25,6 +25,8 @@ class SocketChatService implements ChatService {
       StreamController<dynamic>();
   final StreamController<String> _removeTypingController =
       StreamController<String>();
+  final StreamController<dynamic> _removeTypingRecieverController =
+      StreamController<dynamic>();
 
   SocketChatService() {
     socket = io.io('https://www.grape.market:3001',
@@ -86,14 +88,14 @@ class SocketChatService implements ChatService {
     socket.on('removeTypingMessage', (data) {
       log('removeTypingMessage : $data');
 
-      _removeTypingController.add(data.toString());
+      _removeTypingController.add(data);
     });
 
     // Listen for removeTyping event from reciever
     socket.on('removeTyping', (data) {
       log('removeTyping : $data');
 
-      _removeTypingController.add(data.toString());
+      _removeTypingRecieverController.add(data);
     });
   }
 
@@ -114,7 +116,8 @@ class SocketChatService implements ChatService {
   Stream<String> get removeTypingStream => _removeTypingController.stream;
   Stream<dynamic> get getOnlineStatusStream =>
       _getOnlineStatusController.stream;
-
+  Stream<dynamic> get getRecieverTypingStatus =>
+      _removeTypingRecieverController.stream;
   @override
   Stream<List<Chats>> getMessages() {
     // Implement logic to listen for messages from socket

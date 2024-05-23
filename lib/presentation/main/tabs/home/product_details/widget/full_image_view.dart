@@ -7,12 +7,13 @@ import 'package:grape_customer_app/presentation/core/widgets/layout/layout.dart'
 @RoutePage(name: 'FullImageView')
 class FullImageView extends StatelessWidget {
   final String imageUrl;
-
+  final int type;
   final ChewieController? chewieController;
   const FullImageView({
     super.key,
     required this.imageUrl,
     this.chewieController,
+    required this.type,
   });
 
   @override
@@ -26,7 +27,7 @@ class FullImageView extends StatelessWidget {
         },
         child: SafeArea(
           child: Center(
-            child: imageUrl.contains('mp4')
+            child: type == 2
                 ? chewieController != null &&
                         chewieController!
                             .videoPlayerController.value.isInitialized

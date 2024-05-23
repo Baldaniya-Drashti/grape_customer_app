@@ -19,6 +19,8 @@ class ChatState with _$ChatState {
     required String roomId,
     required String recieverId,
     required bool isUserTyping,
+    required bool isRecieverTyping,
+
     // Add more properties as needed
   }) = _ChatState;
 
@@ -38,7 +40,7 @@ class ChatState with _$ChatState {
         refreshController: RefreshController(),
         roomId: '', chatList: [],
         onlineUserID: getCurrentUser().userId.toString(), recieverId: '-1',
-        isUserTyping: false,
+        isUserTyping: false, isRecieverTyping: false,
         // Initialize other properties
       );
 }

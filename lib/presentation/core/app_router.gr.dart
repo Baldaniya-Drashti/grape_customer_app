@@ -160,6 +160,7 @@ abstract class $AppRouter extends _i32.RootStackRouter {
           key: args.key,
           imageUrl: args.imageUrl,
           chewieController: args.chewieController,
+          type: args.type,
         ),
       );
     },
@@ -588,6 +589,7 @@ class FullImageView extends _i32.PageRouteInfo<FullImageViewArgs> {
     _i33.Key? key,
     required String imageUrl,
     _i36.ChewieController? chewieController,
+    required int type,
     List<_i32.PageRouteInfo>? children,
   }) : super(
           FullImageView.name,
@@ -595,6 +597,7 @@ class FullImageView extends _i32.PageRouteInfo<FullImageViewArgs> {
             key: key,
             imageUrl: imageUrl,
             chewieController: chewieController,
+            type: type,
           ),
           initialChildren: children,
         );
@@ -610,6 +613,7 @@ class FullImageViewArgs {
     this.key,
     required this.imageUrl,
     this.chewieController,
+    required this.type,
   });
 
   final _i33.Key? key;
@@ -618,9 +622,11 @@ class FullImageViewArgs {
 
   final _i36.ChewieController? chewieController;
 
+  final int type;
+
   @override
   String toString() {
-    return 'FullImageViewArgs{key: $key, imageUrl: $imageUrl, chewieController: $chewieController}';
+    return 'FullImageViewArgs{key: $key, imageUrl: $imageUrl, chewieController: $chewieController, type: $type}';
   }
 }
 

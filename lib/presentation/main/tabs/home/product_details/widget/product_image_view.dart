@@ -29,6 +29,12 @@ class ProductImageView extends StatelessWidget {
                           imageUrl: state.getProductDetails.product
                                   ?.media?[state.selectedImageIndex].media ??
                               "",
+                          type: state
+                                  .getProductDetails
+                                  .product
+                                  ?.media?[state.selectedImageIndex]
+                                  .media_type ??
+                              0,
                           chewieController: state
                               .getProductDetails
                               .product

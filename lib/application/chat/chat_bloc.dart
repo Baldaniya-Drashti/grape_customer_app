@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -19,8 +22,11 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
   int page = 1;
   final IMainFacade mainFacade;
   int lastPage = 1;
+  var textEditingController = TextEditingController();
+  Timer? searchOnStoppedTyping;
 
   ChatBloc(this.chatService, this.mainFacade) : super(ChatState.initial()) {
+    //  textEditingController.addListener(onTextChanged);
     on<ChatEvent>(
       (event, emit) async {
         await event.map(
@@ -68,6 +74,8 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
                 add(ChatEvent.recieveMessage());
                 add(ChatEvent.typing(sender, receiver));
                 add(ChatEvent.removeTyping(sender, receiver));
+                add(ChatEvent.removeTypingReciever());
+
                 return state.copyWith(
                   roomId: data,
                 );
@@ -107,8 +115,12 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
               chatService.displayTypingStream,
               onData: (data) {
                 return state.copyWith(
-                  displayTypingData: data['receiver_id'],
-                  //   isUserTyping: true,
+                  //  displayTypingData: data['receiver_id'],
+                  isRecieverTyping: (data['receiver_id'] ==
+                              getCurrentUser().userId.toString() &&
+                          data['roomId'] == state.roomId)
+                      ? true
+                      : false,
                 );
               },
             );
@@ -117,15 +129,15 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
             final sender = value.sender;
             final receiver = value.receiver;
             chatService.sendRemoveTypingEvent(sender, receiver);
-            await emit.forEach(
-              chatService.removeTypingStream,
-              onData: (data) {
-                return state.copyWith(
-                  removeTypingData: data,
-                  isUserTyping: false,
-                );
-              },
-            );
+            // await emit.forEach(
+            //   chatService.removeTypingStream,
+            //   onData: (data) {
+            //     return state.copyWith(
+            //       removeTypingData: data,
+            //       isUserTyping: false,
+            //     );
+            //   },
+            // );
           },
           getOpponentOnlineStatus: (value) async {
             final sender = value.sender;
@@ -221,6 +233,27 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
             );
           },
           sendMessageTextChange: (SendMessageTextChange value) async {
+            if (value.value.isNotEmpty) {
+              add(ChatEvent.userTyping(
+                  getCurrentUser().userId.toString(), state.recieverId));
+              const duration = Duration(seconds: 2);
+              if (searchOnStoppedTyping != null) {
+                searchOnStoppedTyping?.cancel();
+              }
+              searchOnStoppedTyping = Timer(
+                duration,
+                () async {
+                  if (value.value.trim().isNotEmpty) {
+                    add(ChatEvent.removeTyping(
+                        getCurrentUser().userId.toString(), state.recieverId));
+                    //  fetchQuestions();
+                  }
+                },
+              );
+            } else {
+              emit(state.copyWith(isUserTyping: false));
+              //  fetchLearningModules(isRefresh: true);
+            }
             // if (!state.isUserTyping) {
             //   add(ChatEvent.typing(
             //       getCurrentUser().userId.toString(), state.recieverId));
@@ -234,8 +267,50 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
             // }
             return emit(state.copyWith(textFieldValue: value.value));
           },
+          removeTypingReciever: (RemoveTypingReciever value) async {
+            // chatService.sendRemoveTypingEvent(sender, receiver);
+            await emit.forEach(
+              chatService.getRecieverTypingStatus,
+              onData: (data) {
+                return state.copyWith(
+                  isRecieverTyping: (data['receiver_id'] ==
+                              getCurrentUser().userId.toString() &&
+                          data['roomId'] == state.roomId)
+                      ? false
+                      : true,
+                );
+              },
+            );
+          },
+          userTyping: (UserTyping value) async {
+            final sender = value.sender;
+            final receiver = value.receiver;
+            chatService.sendTypingEvent(sender, receiver);
+          },
         );
       },
     );
   }
+  // void onTextChanged() {
+  //   final text = textEditingController.text;
+  //   if (text.isNotEmpty) {
+  //     add(ChatEvent.typing(
+  //         getCurrentUser().userId.toString(), state.recieverId));
+  //     _resetTimer();
+  //   } else {
+  //     _startTimer();
+  //   }
+  // }
+
+  // void _startTimer() {
+  //   searchOnStoppedTyping?.cancel();
+  //   searchOnStoppedTyping = Timer(Duration(seconds: 2), () {
+  //     add(ChatEvent.removeTyping(
+  //         getCurrentUser().userId.toString(), state.recieverId));
+  //   });
+  // }
+
+  // void _resetTimer() {
+  //   searchOnStoppedTyping?.cancel();
+  // }
 }

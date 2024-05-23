@@ -19,8 +19,11 @@ class ChatEvent with _$ChatEvent {
   const factory ChatEvent.recieveMessage() = RecieveMessage;
 
   const factory ChatEvent.typing(String sender, String receiver) = Typing;
+  const factory ChatEvent.userTyping(String sender, String receiver) = UserTyping;
+
   const factory ChatEvent.removeTyping(String sender, String receiver) =
       RemoveTyping;
+  const factory ChatEvent.removeTypingReciever() = RemoveTypingReciever;
   const factory ChatEvent.getOpponentOnlineStatus(
       String sender, String receiver) = GetOpponentOnlineStatus;
 

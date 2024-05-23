@@ -17,6 +17,7 @@ import 'package:grape_customer_app/presentation/common/widgets/base_text.dart';
 import 'package:grape_customer_app/presentation/core/styles/styles.dart';
 import 'package:grape_customer_app/presentation/core/widgets/inputs/custom_text_field.dart';
 import 'package:grape_customer_app/presentation/core/widgets/layout/layout.dart';
+import 'package:grape_customer_app/presentation/core/widgets/utility/life_cycle_watcher.dart';
 import 'package:grape_customer_app/presentation/main/chat/widget/chat_shimmer.dart';
 import 'package:grape_customer_app/presentation/main/chat/widget/chat_widget.dart';
 
@@ -29,7 +30,6 @@ class ChatView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var textEditingController = TextEditingController();
     return BlocProvider(
       create: (context) => getIt<ChatBloc>()
         ..add(
@@ -40,77 +40,84 @@ class ChatView extends StatelessWidget {
         ),
       child: BlocBuilder<ChatBloc, ChatState>(
         builder: (context, state) {
-          return Scaffold(
-            bottomSheet: SafeArea(
-              child: Container(
-                padding: EdgeInsets.only(
-                  left: getSize(18),
-                  right: getSize(18),
-                  bottom:
-                      isFullScreenDevice(context) ? getSize(0) : getSize(18),
-                  top: getSize(18),
-                ),
-                color: AppColors.white,
-                child: CustomTextField(
-                  hintText: 'Type a message',
-                  maxLines: 5,
-                  controller: textEditingController,
-                  //key: Key(state.textFieldValue),
-                  //initialValue: state.textFieldValue,
-                  //  initialValue: state.textFieldValue,
-                  minLines: 1,
-                  keyboardType: TextInputType.multiline,
-                  textInputAction: TextInputAction.newline,
-                  onChanged: (value) => context
-                      .read<ChatBloc>()
-                      .add(ChatEvent.sendMessageTextChange(value)),
-                  suffixIcon: IconButton(
-                    onPressed: () {
-                      // log(textEditingController.text);
-                      AppFocus.unfocus(context);
-                      if (state.textFieldValue.trim().isNotEmpty) {
-                        textEditingController.clear();
-                        context.read<ChatBloc>().add(
-                              ChatEvent.sendMessage(
-                                Message(
-                                  content: state.textFieldValue.trim(),
-                                  sender: getCurrentUser().userId.toString(),
-                                  receiver: recieverID,
-                                  roomId: state.roomId,
-                                  type: 0,
+          //   log('isUserTyping : ${state.isUserTyping}');
+          return LifecycleWatcher(
+            child: Scaffold(
+              bottomSheet: SafeArea(
+                child: Container(
+                  padding: EdgeInsets.only(
+                    left: getSize(18),
+                    right: getSize(18),
+                    bottom:
+                        isFullScreenDevice(context) ? getSize(0) : getSize(18),
+                    top: getSize(18),
+                  ),
+                  color: AppColors.white,
+                  child: CustomTextField(
+                    hintText: 'Type a message',
+                    maxLines: 5,
+                    controller: context.read<ChatBloc>().textEditingController,
+                    //key: Key(state.textFieldValue),
+                    //initialValue: state.textFieldValue,
+                    //  initialValue: state.textFieldValue,
+                    minLines: 1,
+                    keyboardType: TextInputType.multiline,
+                    textInputAction: TextInputAction.newline,
+                    onChanged: (value) => context
+                        .read<ChatBloc>()
+                        .add(ChatEvent.sendMessageTextChange(value)),
+                    suffixIcon: IconButton(
+                      onPressed: () {
+                        // log(textEditingController.text);
+                        AppFocus.unfocus(context);
+                        if (state.textFieldValue.trim().isNotEmpty) {
+                          context
+                              .read<ChatBloc>()
+                              .textEditingController
+                              .clear();
+                          context.read<ChatBloc>().add(
+                                ChatEvent.sendMessage(
+                                  Message(
+                                    content: state.textFieldValue.trim(),
+                                    sender: getCurrentUser().userId.toString(),
+                                    receiver: recieverID,
+                                    roomId: state.roomId,
+                                    type: 0,
+                                  ),
                                 ),
-                              ),
-                            );
-                      }
-                    },
-                    icon: Icon(
-                      Icons.send_rounded,
-                      color: AppColors.primaryOrange,
+                              );
+                        }
+                      },
+                      icon: Icon(
+                        Icons.send_rounded,
+                        color: AppColors.primaryOrange,
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-            appBar: fromLiveChatSupport ? getLiveChatAppBar() : getUserAppBar(),
-            body: WillPopScope(
-              onWillPop: () {
-                context.read<ChatBloc>().add(ChatEvent.removeListners());
-                Navigator.pop(context, true);
-                return Future.value(true);
-              },
-              child: state.isLoading
-                  ? Center(
-                      child: ShimmerChatBubble(),
-                    )
-                  : state.isApiFailed
-                      ? Center(
-                          child: BaseText(
-                            text: 'Something went wrong. Please try again!!',
-                          ),
-                        )
-                      : state.isConnectedToSocket
-                          ? ChatWidget()
-                          : SizedBox(),
+              appBar:
+                  fromLiveChatSupport ? getLiveChatAppBar() : getUserAppBar(),
+              body: WillPopScope(
+                onWillPop: () {
+                  context.read<ChatBloc>().add(ChatEvent.removeListners());
+                  Navigator.pop(context, true);
+                  return Future.value(true);
+                },
+                child: state.isLoading
+                    ? Center(
+                        child: ShimmerChatBubble(),
+                      )
+                    : state.isApiFailed
+                        ? Center(
+                            child: BaseText(
+                              text: 'Something went wrong. Please try again!!',
+                            ),
+                          )
+                        : state.isConnectedToSocket
+                            ? ChatWidget()
+                            : SizedBox(),
+              ),
             ),
           );
         },
@@ -151,7 +158,6 @@ class ChatView extends StatelessWidget {
       leadingWidth: null,
       customTitle: BlocBuilder<ChatBloc, ChatState>(
         builder: (context, state) {
-          log('isReciverTyping : ${state.isUserTyping}');
           return Row(
             children: [
               if (state.apiSuccessData.profile != null)
@@ -198,14 +204,17 @@ class ChatView extends StatelessWidget {
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
                     ),
-                    // SizedBox(
-                    //   height: getSize(2),
-                    // ),
-                    // BaseText(
-                    //   text: 'typing...',
-                    //   maxLines: 1,
-                    //   fontSize: 10,
-                    // ),
+                    SizedBox(
+                      height: getSize(state.isRecieverTyping ? 2 : 0),
+                    ),
+                    Visibility(
+                      visible: state.isRecieverTyping,
+                      child: BaseText(
+                        text: 'typing...',
+                        maxLines: 1,
+                        fontSize: 10,
+                      ),
+                    ),
                   ],
                 ),
               ),
