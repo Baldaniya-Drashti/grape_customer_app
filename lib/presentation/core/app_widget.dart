@@ -47,7 +47,7 @@ class _App extends StatefulWidget {
 }
 
 class _AppState extends State<_App> {
-  final AppRouter _appRouter = AppRouter();
+  final appRouter = getIt<AppRouter>();
   FirebaseAnalytics analytics = FirebaseAnalytics.instance;
 
   @override
@@ -68,7 +68,7 @@ class _AppState extends State<_App> {
               debugShowCheckedModeBanner: false,
               theme: ThemeConfig.lightTheme,
               locale: state1.locale,
-              routerConfig: _appRouter.config(
+              routerConfig: appRouter.config(
                 navigatorObservers: () =>
                     [FirebaseAnalyticsObserver(analytics: analytics)],
                 deepLinkBuilder: (deepLink) {

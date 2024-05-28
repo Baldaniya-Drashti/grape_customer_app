@@ -5,12 +5,14 @@ class NotificationsEvent with _$NotificationsEvent {
   factory NotificationsEvent.tabChange(int tabIndex) = TabChange;
   factory NotificationsEvent.onClickOfRateAndReviewTile(
       bool isShowBottomSheet) = OnClickOfRateAndReviewTile;
-  const factory NotificationsEvent.reviewChanged(String review) = ReviewChanged;
-  const factory NotificationsEvent.submitReview() = SubmitReview;
+  factory NotificationsEvent.reviewChanged(String review) = ReviewChanged;
+  factory NotificationsEvent.productReview(double review) = ProductReview;
+
+  factory NotificationsEvent.submitReview(BuildContext context) = SubmitReview;
   factory NotificationsEvent.getMessageList(bool isRefresh) = GetMessageList;
   factory NotificationsEvent.getNotificationList(bool isRefresh) =
       GetNotificationList;
   factory NotificationsEvent.readNotification(String notificationID) =
       ReadNotification;
-  factory NotificationsEvent.reviewProduct(String dataID) = ReviewProduct;
+  factory NotificationsEvent.getReviewProduct(String dataID) = GetReviewProduct;
 }

@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grape_customer_app/application/main/notifications/notifications_bloc.dart';
 
 import 'package:grape_customer_app/domain/core/math_utils.dart';
+import 'package:grape_customer_app/infrastructure/main/notification_dto/notification_list_dto.dart';
 import 'package:grape_customer_app/injection.dart';
 import 'package:grape_customer_app/presentation/common/utils/app_focus.dart';
 import 'package:grape_customer_app/presentation/common/widgets/base_text.dart';
@@ -14,7 +15,8 @@ import 'package:grape_customer_app/presentation/core/widgets/inputs/custom_text_
 import 'package:grape_customer_app/presentation/core/widgets/utility/common_rating_bar.dart';
 
 class RateAndReviewBotthomSheet extends StatelessWidget {
-  const RateAndReviewBotthomSheet({super.key});
+  final Notifications notifications;
+  const RateAndReviewBotthomSheet({super.key, required this.notifications});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +30,7 @@ class RateAndReviewBotthomSheet extends StatelessWidget {
       context: context,
       backgroundColor: AppColors.white,
       elevation: 0,
-      isScrollControlled: true,
+      //  isScrollControlled: true,
       useRootNavigator: true,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
@@ -37,9 +39,18 @@ class RateAndReviewBotthomSheet extends StatelessWidget {
         ),
       ),
       builder: (context) => BlocProvider(
-        create: (context) => getIt<NotificationsBloc>(),
+        create: (context) => getIt<NotificationsBloc>()
+          ..add(
+            NotificationsEvent.getReviewProduct(
+                notifications.data_id?.toString() ?? ""),
+          ),
         child: BlocBuilder<NotificationsBloc, NotificationsState>(
-          builder: (context, state) {
+            builder: (context, state) {
+          if (state.isLoading) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          } else {
             return Form(
               autovalidateMode: state.showErrorMessages
                   ? AutovalidateMode.always
@@ -81,7 +92,7 @@ class RateAndReviewBotthomSheet extends StatelessWidget {
                                 alignment: Alignment.topRight,
                                 child: IconButton(
                                   onPressed: () {
-                                    context.router.maybePop(true);
+                                    context.router.maybePop();
                                   },
                                   icon: Icon(Icons.close_rounded),
                                 ),
@@ -109,7 +120,11 @@ class RateAndReviewBotthomSheet extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(getSize(6)),
                                 image: DecorationImage(
                                   image: CachedNetworkImageProvider(
-                                      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0U3avlAFpuN9Sf5PVhN3MHdXQzh6rJusL93tMQRngAnrK1k0Z9CH4hzhArR0kyV-Fm_E&usqp=CAU'),
+                                    state.getReviewProduct.images?.first
+                                            .image ??
+                                        "",
+                                  ),
+                                  fit: BoxFit.cover,
                                 ),
                               ),
                             ),
@@ -117,8 +132,9 @@ class RateAndReviewBotthomSheet extends StatelessWidget {
                               width: getSize(10),
                             ),
                             BaseText(
-                              text: 'Google Pixel 7a',
+                              text: state.getReviewProduct.name ?? "",
                               fontSize: 14,
+                              maxLines: 1,
                               fontWeight: FontWeight.w500,
                             ),
                           ],
@@ -140,7 +156,11 @@ class RateAndReviewBotthomSheet extends StatelessWidget {
                         child: CommonRatingBar(
                           iconnSize: getSize(36),
                           horizontalPadding: getSize(7),
-                          onRatingUpdate: (p0) {},
+                          onRatingUpdate: (p0) {
+                            context
+                                .read<NotificationsBloc>()
+                                .add(NotificationsEvent.productReview(p0));
+                          },
                         ),
                       ),
                       SizedBox(
@@ -174,9 +194,10 @@ class RateAndReviewBotthomSheet extends StatelessWidget {
                         onPressed: () {
                           context
                               .read<NotificationsBloc>()
-                              .add(NotificationsEvent.submitReview());
+                              .add(NotificationsEvent.submitReview(context));
                         },
                         buttonText: 'Submit',
+                        isSubmitting: state.isSubmitting,
                       ),
                       SizedBox(
                         height: getSize(30),
@@ -186,8 +207,8 @@ class RateAndReviewBotthomSheet extends StatelessWidget {
                 ),
               ),
             );
-          },
-        ),
+          }
+        }),
       ),
     );
   }

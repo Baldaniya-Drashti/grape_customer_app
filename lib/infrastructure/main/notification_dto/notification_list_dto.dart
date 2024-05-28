@@ -26,7 +26,7 @@ class Notifications with _$Notifications {
     String? image,
     int? created_at,
     int? type,
-    String? data_id,
+    int? data_id,
   }) = _Notifications;
 
   factory Notifications.fromJson(Map<String, dynamic> json) =>

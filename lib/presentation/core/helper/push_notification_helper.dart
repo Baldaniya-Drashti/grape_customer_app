@@ -1,18 +1,35 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'dart:async';
+import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:auto_route/auto_route.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:grape_customer_app/domain/auth/i_auth_facade.dart';
+import 'package:grape_customer_app/injection.dart';
+import 'package:grape_customer_app/presentation/core/app_router.dart';
+import 'package:grape_customer_app/presentation/core/app_router.gr.dart';
 
 late final IAuthFacade authFacade;
 @pragma('vm:entry-point')
 void notificationTapBackground(NotificationResponse notificationResponse) {
+  onTapNotification(
+    RemoteMessage(data: jsonDecode(notificationResponse.payload ?? "")),
+  );
   // handle action
+}
+
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  if (message.data.isNotEmpty) {
+    onTapNotification(message);
+    // DependencyInjection.readNotification('notificationId');
+  }
+
+  print('Handling a background message ${message.messageId}');
 }
 
 class PushNotificationService {
@@ -28,12 +45,14 @@ class PushNotificationService {
   Future<void> setupInteractedMessage(BuildContext context) async {
     await firebaseMessaging.getInitialMessage().then((RemoteMessage? message) {
       log('getInitialMessage : ${message?.data}');
+      if (message != null) {
+        onTapNotification(message);
+      }
     });
 
-    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {
       log('onMessageOpenedApp : ${message.data}');
-
-      if (message.data['type'] == 'chat') {}
+      onTapNotification(message);
     });
     _isAndroidPermissionGranted();
     _requestPermissions();
@@ -95,14 +114,22 @@ class PushNotificationService {
         InitializationSettings(android: androidSettings, iOS: iOSSettings);
     flutterLocalNotificationsPlugin.initialize(
       initSettings,
-      onDidReceiveNotificationResponse: (NotificationResponse details) {
+      onDidReceiveNotificationResponse: (NotificationResponse details) async {
         switch (details.notificationResponseType) {
           case NotificationResponseType.selectedNotification:
-            log('NotificationResponseType.selectedNotification : ${details.payload}');
+            log('NotificationResponseType.selectedNotification : ${jsonDecode(details.payload ?? "")}');
+            // RemoteMessage(data: jsonDecode(details.payload ?? ""));
+            onTapNotification(
+              RemoteMessage(data: jsonDecode(details.payload ?? "")),
+            );
+
             break;
 
           case NotificationResponseType.selectedNotificationAction:
             log('NotificationResponseType.selectedNotificationAction : ${details.payload}');
+            onTapNotification(
+              RemoteMessage(data: jsonDecode(details.payload ?? "")),
+            );
 
             break;
           default:
@@ -115,6 +142,9 @@ class PushNotificationService {
       alert: true, // Required to display a heads up notification
       badge: true,
       sound: true,
+    );
+    FirebaseMessaging.onBackgroundMessage(
+      _firebaseMessagingBackgroundHandler,
     );
 // onMessage is called when the app is in foreground and a notification is received
     FirebaseMessaging.onMessage.listen((RemoteMessage? message) {
@@ -140,6 +170,7 @@ class PushNotificationService {
               icon: android.smallIcon,
             ),
           ),
+          payload: jsonEncode(message.data),
         );
       }
     });
@@ -153,4 +184,24 @@ class PushNotificationService {
             'This channel is used for important notifications.', // description
         importance: Importance.max,
       );
+}
+
+onTapNotification(RemoteMessage message) async {
+  log('onTapNotification : ${message.data}');
+  if (message.data['type'] == '2') {
+//      context.read<MainTabBloc>().add(MainTabEvent.tabChange(3));
+    await getIt<AppRouter>().push(
+      PageRouteInfo(
+        ChatView.name,
+        args: ChatViewArgs(
+          recieverID: message.data['data_id'],
+        ),
+      ),
+    );
+    // if (res != null && res == true) {
+    //   context
+    //       .read<NotificationsBloc>()
+    //       .add(NotificationsEvent.getMessageList(true));
+    // }
+  }
 }

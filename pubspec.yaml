@@ -101,6 +101,7 @@ dependencies:
   dotted_border: ^2.1.0
   flutter_mpesa_package: ^0.0.4
   qr_flutter: ^4.1.0
+  animated_text_kit: ^4.2.2
  
 
 

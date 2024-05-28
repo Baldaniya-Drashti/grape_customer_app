@@ -1,14 +1,16 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:dartz/dartz.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:grape_customer_app/domain/auth/auth_value_objects.dart';
 import 'package:grape_customer_app/domain/main/i_main_facade.dart';
+import 'package:grape_customer_app/domain/main/main_failure.dart';
 import 'package:grape_customer_app/infrastructure/main/chat_dto/chat_list_dto.dart';
+import 'package:grape_customer_app/infrastructure/main/notification_dto/get_review_product_dto.dart';
 import 'package:grape_customer_app/infrastructure/main/notification_dto/notification_list_dto.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-
-import '../../../domain/auth/auth_failure.dart';
 
 part 'notifications_state.dart';
 part 'notifications_event.dart';
@@ -42,14 +44,32 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
               ),
             );
           },
-          submitReview: (SubmitReview value) {
+          submitReview: (SubmitReview value) async {
+            Either<MainFailure, String>? failureOrSuccess;
             final isReviewValid = state.reviewndRate.isValid();
-            if (isReviewValid) {}
+            if (isReviewValid) {
+              emit(
+                state.copyWith(
+                  isSubmitting: true,
+                  failureOrSuccessOption: none(),
+                ),
+              );
+
+              failureOrSuccess = await mainFacade.giveReviewToProduct(
+                productId: state.getReviewProduct.id?.toString() ?? "",
+                rating: state.productReview.toString(),
+                reviewComment: state.reviewndRate.getOrCrash() ?? "",
+              );
+            }
+            if (failureOrSuccess?.isRight() ?? false) {
+              value.context.router.maybePop(true);
+            }
             emit(
               state.copyWith(
                 showErrorMessages: true,
+                isSubmitting: false,
                 isShowClickAndReviewBottomSheet: false,
-                failureOrSuccessOption: none(),
+                failureOrSuccessOption: optionOf(failureOrSuccess),
               ),
             );
           },
@@ -87,9 +107,7 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
               ),
               (r) {
                 var res = ChatListDTO.fromJson(r.data);
-                // var cartList = (r.data as List<dynamic>)
-                //     .map((e) => ChatListDTO.fromJson(e))
-                //     .toList();
+
                 lastPage = r.meta?.lastPage ?? 1;
                 return emit(
                   state.copyWith(
@@ -177,7 +195,38 @@ class NotificationsBloc extends Bloc<NotificationsEvent, NotificationsState> {
               },
             );
           },
-          reviewProduct: (ReviewProduct value) async {},
+          productReview: (ProductReview value) async {
+            emit(state.copyWith(productReview: value.review));
+          },
+          getReviewProduct: (GetReviewProduct value) async {
+            emit(
+              state.copyWith(
+                isLoading: true,
+                failureOrSuccessOption: none(),
+              ),
+            );
+
+            var res = await mainFacade.reviewNotificationAPI(
+              dataId: value.dataID,
+            );
+            res.fold(
+              (l) => emit(
+                state.copyWith(
+                  isLoading: false,
+                  isShowClickAndReviewBottomSheet: false,
+                  failureOrSuccessOption: none(),
+                ),
+              ),
+              (r) => emit(
+                state.copyWith(
+                  isLoading: false,
+                  isShowClickAndReviewBottomSheet: false,
+                  getReviewProduct: r,
+                  failureOrSuccessOption: none(),
+                ),
+              ),
+            );
+          },
         );
       },
     );

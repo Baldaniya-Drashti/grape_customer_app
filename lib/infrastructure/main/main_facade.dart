@@ -8,6 +8,7 @@ import 'package:grape_customer_app/domain/main/main_failure.dart';
 import 'package:grape_customer_app/infrastructure/core/common_response.dart';
 import 'package:grape_customer_app/infrastructure/core/network/injectable_module.dart';
 import 'package:grape_customer_app/infrastructure/main/checkout_dto/checkout_dto.dart';
+import 'package:grape_customer_app/infrastructure/main/notification_dto/get_review_product_dto.dart';
 import 'package:grape_customer_app/infrastructure/main/order_detail_dto/order_detail_dto.dart';
 import 'package:grape_customer_app/infrastructure/main/payemnt_method_dto/get_cards_dto.dart';
 import 'package:grape_customer_app/infrastructure/main/shipping_address_dto/shipping_address_dto.dart';
@@ -1118,7 +1119,7 @@ class MainFacade implements IMainFacade {
   }
 
   @override
-  Future<Either<MainFailure, String>> reviewNotificationAPI({
+  Future<Either<MainFailure, GetReviewProductDTO>> reviewNotificationAPI({
     required String dataId,
   }) async {
     try {
@@ -1126,8 +1127,8 @@ class MainFacade implements IMainFacade {
         '${ApiConstants.getReviewProduct}/$dataId',
       );
 
-      if (res?.dioMessage != null) {
-        return right(res?.dioMessage ?? "");
+      if (res?.data != null) {
+        return right(GetReviewProductDTO.fromJson(res?.data));
       } else {
         return left(const MainFailure.serverError());
       }
@@ -1160,6 +1161,41 @@ class MainFacade implements IMainFacade {
 
       if (res != null && res.data != null) {
         return right(res);
+      } else {
+        return left(const MainFailure.serverError());
+      }
+    } on DioException catch (err) {
+      if (err.response != null) {
+        var commonRespose = CommonResponse.fromJson(err.response?.data);
+
+        if (commonRespose.dioMessage != null) {
+          return left(
+              MainFailure.showAPIResponseMessage(commonRespose.dioMessage!));
+        }
+      } else if (err.type == DioExceptionType.connectionError) {
+        return left(const MainFailure.networkError());
+      }
+
+      return left(const MainFailure.serverError());
+    }
+  }
+
+  @override
+  Future<Either<MainFailure, String>> giveReviewToProduct(
+      {required String productId,
+      required String rating,
+      required String reviewComment}) async {
+    try {
+      var mapData = {
+        "product_id": productId,
+        "rate": rating,
+        "review": reviewComment
+      };
+      final res =
+          await apiService.postMethod(ApiConstants.giveReviews, mapData);
+
+      if (res.dioMessage != null) {
+        return right(res.dioMessage ?? "");
       } else {
         return left(const MainFailure.serverError());
       }

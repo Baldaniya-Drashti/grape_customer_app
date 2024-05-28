@@ -6,6 +6,7 @@ class NotificationsState with _$NotificationsState {
     required int selectedTab,
     required bool isShowClickAndReviewBottomSheet,
     required InputEmptyOrNot reviewndRate,
+    required double productReview,
     required bool showErrorMessages,
     required ChatListDTO messageListDTO,
     required List<Messages> messageList,
@@ -14,9 +15,11 @@ class NotificationsState with _$NotificationsState {
     required bool isLoading,
     required bool isNoDataFound,
     required bool isErrorInAPI,
+    required bool isSubmitting,
+    required GetReviewProductDTO getReviewProduct,
     required RefreshController notificationRefreshController,
     required RefreshController messageRefreshController,
-    required Option<Either<AuthFailure, String>> failureOrSuccessOption,
+    required Option<Either<MainFailure, String>> failureOrSuccessOption,
   }) = _NotificationsState;
   factory NotificationsState.initial() => NotificationsState(
         selectedTab: 0,
@@ -33,5 +36,8 @@ class NotificationsState with _$NotificationsState {
         notificationListDTO: NotificationListDTO(),
         messageList: [],
         notificationList: [],
+        isSubmitting: false,
+        productReview: 0.0,
+        getReviewProduct: GetReviewProductDTO(),
       );
 }

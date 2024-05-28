@@ -73,4 +73,5 @@ class ApiConstants {
 
   //review
   static String getReviews = 'reviews';
+  static String giveReviews = 'review';
 }

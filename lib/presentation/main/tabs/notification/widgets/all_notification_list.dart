@@ -1,3 +1,4 @@
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:figma_squircle/figma_squircle.dart';
 import 'package:flutter/material.dart';
@@ -60,9 +61,15 @@ class AllNotificationListWidget extends StatelessWidget {
                           );
                     }
 
-                    if (state.notificationList[index].data_id != null) {
-                      await RateAndReviewBotthomSheet()
-                          .rateAndReviewBotthomSheet(context);
+                    if (state.notificationList[index].data_id != 0) {
+                      var res = await RateAndReviewBotthomSheet(
+                        notifications: state.notificationList[index],
+                      ).rateAndReviewBotthomSheet(context);
+                      if (res != null && res == true) {
+                        context.read<NotificationsBloc>().add(
+                              NotificationsEvent.getNotificationList(true),
+                            );
+                      }
                     }
                   },
                   child: Container(
