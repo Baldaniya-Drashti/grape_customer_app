@@ -30,7 +30,7 @@ class RateAndReviewBotthomSheet extends StatelessWidget {
       context: context,
       backgroundColor: AppColors.white,
       elevation: 0,
-      //  isScrollControlled: true,
+      isScrollControlled: true,
       useRootNavigator: true,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.only(

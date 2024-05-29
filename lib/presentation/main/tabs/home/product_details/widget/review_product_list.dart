@@ -87,7 +87,7 @@ class ReviewProductList extends StatelessWidget {
                                         backgroundColor: Colors.grey.shade400,
                                         backgroundImage:
                                             CachedNetworkImageProvider(
-                                          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS56ldGyKRHaDGinQ1tg9qMxKiw5-ZW_CyCXZ6p3R0Yg0bZNbd9KErKJhyywksv4DDhQcU&usqp=CAU',
+                                          state.reviewList[index].image ?? "",
                                         ),
                                       ),
                                       SizedBox(width: getSize(8)),

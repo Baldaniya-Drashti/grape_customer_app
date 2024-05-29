@@ -73,6 +73,7 @@ class Reviews with _$Reviews {
     int? review_id,
     String? fullname,
     num? rate,
+    String? image,
     String? review,
     int? created_at,
   }) = _Reviews;

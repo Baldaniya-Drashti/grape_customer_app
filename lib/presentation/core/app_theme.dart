@@ -9,22 +9,21 @@ class ThemeConfig {
       fontFamily: 'SFPro',
       scaffoldBackgroundColor: AppColors.white,
       primaryColor: Colors.black87,
+
       primaryColorDark: Colors.black87,
       dividerTheme: DividerThemeData(color: AppColors.black.withOpacity(0.20)),
       // primarySwatch: Colors.black,
-      colorScheme: ColorScheme(
-        brightness: brightness,
-        primary: AppColors.primary,
-        onPrimary: AppColors.primary,
-        secondary: AppColors.primary,
-        onSecondary: AppColors.primary,
-        error: Colors.redAccent,
-        onError: Colors.redAccent,
-        background: Colors.white,
-        onBackground: Colors.white,
-        surface: Colors.black87,
-        onSurface: Colors.black87,
-      ),
+      // colorScheme: ColorScheme(
+      //   brightness: brightness,
+      //   primary: AppColors.primary,
+      //   onPrimary: AppColors.primary,
+      //   secondary: AppColors.primary,
+      //   onSecondary: AppColors.primary,
+      //   error: Colors.redAccent,
+      //   onError: Colors.redAccent,
+      //   surface: Colors.black87,
+      //   onSurface: Colors.black87,
+      // ),
     );
   }
 

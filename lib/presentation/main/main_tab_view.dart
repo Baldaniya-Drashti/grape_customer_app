@@ -52,9 +52,6 @@ class MainTabView extends StatelessWidget {
       ],
       child: BlocBuilder<MainTabBloc, MainTabState>(
         builder: (context, state) {
-          // context
-          //     .read<MainTabBloc>()
-          //     .add(MainTabEvent.pushNotificationInitialize(context));
           return DefaultTabController(
             length: 2,
             child: Scaffold(

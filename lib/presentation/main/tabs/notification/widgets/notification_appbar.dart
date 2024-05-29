@@ -34,6 +34,7 @@ class NotificationAppBar extends StatelessWidget
                   .read<NotificationsBloc>()
                   .add(NotificationsEvent.tabChange(value));
             },
+            automaticIndicatorColorAdjustment: true,
             labelStyle: TextStyle(
               fontSize: getFontSize(14),
               fontWeight: FontWeight.w500,

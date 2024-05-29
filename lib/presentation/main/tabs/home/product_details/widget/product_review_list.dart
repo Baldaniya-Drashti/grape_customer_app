@@ -44,7 +44,9 @@ class ProductReviewListWidget extends StatelessWidget {
                       radius: getSize(20),
                       backgroundColor: Colors.grey.shade400,
                       backgroundImage: CachedNetworkImageProvider(
-                        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS56ldGyKRHaDGinQ1tg9qMxKiw5-ZW_CyCXZ6p3R0Yg0bZNbd9KErKJhyywksv4DDhQcU&usqp=CAU',
+                        state.getProductDetails.product?.reviews?[index]
+                                .image ??
+                            "",
                       ),
                     ),
                     SizedBox(width: getSize(8)),
