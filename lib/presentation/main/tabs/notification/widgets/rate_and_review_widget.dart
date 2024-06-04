@@ -169,6 +169,7 @@ class RateAndReviewBotthomSheet extends StatelessWidget {
                       BaseText(
                         text: 'Please share your opinion about the product',
                         fontSize: 12,
+                        textAlign: TextAlign.center,
                         fontWeight: FontWeight.w500,
                       ),
                       SizedBox(

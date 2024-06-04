@@ -26,35 +26,24 @@ class ProductImageView extends StatelessWidget {
                       PageRouteInfo(
                         FullImageView.name,
                         args: FullImageViewArgs(
-                          imageUrl: state.getProductDetails.product
-                                  ?.media?[state.selectedImageIndex].media ??
-                              "",
-                          type: state
-                                  .getProductDetails
-                                  .product
-                                  ?.media?[state.selectedImageIndex]
-                                  .media_type ??
-                              0,
-                          chewieController: state
-                              .getProductDetails
-                              .product
-                              ?.media?[state.selectedImageIndex]
-                              .chewieController,
+                          productId:
+                              state.getProductDetails.product?.id.toString() ??
+                                  "",
+                          index: state.selectedImageIndex,
                         ),
                       ),
                     );
 
                     log('res : $res');
-                    if (res != null && res == true) {
-                      if ((state.getProductDetails.product
-                                  ?.media?[state.selectedImageIndex].media ??
-                              "")
-                          .contains('mp4')) {
-                        context
-                            .read<ProductDetailBloc>()
-                            .add(ProductDetailEvent.disposeController());
-                      }
-                    }
+                    // if (res != null && res == true) {
+                    //   if ((state.getProductDetails.product
+                    //           ?.media?[state.selectedImageIndex].media_type ==
+                    //       2)) {
+                    //     context
+                    //         .read<ProductDetailBloc>()
+                    //         .add(ProductDetailEvent.disposeController());
+                    //   }
+                    // }
                   },
                   child: Stack(
                     alignment: Alignment.center,

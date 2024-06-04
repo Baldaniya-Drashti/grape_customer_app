@@ -231,10 +231,10 @@ class ProductYouMayLikeWidget extends StatelessWidget {
                                   } else {
                                     context.read<ProductDetailBloc>().add(
                                           ProductDetailEvent.addProductToCart(
-                                            productId: state
-                                                .getProductList[index].id
-                                                .toString(),
-                                          ),
+                                              productId: state
+                                                  .getProductList[index].id
+                                                  .toString(),
+                                              isMainProductAddedToCart: false),
                                         );
                                   }
                                 },

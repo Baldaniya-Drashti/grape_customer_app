@@ -60,4 +60,7 @@ class SvgImageConstant {
   static const packed = 'assets/svg/packed.svg';
   static const shipped = 'assets/svg/shipped.svg';
   static const addPhotos = 'assets/svg/add_photos.svg';
+
+  //core
+  static const infoIcon = 'assets/svg/info.svg';
 }

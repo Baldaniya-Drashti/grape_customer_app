@@ -93,7 +93,16 @@ class PopMenuWidget extends StatelessWidget {
               title: 'Messages',
               image: SvgImageConstant.message,
               onTap: () {
-                context.router.push(PageRouteInfo(ChatView.name));
+                context.router.push(
+                  PageRouteInfo(
+                    ChatView.name,
+                    args: ChatViewArgs(
+                        recieverID: state
+                                .getProductDetails.vendor_details?.shop_id
+                                .toString() ??
+                            ""),
+                  ),
+                );
               },
             ),
             PopupMenuDivider(

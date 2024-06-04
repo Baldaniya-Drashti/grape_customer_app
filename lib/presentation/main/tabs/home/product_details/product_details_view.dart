@@ -13,7 +13,9 @@ import 'package:grape_customer_app/presentation/core/app_router.gr.dart';
 import 'package:grape_customer_app/presentation/core/helper/dynamic_link_helper.dart';
 import 'package:grape_customer_app/presentation/core/shimmer/product_detail_shimmer.dart';
 import 'package:grape_customer_app/presentation/core/styles/app_colors.dart';
+import 'package:grape_customer_app/presentation/core/widgets/buttons/common_button.dart';
 import 'package:grape_customer_app/presentation/core/widgets/inputs/custom_app_bar.dart';
+import 'package:grape_customer_app/presentation/core/widgets/tooltips/common_tooltip_widget.dart';
 import 'package:grape_customer_app/presentation/main/tabs/home/product_details/widget/buy_now_button_widget.dart';
 import 'package:grape_customer_app/presentation/main/tabs/home/product_details/widget/from_same_store_widget.dart';
 import 'package:grape_customer_app/presentation/main/tabs/home/product_details/widget/out_of_stock_bottom.dart';
@@ -54,9 +56,9 @@ class ProductDetailsView extends StatelessWidget {
                 ).show(context);
               },
               (r) {
-                // showSuccess(
-                //   message: r,
-                // ).show(context);
+                showSuccess(
+                  message: r,
+                ).show(context);
                 // context.read<ProductDetailBloc>().add(
                 //       ProductDetailEvent.getProductDetails(
                 //           productId, true, false),
@@ -155,11 +157,60 @@ class ProductDetailsView extends StatelessWidget {
                           Padding(
                             padding:
                                 EdgeInsets.symmetric(horizontal: getSize(18)),
-                            child: BaseText(
-                              text: 'Product Specification:',
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
-                              textColor: AppColors.black.withOpacity(0.8),
+                            child: Row(
+                              children: [
+                                BaseText(
+                                  text: 'Product Specification:',
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w600,
+                                  textColor: AppColors.black.withOpacity(0.8),
+                                ),
+                                SizedBox(
+                                  width: getSize(4),
+                                ),
+                                CommonTooltipWidget(
+                                  superTooltipController: context
+                                      .read<ProductDetailBloc>()
+                                      .descriptionTooltipController,
+                                  content: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.stretch,
+                                    children: [
+                                      BaseText(
+                                        text:
+                                            'After receiving the products you will be able to return them within 24 hours of receipt of the products.',
+                                        fontSize: 13,
+                                      ),
+                                      SizedBox(
+                                        height: getSize(8),
+                                      ),
+                                      BaseText(
+                                        text:
+                                            'Currently, The app has no replacement feature, hence to claim your warranty you can discuss with vendor using chat option.',
+                                        fontSize: 13,
+                                      ),
+                                      SizedBox(
+                                        height: getSize(10),
+                                      ),
+                                      Align(
+                                        alignment: Alignment.bottomRight,
+                                        child: CommonButton(
+                                          width: getSize(100),
+                                          height: getSize(30),
+                                          onPressed: () {
+                                            context
+                                                .read<ProductDetailBloc>()
+                                                .descriptionTooltipController
+                                                .hideTooltip();
+                                          },
+                                          buttonText: 'Ok',
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                           SizedBox(

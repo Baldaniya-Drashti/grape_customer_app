@@ -21,12 +21,16 @@ class BuyNowButtonWidget extends StatelessWidget {
             GestureDetector(
               onTap: () {
                 if (state.getProductDetails.product?.is_cart == true) {
-                  // context.read<ProductDetailBloc>().add(
-                  //       ProductDetailEvent.removeProductFromCart(),
-                  //     );
+                  context.read<ProductDetailBloc>().add(
+                        ProductDetailEvent.removeProductFromCart(state
+                                .getProductDetails.product?.cart_id
+                                ?.toString() ??
+                            ""),
+                      );
                 } else {
                   context.read<ProductDetailBloc>().add(
-                        ProductDetailEvent.addProductToCart(),
+                        ProductDetailEvent.addProductToCart(
+                            isMainProductAddedToCart: true),
                       );
                 }
               },

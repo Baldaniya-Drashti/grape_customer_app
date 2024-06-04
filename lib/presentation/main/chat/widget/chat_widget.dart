@@ -20,7 +20,7 @@ class ChatWidget extends StatelessWidget {
       child: BlocBuilder<ChatBloc, ChatState>(
         builder: (context, state) {
           return PaginatedListView(
-            reverse: true,
+            // reverse: true,
             isNoDataFound: state.isLoading == false && state.chatList.isEmpty,
             onRefresh: () {
               context.read<ChatBloc>().add(

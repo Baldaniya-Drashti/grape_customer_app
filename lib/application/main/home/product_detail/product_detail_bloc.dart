@@ -14,6 +14,7 @@ import 'package:grape_customer_app/infrastructure/main/home_dto/product_detail_d
 import 'package:grape_customer_app/infrastructure/main/shop_detail_dto/shop_detail_dto.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:super_tooltip/super_tooltip.dart';
 import 'package:video_player/video_player.dart';
 
 part 'product_detail_state.dart';
@@ -30,7 +31,7 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
 
   int pageForProductYoumayLike = 1;
   int lastPageForProductYoumayLike = 1;
-
+  final descriptionTooltipController = SuperTooltipController();
   bool isFetchingForProductYoumayLike = false;
   final RefreshController similarProductRefreshController = RefreshController();
   final RefreshController productYouMayLikeRefreshController =
@@ -167,13 +168,38 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
                   state.getProductDetails.product?.id.toString() ??
                   "",
             );
+            var updatedList = <GetProductListResponse>[];
+            var updatedDetail = ProductDetailDTO();
+            if (value.productId != null) {
+              updatedList = state.getProductList.map((product) {
+                if (product.id.toString() == value.productId) {
+                  return product.copyWith(is_cart: true);
+                }
+                return product;
+              }).toList();
+            } else {
+              updatedDetail = state.getProductDetails.copyWith(
+                  product:
+                      state.getProductDetails.product?.copyWith(is_cart: true));
+            }
 
             emit(
               state.copyWith(
                 failureOrSuccessOption: optionOf(failureOrSuccess),
+                getProductList: updatedList,
+                getProductDetails: updatedDetail,
               ),
             );
-            add(ProductDetailEvent.getProductYouMayAlsoLikeProductList(true));
+            if (value.isMainProductAddedToCart == true) {
+              add(
+                ProductDetailEvent.getProductDetails(
+                  state.getProductDetails.product?.id.toString() ?? "",
+                  true,
+                  true,
+                ),
+              );
+            }
+            // // add(ProductDetailEvent.getProductYouMayAlsoLikeProductList(true));
           },
           removeProductFromFavourite: (value) async {
             emit(
@@ -186,13 +212,19 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
                 productId: value.productId ??
                     state.getProductDetails.product?.id.toString() ??
                     "");
-
+            var updatedList = state.getProductList.map((product) {
+              if (product.id.toString() == value.productId) {
+                return product.copyWith(is_favorite: false);
+              }
+              return product;
+            }).toList();
             emit(
               state.copyWith(
                 failureOrSuccessOption: optionOf(failureOrSuccess),
+                getProductList: updatedList,
               ),
             );
-            add(ProductDetailEvent.getProductYouMayAlsoLikeProductList(true));
+            //  add(ProductDetailEvent.getProductYouMayAlsoLikeProductList(true));
           },
           addToFavourite: (AddToFavourite value) async {
             emit(
@@ -206,14 +238,23 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
                 productId: value.productId ??
                     state.getProductDetails.product?.id.toString() ??
                     "");
+            var updatedList = state.getProductList.map((product) {
+              if (product.id.toString() == value.productId) {
+                return product.copyWith(is_favorite: true);
+              }
+              return product;
+            }).toList();
+
+            //  log('updatedList : ${updatedList}');
 
             emit(
               state.copyWith(
                 failureOrSuccessOption: optionOf(failureOrSuccess),
+                getProductList: updatedList,
               ),
             );
 
-            add(ProductDetailEvent.getProductYouMayAlsoLikeProductList(true));
+            //   add(ProductDetailEvent.getProductYouMayAlsoLikeProductList(true));
           },
           getProductYouMayAlsoLikeProductList:
               (GetProductYouMayAlsoLikeProductList value) async {
@@ -422,13 +463,30 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
             Either<MainFailure, String>? failureOrSuccess;
             failureOrSuccess =
                 await mainFacade.deleteProductFromCart(productId: value.cartId);
+            var updatedList = <GetProductListResponse>[];
+            var updatedDetail = ProductDetailDTO();
+            if (state.getProductDetails.product?.cart_id.toString() ==
+                value.cartId) {
+              updatedDetail = state.getProductDetails.copyWith(
+                  product: state.getProductDetails.product
+                      ?.copyWith(is_cart: false));
+            } else {
+              updatedList = state.getProductList.map((product) {
+                if (product.cart_id.toString() == value.cartId) {
+                  return product.copyWith(is_cart: false);
+                }
+                return product;
+              }).toList();
+            }
 
             emit(
               state.copyWith(
                 failureOrSuccessOption: optionOf(failureOrSuccess),
+                getProductList: updatedList,
+                getProductDetails: updatedDetail,
               ),
             );
-            add(ProductDetailEvent.getProductYouMayAlsoLikeProductList(true));
+            //  add(ProductDetailEvent.getProductYouMayAlsoLikeProductList(true));
           },
           disposeController: (DisposeController value) async {
             var updateList =

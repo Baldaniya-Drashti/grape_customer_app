@@ -74,10 +74,3 @@ Future<void> _initializeCrashlytics() async {
   }
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
 }
-
-
-
-
-
-
-

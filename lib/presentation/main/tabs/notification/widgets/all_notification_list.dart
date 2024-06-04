@@ -158,9 +158,12 @@ class AllNotificationListWidget extends StatelessWidget {
                                 text:
                                     state.notificationList[index].message ?? "",
                                 fontSize: 12,
-                                maxLines: 2,
-                                textColor: AppColors.black
-                                    .withOpacity(index == 0 ? 0.60 : 0.40),
+                                showFullDescription: true,
+                                // maxLines: 2,
+                                textColor: AppColors.black.withOpacity(
+                                    state.notificationList[index].is_read == 0
+                                        ? 0.60
+                                        : 0.40),
                               )
                             ],
                           ),

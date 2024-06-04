@@ -9,7 +9,6 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i32;
-import 'package:chewie/chewie.dart' as _i36;
 import 'package:flutter/material.dart' as _i33;
 import 'package:grape_customer_app/infrastructure/main/payemnt_method_dto/get_cards_dto.dart'
     as _i35;
@@ -158,9 +157,8 @@ abstract class $AppRouter extends _i32.RootStackRouter {
         routeData: routeData,
         child: _i9.FullImageView(
           key: args.key,
-          imageUrl: args.imageUrl,
-          chewieController: args.chewieController,
-          type: args.type,
+          productId: args.productId,
+          index: args.index,
         ),
       );
     },
@@ -587,17 +585,15 @@ class FavouriteView extends _i32.PageRouteInfo<void> {
 class FullImageView extends _i32.PageRouteInfo<FullImageViewArgs> {
   FullImageView({
     _i33.Key? key,
-    required String imageUrl,
-    _i36.ChewieController? chewieController,
-    required int type,
+    required String productId,
+    required int index,
     List<_i32.PageRouteInfo>? children,
   }) : super(
           FullImageView.name,
           args: FullImageViewArgs(
             key: key,
-            imageUrl: imageUrl,
-            chewieController: chewieController,
-            type: type,
+            productId: productId,
+            index: index,
           ),
           initialChildren: children,
         );
@@ -611,22 +607,19 @@ class FullImageView extends _i32.PageRouteInfo<FullImageViewArgs> {
 class FullImageViewArgs {
   const FullImageViewArgs({
     this.key,
-    required this.imageUrl,
-    this.chewieController,
-    required this.type,
+    required this.productId,
+    required this.index,
   });
 
   final _i33.Key? key;
 
-  final String imageUrl;
+  final String productId;
 
-  final _i36.ChewieController? chewieController;
-
-  final int type;
+  final int index;
 
   @override
   String toString() {
-    return 'FullImageViewArgs{key: $key, imageUrl: $imageUrl, chewieController: $chewieController, type: $type}';
+    return 'FullImageViewArgs{key: $key, productId: $productId, index: $index}';
   }
 }
 

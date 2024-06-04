@@ -50,7 +50,12 @@ class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
             );
           },
           selectCountryCode: (e) {
-            emit(state.copyWith(selectedCountrycode: e.counryCode));
+            emit(
+              state.copyWith(
+                selectedCountrycode: e.counryCode,
+                authFailureOrSuccessOption: none(),
+              ),
+            );
           },
           mobileNumberChanged: (e) {
             emit(
