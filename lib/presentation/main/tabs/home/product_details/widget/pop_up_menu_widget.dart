@@ -98,7 +98,7 @@ class PopMenuWidget extends StatelessWidget {
                     ChatView.name,
                     args: ChatViewArgs(
                         recieverID: state
-                                .getProductDetails.vendor_details?.shop_id
+                                .getProductDetails.vendor_details?.user_id
                                 .toString() ??
                             ""),
                   ),

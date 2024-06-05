@@ -129,15 +129,6 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
             final sender = value.sender;
             final receiver = value.receiver;
             chatService.sendRemoveTypingEvent(sender, receiver);
-            // await emit.forEach(
-            //   chatService.removeTypingStream,
-            //   onData: (data) {
-            //     return state.copyWith(
-            //       removeTypingData: data,
-            //       isUserTyping: false,
-            //     );
-            //   },
-            // );
           },
           getOpponentOnlineStatus: (value) async {
             final sender = value.sender;
@@ -252,23 +243,11 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
               );
             } else {
               emit(state.copyWith(isUserTyping: false));
-              //  fetchLearningModules(isRefresh: true);
             }
-            // if (!state.isUserTyping) {
-            //   add(ChatEvent.typing(
-            //       getCurrentUser().userId.toString(), state.recieverId));
-            //   emit(state.copyWith(isUserTyping: true));
 
-            //   await Future.delayed(Duration(seconds: 2)).whenComplete(() {
-            //     add(ChatEvent.removeTyping(
-            //         getCurrentUser().userId.toString(), state.recieverId));
-            //     emit(state.copyWith(isUserTyping: false));
-            //   });
-            // }
             return emit(state.copyWith(textFieldValue: value.value));
           },
           removeTypingReciever: (RemoveTypingReciever value) async {
-            // chatService.sendRemoveTypingEvent(sender, receiver);
             await emit.forEach(
               chatService.getRecieverTypingStatus,
               onData: (data) {
@@ -291,26 +270,4 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
       },
     );
   }
-  // void onTextChanged() {
-  //   final text = textEditingController.text;
-  //   if (text.isNotEmpty) {
-  //     add(ChatEvent.typing(
-  //         getCurrentUser().userId.toString(), state.recieverId));
-  //     _resetTimer();
-  //   } else {
-  //     _startTimer();
-  //   }
-  // }
-
-  // void _startTimer() {
-  //   searchOnStoppedTyping?.cancel();
-  //   searchOnStoppedTyping = Timer(Duration(seconds: 2), () {
-  //     add(ChatEvent.removeTyping(
-  //         getCurrentUser().userId.toString(), state.recieverId));
-  //   });
-  // }
-
-  // void _resetTimer() {
-  //   searchOnStoppedTyping?.cancel();
-  // }
 }

@@ -30,13 +30,15 @@ class SimilarProductWidget extends StatelessWidget {
                       ProductDetailEvent.getProductDetails(
                           state.getProductDetails.product?.id.toString() ?? "",
                           true,
-                          true),
+                          true,
+                          false),
                     );
               },
               onLoading: () {
                 context.read<ProductDetailBloc>().add(
                       ProductDetailEvent.getProductDetails(
                           state.getProductDetails.product?.id.toString() ?? "",
+                          false,
                           false,
                           false),
                     );

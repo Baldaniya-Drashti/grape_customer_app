@@ -31,7 +31,8 @@ class FullImageView extends StatelessWidget {
       body: BlocProvider(
         create: (context) => getIt<ProductDetailBloc>()
           ..add(ProductDetailEvent.selectImage(index))
-          ..add(ProductDetailEvent.getProductDetails(productId, true, true)),
+          ..add(ProductDetailEvent.getProductDetails(
+              productId, true, true, true)),
         child: BlocBuilder<ProductDetailBloc, ProductDetailState>(
           builder: (context, state) {
             if (state.isLoading) {

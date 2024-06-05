@@ -35,6 +35,7 @@ class VendorDetails with _$VendorDetails {
     String? seller_name,
     String? profile,
     int? shop_id,
+    int? user_id,
     String? shop_location,
     int? seller_total_product,
     num? review,

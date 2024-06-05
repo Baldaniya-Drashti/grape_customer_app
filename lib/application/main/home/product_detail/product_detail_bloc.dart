@@ -119,30 +119,34 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
             );
             var updatedMediaList = List<Media>.from(
                 state.getProductDetails.product?.media?.toList() ?? <Media>[]);
+            if (value.isFromFullImageView) {
+              for (var i = 0; i < (updatedMediaList.length); i++) {
+                if (updatedMediaList[i].media_type == 2) {
+                  final media = updatedMediaList[i];
 
-            for (var i = 0; i < (updatedMediaList.length); i++) {
-              if (updatedMediaList[i].media_type == 2) {
-                final media = updatedMediaList[i];
+                  final mediaUrl = media.media;
+                  if (mediaUrl != null && mediaUrl.isNotEmpty) {
+                    final videoPlayerController =
+                        VideoPlayerController.networkUrl(
+                            Uri.tryParse(mediaUrl)!);
 
-                final mediaUrl = media.media;
-                if (mediaUrl != null && mediaUrl.isNotEmpty) {
-                  final videoPlayerController =
-                      VideoPlayerController.networkUrl(Uri.tryParse(mediaUrl)!);
-
-                  await videoPlayerController.initialize().then((value) {
-                    var updatedMedia = media.copyWith(
-                      videoPlayerController: videoPlayerController,
-                      chewieController: ChewieController(
+                    await videoPlayerController.initialize().then((value) {
+                      var updatedMedia = media.copyWith(
                         videoPlayerController: videoPlayerController,
-                        aspectRatio: videoPlayerController.value.aspectRatio,
-                      ),
-                    );
-                    updatedMediaList[i] = updatedMedia;
-                  });
+                        chewieController: ChewieController(
+                          videoPlayerController: videoPlayerController,
+                          aspectRatio: videoPlayerController.value.aspectRatio,
+                        ),
+                      );
+                      updatedMediaList[i] = updatedMedia;
+                    });
+                  }
                 }
               }
             }
-            add(ProductDetailEvent.getProductYouMayAlsoLikeProductList(true));
+            if (!value.isFromFullImageView) {
+              add(ProductDetailEvent.getProductYouMayAlsoLikeProductList(true));
+            }
 
             return emit(
               state.copyWith(
@@ -196,6 +200,7 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
                   state.getProductDetails.product?.id.toString() ?? "",
                   true,
                   true,
+                  false,
                 ),
               );
             }

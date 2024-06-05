@@ -38,7 +38,7 @@ class ChatBubbleView extends StatelessWidget {
                   index: index,
                   time: chatList[index].time ?? 0,
                 )
-              : Container(),
+              : SizedBox(),
           content: Column(
             children: [
               Row(

@@ -39,7 +39,7 @@ class ProductDetailsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => getIt<ProductDetailBloc>()
-        ..add(ProductDetailEvent.getProductDetails(productId, true, true)),
+        ..add(ProductDetailEvent.getProductDetails(productId, true, true,false)),
       child: BlocConsumer<ProductDetailBloc, ProductDetailState>(
         listener: (context, state) {
           state.failureOrSuccessOption.fold(
