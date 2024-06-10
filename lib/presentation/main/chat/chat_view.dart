@@ -161,29 +161,44 @@ class ChatView extends StatelessWidget {
               if (state.apiSuccessData.profile != null)
                 Stack(
                   alignment: Alignment.topRight,
+                  clipBehavior: Clip.none,
                   children: [
-                    CircleAvatar(
-                      backgroundColor: AppColors.grey1,
-                      backgroundImage: state.apiSuccessData.profile != null &&
-                              state.apiSuccessData.profile!.isNotEmpty
-                          ? CachedNetworkImageProvider(
-                              state.apiSuccessData.profile!,
-                            )
-                          : null,
-                      radius: getSize(20),
+                    Container(
+                      height: getSize(34),
+                      width: getSize(34),
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        color: AppColors.grey1,
+                        borderRadius: BorderRadius.circular(getSize(10)),
+                        image: state.apiSuccessData.profile != null &&
+                                state.apiSuccessData.profile!.isNotEmpty
+                            ? DecorationImage(
+                                image: CachedNetworkImageProvider(
+                                  state.apiSuccessData.profile ?? "",
+                                ),
+                                fit: BoxFit.cover,
+                              )
+                            : null,
+                      ),
                       child: state.apiSuccessData.profile == null ||
                               state.apiSuccessData.profile!.isEmpty
-                          ? SvgPicture.asset(SvgImageConstant.profileUnselected)
+                          ? SvgPicture.asset(
+                              SvgImageConstant.profileUnselected,
+                            )
                           : null,
                     ),
-                    Container(
-                      height: getSize(10),
-                      width: getSize(10),
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: state.isStatusOnlineReceived == 1
-                            ? AppColors.green
-                            : AppColors.red,
+                    Positioned(
+                      top: getSize(-3),
+                      right: getSize(-3),
+                      child: Container(
+                        height: getSize(10),
+                        width: getSize(10),
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: state.isStatusOnlineReceived == 1
+                              ? AppColors.green
+                              : AppColors.red,
+                        ),
                       ),
                     ),
                   ],

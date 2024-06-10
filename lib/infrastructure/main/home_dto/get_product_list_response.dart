@@ -20,7 +20,7 @@ class GetProductListResponse with _$GetProductListResponse {
     String? size,
     String? brand_name,
     String? model_name,
-    int? price,
+    num? price,
     int? available_qty,
     int? order_qty,
     int? total_qty,

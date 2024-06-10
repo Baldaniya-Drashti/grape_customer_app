@@ -3,6 +3,7 @@ import 'package:grape_customer_app/application/main/profile/my_orders/return_res
 import 'package:grape_customer_app/domain/auth/auth_value_objects.dart';
 import 'package:grape_customer_app/domain/main/main_failure.dart';
 import 'package:grape_customer_app/infrastructure/core/common_response.dart';
+import 'package:grape_customer_app/infrastructure/main/cart_dto/cart_add_dto.dart';
 import 'package:grape_customer_app/infrastructure/main/checkout_dto/checkout_dto.dart';
 import 'package:grape_customer_app/infrastructure/main/notification_dto/get_review_product_dto.dart';
 import 'package:grape_customer_app/infrastructure/main/order_detail_dto/order_detail_dto.dart';
@@ -27,7 +28,7 @@ abstract class IMainFacade {
     required String productId,
     required int page,
   });
-  Future<Either<MainFailure, String>> addProductToCart({
+  Future<Either<MainFailure, CartAddDTO>> addProductToCart({
     required String productId,
   });
   Future<Either<MainFailure, String>> deleteProductFromCart({

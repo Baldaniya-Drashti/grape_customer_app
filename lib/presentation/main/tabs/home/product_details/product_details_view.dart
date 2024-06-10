@@ -39,7 +39,8 @@ class ProductDetailsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => getIt<ProductDetailBloc>()
-        ..add(ProductDetailEvent.getProductDetails(productId, true, true,false)),
+        ..add(
+            ProductDetailEvent.getProductDetails(productId, true, true, false)),
       child: BlocConsumer<ProductDetailBloc, ProductDetailState>(
         listener: (context, state) {
           state.failureOrSuccessOption.fold(
@@ -76,7 +77,7 @@ class ProductDetailsView extends StatelessWidget {
                   onTap: () async {
                     var shortlink = await DynamicLinksService.createDynamicLink(
                       imageURL: state.getProductDetails.product
-                              ?.images?[state.selectedImageIndex].image ??
+                              ?.media?[state.selectedImageIndex].media ??
                           "",
                       title:
                           state.getProductDetails.product?.product_name ?? "",
@@ -116,10 +117,8 @@ class ProductDetailsView extends StatelessWidget {
                     return PaginatedListView(
                       onRefresh: () {
                         context.read<ProductDetailBloc>().add(
-                              ProductDetailEvent
-                                  .getProductYouMayAlsoLikeProductList(
-                                true,
-                              ),
+                              ProductDetailEvent.getProductDetails(
+                                  productId, true, true, false),
                             );
                       },
                       onLoading: () {

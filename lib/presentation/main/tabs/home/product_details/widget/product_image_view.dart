@@ -93,6 +93,9 @@ class ProductImageView extends StatelessWidget {
                   height: getSize(216),
                   width: MediaQuery.of(context).size.width,
                   color: Colors.grey.shade300,
+                  child: Center(
+                    child: CircularProgressIndicator(),
+                  ),
                 ),
         );
       },

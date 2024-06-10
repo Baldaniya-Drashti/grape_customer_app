@@ -62,40 +62,50 @@ class SelectModelWidget extends StatelessWidget {
                           ? AppColors.black
                           : AppColors.black.withOpacity(0.2),
                     ),
-                    image: DecorationImage(
-                      image: CachedNetworkImageProvider(
-                        state.getProductDetails.product?.media?[index]
-                                .thumbnail ??
-                            "",
-                      ),
-                      fit: BoxFit.cover,
-                    ),
+                    image: state.getProductDetails.product?.media?[index]
+                                .thumbnail !=
+                            null
+                        ? DecorationImage(
+                            image: CachedNetworkImageProvider(
+                              state.getProductDetails.product?.media?[index]
+                                      .thumbnail ??
+                                  "",
+                            ),
+                            fit: BoxFit.cover,
+                          )
+                        : null,
                   ),
-                  child: Visibility(
-                    visible: state.getProductDetails.product?.media?[index]
-                            .media_type ==
-                        2,
-                    child: Container(
-                      height: getSize(20),
-                      width: getSize(20),
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        color: AppColors.white,
-                        shape: BoxShape.circle,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.08),
-                            offset: Offset(0, 0),
-                            spreadRadius: 2,
+                  child: state.getProductDetails.product?.media?[index]
+                              .thumbnail ==
+                          null
+                      ? Center(
+                          child: CircularProgressIndicator(),
+                        )
+                      : Visibility(
+                          visible: state.getProductDetails.product
+                                  ?.media?[index].media_type ==
+                              2,
+                          child: Container(
+                            height: getSize(20),
+                            width: getSize(20),
+                            alignment: Alignment.center,
+                            decoration: BoxDecoration(
+                              color: AppColors.white,
+                              shape: BoxShape.circle,
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.08),
+                                  offset: Offset(0, 0),
+                                  spreadRadius: 2,
+                                ),
+                              ],
+                            ),
+                            child: Icon(
+                              Icons.play_arrow_rounded,
+                              size: getSize(16),
+                            ),
                           ),
-                        ],
-                      ),
-                      child: Icon(
-                        Icons.play_arrow_rounded,
-                        size: getSize(16),
-                      ),
-                    ),
-                  ),
+                        ),
                 ),
               ),
             ),

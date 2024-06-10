@@ -166,44 +166,59 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
                 failureOrSuccessOption: none(),
               ),
             );
-            Either<MainFailure, String>? failureOrSuccess;
-            failureOrSuccess = await mainFacade.addProductToCart(
+            // Either<MainFailure, CartAddDTO>? failureOrSuccess;
+            var cartResponse = await mainFacade.addProductToCart(
               productId: value.productId ??
                   state.getProductDetails.product?.id.toString() ??
                   "",
             );
-            var updatedList = <GetProductListResponse>[];
-            var updatedDetail = ProductDetailDTO();
-            if (value.productId != null) {
-              updatedList = state.getProductList.map((product) {
-                if (product.id.toString() == value.productId) {
-                  return product.copyWith(is_cart: true);
-                }
-                return product;
-              }).toList();
-            } else {
-              updatedDetail = state.getProductDetails.copyWith(
-                  product:
-                      state.getProductDetails.product?.copyWith(is_cart: true));
-            }
+            if (cartResponse.isRight()) {
+              cartResponse.fold(
+                (l) => null,
+                (r) {
+                  var updatedList = <GetProductListResponse>[];
+                  var updatedDetail = ProductDetailDTO();
+                  if (value.productId != null) {
+                    updatedDetail = state.getProductDetails;
+                    updatedList = state.getProductList.map((product) {
+                      if (product.id.toString() == value.productId) {
+                        return product.copyWith(
+                          is_cart: true,
+                          cart_id: r.id,
+                        );
+                      }
+                      return product;
+                    }).toList();
+                  } else {
+                    updatedList = state.getProductList;
+                    updatedDetail = state.getProductDetails.copyWith(
+                        product: state.getProductDetails.product?.copyWith(
+                      is_cart: true,
+                      cart_id: r.id,
+                    ));
+                  }
 
-            emit(
-              state.copyWith(
-                failureOrSuccessOption: optionOf(failureOrSuccess),
-                getProductList: updatedList,
-                getProductDetails: updatedDetail,
-              ),
-            );
-            if (value.isMainProductAddedToCart == true) {
-              add(
-                ProductDetailEvent.getProductDetails(
-                  state.getProductDetails.product?.id.toString() ?? "",
-                  true,
-                  true,
-                  false,
-                ),
+                  emit(
+                    state.copyWith(
+                      failureOrSuccessOption: none(),
+                      getProductList: updatedList,
+                      getProductDetails: updatedDetail,
+                    ),
+                  );
+                },
               );
             }
+
+            // if (value.isMainProductAddedToCart == true) {
+            //   add(
+            //     ProductDetailEvent.getProductDetails(
+            //       state.getProductDetails.product?.id.toString() ?? "",
+            //       true,
+            //       true,
+            //       false,
+            //     ),
+            //   );
+            // }
             // // add(ProductDetailEvent.getProductYouMayAlsoLikeProductList(true));
           },
           removeProductFromFavourite: (value) async {
@@ -325,6 +340,7 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
                 state.copyWith(
                   getProductList: [],
                   isShopDetailLoading: true,
+                  failureOrSuccessOption: none(),
                 ),
               );
               productYouMayLikeRefreshController.resetNoData();
@@ -348,6 +364,7 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
                   isShopDetailLoading: false,
                   shopDetailDTO: ShopDetailDTO(),
                   getProductList: [],
+                  failureOrSuccessOption: none(),
                 ),
               ),
               (r) {
@@ -372,6 +389,7 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
                   state.copyWith(
                     isShopDetailLoading: false,
                     isErrorInAPI: false,
+                    failureOrSuccessOption: none(),
                     shopDetailDTO: searchRes,
                     filterList: filterAPIList,
                     isNoDataFound: searchRes.product?.isEmpty ?? false,
@@ -472,10 +490,12 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
             var updatedDetail = ProductDetailDTO();
             if (state.getProductDetails.product?.cart_id.toString() ==
                 value.cartId) {
+              updatedList = state.getProductList;
               updatedDetail = state.getProductDetails.copyWith(
                   product: state.getProductDetails.product
                       ?.copyWith(is_cart: false));
             } else {
+              updatedDetail = state.getProductDetails;
               updatedList = state.getProductList.map((product) {
                 if (product.cart_id.toString() == value.cartId) {
                   return product.copyWith(is_cart: false);

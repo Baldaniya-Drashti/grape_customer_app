@@ -51,7 +51,7 @@ class PopMenuWidget extends StatelessWidget {
               onTap: () async {
                 var shortlink = await DynamicLinksService.createDynamicLink(
                   imageURL: state.getProductDetails.product
-                          ?.images?[state.selectedImageIndex].image ??
+                          ?.media?[state.selectedImageIndex].media ??
                       "",
                   title: state.getProductDetails.product?.product_name ?? "",
                   description: state.dataList[4].value ?? "",

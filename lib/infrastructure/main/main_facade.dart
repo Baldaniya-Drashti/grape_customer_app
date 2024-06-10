@@ -7,6 +7,7 @@ import 'package:grape_customer_app/domain/main/i_main_facade.dart';
 import 'package:grape_customer_app/domain/main/main_failure.dart';
 import 'package:grape_customer_app/infrastructure/core/common_response.dart';
 import 'package:grape_customer_app/infrastructure/core/network/injectable_module.dart';
+import 'package:grape_customer_app/infrastructure/main/cart_dto/cart_add_dto.dart';
 import 'package:grape_customer_app/infrastructure/main/checkout_dto/checkout_dto.dart';
 import 'package:grape_customer_app/infrastructure/main/notification_dto/get_review_product_dto.dart';
 import 'package:grape_customer_app/infrastructure/main/order_detail_dto/order_detail_dto.dart';
@@ -138,14 +139,14 @@ class MainFacade implements IMainFacade {
   }
 
   @override
-  Future<Either<MainFailure, String>> addProductToCart(
+  Future<Either<MainFailure, CartAddDTO>> addProductToCart(
       {required String productId}) async {
     try {
       final res = await apiService
           .postMethod(ApiConstants.addProductToCart, {"product_id": productId});
 
-      if (res.dioMessage != null) {
-        return right(res.dioMessage ?? "");
+      if (res.data != null) {
+        return right(CartAddDTO.fromJson(res.data));
       } else {
         return left(const MainFailure.serverError());
       }
