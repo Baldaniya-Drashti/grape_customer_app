@@ -45,7 +45,7 @@ class SelectModelWidget extends StatelessWidget {
                     ),
                   ),
                   alignment: Alignment.center,
-                  padding: EdgeInsets.all(getSize(6)),
+                  // padding: EdgeInsets.all(getSize(6)),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(getSize(6)),
                     boxShadow: index == state.selectedImageIndex
@@ -62,50 +62,71 @@ class SelectModelWidget extends StatelessWidget {
                           ? AppColors.black
                           : AppColors.black.withOpacity(0.2),
                     ),
-                    image: state.getProductDetails.product?.media?[index]
-                                .thumbnail !=
-                            null
-                        ? DecorationImage(
-                            image: CachedNetworkImageProvider(
-                              state.getProductDetails.product?.media?[index]
-                                      .thumbnail ??
-                                  "",
-                            ),
-                            fit: BoxFit.cover,
-                          )
-                        : null,
+                    // image: state.getProductDetails.product?.media?[index]
+                    //             .thumbnail !=
+                    //         null
+                    //     ? DecorationImage(
+                    //         image: CachedNetworkImageProvider(
+                    //           state.getProductDetails.product?.media?[index]
+                    //                   .thumbnail ??
+                    //               "",
+                    //         ),
+                    //         fit: BoxFit.cover,
+                    //       )
+                    //     : null,
                   ),
-                  child: state.getProductDetails.product?.media?[index]
-                              .thumbnail ==
-                          null
-                      ? Center(
-                          child: CircularProgressIndicator(),
-                        )
-                      : Visibility(
-                          visible: state.getProductDetails.product
-                                  ?.media?[index].media_type ==
-                              2,
-                          child: Container(
-                            height: getSize(20),
-                            width: getSize(20),
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                              color: AppColors.white,
-                              shape: BoxShape.circle,
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.black.withOpacity(0.08),
-                                  offset: Offset(0, 0),
-                                  spreadRadius: 2,
-                                ),
-                              ],
-                            ),
-                            child: Icon(
-                              Icons.play_arrow_rounded,
-                              size: getSize(16),
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(getSize(6)),
+                        child: CachedNetworkImage(
+                          imageUrl: state.getProductDetails.product
+                                  ?.media?[index].thumbnail ??
+                              "",
+                          progressIndicatorBuilder: (context, url, progress) =>
+                              Center(
+                            child: SizedBox(
+                              height: getSize(20),
+                              width: getSize(20),
+                              child: CircularProgressIndicator(
+                                color: AppColors.primaryOrange,
+                                value: progress.progress,
+                              ),
                             ),
                           ),
+                          height: getSize(50),
+                          width: getSize(50),
+                          fit: BoxFit.cover,
                         ),
+                      ),
+                      Visibility(
+                        visible: state.getProductDetails.product?.media?[index]
+                                .media_type ==
+                            2,
+                        child: Container(
+                          height: getSize(20),
+                          width: getSize(20),
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            color: AppColors.white,
+                            shape: BoxShape.circle,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withOpacity(0.08),
+                                offset: Offset(0, 0),
+                                spreadRadius: 2,
+                              ),
+                            ],
+                          ),
+                          child: Icon(
+                            Icons.play_arrow_rounded,
+                            size: getSize(16),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

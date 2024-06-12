@@ -61,8 +61,8 @@ class SocketChatService implements ChatService {
           id: data['chatId'],
           message: data['message'],
           message_type: data['type'],
-          reciever_id: int.tryParse(data['receiver_id']),
-          sender_id: int.tryParse(data['sender_id']),
+          reciever_id: int.tryParse(data['receiver_id'].toString()),
+          sender_id: int.tryParse(data['sender_id'].toString()),
           time: DateTime.now().millisecondsSinceEpoch,
         );
         _newMessageController.add(messageObject);

@@ -117,14 +117,14 @@ class CustomBottomNavigationWidget extends StatelessWidget {
           BlocBuilder<NotificationsBloc, NotificationsState>(
             builder: (context, state) {
               return Visibility(
-                visible: ((iconName.contains(
-                                SvgImageConstant.notificationSelected) ||
-                            iconName.contains(
-                                SvgImageConstant.notificationUnselected)) &&
-                        (state.notificationListDTO.total_unread_notification ??
+                visible: ((iconName
+                            .contains(SvgImageConstant.notificationSelected) ||
+                        iconName.contains(
+                            SvgImageConstant.notificationUnselected)) &&
+                    ((state.notificationListDTO.total_unread_notification ??
                                 0) >
                             0 ||
-                    (state.messageListDTO.total_unread_messages ?? 0) > 0),
+                        (state.messageListDTO.total_unread_messages ?? 0) > 0)),
                 child: Container(
                   height: getSize(8),
                   width: getSize(8),
@@ -174,14 +174,14 @@ class CustomBottomNavigationWidget extends StatelessWidget {
           BlocBuilder<NotificationsBloc, NotificationsState>(
             builder: (context, state) {
               return Visibility(
-                visible: ((iconName.contains(
-                                SvgImageConstant.notificationSelected) ||
-                            iconName.contains(
-                                SvgImageConstant.notificationUnselected)) &&
-                        (state.notificationListDTO.total_unread_notification ??
+                visible: ((iconName
+                            .contains(SvgImageConstant.notificationSelected) ||
+                        iconName.contains(
+                            SvgImageConstant.notificationUnselected)) &&
+                    ((state.notificationListDTO.total_unread_notification ??
                                 0) >
                             0 ||
-                    (state.messageListDTO.total_unread_messages ?? 0) > 0),
+                        (state.messageListDTO.total_unread_messages ?? 0) > 0)),
                 child: Container(
                   height: getSize(8),
                   width: getSize(8),
