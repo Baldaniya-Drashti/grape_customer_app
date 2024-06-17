@@ -41,14 +41,20 @@ class ChatView extends StatelessWidget {
           //   log('isUserTyping : ${state.isUserTyping}');
           return LifecycleWatcher(
             child: Scaffold(
+              backgroundColor: AppColors.white,
               bottomSheet: SafeArea(
+                // bottom: isFullScreenDevice(context),
+                //    top: getSize(18),
                 child: Container(
+                  // margin: EdgeInsets.only(
+                  //   bottom:
+                  //       isFullScreenDevice(context) ? getSize(24) : getSize(0),
+                  // ),
                   padding: EdgeInsets.only(
                     left: getSize(18),
+                    bottom: getSize(20),
+                    top: getSize(20),
                     right: getSize(18),
-                    bottom:
-                        isFullScreenDevice(context) ? getSize(0) : getSize(18),
-                    top: getSize(18),
                   ),
                   color: AppColors.white,
                   child: CustomTextField(
@@ -96,25 +102,28 @@ class ChatView extends StatelessWidget {
               ),
               appBar:
                   fromLiveChatSupport ? getLiveChatAppBar() : getUserAppBar(),
-              body: WillPopScope(
-                onWillPop: () {
-                  context.read<ChatBloc>().add(ChatEvent.removeListners());
-                  Navigator.pop(context, true);
-                  return Future.value(true);
-                },
-                child: state.isLoading
-                    ? Center(
-                        child: ShimmerChatBubble(),
-                      )
-                    : state.isApiFailed
-                        ? Center(
-                            child: BaseText(
-                              text: 'Something went wrong. Please try again!!',
-                            ),
-                          )
-                        : state.isConnectedToSocket
-                            ? ChatWidget()
-                            : SizedBox(),
+              body: SafeArea(
+                child: WillPopScope(
+                  onWillPop: () {
+                    context.read<ChatBloc>().add(ChatEvent.removeListners());
+                    Navigator.pop(context, true);
+                    return Future.value(true);
+                  },
+                  child: state.isLoading
+                      ? Center(
+                          child: ShimmerChatBubble(),
+                        )
+                      : state.isApiFailed
+                          ? Center(
+                              child: BaseText(
+                                text:
+                                    'Something went wrong. Please try again!!',
+                              ),
+                            )
+                          : state.isConnectedToSocket
+                              ? ChatWidget()
+                              : SizedBox(),
+                ),
               ),
             ),
           );
