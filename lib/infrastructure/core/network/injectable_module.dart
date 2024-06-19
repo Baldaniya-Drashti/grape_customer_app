@@ -1,13 +1,21 @@
+import 'dart:developer';
 import 'dart:io';
 
+import 'package:auto_route/auto_route.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:grape_customer_app/domain/core/api_constants.dart';
+import 'package:grape_customer_app/infrastructure/account/account_entity.dart';
 
 import 'package:grape_customer_app/infrastructure/core/common_response.dart';
+import 'package:grape_customer_app/infrastructure/core/hive_box_names.dart';
 import 'package:grape_customer_app/infrastructure/core/network/interceptor/api_error_interceptors.dart';
 import 'package:grape_customer_app/infrastructure/core/network/interceptor/dio_connectivity_request_retrier.dart';
+import 'package:grape_customer_app/injection.dart';
 import 'package:grape_customer_app/presentation/common/utils/get_cookie.dart';
+import 'package:grape_customer_app/presentation/core/app_router.dart';
+import 'package:grape_customer_app/presentation/core/app_router.gr.dart';
+import 'package:hive/hive.dart';
 import 'package:injectable/injectable.dart';
 
 @lazySingleton
@@ -31,6 +39,16 @@ class ApiService {
         return handler.resolve(response); // continue
       },
       onError: (DioException e, handler) async {
+        if (e.response != null &&
+            e.response!.statusMessage!.contains('Unauthorized') &&
+            e.response!.statusCode == 401) {
+          log("Error : ${e.response?.statusMessage}");
+          await Hive.box(BoxNames.settingsBox).clear();
+          await Hive.box<AccountEntity>(BoxNames.currentUser).clear();
+          await Hive.box(BoxNames.settingsBox)
+              .put(BoxKeys.isUserShowIntro, true);
+          await getIt<AppRouter>().replaceAll([PageRouteInfo(LoginPage.name)]);
+        }
         return handler.next(e); //continue
       },
     );
@@ -53,18 +71,21 @@ class ApiService {
     );
 
     dio = Dio(options)
-      ..interceptors.addAll([
-        LogInterceptor(
-          requestBody: true,
-          responseBody: true,
-        ),
-        AppInterceptors(
+      ..interceptors.addAll(
+        [
+          LogInterceptor(
+            requestBody: true,
+            responseBody: true,
+          ),
+          AppInterceptors(
             requestRetrier: DioConnectivityRequestRetrier(
-          dio: dio,
-          connectivity: Connectivity(),
-        )),
-        interceptor,
-      ]);
+              dio: dio,
+              connectivity: Connectivity(),
+            ),
+          ),
+          interceptor,
+        ],
+      );
 
     return dio;
   }

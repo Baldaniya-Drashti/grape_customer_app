@@ -272,9 +272,7 @@ class ProductDetailsView extends StatelessWidget {
                           ProductVenderDetailWidget(),
                           SizedBox(
                             height: getSize(
-                                state.getProductDetails.same_store != null &&
-                                        state.getProductDetails.same_store!
-                                            .isNotEmpty
+                                state.getProductDetails.vendor_details != null
                                     ? 20
                                     : 0),
                           ),
@@ -304,11 +302,12 @@ class ProductDetailsView extends StatelessWidget {
                           FromSameStoreWidget(),
                           SizedBox(
                             height: getSize(
-                                state.getProductDetails.same_store != null &&
-                                        state.getProductDetails.same_store!
-                                            .isNotEmpty
-                                    ? 20
-                                    : 0),
+                              state.getProductDetails.same_store != null &&
+                                      state.getProductDetails.same_store!
+                                          .isNotEmpty
+                                  ? 20
+                                  : 0,
+                            ),
                           ),
                           Visibility(
                             visible: state.getProductDetails.product?.reviews !=

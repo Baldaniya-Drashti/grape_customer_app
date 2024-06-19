@@ -10,7 +10,7 @@ part 'my_order_dto.g.dart';
 class MyOrderDTO with _$MyOrderDTO {
   const factory MyOrderDTO({
     int? order_id,
-    int? amount,
+    num? amount,
     int? quantity,
     int? order_date,
     GetProductListResponse? product,

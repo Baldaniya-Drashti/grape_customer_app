@@ -28,7 +28,7 @@
     "enterLastName":"Please enter last name",
     "emailAddress":"Email Address",
     "enterEmail":"Please enter valid email address",
-    "enterMobile":"Phone number should be between 10 and 15 digits",
+    "enterMobile":"Phone number should be between 6 and 15 digits",
     "mobileNumber":"Mobile Number",
     "save":"Save",
     "fullName":"Full Name",

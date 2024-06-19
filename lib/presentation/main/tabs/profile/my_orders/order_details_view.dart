@@ -34,32 +34,34 @@ class OrderDetails extends StatelessWidget {
             appBar: CustomAppBar(
               title: AppLocalizations.of(context).orderDetails,
             ),
-            body: state.isLoading
-                ? Center(
-                    child: CircularProgressIndicator(
-                      color: AppColors.primaryOrange,
-                    ),
-                  )
-                : state.isErrorInAPI
-                    ? Center(
-                        child: BaseText(
-                            text: 'Something went wrong. Please try again'),
-                      )
-                    : ListView(
-                        shrinkWrap: true,
-                        padding: EdgeInsets.symmetric(
-                          horizontal: getSize(18),
-                          vertical: getSize(20),
-                        ),
-                        physics: BouncingScrollPhysics(),
-                        children: [
-                          OrderDetailItem(),
-                          OrderDetailTrackOrder(),
-                          OrderDetailPaidAmount(),
-                          OrderDetailShippingAddress(),
-                          OrderDetailPaymentMethod(),
-                        ],
+            body: SafeArea(
+              child: state.isLoading
+                  ? Center(
+                      child: CircularProgressIndicator(
+                        color: AppColors.primaryOrange,
                       ),
+                    )
+                  : state.isErrorInAPI
+                      ? Center(
+                          child: BaseText(
+                              text: 'Something went wrong. Please try again'),
+                        )
+                      : ListView(
+                          shrinkWrap: true,
+                          padding: EdgeInsets.symmetric(
+                            horizontal: getSize(18),
+                            vertical: getSize(20),
+                          ),
+                          physics: BouncingScrollPhysics(),
+                          children: [
+                            OrderDetailItem(),
+                            OrderDetailTrackOrder(),
+                            OrderDetailPaidAmount(),
+                            OrderDetailShippingAddress(),
+                            OrderDetailPaymentMethod(),
+                          ],
+                        ),
+            ),
             bottomNavigationBar: Visibility(
               visible: !state.isLoading && !state.isErrorInAPI,
               child: SafeArea(

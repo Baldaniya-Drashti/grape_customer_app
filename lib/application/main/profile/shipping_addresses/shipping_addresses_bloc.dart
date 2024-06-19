@@ -106,15 +106,14 @@ class ShippingAddressesBloc
             final isLandMarkValid = state.landMark.isValid();
             final isStateValid = state.state.isValid();
             final isCityValid = state.city.isValid();
-            final isPinCodeValid = state.pinCode.isValid();
+            // final isPinCodeValid = state.pinCode.isValid();
 
             if (isFullNameValid &&
                 isMobileNumberValid &&
                 isAddressValid &&
                 isLandMarkValid &&
                 isStateValid &&
-                isCityValid &&
-                isPinCodeValid) {
+                isCityValid) {
               emit(
                 state.copyWith(
                   isSubmitting: true,
@@ -180,15 +179,14 @@ class ShippingAddressesBloc
             final isLandMarkValid = state.landMark.isValid();
             final isStateValid = state.state.isValid();
             final isCityValid = state.city.isValid();
-            final isPinCodeValid = state.pinCode.isValid();
+            //final isPinCodeValid = state.pinCode.isValid();
 
             if (isFullNameValid &&
                 isMobileNumberValid &&
                 isAddressValid &&
                 isLandMarkValid &&
                 isStateValid &&
-                isCityValid &&
-                isPinCodeValid) {
+                isCityValid) {
               emit(
                 state.copyWith(
                   isSubmitting: true,

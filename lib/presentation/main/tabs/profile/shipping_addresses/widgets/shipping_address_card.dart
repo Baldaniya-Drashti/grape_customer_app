@@ -60,8 +60,9 @@ class ShippingAddressCard extends StatelessWidget {
               height: getSize(16),
             ),
             BaseText(
-              text:
-                  '${shippingAddress.address},${shippingAddress.state},${shippingAddress.city},${shippingAddress.pincode}',
+              text: shippingAddress.pincode == null
+                  ? '${shippingAddress.address},${shippingAddress.state},${shippingAddress.city}'
+                  : '${shippingAddress.address},${shippingAddress.state},${shippingAddress.city},${shippingAddress.pincode ?? ""}',
               textColor: AppColors.black.withOpacity(0.6),
               fontSize: 14,
               showFullDescription: true,

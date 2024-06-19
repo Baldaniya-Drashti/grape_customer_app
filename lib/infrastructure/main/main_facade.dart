@@ -300,19 +300,22 @@ class MainFacade implements IMainFacade {
       required InputEmptyOrNot city,
       required PinCode pinCode}) async {
     try {
-      final res = await apiService.postMethod(
-        ApiConstants.addShippingAddress,
-        {
-          "full_name": fullName.getOrCrash(),
-          "country_code": countryCode,
-          "mobile": mobileNumber.getOrCrash(),
-          "address": address.getOrCrash(),
-          "landmark": landMark.getOrCrash(),
-          "state": state.getOrCrash(),
-          "city": city.getOrCrash(),
+      var mapData = {
+        "full_name": fullName.getOrCrash(),
+        "country_code": countryCode,
+        "mobile": mobileNumber.getOrCrash(),
+        "address": address.getOrCrash(),
+        "landmark": landMark.getOrCrash(),
+        "state": state.getOrCrash(),
+        "city": city.getOrCrash(),
+      };
+      if (pinCode.isValid()) {
+        mapData.addAll({
           "pincode": pinCode.getOrCrash(),
-        },
-      );
+        });
+      }
+      final res =
+          await apiService.postMethod(ApiConstants.addShippingAddress, mapData);
 
       if (res.dioMessage != null) {
         return right(res.dioMessage ?? "");
@@ -377,19 +380,24 @@ class MainFacade implements IMainFacade {
       required InputEmptyOrNot city,
       required PinCode pinCode}) async {
     try {
+      var mapData = {
+        "id": id,
+        "full_name": fullName.getOrCrash(),
+        "country_code": countryCode,
+        "mobile": mobileNumber.getOrCrash(),
+        "address": address.getOrCrash(),
+        "landmark": landMark.getOrCrash(),
+        "state": state.getOrCrash(),
+        "city": city.getOrCrash(),
+      };
+      if (pinCode.isValid()) {
+        mapData.addAll({
+          "pincode": pinCode.getOrCrash(),
+        });
+      }
       final res = await apiService.postMethod(
         ApiConstants.updateShippingAddress,
-        {
-          "id": id,
-          "full_name": fullName.getOrCrash(),
-          "country_code": countryCode,
-          "mobile": mobileNumber.getOrCrash(),
-          "address": address.getOrCrash(),
-          "landmark": landMark.getOrCrash(),
-          "state": state.getOrCrash(),
-          "city": city.getOrCrash(),
-          "pincode": pinCode.getOrCrash(),
-        },
+        mapData,
       );
 
       if (res.dioMessage != null) {

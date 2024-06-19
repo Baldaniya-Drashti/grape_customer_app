@@ -224,28 +224,30 @@ class RefundRequestView extends StatelessWidget {
                       ),
               ),
             ),
-            bottomNavigationBar: Padding(
-              padding: EdgeInsets.only(
-                left: getSize(18),
-                right: getSize(18),
-                top: getSize(18),
-                bottom: isFullScreenDevice(context) ? 0 : getSize(18),
-              ),
-              child: CommonButton(
-                isSubmitting: state.isSubmitting,
-                onPressed: () async {
-                  if (state.selectedRefundReason == -1) {
-                    await showError(
-                            message:
-                                "Please select reason for return your product")
-                        .show(context);
-                  } else {
-                    context
-                        .read<MyOrdersBloc>()
-                        .add(MyOrdersEvent.submitRefundRequest());
-                  }
-                },
-                buttonText: 'Continue',
+            bottomNavigationBar: SafeArea(
+              child: Padding(
+                padding: EdgeInsets.only(
+                  left: getSize(18),
+                  right: getSize(18),
+                  top: getSize(18),
+                  bottom: isFullScreenDevice(context) ? 0 : getSize(18),
+                ),
+                child: CommonButton(
+                  isSubmitting: state.isSubmitting,
+                  onPressed: () async {
+                    if (state.selectedRefundReason == -1) {
+                      await showError(
+                              message:
+                                  "Please select reason for return your product")
+                          .show(context);
+                    } else {
+                      context
+                          .read<MyOrdersBloc>()
+                          .add(MyOrdersEvent.submitRefundRequest());
+                    }
+                  },
+                  buttonText: 'Continue',
+                ),
               ),
             ),
           );

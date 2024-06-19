@@ -84,9 +84,12 @@ class FullImageView extends StatelessWidget {
                                 child: CircularProgressIndicator(),
                               )
                         : CachedNetworkImage(
+                            width: MediaQuery.of(context).size.width,
+                            // height: MediaQuery.of(context).size.height,
                             imageUrl: state.getProductDetails.product
                                     ?.media?[state.selectedImageIndex].media ??
                                 "",
+                            fit: BoxFit.cover,
                             placeholder: (context, url) => Container(
                               color: Colors.grey.shade300,
                             ),

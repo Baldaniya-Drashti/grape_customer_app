@@ -12,7 +12,7 @@ part 'order_detail_dto.g.dart';
 class OrderDetailDTO with _$OrderDetailDTO {
   const factory OrderDetailDTO({
     int? order_id,
-    int? amount,
+    num? amount,
     int? quantity,
     int? shipping_charge,
     int? tax,

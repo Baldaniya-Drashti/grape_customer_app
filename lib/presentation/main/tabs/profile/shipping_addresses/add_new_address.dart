@@ -171,15 +171,15 @@ class AddNewAddress extends StatelessWidget {
       onChanged: (pinCode) => context.read<ShippingAddressesBloc>().add(
             ShippingAddressesEvent.pinCodeChanged(pinCode),
           ),
-      validator: (p0, p1) =>
-          context.read<ShippingAddressesBloc>().state.pinCode.value.fold(
-              (l) => l.maybeMap(
-                    orElse: () => null,
-                    empty: (value) => AppLocalizations.of(context).enterPinCode,
-                    exceedingLength: (value) =>
-                        'Pincode should be atleast 6 character long',
-                  ),
-              (r) => null),
+      // validator: (p0, p1) =>
+      //     context.read<ShippingAddressesBloc>().state.pinCode.value.fold(
+      //         (l) => l.maybeMap(
+      //               orElse: () => null,
+      //               empty: (value) => AppLocalizations.of(context).enterPinCode,
+      //               exceedingLength: (value) =>
+      //                   'Pincode should be atleast 6 character long',
+      //             ),
+      //         (r) => null),
     );
   }
 
