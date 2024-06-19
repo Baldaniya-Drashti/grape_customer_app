@@ -38,7 +38,7 @@ Either<ValueFailure<String>, String> validateUsername(String input) {
 Either<ValueFailure<String>, String> validateMobileNumber(String input) {
   // log(input);
   if (validateStringNotEmpty(input).isRight()) {
-    if (input.trim().length >= 6 && input.trim().length <= 15) {
+    if (input.trim().length >= 8 && input.trim().length <= 15) {
       return right(input);
     } else {
       return left(ValueFailure.invalidMobileNumber(failedValue: input));

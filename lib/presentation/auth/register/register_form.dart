@@ -248,7 +248,7 @@ class RegisterForm extends StatelessWidget {
                 (f) => f.maybeMap(
                   empty: (value) => 'Please enter mobile number',
                   invalidMobileNumber: (_) =>
-                      'Phone number should be between 6 and 15 digits',
+                      'Phone number should be between 8 and 15 digits',
                   orElse: () => null,
                 ),
                 (_) => null,
