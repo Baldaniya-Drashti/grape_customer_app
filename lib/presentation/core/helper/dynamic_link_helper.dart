@@ -16,14 +16,13 @@ class DynamicLinksService {
   }) async {
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
 
-    String uriPrefix = "https://iroid.page.link";
+    String uriPrefix = "https://grapecustomer.page.link";
 
     final DynamicLinkParameters parameters = DynamicLinkParameters(
       uriPrefix: uriPrefix,
-      link: Uri.tryParse('https://www.google.com/?productId=$productId')!,
+      link: Uri.tryParse('$uriPrefix?productId=$productId')!,
       androidParameters: AndroidParameters(
         packageName: packageInfo.packageName,
-        minimumVersion: 125,
       ),
       iosParameters: IOSParameters(
         bundleId: packageInfo.packageName,
@@ -39,7 +38,9 @@ class DynamicLinksService {
 
     // final Uri dynamicUrl = await parameters.buildUrl();
     final ShortDynamicLink shortDynamicLink =
-        await FirebaseDynamicLinks.instance.buildShortLink(parameters);
+        await FirebaseDynamicLinks.instance.buildShortLink(
+      parameters,
+    );
     final Uri shortUrl = shortDynamicLink.shortUrl;
     return shortUrl.toString();
   }

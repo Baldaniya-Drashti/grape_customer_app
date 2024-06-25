@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grape_customer_app/application/main/home/product_detail/product_detail_bloc.dart';
@@ -48,18 +49,37 @@ class ProductImageView extends StatelessWidget {
                   child: Stack(
                     alignment: Alignment.center,
                     children: [
-                      CachedNetworkImage(
-                        imageUrl: state.getProductDetails.product
-                                ?.media?[state.selectedImageIndex].thumbnail ??
-                            "",
-                        height: getSize(216),
-                        width: MediaQuery.of(context).size.width,
-                        placeholder: (context, url) => Container(
+                      CarouselSlider.builder(
+                        itemCount:
+                            state.getProductDetails.product?.media?.length,
+                        itemBuilder: (context, index, realIndex) =>
+                            CachedNetworkImage(
+                          imageUrl: state
+                                  .getProductDetails
+                                  .product
+                                  ?.media?[state.selectedImageIndex]
+                                  .thumbnail ??
+                              "",
                           height: getSize(216),
                           width: MediaQuery.of(context).size.width,
-                          color: Colors.grey.shade300,
+                          placeholder: (context, url) => Container(
+                            height: getSize(216),
+                            width: MediaQuery.of(context).size.width,
+                            color: Colors.grey.shade300,
+                          ),
+                          fit: BoxFit.cover,
                         ),
-                        fit: BoxFit.cover,
+                        options: CarouselOptions(
+                          viewportFraction: 1,
+                          onPageChanged: (index, reason) {
+                            context
+                                .read<ProductDetailBloc>()
+                                .add(ProductDetailEvent.selectImage(index));
+                          },
+                          autoPlay: false,
+                          scrollPhysics: BouncingScrollPhysics(),
+                          enableInfiniteScroll: false,
+                        ),
                       ),
                       Visibility(
                         visible: state.getProductDetails.product

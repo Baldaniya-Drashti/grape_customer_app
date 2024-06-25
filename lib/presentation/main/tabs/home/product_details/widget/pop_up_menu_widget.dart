@@ -49,18 +49,20 @@ class PopMenuWidget extends StatelessWidget {
               title: 'Share',
               image: SvgImageConstant.share,
               onTap: () async {
-                var shortlink = await DynamicLinksService.createDynamicLink(
-                  imageURL: state.getProductDetails.product
-                          ?.media?[state.selectedImageIndex].media ??
-                      "",
-                  title: state.getProductDetails.product?.product_name ?? "",
-                  description: state.dataList[4].value ?? "",
-                  productId:
-                      state.getProductDetails.product?.id.toString() ?? "",
-                );
+                if ((state.getProductDetails.product?.available_qty ?? 0) > 0) {
+                  var shortlink = await DynamicLinksService.createDynamicLink(
+                    imageURL: state.getProductDetails.product
+                            ?.media?[state.selectedImageIndex].media ??
+                        "",
+                    title: state.getProductDetails.product?.product_name ?? "",
+                    description: state.dataList[4].value ?? "",
+                    productId:
+                        state.getProductDetails.product?.id.toString() ?? "",
+                  );
 
-                if (shortlink.isNotEmpty) {
-                  await Share.share(shortlink);
+                  if (shortlink.isNotEmpty) {
+                    await Share.share(shortlink);
+                  }
                 }
               },
             ),

@@ -7,6 +7,25 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:568471335476:android:fec09b209ee3b751f09061",
+        "android_client_info": {
+          "package_name": "com.mobile.grape_vendor_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAEPe7upukbefIVDSmvNL90bc-MYfObF4I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:568471335476:android:870d2cdcbf08727af09061",
         "android_client_info": {
           "package_name": "com.mobile.grapecustomer.app"

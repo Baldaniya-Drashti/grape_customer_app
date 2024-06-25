@@ -90,7 +90,7 @@ dependencies:
   socket_io_client: ^2.0.3+1
   sticky_headers: ^0.3.0+2
   package_info_plus: ^5.0.1
-  firebase_dynamic_links: ^5.4.13
+  firebase_dynamic_links: ^5.4.17
   share_plus: ^7.2.2
   flutter_stripe: ^10.1.1
   firebase_core: ^2.27.0
@@ -103,6 +103,7 @@ dependencies:
   qr_flutter: ^4.1.0
   animated_text_kit: ^4.2.2
   super_tooltip: ^2.0.7
+
  
 
 

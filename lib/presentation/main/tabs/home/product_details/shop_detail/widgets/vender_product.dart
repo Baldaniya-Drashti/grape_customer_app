@@ -24,6 +24,10 @@ class VenderProductGrid extends StatelessWidget {
           return Center(
             child: BaseText(text: 'Something wrong. Please try again!!'),
           );
+        } else if (state.getProductList.isEmpty) {
+          return Center(
+            child: BaseText(text: 'No result found.'),
+          );
         } else {
           return GridView.builder(
             itemCount: state.getProductList.length,
@@ -58,7 +62,9 @@ class VenderProductGrid extends StatelessWidget {
                         Center(
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(getSize(10)),
-                            child: state.getProductList[index].images != null
+                            child: state.getProductList[index].images != null &&
+                                    state.getProductList[index].images!
+                                        .isNotEmpty
                                 ? CachedNetworkImage(
                                     imageUrl: state.getProductList[index].images
                                             ?.first.image ??
