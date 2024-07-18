@@ -209,6 +209,13 @@ class PaymentMethodBloc extends Bloc<PaymentMethodEvent, PaymentMethodState> {
                       optionOf(failureOrSuccess)),
             );
           },
+          changePaymentMethod: (ChangePaymentMethod value) async {
+            emit(
+              state.copyWith(
+                isMPessaSelected: value.isMPessaSelected,
+              ),
+            );
+          },
         );
       },
     );

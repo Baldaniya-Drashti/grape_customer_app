@@ -25,4 +25,6 @@ class PaymentMethodEvent with _$PaymentMethodEvent {
   const factory PaymentMethodEvent.getCardList() = GetCardList;
 
   const factory PaymentMethodEvent.changeCard(String index) = ChangedCard;
+  const factory PaymentMethodEvent.changePaymentMethod(bool isMPessaSelected) =
+      ChangePaymentMethod;
 }

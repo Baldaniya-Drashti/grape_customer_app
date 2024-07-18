@@ -15,4 +15,6 @@ class PngImageConstants {
   static const liveChat = 'assets/png/liveChat.png';
   static const masterCard = 'assets/png/logos_mastercard.png';
   static const profile = 'assets/png/profile.png';
+  static const mPessaLogo = 'assets/png/m_pesa_logo.png';
+  static const waffiPayLogo = 'assets/png/waffi_pay_logo.png';
 }

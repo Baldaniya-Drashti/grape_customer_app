@@ -5,12 +5,11 @@ import 'package:flutter_svg/svg.dart';
 import 'package:grape_customer_app/application/main/profile/payment_method/payment_method_bloc.dart';
 import 'package:grape_customer_app/domain/core/l10n/app_localizations.dart';
 import 'package:grape_customer_app/domain/core/math_utils.dart';
+import 'package:grape_customer_app/domain/core/png_image_constants.dart';
 import 'package:grape_customer_app/domain/core/svg_image_constants.dart';
-import 'package:grape_customer_app/infrastructure/main/payemnt_method_dto/get_cards_dto.dart';
 import 'package:grape_customer_app/injection.dart';
 import 'package:grape_customer_app/presentation/common/utils/flushbar_creator.dart';
 import 'package:grape_customer_app/presentation/common/widgets/base_text.dart';
-import 'package:grape_customer_app/presentation/core/app_router.gr.dart';
 import 'package:grape_customer_app/presentation/core/styles/app_colors.dart';
 import 'package:grape_customer_app/presentation/core/widgets/buttons/common_button.dart';
 import 'package:grape_customer_app/presentation/core/widgets/inputs/custom_app_bar.dart';
@@ -79,27 +78,27 @@ class PaymentMethod extends StatelessWidget {
             appBar: CustomAppBar(
               title: AppLocalizations.of(context).paymentMethods,
               actions: [
-                GestureDetector(
-                  onTap: () async {
-                    var res = await context.router.push(
-                      PageRouteInfo(
-                        AddNewCard.name,
-                        args: AddNewCardArgs(
-                          getCardsDTO: GetCardsDTO(),
-                        ),
-                      ),
-                    );
-                    if (res != null && res == true) {
-                      context
-                          .read<PaymentMethodBloc>()
-                          .add(PaymentMethodEvent.getCardList());
-                    }
-                  },
-                  child: Padding(
-                    padding: EdgeInsets.only(right: getSize(16)),
-                    child: SvgPicture.asset(SvgImageConstant.addIcon),
-                  ),
-                ),
+                // GestureDetector(
+                //   onTap: () async {
+                //     var res = await context.router.push(
+                //       PageRouteInfo(
+                //         AddNewCard.name,
+                //         args: AddNewCardArgs(
+                //           getCardsDTO: GetCardsDTO(),
+                //         ),
+                //       ),
+                //     );
+                //     if (res != null && res == true) {
+                //       context
+                //           .read<PaymentMethodBloc>()
+                //           .add(PaymentMethodEvent.getCardList());
+                //     }
+                //   },
+                //   child: Padding(
+                //     padding: EdgeInsets.only(right: getSize(16)),
+                //     child: SvgPicture.asset(SvgImageConstant.addIcon),
+                //   ),
+                // ),
               ],
             ),
             body: Padding(
@@ -126,116 +125,143 @@ class PaymentMethod extends StatelessWidget {
                                 fontWeight: FontWeight.w600,
                               ),
                             )
-                          : Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                          : Row(
+                              //crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                BaseText(
-                                  text: AppLocalizations.of(context)
-                                      .creditDebitCard,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 14,
-                                ),
                                 Expanded(
-                                  child: ListView.separated(
-                                    shrinkWrap: true,
-                                    padding: EdgeInsets.symmetric(
-                                        vertical: getSize(20)),
-                                    itemBuilder: (context, index) {
-                                      return GestureDetector(
-                                        onTap: () {
-                                          context.read<PaymentMethodBloc>().add(
-                                                PaymentMethodEvent.changeCard(
-                                                    state.cardDetail[index]
-                                                            .payment_method_id ??
-                                                        ""),
-                                              );
-                                        },
-                                        child: Container(
-                                          padding: EdgeInsets.zero,
-                                          decoration: BoxDecoration(
-                                              color: AppColors.grey
-                                                  .withOpacity(0.2),
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                              border: state.cardDetail[index]
-                                                          .payment_method_id ==
-                                                      state.selectedCard
-                                                  ? Border.all(
-                                                      color: AppColors
-                                                          .primaryOrange,
-                                                    )
-                                                  : null),
-                                          child: Row(
-                                            children: [
-                                              IconButton(
-                                                onPressed: () {
-                                                  context
-                                                      .read<PaymentMethodBloc>()
-                                                      .add(
-                                                        PaymentMethodEvent
-                                                            .changeCard(state
-                                                                    .cardDetail[
-                                                                        index]
-                                                                    .payment_method_id ??
-                                                                ""),
-                                                      );
-                                                },
-                                                icon: SvgPicture.asset(
-                                                  state.cardDetail[index]
-                                                              .payment_method_id !=
-                                                          state.selectedCard
-                                                      ? SvgImageConstant
-                                                          .selectedRadio
-                                                      : SvgImageConstant
-                                                          .emptyRadio,
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: getSize(8),
-                                              ),
-                                              getCardIcon(state
-                                                          .cardDetail[index]
-                                                          .brand ??
-                                                      "") ??
-                                                  Container(),
-                                              SizedBox(
-                                                width: getSize(8),
-                                              ),
-                                              BaseText(
-                                                text:
-                                                    '**** **** **** ${state.cardDetail[index].last4}',
-                                                fontSize: 12,
-                                              ),
-                                              Spacer(),
-                                              IconButton(
-                                                onPressed: () {
-                                                  context
-                                                      .read<PaymentMethodBloc>()
-                                                      .add(
-                                                        PaymentMethodEvent
-                                                            .deleteCard(state
-                                                                    .cardDetail[
-                                                                        index]
-                                                                    .payment_method_id ??
-                                                                ''),
-                                                      );
-                                                },
-                                                icon: SvgPicture.asset(
-                                                  SvgImageConstant.deleteIcon,
-                                                ),
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                      );
+                                  child: getPaymentMethodContainer(
+                                    image: PngImageConstants.mPessaLogo,
+                                    onTap: () {
+                                      context.read<PaymentMethodBloc>().add(
+                                          PaymentMethodEvent
+                                              .changePaymentMethod(true));
                                     },
-                                    separatorBuilder: (context, index) =>
-                                        SizedBox(
-                                      height: getSize(18),
-                                    ),
-                                    itemCount: state.cardDetail.length,
+                                    title: 'M-Pesa',
+                                    isSelected: state.isMPessaSelected,
                                   ),
                                 ),
+                                SizedBox(
+                                  width: getSize(20),
+                                ),
+                                Expanded(
+                                  child: getPaymentMethodContainer(
+                                    image: PngImageConstants.waffiPayLogo,
+                                    onTap: () {
+                                      context.read<PaymentMethodBloc>().add(
+                                          PaymentMethodEvent
+                                              .changePaymentMethod(false));
+                                    },
+                                    title: 'Wafi Pay',
+                                    isSelected: !state.isMPessaSelected,
+                                  ),
+                                ),
+                                // BaseText(
+                                //   text: AppLocalizations.of(context)
+                                //       .creditDebitCard,
+                                //   fontWeight: FontWeight.w600,
+                                //   fontSize: 14,
+                                // ),
+                                // Expanded(
+                                //   child: ListView.separated(
+                                //     shrinkWrap: true,
+                                //     padding: EdgeInsets.symmetric(
+                                //         vertical: getSize(20)),
+                                //     itemBuilder: (context, index) {
+                                //       return GestureDetector(
+                                //         onTap: () {
+                                //           context.read<PaymentMethodBloc>().add(
+                                //                 PaymentMethodEvent.changeCard(
+                                //                     state.cardDetail[index]
+                                //                             .payment_method_id ??
+                                //                         ""),
+                                //               );
+                                //         },
+                                //         child: Container(
+                                //           padding: EdgeInsets.zero,
+                                //           decoration: BoxDecoration(
+                                //               color: AppColors.grey
+                                //                   .withOpacity(0.2),
+                                //               borderRadius:
+                                //                   BorderRadius.circular(10),
+                                //               border: state.cardDetail[index]
+                                //                           .payment_method_id ==
+                                //                       state.selectedCard
+                                //                   ? Border.all(
+                                //                       color: AppColors
+                                //                           .primaryOrange,
+                                //                     )
+                                //                   : null),
+                                //           child: Row(
+                                //             children: [
+                                //               IconButton(
+                                //                 onPressed: () {
+                                //                   context
+                                //                       .read<PaymentMethodBloc>()
+                                //                       .add(
+                                //                         PaymentMethodEvent
+                                //                             .changeCard(state
+                                //                                     .cardDetail[
+                                //                                         index]
+                                //                                     .payment_method_id ??
+                                //                                 ""),
+                                //                       );
+                                //                 },
+                                //                 icon: SvgPicture.asset(
+                                //                   state.cardDetail[index]
+                                //                               .payment_method_id !=
+                                //                           state.selectedCard
+                                //                       ? SvgImageConstant
+                                //                           .selectedRadio
+                                //                       : SvgImageConstant
+                                //                           .emptyRadio,
+                                //                 ),
+                                //               ),
+                                //               SizedBox(
+                                //                 width: getSize(8),
+                                //               ),
+                                //               getCardIcon(state
+                                //                           .cardDetail[index]
+                                //                           .brand ??
+                                //                       "") ??
+                                //                   Container(),
+                                //               SizedBox(
+                                //                 width: getSize(8),
+                                //               ),
+                                //               BaseText(
+                                //                 text:
+                                //                     '**** **** **** ${state.cardDetail[index].last4}',
+                                //                 fontSize: 12,
+                                //               ),
+                                //               Spacer(),
+                                //               IconButton(
+                                //                 onPressed: () {
+                                //                   context
+                                //                       .read<PaymentMethodBloc>()
+                                //                       .add(
+                                //                         PaymentMethodEvent
+                                //                             .deleteCard(state
+                                //                                     .cardDetail[
+                                //                                         index]
+                                //                                     .payment_method_id ??
+                                //                                 ''),
+                                //                       );
+                                //                 },
+                                //                 icon: SvgPicture.asset(
+                                //                   SvgImageConstant.deleteIcon,
+                                //                 ),
+                                //               )
+                                //             ],
+                                //           ),
+                                //         ),
+                                //       );
+                                //     },
+                                //     separatorBuilder: (context, index) =>
+                                //         SizedBox(
+                                //       height: getSize(18),
+                                //     ),
+                                //     itemCount: state.cardDetail.length,
+                                //   ),
+                                // ),
                               ],
                             ),
             ),
@@ -261,6 +287,61 @@ class PaymentMethod extends StatelessWidget {
             ),
           );
         },
+      ),
+    );
+  }
+
+  getPaymentMethodContainer({
+    required String image,
+    required Function() onTap,
+    required String title,
+    bool isSelected = false,
+  }) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            height: getSize(85),
+            padding: EdgeInsets.all(getSize(20)),
+            decoration: BoxDecoration(
+              color: AppColors.grey.withOpacity(0.20),
+              borderRadius: BorderRadius.circular(
+                getSize(10),
+              ),
+              border: isSelected
+                  ? Border.all(
+                      color: AppColors.primaryOrange,
+                    )
+                  : null,
+            ),
+            alignment: Alignment.center,
+            child: Image.asset(
+              image,
+            ),
+          ),
+          SizedBox(
+            height: getSize(12),
+          ),
+          Row(
+            children: [
+              SvgPicture.asset(
+                isSelected
+                    ? SvgImageConstant.emptyRadio
+                    : SvgImageConstant.selectedRadio,
+              ),
+              SizedBox(
+                width: getSize(10),
+              ),
+              BaseText(
+                text: title,
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+              )
+            ],
+          )
+        ],
       ),
     );
   }

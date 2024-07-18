@@ -7,6 +7,7 @@ class PaymentMethodState with _$PaymentMethodState {
     required CardNumber cardNumber,
     required CardDate cardDate,
     required bool showErrorMessages,
+    required bool isMPessaSelected,
     required CVV cvv,
     required List<GetCardsDTO> cardDetail,
     required Option<Either<MainFailure, String>> failureOrSuccessOption,
@@ -38,5 +39,6 @@ class PaymentMethodState with _$PaymentMethodState {
         mobileNumberFocusNode: FocusNode(),
         cvvNumberFocusNode: FocusNode(),
         validUptoFocusNode: FocusNode(),
+        isMPessaSelected: true,
       );
 }
