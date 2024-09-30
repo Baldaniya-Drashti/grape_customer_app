@@ -268,6 +268,10 @@ class PaymentMethod extends StatelessWidget {
             bottomNavigationBar: SafeArea(
               child: Padding(
                 padding: EdgeInsets.symmetric(
+
+
+
+                  
                   horizontal: getSize(18),
                   vertical: isFullScreenDevice(context) ? 0 : getSize(18),
                 ),

@@ -16,7 +16,6 @@ class NotificationView extends StatelessWidget {
       builder: (context, state) {
         return TabBarView(
           physics: BouncingScrollPhysics(),
-          
           children: [
             AllNotificationListWidget(),
             AllMessageListWidget(),
