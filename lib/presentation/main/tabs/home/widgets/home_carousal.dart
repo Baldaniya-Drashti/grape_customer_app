@@ -1,5 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:carousel_slider/carousel_slider.dart';
+import 'package:carousel_slider/carousel_slider.dart' as carousal;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grape_customer_app/application/main/home/home_bloc.dart';
@@ -14,7 +14,7 @@ class HomeDiscountCarousalWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<HomeBloc, HomeState>(
       builder: (context, state) {
-        return CarouselSlider.builder(
+        return carousal.CarouselSlider.builder(
           itemCount: context.read<HomeBloc>().imgList.length,
           itemBuilder: (context, index, realIndex) => Padding(
             padding: EdgeInsets.symmetric(horizontal: getSize(18)),
@@ -27,7 +27,7 @@ class HomeDiscountCarousalWidget extends StatelessWidget {
               ),
             ),
           ),
-          options: CarouselOptions(
+          options: carousal.CarouselOptions(
             autoPlay: false,
             enlargeCenterPage: false,
             viewportFraction: 1,

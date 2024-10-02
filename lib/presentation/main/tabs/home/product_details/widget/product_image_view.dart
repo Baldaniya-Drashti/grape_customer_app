@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:carousel_slider/carousel_slider.dart';
+import 'package:carousel_slider/carousel_slider.dart' as carousal;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grape_customer_app/application/main/home/product_detail/product_detail_bloc.dart';
@@ -49,7 +49,7 @@ class ProductImageView extends StatelessWidget {
                   child: Stack(
                     alignment: Alignment.center,
                     children: [
-                      CarouselSlider.builder(
+                      carousal.CarouselSlider.builder(
                         itemCount:
                             state.getProductDetails.product?.media?.length,
                         itemBuilder: (context, index, realIndex) =>
@@ -69,7 +69,7 @@ class ProductImageView extends StatelessWidget {
                           ),
                           fit: BoxFit.cover,
                         ),
-                        options: CarouselOptions(
+                        options: carousal.CarouselOptions(
                           viewportFraction: 1,
                           onPageChanged: (index, reason) {
                             context

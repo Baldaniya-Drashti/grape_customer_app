@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:carousel_slider/carousel_slider.dart';
+import 'package:carousel_slider/carousel_slider.dart' as carousal;
 import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -84,7 +84,7 @@ class FullImageView extends StatelessWidget {
                             : Center(
                                 child: CircularProgressIndicator(),
                               )
-                        : CarouselSlider.builder(
+                        : carousal.CarouselSlider.builder(
                             itemCount:
                                 state.getProductDetails.product?.media?.length,
                             itemBuilder: (context, index, realIndex) =>
@@ -102,7 +102,7 @@ class FullImageView extends StatelessWidget {
                                 color: Colors.grey.shade300,
                               ),
                             ),
-                            options: CarouselOptions(
+                            options: carousal.CarouselOptions(
                               viewportFraction: 1,
                               onPageChanged: (index, reason) {
                                 context
