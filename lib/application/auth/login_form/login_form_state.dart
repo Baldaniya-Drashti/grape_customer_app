@@ -21,7 +21,7 @@ class LoginFormState with _$LoginFormState {
         authFailureOrSuccessOption: none(),
         selectedCountrycode: '91',
         enteredOTP: OTPText(''),
-        secondsRemaining: 0,
+        secondsRemaining: 00,
         mobileNumberFocusNode: FocusNode(),
         resendFailureOrSuccessOption: none(),
       );
