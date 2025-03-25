@@ -3,7 +3,7 @@ name: Flutter Release Build
 on:
   push:
     branches:
-      - main  # Change this if your branch is different
+      - maitry_mockito_unittesting # Change this if your branch is different
 
 jobs:
   build:
