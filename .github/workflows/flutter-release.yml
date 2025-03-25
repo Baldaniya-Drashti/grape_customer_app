@@ -3,28 +3,28 @@ name: Flutter Release Build
 on:
   push:
     branches:
-      - maitry_mockito_unittesting  # Change this to the branch where you want to trigger the build
+      - main  # Change this if your branch is different
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout Repository
         uses: actions/checkout@v3
 
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: 3.24.3  # Use your Flutter version
+          flutter-version: "3.13.0"  # Change to your Flutter version
 
-      - name: Install dependencies
+      - name: Install Dependencies
         run: flutter pub get
 
       - name: Build APK
         run: flutter build apk --release
 
-      - name: Upload APK as Artifact
+      - name: Upload APK Artifact
         uses: actions/upload-artifact@v3
         with:
           name: release-apk
