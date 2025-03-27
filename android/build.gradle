@@ -17,7 +17,6 @@ allprojects {
     repositories {
         google()
         mavenCentral()
-        maven { url 'https://storage.googleapis.com/download.flutter.io' } 
     }
 }
 
@@ -27,6 +26,13 @@ subprojects {
 }
 subprojects {
     project.evaluationDependsOn(':app')
+}
+subprojects {
+    afterEvaluate { project ->
+        if (project.hasProperty("android")) {
+            project.android.compileSdkVersion = 34
+        }
+    }
 }
 
 tasks.register("clean", Delete) {
