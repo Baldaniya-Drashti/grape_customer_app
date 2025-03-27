@@ -75,7 +75,7 @@ dependencies:
   pin_code_fields: ^8.0.1
   flutter_svg: ^2.0.9
   geocoding: ^2.1.1
-  geolocator: ^12.0.0
+  geolocator: ^11.1.0
 
   figma_squircle: ^0.5.3
   carousel_slider: ^5.0.0
