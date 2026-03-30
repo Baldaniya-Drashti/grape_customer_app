@@ -37,9 +37,7 @@ class HomeView extends StatelessWidget {
               physics: BouncingScrollPhysics(),
               children: [
                 HomeDiscountCarousalWidget(),
-                SizedBox(
-                  height: getSize(6),
-                ),
+                SizedBox(height: getSize(6)),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: context
@@ -51,9 +49,7 @@ class HomeView extends StatelessWidget {
                     return Container(
                       width: getSize(state.carousalIndex == entry.key ? 18 : 5),
                       height: getSize(5),
-                      margin: EdgeInsets.symmetric(
-                        horizontal: getSize(5),
-                      ),
+                      margin: EdgeInsets.symmetric(horizontal: getSize(5)),
                       decoration: BoxDecoration(
                         borderRadius: state.carousalIndex == entry.key
                             ? BorderRadius.circular(getSize(30))
@@ -68,9 +64,7 @@ class HomeView extends StatelessWidget {
                     );
                   }).toList(),
                 ),
-                SizedBox(
-                  height: getSize(25),
-                ),
+                SizedBox(height: getSize(25)),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: getSize(18)),
                   child: BaseText(
@@ -96,9 +90,7 @@ class HomeView extends StatelessWidget {
                   //   ],
                   // ),
                 ),
-                SizedBox(
-                  height: getSize(18),
-                ),
+                SizedBox(height: getSize(18)),
                 //ProductGridShimmerView()
                 RecommandedProductWidget(),
               ],

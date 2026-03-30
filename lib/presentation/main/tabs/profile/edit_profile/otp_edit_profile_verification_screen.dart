@@ -104,9 +104,7 @@ class OtpEditProfileVerificationView extends StatelessWidget {
                       fontWeight: FontWeight.w800,
                       textColor: AppColors.authBlack,
                     ),
-                    SizedBox(
-                      height: getSize(20),
-                    ),
+                    SizedBox(height: getSize(20)),
                     RichText(
                       text: TextSpan(
                         style: TextStyle(
@@ -117,9 +115,8 @@ class OtpEditProfileVerificationView extends StatelessWidget {
                         ),
                         children: [
                           TextSpan(
-                            text:
-                                'Enter the verification code we just sent on your mobile number ',
-                          ),
+                              text:
+                                  'Enter the verification code we just sent on your mobile number '),
                           TextSpan(
                             text:
                                 '(+${state.countryCode}) ${state.mobileNumber.getValue()}',
@@ -144,7 +141,8 @@ class OtpEditProfileVerificationView extends StatelessWidget {
                             fontWeight: FontWeight.w500,
                           ),
                           BaseText(
-                            text: '00:${state.secondsRemaining}',
+                            text:
+                                '00:${(state.secondsRemaining.toString().length == 2) ? state.secondsRemaining : "0${state.secondsRemaining}"}',
                             fontSize: 12,
                             fontWeight: FontWeight.w500,
                             textColor: AppColors.black.withOpacity(0.6),

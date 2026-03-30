@@ -107,7 +107,6 @@ class AddNewCard extends StatelessWidget {
                     ],
                   ),
                 ),
-              
               ),
               bottomNavigationBar: SafeArea(
                 child: Padding(
@@ -238,5 +237,4 @@ class AddNewCard extends StatelessWidget {
               (r) => null),
     );
   }
-
 }

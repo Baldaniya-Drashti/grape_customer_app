@@ -141,13 +141,36 @@ class CartListView extends StatelessWidget {
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    BaseText(
-                      text:
-                          state.cartListDTO[index].product?.product_name ?? "",
-                      fontSize: 14,
-                      maxLines: 3,
-                      fontWeight: FontWeight.w500,
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          child: BaseText(
+                            text: state
+                                    .cartListDTO[index].product?.product_name ??
+                                "",
+                            fontSize: 14,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            context.read<CartBloc>().add(
+                                  CartEvent.removeProductFromCart(
+                                      state.cartListDTO[index].id?.toString() ??
+                                          ""),
+                                );
+                          },
+                          child: Icon(
+                            Icons.close_rounded,
+                            color: AppColors.black.withOpacity(0.60),
+                          ),
+                        ),
+                      ],
                     ),
                     SizedBox(
                       height: getSize(8),
@@ -205,25 +228,6 @@ class CartListView extends StatelessWidget {
                 fontSize: 18,
                 textColor: AppColors.mildBlue,
                 fontWeight: FontWeight.w600,
-              ),
-            ),
-          ),
-          Positioned.fill(
-            top: getSize(-10),
-            right: getSize(-10),
-            child: Align(
-              alignment: Alignment.topRight,
-              child: IconButton(
-                onPressed: () {
-                  context.read<CartBloc>().add(
-                        CartEvent.removeProductFromCart(
-                            state.cartListDTO[index].id?.toString() ?? ""),
-                      );
-                },
-                icon: Icon(
-                  Icons.close_rounded,
-                  color: AppColors.black.withOpacity(0.60),
-                ),
               ),
             ),
           ),

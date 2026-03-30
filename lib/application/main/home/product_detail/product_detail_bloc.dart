@@ -4,6 +4,7 @@ import 'dart:convert';
 
 import 'package:chewie/chewie.dart';
 import 'package:dartz/dartz.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:grape_customer_app/domain/main/i_main_facade.dart';
@@ -12,6 +13,9 @@ import 'package:grape_customer_app/infrastructure/core/common_product_from_json_
 import 'package:grape_customer_app/infrastructure/main/home_dto/get_product_list_response.dart';
 import 'package:grape_customer_app/infrastructure/main/home_dto/product_detail_dto.dart';
 import 'package:grape_customer_app/infrastructure/main/shop_detail_dto/shop_detail_dto.dart';
+import 'package:grape_customer_app/injection.dart';
+import 'package:grape_customer_app/presentation/common/utils/flushbar_creator.dart';
+import 'package:grape_customer_app/presentation/core/app_router.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:super_tooltip/super_tooltip.dart';
@@ -37,6 +41,13 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
   final RefreshController productYouMayLikeRefreshController =
       RefreshController();
   final RefreshController productReviewRefreshController = RefreshController();
+
+  BuildContext get currentContext {
+    final context = getIt<AppRouter>().navigatorKey.currentContext;
+    assert(context != null);
+    return context!;
+  }
+
   ProductDetailBloc(this.mainFacade) : super(ProductDetailState.initial()) {
     on<ProductDetailEvent>(
       (event, emit) async {
@@ -176,6 +187,9 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
               cartResponse.fold(
                 (l) => null,
                 (r) {
+                  showSuccess(
+                    message: "Product added in cart",
+                  ).show(value.context);
                   var updatedList = <GetProductListResponse>[];
                   var updatedDetail = ProductDetailDTO();
                   if (value.productId != null) {
@@ -238,12 +252,48 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
               }
               return product;
             }).toList();
-            emit(
+
+            /* emit(
               state.copyWith(
                 failureOrSuccessOption: optionOf(failureOrSuccess),
                 getProductList: updatedList,
               ),
+            ); */
+
+            failureOrSuccess.fold(
+              (failure) {
+                showError(
+                  message: failure.maybeMap(
+                    showAPIResponseMessage: (value) => value.message,
+                    networkError: (value) =>
+                        'Please check your internet connectivity',
+                    orElse: () => "Server Error. Try again later.",
+                  ),
+                ).show(currentContext);
+                emit(
+                  state.copyWith(
+                    failureOrSuccessOption: none(),
+                    getProductList: updatedList,
+                  ),
+                );
+              },
+              (r) {
+                showSuccess(
+                  message: r,
+                ).show(currentContext);
+                emit(
+                  state.copyWith(
+                    // failureOrSuccessOption: optionOf(failureOrSuccess),
+                    getProductList: updatedList,
+                  ),
+                );
+                if (value.productId != null && value.productId!.isNotEmpty) {
+                  add(ProductDetailEvent.getProductDetails(
+                      value.productId!, true, true, false));
+                }
+              },
             );
+
             //  add(ProductDetailEvent.getProductYouMayAlsoLikeProductList(true));
           },
           addToFavourite: (AddToFavourite value) async {
@@ -264,14 +314,45 @@ class ProductDetailBloc extends Bloc<ProductDetailEvent, ProductDetailState> {
               }
               return product;
             }).toList();
-
             //  log('updatedList : ${updatedList}');
 
-            emit(
-              state.copyWith(
-                failureOrSuccessOption: optionOf(failureOrSuccess),
-                getProductList: updatedList,
-              ),
+            failureOrSuccess.fold(
+              (failure) {
+                showError(
+                  message: failure.maybeMap(
+                    showAPIResponseMessage: (value) => value.message,
+                    networkError: (value) =>
+                        'Please check your internet connectivity',
+                    orElse: () => "Server Error. Try again later.",
+                  ),
+                ).show(currentContext);
+                emit(
+                  state.copyWith(
+                    failureOrSuccessOption: none(),
+                    getProductList: updatedList,
+                  ),
+                );
+              },
+              (r) {
+                showSuccess(
+                  message: r,
+                ).show(currentContext);
+                emit(
+                  state.copyWith(
+                    // failureOrSuccessOption: optionOf(failureOrSuccess),
+                    getProductList: updatedList,
+                  ),
+                );
+                if (value.productId != null && value.productId!.isNotEmpty) {
+                  add(ProductDetailEvent.getProductDetails(
+                      value.productId!, true, true, false));
+                }
+
+                // context.read<ProductDetailBloc>().add(
+                //       ProductDetailEvent.getProductDetails(
+                //           productId, true, false),
+                //     );
+              },
             );
 
             //   add(ProductDetailEvent.getProductYouMayAlsoLikeProductList(true));

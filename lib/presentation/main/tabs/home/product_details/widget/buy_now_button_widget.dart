@@ -29,7 +29,7 @@ class BuyNowButtonWidget extends StatelessWidget {
                       );
                 } else {
                   context.read<ProductDetailBloc>().add(
-                        ProductDetailEvent.addProductToCart(
+                        ProductDetailEvent.addProductToCart(context,
                             isMainProductAddedToCart: true),
                       );
                 }

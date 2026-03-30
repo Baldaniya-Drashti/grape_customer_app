@@ -39,7 +39,8 @@ class EditProfileScreen extends StatelessWidget {
                 ).show(context);
               },
               (r) async {
-                await context.router.push(
+                await context.router
+                    .push(
                   PageRouteInfo(
                     OtpEditProfileVerificationView.name,
                     args: OtpEditProfileVerificationViewArgs(
@@ -47,7 +48,14 @@ class EditProfileScreen extends StatelessWidget {
                       phoneNumber: state.mobileNumber.getValue(),
                     ),
                   ),
-                );
+                )
+                    .then((value) {
+                  if (value == true) {
+                    context
+                        .read<EditProfileBloc>()
+                        .add(EditProfileEvent.checkVerify());
+                  }
+                });
 
                 // // log('res : $res');
                 // if (res != null && res == true) {

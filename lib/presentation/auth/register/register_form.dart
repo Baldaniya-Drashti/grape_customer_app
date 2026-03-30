@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grape_customer_app/application/auth/register_form/register_form_bloc.dart';
 import 'package:grape_customer_app/domain/core/math_utils.dart';
@@ -174,6 +175,9 @@ class RegisterForm extends StatelessWidget {
     return CustomTextField(
       labelText: 'First Name',
       hintText: 'First Name',
+      inputFormatters: [
+        FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z\s]')),
+      ],
       textCapitalization: TextCapitalization.words,
       onChanged: (value) => context
           .read<RegisterFormBloc>()
@@ -195,6 +199,9 @@ class RegisterForm extends StatelessWidget {
     return CustomTextField(
       labelText: 'Last Name',
       hintText: 'Last Name',
+      inputFormatters: [
+        FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z\s]')),
+      ],
       textCapitalization: TextCapitalization.words,
       onChanged: (value) => context
           .read<RegisterFormBloc>()
@@ -238,6 +245,9 @@ class RegisterForm extends StatelessWidget {
       labelText: 'Mobile Number',
       hintText: 'Mobile Number',
       keyboardType: TextInputType.phone,
+      inputFormatters: [
+        FilteringTextInputFormatter.digitsOnly,
+      ],
       errorMaxLines: 2,
       focusNode: state.mobileNumberFocusNode,
       onChanged: (value) => context

@@ -25,7 +25,7 @@ class NotificationAppBar extends StatelessWidget
           title: BaseText(
             fontSize: 16,
             text: AppLocalizations.of(context).notifications,
-            fontWeight: FontWeight.w600,
+            fontWeight: FontWeight.bold,
           ),
           elevation: 0,
           bottom: TabBar(

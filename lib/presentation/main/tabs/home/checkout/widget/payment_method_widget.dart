@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grape_customer_app/application/main/checkout/checkout_bloc.dart';
 import 'package:grape_customer_app/domain/core/math_utils.dart';
 import 'package:grape_customer_app/infrastructure/main/payemnt_method_dto/get_cards_dto.dart';
+import 'package:grape_customer_app/presentation/common/utils/flushbar_creator.dart';
 import 'package:grape_customer_app/presentation/common/widgets/base_text.dart';
 import 'package:grape_customer_app/presentation/core/app_router.gr.dart';
 import 'package:grape_customer_app/presentation/core/styles/app_colors.dart';
@@ -66,14 +67,17 @@ class PaymentMethodWidget extends StatelessWidget {
               child: state.checkoutDTO.payment_method == null
                   ? GestureDetector(
                       onTap: () async {
-                        var res = await context.router
+                        /* var res = await context.router
                             .push(PageRouteInfo(PaymentMethod.name));
 
                         if (res != null) {
                           context.read<CheckoutBloc>().add(
                               CheckoutEvent.changePaymentMethod(
                                   res as GetCardsDTO));
-                        }
+                        } */
+
+                        showSuccess(message: "Currently Under Development")
+                            .show(context);
                       },
                       child: Center(
                         child: BaseText(

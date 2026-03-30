@@ -7,7 +7,6 @@ import 'package:grape_customer_app/presentation/core/app_router.gr.dart';
 import 'package:grape_customer_app/presentation/core/helper/dynamic_link_helper.dart';
 import 'package:grape_customer_app/presentation/core/helper/push_notification_helper.dart';
 import 'package:injectable/injectable.dart';
-
 part 'main_tab_state.dart';
 part 'main_tab_event.dart';
 part 'main_tab_bloc.freezed.dart';
@@ -66,6 +65,7 @@ class MainTabBloc extends Bloc<MainTabEvent, MainTabState> {
             }
           },
           registerForPush: (RegisterForPush value) async {
+            print("FCM token----> ${value.fcmToken}");
             await authFacade.registerForPush(fcmToken: value.fcmToken);
           },
           pushNotificationInitialize: (PushNotificationInitialize value) async {
@@ -81,6 +81,7 @@ class MainTabBloc extends Bloc<MainTabEvent, MainTabState> {
                 .firebaseMessaging
                 .getToken()
                 .then((value) async {
+              print("FCM TOKEN---> $value");
               add(MainTabEvent.registerForPush(value ?? ""));
             });
           },

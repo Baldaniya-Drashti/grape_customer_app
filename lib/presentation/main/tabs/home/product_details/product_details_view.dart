@@ -102,7 +102,7 @@ class ProductDetailsView extends StatelessWidget {
                 SizedBox(
                   width: getSize(8),
                 ),
-                PopMenuWidget(),
+                PopMenuWidget(productId: productId),
                 SizedBox(
                   width: getSize(8),
                 ),

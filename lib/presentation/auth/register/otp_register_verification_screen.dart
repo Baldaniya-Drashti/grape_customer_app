@@ -169,7 +169,8 @@ class OtpRegisterVerificationView extends StatelessWidget {
                             fontWeight: FontWeight.w500,
                           ),
                           BaseText(
-                            text: '00:${state.secondsRemaining}',
+                            text:
+                                '00:${(state.secondsRemaining.toString().length == 2) ? state.secondsRemaining : "0${state.secondsRemaining}"}',
                             fontSize: 12,
                             fontWeight: FontWeight.w500,
                             textColor: AppColors.black.withOpacity(0.6),

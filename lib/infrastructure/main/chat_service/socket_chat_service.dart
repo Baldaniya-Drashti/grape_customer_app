@@ -29,7 +29,7 @@ class SocketChatService implements ChatService {
       StreamController<dynamic>();
 
   SocketChatService() {
-    socket = io.io('https://www.grape.market:3001',
+    socket = io.io('https://grape.market:3001',
         io.OptionBuilder().setTransports(['websocket']).build());
     //connectToSocket(); // Connect to socket when the service is instantiated
 

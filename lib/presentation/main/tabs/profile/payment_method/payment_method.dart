@@ -115,8 +115,7 @@ class PaymentMethod extends StatelessWidget {
                   : state.isErrorInAPI
                       ? Center(
                           child: BaseText(
-                              text: 'Something went wrong. Please try again'),
-                        )
+                              text: 'Something went wrong. Please try again'))
                       : state.isNoDataFound
                           ? Center(
                               child: BaseText(
@@ -268,10 +267,6 @@ class PaymentMethod extends StatelessWidget {
             bottomNavigationBar: SafeArea(
               child: Padding(
                 padding: EdgeInsets.symmetric(
-
-
-
-                  
                   horizontal: getSize(18),
                   vertical: isFullScreenDevice(context) ? 0 : getSize(18),
                 ),
@@ -325,9 +320,7 @@ class PaymentMethod extends StatelessWidget {
               image,
             ),
           ),
-          SizedBox(
-            height: getSize(12),
-          ),
+          SizedBox(height: getSize(12)),
           Row(
             children: [
               SvgPicture.asset(
@@ -335,14 +328,12 @@ class PaymentMethod extends StatelessWidget {
                     ? SvgImageConstant.emptyRadio
                     : SvgImageConstant.selectedRadio,
               ),
-              SizedBox(
-                width: getSize(10),
-              ),
+              SizedBox(width: getSize(10)),
               BaseText(
                 text: title,
                 fontSize: 14,
                 fontWeight: FontWeight.w500,
-              )
+              ),
             ],
           )
         ],

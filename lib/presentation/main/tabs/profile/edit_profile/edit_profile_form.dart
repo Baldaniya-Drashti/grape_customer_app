@@ -98,7 +98,7 @@ class EditProfileForm extends StatelessWidget {
               ),
             ),
       ),
-      suffixIcon: getIsMobileNumberChange(state)
+      suffixIcon: (getIsMobileNumberChange(state) && !state.isVerify)
           ? IconButton(
               onPressed: () async {
                 if (state.mobileNumber.isValid()) {

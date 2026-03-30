@@ -67,7 +67,7 @@ class ProductImageView extends StatelessWidget {
                             width: MediaQuery.of(context).size.width,
                             color: Colors.grey.shade300,
                           ),
-                          fit: BoxFit.cover,
+                          fit: BoxFit.scaleDown,
                         ),
                         options: carousal.CarouselOptions(
                           viewportFraction: 1,

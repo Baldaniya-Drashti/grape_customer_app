@@ -139,7 +139,7 @@ class ChatView extends StatelessWidget {
       customTitle: Row(
         children: [
           Image.asset(
-            PngImageConstants.cartSelected, 
+            PngImageConstants.cartSelected,
             height: getSize(25),
             width: getSize(30),
           ),

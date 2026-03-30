@@ -85,29 +85,31 @@ class SearchView extends StatelessWidget {
                       ..add(HomeEvent.searchProductList(false));
                   },
                   refreshController: context.read<HomeBloc>().refreshController,
-                  child: ListView(
-                    shrinkWrap: true,
-                    physics: BouncingScrollPhysics(),
-                    children: [
-                      state.getProductList.isEmpty
-                          ? Container()
-                          : HomeDiscountCarousalWidget(),
-                      SizedBox(
-                        height: getSize(6),
-                      ),
-                      state.getProductList.isEmpty
-                          ? Container()
-                          : getCarousalWidget(context, state),
-                      SizedBox(
-                        height: getSize(25),
-                      ),
-                      FilterListWidget(),
-                      SizedBox(
-                        height: getSize(18),
-                      ),
-                      RecommandedProductWidget(),
-                    ],
-                  ),
+                  child: (state.getProductList.isEmpty)
+                      ? Center(child: Text("No records found"))
+                      : ListView(
+                          shrinkWrap: true,
+                          physics: BouncingScrollPhysics(),
+                          children: [
+                            state.getProductList.isEmpty
+                                ? Container()
+                                : HomeDiscountCarousalWidget(),
+                            SizedBox(
+                              height: getSize(6),
+                            ),
+                            state.getProductList.isEmpty
+                                ? Container()
+                                : getCarousalWidget(context, state),
+                            SizedBox(
+                              height: getSize(25),
+                            ),
+                            FilterListWidget(),
+                            SizedBox(
+                              height: getSize(18),
+                            ),
+                            RecommandedProductWidget(),
+                          ],
+                        ),
                 ),
               ),
             ),

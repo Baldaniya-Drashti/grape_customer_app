@@ -22,11 +22,15 @@ part 'edit_profile_bloc.freezed.dart';
 class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
   final IAccountRepository accountRepository;
   final IAuthFacade _authFacade;
-  late Timer timer;
+  Timer? timer;
   EditProfileBloc(this.accountRepository, this._authFacade)
       : super(EditProfileState.initial()) {
     on<EditProfileEvent>((event, emit) async {
       await event.map(
+        checkVerify: (e) {
+          print("Called---> ${state.isVerify}");
+          emit(state.copyWith(isVerify: true));
+        },
         changeProfilePicture: (value) async {
           emit(
             state.copyWith(selectImage: value.imagePath),
@@ -59,6 +63,7 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
         mobileNumberChanged: (MobileNumberChanged value) async {
           emit(
             state.copyWith(
+                isVerify: false,
                 mobileNumber: MobileNumber(value.mobileNumber),
                 authFailureOrSuccessOption: none()),
           );
@@ -66,6 +71,7 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
         countryCodeChanged: (CountryCodeChanged value) async {
           emit(
             state.copyWith(
+              isVerify: false,
               countryCode: value.countryCode,
               authFailureOrSuccessOption: none(),
             ),
@@ -168,6 +174,9 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
           );
         },
         startCountdown: (StartCountdown value) {
+          if (timer != null) {
+            timer!.cancel();
+          }
           timer = Timer.periodic(const Duration(seconds: 1), (timer) {
             if (state.secondsRemaining > 0 && !isClosed) {
               add(const EditProfileEvent.decrementTimer());
@@ -176,7 +185,10 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
               // add(const LoginFormEvent.resendOtp());
             }
           });
-          emit(state.copyWith(secondsRemaining: 30));
+          emit(state.copyWith(
+            secondsRemaining: 30,
+            otpFailureOrSuccessOption: none(),
+          ));
         },
         decrementTimer: (DecrementTimer value) {
           emit(
@@ -189,11 +201,14 @@ class EditProfileBloc extends Bloc<EditProfileEvent, EditProfileState> {
           );
         },
         resendOtp: (ResendOtp value) async {
+          if (timer != null) {
+            timer!.cancel();
+          }
           Either<AuthFailure, String>? failureOrSuccess;
 
           emit(
             state.copyWith(
-              // isSubmitting: true,
+              isSubmitting: true,
               otpFailureOrSuccessOption: none(),
             ),
           );

@@ -13,7 +13,7 @@ class ProductDetailEvent with _$ProductDetailEvent {
   factory ProductDetailEvent.addToFavourite({String? productId}) =
       AddToFavourite;
   factory ProductDetailEvent.selectImage(int index) = SelectImage;
-  factory ProductDetailEvent.addProductToCart(
+  factory ProductDetailEvent.addProductToCart(BuildContext context,
       {String? productId, bool? isMainProductAddedToCart}) = AddProductToCart;
   factory ProductDetailEvent.removeProductFromCart(String cartId) =
       RemoveProductFromCart;

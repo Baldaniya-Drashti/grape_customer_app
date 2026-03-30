@@ -36,6 +36,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
             await emit.forEach(
               chatService.socketConnectStream,
               onData: (data) {
+                print("Is Socket Connect --> $data");
                 add(ChatEvent.createRoom(value.sender, value.receiver));
                 add(ChatEvent.updateStatusToOnline(
                     value.sender, value.receiver));
@@ -84,6 +85,8 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
           },
           sendMessage: (value) async {
             final message = value.message;
+
+            print("messagee---> ${message}");
             chatService.sendMessage(message).then(
                   (value) {},
                 );
@@ -100,6 +103,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
                 time: DateTime.now().millisecondsSinceEpoch,
               ),
             );
+            print("Updeted chat list----> ${updatedList}");
             return emit(
               state.copyWith(
                 chatList: updatedList,

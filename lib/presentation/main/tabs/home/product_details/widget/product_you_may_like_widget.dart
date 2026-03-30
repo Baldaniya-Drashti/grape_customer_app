@@ -231,6 +231,7 @@ class ProductYouMayLikeWidget extends StatelessWidget {
                                   } else {
                                     context.read<ProductDetailBloc>().add(
                                           ProductDetailEvent.addProductToCart(
+                                              context,
                                               productId: state
                                                   .getProductList[index].id
                                                   .toString(),

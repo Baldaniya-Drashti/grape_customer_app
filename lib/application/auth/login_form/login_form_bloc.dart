@@ -17,7 +17,7 @@ part 'login_form_state.dart';
 @injectable
 class LoginFormBloc extends Bloc<LoginFormEvent, LoginFormState> {
   final IAuthFacade _authFacade;
-  late Timer? timer;
+  late Timer timer;
 
   LoginFormBloc(this._authFacade) : super(LoginFormState.initial()) {
     on<LoginFormEvent>(

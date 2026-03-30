@@ -241,116 +241,107 @@ productDetailsView(
     BuildContext context, GetProductListResponse getProductListResponse) {
   return Padding(
     padding: EdgeInsets.symmetric(horizontal: getSize(18)),
-    child: Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.start,
+    child: Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Stack(
-          clipBehavior: Clip.none,
-          children: [
-            Row(
-              children: [
-                Container(
-                  height: getSize(60),
-                  width: getSize(60),
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: AppColors.primaryOrange.withOpacity(0.20),
-                    ),
-                    borderRadius: BorderRadius.circular(getSize(6)),
-                    image: DecorationImage(
-                      image: CachedNetworkImageProvider(
-                        getProductListResponse.media?[0].thumbnail ?? "",
-                      ),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  width: getSize(12),
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    BaseText(
+        Container(
+          height: getSize(60),
+          width: getSize(60),
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: AppColors.primaryOrange.withOpacity(0.20),
+            ),
+            borderRadius: BorderRadius.circular(getSize(6)),
+            image: DecorationImage(
+              image: CachedNetworkImageProvider(
+                getProductListResponse.media?[0].thumbnail ?? "",
+              ),
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
+        SizedBox(width: getSize(12)),
+        Flexible(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: BaseText(
                       text: getProductListResponse.product_name ?? "",
                       fontWeight: FontWeight.w600,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
                       textColor: AppColors.black.withOpacity(0.80),
                     ),
-                    SizedBox(
-                      height: getSize(8),
+                  ),
+                  Align(
+                    alignment: Alignment.topCenter,
+                    child: GestureDetector(
+                      onTap: () {
+                        context.router.maybePop();
+                      },
+                      child: Icon(Icons.close_rounded),
                     ),
-                    Row(
-                      children: [
-                        Visibility(
-                          visible: getProductListResponse.discount != null,
-                          child: BaseText(
-                            text: NumberFormat.simpleCurrency(
-                              decimalDigits: num.tryParse(getProductListResponse
-                                      .price
-                                      .toString()) is int
-                                  ? 0
-                                  : 2,
-                            ).format(getProductListResponse.price),
-                            textDecoration: TextDecoration.lineThrough,
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500,
-                            textColor: AppColors.black.withOpacity(0.4),
-                          ),
-                        ),
-                        SizedBox(
-                          width: getSize(
-                              getProductListResponse.discount != null ? 6 : 0),
-                        ),
-                        BaseText(
-                          text: getProductListResponse.discount != null
-                              ? NumberFormat.simpleCurrency(
-                                  decimalDigits: num.tryParse(
-                                          getProductListResponse.price
-                                              .toString()) is int
-                                      ? 0
-                                      : 2,
-                                ).format((getProductListResponse.price ?? 0) -
-                                  (((getProductListResponse.price ?? 0) / 100) *
-                                      (int.tryParse(
-                                              getProductListResponse.discount ??
-                                                  "") ??
-                                          0)))
-                              //'\$${(state.getProductList[index].price ?? 0) - (((state.getProductList[index].price ?? 0) / 100) * (int.tryParse(state.getProductList[index].discount ?? "") ?? 0))}'
-                              : NumberFormat.simpleCurrency(
-                                  decimalDigits: num.tryParse(
-                                          getProductListResponse.price
-                                              .toString()) is int
-                                      ? 0
-                                      : 2,
-                                ).format(getProductListResponse.price),
-                          //  : '\$${state.getProductList[index].price}',
-                          fontWeight: FontWeight.w600,
-                          maxLines: 1,
-                        ),
-
-                        // Vi
-                      ],
-                    )
-                  ],
-                ),
-              ],
-            ),
-            Positioned.fill(
-              top: getSize(-10),
-              right: getSize(-10),
-              child: Align(
-                alignment: Alignment.topRight,
-                child: IconButton(
-                  padding: EdgeInsets.zero,
-                  onPressed: () {
-                    context.router.maybePop();
-                  },
-                  icon: Icon(Icons.close_rounded),
-                ),
+                  ),
+                ],
               ),
-            )
-          ],
+              SizedBox(height: getSize(8)),
+              Row(
+                children: [
+                  Visibility(
+                    visible: getProductListResponse.discount != null,
+                    child: BaseText(
+                      text: NumberFormat.simpleCurrency(
+                        decimalDigits: num.tryParse(
+                                getProductListResponse.price.toString()) is int
+                            ? 0
+                            : 2,
+                      ).format(getProductListResponse.price),
+                      textDecoration: TextDecoration.lineThrough,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w500,
+                      textColor: AppColors.black.withOpacity(0.4),
+                    ),
+                  ),
+                  SizedBox(
+                    width: getSize(
+                        getProductListResponse.discount != null ? 6 : 0),
+                  ),
+                  BaseText(
+                    text: getProductListResponse.discount != null
+                        ? NumberFormat.simpleCurrency(
+                            decimalDigits: num.tryParse(
+                                        getProductListResponse.price.toString())
+                                    is int
+                                ? 0
+                                : 2,
+                          ).format((getProductListResponse.price ?? 0) -
+                            (((getProductListResponse.price ?? 0) / 100) *
+                                (int.tryParse(getProductListResponse.discount ??
+                                        "") ??
+                                    0)))
+                        //'\$${(state.getProductList[index].price ?? 0) - (((state.getProductList[index].price ?? 0) / 100) * (int.tryParse(state.getProductList[index].discount ?? "") ?? 0))}'
+                        : NumberFormat.simpleCurrency(
+                            decimalDigits: num.tryParse(
+                                        getProductListResponse.price.toString())
+                                    is int
+                                ? 0
+                                : 2,
+                          ).format(getProductListResponse.price),
+                    //  : '\$${state.getProductList[index].price}',
+                    fontWeight: FontWeight.w600,
+                    maxLines: 1,
+                  ),
+
+                  // Vi
+                ],
+              )
+            ],
+          ),
         ),
       ],
     ),

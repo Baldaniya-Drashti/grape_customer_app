@@ -97,7 +97,7 @@ class FullImageView extends StatelessWidget {
                                       ?.media?[state.selectedImageIndex]
                                       .media ??
                                   "",
-                              fit: BoxFit.cover,
+                              fit: BoxFit.scaleDown,
                               placeholder: (context, url) => Container(
                                 color: Colors.grey.shade300,
                               ),

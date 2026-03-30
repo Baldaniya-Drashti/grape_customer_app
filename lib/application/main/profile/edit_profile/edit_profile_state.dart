@@ -18,6 +18,7 @@ class EditProfileState with _$EditProfileState {
     required OTPText enteredOTP,
     required int secondsRemaining,
     required FocusNode mobileNumberFocusNode,
+    required bool isVerify,
   }) = _EditProfileState;
   factory EditProfileState.initial() => EditProfileState(
         isSubmitting: false,
@@ -35,5 +36,6 @@ class EditProfileState with _$EditProfileState {
         otpFailureOrSuccessOption: none(),
         verifyOtpOrSuccessOption: none(),
         mobileNumberFocusNode: FocusNode(),
+        isVerify: true,
       );
 }

@@ -12,7 +12,8 @@ import 'package:grape_customer_app/presentation/core/styles/app_colors.dart';
 import 'package:share_plus/share_plus.dart';
 
 class PopMenuWidget extends StatelessWidget {
-  const PopMenuWidget({super.key});
+  final String productId;
+  const PopMenuWidget({super.key, required this.productId});
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +41,9 @@ class PopMenuWidget extends StatelessWidget {
             getMenuItems(
               title: 'Home',
               image: SvgImageConstant.homeUnselected,
-              onTap: () {},
+              onTap: () {
+                Navigator.pop(context);
+              },
             ),
             PopupMenuDivider(
               height: 0,
@@ -78,19 +81,16 @@ class PopMenuWidget extends StatelessWidget {
                   : SvgImageConstant.favouriteUnselected,
               onTap: () {
                 if (state.getProductDetails.product?.is_favorite == true) {
-                  context
-                      .read<ProductDetailBloc>()
-                      .add(ProductDetailEvent.removeProductFromFavourite());
+                  context.read<ProductDetailBloc>().add(
+                      ProductDetailEvent.removeProductFromFavourite(
+                          productId: productId));
                 } else {
-                  context
-                      .read<ProductDetailBloc>()
-                      .add(ProductDetailEvent.addToFavourite());
+                  context.read<ProductDetailBloc>().add(
+                      ProductDetailEvent.addToFavourite(productId: productId));
                 }
               },
             ),
-            PopupMenuDivider(
-              height: 0,
-            ),
+            PopupMenuDivider(height: 0),
             getMenuItems(
               title: 'Messages',
               image: SvgImageConstant.message,

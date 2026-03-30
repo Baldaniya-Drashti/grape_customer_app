@@ -25,4 +25,5 @@ class EditProfileEvent with _$EditProfileEvent {
   const factory EditProfileEvent.startCountdown() = StartCountdown;
   const factory EditProfileEvent.decrementTimer() = DecrementTimer;
   const factory EditProfileEvent.resendOtp() = ResendOtp;
+  const factory EditProfileEvent.checkVerify() = CheckVerify;
 }
